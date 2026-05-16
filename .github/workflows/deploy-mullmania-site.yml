@@ -34,7 +34,8 @@ jobs:
         id: target
         env:
           SITE_ID: ${{ inputs.site_id }}
-          TARGETS_JSON: ${{ secrets.MULLMANIA_DEPLOY_TARGETS_JSON }}
+          BROKER_TARGET_API_URL: https://sites.mullmania.com/api/redeploy/broker-target
+          BROKER_API_KEY: ${{ secrets.MULLMANIA_BROKER_API_KEY }}
           PRIVATE_REPO_TOKEN: ${{ secrets.MULLMANIA_PRIVATE_REPO_TOKEN }}
         shell: python
         run: |
@@ -47,9 +48,26 @@ jobs:
           from pathlib import Path
 
           site_id = os.environ["SITE_ID"].strip()
-          targets = json.loads(os.environ["TARGETS_JSON"])
-          target = next((item for item in targets if item.get("siteId") == site_id and item.get("enabled", True)), None)
-          if not target:
+          broker_api_key = os.environ["BROKER_API_KEY"].strip()
+          if not broker_api_key:
+            raise SystemExit("MULLMANIA_BROKER_API_KEY is not configured.")
+
+          lookup_request = urllib.request.Request(
+            os.environ["BROKER_TARGET_API_URL"].strip(),
+            data=json.dumps({"siteId": site_id}).encode("utf-8"),
+            method="POST",
+            headers={
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "User-Agent": "mullmania-broker-deploy",
+              "X-Broker-Deploy-Key": broker_api_key,
+            },
+          )
+          with urllib.request.urlopen(lookup_request, timeout=15) as response:
+            lookup = json.loads(response.read().decode("utf-8"))
+
+          target = lookup.get("target") if isinstance(lookup, dict) else None
+          if not isinstance(target, dict):
             raise SystemExit(f"Unsupported site_id: {site_id}")
 
           repo = str(target["sourceRepo"]).strip()
