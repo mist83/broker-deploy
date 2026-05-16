@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA Lockdown -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Hack-Toe</title>
+    <style>
+        /* PWA Lockdown */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        html, body {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            touch-action: manipulation;
+            overscroll-behavior: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #2a2a3a;
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        
+        .mode {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #aaaaaa;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, min(18vh, 160px));
+            grid-template-rows: repeat(3, min(18vh, 160px));
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .cell {
+            background: #3a3a4a;
+            border: 3px solid #4a4a5a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #ffffff;
+        }
+        .cell:focus-visible,
+        .tv-control:focus-visible {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.18);
+        }
+        
+        .cell.x {
+            color: #66ff66;
+        }
+        
+        .cell.o {
+            color: #ff6666;
+        }
+        
+        .cell.winner {
+            background: #ffd700;
+            color: #000000;
+        }
+        
+        .status {
+            font-size: 24px;
+            margin-bottom: 20px;
+            min-height: 30px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: #aaaaaa;
+            margin-bottom: 16px;
+        }
+
+        .tv-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 720px;
+        }
+
+        .tv-control {
+            padding: 12px 18px;
+            border: 3px solid #4a4a5a;
+            border-radius: 4px;
+            background: #3a3a4a;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .tv-control.active {
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+    </style>
+<link rel="icon" href="../favicon.ico">
+</head>
+<body>
+    <h1>TIC-HACK-TOE</h1>
+    <div class="mode" id="mode">Mode: Normal</div>
+    <div class="status" id="status">Your turn</div>
+    
+    <div class="grid" id="grid">
+        <button class="cell" type="button" data-index="0"></button>
+        <button class="cell" type="button" data-index="1"></button>
+        <button class="cell" type="button" data-index="2"></button>
+        <button class="cell" type="button" data-index="3"></button>
+        <button class="cell" type="button" data-index="4"></button>
+        <button class="cell" type="button" data-index="5"></button>
+        <button class="cell" type="button" data-index="6"></button>
+        <button class="cell" type="button" data-index="7"></button>
+        <button class="cell" type="button" data-index="8"></button>
+    </div>
+    
+    <div class="controls">
+        <span>TV remote: Arrows move focus. Enter activates. Backspace resets.</span>
+    </div>
+
+    <div class="tv-controls">
+        <button class="tv-control" id="mode-normal" type="button">Normal mode</button>
+        <button class="tv-control" id="mode-bomb" type="button">Bomb mode</button>
+        <button class="tv-control" id="mode-laser" type="button">Laser mode</button>
+        <button class="tv-control" id="reset-button" type="button">Reset board</button>
+        <button class="tv-control" id="palette-button" type="button">Cycle color</button>
+    </div>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let mode = 'normal'; // normal, bomb, laser
+        let bgColors = ['#2a2a3a', '#3a2a2a', '#2a3a3a', '#3a2a4a'];
+        let colorIndex = 0;
+
+        const winPatterns = [
+            [0,1,2], [3,4,5], [6,7,8],
+            [0,3,6], [1,4,7], [2,5,8],
+            [0,4,8], [2,4,6]
+        ];
+
+        function getTvControls() {
+            return Array.from(document.querySelectorAll('.cell, .tv-control'));
+        }
+
+        function focusTvControl(element) {
+            if (element && typeof element.focus === 'function') {
+                element.focus({ preventScroll: true });
+            }
+        }
+
+        function findNextTvControl(direction) {
+            const controls = getTvControls();
+            const current = document.activeElement && controls.includes(document.activeElement)
+                ? document.activeElement
+                : controls[0];
+
+            if (!current) {
+                return null;
+            }
+
+            const currentRect = current.getBoundingClientRect();
+            const currentCenterX = currentRect.left + currentRect.width / 2;
+            const currentCenterY = currentRect.top + currentRect.height / 2;
+
+            let best = null;
+            let bestScore = Number.POSITIVE_INFINITY;
+
+            controls.forEach((candidate) => {
+                if (candidate === current) {
+                    return;
+                }
+
+                const rect = candidate.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const deltaX = centerX - currentCenterX;
+                const deltaY = centerY - currentCenterY;
+
+                if (direction === 'ArrowRight' && deltaX <= 0) return;
+                if (direction === 'ArrowLeft' && deltaX >= 0) return;
+                if (direction === 'ArrowDown' && deltaY <= 0) return;
+                if (direction === 'ArrowUp' && deltaY >= 0) return;
+
+                const primary = direction === 'ArrowLeft' || direction === 'ArrowRight'
+                    ? Math.abs(deltaX)
+                    : Math.abs(deltaY);
+                const secondary = direction === 'ArrowLeft' || direction === 'ArrowRight'
+                    ? Math.abs(deltaY)
+                    : Math.abs(deltaX);
+                const score = primary + (secondary * 4);
+
+                if (score < bestScore) {
+                    bestScore = score;
+                    best = candidate;
+                }
+            });
+
+            return best || current;
+        }
+
+        function setMode(nextMode) {
+            mode = nextMode;
+            document.getElementById('mode').textContent = `Mode: ${mode === 'bomb' ? 'Bomb' : mode === 'laser' ? 'Laser' : 'Normal'}`;
+            document.getElementById('mode-normal').classList.toggle('active', mode === 'normal');
+            document.getElementById('mode-bomb').classList.toggle('active', mode === 'bomb');
+            document.getElementById('mode-laser').classList.toggle('active', mode === 'laser');
+        }
+
+        function makeMove(index) {
+            if (!gameActive || board[index] !== '' || currentPlayer !== 'X') return;
+            
+            if (mode === 'bomb') {
+                board[index] = 'X';
+                clearAdjacent(index);
+            } else if (mode === 'laser') {
+                board[index] = 'X';
+                clearRowCol(index);
+            } else {
+                board[index] = 'X';
+            }
+            
+            render();
+            
+            if (checkWin('X')) {
+                endGame('You win!');
+                return;
+            }
+            
+            if (board.every(cell => cell !== '')) {
+                endGame('Draw!');
+                return;
+            }
+            
+            currentPlayer = 'O';
+            document.getElementById('status').textContent = 'AI thinking...';
+            setTimeout(aiMove, 500);
+        }
+
+        function clearAdjacent(index) {
+            const adjacent = [
+                index-4, index-3, index-2,
+                index-1,         index+1,
+                index+2, index+3, index+4
+            ];
+            const row = Math.floor(index / 3);
+            adjacent.forEach(i => {
+                if (i >= 0 && i < 9 && Math.abs(Math.floor(i/3) - row) <= 1) {
+                    if (board[i] === 'O') board[i] = '';
+                }
+            });
+        }
+
+        function clearRowCol(index) {
+            const row = Math.floor(index / 3);
+            const col = index % 3;
+            for (let i = 0; i < 3; i++) {
+                if (board[row * 3 + i] === 'O') board[row * 3 + i] = '';
+                if (board[i * 3 + col] === 'O') board[i * 3 + col] = '';
+            }
+        }
+
+        function aiMove() {
+            const empty = board.map((v, i) => v === '' ? i : null).filter(v => v !== null);
+            if (empty.length === 0) return;
+            
+            const move = empty[Math.floor(Math.random() * empty.length)];
+            board[move] = 'O';
+            currentPlayer = 'X';
+            
+            render();
+            
+            if (checkWin('O')) {
+                endGame('AI wins!');
+                return;
+            }
+            
+            if (board.every(cell => cell !== '')) {
+                endGame('Draw!');
+                return;
+            }
+            
+            document.getElementById('status').textContent = 'Your turn';
+        }
+
+        function checkWin(player) {
+            return winPatterns.some(pattern => {
+                if (pattern.every(i => board[i] === player)) {
+                    pattern.forEach(i => {
+                        document.querySelector(`[data-index="${i}"]`).classList.add('winner');
+                    });
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        function endGame(message) {
+            gameActive = false;
+            document.getElementById('status').textContent = message;
+        }
+
+        function render() {
+            board.forEach((val, i) => {
+                const cell = document.querySelector(`[data-index="${i}"]`);
+                cell.textContent = val;
+                cell.className = `cell ${val.toLowerCase()}`;
+            });
+        }
+
+        function reset() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            setMode('normal');
+            document.getElementById('status').textContent = 'Your turn';
+            render();
+        }
+
+        function cycleColor() {
+            colorIndex = (colorIndex + 1) % bgColors.length;
+            document.body.style.background = bgColors[colorIndex];
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key;
+
+            if (key === 'ArrowLeft' || key === 'ArrowRight' || key === 'ArrowUp' || key === 'ArrowDown') {
+                e.preventDefault();
+                focusTvControl(findNextTvControl(key));
+                return;
+            }
+
+            if (key === 'Enter') {
+                const target = document.activeElement;
+                if (target instanceof HTMLButtonElement) {
+                    e.preventDefault();
+                    target.click();
+                    return;
+                }
+            }
+            
+            if (key === 'Backspace') {
+                e.preventDefault();
+                reset();
+            }
+        });
+
+        document.querySelectorAll('.cell').forEach((cell) => {
+            cell.addEventListener('click', () => {
+                makeMove(Number(cell.dataset.index));
+            });
+        });
+
+        document.getElementById('mode-normal').addEventListener('click', () => setMode('normal'));
+        document.getElementById('mode-bomb').addEventListener('click', () => setMode('bomb'));
+        document.getElementById('mode-laser').addEventListener('click', () => setMode('laser'));
+        document.getElementById('reset-button').addEventListener('click', reset);
+        document.getElementById('palette-button').addEventListener('click', cycleColor);
+
+        render();
+        setMode('normal');
+        focusTvControl(document.querySelector('[data-index="0"]'));
+    </script>
+<script src="../../keyboard-nav-standard.js"></script>
+</body>
+</html>
