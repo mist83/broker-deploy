@@ -9,3 +9,7 @@ Mullmania deploy script with AWS OIDC.
 
 No AWS keys live here. No target repository list is checked into this repo.
 
+The protected Sites API can also receive signed GitHub push webhooks from
+allowlisted source repositories. Those hooks dispatch this broker workflow, so
+private repos do not need their own GitHub Actions runners to redeploy after a
+normal check-in.
