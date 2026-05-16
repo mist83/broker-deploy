@@ -13,3 +13,7 @@ The protected Sites API can also receive signed GitHub push webhooks from
 allowlisted source repositories. Those hooks dispatch this broker workflow, so
 private repos do not need their own GitHub Actions runners to redeploy after a
 normal check-in.
+
+After the AWS publish succeeds, the workflow mirrors the public artifact from
+S3 into this repository's `gh-pages` branch under the site id. The mirror uses
+the already-published files, not the private source checkout.

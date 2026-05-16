@@ -17,7 +17,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 concurrency:
@@ -103,3 +103,58 @@ jobs:
         working-directory: target-site
         shell: bash
         run: aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - --region us-west-2 | bash -s -- apply --config "${{ steps.target.outputs.config }}"
+
+      - name: Mirror public artifact to GitHub Pages branch
+        env:
+          SITE_ID: ${{ inputs.site_id }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf pages-source
+          if ! git clone --depth 1 --branch gh-pages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pages-source; then
+            git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pages-source
+            cd pages-source
+            git switch --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            cd ..
+          fi
+
+          rm -rf "pages-source/${SITE_ID}"
+          mkdir -p "pages-source/${SITE_ID}"
+          aws s3 sync "s3://mullmania.com/${SITE_ID}/" "pages-source/${SITE_ID}/" --delete --only-show-errors
+          touch pages-source/.nojekyll
+
+          cd pages-source
+          {
+            printf '%s\n' '<!doctype html>'
+            printf '%s\n' '<html lang="en">'
+            printf '%s\n' '<head>'
+            printf '%s\n' '  <meta charset="utf-8">'
+            printf '%s\n' '  <meta name="viewport" content="width=device-width, initial-scale=1">'
+            printf '%s\n' '  <title>Mullmania Deploy Mirrors</title>'
+            printf '%s\n' '</head>'
+            printf '%s\n' '<body>'
+            printf '%s\n' '  <h1>Mullmania Deploy Mirrors</h1>'
+            printf '%s\n' '  <ul>'
+            for site_dir in */; do
+              site_name="${site_dir%/}"
+              if [ -f "${site_dir}index.html" ]; then
+                printf '    <li><a href="%s/">%s</a></li>\n' "$site_name" "$site_name"
+              fi
+            done
+            printf '%s\n' '  </ul>'
+            printf '%s\n' '</body>'
+            printf '%s\n' '</html>'
+          } > index.html
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "GitHub Pages mirror is already current."
+          else
+            git commit -m "Mirror ${SITE_ID} artifact"
+            git push origin gh-pages
+          fi
