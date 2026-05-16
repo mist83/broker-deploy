@@ -31,6 +31,7 @@ jobs:
 
     steps:
       - name: Download allowlisted target
+        id: target
         env:
           SITE_ID: ${{ inputs.site_id }}
           TARGETS_JSON: ${{ secrets.MULLMANIA_DEPLOY_TARGETS_JSON }}
@@ -101,4 +102,4 @@ jobs:
       - name: Deploy target site
         working-directory: target-site
         shell: bash
-        run: aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - --region us-west-2 | bash -s -- apply --config mullmania.site.json
+        run: aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - --region us-west-2 | bash -s -- apply --config "${{ steps.target.outputs.config }}"
