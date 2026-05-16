@@ -1,0 +1,104 @@
+name: Broker Deploy Mullmania Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_id:
+        description: Allowlisted site id to deploy.
+        required: true
+        type: string
+      reason:
+        description: Optional caller note.
+        required: false
+        type: string
+      source:
+        description: Optional caller label.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: broker-deploy-${{ inputs.site_id }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Download allowlisted target
+        env:
+          SITE_ID: ${{ inputs.site_id }}
+          TARGETS_JSON: ${{ secrets.MULLMANIA_DEPLOY_TARGETS_JSON }}
+          PRIVATE_REPO_TOKEN: ${{ secrets.MULLMANIA_PRIVATE_REPO_TOKEN }}
+        shell: python
+        run: |
+          import io
+          import json
+          import os
+          import shutil
+          import tarfile
+          import urllib.request
+          from pathlib import Path
+
+          site_id = os.environ["SITE_ID"].strip()
+          targets = json.loads(os.environ["TARGETS_JSON"])
+          target = next((item for item in targets if item.get("siteId") == site_id and item.get("enabled", True)), None)
+          if not target:
+            raise SystemExit(f"Unsupported site_id: {site_id}")
+
+          repo = str(target["sourceRepo"]).strip()
+          ref = str(target.get("sourceRef") or "main").strip()
+          config = str(target.get("config") or "mullmania.site.json").strip()
+          token = os.environ["PRIVATE_REPO_TOKEN"].strip()
+          if not token:
+            raise SystemExit("MULLMANIA_PRIVATE_REPO_TOKEN is not configured.")
+
+          url = f"https://api.github.com/repos/{repo}/tarball/{ref}"
+          request = urllib.request.Request(
+            url,
+            headers={
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {token}",
+              "User-Agent": "mullmania-broker-deploy",
+              "X-GitHub-Api-Version": "2022-11-28",
+            },
+          )
+          with urllib.request.urlopen(request, timeout=30) as response:
+            archive = response.read()
+
+          target_dir = Path("target-site")
+          shutil.rmtree(target_dir, ignore_errors=True)
+          target_dir.mkdir()
+          with tarfile.open(fileobj=io.BytesIO(archive), mode="r:gz") as tar:
+            members = []
+            for member in tar.getmembers():
+              parts = Path(member.name).parts
+              if len(parts) < 2:
+                continue
+              member.name = str(Path(*parts[1:]))
+              members.append(member)
+            tar.extractall(target_dir, members=members)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            output.write(f"config={config}\n")
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: arn:aws:iam::166404899495:role/github-actions-role
+          aws-region: us-west-2
+
+      - name: Deploy target site
+        working-directory: target-site
+        shell: bash
+        run: aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - --region us-west-2 | bash -s -- apply --config mullmania.site.json
