@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T12:07:58.473Z",
+  "generatedAt": "2026-05-17T12:08:28.050Z",
   "sites": [
     {
       "siteId": "agent",
@@ -32,13 +32,13 @@
       "status": "success",
       "liveUrl": "https://bug-beacon.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/bug-beacon/",
-      "lastPublishedAt": "2026-05-17T05:47:26.368Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25982718300",
-      "latestBrokerRunNumber": "43",
+      "lastPublishedAt": "2026-05-17T12:08:28.040Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25990394742",
+      "latestBrokerRunNumber": "71",
       "trigger": "github-webhook",
-      "hostingFiles": 9,
-      "hostingBytes": 86754,
-      "recordedDeployments": 1
+      "hostingFiles": 10,
+      "hostingBytes": 116733,
+      "recordedDeployments": 2
     },
     {
       "siteId": "gitter",
