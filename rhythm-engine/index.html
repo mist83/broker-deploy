@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050a13">
+  <title>rhythm-engine</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050a13'/%3E%3Cpath d='M14 41V23h6v18zm12 0V15h6v26zm12 0V28h6v13zm12 0V20h6v21z' fill='%2374c0fc'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050a13;
+      --panel: rgba(10, 18, 35, 0.85);
+      --line: rgba(116, 192, 252, 0.16);
+      --text: #eff6ff;
+      --muted: #9ab2d7;
+      --accent: #74c0fc;
+      --cta: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.14), transparent 30%),
+        linear-gradient(180deg, #07101d 0%, var(--bg) 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    main {
+      width: min(100%, 900px);
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 22px 80px rgba(1, 6, 18, 0.45);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      letter-spacing: .16em;
+      font-size: .72rem;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: .92;
+      letter-spacing: -0.06em;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 65ch;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .card {
+      background: rgba(6, 14, 29, 0.62);
+      border: 1px solid rgba(116, 192, 252, 0.12);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .primary {
+      color: white;
+      background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    }
+    .secondary {
+      color: var(--text);
+      background: rgba(18, 38, 71, 0.84);
+      border: 1px solid rgba(116, 192, 252, 0.16);
+    }
+    .meta {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .meta li {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(116, 192, 252, 0.12);
+      color: var(--muted);
+    }
+    code {
+      color: #dbeafe;
+      background: rgba(255,255,255,0.06);
+      padding: 0.1rem 0.35rem;
+      border-radius: 6px;
+    }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Static front door · scene viewer ready</p>
+    <h1>rhythm-engine</h1>
+    <p>Headless rhythm compilation, playback, and projection utilities. The repo root now serves as the honest deployment surface, because the scene viewer imports engine source from <code>./src</code> and therefore needs the repo root published instead of a half-truthy subfolder.</p>
+
+    <div class="grid">
+      <section class="card">
+        <h2 style="margin-top:0">Open the surfaces</h2>
+        <div class="links">
+          <a class="primary" href="app/examples/scene-viewer/">Open scene viewer</a>
+          <a class="secondary" href="README.md">Read the docs</a>
+          <a class="secondary" href="npm-debug.log" style="display:none">Ignore this joke</a>
+        </div>
+      </section>
+
+      <aside class="card">
+        <ul class="meta">
+          <li><strong>Publish path</strong> repo root <code>.</code></li>
+          <li><strong>GitHub Pages</strong> deploys <code>master</code></li>
+          <li><strong>Mullmania</strong> points at the same static root</li>
+          <li><strong>Viewer</strong> lives at <code>app/examples/scene-viewer/</code></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

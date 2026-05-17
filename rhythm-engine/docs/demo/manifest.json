@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/rhythm-engine",
+  "name": "rhythm-engine",
+  "posterUrl": "https://mist83.github.io/_demo/rhythm-engine/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/rhythm-engine/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/rhythm-engine/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+}

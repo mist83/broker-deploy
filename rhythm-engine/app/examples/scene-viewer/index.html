@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm Scene</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23050a13'/%3E%3Cpath d='M16 40V24h8v16zm12 0V16h8v24zm12 0V30h8v10z' fill='%2374c0fc'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://ui.mikesendpoint.com/active/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="shell">
+        <aside class="panel">
+            <div class="panel-header">
+                <p class="eyebrow">Rhythm Scene</p>
+                <h1>Alive playback for shared rhythm data</h1>
+                <p class="lede">A first scene consumer for <code>rhythm-engine</code>, aimed at the Gource-like direction without hardwiring it to source control.</p>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span class="summary-label">Status</span>
+                    <strong id="summary-status">Loading</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Tempo</span>
+                    <strong id="summary-bpm">-</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Entities</span>
+                    <strong id="summary-entities">0</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Duration</span>
+                    <strong id="summary-duration">0.00s</strong>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="btn-demo" class="btn btn-secondary">Load Demo</button>
+                <button id="btn-import" class="btn btn-secondary">Import Pattern</button>
+                <button id="btn-play" class="btn btn-primary">Play</button>
+                <button id="btn-pause" class="btn btn-secondary">Pause</button>
+                <button id="btn-reset" class="btn btn-secondary">Reset</button>
+                <button id="btn-copy-link" class="btn btn-secondary">Copy Share Link</button>
+                <button id="btn-open-dag" class="btn btn-secondary">Open in DAG</button>
+                <button id="btn-open-taps" class="btn btn-secondary">Open in Taps</button>
+            </div>
+
+            <label class="field">
+                <span>Serialized Rhythm</span>
+                <textarea id="pattern-input" spellcheck="false" placeholder="Paste a serialized rhythm payload or load the demo pattern."></textarea>
+            </label>
+
+            <div class="legend">
+                <div class="legend-row"><span class="legend-dot beat"></span><span>Beat pulse</span></div>
+                <div class="legend-row"><span class="legend-dot sustain"></span><span>Sustain anchor</span></div>
+                <div class="legend-row"><span class="legend-dot gesture"></span><span>Gesture sweep</span></div>
+            </div>
+
+            <p id="status-message" class="status-message">Preparing scene projection.</p>
+        </aside>
+
+        <main class="stage-shell">
+            <div class="stage-topline">
+                <span id="projection-label">Scene projection</span>
+                <span id="camera-label">Camera idle</span>
+            </div>
+            <canvas id="scene-canvas"></canvas>
+            <div class="timeline-shell">
+                <div class="timeline-bar">
+                    <div id="timeline-progress" class="timeline-progress"></div>
+                </div>
+                <div class="timeline-stamps">
+                    <span>0%</span>
+                    <span id="timeline-now">0.00s</span>
+                    <span>100%</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+</html>

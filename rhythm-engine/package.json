@@ -1,0 +1,38 @@
+{
+  "name": "rhythm-engine",
+  "version": "0.1.0",
+  "description": "Shared rhythm compilation, playback, and projection engine for taps, DAG, and scene visualizations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mist83/rhythm-engine.git"
+  },
+  "homepage": "https://github.com/mist83/rhythm-engine",
+  "bugs": {
+    "url": "https://github.com/mist83/rhythm-engine/issues"
+  },
+  "type": "module",
+  "files": [
+    "README.md",
+    "src",
+    "app/examples/scene-viewer"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./events": "./src/events.js",
+    "./pattern": "./src/pattern.js",
+    "./playback": "./src/playback.js",
+    "./projection": "./src/projection.js",
+    "./serialization": "./src/serialization.js",
+    "./adapters/tap-repeater": "./src/adapters/tapRepeater.js",
+    "./adapters/dag": "./src/adapters/dag.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "sync:consumers": "node scripts/sync-consumers.mjs",
+    "serve:scene-viewer": "python3 -m http.server 8093",
+    "test:scene-viewer": "node app/examples/scene-viewer/test-scene-viewer.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.40.0"
+  }
+}
