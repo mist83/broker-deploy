@@ -1,7 +1,7 @@
 {
   "status": "ok",
   "siteId": "sites",
-  "generatedAt": "2026-05-17T10:14:44.809Z",
+  "generatedAt": "2026-05-17T10:27:25.056Z",
   "checks": [
     {
       "id": "build",

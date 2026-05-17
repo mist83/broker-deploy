@@ -30577,27 +30577,29 @@
     "tags": [
       "public-frontdoor",
       "github",
-      "curated"
+      "curated",
+      "project-redline",
+      "lambda-service"
     ],
     "notes": [
       "Static public front door for Project Redline. The live review service runs from the Lambda URL configured in project-redline-site-config.js."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-17T13:21:14.041Z",
+    "lastPublishedAt": "2026-05-17T10:24:32.074Z",
     "publishContext": {
       "github": {
-        "actions": true,
+        "actions": false,
         "repository": "mist83/redline",
-        "ref": "refs/heads/main",
-        "sha": "aed7bc1dff524bc4b43ffac7bacf24ca88cd96e6",
-        "runId": "24567255645",
-        "runNumber": "1"
+        "ref": null,
+        "sha": "750163e3c7afc9af9fe2366a6c7c7e5b4ad36341",
+        "runId": null,
+        "runNumber": null
       },
       "git": {
-        "root": "/home/runner/work/redline/redline",
+        "root": "/Users/mist83/Code/redline",
         "branch": "main",
-        "commit": "aed7bc1dff524bc4b43ffac7bacf24ca88cd96e6",
-        "remote": "https://github.com/mist83/redline"
+        "commit": "750163e3c7afc9af9fe2366a6c7c7e5b4ad36341",
+        "remote": "https://github.com/mist83/redline.git"
       }
     },
     "mainSite": false,
@@ -34418,17 +34420,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T10:10:45.536Z",
+    "lastPublishedAt": "2026-05-17T10:25:46.335Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25987941890",
-        "runNumber": "67"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "c696e5aa6789d3d899b7c0b905ebaa70e9db3e3d",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "c696e5aa6789d3d899b7c0b905ebaa70e9db3e3d",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -38901,20 +38908,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T09:52:21.149Z",
+    "lastPublishedAt": "2026-05-17T10:24:23.992Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "f66532bfc02431adb0eed5882de204ddd0160069",
+        "sha": "bd8ea038738156c1f7defb3a22e691a7920a5788",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "f66532bfc02431adb0eed5882de204ddd0160069",
+        "commit": "bd8ea038738156c1f7defb3a22e691a7920a5788",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
