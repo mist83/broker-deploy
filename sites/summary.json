@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-17T06:25:19.212Z",
-  "updatedAt": "2026-05-17T06:25:19.212Z",
+  "generatedAt": "2026-05-17T06:37:19.105Z",
+  "updatedAt": "2026-05-17T06:37:19.105Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
@@ -39,9 +39,9 @@
     "ok": 20,
     "unknown": 1
   },
-  "lastPublishedSite": "sites",
+  "lastPublishedSite": "specromancer",
   "visibleHostedSites": 1078,
-  "launchpadBuiltAt": "2026-05-17T06:28:15.312Z",
+  "launchpadBuiltAt": "2026-05-17T06:41:19.677Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"

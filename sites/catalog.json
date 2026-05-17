@@ -26219,20 +26219,20 @@
       "Converted to Fire Drill rhythm trivia game with phone-controller multiplayer scaffold."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:12:58.666Z",
+    "lastPublishedAt": "2026-05-17T06:29:38.061Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/oh-billy",
         "ref": null,
-        "sha": "308d8e3937d3648de30794b8b036a3287740c7f5",
+        "sha": "6fa92f4cdb5ee3dee21dab2a52a6f68bf69bb496",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/oh-billy",
         "branch": "master",
-        "commit": "308d8e3937d3648de30794b8b036a3287740c7f5",
+        "commit": "6fa92f4cdb5ee3dee21dab2a52a6f68bf69bb496",
         "remote": "https://github.com/mist83/oh-billy.git"
       }
     },
@@ -32328,20 +32328,20 @@
       "Mullmania-hosted UI for the remote screenshot Lambda. Publish the browser front end from wwwroot and keep the renderer behind the API."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:26:53.436Z",
+    "lastPublishedAt": "2026-05-17T06:34:04.541Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/url-previewer",
         "ref": null,
-        "sha": "d5fa6c565c56c042d22fe37ee4ef66e483441eeb",
+        "sha": "178f91c62bb1b29a2a9d359434cddf949383a831",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/url-previewer",
-        "branch": "demo/oscar-url-previewer",
-        "commit": "d5fa6c565c56c042d22fe37ee4ef66e483441eeb",
+        "branch": "master",
+        "commit": "178f91c62bb1b29a2a9d359434cddf949383a831",
         "remote": "https://github.com/mist83/url-previewer.git"
       }
     },
@@ -35560,24 +35560,25 @@
       "repo-artifacts"
     ],
     "notes": [
-      "Specromancer redirects to the live generator because the working backend host is a Lambda URL, not a static mirror. The source repo is still mist83/mcp-me until the GitHub repo is explicitly renamed."
+      "Specromancer redirects to the live generator because the working backend host is a Lambda URL, not a static mirror. The source repo is still mist83/mcp-me until the GitHub repo is explicitly renamed.",
+      "Specromancer redirects to the live generator because the working backend host is a Lambda URL, not a static mirror. The source repo is mist83/specromancer."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:20:42.322Z",
+    "lastPublishedAt": "2026-05-17T06:37:19.105Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/mcp-me",
+        "repository": "mist83/specromancer",
         "ref": null,
-        "sha": "8749c63aadee2291e86ad80abce8ad36e6a82c9f",
+        "sha": "b31b18ed493fa1faa5985a3ab070fe1f46737ca3",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/mcp-me",
+        "root": "/Users/mist83/Code/specromancer",
         "branch": "master",
-        "commit": "8749c63aadee2291e86ad80abce8ad36e6a82c9f",
-        "remote": "https://github.com/mist83/mcp-me.git"
+        "commit": "b31b18ed493fa1faa5985a3ab070fe1f46737ca3",
+        "remote": "https://github.com/mist83/specromancer.git"
       }
     },
     "catalogTagsVersion": 2,
@@ -38900,20 +38901,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T05:33:18.333Z",
+    "lastPublishedAt": "2026-05-17T06:31:48.866Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "f8166fbda8b9573e9fef4357c85df71a94af5594",
+        "sha": "45576ca1f3eb46cd415fafe9c281517e7762b5bd",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "f8166fbda8b9573e9fef4357c85df71a94af5594",
+        "commit": "45576ca1f3eb46cd415fafe9c281517e7762b5bd",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -38923,7 +38924,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
