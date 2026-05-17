@@ -12301,20 +12301,20 @@
       "Static landing and interface surface for GitHub Pages and Mullmania. No backend compute is required for the deployable frontend shell."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:00:55.960Z",
+    "lastPublishedAt": "2026-05-17T14:26:22.839Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/decks-out",
         "ref": null,
-        "sha": "06dbabc4492e51fe96057598a577aad418bf635e",
+        "sha": "dc639d82fc797554a4f2e73987625ceb4e7fed6d",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/decks-out",
         "branch": "master",
-        "commit": "06dbabc4492e51fe96057598a577aad418bf635e",
+        "commit": "dc639d82fc797554a4f2e73987625ceb4e7fed6d",
         "remote": "https://github.com/mist83/decks-out.git"
       }
     },
@@ -15028,26 +15028,29 @@
       "repo-artifacts",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
-      "Repo docs page."
+      "Repo docs page.",
+      "Deterministic public front door for GitHub Pages plus canonical demo asset links."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T00:23:38.208Z",
+    "lastPublishedAt": "2026-05-17T14:29:21.075Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/fake-history",
         "ref": null,
-        "sha": "1296499d42e1bbe839d3649af25f5af646f84a6f",
+        "sha": "289e648d547bcec43acba1d5ba0557b022c887d8",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/fake-history",
         "branch": "master",
-        "commit": "1296499d42e1bbe839d3649af25f5af646f84a6f",
+        "commit": "289e648d547bcec43acba1d5ba0557b022c887d8",
         "remote": "https://github.com/mist83/fake-history.git"
       }
     },
@@ -15056,10 +15059,19 @@
     "mainSiteUpdatedAt": null,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T14:24:33Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://mist83.github.io/_demo/fake-history/poster.svg",
+      "durationSec": null,
+      "mode": null,
+      "posterKind": "generated-placeholder",
+      "posterNote": "No repo-specific proof asset was found yet, so this falls back to a deterministic placeholder."
+    },
+    "showcaseRank": 240
   },
   {
     "siteId": "falldown",
@@ -22564,7 +22576,9 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Publish the repository root directly. tv/index.html is the main app surface, mobile/builder-remote.html is the companion remote, and test/test-canvas-builder.html is the smoke harness.",
@@ -22572,20 +22586,20 @@
       "TV + mobile app-building workflow. Repo root index.html is a hand-built dark hero (theme-coherent, not a generic frontdoor) that links to the actual app surfaces under tv/, mobile/, test/."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:26:42.673Z",
+    "lastPublishedAt": "2026-05-17T14:25:22.225Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mainline-coding",
         "ref": null,
-        "sha": "2b83d5a309c1d8d211fc60c3dd18838407807c5e",
+        "sha": "c3bacb44b8a61ea7f9d0bb2aa226c3efad08e9b1",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mainline-coding",
         "branch": "master",
-        "commit": "2b83d5a309c1d8d211fc60c3dd18838407807c5e",
+        "commit": "c3bacb44b8a61ea7f9d0bb2aa226c3efad08e9b1",
         "remote": "https://github.com/mist83/mainline-coding.git"
       }
     },
@@ -22594,11 +22608,11 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/mainline-coding/poster.svg",
-      "durationSec": 45,
+      "posterUrl": "https://mist83.github.io/_demo/mainline-coding/poster.svg",
+      "durationSec": null,
       "mode": "video-first",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "manualRank": 20,
@@ -26528,7 +26542,11 @@
       "github",
       "curated",
       "frontend-ui",
-      "ui-framework"
+      "ui-framework",
+      "chatgpt",
+      "archive",
+      "standalone",
+      "static"
     ],
     "notes": [
       "Validated canonical repo-local deploy contract.",
@@ -26536,20 +26554,20 @@
       "Site identity was corrected from the stale infinite-scroll host claim."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T15:48:49.987Z",
+    "lastPublishedAt": "2026-05-17T14:42:03.838Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/openai-archive",
         "ref": null,
-        "sha": "b7b35831c239c53a47c5cd7d784cce07f2a734dc",
+        "sha": "e11baedaf33d6972bd053bdc15010d42363417ab",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/openai-archive-ghclone",
+        "root": "/Users/mist83/Code/openai-archive",
         "branch": "main",
-        "commit": "b7b35831c239c53a47c5cd7d784cce07f2a734dc",
+        "commit": "e11baedaf33d6972bd053bdc15010d42363417ab",
         "remote": "https://github.com/mist83/openai-archive.git"
       }
     },
@@ -33583,27 +33601,29 @@
       "dual-static",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Static app gallery and Repo Reels. Publish the repository root directly; there is no build step.",
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:34:32.524Z",
+    "lastPublishedAt": "2026-05-17T14:19:46.003Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/showcase",
         "ref": null,
-        "sha": "427d57ccce9918e9dba844f595b1ffed0e9842ff",
+        "sha": "ccd5a77a83db95b4a54f94866186f9ac2b738597",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/showcase",
         "branch": "main",
-        "commit": "427d57ccce9918e9dba844f595b1ffed0e9842ff",
+        "commit": "ccd5a77a83db95b4a54f94866186f9ac2b738597",
         "remote": "https://github.com/mist83/showcase.git"
       }
     },
@@ -33628,8 +33648,8 @@
     "testStatus": "smoke",
     "testNotes": "Checked live.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T14:23:20Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -34596,17 +34616,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:06:43.809Z",
+    "lastPublishedAt": "2026-05-17T15:02:00.539Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25990349639",
-        "runNumber": "70"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "5ab9f4cc4f3b8569333ec89b77a2d0566c7a1dc7",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "5ab9f4cc4f3b8569333ec89b77a2d0566c7a1dc7",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -38641,8 +38666,7 @@
       "mullmania-mirror"
     ],
     "notes": [
-      "Repo docs page.",
-      "Repo docs page with links to the site and demo files."
+      "Repo docs page."
     ],
     "managedBy": "publish-site",
     "lastPublishedAt": "2026-05-17T14:19:45.998Z",
@@ -38671,13 +38695,13 @@
       "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T14:23:56Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -39082,20 +39106,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T13:26:35.771Z",
+    "lastPublishedAt": "2026-05-17T14:35:07.145Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "12f25f03bca6e49a6795f0c67140e18249a6fcb6",
+        "sha": "b431be0952ce9a56d86aab8abd5c8200f4ea5694",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "12f25f03bca6e49a6795f0c67140e18249a6fcb6",
+        "commit": "b431be0952ce9a56d86aab8abd5c8200f4ea5694",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -39105,7 +39129,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -41746,6 +41770,35 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "worth",
+    "host": "worth.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "ai",
+      "image",
+      "experiment",
+      "dag"
+    ],
+    "notes": [
+      "Picture Worth static gateway placeholder. Sends uploaded images to the DAG vision endpoint and uses local placeholder generation until real text-to-image is available."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T14:57:21.304Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": false
   },
   {
     "siteId": "wrapped-table-demo",

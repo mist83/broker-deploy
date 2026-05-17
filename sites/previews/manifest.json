@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-16T03:06:42Z",
+  "updatedAt": "2026-05-17T15:10:26Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -18753,15 +18753,98 @@
       "siteId": "sites",
       "status": "ok",
       "path": "/api/previews/sites.png",
-      "url": "/api/previews/sites.png?v=1777327226191",
+      "url": "/api/previews/sites.png?v=1779030615051",
       "objectKey": "sites/previews/sites.png",
-      "capturedAt": "2026-04-27T22:00:26Z",
-      "version": "1777327226191",
-      "width": 960,
-      "height": 540,
+      "capturedAt": "2026-05-17T15:10:15Z",
+      "version": "1779030615051",
+      "width": 1024,
+      "height": 768,
+      "style": "default",
+      "params": {
+        "width": 1024,
+        "height": 768,
+        "settleDelayMs": 5000,
+        "randomizeStyle": false,
+        "readySelector": "#site-table-body tr.site-row"
+      },
+      "screenshots": [
+        {
+          "siteId": "sites",
+          "status": "ok",
+          "id": "1779030615051",
+          "path": "/api/previews/sites/1779030615051.png",
+          "url": "/api/previews/sites/1779030615051.png?v=1779030615051",
+          "objectKey": "sites/previews/sites/1779030615051.png",
+          "capturedAt": "2026-05-17T15:10:15Z",
+          "version": "1779030615051",
+          "label": "default / 1024x768",
+          "style": "default",
+          "params": {
+            "width": 1024,
+            "height": 768,
+            "settleDelayMs": 5000,
+            "randomizeStyle": false,
+            "readySelector": "#site-table-body tr.site-row"
+          },
+          "width": 1024,
+          "height": 768,
+          "contentType": "image/png",
+          "size": 201765,
+          "etag": "ebab12a36bae415a9a48c52f893dd877",
+          "sourceUrl": "https://sites.mullmania.com/"
+        },
+        {
+          "siteId": "sites",
+          "status": "ok",
+          "id": "1779029314976",
+          "path": "/api/previews/sites/1779029314976.png",
+          "url": "/api/previews/sites/1779029314976.png?v=1779029314976",
+          "objectKey": "sites/previews/sites/1779029314976.png",
+          "capturedAt": "2026-05-17T14:48:34Z",
+          "version": "1779029314976",
+          "label": "default / 1024x768",
+          "style": "default",
+          "params": {
+            "width": 1024,
+            "height": 768,
+            "settleDelayMs": 5000,
+            "randomizeStyle": false
+          },
+          "width": 1024,
+          "height": 768,
+          "contentType": "image/png",
+          "size": 40102,
+          "etag": "bcc22108e295cd879d8ccf48d3332134",
+          "sourceUrl": "https://sites.mullmania.com/"
+        },
+        {
+          "siteId": "sites",
+          "status": "ok",
+          "id": "1779029182172",
+          "path": "/api/previews/sites/1779029182172.png",
+          "url": "/api/previews/sites/1779029182172.png?v=1779029182172",
+          "objectKey": "sites/previews/sites/1779029182172.png",
+          "capturedAt": "2026-05-17T14:46:22Z",
+          "version": "1779029182172",
+          "label": "default / 1024x768",
+          "style": "default",
+          "params": {
+            "width": 1024,
+            "height": 768,
+            "settleDelayMs": 5000,
+            "randomizeStyle": false
+          },
+          "width": 1024,
+          "height": 768,
+          "contentType": "image/png",
+          "size": 181561,
+          "etag": "2fa9dd3cd2314af164b7544c776dcf63",
+          "sourceUrl": "https://sites.mullmania.com/"
+        }
+      ],
       "contentType": "image/png",
-      "size": 99052,
-      "etag": "f578be34f021d652a98170719a4463f7",
+      "size": 201765,
+      "etag": "ebab12a36bae415a9a48c52f893dd877",
       "sourceUrl": "https://sites.mullmania.com/"
     },
     "six-seven": {

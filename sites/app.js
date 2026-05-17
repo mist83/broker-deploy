@@ -12593,7 +12593,7 @@ function resolveFullscreenStageMedia(entry) {
 }
 
 function getFullscreenPreviewStatusText(entry, media) {
-  if (media?.label === 'Snapshot') {
+  if (media?.label === 'Snapshot' || media?.screenshot) {
     return 'Cached snapshot preview.';
   }
   if (media?.label === 'Poster') {
