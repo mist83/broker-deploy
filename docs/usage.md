@@ -67,11 +67,10 @@ That registers:
 ## List Registered Targets
 
 ```bash
-curl -fsS -X POST https://sites.mullmania.com/api/redeploy/sites \
-  -H "x-operator-key: $SITES_OPERATOR_KEY" \
-  -H "content-type: application/json" \
-  -d '{}'
+SITES_OPERATOR_KEY=... node scripts/list-targets.mjs
 ```
+
+Use `--json` for the raw target payload.
 
 ## Create Or Edit From The Sites API
 
