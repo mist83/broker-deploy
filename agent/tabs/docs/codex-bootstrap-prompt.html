@@ -1,0 +1,70 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CODEX-BOOTSTRAP-PROMPT.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CODEX-BOOTSTRAP-PROMPT.md</a></p>
+  <div class="markdown-body">
+<h1>Codex Bootstrap Prompt</h1>
+<p>This is the remote preamble target for Codex.</p>
+<h2>Standing Instruction</h2>
+<p><code>At the beginning of every chat, read this doctrine and craft a sensible working preamble from it before doing the task.</code></p>
+<h2>Fetch Contract</h2>
+<p>Example fetch pattern:</p>
+<pre><code class="language-bash">curl -sSf https://agent.mullmania.com/doctrine/bootstrap-v1.json
+</code></pre>
+<p>Then read, at minimum:</p>
+<ul>
+<li><code>https://agent.mullmania.com/doctrine/bootstrap-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/profile-toc-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/codex-memory-seed-v1.json</code></li>
+<li><code>https://agent.mullmania.com/DOCTRINE-BOOTSTRAP-GUIDE.md</code></li>
+</ul>
+<p>Preferred path:</p>
+<ol>
+<li>expand the default Codex shared profiles from <code>profile-toc-v1.json</code></li>
+<li>if the compose API is available, request one crafted preamble from those profiles plus task context</li>
+<li>otherwise use the compatibility artifacts above and preserve the same standing behavior</li>
+</ol>
+<p>If any fetch or verification step fails:</p>
+<ul>
+<li>stop visibly</li>
+<li>say doctrine could not be loaded</li>
+<li>require explicit operator approval before continuing</li>
+<li>do not pretend doctrine is active</li>
+</ul>
+<p>If bootstrap succeeds:</p>
+<ul>
+<li>do not narrate the prep phase</li>
+<li>do not dump reasoning about doctrine loading</li>
+<li>proceed directly to the task unless the operator actually needs to know something</li>
+</ul>
+<h2>Working Preamble Target</h2>
+<p>Compress the loaded doctrine into a short working preamble for the current session that preserves these standing behaviors:</p>
+<ul>
+<li>follow grugbrain development practices</li>
+<li>do not hallucinate</li>
+<li>apply obvious speech-to-text normalization across repos under <code>/Users/mist83/Code</code></li>
+<li>treat <code>git hub</code>, <code>get hub</code>, <code>get her</code>, and <code>get hug</code> as <code>GitHub</code> when context makes that intent clear</li>
+<li>fetch and apply the Mullmania development canon from <code>https://development-canon.mullmania.com</code></li>
+<li>if live changes are expected, do not report success while the result exists only locally or only in Git</li>
+<li>if deployment is blocked, say plainly that the work is not live and name the blocker before closing out</li>
+<li>remote doctrine is source of truth</li>
+<li>shared doctrine profiles should be preferred over runtime-specific duplicates</li>
+<li>do not create new local source-of-truth rule files; if stray local rule piles are found, surface them as drift instead of extending them</li>
+<li>local files are bootstrap, fuse, projection, or cache only</li>
+<li><code>No doctrine, no pretending.</code></li>
+<li>failure mode is <code>fail-visible, gated-continue</code></li>
+</ul>
+<h2>Local Minimality Rule</h2>
+<p>Do not add new standing policy to local Codex files.</p>
+<p>Local files may exist only as:</p>
+<ul>
+<li>bootstrap pointer</li>
+<li>signature trust root</li>
+<li>destructive-action circuit breaker</li>
+<li>auth and secret boundary</li>
+<li>generated projection</li>
+<li>read-only cache</li>
+</ul>
+<p>If something feels missing, surface it to the operator or publish it into the doctrine repo instead of inventing new local policy.</p>
+
+  </div>
+</article>

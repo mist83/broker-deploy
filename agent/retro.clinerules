@@ -1,0 +1,16 @@
+# Retro
+
+## TRIGGER
+When the user says "retro", "let's retro", "retro this issue", "retrospective", or similar phrases requesting pattern analysis.
+
+## PURPOSE
+Extract actionable patterns from completed work and update directives to prevent recurrence. NO documentation - just behavioral changes.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/retro.md" -Raw
+```
+
+Or use read_file tool:
+`full/retro.md`

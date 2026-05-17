@@ -1,0 +1,70 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../powershell-enforcement.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> powershell-enforcement.clinerules</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>POWERSHELL SYNTAX ENFORCEMENT - CRITICAL RULE</h1>
+<h1>This rule MUST be followed without exception</h1>
+<h2>SYSTEM CONTEXT</h2>
+<ul>
+<li>Operating System: Windows 11</li>
+<li>Default Shell: PowerShell 7 (pwsh.exe)</li>
+<li>Shell Location: C:\Program Files\PowerShell\7\pwsh.exe</li>
+</ul>
+<h2>MANDATORY POWERSHELL SYNTAX RULES</h2>
+<h3>COMMAND CHAINING - NEVER USE <code>&amp;&amp;</code></h3>
+<p><strong>WRONG (BASH SYNTAX - WILL BREAK):</strong></p>
+<pre><code>cd some-directory &amp;&amp; npm install
+command1 &amp;&amp; command2
+</code></pre>
+<p><strong>CORRECT (POWERSHELL SYNTAX):</strong></p>
+<pre><code>cd some-directory; npm install
+command1; command2
+</code></pre>
+<h3>ALWAYS USE SEMICOLON (;) FOR COMMAND CHAINING</h3>
+<p>When you need to chain commands in PowerShell:</p>
+<ul>
+<li>Use <code>;</code> (semicolon) to separate commands</li>
+<li>NEVER use <code>&amp;&amp;</code> (this is bash/sh syntax and will fail)</li>
+<li>NEVER use <code>||</code> (this is also bash/sh syntax)</li>
+</ul>
+<h3>BEFORE EVERY COMMAND EXECUTION</h3>
+<ol>
+<li>Check if you&#39;re about to use <code>&amp;&amp;</code> or <code>||</code></li>
+<li>If yes, STOP and replace with <code>;</code></li>
+<li>Remember: You are ALWAYS in PowerShell on this system</li>
+<li>There are NO exceptions to this rule</li>
+</ol>
+<h3>EXAMPLES OF CORRECT POWERSHELL COMMANDS</h3>
+<p><strong>Navigating and running commands:</strong></p>
+<pre><code class="language-powershell">cd path\to\directory; npm install
+cd ..; git status
+Set-Location &#39;C:\Projects&#39;; yarn build
+</code></pre>
+<p><strong>Multiple commands:</strong></p>
+<pre><code class="language-powershell">npm run build; npm test; npm run deploy
+Remove-Item temp.txt; New-Item temp.txt
+</code></pre>
+<p><strong>With error handling (if needed):</strong></p>
+<pre><code class="language-powershell">if (Test-Path file.txt) { Remove-Item file.txt }; New-Item file.txt
+</code></pre>
+<h2>ENFORCEMENT LEVEL: MAXIMUM</h2>
+<p>This rule has MAXIMUM priority. If there is ANY conflict with other instructions, THIS RULE WINS.</p>
+<h2>VIOLATION CONSEQUENCES</h2>
+<p>Using <code>&amp;&amp;</code> or <code>||</code> in PowerShell commands will:</p>
+<ol>
+<li>Cause command execution to fail 100% of the time</li>
+<li>Frustrate the user</li>
+<li>Waste time with error messages</li>
+</ol>
+<h2>VERIFICATION CHECKLIST</h2>
+<p>Before using execute_command tool, ask yourself:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Am I on Windows? (Yes - ALWAYS)</li>
+<li><input disabled="" type="checkbox"> Is the default shell PowerShell? (Yes - ALWAYS)</li>
+<li><input disabled="" type="checkbox"> Did I use <code>&amp;&amp;</code> or <code>||</code>? (If yes - STOP and fix it)</li>
+<li><input disabled="" type="checkbox"> Did I use <code>;</code> for chaining? (This is correct)</li>
+</ul>
+<h2>REMEMBER</h2>
+
+  </div>
+</article>

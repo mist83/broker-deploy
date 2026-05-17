@@ -1,0 +1,67 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CODEX-LOCAL-RUNTIME-INVENTORY.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CODEX-LOCAL-RUNTIME-INVENTORY.md</a></p>
+  <div class="markdown-body">
+<h1>Codex Local Runtime Inventory</h1>
+<p>This is the current local Codex-side surface that still exists on the operator machine.</p>
+<p>Treat it as migration inventory, not future source of truth.</p>
+<h2>Active Local Instruction Surfaces</h2>
+<ul>
+<li><code>~/.codex/AGENTS.md</code>
+Global Codex instructions. This should collapse to a bootstrap pointer only.</li>
+<li><code>/Users/mist83/Code/AGENTS.md</code>
+Workspace-family instructions for repos under <code>/Users/mist83/Code</code>. This should collapse to a bootstrap pointer only.</li>
+</ul>
+<h2>Active Local Permission And Fuse Surface</h2>
+<ul>
+<li><code>~/.codex/rules/default.rules</code>
+Large local prefix-allow list. This is a runtime permission/fuse surface, not doctrine. It is still locally authoritative today.</li>
+</ul>
+<h2>Active Local User Skill Packs</h2>
+<p>These are still local runtime inputs today:</p>
+<ul>
+<li><code>canonize</code></li>
+<li><code>coordinate</code></li>
+<li><code>frontend-skill</code></li>
+<li><code>heimdall-announce</code></li>
+<li><code>imagegen</code></li>
+<li><code>itchy-brain</code></li>
+<li><code>marionette-protocol</code></li>
+<li><code>mark-defunct</code></li>
+<li><code>mullmania-frontend-demo-swarm</code></li>
+<li><code>playwright</code></li>
+<li><code>playwright-interactive</code></li>
+<li><code>remote-site-screenshot</code></li>
+<li><code>roomup</code></li>
+<li><code>screenshot</code></li>
+<li><code>shipit</code></li>
+<li><code>sora</code></li>
+<li><code>ui-mullmania-migrator</code></li>
+<li><code>wrap-executable-ui</code></li>
+</ul>
+<h2>Runtime-Provided Local Bundles</h2>
+<p>These are local runtime dependencies, but not authored doctrine:</p>
+<ul>
+<li><code>~/.codex/skills/.system</code></li>
+<li><code>~/.codex/skills/codex-primary-runtime</code></li>
+<li>curated plugin caches under <code>~/.codex/plugins/cache/*</code>
+Current bundle names: <code>computer-use</code>, <code>build-macos-apps</code>, <code>build-web-apps</code>, <code>game-studio</code>, <code>github</code>, <code>gmail</code></li>
+</ul>
+<h2>Scratch And State Surfaces</h2>
+<p>These exist locally but are not standing doctrine:</p>
+<ul>
+<li><code>~/.codex/.codex-global-state.json</code></li>
+<li><code>~/.codex/state/*</code></li>
+<li><code>~/.codex/automations/.run-jitter-salt</code></li>
+<li>prompt history and UI state inside Codex app storage</li>
+</ul>
+<p>These are disposable only if you do not need their scratch data anymore.</p>
+<h2>Interpretation</h2>
+<ul>
+<li>Safe to collapse the two <code>AGENTS.md</code> files to a bootstrap pointer once the remote doctrine preserves their standing behavior.</li>
+<li>Not safe to delete <code>default.rules</code> if you expect the same local permission/fuse behavior.</li>
+<li>Not safe to delete the local user skill packs if you expect the same named skill triggers and local scripts to keep working.</li>
+<li>Not necessary to preserve scratch/state files unless you still rely on their transient data.</li>
+</ul>
+
+  </div>
+</article>

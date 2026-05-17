@@ -1,0 +1,107 @@
+# Code Generators Facet
+
+**Description:** Scaffolding and code generation tools
+
+**Domains:** tooling, automation
+**Behaviors:** generation, scaffolding
+
+---
+
+## make-lambda
+
+# Make Lambda
+
+## TRIGGER
+See full content
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/make-lambda.md" -Raw
+```
+
+Or use read_file tool:
+`full/make-lambda.md`
+
+---
+
+## make-fab
+
+# Make FAB - Floating Action Button Wrapper Generator
+
+## TRIGGER
+"make a fab", "make this into a fab", "turn this into a fab", "create a fab", "wrap this in a fab"
+
+## PURPOSE
+Automates FAB Collection library creation - wraps HTML content in self-contained FAB infrastructure, generates deployment files, and provides S3 upload commands.
+
+## WHAT IT DOES
+- Prompts for: FAB name (kebab-case), Tabler icon, color, tooltip, HTML source
+- Generates: {fab-name}.js (with embedded FAB Manager), test page, S3 commands
+- Pattern: Self-contained library, single script tag deployment
+- Output: Circular button in bottom-right that opens sidebar panel
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/make-fab.md" -Raw
+```
+
+Or use read_file tool:
+`full/make-fab.md`
+
+## QUICK REFERENCE
+- **Validation:** Kebab-case names, hex colors, Tabler icons
+- **Content strategies:** Inline (<500 chars), separate HTML file (>500 chars), URL
+- **FAB Manager:** Embedded in each library (DRIFT WARNING pattern)
+- **Coordination:** Multiple FABs coexist, hide when sidebar opens
+- **Deployment:** S3 bucket `vizio-data-ingestion-resources/other/fabs/`
+
+
+---
+
+## make-tv-app
+
+# Make Tv App
+
+## TRIGGER
+When the user says "make a TV app", "convert to TV", "make this TV-friendly", or similar phrases requesting a fullscreen TV-optimized interface.
+
+## PURPOSE
+TV apps are keyboard-driven, fullscreen experiences designed for 10-foot viewing. Large text, minimal UI, high contrast, and simple navigation optimized for couch interaction.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/make-tv-app.md" -Raw
+```
+
+Or use read_file tool:
+`full/make-tv-app.md`
+
+---
+
+## guided-design-wizard
+
+# Guided Design Wizard
+
+## TRIGGER
+When the user says any of:
+
+## PURPOSE
+Transform vague ideas into concrete app specifications through an HTML questionnaire. Answer everything at once in a browser instead of back-and-forth chat.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/guided-design-wizard.md" -Raw
+```
+
+Or use read_file tool:
+`full/guided-design-wizard.md`
+
+---
+

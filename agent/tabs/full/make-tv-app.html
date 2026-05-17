@@ -1,0 +1,318 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/make-tv-app.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/make-tv-app.md</a></p>
+  <div class="markdown-body">
+<h1>Make TV App - Fullscreen Immersive UI Pattern</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;make a TV app&quot;, &quot;convert to TV&quot;, &quot;make this TV-friendly&quot;, or similar phrases requesting a fullscreen TV-optimized interface.</p>
+<h2>PHILOSOPHY</h2>
+<p>TV apps are keyboard-driven, fullscreen experiences designed for 10-foot viewing. Large text, minimal UI, high contrast, and simple navigation optimized for couch interaction.</p>
+<h2>CORE PATTERN</h2>
+<h3>Visual Design</h3>
+<ul>
+<li><strong>Fullscreen:</strong> 100vw × 100vh, no scroll, overflow hidden</li>
+<li><strong>Large text:</strong> 3-6.5rem for primary content</li>
+<li><strong>High contrast:</strong> Bold colors on simple backgrounds</li>
+<li><strong>Minimal chrome:</strong> HUD overlays only, no traditional nav</li>
+<li><strong>Animations:</strong> Smooth transitions, gentle effects</li>
+</ul>
+<h3>Interaction</h3>
+<ul>
+<li><strong>Keyboard-first:</strong> Arrow keys (nav), numbers (actions), Enter (select), Backspace (reset)</li>
+<li><strong>Remote control:</strong> Optional QR + SignalR for mobile control</li>
+<li><strong>Shortcuts overlay:</strong> Press &#39;0&#39; to show/hide keyboard help</li>
+<li><strong>No mouse required:</strong> Every action has keyboard shortcut</li>
+</ul>
+<h3>Structure</h3>
+<pre><code>wwwroot/
+  tv/
+    index.html    - Main TV view
+    tv.css        - TV-optimized styling
+    tv.js         - Keyboard handlers &amp; logic
+    remote.html   - Optional mobile remote
+    remote.js     - Optional SignalR remote control
+</code></pre>
+<h2>STANDARD ELEMENTS</h2>
+<h3>1. Fullscreen Container</h3>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;main class=&quot;tv-container&quot;&gt;
+    &lt;!-- Main content here --&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+</code></pre>
+<pre><code class="language-css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;
+  background: #000000; /* or gradient */
+}
+
+.tv-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+</code></pre>
+<h3>2. HUD Overlay (Bottom)</h3>
+<pre><code class="language-html">&lt;div class=&quot;hud&quot;&gt;
+  &lt;div class=&quot;hud-left&quot;&gt;
+    &lt;!-- Status indicators --&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;hud-right&quot;&gt;
+    &lt;div class=&quot;controls&quot;&gt;
+      &lt;div class=&quot;control-item&quot;&gt;
+        &lt;span class=&quot;key&quot;&gt;ENTER&lt;/span&gt;
+        &lt;span class=&quot;action&quot;&gt;Action&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">.hud {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+}
+
+.key {
+  background: rgba(255, 215, 0, 0.25);
+  border: 3px solid #ffd700;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.action {
+  color: #ffffff;
+  font-weight: 600;
+}
+</code></pre>
+<h3>3. Shortcuts Overlay</h3>
+<pre><code class="language-html">&lt;div class=&quot;shortcuts-overlay&quot; id=&quot;shortcuts-overlay&quot;&gt;
+  &lt;h2&gt;KEYBOARD SHORTCUTS&lt;/h2&gt;
+  &lt;div class=&quot;shortcuts-grid&quot;&gt;
+    &lt;div class=&quot;shortcut&quot;&gt;
+      &lt;span class=&quot;shortcut-key&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;shortcut-desc&quot;&gt;Next&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- More shortcuts --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">.shortcuts-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.shortcuts-overlay.visible {
+  display: flex;
+}
+
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 800px;
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 24px;
+  color: white;
+}
+
+.shortcut-key {
+  background: #333;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 3px solid #666;
+  min-width: 120px;
+  text-align: center;
+  font-weight: bold;
+}
+</code></pre>
+<h3>4. JavaScript Keyboard Handler</h3>
+<pre><code class="language-javascript">document.addEventListener(&#39;keydown&#39;, (e) =&gt; {
+  switch(e.key) {
+    case &#39;ArrowRight&#39;:
+      e.preventDefault();
+      nextItem();
+      break;
+    case &#39;ArrowLeft&#39;:
+      e.preventDefault();
+      previousItem();
+      break;
+    case &#39;Enter&#39;:
+      e.preventDefault();
+      togglePause();
+      break;
+    case &#39;Backspace&#39;:
+      e.preventDefault();
+      location.reload();
+      break;
+    case &#39;0&#39;:
+      e.preventDefault();
+      toggleShortcuts();
+      break;
+  }
+});
+</code></pre>
+<h2>USER PROMPTS</h2>
+<p>Use <code>ask_followup_question</code> to gather:</p>
+<h3>Prompt 1: Content Type</h3>
+<p><strong>Question:</strong> &quot;What content should the TV app display?&quot;
+<strong>Example:</strong> &quot;Trivia questions&quot;, &quot;Image carousel&quot;, &quot;Live data feed&quot;</p>
+<h3>Prompt 2: Navigation Style</h3>
+<p><strong>Question:</strong> &quot;How should users navigate?&quot;
+<strong>Options:</strong> </p>
+<ul>
+<li><input disabled="" type="checkbox"> One item per screen (flashcard style)</li>
+<li><input disabled="" type="checkbox"> Vertical scroll with large cards</li>
+<li><input disabled="" type="checkbox"> Auto-advance with timer</li>
+</ul>
+<h3>Prompt 3: Data Source</h3>
+<p><strong>Question:</strong> &quot;Where does the data come from?&quot;
+<strong>Options:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Static JSON file</li>
+<li><input disabled="" type="checkbox"> API endpoint</li>
+<li><input disabled="" type="checkbox"> SignalR live stream</li>
+<li><input disabled="" type="checkbox"> CSV file</li>
+</ul>
+<h3>Prompt 4: Color Scheme</h3>
+<p><strong>Question:</strong> &quot;What&#39;s the color vibe?&quot;
+<strong>Options:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Dark (black background)</li>
+<li><input disabled="" type="checkbox"> Gradient (colorful)</li>
+<li><input disabled="" type="checkbox"> Themed (match content)</li>
+</ul>
+<h2>GENERATED FILES</h2>
+<h3>index.html</h3>
+<ul>
+<li>Fullscreen container</li>
+<li>Main content area</li>
+<li>HUD with controls</li>
+<li>Shortcuts overlay</li>
+<li>Tabler icons CDN</li>
+</ul>
+<h3>tv.css</h3>
+<ul>
+<li>Fullscreen body styling</li>
+<li>Large text (3-6rem)</li>
+<li>HUD positioning</li>
+<li>Shortcuts overlay</li>
+<li>Responsive breakpoints (optional)</li>
+</ul>
+<h3>tv.js</h3>
+<ul>
+<li>Keyboard event handlers</li>
+<li>Navigation logic (next/prev/pause)</li>
+<li>Data loading</li>
+<li>State management</li>
+</ul>
+<h3>remote.html (optional)</h3>
+<ul>
+<li>Mobile remote control interface</li>
+<li>QR code for connection</li>
+<li>SignalR integration</li>
+</ul>
+<h2>BACKEND INTEGRATION</h2>
+<p>For Lambda deployment:</p>
+<ul>
+<li>Add <code>/tv</code> route redirect in Program.cs</li>
+<li>Serve static files from wwwroot/tv/</li>
+<li>Optional: Create API endpoint for data</li>
+</ul>
+<pre><code class="language-csharp">app.MapGet(&quot;/tv&quot;, () =&gt; Results.Redirect(&quot;/tv/index.html&quot;));
+</code></pre>
+<h2>EXAMPLE OUTPUT</h2>
+<p><strong>For a trivia TV app:</strong></p>
+<ul>
+<li>Large question text (5rem)</li>
+<li>Answer buttons with number shortcuts</li>
+<li>Score HUD in corner</li>
+<li>Timer progress bar at bottom</li>
+<li>Dark background for readability</li>
+</ul>
+<p><strong>For a feed TV app:</strong></p>
+<ul>
+<li>One item per screen (4rem text)</li>
+<li>Arrow keys navigate</li>
+<li>Metadata in corners</li>
+<li>Auto-advance option</li>
+<li>Pause with Enter</li>
+</ul>
+<h2>COMPLETION MESSAGE</h2>
+<pre><code>TV app created in wwwroot/tv/ ✅
+
+Files:
+- tv/index.html - Main TV interface
+- tv/tv.css - TV-optimized styling
+- tv/tv.js - Keyboard controls
+
+Access at: https://your-url/tv
+
+Controls:
+- Arrow keys: Navigate
+- Enter: Pause/Play
+- 0: Show shortcuts
+- Backspace: Reload
+</code></pre>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>TV-first:</strong> Design for 10-foot viewing (large text, simple)</li>
+<li><strong>Keyboard-only:</strong> Every action must have shortcut</li>
+<li><strong>No mouse:</strong> Assume user has remote only</li>
+<li><strong>Responsive:</strong> Works on actual TVs (720p to 4K)</li>
+<li><strong>Performance:</strong> Smooth 60fps animations</li>
+<li><strong>Accessibility:</strong> High contrast, readable at distance</li>
+</ol>
+<h2>TONE</h2>
+<p>When creating TV apps:</p>
+<ul>
+<li>&quot;TV view created at /tv&quot;</li>
+<li>&quot;Large text optimized for 10-foot viewing&quot;</li>
+<li>&quot;Keyboard shortcuts: arrows navigate, Enter pauses&quot;</li>
+</ul>
+<p>Not:</p>
+<ul>
+<li>&quot;Great! I&#39;ve created an amazing TV experience...&quot;</li>
+</ul>
+
+  </div>
+</article>

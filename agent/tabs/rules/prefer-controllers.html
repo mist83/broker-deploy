@@ -1,0 +1,127 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../prefer-controllers.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> prefer-controllers.clinerules</a> &middot; <a class="link-muted" href="../full/prefer-controllers.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/prefer-controllers.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Prefer Controllers</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.</p>
+<h2>PURPOSE</h2>
+<p>Use proper MVC Controllers instead of minimal API (MapGet/MapPost) patterns. Controllers provide better organization, testability, and maintainability.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/prefer-controllers.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/prefer-controllers.md</code></p>
+<h2>Full content</h2>
+<h1>Prefer Controllers Over Minimal APIs</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.</p>
+<h2>PHILOSOPHY</h2>
+<p>Use proper MVC Controllers instead of minimal API (MapGet/MapPost) patterns. Controllers provide better organization, testability, and maintainability.</p>
+<h2>RULES</h2>
+<h3>Always Use Controllers For:</h3>
+<ul>
+<li>REST API endpoints</li>
+<li>Any HTTP endpoint beyond simple redirects</li>
+<li>Business logic that requires services</li>
+</ul>
+<h3>Controller Structure</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly IService _service;
+    
+    public MyController(IService service)
+    {
+        _service = service;
+    }
+    
+    [HttpGet]
+    public async Task&lt;IActionResult&gt; Get()
+    {
+        // Implementation
+    }
+}
+</code></pre>
+<h3>Organize Code</h3>
+<ul>
+<li><strong>Controllers/</strong> - API endpoints</li>
+<li><strong>Services/</strong> - Business logic</li>
+<li><strong>Models/</strong> - Data structures</li>
+<li><strong>Program.cs</strong> - Minimal, just registration and middleware</li>
+</ul>
+<h3>Program.cs Should Only:</h3>
+<ul>
+<li>Register services</li>
+<li>Configure middleware</li>
+<li>Add controllers with <code>builder.Services.AddControllers()</code></li>
+<li>Map controllers with <code>app.MapControllers()</code></li>
+<li>Simple redirects (like &quot;/&quot; → &quot;/index.html&quot;)</li>
+</ul>
+<h3>What NOT to Put in Program.cs:</h3>
+<ul>
+<li>Business logic</li>
+<li>Multiple MapGet/MapPost endpoints</li>
+<li>Complex HTTP handlers</li>
+<li>Data access logic</li>
+</ul>
+<h2>BENEFITS</h2>
+<ul>
+<li><strong>Testability</strong> - Controllers are easily unit tested</li>
+<li><strong>Organization</strong> - Clear separation of concerns</li>
+<li><strong>Scalability</strong> - Easy to add more endpoints</li>
+<li><strong>Dependency Injection</strong> - Built-in support</li>
+<li><strong>Attributes</strong> - Rich routing and validation options</li>
+</ul>
+<h2>EXAMPLE: BAD (Minimal API)</h2>
+<pre><code class="language-csharp">app.MapGet(&quot;/api/users&quot;, async (UserService service) =&gt; {
+    var users = await service.GetUsers();
+    return Results.Ok(users);
+});
+
+app.MapPost(&quot;/api/users&quot;, async (User user, UserService service) =&gt; {
+    await service.CreateUser(user);
+    return Results.Created();
+});
+</code></pre>
+<h2>EXAMPLE: GOOD (Controller)</h2>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class UsersController : ControllerBase
+{
+    private readonly UserService _service;
+    
+    public UsersController(UserService service)
+    {
+        _service = service;
+    }
+    
+    [HttpGet]
+    public async Task&lt;IActionResult&gt; GetUsers()
+    {
+        var users = await _service.GetUsers();
+        return Ok(users);
+    }
+    
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; CreateUser([FromBody] User user)
+    {
+        await _service.CreateUser(user);
+        return Created();
+    }
+}
+</code></pre>
+<h2>ENFORCEMENT</h2>
+<p>When you see minimal API patterns (MapGet, MapPost, etc.) with business logic:</p>
+<ol>
+<li>Create appropriate Controller class</li>
+<li>Move logic to Controller action methods</li>
+<li>Update Program.cs to just use MapControllers()</li>
+<li>Organize services in Services/ directory</li>
+<li>Keep models in Models/ directory</li>
+</ol>
+
+  </div>
+</article>

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "agents-codex-memory-seed-v1",
+  "summary": "Condensed Codex-side memory prepared for migration into the remote doctrine/control plane.",
+  "principles": [
+    "Remote doctrine is the source of truth.",
+    "Local runtime files are compatibility shims, not authored policy.",
+    "No doctrine, no pretending.",
+    "Doctrine failure mode is fail-visible-gated-continue.",
+    "Override is session-scoped and visibly marked.",
+    "Local safety is welded on even when the remote doctrine is authoritative."
+  ],
+  "activeDecisions": [
+    "Use agent.mullmania.com as the current live publish surface until a plural host exists.",
+    "Keep a two-layer remote brain: static signed doctrine artifact plus narrow dynamic service.",
+    "Prefer shared-rule-catalog-v1.json plus profile-toc-v1.json as the shared doctrine core for both Codex and Claude.",
+    "Use orchestrator-owned durable memory in v1.",
+    "Keep cross-agent shared live memory out of v1.",
+    "Keep conditional logic out of the static artifact.",
+    "Treat doctrine artifacts on agent.mullmania.com as publicly readable. If they are unavailable, fail visibly and require operator override before continuing."
+  ],
+  "localAllowed": [
+    "bootstrap pointer",
+    "signature trust root",
+    "destructive-action circuit breaker",
+    "auth and secret resolution boundaries",
+    "generated runtime projections",
+    "read-only doctrine cache"
+  ],
+  "localForbiddenAsSourceOfTruth": [
+    "custom CLAUDE.md",
+    "custom AGENTS.md",
+    "custom Codex skill packs",
+    "custom Claude skill packs",
+    "custom local plugin registries",
+    "custom local automation registries",
+    "hook scripts with real policy logic"
+  ],
+  "runtimeQuirks": [
+    "Codex sessions currently ingest both ~/.codex/AGENTS.md and workspace/root AGENTS.md when they exist.",
+    "~/.codex/rules/default.rules is a local permission/fuse surface, not doctrine.",
+    "User skill packs under ~/.codex/skills/* are surfaced by name and description; removing them changes what the runtime can trigger by skill name.",
+    "Curated plugin caches under ~/.codex/plugins/cache/* are runtime tool bundles, not authored doctrine.",
+    "~/.codex/state/*, ~/.codex/.codex-global-state.json, and prompt-history state are scratch/history, not standing behavior.",
+    "The live doctrine host should be readable without local secret material. If it is not, the session should stop visibly instead of pretending doctrine was loaded."
+  ],
+  "migrationInventory": {
+    "globalInstructionsFile": "~/.codex/AGENTS.md",
+    "workspaceInstructionsFile": "/Users/mist83/Code/AGENTS.md",
+    "permissionRulesFile": "~/.codex/rules/default.rules",
+    "customSkillPacks": [
+      "canonize",
+      "coordinate",
+      "frontend-skill",
+      "heimdall-announce",
+      "imagegen",
+      "itchy-brain",
+      "marionette-protocol",
+      "mark-defunct",
+      "mullmania-frontend-demo-swarm",
+      "playwright",
+      "playwright-interactive",
+      "remote-site-screenshot",
+      "roomup",
+      "screenshot",
+      "shipit",
+      "sora",
+      "ui-mullmania-migrator",
+      "wrap-executable-ui"
+    ],
+    "runtimeSkillBundles": [
+      ".system",
+      "codex-primary-runtime"
+    ],
+    "cachedPluginBundles": [
+      "computer-use",
+      "build-macos-apps",
+      "build-web-apps",
+      "game-studio",
+      "github",
+      "gmail"
+    ],
+    "automationStatus": "No user automation definitions today. Only runtime salt exists at ~/.codex/automations/.run-jitter-salt.",
+    "scratchStateNote": "Several scratch/state files exist under ~/.codex/state/* and ~/.codex/.codex-global-state.json. They are not doctrine and are safe to treat as disposable operator scratch unless a specific workflow still uses them."
+  },
+  "mandatoryStandingBehaviors": [
+    "Follow grugbrain development practices.",
+    "Do not hallucinate.",
+    "Apply obvious speech-to-text normalization across repos under /Users/mist83/Code.",
+    "Treat near-misses like git hub, get hub, get her, and get hug as GitHub when context makes that intent clear.",
+    "Fetch and apply the Mullmania development canon from https://development-canon.mullmania.com.",
+    "If live changes are expected, do not report success while the result exists only locally or only in Git.",
+    "If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.",
+    "Treat remote doctrine as source of truth and local files as bootstrap/fuse/projection surfaces only.",
+    "Prefer shared doctrine profiles over runtime-specific restatements when the rule applies equally to Codex and Claude."
+  ],
+  "slogan": "Remote thinks. Local bounces. Safety is welded on."
+}

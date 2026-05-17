@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "agents-doctrine-recipe-catalog-v1",
+  "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
+  "generatedAt": "2026-05-17T02:31:35.686Z",
+  "recipes": [
+    {
+      "id": "repo-task-default",
+      "label": "Repo task",
+      "description": "Default repository task recipe for implementation, debugging, and code review work.",
+      "event": "task_execution",
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "recommendedProfileIds": [
+        "shared-operator-core",
+        "shared-live-ship",
+        "shared-platform-systems"
+      ],
+      "paramsTemplate": {
+        "repoPath": "/Users/mist83/Code",
+        "deliverable": "",
+        "constraints": "",
+        "verificationTarget": ""
+      }
+    },
+    {
+      "id": "frontend-ui-task",
+      "label": "Frontend UI task",
+      "description": "Browser-facing work that should load the shared UI and visual quality doctrine by default.",
+      "event": "task_execution",
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "recommendedProfileIds": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship"
+      ],
+      "paramsTemplate": {
+        "repoPath": "/Users/mist83/Code",
+        "surfaceUrl": "",
+        "audience": "",
+        "proofNeeded": "screenshots, live verification"
+      }
+    },
+    {
+      "id": "deploy-verify-task",
+      "label": "Deploy and verify",
+      "description": "Deployment-oriented task with strong live-state and verification defaults.",
+      "event": "task_execution",
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "recommendedProfileIds": [
+        "shared-operator-core",
+        "shared-live-ship",
+        "shared-platform-systems"
+      ],
+      "paramsTemplate": {
+        "repoPath": "/Users/mist83/Code",
+        "targetHost": "",
+        "deployExpectation": "live",
+        "verificationTarget": ""
+      }
+    },
+    {
+      "id": "multi-agent-handoff",
+      "label": "Multi-agent handoff",
+      "description": "Task recipe for room-based coordination and cross-agent handoffs.",
+      "event": "task_execution",
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "recommendedProfileIds": [
+        "shared-operator-core",
+        "shared-multi-agent",
+        "shared-platform-systems"
+      ],
+      "paramsTemplate": {
+        "roomUrl": "",
+        "collaborators": "",
+        "deliverable": "",
+        "handoffGoal": ""
+      }
+    }
+  ],
+  "notes": [
+    "Recipes are semantic bundles. Valet should pass recipe id plus task-specific params instead of authoring a second local brain."
+  ]
+}

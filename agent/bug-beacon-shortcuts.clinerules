@@ -1,0 +1,16 @@
+# Bug Beacon Shortcuts
+
+## TRIGGER
+When the user mentions any of these phrases, automatically fetch and analyze bugs from Bug Beacon:
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/bug-beacon-shortcuts.md" -Raw
+```
+
+Or use read_file tool:
+`full/bug-beacon-shortcuts.md`

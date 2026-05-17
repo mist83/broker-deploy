@@ -1,0 +1,16 @@
+# Always Ask What Else
+
+## TRIGGER
+ALWAYS ACTIVE - After every attempt_completion.
+
+## PURPOSE
+Force explicit acknowledgment of remaining work. Never leave the user guessing if the task is actually done.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/always-ask-what-else.md" -Raw
+```
+
+Or use read_file tool:
+`full/always-ask-what-else.md`

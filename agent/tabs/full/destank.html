@@ -1,0 +1,199 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/destank.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/destank.md</a></p>
+  <div class="markdown-body">
+<h1>Destank/Destink/Unslop Command</h1>
+<h2>TRIGGER</h2>
+<p>When the user says any of: &quot;destank&quot;, &quot;destink&quot;, &quot;unslop&quot;, &quot;unsloppify&quot;, &quot;remove ai stink&quot;, &quot;remove ai stank&quot;, &quot;this code reeks of ai&quot;, &quot;this is stinky with AI&quot;, &quot;this is stanky with ai&quot;, or similar phrases indicating AI-generated code patterns should be removed.</p>
+<h2>PHILOSOPHY</h2>
+<p>AI-generated code often has telltale patterns that make it obvious it wasn&#39;t written by a human. This command removes those patterns while maintaining functionality.</p>
+<h2>DETECTION PATTERNS</h2>
+<h3>Code Patterns to Remove</h3>
+<ol>
+<li><p><strong>Overly verbose comments:</strong></p>
+<ul>
+<li>&quot;This function does X by doing Y and returns Z&quot;</li>
+<li>&quot;Note: This was added to handle edge case...&quot;</li>
+<li>Comments explaining obvious things</li>
+</ul>
+</li>
+<li><p><strong>Sales pitch language:</strong></p>
+<ul>
+<li>&quot;amazing&quot;, &quot;powerful&quot;, &quot;elegant&quot;, &quot;beautiful&quot;</li>
+<li>&quot;This provides a robust solution...&quot;</li>
+<li>&quot;leverages&quot;, &quot;utilizes&quot; (use &quot;uses&quot; instead)</li>
+</ul>
+</li>
+<li><p><strong>Legacy indicators:</strong></p>
+<ul>
+<li>&quot;This replaces the old...&quot;</li>
+<li>&quot;Previously this was...&quot;</li>
+<li>&quot;Changed from X to Y because...&quot;</li>
+</ul>
+</li>
+<li><p><strong>AI conversation artifacts:</strong></p>
+<ul>
+<li>&quot;The user asked for...&quot;</li>
+<li>&quot;As requested...&quot;</li>
+<li>References to prompts or instructions</li>
+</ul>
+</li>
+<li><p><strong>Excessive error handling boilerplate:</strong></p>
+<ul>
+<li>Try-catch wrapping every single line</li>
+<li>Redundant null checks</li>
+<li>Over-defensive coding</li>
+</ul>
+</li>
+<li><p><strong>Redundant type annotations:</strong></p>
+<ul>
+<li><code>string myString = &quot;hello&quot;</code> → <code>var myString = &quot;hello&quot;</code></li>
+<li>Obvious type declarations</li>
+</ul>
+</li>
+<li><p><strong>Unnecessary abstractions:</strong></p>
+<ul>
+<li>Interfaces with single implementations</li>
+<li>Wrapper classes that just delegate</li>
+<li>Factory patterns for simple object creation</li>
+</ul>
+</li>
+</ol>
+<h3>CSS Patterns to Remove</h3>
+<ol>
+<li><strong>Gradients</strong> - Replace with flat colors</li>
+<li><strong>Complex shadows</strong> - Simplify or remove</li>
+<li><strong>Excessive animations</strong> - Remove non-functional ones</li>
+<li><strong>Overly rounded corners</strong> - Reduce border-radius</li>
+</ol>
+<h3>Comment Patterns to Remove</h3>
+<ol>
+<li><strong>Region markers</strong> - <code>#region</code>, <code>// #endregion</code></li>
+<li><strong>Divider comments</strong> - <code>// =============================</code></li>
+<li><strong>TODO with excessive explanation</strong> - Keep TODO, remove essay</li>
+<li><strong>Commented-out code</strong> - Remove entirely</li>
+</ol>
+<h2>RULES FOR DESTANKING</h2>
+<h3>Must Maintain</h3>
+<ol>
+<li><strong>Functionality</strong> - Code must work identically after destanking</li>
+<li><strong>Clarity</strong> - Simpler is better, but not at expense of meaning</li>
+<li><strong>Naming</strong> - Keep descriptive variable/function names</li>
+</ol>
+<h3>Must Remove</h3>
+<ol>
+<li><strong>Emojis</strong> - All emojis in code</li>
+<li><strong>Gradients</strong> - Replace with solid colors</li>
+<li><strong>Verbose comments</strong> - Keep technical notes, remove explanations</li>
+<li><strong>AI artifacts</strong> - Any reference to prompts, users, or generation</li>
+<li><strong>Legacy mentions</strong> - Don&#39;t document what changed, just the current state</li>
+<li><strong>Sales language</strong> - Direct technical language only</li>
+</ol>
+<h3>Must Simplify</h3>
+<ol>
+<li><strong>Nested wrappers</strong> - Flatten unnecessary nesting</li>
+<li><strong>Redundant abstractions</strong> - Remove single-use interfaces/wrappers</li>
+<li><strong>Over-defensive code</strong> - Reasonable error handling only</li>
+<li><strong>Complex CSS</strong> - Flat design, minimal effects</li>
+</ol>
+<h2>EXECUTION PROCESS</h2>
+<ol>
+<li><strong>Scan all code files</strong> for detection patterns</li>
+<li><strong>Remove AI stink</strong> systematically</li>
+<li><strong>Verify functionality</strong> unchanged</li>
+<li><strong>Run again</strong> to double-check (destanking is not partial)</li>
+<li><strong>Report changes</strong> made</li>
+</ol>
+<h2>EXAMPLE TRANSFORMATIONS</h2>
+<h3>Before (Stinky):</h3>
+<pre><code class="language-csharp">// This is an amazing helper function that leverages the power of
+// async/await to fetch user data from the API. Previously, this
+// was implemented using callbacks, but we changed it to provide
+// a more elegant solution.
+public async Task&lt;User&gt; GetUserAsync(string userId)
+{
+    try
+    {
+        // The user requested that we add validation here
+        if (string.IsNullOrEmpty(userId))
+        {
+            throw new ArgumentException(&quot;User ID cannot be null or empty&quot;, nameof(userId));
+        }
+        
+        // This utilizes the HTTP client to make the request
+        var response = await _httpClient.GetAsync($&quot;/api/users/{userId}&quot;);
+        
+        // Handle the response
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpRequestException($&quot;Failed to fetch user: {response.StatusCode}&quot;);
+        }
+        
+        return await response.Content.ReadFromJsonAsync&lt;User&gt;();
+    }
+    catch (Exception ex)
+    {
+        // Log the error for debugging purposes
+        _logger.LogError(ex, &quot;Error fetching user&quot;);
+        throw;
+    }
+}
+</code></pre>
+<h3>After (Destanked):</h3>
+<pre><code class="language-csharp">// Fetch user by ID from API
+public async Task&lt;User&gt; GetUserAsync(string userId)
+{
+    if (string.IsNullOrEmpty(userId))
+        throw new ArgumentException(&quot;User ID required&quot;, nameof(userId));
+    
+    var response = await _httpClient.GetAsync($&quot;/api/users/{userId}&quot;);
+    response.EnsureSuccessStatusCode();
+    
+    return await response.Content.ReadFromJsonAsync&lt;User&gt;();
+}
+</code></pre>
+<h3>CSS Before (Stinky):</h3>
+<pre><code class="language-css">.button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+}
+</code></pre>
+<h3>CSS After (Destanked):</h3>
+<pre><code class="language-css">.button {
+    background: #667eea;
+    border: 1px solid #5568d3;
+    border-radius: 4px;
+}
+
+.button:hover {
+    background: #5568d3;
+}
+</code></pre>
+<h2>COMPLETION MESSAGE</h2>
+<p>After destanking, report:</p>
+<ul>
+<li>Number of files processed</li>
+<li>Types of patterns removed</li>
+<li>Verification that functionality maintained</li>
+<li>Suggest running tests to confirm</li>
+</ul>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Run to completion</strong> - Not a partial operation</li>
+<li><strong>Double-check</strong> - Run scan twice to catch missed patterns</li>
+<li><strong>Maintain functionality</strong> - Critical requirement</li>
+<li><strong>Be thorough</strong> - Check all file types (code, CSS, HTML, etc.)</li>
+<li><strong>No apologies</strong> - Just report what was cleaned</li>
+</ol>
+<h2>TONE</h2>
+<p>Be direct: &quot;Removed verbose comments from 12 files. Replaced gradients with flat colors in 3 CSS files. Functionality verified.&quot;</p>
+<p>Not: &quot;Great! I&#39;ve successfully cleaned up your code and it&#39;s looking much better now!&quot;</p>
+
+  </div>
+</article>

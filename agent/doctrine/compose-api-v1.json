@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "agents-doctrine-compose-api-v1",
+  "summary": "Contract for building a crafted runtime instruction block from shared doctrine profiles, semantic rules, and task context.",
+  "generatedAt": "2026-05-17T02:31:35.686Z",
+  "contractUrl": "https://agent.mullmania.com/doctrine/compose-api-v1.json",
+  "staticInputs": {
+    "bootstrapUrl": "https://agent.mullmania.com/doctrine/bootstrap-v1.json",
+    "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
+    "semanticCatalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
+    "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
+    "runtimeCatalogUrl": "https://agent.mullmania.com/doctrine/runtime-catalog-v1.json",
+    "eventCatalogUrl": "https://agent.mullmania.com/doctrine/event-catalog-v1.json",
+    "recipeCatalogUrl": "https://agent.mullmania.com/doctrine/recipe-catalog-v1.json",
+    "builderDataUrl": "https://agent.mullmania.com/doctrine/builder-data-v1.json"
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/doctrine/catalog/list",
+      "purpose": "Return the semantic catalog, profiles, runtimes, events, and recipes used by builder UIs and remote launchers."
+    },
+    {
+      "method": "POST",
+      "path": "/api/doctrine/compose",
+      "purpose": "Return one crafted doctrine instruction block plus ordered rules and citations."
+    },
+    {
+      "method": "GET",
+      "path": "/api/doctrine/health",
+      "purpose": "Availability and artifact hash compatibility."
+    }
+  ],
+  "requestSchema": {
+    "required": [
+      "runtime",
+      "event",
+      "taskIntent"
+    ],
+    "properties": {
+      "runtime": "string; e.g. codex or claude",
+      "event": "string; e.g. session_start or task_execution",
+      "taskIntent": "short task description that doctrine should tailor against",
+      "params": "object; structured task parameters",
+      "recipeId": "optional string; recipe id from recipe-catalog-v1.json",
+      "profileIds": "optional string[]; explicit shared profile ids",
+      "includeRuleIds": "optional string[]",
+      "excludeRuleIds": "optional string[]",
+      "operatorNotes": "optional string",
+      "sessionState": "healthy | degraded_doctrine_unavailable | degraded_doctrine_invalid | degraded_doctrine_unverified | continued_with_operator_override",
+      "operatorOverride": "optional boolean",
+      "maxChars": "optional integer target for the crafted instruction size"
+    }
+  },
+  "responseSchema": {
+    "required": [
+      "runtime",
+      "event",
+      "sessionState",
+      "selectedProfileIds",
+      "orderedRuleIds",
+      "craftedInstruction",
+      "citations"
+    ],
+    "properties": {
+      "runtime": "string",
+      "event": "string",
+      "sessionState": "same state model as request/bootstrap",
+      "selectedProfileIds": "string[]",
+      "orderedRuleIds": "string[] after expansion, exclusion, and dedupe",
+      "craftedInstruction": "string; one ready-to-use instruction block",
+      "craftedPreamble": "string; compatibility alias of craftedInstruction",
+      "citations": "array of {id, url, sha256}",
+      "warnings": "string[]",
+      "notes": "string[]"
+    }
+  },
+  "notes": [
+    "The compose service should order rules deterministically and return the same output for the same input set.",
+    "Valet should queue doctrine references and structured params, not only a flat prompt string."
+  ],
+  "exampleUrls": {
+    "request": "https://agent.mullmania.com/doctrine/compose-request-example-v1.json",
+    "response": "https://agent.mullmania.com/doctrine/compose-response-example-v1.json"
+  }
+}

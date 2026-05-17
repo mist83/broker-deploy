@@ -1,0 +1,60 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CUSTOM-CLINE-EXTENSION.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CUSTOM-CLINE-EXTENSION.md</a></p>
+  <div class="markdown-body">
+<h1>Custom Cline Extension Build Notes</h1>
+<p>This guide was salvaged from <code>mist83/clone</code>, which was a notes-only repo. It is for building a private Cline VS Code extension variant from the upstream <code>cline/cline</code> checkout.</p>
+<h2>Purpose</h2>
+<p>Fork or clone Cline, replace branding assets, adjust extension metadata, package a <code>.vsix</code>, and install it locally.</p>
+<h2>Prerequisites</h2>
+<pre><code class="language-bash">git --version
+node --version
+npm --version
+code --version
+git lfs install
+npm install -g @vscode/vsce
+</code></pre>
+<p>Cline uses Git LFS for binary assets. If clone or checkout fails, verify Git LFS first.</p>
+<h2>Build Flow</h2>
+<pre><code class="language-bash">git clone https://github.com/cline/cline.git cline-custom
+cd cline-custom
+npm run install:all
+npm run protos
+npm run compile
+npx vsce package
+code --install-extension ./cline-custom-*.vsix
+</code></pre>
+<h2>Branding Files</h2>
+<p>Common files to inspect or replace:</p>
+<ul>
+<li><code>assets/cline-bot.svg</code></li>
+<li><code>assets/icon.png</code></li>
+<li><code>assets/cline-bot.ttf</code></li>
+<li><code>assets/cline-bot.woff</code></li>
+<li><code>webview-ui/public/</code></li>
+<li><code>package.json</code></li>
+</ul>
+<p>Useful searches:</p>
+<pre><code class="language-bash">rg &quot;icon|cline-bot&quot; package.json assets webview-ui/public
+</code></pre>
+<h2>Metadata</h2>
+<p>To avoid confusing the custom build with the official extension, update these fields in <code>package.json</code>:</p>
+<ul>
+<li><code>name</code></li>
+<li><code>displayName</code></li>
+<li><code>description</code></li>
+<li><code>publisher</code></li>
+</ul>
+<p>Keep <code>name</code> lowercase and hyphenated. Install the official extension and custom extension side by side only if the identifiers are distinct.</p>
+<h2>Troubleshooting</h2>
+<p>If the package build fails after dependency or generated-code drift:</p>
+<pre><code class="language-bash">rm -rf node_modules webview-ui/node_modules
+npm run install:all
+npm run protos
+npm run compile
+npx vsce package
+</code></pre>
+<h2>Source</h2>
+<p>Recovered from <code>mist83/clone</code> before that repo was retired into <code>mist83/agent</code>.</p>
+
+  </div>
+</article>

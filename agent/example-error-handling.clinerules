@@ -1,0 +1,36 @@
+# Error Handling Best Practices
+
+## TRIGGER
+When implementing functions that interact with external systems or handle user input.
+
+## RULES
+
+### Exception Handling
+- Use try-catch blocks for operations that can fail
+- Catch specific exceptions, not generic Exception
+- Log errors with context for debugging
+- Don't swallow exceptions silently
+
+### User-Facing Errors
+- Return user-friendly error messages
+- Don't expose stack traces to users
+- Provide actionable guidance when errors occur
+- Use HTTP status codes correctly (400 for bad request, 500 for server error)
+
+### Validation
+- Validate input at API boundaries
+- Return clear validation error messages
+- Check for null/empty values before processing
+- Use data annotations or FluentValidation
+
+### Logging
+- Log errors with sufficient context
+- Include request IDs for tracing
+- Don't log sensitive data (passwords, tokens)
+- Use appropriate log levels (Error, Warning, Info)
+
+### Recovery
+- Implement retry logic for transient failures
+- Provide fallback values when appropriate
+- Clean up resources in finally blocks
+- Use Circuit Breaker pattern for external calls

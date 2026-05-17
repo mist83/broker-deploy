@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "agents-doctrine-event-catalog-v1",
+  "summary": "Lifecycle events that doctrine can tailor against.",
+  "generatedAt": "2026-05-17T02:31:35.686Z",
+  "events": [
+    {
+      "id": "session_start",
+      "label": "Session Start",
+      "description": "Initial runtime bootstrap for a new chat or a fresh agent session.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "id": "task_execution",
+      "label": "Task Execution",
+      "description": "Unattended remote task launch, such as a Valet-started Codex or Claude job.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "id": "memory_read",
+      "label": "Memory Read",
+      "description": "Scoped doctrine and memory fetch before a worker or runtime loads contextual memory.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "id": "skill_load",
+      "label": "Skill Load",
+      "description": "Resolve a shared skill body or skill package for the active runtime.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "id": "command_resolve",
+      "label": "Command Resolve",
+      "description": "Resolve a named command or slash-command body for the active runtime.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "id": "hook_dispatch",
+      "label": "Hook Dispatch",
+      "description": "Handle lifecycle hook trampolines such as post-tool-use dispatch.",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "notes": [
+    "Session start and task execution are the first two production events. Memory/skill/command/hook events are v1 placeholders for convergence."
+  ]
+}

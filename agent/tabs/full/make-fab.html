@@ -1,0 +1,799 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/make-fab.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/make-fab.md</a></p>
+  <div class="markdown-body">
+<h1>Make FAB - Floating Action Button Wrapper Generator</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;make a fab&quot;, &quot;make this into a fab&quot;, &quot;turn this into a fab&quot;, &quot;create a fab&quot;, &quot;wrap this in a fab&quot;, or similar phrases, activate this command to wrap HTML content in a FAB Collection library.</p>
+<h2>PHILOSOPHY</h2>
+<p>The FAB Collection pattern allows multiple floating action buttons (FABs) to coexist on a page, coordinating their sidebar panels. Each FAB library is self-contained - one script tag loads everything. The FAB Manager code is embedded (with DRIFT WARNING) in each library to avoid external dependencies.</p>
+<p>This command automates the pattern: take any HTML content, wrap it in FAB infrastructure, generate deployment-ready files, and upload to S3.</p>
+<h2>WHAT IS A FAB?</h2>
+<p>A FAB (Floating Action Button) is a circular button that appears in the bottom-right of the page. When clicked, it opens a sidebar panel from the right side. The FAB Collection system allows multiple FABs to coexist - when one sidebar opens, all FAB buttons hide. When the sidebar closes, all FABs reappear.</p>
+<p><strong>Key Pattern:</strong> Each FAB library embeds the FAB Manager code. The first library creates <code>window.FABCollection</code>, subsequent libraries reuse it. This is intentional to avoid external script dependencies.</p>
+<h2>USER PROMPTS</h2>
+<p>Use <code>ask_followup_question</code> tool to gather required information:</p>
+<h3>Prompt 1: FAB Name (Required)</h3>
+<p><strong>Question:</strong> &quot;What should this FAB be called? (Use kebab-case: lowercase with hyphens, e.g., &#39;rocket-launcher&#39;, &#39;task-manager&#39;)&quot;
+<strong>Validation:</strong> </p>
+<ul>
+<li>Must be kebab-case (lowercase letters, numbers, hyphens only)</li>
+<li>No spaces, no special characters except hyphens</li>
+<li>Cannot start or end with hyphen</li>
+</ul>
+<p><strong>Examples:</strong> &quot;data-viewer&quot;, &quot;chart-tool&quot;, &quot;config-panel&quot;</p>
+<h3>Prompt 2: Tabler Icon (Required)</h3>
+<p><strong>Question:</strong> &quot;What Tabler icon should the FAB use? (Browse icons at <a href="https://tabler.io/icons">https://tabler.io/icons</a> - provide the icon name like &#39;rocket&#39;, &#39;database&#39;, &#39;settings&#39;)&quot;
+<strong>Validation:</strong></p>
+<ul>
+<li>Icon name only (e.g., &quot;rocket&quot; not &quot;ti-rocket&quot;)</li>
+<li>Will be converted to &quot;ti ti-{icon}&quot; format</li>
+</ul>
+<p><strong>Examples:</strong> &quot;rocket&quot;, &quot;database&quot;, &quot;chart-line&quot;, &quot;settings&quot;, &quot;pencil&quot;</p>
+<h3>Prompt 3: FAB Color (Required)</h3>
+<p><strong>Question:</strong> &quot;What color should the FAB be? (Provide hex code like #FF5722 or a color name)&quot;
+<strong>Validation:</strong></p>
+<ul>
+<li>Must be valid hex code (#RRGGBB format) OR common color name</li>
+<li>Convert color names to hex (blue → #2196F3, green → #4CAF50, red → #f44336, orange → #FF5722, purple → #9C27B0)</li>
+</ul>
+<p><strong>Default if invalid:</strong> #2196F3 (blue)</p>
+<h3>Prompt 4: Tooltip Text (Optional)</h3>
+<p><strong>Question:</strong> &quot;What tooltip text should appear on hover? (Leave empty for FAB name)&quot;
+<strong>Default:</strong> Capitalize the FAB name (e.g., &quot;rocket-launcher&quot; → &quot;Rocket Launcher&quot;)</p>
+<h3>Prompt 5: HTML Content Source (Required)</h3>
+<p><strong>Question:</strong> &quot;Where is the HTML content for the sidebar?&quot;
+<strong>Options:</strong> </p>
+<ul>
+<li><input disabled="" type="checkbox"> Inline HTML (I&#39;ll provide the HTML directly)</li>
+<li><input disabled="" type="checkbox"> HTML file path (Load from existing file)</li>
+<li><input disabled="" type="checkbox"> URL (Load from a URL)</li>
+</ul>
+<p>If &quot;HTML file path&quot; selected, ask:
+<strong>Question:</strong> &quot;What is the path to the HTML file?&quot;
+<strong>Validation:</strong> File must exist</p>
+<p>If &quot;URL&quot; selected, ask:
+<strong>Question:</strong> &quot;What is the URL to load?&quot;
+<strong>Validation:</strong> Must be valid URL format</p>
+<p>If &quot;Inline HTML&quot; selected, ask:
+<strong>Question:</strong> &quot;Paste the HTML content for the sidebar:&quot;
+<strong>Note:</strong> Can be simple or complex HTML</p>
+<h2>VALIDATION RULES</h2>
+<p>Before proceeding, validate all inputs:</p>
+<h3>FAB Name Validation</h3>
+<pre><code class="language-javascript">function isValidFABName(name) {
+  return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(name) &amp;&amp; 
+         !name.startsWith(&#39;-&#39;) &amp;&amp; 
+         !name.endsWith(&#39;-&#39;);
+}
+</code></pre>
+<h3>Icon Validation</h3>
+<p>Accept any icon name. Format as: <code>ti ti-{icon}</code> where {icon} is the user&#39;s input.</p>
+<h3>Color Validation</h3>
+<pre><code class="language-javascript">function normalizeColor(input) {
+  const colorMap = {
+    &#39;blue&#39;: &#39;#2196F3&#39;,
+    &#39;green&#39;: &#39;#4CAF50&#39;,
+    &#39;red&#39;: &#39;#f44336&#39;,
+    &#39;orange&#39;: &#39;#FF5722&#39;,
+    &#39;purple&#39;: &#39;#9C27B0&#39;,
+    &#39;teal&#39;: &#39;#009688&#39;,
+    &#39;pink&#39;: &#39;#E91E63&#39;,
+    &#39;yellow&#39;: &#39;#FFC107&#39;
+  };
+  
+  if (input.startsWith(&#39;#&#39;) &amp;&amp; /^#[0-9A-Fa-f]{6}$/.test(input)) {
+    return input.toUpperCase();
+  }
+  
+  return colorMap[input.toLowerCase()] || &#39;#2196F3&#39;;
+}
+</code></pre>
+<h2>FILE GENERATION</h2>
+<h3>1. JavaScript Wrapper File</h3>
+<p><strong>Filename:</strong> <code>{fab-name}.js</code>
+<strong>Location:</strong> Current working directory</p>
+<p><strong>Structure:</strong></p>
+<pre><code class="language-javascript">/**
+ * {FAB Name} Library
+ * @version 1.0.0
+ * @description FAB Collection library for {purpose}
+ * @license MIT
+ * 
+ * USAGE:
+ * &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&gt;
+ * &lt;script src=&quot;https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.js&quot;&gt;&lt;/script&gt;
+ */
+
+// ==================== FAB MANAGER (DO NOT EDIT - See DRIFT WARNING) ====================
+// Source: https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/fab-manager/fab-manager-core.js
+// WARNING: This code is duplicated across libraries. Changes MUST be synced manually until CI/CD is implemented.
+
+if (!window.FABCollection) {
+    window.FABCollection = (function() {
+        &#39;use strict&#39;;
+
+        const fabs = [];
+        let container = null;
+        let activeSidebar = null;
+        let dragState = {
+            isDragging: false,
+            fabId: null,
+            startX: 0,
+            startY: 0,
+            offsetX: 0,
+            offsetY: 0
+        };
+
+        function initContainer() {
+            if (container) return container;
+
+            container = document.getElementById(&#39;fab-area&#39;);
+            if (!container) {
+                container = document.createElement(&#39;div&#39;);
+                container.id = &#39;fab-area&#39;;
+                
+                const savedPosition = loadPosition();
+                
+                container.style.cssText = `
+                    position: fixed;
+                    bottom: ${savedPosition.bottom};
+                    right: ${savedPosition.right};
+                    display: flex;
+                    flex-direction: row-reverse;
+                    gap: 12px;
+                    align-items: center;
+                    z-index: 999996;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(container);
+
+                setupDragging();
+            }
+
+            return container;
+        }
+
+        function loadPosition() {
+            try {
+                const saved = localStorage.getItem(&#39;fab-area-position&#39;);
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+            } catch (e) {
+                console.warn(&#39;[FAB Manager] Error loading position:&#39;, e);
+            }
+            return { bottom: &#39;24px&#39;, right: &#39;24px&#39; };
+        }
+
+        function savePosition(bottom, right) {
+            try {
+                localStorage.setItem(&#39;fab-area-position&#39;, JSON.stringify({ bottom, right }));
+            } catch (e) {
+                console.warn(&#39;[FAB Manager] Error saving position:&#39;, e);
+            }
+        }
+
+        function setupDragging() {
+            let isDragging = false;
+            let startX, startY, startBottom, startRight;
+
+            container.addEventListener(&#39;mousedown&#39;, (e) =&gt; {
+                if (e.target.closest(&#39;button&#39;)) return;
+
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+
+                const style = window.getComputedStyle(container);
+                startBottom = parseInt(style.bottom);
+                startRight = parseInt(style.right);
+
+                container.style.cursor = &#39;grabbing&#39;;
+                e.preventDefault();
+            });
+
+            document.addEventListener(&#39;mousemove&#39;, (e) =&gt; {
+                if (!isDragging) return;
+
+                const deltaX = startX - e.clientX;
+                const deltaY = e.clientY - startY;
+
+                const newBottom = Math.max(0, Math.min(window.innerHeight - 80, startBottom + deltaY));
+                const newRight = Math.max(0, Math.min(window.innerWidth - 80, startRight + deltaX));
+
+                container.style.bottom = newBottom + &#39;px&#39;;
+                container.style.right = newRight + &#39;px&#39;;
+            });
+
+            document.addEventListener(&#39;mouseup&#39;, () =&gt; {
+                if (isDragging) {
+                    isDragging = false;
+                    container.style.cursor = &#39;&#39;;
+
+                    savePosition(container.style.bottom, container.style.right);
+                }
+            });
+        }
+
+        function register(config) {
+            const fabContainer = initContainer();
+
+            const fab = document.createElement(&#39;button&#39;);
+            fab.id = `fab-${config.id}`;
+            fab.className = &#39;fab-button&#39;;
+            fab.innerHTML = `&lt;i class=&quot;${config.icon}&quot;&gt;&lt;/i&gt;`;
+            fab.title = config.title || &#39;&#39;;
+            
+            fab.style.cssText = `
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: ${config.color || &#39;#2196F3&#39;};
+                border: none;
+                color: white;
+                font-size: 28px;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.2s, box-shadow 0.2s;
+                pointer-events: auto;
+            `;
+
+            fab.addEventListener(&#39;mouseenter&#39;, () =&gt; {
+                fab.style.transform = &#39;scale(1.1)&#39;;
+                fab.style.boxShadow = &#39;0 6px 16px rgba(0,0,0,0.4)&#39;;
+            });
+
+            fab.addEventListener(&#39;mouseleave&#39;, () =&gt; {
+                fab.style.transform = &#39;scale(1)&#39;;
+                fab.style.boxShadow = &#39;0 4px 12px rgba(0,0,0,0.3)&#39;;
+            });
+
+            fab.addEventListener(&#39;click&#39;, () =&gt; {
+                if (config.onClick) {
+                    config.onClick();
+                }
+            });
+
+            fabContainer.appendChild(fab);
+
+            fabs.push({
+                id: config.id,
+                element: fab,
+                config: config
+            });
+
+            return fab;
+        }
+
+        function hideFABs() {
+            if (container) {
+                container.style.display = &#39;none&#39;;
+            }
+        }
+
+        function showFABs() {
+            if (container) {
+                container.style.display = &#39;flex&#39;;
+            }
+        }
+
+        function updateFABColor(fabId, color) {
+            const fab = fabs.find(f =&gt; f.id === fabId);
+            if (fab &amp;&amp; fab.element) {
+                fab.element.style.background = color;
+            }
+        }
+
+        return {
+            register,
+            hideFABs,
+            showFABs,
+            updateFABColor
+        };
+    })();
+}
+// ==================== END FAB MANAGER ====================
+
+(function(window, document) {
+    &#39;use strict&#39;;
+
+    let isOpen = false;
+    let panel = null;
+
+    // Register FAB
+    function createFAB() {
+        window.FABCollection.register({
+            id: &#39;{fab-name}&#39;,
+            icon: &#39;ti ti-{icon}&#39;,
+            color: &#39;{color}&#39;,
+            title: &#39;{tooltip}&#39;,
+            onClick: togglePanel
+        });
+    }
+
+    // Toggle panel open/close
+    function togglePanel() {
+        if (isOpen) {
+            closePanel();
+        } else {
+            openPanel();
+        }
+    }
+
+    // Open sidebar panel
+    function openPanel() {
+        if (isOpen) return;
+
+        // Hide all FABs when opening sidebar
+        window.FABCollection.hideFABs();
+
+        panel = document.createElement(&#39;div&#39;);
+        panel.id = &#39;{fab-name}-panel&#39;;
+        panel.style.cssText = `
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -8px 0 24px rgba(0,0,0,0.3);
+            z-index: 1000000;
+            overflow-y: auto;
+            font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;
+        `;
+
+        panel.innerHTML = `
+            &lt;div style=&quot;padding: 20px; border-bottom: 2px solid #f0f0f0;&quot;&gt;
+                &lt;div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;&gt;
+                    &lt;h2 style=&quot;margin: 0; font-size: 20px;&quot;&gt;{panel-title}&lt;/h2&gt;
+                    &lt;button id=&quot;{fab-name}-close&quot; style=&quot;background: none; border: none; font-size: 24px; cursor: pointer; color: #666;&quot;&gt;&amp;times;&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div id=&quot;{fab-name}-content&quot; style=&quot;padding: 20px;&quot;&gt;
+                {content-placeholder}
+            &lt;/div&gt;
+        `;
+
+        document.body.appendChild(panel);
+
+        document.getElementById(&#39;{fab-name}-close&#39;).addEventListener(&#39;click&#39;, closePanel);
+
+        isOpen = true;
+
+        // Load content
+        loadContent();
+    }
+
+    // Close sidebar panel
+    function closePanel() {
+        if (!isOpen || !panel) return;
+
+        panel.remove();
+        panel = null;
+        isOpen = false;
+
+        // Show all FABs when closing sidebar
+        window.FABCollection.showFABs();
+    }
+
+    // Load content into panel
+    function loadContent() {
+        const contentDiv = document.getElementById(&#39;{fab-name}-content&#39;);
+        if (!contentDiv) return;
+
+        {content-loading-code}
+    }
+
+    // Initialize
+    function init() {
+        console.log(&#39;[{fab-name}] Library loaded&#39;);
+        
+        if (document.readyState === &#39;loading&#39;) {
+            document.addEventListener(&#39;DOMContentLoaded&#39;, createFAB);
+        } else {
+            createFAB();
+        }
+    }
+
+    init();
+
+})(window, document);
+</code></pre>
+<p><strong>Placeholder Replacements:</strong></p>
+<ul>
+<li><code>{fab-name}</code> → User-provided FAB name</li>
+<li><code>{icon}</code> → User-provided icon name</li>
+<li><code>{color}</code> → Validated/normalized hex color</li>
+<li><code>{tooltip}</code> → Tooltip text or capitalized FAB name</li>
+<li><code>{panel-title}</code> → Capitalized FAB name for panel header</li>
+<li><code>{content-placeholder}</code> → Loading message or inline HTML</li>
+<li><code>{content-loading-code}</code> → Content loading logic based on source type</li>
+</ul>
+<h3>Content Loading Strategies</h3>
+<p><strong>For Inline HTML:</strong></p>
+<pre><code class="language-javascript">function loadContent() {
+    const contentDiv = document.getElementById(&#39;{fab-name}-content&#39;);
+    if (!contentDiv) return;
+
+    contentDiv.innerHTML = `{escaped-html}`;
+}
+</code></pre>
+<p><strong>For HTML File (S3):</strong></p>
+<pre><code class="language-javascript">function loadContent() {
+    const contentDiv = document.getElementById(&#39;{fab-name}-content&#39;);
+    if (!contentDiv) return;
+
+    contentDiv.innerHTML = &#39;&lt;iframe src=&quot;https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.html&quot; style=&quot;width: 100%; height: 100%; border: none;&quot;&gt;&lt;/iframe&gt;&#39;;
+}
+</code></pre>
+<p><strong>For URL:</strong></p>
+<pre><code class="language-javascript">function loadContent() {
+    const contentDiv = document.getElementById(&#39;{fab-name}-content&#39;);
+    if (!contentDiv) return;
+
+    contentDiv.innerHTML = &#39;&lt;iframe src=&quot;{url}&quot; style=&quot;width: 100%; height: 100%; border: none;&quot;&gt;&lt;/iframe&gt;&#39;;
+}
+</code></pre>
+<h3>2. HTML Content File (if separate file)</h3>
+<p><strong>Filename:</strong> <code>{fab-name}.html</code>
+<strong>Location:</strong> Current working directory</p>
+<p><strong>Only create if source is &quot;HTML file path&quot; or &quot;Inline HTML&quot; and content is substantial (&gt;500 characters)</strong></p>
+<p><strong>Structure:</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;{FAB Name} Content&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    {user-html-content}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>3. Test Page</h3>
+<p><strong>Filename:</strong> <code>test-{fab-name}.html</code>
+<strong>Location:</strong> Current working directory</p>
+<p><strong>Structure:</strong></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Test - {FAB Name}&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+        .status {
+            padding: 12px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            margin-bottom: 20px;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h1&gt;{FAB Name} - Test Page&lt;/h1&gt;
+        
+        &lt;div class=&quot;status&quot;&gt;
+            &lt;strong&gt;Status:&lt;/strong&gt; FAB should appear in bottom-right corner
+        &lt;/div&gt;
+
+        &lt;h2&gt;Instructions&lt;/h2&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Look for the FAB button (circular, {color}) in the bottom-right corner&lt;/li&gt;
+            &lt;li&gt;Click the FAB to open the sidebar panel&lt;/li&gt;
+            &lt;li&gt;Verify your content loads in the sidebar&lt;/li&gt;
+            &lt;li&gt;Close the sidebar with the × button&lt;/li&gt;
+            &lt;li&gt;Verify the FAB reappears&lt;/li&gt;
+        &lt;/ol&gt;
+
+        &lt;h2&gt;Integration&lt;/h2&gt;
+        &lt;p&gt;To use this FAB in your own page, add these lines:&lt;/p&gt;
+        &lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&amp;gt;
+&amp;lt;script src=&quot;https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+        &lt;h2&gt;Next Steps&lt;/h2&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Upload files to S3: &lt;code&gt;aws s3 cp {fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;application/javascript&quot;&lt;/code&gt;&lt;/li&gt;
+            &lt;li&gt;If separate HTML: &lt;code&gt;aws s3 cp {fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;text/html&quot;&lt;/code&gt;&lt;/li&gt;
+            &lt;li&gt;Make files public: &lt;code&gt;aws s3 cp s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js --acl public-read&lt;/code&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Load FAB from local file for testing --&gt;
+    &lt;script src=&quot;./{fab-name}.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2>IMPLEMENTATION SEQUENCE</h2>
+<p>Execute in this exact order:</p>
+<ol>
+<li><p><strong>Validate trigger phrase</strong> - Confirm user wants to create a FAB</p>
+</li>
+<li><p><strong>Gather user inputs</strong> - Use ask_followup_question for all 5 prompts</p>
+<ul>
+<li>FAB name (validate kebab-case)</li>
+<li>Icon name (format as ti ti-{icon})</li>
+<li>Color (normalize to hex)</li>
+<li>Tooltip (default to capitalized name)</li>
+<li>HTML content source and content</li>
+</ul>
+</li>
+<li><p><strong>Validate all inputs</strong> - Ensure format correctness before proceeding</p>
+</li>
+<li><p><strong>Read reference implementation</strong> - Read MockApi/wwwroot/mock-api-simple.js to verify FAB Manager code is current</p>
+</li>
+<li><p><strong>Generate JavaScript wrapper file:</strong></p>
+<ul>
+<li>Create {fab-name}.js</li>
+<li>Embed FAB Manager code with DRIFT WARNING intact</li>
+<li>Replace all placeholders</li>
+<li>Implement appropriate content loading strategy</li>
+<li>Ensure proper escaping for inline HTML</li>
+</ul>
+</li>
+<li><p><strong>Generate HTML content file (if needed):</strong></p>
+<ul>
+<li>Only if content source is file or inline HTML &gt;500 chars</li>
+<li>Create {fab-name}.html with full HTML document structure</li>
+<li>Include Tabler icons CDN</li>
+<li>Add user&#39;s content</li>
+</ul>
+</li>
+<li><p><strong>Generate test page:</strong></p>
+<ul>
+<li>Create test-{fab-name}.html</li>
+<li>Include instructions and integration code</li>
+<li>Load FAB from local file for testing</li>
+</ul>
+</li>
+<li><p><strong>Provide S3 upload commands:</strong></p>
+<ul>
+<li>Generate AWS CLI commands for uploading</li>
+<li>Include content-type headers</li>
+<li>Include public-read ACL commands</li>
+</ul>
+</li>
+<li><p><strong>Report completion with:</strong></p>
+<ul>
+<li>List of files created</li>
+<li>S3 upload commands</li>
+<li>Test instructions</li>
+<li>Integration example</li>
+<li>Next steps</li>
+</ul>
+</li>
+</ol>
+<h2>S3 UPLOAD COMMANDS</h2>
+<p>Provide these exact commands:</p>
+<pre><code class="language-bash"># Upload JavaScript library
+aws s3 cp {fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;application/javascript&quot;
+
+# Make JavaScript public
+aws s3 cp s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js --acl public-read
+
+# Upload HTML (if separate file)
+aws s3 cp {fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;text/html&quot;
+
+# Make HTML public
+aws s3 cp s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.html --acl public-read
+</code></pre>
+<h2>COMPLETION MESSAGE</h2>
+<p>After all files generated, provide this message:</p>
+<pre><code>FAB library created! ✅
+
+**Files Created:**
+- {fab-name}.js - Main FAB library (with embedded FAB Manager)
+- {fab-name}.html - Content file (if applicable)
+- test-{fab-name}.html - Local test page
+
+**Configuration:**
+- Name: {fab-name}
+- Icon: ti ti-{icon}
+- Color: {color}
+- Tooltip: {tooltip}
+
+**Test Locally:**
+1. Open test-{fab-name}.html in your browser
+2. Verify FAB appears in bottom-right corner
+3. Click FAB to open sidebar
+4. Test content loads correctly
+
+**Deploy to S3:**
+
+Upload JavaScript:
+aws s3 cp {fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;application/javascript&quot;
+aws s3 cp s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.js --acl public-read
+
+{if-html-file}
+Upload HTML:
+aws s3 cp {fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;text/html&quot;
+aws s3 cp s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/{fab-name}.html --acl public-read
+{endif}
+
+**Integration Example:**
+Add to any HTML page:
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&gt;
+&lt;script src=&quot;https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.js&quot;&gt;&lt;/script&gt;
+
+**FAB Collection:**
+This FAB integrates with the FAB Collection system. Multiple FABs can coexist on the same page. When one opens its sidebar, all FABs hide. When the sidebar closes, all FABs reappear.
+
+**Next Steps:**
+1. Test locally with test-{fab-name}.html
+2. Upload to S3 using commands above
+3. Integrate into your web page
+4. Test with other FABs to verify coordination
+</code></pre>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><p><strong>DRIFT WARNING</strong> - The FAB Manager code is intentionally duplicated. Keep the DRIFT WARNING comments intact.</p>
+</li>
+<li><p><strong>Self-Contained</strong> - Each FAB library must be 100% self-contained. Single script tag is all that&#39;s needed.</p>
+</li>
+<li><p><strong>FAB Coordination</strong> - When sidebar opens, call <code>window.FABCollection.hideFABs()</code>. When sidebar closes, call <code>window.FABCollection.showFABs()</code>.</p>
+</li>
+<li><p><strong>Content Strategy:</strong></p>
+<ul>
+<li>Inline HTML (&lt;500 chars): Embed directly in JS</li>
+<li>Inline HTML (&gt;500 chars): Create separate HTML file, load via iframe</li>
+<li>File path: Copy file, load via iframe</li>
+<li>URL: Load via iframe</li>
+</ul>
+</li>
+<li><p><strong>No Configuration</strong> - FABs should work immediately with no setup required from the user.</p>
+</li>
+<li><p><strong>Test Before Deploy</strong> - Always generate test page for local verification before S3 upload.</p>
+</li>
+<li><p><strong>S3 Paths</strong> - All FABs go to <code>other/fabs/</code> directory with public-read ACL.</p>
+</li>
+<li><p><strong>Icon Format</strong> - Always use <code>ti ti-{icon}</code> format for Tabler icons.</p>
+</li>
+<li><p><strong>Panel Width</strong> - Default sidebar width is 400px. Can be adjusted if user specifies.</p>
+</li>
+<li><p><strong>Z-Index Layers:</strong></p>
+<ul>
+<li>FAB Container: 999996</li>
+<li>Sidebar Panel: 1000000</li>
+<li>Ensures proper stacking with other elements</li>
+</ul>
+</li>
+</ol>
+<h2>EDGE CASES</h2>
+<h3>If FAB name already exists in S3:</h3>
+<ul>
+<li>Ask user: &quot;A FAB with this name may already exist in S3. Do you want to overwrite it?&quot;</li>
+<li>Options: [&quot;Yes, overwrite&quot;, &quot;No, choose a different name&quot;]</li>
+</ul>
+<h3>If HTML content is very large:</h3>
+<ul>
+<li>Warn user: &quot;This HTML is quite large. Consider hosting it separately and loading via URL instead.&quot;</li>
+<li>Options: [&quot;Continue with current approach&quot;, &quot;Provide a URL instead&quot;]</li>
+</ul>
+<h3>If no HTML content provided:</h3>
+<ul>
+<li>Use placeholder content:</li>
+</ul>
+<pre><code class="language-html">&lt;div style=&quot;text-align: center; padding: 40px;&quot;&gt;
+    &lt;i class=&quot;ti ti-{icon}&quot; style=&quot;font-size: 48px; color: {color};&quot;&gt;&lt;/i&gt;
+    &lt;h3&gt;Welcome to {FAB Name}&lt;/h3&gt;
+    &lt;p&gt;This is a placeholder. Replace with your content.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3>If icon name is invalid:</h3>
+<ul>
+<li>Use default: &quot;ti ti-square&quot; and inform user to browse <a href="https://tabler.io/icons">https://tabler.io/icons</a> for valid icons.</li>
+</ul>
+<h2>TESTING CHECKLIST</h2>
+<p>After generation, verify:</p>
+<ul>
+<li><input disabled="" type="checkbox"> JavaScript file contains complete FAB Manager code</li>
+<li><input disabled="" type="checkbox"> DRIFT WARNING comments are present</li>
+<li><input disabled="" type="checkbox"> All placeholders replaced</li>
+<li><input disabled="" type="checkbox"> Content loading logic matches source type</li>
+<li><input disabled="" type="checkbox"> Test page generated with correct paths</li>
+<li><input disabled="" type="checkbox"> S3 commands are correct</li>
+<li><input disabled="" type="checkbox"> FAB name is kebab-case</li>
+<li><input disabled="" type="checkbox"> Icon format is &quot;ti ti-{icon}&quot;</li>
+<li><input disabled="" type="checkbox"> Color is valid hex code</li>
+</ul>
+<h2>REMEMBER</h2>
+<p>This automation follows the proven pattern from mock-api-simple.js and html-canvas-overlay.js. The FAB Manager embedding is intentional to keep libraries self-contained. The DRIFT WARNING acknowledges this technical debt but makes the trade-off for simplicity.</p>
+<p>Every FAB created with this command should work immediately when the JS file is loaded via script tag. No additional configuration or dependencies required (except Tabler icons CSS).</p>
+<hr>
+<h1>FAB STANDARDS (Validated 2026-01-10)</h1>
+<p>The following standards have been validated with real implementations and should be followed for all NEW FABs. Existing FABs (mock-api, bug-beacon, pointy-clicky) are legacy reference implementations and should not be modified unless there&#39;s a functional reason.</p>
+<h2>SEMANTIC COLOR SYSTEM</h2>
+<p>Use semantic color roles instead of arbitrary colors. This provides consistency and makes intent clear.</p>
+<pre><code class="language-javascript">const COLORS = {
+    // Semantic roles
+    primary: &#39;#2196F3&#39;,      // Primary actions (blue)
+    success: &#39;#4CAF50&#39;,      // Success states (green)
+    warning: &#39;#FF9800&#39;,      // Warnings (orange)
+    danger: &#39;#f44336&#39;,       // Errors/destructive actions (red)
+    info: &#39;#00BCD4&#39;,         // Informational (cyan)
+    
+    // Panel theming (dark theme)
+    bgPanel: &#39;#2a2a2a&#39;,      // Panel background
+    bgCard: &#39;#1a1a1a&#39;,       // Card/section background
+    bgButton: &#39;#3a3a3a&#39;,     // Button background
+    borderColor: &#39;#3a3a3a&#39;,  // Border color
+    borderLight: &#39;#4a4a4a&#39;,  // Lighter border
+    
+    // Text colors
+    textPrimary: &#39;#e0e0e0&#39;,  // Primary text
+    textSecondary: &#39;#b0b0b0&#39;, // Secondary text
+    textMuted: &#39;#999999&#39;,    // Muted text
+    textOnAccent: &#39;#ffffff&#39;  // Text on colored backgrounds
+};
+</code></pre>
+<p><strong>When to use each color:</strong></p>
+<ul>
+<li><code>primary</code> - Main action buttons, primary FAB color for general tools</li>
+<li><code>success</code> - Confirmation actions, success states, &quot;save&quot; buttons</li>
+<li><code>warning</code> - Caution states, non-critical alerts</li>
+<li><code>danger</code> - Delete actions, error states, destructive operations</li>
+<li><code>info</code> - Informational FABs, help content, neutral notifications</li>
+</ul>
+<p><strong>FAB Color Selection Guide:</strong></p>
+<ul>
+<li>Data/API tools → <code>primary</code> (blue)</li>
+<li>Error monitoring → <code>danger</code> (red)</li>
+<li>UI tools → <code>warning</code> (orange)</li>
+<li>Testing/dev tools → <code>info</code> (cyan)</li>
+<li>Success indicators → <code>success</code> (green)</li>
+</ul>
+<h2>Z-INDEX HIERARCHY</h2>
+<p>Explicit z-index layers prevent visual conflicts between FABs and other page elements.</p>
+<pre><code class="language-javascript">const Z_INDEX = {
+    fabContainer: 999999,    // FAB container (shared with all FABs)
+    panel: 1000000,          // Sidebar panels
+    modal: 1000001,          // Modal dialogs
+    overlay: 1000002,        // Full-screen overlays (like BSOD)
+    tooltip: 1000003         // Tooltips (highest)
+};
+</code></pre>
+<p><strong>Rules:</strong></p>
+<ol>
+<li>FAB container MUST use <code>999999</code> (standar</li>
+</ol>
+
+  </div>
+</article>

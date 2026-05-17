@@ -1,0 +1,99 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/fix-bugs.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/fix-bugs.md</a></p>
+  <div class="markdown-body">
+<h1>Fix Bugs - Automated Bug Resolution</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;fix bugs&quot;, &quot;resolve bugs&quot;, &quot;address bugs&quot;, or similar phrases requesting bug fixes.</p>
+<h2>PURPOSE</h2>
+<p>Close the feedback loop by fetching reported bugs from Bug Beacon tracker, allowing user to select which to fix, then creating DallAIre tasks with full bug context.</p>
+<h2>BUG BEACON API</h2>
+<p><strong>Base URL:</strong> <a href="https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws">https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws</a></p>
+<p><strong>Endpoints:</strong></p>
+<ul>
+<li>GET <code>/api/bugs/list</code> - List all reported bugs</li>
+<li>GET <code>/api/bugs/{id}</code> - Get specific bug details</li>
+<li>DELETE <code>/api/bugs/{id}</code> - Delete bug after fixing</li>
+</ul>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>Step 1: Fetch Bug List</h3>
+<pre><code class="language-powershell">$response = Invoke-RestMethod -Uri &quot;https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws/api/bugs/list&quot;
+$bugs = $response.bugs
+</code></pre>
+<h3>Step 2: Present Bugs to User</h3>
+<p>Use <code>ask_followup_question</code> to let user select which bugs to fix:</p>
+<ul>
+<li>Show bug ID and timestamp</li>
+<li>Allow multiple selection</li>
+<li>Include &quot;Fix all&quot; option</li>
+</ul>
+<h3>Step 3: Fetch Bug Details</h3>
+<p>For each selected bug:</p>
+<pre><code class="language-powershell">$bugDetails = Invoke-RestMethod -Uri &quot;https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws/api/bugs/$bugId&quot;
+</code></pre>
+<h3>Step 4: Create Fix Task</h3>
+<p>Create a task in DallAIre with comprehensive context:</p>
+<p><strong>Task Prompt Format:</strong></p>
+<pre><code>Fix bug: {Bug ID}
+
+URL: {bug.url}
+Timestamp: {bug.timestamp}
+
+User Context:
+{bug.userContext}
+
+Errors ({count}):
+{formatted error list with stack traces}
+
+Please analyze these errors, identify the root cause, and implement a fix.
+</code></pre>
+<h3>Step 5: Delete Fixed Bugs</h3>
+<p>After task created successfully:</p>
+<pre><code class="language-powershell">Invoke-RestMethod -Uri &quot;https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws/api/bugs/$bugId&quot; -Method Delete
+</code></pre>
+<h2>USER WORKFLOW</h2>
+<ol>
+<li>User encounters error in DallAIre</li>
+<li>Bug Beacon FAB appears (red bug icon)</li>
+<li>User opens panel, adds context</li>
+<li>SHIFT+click &quot;Auto Fix&quot; → submits to tracker</li>
+<li>Later: User says &quot;fix bugs&quot;</li>
+<li>Cline lists bugs, user selects</li>
+<li>Task created with full context</li>
+<li>Bug automatically deleted after task creation</li>
+</ol>
+<h2>COMPLETION MESSAGE</h2>
+<p>After creating tasks:</p>
+<pre><code>Created {count} bug fix tasks:
+- Task {taskId}: {Bug ID}
+- ...
+
+Bugs automatically deleted from tracker.
+Navigate to Tasks tab to monitor progress.
+</code></pre>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Auto-delete after task creation</strong> - Bug is removed from tracker once task is queued</li>
+<li><strong>Full context preservation</strong> - Stack traces, user context, URL all included in task</li>
+<li><strong>DallAIre integration</strong> - Uses existing task creation API</li>
+<li><strong>No manual cleanup needed</strong> - Bugs vanish once addressed</li>
+</ol>
+<h2>ERROR HANDLING</h2>
+<p>If bug fetch fails:</p>
+<ul>
+<li>Inform user tracker may be unavailable</li>
+<li>Suggest manual bug viewing at Lambda URL</li>
+</ul>
+<p>If task creation fails:</p>
+<ul>
+<li>DO NOT delete bug from tracker</li>
+<li>Inform user to retry</li>
+</ul>
+<h2>EXAMPLE USAGE</h2>
+<p>User: &quot;fix bugs&quot;
+Cline: Lists 3 bugs with timestamps
+User: Selects bugs 1 and 3
+Cline: Creates 2 tasks with full error context, deletes bugs from tracker
+Result: Tasks queued, bugs removed, loop closed</p>
+
+  </div>
+</article>

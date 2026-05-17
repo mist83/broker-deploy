@@ -1,0 +1,56 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/bug-beacon-shortcuts.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/bug-beacon-shortcuts.md</a></p>
+  <div class="markdown-body">
+<h1>Bug Beacon Shortcuts - Automatic Detection</h1>
+<h2>TRIGGER</h2>
+<p>When the user mentions any of these phrases, automatically fetch and analyze bugs from Bug Beacon:</p>
+<ul>
+<li>&quot;bbfix&quot;</li>
+<li>&quot;bug beacon&quot;</li>
+<li>&quot;BB&quot; (standalone, capital)</li>
+<li>&quot;bug was beaconed&quot;</li>
+<li>&quot;check bug beacon&quot;</li>
+<li>&quot;info in bug beacon&quot;</li>
+<li>&quot;bug beacon has&quot;</li>
+<li>&quot;reported via bug beacon&quot;</li>
+</ul>
+<h2>ACTIVATION</h2>
+<p>Immediately fetch bug list without asking for confirmation or explanation.</p>
+<h2>PROCESS</h2>
+<h3>Step 1: Fetch Bug List</h3>
+<pre><code class="language-powershell">$response = Invoke-RestMethod -Uri &quot;https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws/api/bugs/list&quot;
+$bugs = $response.bugs
+</code></pre>
+<h3>Step 2: If Bugs Found</h3>
+<p>For each bug:</p>
+<ol>
+<li>Fetch full details</li>
+<li>Analyze the error</li>
+<li>Identify root cause</li>
+<li>Fix the issue</li>
+<li>Delete bug from tracker after fix</li>
+</ol>
+<h3>Step 3: Report Findings</h3>
+<p>Brief summary: &quot;Found {count} bugs in Bug Beacon. Fixing...&quot;</p>
+<h3>Step 4: Auto-Delete After Fix</h3>
+<p>Once fix is deployed and verified:</p>
+<pre><code class="language-powershell">Invoke-RestMethod -Uri &quot;https://45dnvlvxc7zcganiggt7asor7y0vrotm.lambda-url.us-west-2.on.aws/api/bugs/{bugId}&quot; -Method Delete
+</code></pre>
+<h2>TONE</h2>
+<p>Direct and efficient:</p>
+<ul>
+<li>&quot;Found 2 bugs in Bug Beacon&quot;</li>
+<li>&quot;Bug 1: insertBefore on null - fixed&quot;</li>
+<li>&quot;Bug 2: display name JSON - fixed&quot;</li>
+<li>&quot;Deleted bugs from tracker&quot;</li>
+</ul>
+<p>NOT:</p>
+<ul>
+<li>&quot;Great! I found some bugs...&quot;</li>
+<li>&quot;Let me check Bug Beacon for you...&quot;</li>
+</ul>
+<h2>REMEMBER</h2>
+<p>This is a workflow accelerator. When user mentions Bug Beacon, I immediately check it without asking or explaining.</p>
+
+  </div>
+</article>

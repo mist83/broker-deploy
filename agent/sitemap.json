@@ -1,0 +1,702 @@
+{
+  "header": {
+    "icon": "ti ti-book-2",
+    "title": "Agent",
+    "subtitle": "Prompt rules, scaffolds, and workflows for agents. Supersedes the clinerules and agent-rules names.",
+    "controls": [
+      {
+        "type": "link",
+        "label": "GitHub",
+        "href": "https://github.com/mist83/agent",
+        "target": "_blank",
+        "rel": "noreferrer",
+        "icon": "ti ti-brand-github"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "overview",
+      "label": "Overview",
+      "icon": "ti ti-home",
+      "htmlSource": "./tabs/overview.html",
+      "allowHtmlSource": true
+    },
+    {
+      "id": "builder",
+      "label": "Builder",
+      "icon": "ti ti-adjustments-horizontal",
+      "htmlSource": "./tabs/builder.html",
+      "allowHtmlSource": true
+    },
+    {
+      "id": "rules",
+      "label": "Rules",
+      "icon": "ti ti-file-code",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "quickstart",
+              "name": "quickstart",
+              "icon": "ti ti-file-code",
+              "group": "Generators",
+              "description": "When the user says \"quickstart\", \"just run it\", \"start this\", \"run this project\", or simil",
+              "htmlSource": "./tabs/rules/quickstart.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-lambda",
+              "name": "make-lambda",
+              "icon": "ti ti-file-code",
+              "group": "Generators",
+              "description": "See full content",
+              "htmlSource": "./tabs/rules/make-lambda.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-fab",
+              "name": "make-fab",
+              "icon": "ti ti-file-code",
+              "group": "Generators",
+              "description": "\"make a fab\", \"make this into a fab\", \"turn this into a fab\", \"create a fab\", \"wrap this i",
+              "htmlSource": "./tabs/rules/make-fab.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-tv-app",
+              "name": "make-tv-app",
+              "icon": "ti ti-file-code",
+              "group": "Generators",
+              "description": "When the user says \"make a TV app\", \"convert to TV\", \"make this TV-friendly\", or similar p",
+              "htmlSource": "./tabs/rules/make-tv-app.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "guided-design-wizard",
+              "name": "guided-design-wizard",
+              "icon": "ti ti-file-code",
+              "group": "Generators",
+              "description": "When the user says any of:",
+              "htmlSource": "./tabs/rules/guided-design-wizard.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-ai-assistance",
+              "name": "add-ai-assistance",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "See full content",
+              "htmlSource": "./tabs/rules/add-ai-assistance.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-ai-integration",
+              "name": "add-ai-integration",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "When the user requests AI-powered features that need to fetch from external AI endpoints, ",
+              "htmlSource": "./tabs/rules/add-ai-integration.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-feature-flags",
+              "name": "add-feature-flags",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "When the user says \"add feature flags\", \"add f3\", \"use feature flags\", or similar phrases ",
+              "htmlSource": "./tabs/rules/add-feature-flags.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-signalargh",
+              "name": "add-signalargh",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "\"add signalargh\", \"use signalargh\", \"add signalr\"",
+              "htmlSource": "./tabs/rules/add-signalargh.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "auto-deploy-slack",
+              "name": "auto-deploy-slack",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "After any successful Lambda deployment that completes with a Function URL.",
+              "htmlSource": "./tabs/rules/auto-deploy-slack.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "upload-to-mikesendpoint",
+              "name": "upload-to-mikesendpoint",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "When the user says \"upload to mikesendpoint\" or similar phrases, deploy the current worksp",
+              "htmlSource": "./tabs/rules/upload-to-mikesendpoint.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "assign-port",
+              "name": "assign-port",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "When the user says \"assign port\", \"register port\", \"add port\", \"new port for [project]\", o",
+              "htmlSource": "./tabs/rules/assign-port.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "use-liskov-file-system",
+              "name": "use-liskov-file-system",
+              "icon": "ti ti-file-code",
+              "group": "Integrations",
+              "description": "When the user says \"use liskov file system\", \"use liskov with [bucket-name] bucket\", \"add ",
+              "htmlSource": "./tabs/rules/use-liskov-file-system.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "always-ask-what-else",
+              "name": "always-ask-what-else",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "ALWAYS ACTIVE - After every attempt_completion.",
+              "htmlSource": "./tabs/rules/always-ask-what-else.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "deep-planning-triage",
+              "name": "deep-planning-triage",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "See full content",
+              "htmlSource": "./tabs/rules/deep-planning-triage.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "fix-bugs",
+              "name": "fix-bugs",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user says \"fix bugs\", \"resolve bugs\", \"address bugs\", or similar phrases requesti",
+              "htmlSource": "./tabs/rules/fix-bugs.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "fix-nitpicks",
+              "name": "fix-nitpicks",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user says any phrase containing \"nit\" related to fixing/removing them:",
+              "htmlSource": "./tabs/rules/fix-nitpicks.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "bug-beacon-shortcuts",
+              "name": "bug-beacon-shortcuts",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user mentions any of these phrases, automatically fetch and analyze bugs from Bug",
+              "htmlSource": "./tabs/rules/bug-beacon-shortcuts.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "refactor",
+              "name": "refactor",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "See full content",
+              "htmlSource": "./tabs/rules/refactor.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "refresh-me",
+              "name": "refresh-me",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user says any of:",
+              "htmlSource": "./tabs/rules/refresh-me.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "retro",
+              "name": "retro",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user says \"retro\", \"let's retro\", \"retro this issue\", \"retrospective\", or similar",
+              "htmlSource": "./tabs/rules/retro.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "search-before-implementing",
+              "name": "search-before-implementing",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects",
+              "htmlSource": "./tabs/rules/search-before-implementing.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "show-custom-commands",
+              "name": "show-custom-commands",
+              "icon": "ti ti-file-code",
+              "group": "Workflows",
+              "description": "When the user asks about custom commands or capabilities, such as:",
+              "htmlSource": "./tabs/rules/show-custom-commands.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "proactive-code-quality",
+              "name": "proactive-code-quality",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "**ALWAYS ACTIVE** - Consult these standards automatically when writing any code, without r",
+              "htmlSource": "./tabs/rules/proactive-code-quality.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "kiss-html-css-js",
+              "name": "kiss-html-css-js",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "When the user says \"KISS the html\", \"KISS the css\", \"KISS the js\", or variations like \"kee",
+              "htmlSource": "./tabs/rules/kiss-html-css-js.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "destank",
+              "name": "destank",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "When the user says any of: \"destank\", \"destink\", \"unslop\", \"unsloppify\", \"remove ai stink\"",
+              "htmlSource": "./tabs/rules/destank.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "no-emojis-no-fluff",
+              "name": "no-emojis-no-fluff",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "ALWAYS ACTIVE - These rules apply to ALL interactions unless explicitly overridden.",
+              "htmlSource": "./tabs/rules/no-emojis-no-fluff.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "no-inline-styles",
+              "name": "no-inline-styles",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "ALWAYS ACTIVE - Enforced during code generation and review.",
+              "htmlSource": "./tabs/rules/no-inline-styles.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "pwa-lockdown",
+              "name": "pwa-lockdown",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "ALWAYS ACTIVE when creating or modifying PWA files.",
+              "htmlSource": "./tabs/rules/pwa-lockdown.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "prefer-controllers",
+              "name": "prefer-controllers",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.",
+              "htmlSource": "./tabs/rules/prefer-controllers.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "powershell-enforcement",
+              "name": "powershell-enforcement",
+              "icon": "ti ti-file-code",
+              "group": "Style & Quality",
+              "description": "- Operating System: Windows 11",
+              "htmlSource": "./tabs/rules/powershell-enforcement.html",
+              "allowHtmlSource": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "full",
+      "label": "Full Guides",
+      "icon": "ti ti-notebook",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "add-ai-assistance",
+              "name": "add-ai-assistance",
+              "icon": "ti ti-file-text",
+              "description": "Full content: C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-ai",
+              "htmlSource": "./tabs/full/add-ai-assistance.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-ai-integration",
+              "name": "add-ai-integration",
+              "icon": "ti ti-file-text",
+              "description": "When the user requests AI-powered features that need to fetch from external AI endpoints, ",
+              "htmlSource": "./tabs/full/add-ai-integration.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-feature-flags",
+              "name": "add-feature-flags",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"add feature flags\", \"add f3\", \"use feature flags\", or similar phrases ",
+              "htmlSource": "./tabs/full/add-feature-flags.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "add-signalargh",
+              "name": "add-signalargh",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"add signalargh\", \"use signalargh\", \"add signalr\", or similar phrases, ",
+              "htmlSource": "./tabs/full/add-signalargh.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "always-ask-what-else",
+              "name": "always-ask-what-else",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE - After every attempt_completion.",
+              "htmlSource": "./tabs/full/always-ask-what-else.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "assign-port",
+              "name": "assign-port",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"assign port\", \"register port\", \"add port\", \"new port for project\", or ",
+              "htmlSource": "./tabs/full/assign-port.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "auto-deploy-slack",
+              "name": "auto-deploy-slack",
+              "icon": "ti ti-file-text",
+              "description": "After any successful Lambda deployment that completes with a Function URL.",
+              "htmlSource": "./tabs/full/auto-deploy-slack.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "bug-beacon-shortcuts",
+              "name": "bug-beacon-shortcuts",
+              "icon": "ti ti-file-text",
+              "description": "When the user mentions any of these phrases, automatically fetch and analyze bugs from Bug",
+              "htmlSource": "./tabs/full/bug-beacon-shortcuts.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "deep-planning-triage",
+              "name": "deep-planning-triage",
+              "icon": "ti ti-file-text",
+              "description": "When the user requests `/deep-planning` or architectural triage, use this framework:",
+              "htmlSource": "./tabs/full/deep-planning-triage.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "destank",
+              "name": "destank",
+              "icon": "ti ti-file-text",
+              "description": "When the user says any of: \"destank\", \"destink\", \"unslop\", \"unsloppify\", \"remove ai stink\"",
+              "htmlSource": "./tabs/full/destank.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "fix-bugs",
+              "name": "fix-bugs",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"fix bugs\", \"resolve bugs\", \"address bugs\", or similar phrases requesti",
+              "htmlSource": "./tabs/full/fix-bugs.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "fix-nitpicks",
+              "name": "fix-nitpicks",
+              "icon": "ti ti-file-text",
+              "description": "When the user says any phrase containing \"nit\" related to fixing/removing them:",
+              "htmlSource": "./tabs/full/fix-nitpicks.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "guided-design-wizard",
+              "name": "guided-design-wizard",
+              "icon": "ti ti-file-text",
+              "description": "When the user says any of:",
+              "htmlSource": "./tabs/full/guided-design-wizard.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "kiss-html-css-js",
+              "name": "kiss-html-css-js",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"KISS the html\", \"KISS the css\", \"KISS the js\", or variations like \"kee",
+              "htmlSource": "./tabs/full/kiss-html-css-js.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-fab",
+              "name": "make-fab",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"make a fab\", \"make this into a fab\", \"turn this into a fab\", \"create a",
+              "htmlSource": "./tabs/full/make-fab.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-lambda",
+              "name": "make-lambda",
+              "icon": "ti ti-file-text",
+              "description": "Full content: C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/make-l",
+              "htmlSource": "./tabs/full/make-lambda.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "make-tv-app",
+              "name": "make-tv-app",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"make a TV app\", \"convert to TV\", \"make this TV-friendly\", or similar p",
+              "htmlSource": "./tabs/full/make-tv-app.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "no-emojis-no-fluff",
+              "name": "no-emojis-no-fluff",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE - These rules apply to ALL interactions unless explicitly overridden.",
+              "htmlSource": "./tabs/full/no-emojis-no-fluff.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "no-inline-styles",
+              "name": "no-inline-styles",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE - Enforced during code generation and review.",
+              "htmlSource": "./tabs/full/no-inline-styles.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "prefer-controllers",
+              "name": "prefer-controllers",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.",
+              "htmlSource": "./tabs/full/prefer-controllers.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "pwa-lockdown",
+              "name": "pwa-lockdown",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE when creating or modifying PWA files.",
+              "htmlSource": "./tabs/full/pwa-lockdown.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "quickstart",
+              "name": "quickstart",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"quickstart\", \"just run it\", \"start this\", \"run this project\", or simil",
+              "htmlSource": "./tabs/full/quickstart.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "refactor",
+              "name": "refactor",
+              "icon": "ti ti-file-text",
+              "description": "When the user types `/refactor`, use this file as the source of truth.",
+              "htmlSource": "./tabs/full/refactor.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "refresh-me",
+              "name": "refresh-me",
+              "icon": "ti ti-file-text",
+              "description": "When the user says any of:",
+              "htmlSource": "./tabs/full/refresh-me.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "retro",
+              "name": "retro",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"retro\", \"let's retro\", \"retro this issue\", \"retrospective\", or similar",
+              "htmlSource": "./tabs/full/retro.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "search-before-implementing",
+              "name": "search-before-implementing",
+              "icon": "ti ti-file-text",
+              "description": "ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects",
+              "htmlSource": "./tabs/full/search-before-implementing.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "show-custom-commands",
+              "name": "show-custom-commands",
+              "icon": "ti ti-file-text",
+              "description": "When the user asks about custom commands or capabilities, such as:",
+              "htmlSource": "./tabs/full/show-custom-commands.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "upload-to-mikesendpoint",
+              "name": "upload-to-mikesendpoint",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"upload to mikesendpoint\" or similar phrases, deploy the current worksp",
+              "htmlSource": "./tabs/full/upload-to-mikesendpoint.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "use-liskov-file-system",
+              "name": "use-liskov-file-system",
+              "icon": "ti ti-file-text",
+              "description": "When the user says \"use liskov file system\", \"use liskov with bucket-name bucket\", \"add li",
+              "htmlSource": "./tabs/full/use-liskov-file-system.html",
+              "allowHtmlSource": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "docs",
+      "label": "Docs",
+      "icon": "ti ti-book",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "readme",
+              "name": "README",
+              "icon": "ti ti-book",
+              "htmlSource": "./tabs/docs/readme.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "doctrine-bootstrap-guide",
+              "name": "Doctrine bootstrap guide",
+              "icon": "ti ti-brain",
+              "htmlSource": "./tabs/docs/doctrine-bootstrap-guide.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "doctrine-compose-api",
+              "name": "Doctrine compose API",
+              "icon": "ti ti-api",
+              "htmlSource": "./tabs/docs/doctrine-compose-api.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "codex-bootstrap-prompt",
+              "name": "Codex bootstrap prompt",
+              "icon": "ti ti-bolt",
+              "htmlSource": "./tabs/docs/codex-bootstrap-prompt.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "codex-memory-seed",
+              "name": "Codex memory seed",
+              "icon": "ti ti-cpu",
+              "htmlSource": "./tabs/docs/codex-memory-seed.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "codex-local-runtime-inventory",
+              "name": "Codex local runtime inventory",
+              "icon": "ti ti-list-details",
+              "htmlSource": "./tabs/docs/codex-local-runtime-inventory.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "safe-to-wipe-codex",
+              "name": "Safe to wipe Codex",
+              "icon": "ti ti-shield-half-filled",
+              "htmlSource": "./tabs/docs/safe-to-wipe-codex.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "claude-memory-seed",
+              "name": "Claude memory seed",
+              "icon": "ti ti-cpu",
+              "htmlSource": "./tabs/docs/claude-memory-seed.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "rule-creation-guide",
+              "name": "Rule creation guide",
+              "icon": "ti ti-notebook",
+              "htmlSource": "./tabs/docs/rule-creation-guide.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "custom-instructions",
+              "name": "Custom instructions",
+              "icon": "ti ti-file-text",
+              "htmlSource": "./tabs/docs/custom-instructions.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "rules-index",
+              "name": "Rules index",
+              "icon": "ti ti-list-details",
+              "htmlSource": "./tabs/docs/rules-index.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "custom-commands-index",
+              "name": "Custom commands index",
+              "icon": "ti ti-terminal",
+              "htmlSource": "./tabs/docs/custom-commands-index.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "custom-cline-extension",
+              "name": "Custom Cline extension",
+              "icon": "ti ti-package",
+              "htmlSource": "./tabs/docs/custom-cline-extension.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "retired-repos",
+              "name": "Retired repos",
+              "icon": "ti ti-archive",
+              "htmlSource": "./tabs/docs/retired-repos.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "implementation-summary",
+              "name": "Implementation summary",
+              "icon": "ti ti-file-check",
+              "htmlSource": "./tabs/docs/implementation-summary.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "consolidation-todo",
+              "name": "Consolidation TODO",
+              "icon": "ti ti-checklist",
+              "htmlSource": "./tabs/docs/consolidation-todo.html",
+              "allowHtmlSource": true
+            },
+            {
+              "id": "implementation-plan",
+              "name": "Implementation plan",
+              "icon": "ti ti-map",
+              "htmlSource": "./tabs/docs/implementation-plan.html",
+              "allowHtmlSource": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

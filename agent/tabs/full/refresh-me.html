@@ -1,0 +1,136 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/refresh-me.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/refresh-me.md</a></p>
+  <div class="markdown-body">
+<h1>Refresh Me - Project Synopsis Command</h1>
+<h2>TRIGGER</h2>
+<p>When the user says any of:</p>
+<ul>
+<li>&quot;refresh me&quot;</li>
+<li>&quot;I have selective amnesia&quot;</li>
+<li>&quot;tell me about this&quot;</li>
+<li>&quot;get me tf back up to speed&quot;</li>
+<li>&quot;what did we build&quot;</li>
+<li>&quot;give me the manager brief&quot;</li>
+<li>Or similar phrases requesting a high-level overview</li>
+</ul>
+<h2>COMMAND PREFIX</h2>
+<p>Can be forced with:</p>
+<ul>
+<li><code>directive: refresh me</code></li>
+<li><code>force: refresh me</code></li>
+</ul>
+<h2>PHILOSOPHY</h2>
+<p>You&#39;re briefing a capable software engineer who can read code. They want:</p>
+<ul>
+<li><strong>High-level architecture</strong> - not implementation details</li>
+<li><strong>Clever bits highlighted</strong> - where you did something exceptional</li>
+<li><strong>Glue code ignored</strong> - standard CRUD, obvious patterns, boilerplate</li>
+<li><strong>Brief and punchy</strong> - manager synopsis that tickles the dev/nerd parts</li>
+</ul>
+<h2>RULES</h2>
+<h3>What to Include</h3>
+<ol>
+<li><strong>Project purpose</strong> - one sentence</li>
+<li><strong>Key architectural decisions</strong> - only the interesting ones</li>
+<li><strong>Clever implementations</strong> - highlight exceptional work</li>
+<li><strong>Tech stack</strong> - bullet points only</li>
+<li><strong>Deployment model</strong> - where/how it runs</li>
+</ol>
+<h3>What to Exclude</h3>
+<ol>
+<li>Standard CRUD operations</li>
+<li>Obvious REST API patterns</li>
+<li>Basic file structures</li>
+<li>Standard configuration</li>
+<li>Boilerplate code</li>
+</ol>
+<h3>Language Guidelines</h3>
+<ul>
+<li>&quot;Stored in cloud&quot; NOT &quot;stored in S3 via keys with async batch processing...&quot;</li>
+<li>&quot;Easily retrieved&quot; NOT detailed query explanation</li>
+<li>Only include code snippets for truly exceptional implementations</li>
+<li>Use terms like &quot;clever&quot;, &quot;interesting&quot;, &quot;notable&quot; to flag special work</li>
+<li>Skip phrases like &quot;implements standard&quot;, &quot;follows typical pattern&quot;</li>
+</ul>
+<h2>OUTPUT FORMAT</h2>
+<pre><code># [Project Name]
+
+[One sentence purpose]
+
+## Key Architecture
+- [Only interesting architectural choices]
+- [Skip obvious patterns]
+
+## Clever Bits
+- [Highlight exceptional implementations]
+- [Call out smart solutions]
+
+## Tech Stack
+- [Bulleted list]
+
+## Deployment
+- [Where/how it runs]
+
+## Next Steps
+- [What remains or how to use it]
+</code></pre>
+<h2>EXAMPLE (Good)</h2>
+<pre><code># Tixplain
+
+Analyzes GitHub PRs and JIRA tickets to build an AI-powered semantic knowledge base of problem-solution patterns.
+
+## Key Architecture
+- **Idempotent repository caching** - checks existence before cloning, reuses across analyses
+- **Dual storage model** - SQLite for speed, auto-syncs to S3 for persistence
+- **Vector similarity search** - 1536-dim embeddings with cosine similarity for pattern recognition
+
+## Clever Bits
+- **Repository manager** applies PR changes locally for real diff analysis (not just API metadata)
+- **Liskov File System abstraction** - transparent local/S3 switching without code changes
+- **Semantic tag extraction** - AI generates searchable taxonomy automatically
+
+## Tech Stack
+- .NET 8 Lambda with Function URL
+- Bedrock Claude + Titan Embeddings
+- SQLite → S3 via Liskov
+- Octokit + git CLI
+
+## Deployment
+Lambda with 2GB RAM, 5min timeout, Function URL enabled
+
+## Next Steps
+Configure GitHub/JIRA tokens, deploy with `.\scripts\deploy_tixplain.ps1`
+</code></pre>
+<h2>EXAMPLE (Bad - Too Verbose)</h2>
+<pre><code># Tixplain
+
+This is a comprehensive ticket explanation and knowledge extraction system that has been designed to analyze GitHub pull requests and JIRA tickets using advanced AI capabilities. The system creates a searchable knowledge base...
+
+## Architecture
+- Uses ASP.NET Core Web API with standard REST endpoints
+- Implements dependency injection for all services
+- Has three controllers following standard MVC pattern
+- Uses Entity Framework Core for database access
+- Stores data in SQLite database with standard schema
+- Implements standard CRUD operations...
+[Goes on for pages about obvious stuff]
+</code></pre>
+<h2>IMPORTANT</h2>
+<p>This is for engineers who know how things work. They don&#39;t need:</p>
+<ul>
+<li>Explanations of what REST APIs are</li>
+<li>Details on how dependency injection works</li>
+<li>Standard patterns spelled out</li>
+<li>Boilerplate acknowledged</li>
+</ul>
+<p>They DO need:</p>
+<ul>
+<li>What makes THIS implementation special</li>
+<li>Smart decisions that aren&#39;t obvious</li>
+<li>Trade-offs and why you picked them</li>
+<li>How to actually use it</li>
+</ul>
+<p>Keep it punchy. Keep it interesting. Skip the obvious.</p>
+
+  </div>
+</article>

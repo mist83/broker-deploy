@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent</title>
+    <meta name="description" content="Prompt rules, scaffolds, and workflows for agents.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="site.css">
+    <script src="https://ui.mullmania.com/ui.js" data-ui-theme="active"></script>
+  </head>
+  <body>
+    <div id="header-container" class="header"></div>
+    <div id="tabs-container" class="tabs"></div>
+    <div id="content-container"></div>
+    <script type="module" src="app.js"></script>
+    <script>
+      (async () => {
+        await window.UI.ready();
+        const sitemap = await (await fetch('./sitemap.json', { cache: 'no-store' })).json();
+        const shell = window.UI.createShell({
+          tabsContainerId: 'tabs-container',
+          contentContainerId: 'content-container',
+          sitemap,
+        });
+        await shell.init();
+      })().catch((err) => {
+        console.error('[agent] shell init failed:', err);
+      });
+    </script>
+  </body>
+</html>

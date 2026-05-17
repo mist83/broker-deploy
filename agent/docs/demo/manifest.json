@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/agent",
+  "name": "agent",
+  "posterUrl": "https://mist83.github.io/_demo/agent/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "https://project-and.mullmania.com/films/cinema/film-14-agent-2026-04-28T04-56-02-000Z.mp4",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/agent/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/agent/",
+  "hasVideo": true,
+  "posterKind": "screenshot",
+  "posterNote": "Captured from the destank rule, framed on the closing tone line."
+}

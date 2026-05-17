@@ -1,0 +1,16 @@
+# Refresh Me
+
+## TRIGGER
+When the user says any of:
+
+## PURPOSE
+You're briefing a capable software engineer who can read code. They want:
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/refresh-me.md" -Raw
+```
+
+Or use read_file tool:
+`full/refresh-me.md`

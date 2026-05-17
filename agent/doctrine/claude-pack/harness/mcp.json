@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "itchy-brain": {
+      "command": "/Users/mist83/.claude/mcp-servers/itchy-brain/.venv/bin/python3.13",
+      "args": ["/Users/mist83/.claude/mcp-servers/itchy-brain/server.py"]
+    }
+  }
+}

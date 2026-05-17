@@ -1,0 +1,16 @@
+# Make Tv App
+
+## TRIGGER
+When the user says "make a TV app", "convert to TV", "make this TV-friendly", or similar phrases requesting a fullscreen TV-optimized interface.
+
+## PURPOSE
+TV apps are keyboard-driven, fullscreen experiences designed for 10-foot viewing. Large text, minimal UI, high contrast, and simple navigation optimized for couch interaction.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/make-tv-app.md" -Raw
+```
+
+Or use read_file tool:
+`full/make-tv-app.md`

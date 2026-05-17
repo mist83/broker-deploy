@@ -1,0 +1,107 @@
+# External Integrations Facet
+
+**Description:** External service and API integrations
+
+**Domains:** apis, services
+**Behaviors:** integration, connectivity
+
+---
+
+## add-signalargh
+
+# Add SignalArgh Command
+
+## TRIGGER
+"add signalargh", "use signalargh", "add signalr"
+
+## PURPOSE
+Integrates SignalArgh real-time messaging - free, no-registration SignalR hub for JavaScript, Python, or C# projects.
+
+## WHAT IT DOES
+- Detects project language (JS/Python/C#)
+- Prompts for: Channel ID, User ID strategy, Features needed
+- Creates: SignalR client helper file with complete implementation
+- Supports: Channels, Groups, Announcements, Auto-reconnect
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-signalargh.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-signalargh.md`
+
+## QUICK REFERENCE
+- **Hub URL:** https://signalargh.mikesendpoint.com/hub
+- **No Auth:** Just channelId + userId query params
+- **Channel Isolation:** Messages never cross channels
+- **Auto-Reconnect:** Built-in reconnection on connection loss
+- **Multi-Language:** JavaScript (browser/Node), Python, C#
+
+
+---
+
+## add-ai-integration
+
+# Add Ai Integration
+
+## TRIGGER
+When the user requests AI-powered features that need to fetch from external AI endpoints, use this pattern to avoid CORS issues.
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-ai-integration.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-ai-integration.md`
+
+---
+
+## use-liskov-file-system
+
+# Use Liskov File System
+
+## TRIGGER
+When the user says "use liskov file system", "use liskov with [bucket-name] bucket", "add liskov", or similar phrases, activate this command to integrate the Liskov File System library.
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/use-liskov-file-system.md" -Raw
+```
+
+Or use read_file tool:
+`full/use-liskov-file-system.md`
+
+---
+
+## upload-to-mikesendpoint
+
+# Upload To Mikesendpoint
+
+## TRIGGER
+When the user says "upload to mikesendpoint" or similar phrases, deploy the current workspace to a subdomain at mikesendpoint.com.
+
+## PURPOSE
+Universal deployment command that works from ANY repo. Automatically uses the workspace folder name as the subdomain.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/upload-to-mikesendpoint.md" -Raw
+```
+
+Or use read_file tool:
+`full/upload-to-mikesendpoint.md`
+
+---
+

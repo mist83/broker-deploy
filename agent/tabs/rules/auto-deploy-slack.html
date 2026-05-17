@@ -1,0 +1,153 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../auto-deploy-slack.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> auto-deploy-slack.clinerules</a> &middot; <a class="link-muted" href="../full/auto-deploy-slack.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/auto-deploy-slack.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Auto Deploy Slack</h1>
+<h2>TRIGGER</h2>
+<p>After any successful Lambda deployment that completes with a Function URL.</p>
+<h2>PURPOSE</h2>
+<p>Automatically post to Slack whenever you deploy an app, providing immediate notification with the deployed URL.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/auto-deploy-slack.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/auto-deploy-slack.md</code></p>
+<h2>Full content</h2>
+<h1>Auto-Deploy Slack Notifications - Global Rule</h1>
+<h2>TRIGGER</h2>
+<p>After any successful Lambda deployment that completes with a Function URL.</p>
+<h2>PURPOSE</h2>
+<p>Automatically post to Slack whenever you deploy an app, providing immediate notification with the deployed URL.</p>
+<h2>ACTIVATION</h2>
+<p>This rule activates automatically after:</p>
+<ul>
+<li>Successful <code>dotnet lambda deploy-function</code> completion</li>
+<li>AWS CLI returns Function URL</li>
+<li>Deployment script finishes without errors</li>
+</ul>
+<h2>SLACK CONFIGURATION</h2>
+<p><strong>Hardcoded Values:</strong></p>
+<ul>
+<li>Channel ID: C07J7THR8KF</li>
+<li>User ID: U01SCCXAQSF</li>
+<li>Private: false (public channel)</li>
+<li>Endpoint: <a href="https://3y5fdemhmbauwcyo7jc2eib5te0zsuer.lambda-url.us-west-2.on.aws/Slack/chat">https://3y5fdemhmbauwcyo7jc2eib5te0zsuer.lambda-url.us-west-2.on.aws/Slack/chat</a></li>
+</ul>
+<h2>EMOJI ROTATION</h2>
+<p>Random emoji pool for variety:</p>
+<ul>
+<li>:rocket: - For most deployments</li>
+<li>:globe_with_meridians: - For web apps</li>
+<li>:sparkles: - For new features</li>
+<li>:tada: - For major releases</li>
+<li>:satellite: - For APIs</li>
+<li>:zap: - For performance updates</li>
+<li>:package: - For deployments</li>
+</ul>
+<h2>MESSAGE FORMAT</h2>
+<pre><code>{emoji} {ProjectName} deployed
+{LambdaUrl}?cacheBust={timestamp}
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code>:rocket: DallAIre deployed
+https://abc123.lambda-url.us-west-2.on.aws?cacheBust=1732847097
+</code></pre>
+<h2>IMPLEMENTATION</h2>
+<p>After deployment script completes successfully, execute:</p>
+<pre><code class="language-powershell"># Get current timestamp for cache bust
+$timestamp = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+
+# Random emoji selection
+$emojis = @(&#39;:rocket:&#39;, &#39;:globe_with_meridians:&#39;, &#39;:sparkles:&#39;, &#39;:tada:&#39;, &#39;:satellite:&#39;, &#39;:zap:&#39;, &#39;:package:&#39;)
+$emoji = $emojis | Get-Random
+
+# Get project/function name from deployment config or context
+$projectName = &quot;App&quot;  # Replace with actual project name from context
+
+# Get Lambda URL from deployment output or AWS CLI
+$lambdaUrl = &quot;https://your-function.lambda-url.us-west-2.on.aws&quot;  # Replace with actual URL
+
+# Format message
+$message = &quot;$emoji $projectName deployed`n${lambdaUrl}?cacheBust=$timestamp&quot;
+
+# Post to Slack
+try {
+    $response = Invoke-RestMethod -Uri &quot;https://3y5fdemhmbauwcyo7jc2eib5te0zsuer.lambda-url.us-west-2.on.aws/Slack/chat?message=$([uri]::EscapeDataString($message))&amp;channelId=C07J7THR8KF&amp;userId=U01SCCXAQSF&amp;isPrivate=false&quot; -Method Post -Headers @{&quot;accept&quot;=&quot;*/*&quot;; &quot;Content-Type&quot;=&quot;application/json-patch+json&quot;} -Body &quot;{}&quot;
+    
+    Write-Host &quot;Slack notification sent!&quot; -ForegroundColor Green
+} catch {
+    Write-Host &quot;Slack notification failed (non-blocking): $_&quot; -ForegroundColor Yellow
+}
+</code></pre>
+<h2>INTEGRATION WITH DEPLOYMENT SCRIPTS</h2>
+<p>To integrate with your deployment scripts, add this snippet after successful deployment:</p>
+<pre><code class="language-powershell">if ($LASTEXITCODE -eq 0) {
+    Write-Host &quot;`nDeployment successful!&quot; -ForegroundColor Green
+    
+    if ($config.&#39;function-url-enable&#39;) {
+        $functionUrl = aws lambda get-function-url-config `
+            --function-name $config.&#39;function-name&#39; `
+            --region $config.region `
+            --query &#39;FunctionUrl&#39; `
+            --output text
+        
+        if ($functionUrl) {
+            # AUTO-DEPLOY SLACK NOTIFICATION
+            $timestamp = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+            $emojis = @(&#39;:rocket:&#39;, &#39;:globe_with_meridians:&#39;, &#39;:sparkles:&#39;, &#39;:tada:&#39;, &#39;:satellite:&#39;, &#39;:zap:&#39;, &#39;:package:&#39;)
+            $emoji = $emojis | Get-Random
+            $projectName = $config.&#39;function-name&#39;
+            $message = &quot;$emoji $projectName deployed`n${functionUrl}?cacheBust=$timestamp&quot;
+            
+            try {
+                Invoke-RestMethod -Uri &quot;https://3y5fdemhmbauwcyo7jc2eib5te0zsuer.lambda-url.us-west-2.on.aws/Slack/chat?message=$([uri]::EscapeDataString($message))&amp;channelId=C07J7THR8KF&amp;userId=U01SCCXAQSF&amp;isPrivate=false&quot; -Method Post -Headers @{&quot;accept&quot;=&quot;*/*&quot;; &quot;Content-Type&quot;=&quot;application/json-patch+json&quot;} -Body &quot;{}&quot; | Out-Null
+                Write-Host &quot;Slack notification sent!&quot; -ForegroundColor Green
+            } catch {
+                Write-Host &quot;Slack notification failed (non-blocking)&quot; -ForegroundColor Yellow
+            }
+            
+            # BROADCAST THOUGHT TO LIVE USAGE
+            try {
+                $thoughtData = @{
+                    id = &quot;deploy-$(Get-Date -Format &#39;yyyyMMddHHmmss&#39;)&quot;
+                    timestamp = (Get-Date).ToUniversalTime().ToString(&quot;o&quot;)
+                    thought = &quot;$emoji $projectName deployed - version $timestamp&quot;
+                    source = &quot;auto-deploy&quot;
+                    metadata = @{
+                        taskId = &quot;deployment&quot;
+                        workspace = &quot;lambda&quot;
+                        artifactType = $null
+                    }
+                } | ConvertTo-Json -Compress
+                
+                Invoke-RestMethod -Uri &quot;${functionUrl}/api/thoughts/broadcast&quot; -Method Post -ContentType &quot;application/json&quot; -Body $thoughtData | Out-Null
+                Write-Host &quot;Live Usage thought broadcasted!&quot; -ForegroundColor Green
+            } catch {
+                Write-Host &quot;Thought broadcast failed (non-blocking)&quot; -ForegroundColor Yellow
+            }
+        }
+    }
+}
+</code></pre>
+<h2>USAGE NOTES</h2>
+<ol>
+<li><strong>Non-Blocking</strong> - If Slack notification fails, deployment is still considered successful</li>
+<li><strong>Cache Busting</strong> - Always includes Unix timestamp to force fresh page loads</li>
+<li><strong>Random Emoji</strong> - Adds variety to notifications</li>
+<li><strong>Project Name</strong> - Automatically derived from function name in deployment config</li>
+<li><strong>URL Validation</strong> - Only sends notification if Function URL is available</li>
+</ol>
+<h2>ERROR HANDLING</h2>
+<p>Slack notification errors are caught and logged but do not fail the deployment. This ensures:</p>
+<ul>
+<li>Deployment success is not dependent on Slack availability</li>
+<li>Network issues don&#39;t block deployments</li>
+<li>Missing configuration doesn&#39;t cause failures</li>
+</ul>
+<h2>GLOBAL SCOPE</h2>
+<p>This rule applies to ALL projects that deploy to AWS Lambda with Function URLs enabled. No per-project configuration needed.</p>
+<p>To disable for a specific deployment, comment out the Slack notification section in the deployment script.</p>
+
+  </div>
+</article>

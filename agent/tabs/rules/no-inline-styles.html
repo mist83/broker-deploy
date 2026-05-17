@@ -1,0 +1,121 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../no-inline-styles.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> no-inline-styles.clinerules</a> &middot; <a class="link-muted" href="../full/no-inline-styles.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/no-inline-styles.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>No Inline Styles</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE - Enforced during code generation and review.</p>
+<h2>PURPOSE</h2>
+<p>Inline styles in JavaScript are a code smell. They mix concerns, make dark mode difficult, and create maintenance nightmares. Always use CSS classes.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/no-inline-styles.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/no-inline-styles.md</code></p>
+<h2>Full content</h2>
+<h1>No Inline Styles - CSS Class Enforcement</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE - Enforced during code generation and review.</p>
+<h2>PHILOSOPHY</h2>
+<p>Inline styles in JavaScript are a code smell. They mix concerns, make dark mode difficult, and create maintenance nightmares. Always use CSS classes.</p>
+<h2>BANNED PATTERNS</h2>
+<h3>JavaScript Inline Style Setting</h3>
+<pre><code class="language-javascript">❌ element.style.background = &#39;#ffffff&#39;;
+❌ element.style.color = &#39;#000000&#39;;
+❌ element.style.borderLeft = &#39;3px solid #FFC220&#39;;
+❌ element.style.fontWeight = &#39;600&#39;;
+
+✅ element.classList.add(&#39;sidebar-item-active&#39;);
+✅ element.classList.remove(&#39;sidebar-item-inactive&#39;);
+</code></pre>
+<h3>HTML Inline Styles (Dynamic Content Exception)</h3>
+<pre><code class="language-html">❌ &lt;div style=&quot;background: white; color: black;&quot;&gt;Static Content&lt;/div&gt;
+
+✅ &lt;div class=&quot;content-card&quot;&gt;Static Content&lt;/div&gt;
+
+⚠️ EXCEPTION: Generated/dynamic HTML (innerHTML, template literals) MAY use inline styles
+   if the content is truly dynamic and CSS classes won&#39;t work.
+</code></pre>
+<h2>RULES</h2>
+<h3>1. CSS Classes First</h3>
+<p>When you need styling:</p>
+<ol>
+<li>Check if a class exists</li>
+<li>If not, create a reusable class in CSS</li>
+<li>Apply the class via JavaScript</li>
+</ol>
+<h3>2. CSS Variables for Themes</h3>
+<pre><code class="language-css">✅ .my-element {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+❌ .my-element {
+    background: #ffffff;
+    color: #000000;
+}
+</code></pre>
+<h3>3. Shared Utilities</h3>
+<p>For repeated patterns (like sidebar selection):</p>
+<ul>
+<li>Create a shared utility function</li>
+<li>Use consistent class names</li>
+<li>Single source of truth</li>
+</ul>
+<p>Example: <code>window.SidebarUtils.selectItem()</code></p>
+<h2>ENFORCEMENT</h2>
+<p>When you see:</p>
+<pre><code class="language-javascript">element.style.something = value;
+</code></pre>
+<p><strong>Stop and ask:</strong></p>
+<ol>
+<li>Can this be a CSS class?</li>
+<li>Does a class already exist?</li>
+<li>Is this truly dynamic or just lazy?</li>
+</ol>
+<p><strong>If lazy:</strong> Refactor to CSS classes
+<strong>If dynamic:</strong> Document why inline is necessary</p>
+<h2>EXCEPTIONS</h2>
+<p>Inline styles ARE acceptable for:</p>
+<ul>
+<li>Dynamically calculated positions (drag/drop)</li>
+<li>Animation endpoints (computed at runtime)</li>
+<li>User-driven style overrides (theme customizer)</li>
+<li>Generated HTML where classes can&#39;t apply</li>
+</ul>
+<p>But even then, consider CSS custom properties:</p>
+<pre><code class="language-javascript">element.style.setProperty(&#39;--dynamic-position&#39;, calculatedValue);
+</code></pre>
+<h2>REFACTORING GUIDE</h2>
+<p><strong>Before:</strong></p>
+<pre><code class="language-javascript">function selectItem(id) {
+    items.forEach(item =&gt; {
+        item.style.background = &#39;&#39;;
+        item.style.color = &#39;#374151&#39;;
+    });
+    
+    const active = getItem(id);
+    active.style.background = &#39;#ffffff&#39;;
+    active.style.color = &#39;#000000&#39;;
+}
+</code></pre>
+<p><strong>After:</strong></p>
+<pre><code class="language-javascript">function selectItem(id) {
+    items.forEach(item =&gt; {
+        item.classList.remove(&#39;item-active&#39;);
+        item.classList.add(&#39;item-inactive&#39;);
+    });
+    
+    const active = getItem(id);
+    active.classList.remove(&#39;item-inactive&#39;);
+    active.classList.add(&#39;item-active&#39;);
+}
+</code></pre>
+<h2>REMEMBER</h2>
+<p>Less inline styles = Better maintenance = Easier theming = Cleaner code = Happier developers</p>
+<p>If you find yourself setting more than 2 inline styles, you need a CSS class.</p>
+
+  </div>
+</article>

@@ -1,0 +1,165 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../upload-to-mikesendpoint.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> upload-to-mikesendpoint.clinerules</a> &middot; <a class="link-muted" href="../full/upload-to-mikesendpoint.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/upload-to-mikesendpoint.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Upload To Mikesendpoint</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;upload to mikesendpoint&quot; or similar phrases, deploy the current workspace to a subdomain at mikesendpoint.com.</p>
+<h2>PURPOSE</h2>
+<p>Universal deployment command that works from ANY repo. Automatically uses the workspace folder name as the subdomain.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/upload-to-mikesendpoint.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/upload-to-mikesendpoint.md</code></p>
+<h2>Full content</h2>
+<h1>Upload to mikesendpoint.com - Universal S3 Subdomain Deployment</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;upload to mikesendpoint&quot; or similar phrases, deploy the current workspace to a subdomain at mikesendpoint.com.</p>
+<h2>PURPOSE</h2>
+<p>Universal deployment command that works from ANY repo. Automatically uses the workspace folder name as the subdomain.</p>
+<h2>GATEKEEP</h2>
+<p>This command uses gatekeeping - requires button confirmation before deployment to prevent accidental uploads.</p>
+<h2>DETECTION</h2>
+<p>Extract subdomain name from current workspace:</p>
+<ul>
+<li>Workspace path: <code>c:/code/git/my-project</code> → Subdomain: <code>my-project</code></li>
+<li>Result: <a href="https://my-project.mikesendpoint.com">https://my-project.mikesendpoint.com</a></li>
+</ul>
+<h2>DEPLOYMENT PATTERN</h2>
+<p>Uses the proven deployment system from c:/code/git/project-and:</p>
+<ul>
+<li>Script: <code>c:/code/git/project-and/scripts/deploy-subdomain.ps1</code></li>
+<li>Bucket: <code>mikesendpoint-sites</code></li>
+<li>Distribution: <code>E1M52KIEPYIWE5</code></li>
+<li>Deployment time: 7-10 seconds</li>
+</ul>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>Step 1: Extract Subdomain Name</h3>
+<p>From current working directory, extract folder name:</p>
+<pre><code class="language-powershell">$workspacePath = Get-Location
+$subdomainName = Split-Path $workspacePath -Leaf
+$subdomainName = $subdomainName.ToLower() -replace &#39;[^a-z0-9\-]&#39;, &#39;-&#39;
+</code></pre>
+<h3>Step 2: Confirm Deployment (GATEKEEP)</h3>
+<p>Use <code>ask_followup_question</code> with button confirmation:</p>
+<p><strong>Question:</strong> &quot;Deploy this workspace to mikesendpoint.com?&quot;</p>
+<p><strong>Details to show:</strong></p>
+<ul>
+<li>Workspace: {current folder}</li>
+<li>Subdomain: {subdomain-name}.mikesendpoint.com</li>
+<li>Source: {current directory}</li>
+<li>Target: s3://mikesendpoint-sites/{subdomain-name}/</li>
+</ul>
+<p><strong>Button:</strong> [&quot;Deploy to {subdomain-name}.mikesendpoint.com&quot;]</p>
+<p><strong>CRITICAL:</strong> Do NOT proceed until button is clicked. If user responds with text, they&#39;re adjusting - handle accordingly.</p>
+<h3>Step 3: Execute Deployment</h3>
+<p>Once confirmed, run:</p>
+<pre><code class="language-powershell">cd c:/code/git/project-and/scripts
+.\deploy-subdomain.ps1 {subdomain-name} {workspace-path}
+</code></pre>
+<h3>Step 4: Report Success</h3>
+<p>After deployment completes:</p>
+<pre><code>Deployed to: https://{subdomain-name}.mikesendpoint.com
+
+Deployment time: X seconds
+Files uploaded: Y files
+
+Wait 30-60 seconds for cache invalidation, then test the site.
+</code></pre>
+<h2>SUBDOMAIN NAME RULES</h2>
+<ul>
+<li>Convert to lowercase</li>
+<li>Replace invalid characters with hyphens</li>
+<li>Valid: <code>my-project</code>, <code>test-app</code>, <code>demo-123</code></li>
+<li>Invalid chars: Spaces, underscores, special chars → Convert to hyphens</li>
+</ul>
+<h2>DEPLOYMENT CONFIGURATION</h2>
+<p><strong>Script Location:</strong> <code>c:/code/git/project-and/scripts/deploy-subdomain.ps1</code></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li>SubdomainName: Extracted from folder name</li>
+<li>SourceFolder: Current workspace path</li>
+</ul>
+<p><strong>Infrastructure (already set up):</strong></p>
+<ul>
+<li>S3 Bucket: mikesendpoint-sites</li>
+<li>CloudFront: E1M52KIEPYIWE5</li>
+<li>Domain: *.mikesendpoint.com</li>
+<li>Certificate: Validated and ready</li>
+</ul>
+<h2>EXAMPLE WORKFLOWS</h2>
+<h3>Example 1: Deploy Dashboard</h3>
+<pre><code>Working directory: c:/code/git/my-dashboard
+User: &quot;upload to mikesendpoint&quot;
+Extracted subdomain: &quot;my-dashboard&quot;
+Deployment: https://my-dashboard.mikesendpoint.com
+</code></pre>
+<h3>Example 2: Deploy Test Site</h3>
+<pre><code>Working directory: c:/code/git/test-site
+User: &quot;upload to mikesendpoint&quot;
+Extracted subdomain: &quot;test-site&quot;
+Deployment: https://test-site.mikesendpoint.com
+</code></pre>
+<h3>Example 3: Custom Name (Override)</h3>
+<pre><code>Working directory: c:/code/git/project-x
+User: &quot;upload to mikesendpoint as demo&quot;
+Extracted subdomain: &quot;demo&quot; (override folder name)
+Deployment: https://demo.mikesendpoint.com
+</code></pre>
+<h2>OVERRIDE PATTERN</h2>
+<p>If user specifies &quot;as {name}&quot;, use that instead of folder name:</p>
+<ul>
+<li>&quot;upload to mikesendpoint as demo&quot; → demo.mikesendpoint.com</li>
+<li>&quot;upload to mikesendpoint as test-123&quot; → test-123.mikesendpoint.com</li>
+</ul>
+<h2>ERROR HANDLING</h2>
+<p><strong>If script doesn&#39;t exist:</strong></p>
+<pre><code>ERROR: Deployment script not found at c:/code/git/project-and/scripts/deploy-subdomain.ps1
+Cannot proceed with deployment.
+</code></pre>
+<p><strong>If infrastructure not configured:</strong></p>
+<pre><code>ERROR: Infrastructure not configured. Run setup-infrastructure.ps1 first.
+Location: c:/code/git/project-and/scripts/setup-infrastructure.ps1
+</code></pre>
+<p><strong>If invalid subdomain name:</strong></p>
+<pre><code>ERROR: Invalid subdomain name: {name}
+Must use lowercase letters, numbers, and hyphens only.
+</code></pre>
+<h2>CONFIRMATION MESSAGE</h2>
+<p>After successful deployment:</p>
+<pre><code>Deployed to mikesendpoint.com! ✅
+
+URL: https://{subdomain-name}.mikesendpoint.com
+Files: {count} uploaded
+Time: {seconds} seconds
+
+Cache invalidation in progress (30-60 seconds).
+Test your site after cache propagates.
+
+Subdomain added to service directory: https://index.mikesendpoint.com
+</code></pre>
+<h2>SECURITY NOTE</h2>
+<p>Deployed sites are protected by CloudFront header validation:</p>
+<ul>
+<li>Requires X-Site-Key header from Chrome extension</li>
+<li>Without extension: 403 Forbidden</li>
+<li>Exception: favicon.ico always loads</li>
+</ul>
+<h2>IMPORTANT</h2>
+<p>This is a GLOBAL rule - works from any workspace. The deployment scripts in project-and are the canonical implementation and should not be modified without updating this rule.</p>
+<h2>TONE</h2>
+<p>Direct and efficient:</p>
+<ul>
+<li>&quot;Deploying to my-project.mikesendpoint.com...&quot;</li>
+<li>&quot;Deployment complete: 8.2 seconds&quot;</li>
+<li>&quot;Site live at <a href="https://my-project.mikesendpoint.com">https://my-project.mikesendpoint.com</a>&quot;</li>
+</ul>
+<p>Not:</p>
+<ul>
+<li>&quot;Great! I&#39;ll deploy this for you...&quot;</li>
+</ul>
+
+  </div>
+</article>

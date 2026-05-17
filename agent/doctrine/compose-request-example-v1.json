@@ -1,0 +1,22 @@
+{
+  "runtime": "codex",
+  "event": "task_execution",
+  "taskIntent": "Implement the requested repo change directly in the workspace and verify it.",
+  "params": {
+    "repoPath": "/Users/mist83/Code",
+    "deliverable": "working code change",
+    "verificationTarget": "build and targeted test"
+  },
+  "recipeId": "repo-task-default",
+  "profileIds": [
+    "shared-operator-core",
+    "shared-live-ship",
+    "shared-platform-systems"
+  ],
+  "includeRuleIds": [],
+  "excludeRuleIds": [],
+  "operatorNotes": "Prefer doing the work over proposing it.",
+  "sessionState": "healthy",
+  "operatorOverride": false,
+  "maxChars": 4200
+}

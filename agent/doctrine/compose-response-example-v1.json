@@ -1,0 +1,176 @@
+{
+  "runtime": "codex",
+  "event": "task_execution",
+  "sessionState": "healthy",
+  "selectedProfileIds": [
+    "shared-operator-core",
+    "shared-live-ship",
+    "shared-platform-systems"
+  ],
+  "orderedRuleIds": [
+    "feedback_grugbrain",
+    "feedback_no_hallucination",
+    "feedback_speech_normalization",
+    "feedback_development_canon_source_of_truth",
+    "feedback_deployment_completion",
+    "feedback_heimdall_announce",
+    "feedback_dev_diary_log",
+    "feedback_stop_when_unproductive",
+    "feedback_communication_style",
+    "feedback_bootstrap_quiet_by_default",
+    "feedback_context_sidecar_plain_context",
+    "feedback_preempt_adhd_spiral",
+    "feedback_domain_agnostic",
+    "feedback_interconnect_and_suggest",
+    "feedback_no_ai_stink",
+    "feedback_remote_doctrine_only_no_new_local_rules",
+    "feedback_ship_to_deployed",
+    "feedback_mullmania_bucket_safety",
+    "feedback_mullmania_403_check_whitelist_first",
+    "reference_mullmania_access_logs",
+    "reference_mullmania_packages_site",
+    "reference_passthrough_routing",
+    "reference_codeartifact_mullmania",
+    "reference_signal_argh",
+    "reference_gha_runner",
+    "reference_tv_telemetry"
+  ],
+  "craftedInstruction": "Remote doctrine is source of truth. Follow the composed doctrine block as authoritative for this task execution.\nRuntime: codex. Event: task_execution.\nTask intent: Implement the requested repo change directly in the workspace and verify it.\nStructured params: {\"repoPath\":\"/Users/mist83/Code\",\"deliverable\":\"working code change\",\"verificationTarget\":\"build and targeted test\"}\nOperator notes: Prefer doing the work over proposing it.\n\nApply these rules in order:\n1. Default to simple caveman engineering.\n2. Never make up reality.\n3. Treat dictated intent as intent, not as a trap.\n4. The development canon is the standing repo/workflow ruleset for mist83/*.\n5. When the task expects live change, treat undeployed work as unfinished.\n6. Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.\n7. The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, a\n8. The operator (Mike) explicitly asked for a check on himself: when he is pushing past the point where you can stay productive, do not silently absorb the overload. Call it out with a visible banner so he can course-correc\n9. Two reflexes that govern how to communicate with this user. All global, all apply unless explicitly overridden.\n10. Fast startup matters. Successful bootstrap should be boring.\n11. Direct operator feedback, 2026-04-26: stop making the operator ask for \"recompactify context for handoff.\" The default should be a living context sidecar that stays current during real work.\n12. When proposing a plan with deliberately unfixed details, name the wiggle-room out loud in a confident parenthetical **before** the operator can latch onto it.\n13. Never hardcode mullmania.com or mikesendpoint.com in any browser-facing code. The two domains must be interchangeable.\n14. When Mike asks a question like \"can you weave X into Y\" or \"see if you can tie this into Z\", treat it as an invitation to go bigger than the narrow question. Discover adjacent connections he didn't mention and surface th\n15. Text content (placeholder copy, phrase banks, any creative writing in a product) must not have \"AI stinky stink.\"\n16. The cloud doctrine is the brain. Local rule piles are migration debt.\n17. Don't stop at \"changes are in the working tree\" and wait for a second \"ok now deploy\" round-trip. Once a task is semi-done and locally verified (build passes, tests pass, preview looks right), close it out with commit + \n18. The mullmania.com S3 bucket is unified — every *.mullmania.com subdomain routes through it via the mullmania-subdomain-router CloudFront function. The sites API auto-commits per-site git history at s3://mullmania.com-his\n19. When a request to *.mullmania.com returns 403 or 404, the most common cause is the subdomain router's whitelist gate, not CORS.\n20. Server access logging is enabled on s3://mullmania.com/ as of 2026-04-18.\n21. https://packages.mullmania.com is the auto-generated index of every package in the public sleet-static mullmania/nuget feed. Zero-manual-edit list — always consistent with what's actually published.\n22. The mullmania-subdomain-router CloudFront function normally prepends /<siteId>/ to incoming request URIs (disco.mullmania.com/foo → S3 key disco/foo). Catalog entries can opt into a \"passthrough\" mode where this prefix i\n23. Public NuGet feed for mist83/* libraries. NOT CodeArtifact anymore.\n24. Real-time messaging for mist83 projects is mist83/signal-argh. A single-tenant\n25. Dedicated repo mist83/gha-runner is the home for the local self-hosted GitHub Actions runner. Full context — install layout, operational runbook, known caveats, DAG/notification follow-ups, and the contrast-dye architect\n26. For any browser app where opening devtools on the target device is hard or",
+  "craftedPreamble": "Remote doctrine is source of truth. Follow the composed doctrine block as authoritative for this task execution.\nRuntime: codex. Event: task_execution.\nTask intent: Implement the requested repo change directly in the workspace and verify it.\nStructured params: {\"repoPath\":\"/Users/mist83/Code\",\"deliverable\":\"working code change\",\"verificationTarget\":\"build and targeted test\"}\nOperator notes: Prefer doing the work over proposing it.\n\nApply these rules in order:\n1. Default to simple caveman engineering.\n2. Never make up reality.\n3. Treat dictated intent as intent, not as a trap.\n4. The development canon is the standing repo/workflow ruleset for mist83/*.\n5. When the task expects live change, treat undeployed work as unfinished.\n6. Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.\n7. The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, a\n8. The operator (Mike) explicitly asked for a check on himself: when he is pushing past the point where you can stay productive, do not silently absorb the overload. Call it out with a visible banner so he can course-correc\n9. Two reflexes that govern how to communicate with this user. All global, all apply unless explicitly overridden.\n10. Fast startup matters. Successful bootstrap should be boring.\n11. Direct operator feedback, 2026-04-26: stop making the operator ask for \"recompactify context for handoff.\" The default should be a living context sidecar that stays current during real work.\n12. When proposing a plan with deliberately unfixed details, name the wiggle-room out loud in a confident parenthetical **before** the operator can latch onto it.\n13. Never hardcode mullmania.com or mikesendpoint.com in any browser-facing code. The two domains must be interchangeable.\n14. When Mike asks a question like \"can you weave X into Y\" or \"see if you can tie this into Z\", treat it as an invitation to go bigger than the narrow question. Discover adjacent connections he didn't mention and surface th\n15. Text content (placeholder copy, phrase banks, any creative writing in a product) must not have \"AI stinky stink.\"\n16. The cloud doctrine is the brain. Local rule piles are migration debt.\n17. Don't stop at \"changes are in the working tree\" and wait for a second \"ok now deploy\" round-trip. Once a task is semi-done and locally verified (build passes, tests pass, preview looks right), close it out with commit + \n18. The mullmania.com S3 bucket is unified — every *.mullmania.com subdomain routes through it via the mullmania-subdomain-router CloudFront function. The sites API auto-commits per-site git history at s3://mullmania.com-his\n19. When a request to *.mullmania.com returns 403 or 404, the most common cause is the subdomain router's whitelist gate, not CORS.\n20. Server access logging is enabled on s3://mullmania.com/ as of 2026-04-18.\n21. https://packages.mullmania.com is the auto-generated index of every package in the public sleet-static mullmania/nuget feed. Zero-manual-edit list — always consistent with what's actually published.\n22. The mullmania-subdomain-router CloudFront function normally prepends /<siteId>/ to incoming request URIs (disco.mullmania.com/foo → S3 key disco/foo). Catalog entries can opt into a \"passthrough\" mode where this prefix i\n23. Public NuGet feed for mist83/* libraries. NOT CodeArtifact anymore.\n24. Real-time messaging for mist83 projects is mist83/signal-argh. A single-tenant\n25. Dedicated repo mist83/gha-runner is the home for the local self-hosted GitHub Actions runner. Full context — install layout, operational runbook, known caveats, DAG/notification follow-ups, and the contrast-dye architect\n26. For any browser app where opening devtools on the target device is hard or",
+  "citations": [
+    {
+      "id": "feedback_grugbrain",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_grugbrain.md",
+      "sha256": "d7004b3f16be63a1caffaa338e2585064914c4f14a5b58eae9a20e95c2d5e61f"
+    },
+    {
+      "id": "feedback_no_hallucination",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_no_hallucination.md",
+      "sha256": "af418a1cc576c2a0cc9167ec082a86d0edeb9566160c683af76467946df6325d"
+    },
+    {
+      "id": "feedback_speech_normalization",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_speech_normalization.md",
+      "sha256": "3ea37c430be6528a48adf668f8cab028add5e5988ff47406094b10362c949dc7"
+    },
+    {
+      "id": "feedback_development_canon_source_of_truth",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_development_canon_source_of_truth.md",
+      "sha256": "fa47a5e8fcaeb20358a82290bfab2ddf9b4d76c40cb8d12363bb0befb6d05de6"
+    },
+    {
+      "id": "feedback_deployment_completion",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_deployment_completion.md",
+      "sha256": "f684b218b57374ee2341ce5d45bf1f6cac4dc212fe4145cb1a88feac220bebb9"
+    },
+    {
+      "id": "feedback_heimdall_announce",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_heimdall_announce.md",
+      "sha256": "1a48ebdff2d44e90023df60edf841eb52635e7ca1ad15a488513ff89bc0b23b6"
+    },
+    {
+      "id": "feedback_dev_diary_log",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_dev_diary_log.md",
+      "sha256": "7bb6699721830723255601c2774549d58f6e4e2d444ba64b01d3b024f8c766e6"
+    },
+    {
+      "id": "feedback_stop_when_unproductive",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_stop_when_unproductive.md",
+      "sha256": "5c6669a6c2389c837bd7a4c0d44722101b70f4dceefeec5ba5462e24612dc4bb"
+    },
+    {
+      "id": "feedback_communication_style",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_communication_style.md",
+      "sha256": "254d761755b19d04105bdc4605172977393ac274ad5279a92f947470f9d31e91"
+    },
+    {
+      "id": "feedback_bootstrap_quiet_by_default",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_bootstrap_quiet_by_default.md",
+      "sha256": "4eb27dde1fa154641bdae1ba49a048d61c12a58c04a98806d01f61b94462e2f3"
+    },
+    {
+      "id": "feedback_context_sidecar_plain_context",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_context_sidecar_plain_context.md",
+      "sha256": "e325950ffc26011fe0db4aab4064f280bcd981840781cba7b79227bc574656b7"
+    },
+    {
+      "id": "feedback_preempt_adhd_spiral",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_preempt_adhd_spiral.md",
+      "sha256": "1249dd7e19eeb0d849fee0f29790c3e9e28a7cd0007d72ad37d94efc65584523"
+    },
+    {
+      "id": "feedback_domain_agnostic",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_domain_agnostic.md",
+      "sha256": "02a93acc5b36cf84e522e9bee50cc9c021a5dffdff3280bd1a4ae4faadf112ea"
+    },
+    {
+      "id": "feedback_interconnect_and_suggest",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_interconnect_and_suggest.md",
+      "sha256": "32fb8b13186047741e5b637bfbbb31d0c5ec35d2d9ff336a71141ec9824e9c8c"
+    },
+    {
+      "id": "feedback_no_ai_stink",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_no_ai_stink.md",
+      "sha256": "2f89073f48cb88ff8d1fe10a7c9f6e14940082919c3c8bbb0848edbc13eb9b29"
+    },
+    {
+      "id": "feedback_remote_doctrine_only_no_new_local_rules",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_remote_doctrine_only_no_new_local_rules.md",
+      "sha256": "f85bbc496a9bc6d9f8ac25235cdf4defa929ae9d3278db26c7630abb2fe751a0"
+    },
+    {
+      "id": "feedback_ship_to_deployed",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_ship_to_deployed.md",
+      "sha256": "8363ba370a645d5d67616c9b8feb6dca9a3c58b8d4460648f8bde1ef3711ee00"
+    },
+    {
+      "id": "feedback_mullmania_bucket_safety",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_bucket_safety.md",
+      "sha256": "27eba32303d0d61e9125e2e832d8ab6e72ad410fc0b529fe31e9b00eff8a30ae"
+    },
+    {
+      "id": "feedback_mullmania_403_check_whitelist_first",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_403_check_whitelist_first.md",
+      "sha256": "804812564c6068548c91037eb6af13bca9f811293dcd3638aaddc278b4b67a00"
+    },
+    {
+      "id": "reference_mullmania_access_logs",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_mullmania_access_logs.md",
+      "sha256": "85d8a585df0d1ff7401a329178957495e189d6b16ad7ffed34d2d6f33793eb07"
+    },
+    {
+      "id": "reference_mullmania_packages_site",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_mullmania_packages_site.md",
+      "sha256": "fed6493a9fb1ede940b55c8ce22501688c2070defaeac057f052093aa8cbbd3b"
+    },
+    {
+      "id": "reference_passthrough_routing",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_passthrough_routing.md",
+      "sha256": "c952a8d618429ed53122fbbc0eae64a363b970cc3640fb3faaff17b8b737335b"
+    },
+    {
+      "id": "reference_codeartifact_mullmania",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_codeartifact_mullmania.md",
+      "sha256": "b212dd7ce7c54c72b99812520749808e3368264cec96c7ffd1f0aa0f3c36692a"
+    },
+    {
+      "id": "reference_signal_argh",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_signal_argh.md",
+      "sha256": "729a05e203c73dd5c92adc4e1eea842ffd982ff272eb056b8056364c3b8b5059"
+    },
+    {
+      "id": "reference_gha_runner",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_gha_runner.md",
+      "sha256": "75fd3aff20a012705b66ce872a9d30a71fa013e8374261afb035f4dbd3e8a163"
+    },
+    {
+      "id": "reference_tv_telemetry",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_tv_telemetry.md",
+      "sha256": "7c2c19888527917660d0fa365342dd0ff44ec12072129ec07cbade830efbb0a0"
+    }
+  ],
+  "warnings": [],
+  "notes": [
+    "This is an example compatibility response. The live compose endpoint should produce the same shape dynamically."
+  ]
+}

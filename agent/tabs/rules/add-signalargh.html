@@ -1,0 +1,554 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../add-signalargh.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> add-signalargh.clinerules</a> &middot; <a class="link-muted" href="../full/add-signalargh.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/add-signalargh.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Add SignalArgh Command</h1>
+<h2>TRIGGER</h2>
+<p>&quot;add signalargh&quot;, &quot;use signalargh&quot;, &quot;add signalr&quot;</p>
+<h2>PURPOSE</h2>
+<p>Integrates SignalArgh real-time messaging - free, no-registration SignalR hub for JavaScript, Python, or C# projects.</p>
+<h2>WHAT IT DOES</h2>
+<ul>
+<li>Detects project language (JS/Python/C#)</li>
+<li>Prompts for: Channel ID, User ID strategy, Features needed</li>
+<li>Creates: SignalR client helper file with complete implementation</li>
+<li>Supports: Channels, Groups, Announcements, Auto-reconnect</li>
+</ul>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-signalargh.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/add-signalargh.md</code></p>
+<h2>QUICK REFERENCE</h2>
+<ul>
+<li><strong>Hub URL:</strong> <a href="https://signalargh.mikesendpoint.com/hub">https://signalargh.mikesendpoint.com/hub</a></li>
+<li><strong>No Auth:</strong> Just channelId + userId query params</li>
+<li><strong>Channel Isolation:</strong> Messages never cross channels</li>
+<li><strong>Auto-Reconnect:</strong> Built-in reconnection on connection loss</li>
+<li><strong>Multi-Language:</strong> JavaScript (browser/Node), Python, C#</li>
+</ul>
+<h2>Full content</h2>
+<h1>Add SignalArgh Command</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;add signalargh&quot;, &quot;use signalargh&quot;, &quot;add signalr&quot;, or similar phrases, activate this command to integrate SignalArgh real-time messaging.</p>
+<h2>WHAT IS SIGNALARGH?</h2>
+<p>SignalArgh is a free, no-registration-required SignalR hub for real-time messaging. It uses channels for isolated message streams and supports groups for sub-divisions within channels.</p>
+<p><strong>Hub URL:</strong> <a href="https://signalargh.mikesendpoint.com/hub">https://signalargh.mikesendpoint.com/hub</a>
+<strong>Documentation:</strong> <a href="https://signalargh.mikesendpoint.com">https://signalargh.mikesendpoint.com</a></p>
+<h2>KEY CONCEPTS</h2>
+<ul>
+<li><strong>Channels:</strong> Isolated message streams - vessels in different channels never cross paths</li>
+<li><strong>Groups:</strong> Sub-divisions within a channel for organizing specific operations</li>
+<li><strong>No Auth Required:</strong> Just provide channelId and userId in query parameters</li>
+</ul>
+<h2>DETECTION LOGIC</h2>
+<p>Detect the project language:</p>
+<ol>
+<li><strong>JavaScript/HTML Project:</strong> Check for <code>package.json</code>, <code>*.html</code>, or <code>*.js</code> files</li>
+<li><strong>Python Project:</strong> Check for <code>requirements.txt</code>, <code>*.py</code>, or <code>pyproject.toml</code></li>
+<li><strong>C# Project:</strong> Check for <code>*.csproj</code> or <code>*.sln</code> files</li>
+</ol>
+<h2>USER PROMPTS</h2>
+<p>Use <code>ask_followup_question</code> tool to gather required information:</p>
+<h3>Prompt 1: Channel ID (Required)</h3>
+<p><strong>Question:</strong> &quot;What channel ID should this application use? (e.g., &#39;my-fleet&#39;, &#39;chat-room-1&#39;)&quot;
+<strong>Validation:</strong> Should be URL-safe, lowercase with hyphens preferred</p>
+<h3>Prompt 2: User ID Strategy (Required)</h3>
+<p><strong>Question:</strong> &quot;How should user IDs be generated?&quot;
+<strong>Options:</strong> [&quot;Random ID (for testing)&quot;, &quot;From user input&quot;, &quot;From authentication system&quot;]</p>
+<h3>Prompt 3: Features Needed (Optional)</h3>
+<p><strong>Question:</strong> &quot;Which features do you need?&quot;
+<strong>Options:</strong> [&quot;Basic chat only&quot;, &quot;Chat + Groups&quot;, &quot;Chat + Announcements&quot;, &quot;All features&quot;]</p>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>For JavaScript/HTML Projects</h3>
+<h4>1. Add SignalR CDN or Package</h4>
+<p><strong>For HTML (CDN approach):</strong>
+Add to <code>&lt;head&gt;</code> section:</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p><strong>For Node.js (package approach):</strong></p>
+<pre><code class="language-bash">npm install @microsoft/signalr
+</code></pre>
+<h4>2. Create SignalR Helper File</h4>
+<p><strong>For Browser JavaScript:</strong>
+Create <code>signalrClient.js</code>:</p>
+<pre><code class="language-javascript">/**
+ * SignalArgh Client - Real-time messaging
+ * Hub: https://signalargh.mikesendpoint.com/hub
+ */
+
+class SignalArghClient {
+    constructor(channelId, userId) {
+        this.channelId = channelId;
+        this.userId = userId;
+        this.connection = null;
+        this.messageHandlers = new Map();
+    }
+
+    async connect() {
+        const hubUrl = `https://signalargh.mikesendpoint.com/hub?channelId=${this.channelId}&amp;userId=${this.userId}`;
+        
+        this.connection = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl)
+            .withAutomaticReconnect()
+            .build();
+
+        // Setup message handlers
+        this.connection.on(&quot;channelChat&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;channelChat&quot;);
+            if (handler) handler(data);
+        });
+
+        this.connection.on(&quot;systemNotification&quot;, (message) =&gt; {
+            const handler = this.messageHandlers.get(&quot;systemNotification&quot;);
+            if (handler) handler(message);
+        });
+
+        this.connection.on(&quot;channelAnnouncement&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;channelAnnouncement&quot;);
+            if (handler) handler(data);
+        });
+
+        this.connection.on(&quot;groupChat&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;groupChat&quot;);
+            if (handler) handler(data);
+        });
+
+        await this.connection.start();
+        console.log(&quot;Connected to SignalArgh!&quot;);
+    }
+
+    on(eventType, handler) {
+        this.messageHandlers.set(eventType, handler);
+    }
+
+    async sendMessage(message) {
+        await this.connection.invoke(&quot;SendChannelChat&quot;, this.channelId, message);
+    }
+
+    async sendAnnouncement(message) {
+        await this.connection.invoke(&quot;SendChannelAnnouncement&quot;, this.channelId, message);
+    }
+
+    async joinGroup(groupName) {
+        await this.connection.invoke(&quot;JoinGroup&quot;, groupName);
+    }
+
+    async leaveGroup(groupName) {
+        await this.connection.invoke(&quot;LeaveGroup&quot;, groupName);
+    }
+
+    async sendToGroup(groupName, message) {
+        await this.connection.invoke(&quot;PublishToGroupWithUser&quot;, groupName, &quot;groupChat&quot;, message);
+    }
+
+    async disconnect() {
+        if (this.connection) {
+            await this.connection.stop();
+        }
+    }
+}
+
+// Usage example:
+// const client = new SignalArghClient(&quot;my-channel&quot;, &quot;user-123&quot;);
+// client.on(&quot;channelChat&quot;, (data) =&gt; console.log(`${data.userId}: ${data.message}`));
+// await client.connect();
+// await client.sendMessage(&quot;Hello!&quot;);
+</code></pre>
+<p><strong>For Node.js/ES6:</strong>
+Create <code>signalrClient.js</code> (or <code>.mjs</code>):</p>
+<pre><code class="language-javascript">import * as signalR from &quot;@microsoft/signalr&quot;;
+
+export class SignalArghClient {
+    constructor(channelId, userId) {
+        this.channelId = channelId;
+        this.userId = userId;
+        this.connection = null;
+        this.messageHandlers = new Map();
+    }
+
+    async connect() {
+        const hubUrl = `https://signalargh.mikesendpoint.com/hub?channelId=${this.channelId}&amp;userId=${this.userId}`;
+        
+        this.connection = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl)
+            .withAutomaticReconnect()
+            .build();
+
+        // Setup message handlers
+        this.connection.on(&quot;channelChat&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;channelChat&quot;);
+            if (handler) handler(data);
+        });
+
+        this.connection.on(&quot;systemNotification&quot;, (message) =&gt; {
+            const handler = this.messageHandlers.get(&quot;systemNotification&quot;);
+            if (handler) handler(message);
+        });
+
+        this.connection.on(&quot;channelAnnouncement&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;channelAnnouncement&quot;);
+            if (handler) handler(data);
+        });
+
+        this.connection.on(&quot;groupChat&quot;, (data) =&gt; {
+            const handler = this.messageHandlers.get(&quot;groupChat&quot;);
+            if (handler) handler(data);
+        });
+
+        await this.connection.start();
+        console.log(&quot;Connected to SignalArgh!&quot;);
+    }
+
+    on(eventType, handler) {
+        this.messageHandlers.set(eventType, handler);
+    }
+
+    async sendMessage(message) {
+        await this.connection.invoke(&quot;SendChannelChat&quot;, this.channelId, message);
+    }
+
+    async sendAnnouncement(message) {
+        await this.connection.invoke(&quot;SendChannelAnnouncement&quot;, this.channelId, message);
+    }
+
+    async joinGroup(groupName) {
+        await this.connection.invoke(&quot;JoinGroup&quot;, groupName);
+    }
+
+    async leaveGroup(groupName) {
+        await this.connection.invoke(&quot;LeaveGroup&quot;, groupName);
+    }
+
+    async sendToGroup(groupName, message) {
+        await this.connection.invoke(&quot;PublishToGroupWithUser&quot;, groupName, &quot;groupChat&quot;, message);
+    }
+
+    async disconnect() {
+        if (this.connection) {
+            await this.connection.stop();
+        }
+    }
+}
+</code></pre>
+<h3>For Python Projects</h3>
+<h4>1. Add Package Requirement</h4>
+<p>Add to <code>requirements.txt</code>:</p>
+<pre><code>signalrcore&gt;=0.9.5
+</code></pre>
+<p>Or install directly:</p>
+<pre><code class="language-bash">pip install signalrcore
+</code></pre>
+<h4>2. Create SignalR Helper File</h4>
+<p>Create <code>signalargh_client.py</code>:</p>
+<pre><code class="language-python">&quot;&quot;&quot;
+SignalArgh Client - Real-time messaging
+Hub: https://signalargh.mikesendpoint.com/hub
+&quot;&quot;&quot;
+
+from signalrcore.hub_connection_builder import HubConnectionBuilder
+from typing import Callable, Dict
+
+class SignalArghClient:
+    def __init__(self, channel_id: str, user_id: str):
+        self.channel_id = channel_id
+        self.user_id = user_id
+        self.connection = None
+        self.message_handlers: Dict[str, Callable] = {}
+        
+    def connect(self):
+        hub_url = f&quot;https://signalargh.mikesendpoint.com/hub?channelId={self.channel_id}&amp;userId={self.user_id}&quot;
+        
+        self.connection = HubConnectionBuilder() \
+            .with_url(hub_url) \
+            .with_automatic_reconnect({
+                &quot;type&quot;: &quot;interval&quot;,
+                &quot;intervals&quot;: [0, 1000, 2000, 5000]
+            }) \
+            .build()
+        
+        # Setup message handlers
+        self.connection.on(&quot;channelChat&quot;, lambda data: 
+            self.message_handlers.get(&quot;channelChat&quot;, lambda x: None)(data))
+        
+        self.connection.on(&quot;systemNotification&quot;, lambda message: 
+            self.message_handlers.get(&quot;systemNotification&quot;, lambda x: None)(message))
+        
+        self.connection.on(&quot;channelAnnouncement&quot;, lambda data: 
+            self.message_handlers.get(&quot;channelAnnouncement&quot;, lambda x: None)(data))
+        
+        self.connection.on(&quot;groupChat&quot;, lambda data: 
+            self.message_handlers.get(&quot;groupChat&quot;, lambda x: None)(data))
+        
+        self.connection.start()
+        print(&quot;Connected to SignalArgh!&quot;)
+    
+    def on(self, event_type: str, handler: Callable):
+        &quot;&quot;&quot;Register event handler&quot;&quot;&quot;
+        self.message_handlers[event_type] = handler
+    
+    def send_message(self, message: str):
+        &quot;&quot;&quot;Send message to channel&quot;&quot;&quot;
+        self.connection.send(&quot;SendChannelChat&quot;, [self.channel_id, message])
+    
+    def send_announcement(self, message: str):
+        &quot;&quot;&quot;Send announcement to channel&quot;&quot;&quot;
+        self.connection.send(&quot;SendChannelAnnouncement&quot;, [self.channel_id, message])
+    
+    def join_group(self, group_name: str):
+        &quot;&quot;&quot;Join a group within the channel&quot;&quot;&quot;
+        self.connection.send(&quot;JoinGroup&quot;, [group_name])
+    
+    def leave_group(self, group_name: str):
+        &quot;&quot;&quot;Leave a group&quot;&quot;&quot;
+        self.connection.send(&quot;LeaveGroup&quot;, [group_name])
+    
+    def send_to_group(self, group_name: str, message: str):
+        &quot;&quot;&quot;Send message to group&quot;&quot;&quot;
+        self.connection.send(&quot;PublishToGroupWithUser&quot;, [group_name, &quot;groupChat&quot;, message])
+    
+    def disconnect(self):
+        &quot;&quot;&quot;Disconnect from hub&quot;&quot;&quot;
+        if self.connection:
+            self.connection.stop()
+
+# Usage example:
+# client = SignalArghClient(&quot;my-channel&quot;, &quot;user-123&quot;)
+# client.on(&quot;channelChat&quot;, lambda data: print(f&quot;{data[&#39;userId&#39;]}: {data[&#39;message&#39;]}&quot;))
+# client.connect()
+# client.send_message(&quot;Hello from Python!&quot;)
+</code></pre>
+<h3>For C# Projects</h3>
+<h4>1. Add NuGet Package</h4>
+<p>Add to <code>.csproj</code> or use command:</p>
+<pre><code class="language-bash">dotnet add package Microsoft.AspNetCore.SignalR.Client
+</code></pre>
+<h4>2. Create SignalR Service</h4>
+<p>Create <code>Services/SignalArghService.cs</code>:</p>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.SignalR.Client;
+
+namespace {{ProjectName}}.Services
+{
+    /// &lt;summary&gt;
+    /// SignalArgh Client - Real-time messaging
+    /// Hub: https://signalargh.mikesendpoint.com/hub
+    /// &lt;/summary&gt;
+    public class SignalArghService : IAsyncDisposable
+    {
+        private readonly string _channelId;
+        private readonly string _userId;
+        private HubConnection? _connection;
+        private readonly Dictionary&lt;string, Action&lt;object&gt;&gt; _handlers = new();
+
+        public SignalArghService(string channelId, string userId)
+        {
+            _channelId = channelId;
+            _userId = userId;
+        }
+
+        public async Task ConnectAsync()
+        {
+            var hubUrl = $&quot;https://signalargh.mikesendpoint.com/hub?channelId={_channelId}&amp;userId={_userId}&quot;;
+
+            _connection = new HubConnectionBuilder()
+                .WithUrl(hubUrl)
+                .WithAutomaticReconnect()
+                .Build();
+
+            // Setup message handlers
+            _connection.On&lt;dynamic&gt;(&quot;channelChat&quot;, data =&gt;
+            {
+                if (_handlers.TryGetValue(&quot;channelChat&quot;, out var handler))
+                    handler(data);
+            });
+
+            _connection.On&lt;string&gt;(&quot;systemNotification&quot;, message =&gt;
+            {
+                if (_handlers.TryGetValue(&quot;systemNotification&quot;, out var handler))
+                    handler(message);
+            });
+
+            _connection.On&lt;dynamic&gt;(&quot;channelAnnouncement&quot;, data =&gt;
+            {
+                if (_handlers.TryGetValue(&quot;channelAnnouncement&quot;, out var handler))
+                    handler(data);
+            });
+
+            _connection.On&lt;dynamic&gt;(&quot;groupChat&quot;, data =&gt;
+            {
+                if (_handlers.TryGetValue(&quot;groupChat&quot;, out var handler))
+                    handler(data);
+            });
+
+            await _connection.StartAsync();
+            Console.WriteLine(&quot;Connected to SignalArgh!&quot;);
+        }
+
+        public void On(string eventType, Action&lt;object&gt; handler)
+        {
+            _handlers[eventType] = handler;
+        }
+
+        public async Task SendMessageAsync(string message)
+        {
+            if (_connection == null) throw new InvalidOperationException(&quot;Not connected&quot;);
+            await _connection.InvokeAsync(&quot;SendChannelChat&quot;, _channelId, message);
+        }
+
+        public async Task SendAnnouncementAsync(string message)
+        {
+            if (_connection == null) throw new InvalidOperationException(&quot;Not connected&quot;);
+            await _connection.InvokeAsync(&quot;SendChannelAnnouncement&quot;, _channelId, message);
+        }
+
+        public async Task JoinGroupAsync(string groupName)
+        {
+            if (_connection == null) throw new InvalidOperationException(&quot;Not connected&quot;);
+            await _connection.InvokeAsync(&quot;JoinGroup&quot;, groupName);
+        }
+
+        public async Task LeaveGroupAsync(string groupName)
+        {
+            if (_connection == null) throw new InvalidOperationException(&quot;Not connected&quot;);
+            await _connection.InvokeAsync(&quot;LeaveGroup&quot;, groupName);
+        }
+
+        public async Task SendToGroupAsync(string groupName, string message)
+        {
+            if (_connection == null) throw new InvalidOperationException(&quot;Not connected&quot;);
+            await _connection.InvokeAsync(&quot;PublishToGroupWithUser&quot;, groupName, &quot;groupChat&quot;, message);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_connection != null)
+            {
+                await _connection.StopAsync();
+                await _connection.DisposeAsync();
+            }
+        }
+    }
+}
+</code></pre>
+<h2>COMPLETION MESSAGE</h2>
+<p>After successful setup, inform the user:</p>
+<h3>For JavaScript Projects</h3>
+<pre><code>SignalArgh client added! ✅
+
+**Configuration:**
+- Channel ID: {{channelId}}
+- Hub URL: https://signalargh.mikesendpoint.com/hub
+
+**Usage example:**
+```javascript
+const client = new SignalArghClient(&quot;{{channelId}}&quot;, &quot;user-123&quot;);
+
+// Listen for messages
+client.on(&quot;channelChat&quot;, (data) =&gt; {
+    console.log(`${data.userId}: ${data.message}`);
+});
+
+// Connect
+await client.connect();
+
+// Send message
+await client.sendMessage(&quot;Hello!&quot;);
+</code></pre>
+<p><strong>Available methods:</strong></p>
+<ul>
+<li><code>connect()</code> - Connect to hub</li>
+<li><code>sendMessage(text)</code> - Send chat message</li>
+<li><code>sendAnnouncement(text)</code> - Send priority announcement</li>
+<li><code>joinGroup(name)</code> - Join a group</li>
+<li><code>leaveGroup(name)</code> - Leave a group</li>
+<li><code>sendToGroup(group, text)</code> - Send to specific group</li>
+<li><code>disconnect()</code> - Close connection</li>
+</ul>
+<p><strong>Event types:</strong></p>
+<ul>
+<li><code>channelChat</code> - Regular messages</li>
+<li><code>systemNotification</code> - System events</li>
+<li><code>channelAnnouncement</code> - Priority announcements</li>
+<li><code>groupChat</code> - Group-specific messages</li>
+</ul>
+<pre><code>
+### For Python Projects
+</code></pre>
+<p>SignalArgh client added! ✅</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Channel ID: {{channelId}}</li>
+<li>Hub URL: <a href="https://signalargh.mikesendpoint.com/hub">https://signalargh.mikesendpoint.com/hub</a></li>
+</ul>
+<p><strong>Usage example:</strong></p>
+<pre><code class="language-python">from signalargh_client import SignalArghClient
+
+client = SignalArghClient(&quot;{{channelId}}&quot;, &quot;user-123&quot;)
+
+# Listen for messages
+client.on(&quot;channelChat&quot;, lambda data: print(f&quot;{data[&#39;userId&#39;]}: {data[&#39;message&#39;]}&quot;))
+
+# Connect
+client.connect()
+
+# Send message
+client.send_message(&quot;Hello from Python!&quot;)
+</code></pre>
+<p><strong>Available methods:</strong></p>
+<ul>
+<li><code>connect()</code> - Connect to hub</li>
+<li><code>send_message(text)</code> - Send chat message</li>
+<li><code>send_announcement(text)</code> - Send priority announcement</li>
+<li><code>join_group(name)</code> - Join a group</li>
+<li><code>leave_group(name)</code> - Leave a group</li>
+<li><code>send_to_group(group, text)</code> - Send to specific group</li>
+<li><code>disconnect()</code> - Close connection</li>
+</ul>
+<pre><code>
+### For C# Projects
+</code></pre>
+<p>SignalArgh service added! ✅</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Channel ID: {{channelId}}</li>
+<li>Hub URL: <a href="https://signalargh.mikesendpoint.com/hub">https://signalargh.mikesendpoint.com/hub</a></li>
+</ul>
+<p><strong>Usage example:</strong></p>
+<pre><code class="language-csharp">var service = new SignalArghService(&quot;{{channelId}}&quot;, &quot;user-123&quot;);
+
+// Listen for messages
+service.On(&quot;channelChat&quot;, data =&gt; {
+    dynamic msg = data;
+    Console.WriteLine($&quot;{msg.userId}: {msg.message}&quot;);
+});
+
+// Connect
+await service.ConnectAsync();
+
+// Send message
+await service.SendMessageAsync(&quot;Hello from C#!&quot;);
+</code></pre>
+<p><strong>Available methods:</strong></p>
+<ul>
+<li><code>ConnectAsync()</code> - Connect to hub</li>
+<li><code>SendMessageAsync(text)</code> - Send chat message</li>
+<li><code>SendAnnouncementAsync(text)</code> - Send priority announcement</li>
+<li><code>JoinGroupAsync(name)</code> - Join a group</li>
+<li><code>LeaveGroupAsync(name)</code> - Leave a group</li>
+<li><code>SendToGroupAsync(group, text)</code> - Send to specific group</li>
+</ul>
+<pre><code>
+## IMPORTANT NOTES
+
+1. **No Authentication:** SignalArgh requires no registration or API keys
+2. **Channel Isolation:** Messages in different channels never cross
+3. **Connection String:** Always include both `channelId` and `userId` as query parameters
+4. **Auto-Reconnect:** Built-in automatic reconnection on connection loss
+5. **Health Check:** Test hub availability at https://signalargh.mikesendpoint.com/health
+6. **Groups are Optional:** Only use groups if you need sub-divisions within your channel
+7. **Testing:** Open https://signalargh.mikesendpoint.com in multiple tabs to test real-time messaging
+</code></pre>
+
+  </div>
+</article>

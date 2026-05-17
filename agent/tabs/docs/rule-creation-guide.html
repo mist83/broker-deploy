@@ -1,0 +1,244 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../RULE-CREATION-GUIDE.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> RULE-CREATION-GUIDE.md</a></p>
+  <div class="markdown-body">
+<h1>Agent Rule Creation Guide</h1>
+<h2>Token-Optimized Loading Pattern</h2>
+<p>This guide explains how to create new agent rules using the token-optimized pattern implemented on 2026-01-22.</p>
+<h2>The Problem We Solved</h2>
+<p><strong>Before optimization:</strong></p>
+<ul>
+<li>35 <code>.clinerules</code> files totaling ~150 KB</li>
+<li>All rules loaded on every request</li>
+<li>Starting context: 50k+ tokens</li>
+<li>Wasteful for rules that are rarely triggered</li>
+</ul>
+<p><strong>After optimization:</strong></p>
+<ul>
+<li>Synopsis files: ~30 KB (always loaded)</li>
+<li>Full content: ~120 KB (loaded on-demand)</li>
+<li><strong>80% token reduction</strong> on initial load</li>
+<li>Full content only loaded when trigger matches</li>
+</ul>
+<h2>Pattern Overview</h2>
+<h3>Two-File System</h3>
+<ol>
+<li><p><strong>Synopsis (.clinerules)</strong> - Always loaded, minimal size</p>
+<ul>
+<li>Trigger phrases</li>
+<li>One-sentence purpose</li>
+<li>Reference to full content</li>
+<li>Quick reference info</li>
+</ul>
+</li>
+<li><p><strong>Full Content (full/*.md)</strong> - Loaded on-demand</p>
+<ul>
+<li>Complete implementation details</li>
+<li>Code examples</li>
+<li>Step-by-step instructions</li>
+<li>Edge cases and notes</li>
+</ul>
+</li>
+</ol>
+<h2>Creating a New Rule</h2>
+<h3>Step 1: Write Full Content First</h3>
+<p>Create <code>full/my-new-rule.md</code> with complete implementation:</p>
+<pre><code class="language-markdown"># My New Rule
+
+## TRIGGER
+When the user says &quot;trigger phrase&quot;, &quot;alternative phrase&quot;, or similar.
+
+## PURPOSE
+One-sentence description of what this rule does.
+
+## DETAILED IMPLEMENTATION
+
+[Full implementation details here]
+[Code examples]
+[Step-by-step instructions]
+[Edge cases]
+[Everything needed to execute the rule]
+</code></pre>
+<h3>Step 2: Create Synopsis</h3>
+<p>Create <code>my-new-rule.clinerules</code> with minimal synopsis:</p>
+<pre><code class="language-markdown"># My New Rule
+
+## TRIGGER
+&quot;trigger phrase&quot;, &quot;alternative phrase&quot;
+
+## PURPOSE
+One-sentence description of what this rule does.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/my-new-rule.md&quot; -Raw
+</code></pre>
+<p>Or just read the sibling file directly:
+<code>full/my-new-rule.md</code></p>
+<h2>QUICK REFERENCE</h2>
+<ul>
+<li><strong>Key Point 1:</strong> Brief info</li>
+<li><strong>Key Point 2:</strong> Brief info</li>
+<li><strong>Key Point 3:</strong> Brief info</li>
+</ul>
+<pre><code>
+### Step 3: Keep Synopsis Under 1 KB
+
+**Target size:** 400-700 bytes
+**Maximum size:** 1 KB
+
+**What to include:**
+- Trigger phrases (exact)
+- One-sentence purpose
+- Reference to full content
+- 3-5 quick reference bullets
+
+**What NOT to include:**
+- Code examples
+- Detailed instructions
+- Long explanations
+- Implementation steps
+
+## Rule Categories
+
+### Always-Active Rules (Keep Inline)
+
+These rules are consulted on every request and should NOT use the synopsis pattern:
+
+- `custom_instructions.md` - Core personality
+- `proactive-code-quality.clinerules` - Code quality standards
+- `powershell-enforcement.clinerules` - Critical syntax rules
+
+**Why:** These need to be immediately available without file reads.
+
+### Command-Triggered Rules (Use Synopsis Pattern)
+
+These rules activate only when specific trigger phrases are detected:
+
+- All &quot;make X&quot; commands
+- All &quot;add X&quot; commands
+- All &quot;fix X&quot; commands
+- All workflow commands
+
+**Why:** Only loaded when needed, saving tokens on every other request.
+
+### Example Rules (Keep As-Is)
+
+Reference implementations that demonstrate patterns:
+
+- `example-error-handling.clinerules`
+- `example-formatting.clinerules`
+- `example-testing.clinerules`
+
+**Why:** Small enough that optimization isn&#39;t needed.
+
+## Best Practices
+
+### Trigger Phrases
+
+**Good:**
+```markdown
+## TRIGGER
+&quot;make a fab&quot;, &quot;create a fab&quot;, &quot;turn this into a fab&quot;
+</code></pre>
+<p><strong>Bad:</strong></p>
+<pre><code class="language-markdown">## TRIGGER
+When the user wants to create a FAB or mentions FABs or asks about FAB creation...
+</code></pre>
+<h3>Purpose Statement</h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-markdown">## PURPOSE
+Automates FAB Collection library creation with deployment files and S3 commands.
+</code></pre>
+<p><strong>Bad:</strong></p>
+<pre><code class="language-markdown">## PURPOSE
+This rule helps you create FABs which are floating action buttons that appear in the bottom right and when clicked open a sidebar panel and...
+</code></pre>
+<h3>Quick Reference</h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-markdown">## QUICK REFERENCE
+- **Validation:** Kebab-case names, hex colors
+- **Output:** {name}.js, test page, S3 commands
+- **Deployment:** S3 bucket `vizio-data-ingestion-resources/other/fabs/`
+</code></pre>
+<p><strong>Bad:</strong></p>
+<pre><code class="language-markdown">## QUICK REFERENCE
+- This rule will validate your input to make sure the FAB name is in kebab-case format which means lowercase letters with hyphens...
+</code></pre>
+<h2>Testing Your Rule</h2>
+<h3>1. Check Synopsis Size</h3>
+<pre><code class="language-powershell">Get-Item &quot;my-new-rule.clinerules&quot; | Select-Object Name, @{N=&#39;KB&#39;;E={[math]::Round($_.Length/1KB,2)}}
+</code></pre>
+<p>Target: &lt; 1 KB</p>
+<h3>2. Verify Trigger Detection</h3>
+<p>Test that the active agent shell recognizes your trigger phrases and loads the full content.</p>
+<h3>3. Confirm Full Content Loads</h3>
+<p>When triggered, verify that the agent reads <code>full/my-new-rule.md</code> and executes correctly.</p>
+<h2>Conversion Script</h2>
+<p>To convert an existing large rule to the synopsis pattern:</p>
+<pre><code class="language-powershell">pwsh ./convert-rules.ps1
+</code></pre>
+<p>The script will:</p>
+<ol>
+<li>Move full content to <code>full/</code> directory</li>
+<li>Extract trigger and purpose</li>
+<li>Generate synopsis</li>
+<li>Report size savings</li>
+</ol>
+<h2>Maintenance</h2>
+<h3>When to Update Synopsis</h3>
+<ul>
+<li>Trigger phrases change</li>
+<li>Purpose statement changes</li>
+<li>Quick reference info changes</li>
+</ul>
+<h3>When to Update Full Content</h3>
+<ul>
+<li>Implementation details change</li>
+<li>Code examples need updates</li>
+<li>New edge cases discovered</li>
+<li>Instructions need clarification</li>
+</ul>
+<h3>Keep Them in Sync</h3>
+<p>When updating a rule:</p>
+<ol>
+<li>Update full content first</li>
+<li>Check if synopsis needs changes</li>
+<li>Test trigger detection still works</li>
+</ol>
+<h2>Token Savings Calculator</h2>
+<pre><code class="language-powershell"># Before optimization
+$before = 150  # KB
+
+# After optimization
+$after = Get-ChildItem &quot;*.clinerules&quot; | Measure-Object -Property Length -Sum | Select-Object -ExpandProperty Sum
+$afterKB = [math]::Round($after/1KB, 2)
+
+# Savings
+$saved = $before - $afterKB
+$pctSaved = [math]::Round(($saved / $before) * 100, 1)
+
+Write-Host &quot;Saved: $saved KB ($pctSaved% reduction)&quot;
+</code></pre>
+<h2>Results</h2>
+<p><strong>Optimization completed:</strong> 2026-01-22</p>
+<p><strong>Files converted:</strong> 29 rules
+<strong>Token savings:</strong> 120 KB (80% reduction)
+<strong>Average rule size:</strong> 0.5 KB (synopsis) vs 5 KB (full content)</p>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Initial context load: 50k tokens → 10k tokens</li>
+<li>On-demand loading: Only when trigger matches</li>
+<li>No functionality lost: Full content still available</li>
+</ul>
+<h2>Questions?</h2>
+<p>This pattern is now the standard for all new agent rules. If you&#39;re unsure whether a rule should use the synopsis pattern, ask:</p>
+<ol>
+<li>Is it triggered by specific phrases? → Use synopsis pattern</li>
+<li>Is it consulted on every request? → Keep inline</li>
+<li>Is it under 1 KB already? → Keep as-is</li>
+</ol>
+<p>When in doubt, use the synopsis pattern. It&#39;s better to optimize early than to bloat context later.</p>
+
+  </div>
+</article>

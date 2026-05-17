@@ -1,0 +1,16 @@
+# Quickstart
+
+## TRIGGER
+When the user says "quickstart", "just run it", "start this", "run this project", or similar phrases.
+
+## PURPOSE
+Don't read docs. Don't ask questions. Just detect project type and run it.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/quickstart.md" -Raw
+```
+
+Or use read_file tool:
+`full/quickstart.md`

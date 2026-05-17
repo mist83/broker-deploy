@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "agents-doctrine-bootstrap-v1",
+  "summary": "Doctrine-first bootstrap contract for remote agent brains. Current live host is agent.mullmania.com.",
+  "bootstrapInstruction": "At the beginning of every chat, read this doctrine. If doctrine cannot be loaded and verified, stop visibly and require operator override before continuing.",
+  "currentHost": {
+    "primary": "https://agent.mullmania.com/",
+    "notes": [
+      "agents.mullmania.com does not exist yet.",
+      "If a plural host is created later, it should replace or mirror the singular host instead of forking doctrine."
+    ]
+  },
+  "sourceOfTruth": {
+    "guideUrl": "https://agent.mullmania.com/DOCTRINE-BOOTSTRAP-GUIDE.md",
+    "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
+    "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
+    "composeApiContractUrl": "https://agent.mullmania.com/doctrine/compose-api-v1.json",
+    "composeExampleRequestUrl": "https://agent.mullmania.com/doctrine/compose-request-example-v1.json",
+    "composeExampleResponseUrl": "https://agent.mullmania.com/doctrine/compose-response-example-v1.json",
+    "memorySeedUrl": "https://agent.mullmania.com/doctrine/codex-memory-seed-v1.json",
+    "memorySeedUrls": {
+      "codex": "https://agent.mullmania.com/doctrine/codex-memory-seed-v1.json",
+      "claude": "https://agent.mullmania.com/doctrine/claude-memory-seed-v1.json"
+    },
+    "defaultProfileIdsByRuntime": {
+      "codex": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "claude": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ]
+    },
+    "preamblePromptUrls": {
+      "codex": "https://agent.mullmania.com/CODEX-BOOTSTRAP-PROMPT.md"
+    },
+    "runtimeInventoryUrls": {
+      "codex": "https://agent.mullmania.com/doctrine/codex-local-runtime-inventory-v1.json"
+    },
+    "wipeStatusUrls": {
+      "codex": "https://agent.mullmania.com/SAFE-TO-WIPE-CODEX.md"
+    },
+    "instructionPackUrls": {
+      "claude": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json"
+    },
+    "bootstrapScriptUrls": {
+      "claude": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh"
+    }
+  },
+  "access": {
+    "agentSite": {
+      "requiresSiteKeyHeader": false,
+      "notes": [
+        "Doctrine artifacts are expected to be publicly readable at agent.mullmania.com.",
+        "If they are unavailable, consumers must fail visibly and require explicit operator override before continuing."
+      ]
+    }
+  },
+  "failurePolicy": {
+    "mode": "fail-visible-gated-continue",
+    "continueRequiresExplicitOperatorApproval": true,
+    "overrideScope": "session",
+    "doctrineComplianceClaimAllowedAfterOverride": false,
+    "states": [
+      "healthy",
+      "degraded_doctrine_unavailable",
+      "degraded_doctrine_invalid",
+      "degraded_doctrine_unverified",
+      "continued_with_operator_override"
+    ]
+  },
+  "localShimPolicy": {
+    "allowed": [
+      "bootstrap pointer",
+      "signature trust root",
+      "destructive-action circuit breaker",
+      "auth and secret resolution boundaries",
+      "generated runtime projections",
+      "read-only doctrine cache"
+    ],
+    "forbiddenAsSourceOfTruth": [
+      "custom CLAUDE.md",
+      "custom AGENTS.md",
+      "custom Codex skill packs",
+      "custom Claude skill packs",
+      "custom local plugin registries",
+      "custom local automation registries",
+      "hook scripts with real policy logic"
+    ]
+  },
+  "remoteRegisters": [
+    "instructions",
+    "skills",
+    "commands",
+    "automations",
+    "plugins",
+    "hooks",
+    "memory policy",
+    "task profiles",
+    "script catalog"
+  ],
+  "dynamicService": {
+    "requiredEndpoints": [
+      "/scope",
+      "/compose",
+      "/dispatch",
+      "/health"
+    ],
+    "notes": [
+      "Static bootstrap should fetch shared-rule-catalog-v1.json and profile-toc-v1.json before any dynamic call.",
+      "/scope chooses task-scoped profile ids and memory refs.",
+      "/compose returns one crafted preamble from shared profiles and any extra rule ids.",
+      "/dispatch is for hook trampolines and fire-and-forget events.",
+      "/health is for availability and schema compatibility."
+    ]
+  },
+  "v1Rules": [
+    "Static artifacts are unconditional. Conditional logic belongs in /scope.",
+    "Durable remote memory is single-writer in v1.",
+    "Agents may propose memory writes but do not co-own durable memory yet.",
+    "Cross-agent shared live memory is out of v1.",
+    "Synthetic memory must be tagged, scoped, expiring, and visibly injected."
+  ]
+}

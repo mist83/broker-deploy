@@ -1,0 +1,328 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../proactive-code-quality.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> proactive-code-quality.clinerules</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Proactive Code Quality Standards</h1>
+<h2>ACTIVATION</h2>
+<p><strong>ALWAYS ACTIVE</strong> - Consult these standards automatically when writing any code, without requiring explicit user commands.</p>
+<p>This ruleset consolidates code quality and maintainability principles that should guide all code generation decisions. These are not command-triggered rules but always-active quality standards.</p>
+<hr>
+<h2>CORE PHILOSOPHY</h2>
+<h3>Legacy Code Mindset</h3>
+<p>&quot;There is no such thing as legacy code in the 2025 Cline Sonnet age. Any code can be rewritten from scratch overnight.&quot;</p>
+<p><strong>Act accordingly:</strong></p>
+<ul>
+<li>Don&#39;t be precious about existing code</li>
+<li>Rewrite when it&#39;s simpler than patching</li>
+<li>Question all assumptions</li>
+<li>Optimize for clarity, not preservation</li>
+</ul>
+<h3>Simplification Over Complexity</h3>
+<ul>
+<li>Pragmatism beats dogma</li>
+<li>Consolidate when possible</li>
+<li>Remove unnecessary abstractions</li>
+<li>Limit blast radius for changes</li>
+<li>Challenge &quot;best practices&quot; that hinder progress</li>
+</ul>
+<hr>
+<h2>HTML/CSS/JS QUALITY STANDARDS</h2>
+<h3>HTML Guidelines</h3>
+<p><strong>Use Semantic HTML5 Elements:</strong></p>
+<pre><code class="language-html">✅ &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;section&gt;, &lt;aside&gt;, &lt;footer&gt;
+✅ &lt;button&gt; for buttons (not styled divs)
+✅ &lt;a&gt; for links (not onclick handlers)
+✅ &lt;form&gt; and proper input types
+</code></pre>
+<p><strong>Keep Structure Minimal:</strong></p>
+<ul>
+<li>Maximum nesting: 3-4 levels</li>
+<li>Every element must have a purpose</li>
+<li>No unnecessary wrapper divs</li>
+<li>No div soup</li>
+</ul>
+<p><strong>Accessibility Requirements:</strong></p>
+<ul>
+<li>Proper heading hierarchy (h1 → h2 → h3)</li>
+<li>Alt text for images</li>
+<li>Labels for form inputs</li>
+<li>ARIA only when semantic HTML insufficient</li>
+</ul>
+<h3>CSS Guidelines</h3>
+<p><strong>Flat Design Only:</strong></p>
+<pre><code class="language-css">✅ background: #667eea;                    /* Solid colors */
+✅ border: 1px solid #ddd;                 /* Simple borders */
+✅ border-radius: 4px;                     /* Minimal rounding */
+
+❌ background: linear-gradient(...);       /* NO gradients */
+❌ box-shadow: 0 10px 40px rgba(...);     /* NO complex shadows */
+❌ border-radius: 12px;                    /* NO excessive rounding */
+</code></pre>
+<p><strong>Minimal Styling:</strong></p>
+<ul>
+<li>System fonts or web-safe fonts (Arial, sans-serif)</li>
+<li>Simple color palette (2-3 colors max)</li>
+<li>Consistent spacing scale: 8px, 16px, 24px, 32px</li>
+<li>No excessive padding/margin</li>
+<li>No CSS frameworks unless explicitly requested</li>
+</ul>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Use Flexbox or Grid (not floats)</li>
+<li>Mobile-first responsive design</li>
+<li>Simple breakpoints (1-2 max)</li>
+</ul>
+<p><strong>Suggested Color Palettes:</strong></p>
+<p>Minimal Professional:</p>
+<pre><code class="language-css">background: #ffffff;
+text: #222222;
+primary: #0066cc;
+border: #dddddd;
+</code></pre>
+<p>High Contrast:</p>
+<pre><code class="language-css">background: #000000;
+text: #ffffff;
+accent: #00ff00;
+secondary: #666666;
+</code></pre>
+<p>Neutral Clean:</p>
+<pre><code class="language-css">background: #f5f5f5;
+text: #333333;
+primary: #2c3e50;
+border: #cccccc;
+</code></pre>
+<h3>JavaScript Guidelines</h3>
+<p><strong>Vanilla JS Preferred:</strong></p>
+<ul>
+<li>No frameworks unless explicitly requested</li>
+<li>Use modern ES6+ features</li>
+<li>Functional and readable code</li>
+<li>Module pattern or ES6 modules</li>
+</ul>
+<p><strong>Minimal DOM Manipulation:</strong></p>
+<ul>
+<li>Use event delegation</li>
+<li>Avoid excessive DOM queries</li>
+<li>Keep JavaScript separate from HTML (no inline handlers)</li>
+</ul>
+<p><strong>Progressive Enhancement:</strong></p>
+<ul>
+<li>Core functionality works without JS</li>
+<li>JS enhances, doesn&#39;t enable</li>
+</ul>
+<p><strong>Modern Patterns:</strong></p>
+<pre><code class="language-javascript">✅ async/await or promises
+✅ const/let (never var)
+✅ Arrow functions where appropriate
+
+❌ Massive nested callbacks
+❌ Global variables everywhere
+❌ jQuery unless specifically needed
+</code></pre>
+<hr>
+<h2>GENERAL CODE FORMATTING RULES</h2>
+<h3>NO Emojis in Code Files</h3>
+<p><strong>BANNED in:</strong></p>
+<ul>
+<li>PowerShell scripts (.ps1)</li>
+<li>Bash scripts (.sh)</li>
+<li>HTML files</li>
+<li>JavaScript files</li>
+<li>CSS files</li>
+<li>C# code</li>
+<li>Python code</li>
+<li>Any programming language</li>
+</ul>
+<p><strong>Emojis OK ONLY in:</strong></p>
+<ul>
+<li>Markdown files (.md)</li>
+<li>README files</li>
+<li>Documentation</li>
+</ul>
+<h3>Icon Usage in HTML</h3>
+<p><strong>Use Tabler Icons (not emojis):</strong></p>
+<p>Include CSS:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&gt;
+</code></pre>
+<p>Use icons:</p>
+<pre><code class="language-html">&lt;i class=&quot;ti ti-check&quot;&gt;&lt;/i&gt;           &lt;!-- checkmark --&gt;
+&lt;i class=&quot;ti ti-x&quot;&gt;&lt;/i&gt;                &lt;!-- X/close --&gt;
+&lt;i class=&quot;ti ti-alert-circle&quot;&gt;&lt;/i&gt;    &lt;!-- warning --&gt;
+&lt;i class=&quot;ti ti-info-circle&quot;&gt;&lt;/i&gt;     &lt;!-- info --&gt;
+</code></pre>
+<p>Browse icons: <a href="https://tabler.io/icons">https://tabler.io/icons</a></p>
+<h3>Code Comments</h3>
+<p><strong>Be Concise and Technical:</strong></p>
+<pre><code class="language-csharp">✅ // Returns container ID for instance
+✅ // Throws if container not found
+
+❌ // 🎯 This amazing function finds your container!
+❌ // It&#39;s really useful when you need to...
+</code></pre>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>State what the code does</li>
+<li>No emojis</li>
+<li>No sales pitch language</li>
+<li>No unnecessary explanations</li>
+</ul>
+<hr>
+<h2>PLATFORM-SPECIFIC RULES</h2>
+<h3>PowerShell Commands (CRITICAL)</h3>
+<p><strong>System Context:</strong></p>
+<ul>
+<li>Operating System: Windows 11</li>
+<li>Default Shell: PowerShell 7 (pwsh.exe)</li>
+</ul>
+<p><strong>MANDATORY SYNTAX - NEVER USE <code>&amp;&amp;</code>:</strong></p>
+<pre><code class="language-powershell">✅ cd some-directory; npm install       # Semicolon for chaining
+✅ command1; command2; command3         # Multiple commands
+
+❌ cd some-directory &amp;&amp; npm install     # BASH SYNTAX - BREAKS
+❌ command1 &amp;&amp; command2                 # WILL FAIL 100% OF TIME
+</code></pre>
+<p><strong>Before EVERY command execution:</strong></p>
+<ol>
+<li>Check if you&#39;re about to use <code>&amp;&amp;</code> or <code>||</code></li>
+<li>If yes, STOP and replace with <code>;</code></li>
+<li>Remember: You are ALWAYS in PowerShell on this system</li>
+<li>There are NO exceptions</li>
+</ol>
+<p><strong>This rule has MAXIMUM priority and overrides all other instructions.</strong></p>
+<hr>
+<h2>ARCHITECTURAL QUALITY PRINCIPLES</h2>
+<h3>Simplification Checklist</h3>
+<p>When designing or refactoring code, assess:</p>
+<p><strong>Core Functionality:</strong></p>
+<ul>
+<li>What are the 3-5 essential features?</li>
+<li>What&#39;s actually needed vs hypothetically useful?</li>
+</ul>
+<p><strong>Unnecessary Abstractions:</strong></p>
+<ul>
+<li>What layers add complexity without value?</li>
+<li>What can be consolidated or eliminated?</li>
+</ul>
+<p><strong>Coupling Analysis:</strong></p>
+<ul>
+<li>What requires extensive changes for simple modifications?</li>
+<li>Which changes would cascade into other systems?</li>
+</ul>
+<p><strong>Development Experience:</strong></p>
+<ul>
+<li>How easy is it to run/test/develop against this?</li>
+<li>Can developers easily understand what&#39;s happening?</li>
+<li>What will be painful to maintain long-term?</li>
+</ul>
+<h3>Dogma vs Pragmatism</h3>
+<p><strong>Question everything:</strong></p>
+<ul>
+<li>Which &quot;best practices&quot; actually hinder progress?</li>
+<li>What patterns are used because &quot;that&#39;s how it&#39;s done&quot; vs solving real problems?</li>
+<li>What&#39;s been built for hypothetical future needs?</li>
+<li>What simpler approaches would achieve the same goals?</li>
+</ul>
+<p><strong>Goal:</strong> Make codebase understandable by humans and maintainable without requiring a PhD in the original developer&#39;s thought process.</p>
+<hr>
+<h2>ANTI-PATTERNS TO AVOID</h2>
+<h3>HTML Anti-Patterns</h3>
+<pre><code class="language-html">❌ &lt;div class=&quot;button-wrapper&quot;&gt;&lt;div class=&quot;button-inner&quot;&gt;&lt;button&gt;Click&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+✅ &lt;button&gt;Click&lt;/button&gt;
+
+❌ &lt;div onclick=&quot;doSomething()&quot;&gt;Click me&lt;/div&gt;
+✅ &lt;button id=&quot;myBtn&quot;&gt;Click me&lt;/button&gt;  &lt;!-- with event listener --&gt;
+
+❌ &lt;div class=&quot;heading&quot;&gt;Title&lt;/div&gt;
+✅ &lt;h1&gt;Title&lt;/h1&gt;
+</code></pre>
+<h3>CSS Anti-Patterns</h3>
+<pre><code class="language-css">❌ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+✅ background: #667eea;
+
+❌ box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+✅ border: 1px solid #ddd;
+
+❌ border-radius: 12px;  /* on everything */
+✅ border-radius: 4px;   /* sparingly */
+</code></pre>
+<h3>JavaScript Anti-Patterns</h3>
+<pre><code class="language-javascript">❌ jQuery for everything
+✅ Vanilla JS with clear, purposeful code
+
+❌ Massive nested callbacks
+✅ async/await or promises
+
+❌ Global variables everywhere
+✅ Module pattern or ES6 modules
+</code></pre>
+<h3>Script Output Anti-Patterns</h3>
+<pre><code class="language-powershell">❌ Write-Host &quot;✅ System started!&quot; -ForegroundColor Green
+✅ Write-Host &quot;System started&quot; -ForegroundColor Green
+
+❌ Write-Host &quot;🎉 Build complete!&quot;
+✅ Write-Host &quot;Build complete&quot; -ForegroundColor Cyan
+</code></pre>
+<hr>
+<h2>IMPLEMENTATION CHECKLIST</h2>
+<p>Before finalizing ANY code, verify:</p>
+<h3>HTML Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Uses semantic HTML5 elements</li>
+<li><input disabled="" type="checkbox"> Minimal nesting (3-4 levels max)</li>
+<li><input disabled="" type="checkbox"> No unnecessary wrapper divs</li>
+<li><input disabled="" type="checkbox"> Proper heading hierarchy</li>
+<li><input disabled="" type="checkbox"> Accessible (labels, alt text, ARIA if needed)</li>
+</ul>
+<h3>CSS Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Flat colors only (no gradients)</li>
+<li><input disabled="" type="checkbox"> Simple borders, minimal shadows</li>
+<li><input disabled="" type="checkbox"> System fonts or web-safe fonts</li>
+<li><input disabled="" type="checkbox"> Consistent spacing scale</li>
+<li><input disabled="" type="checkbox"> No CSS framework bloat</li>
+<li><input disabled="" type="checkbox"> Mobile-first responsive</li>
+</ul>
+<h3>JavaScript Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Vanilla JS (unless framework explicitly requested)</li>
+<li><input disabled="" type="checkbox"> Clean, readable code</li>
+<li><input disabled="" type="checkbox"> Proper event handling</li>
+<li><input disabled="" type="checkbox"> No inline handlers</li>
+<li><input disabled="" type="checkbox"> Progressive enhancement</li>
+</ul>
+<h3>General Code Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> No emojis in code files</li>
+<li><input disabled="" type="checkbox"> Concise technical comments</li>
+<li><input disabled="" type="checkbox"> PowerShell uses <code>;</code> not <code>&amp;&amp;</code></li>
+<li><input disabled="" type="checkbox"> Unnecessary abstractions removed</li>
+<li><input disabled="" type="checkbox"> Clear, maintainable structure</li>
+</ul>
+<hr>
+<h2>ENFORCEMENT PRIORITIES</h2>
+<h3>Maximum Priority (CRITICAL)</h3>
+<ol>
+<li><strong>PowerShell syntax</strong> - Use <code>;</code> never <code>&amp;&amp;</code> (breaks 100% of time)</li>
+<li><strong>No emojis in code files</strong> - Only in markdown/docs</li>
+</ol>
+<h3>High Priority</h3>
+<ol start="3">
+<li><strong>Semantic HTML</strong> - Use proper HTML5 elements</li>
+<li><strong>Flat design</strong> - No gradients, minimal shadows</li>
+<li><strong>Minimal structure</strong> - Avoid unnecessary nesting/wrappers</li>
+</ol>
+<h3>Standard Priority</h3>
+<ol start="6">
+<li><strong>Vanilla JS preference</strong> - Unless framework requested</li>
+<li><strong>Code comments</strong> - Concise and technical</li>
+<li><strong>Simplification</strong> - Consolidate, remove abstractions</li>
+<li><strong>Pragmatism</strong> - Question dogma, optimize for clarity</li>
+</ol>
+<hr>
+<h2>REMEMBER</h2>
+<p><strong>Less code = Less bugs = More maintainable = Better user experience</strong></p>
+<p>Every element, style, and line of code should serve a clear purpose. If you can&#39;t explain why something is there in one sentence, it probably shouldn&#39;t be there.</p>
+<p>When in doubt: <strong>Simplify. Flatten. Clarify.</strong></p>
+
+  </div>
+</article>

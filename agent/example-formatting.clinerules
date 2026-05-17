@@ -1,0 +1,30 @@
+# Code Formatting Standards
+
+## TRIGGER
+ALWAYS ACTIVE - Apply these formatting rules to all code generated.
+
+## RULES
+
+### Indentation
+- Use 4 spaces for indentation (not tabs)
+- Consistent indentation across all file types
+
+### Line Length
+- Maximum line length: 120 characters
+- Break long lines at logical points
+
+### Naming Conventions
+- Functions: camelCase (e.g., getUserData)
+- Classes: PascalCase (e.g., UserController)
+- Constants: UPPER_SNAKE_CASE (e.g., MAX_RETRY_COUNT)
+- Private fields: _camelCase with underscore prefix
+
+### Comments
+- Use single-line comments for brief explanations
+- Use multi-line comments for complex logic
+- No commented-out code in final commits
+
+### Code Organization
+- Group related functions together
+- Place private methods below public methods
+- Keep files under 300 lines when possible

@@ -1,0 +1,58 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CONSOLIDATION-TODO.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CONSOLIDATION-TODO.md</a></p>
+  <div class="markdown-body">
+<h1>Agent Consolidation - Questions to Answer</h1>
+<h2>Decision Points</h2>
+<h3>1. Consolidation Scope</h3>
+<p><strong>Question:</strong> Do you want to consolidate ALL 35 synopsis files into ONE master file, or keep the current structure but add a cloud-hosted version?</p>
+<p><strong>Options:</strong></p>
+<p><strong>Current state:</strong> 35 synopsis files (<del>30 KB) + 26 full implementations (</del>120 KB)</p>
+<hr>
+<h3>2. Cloud Hosting Strategy</h3>
+<p><strong>Question:</strong> Should agent.mikesendpoint.com mirror local structure or serve consolidated format?</p>
+<p><strong>Options:</strong></p>
+<p><strong>Note:</strong> This affects how the agent loads rules from the cloud</p>
+<hr>
+<h3>3. Personality Bucketing</h3>
+<p><strong>Question:</strong> How should rules be categorized for &quot;personality slicing&quot;?</p>
+<p><strong>Suggested categories:</strong></p>
+<p><strong>Goal:</strong> Enable per-task or per-request rule selection in future &quot;ai-brain-carvery&quot;</p>
+<hr>
+<h3>4. Deployment Pattern</h3>
+<p><strong>Question:</strong> How should deployment to agent.mikesendpoint.com work?</p>
+<p><strong>Options:</strong></p>
+<p><strong>Existing patterns:</strong> You have upload-to-mikesendpoint.clinerules that uses Index Lambda API</p>
+<hr>
+<h2>Current System Analysis</h2>
+<p><strong>What works well:</strong></p>
+<ul>
+<li>Token-optimized loading (80% reduction)</li>
+<li>Synopsis + full content pattern</li>
+<li>Clear separation of concerns</li>
+<li>Well-documented in RULE-CREATION-GUIDE.md</li>
+</ul>
+<p><strong>What needs improvement:</strong></p>
+<ul>
+<li>No cloud deployment workflow</li>
+<li>No categorization/bucketing system</li>
+<li>No dynamic rule selection mechanism</li>
+<li>Context still includes all 35 synopsis files</li>
+</ul>
+<hr>
+<h2>Next Steps (After Decisions)</h2>
+<p>Once you answer the questions above, we&#39;ll:</p>
+<ol>
+<li>Design the consolidated structure</li>
+<li>Set foundation for ai-brain-carvery</li>
+</ol>
+<hr>
+<h2>Notes</h2>
+<ul>
+<li>Current repo: <code>c:\code\git\tools\agent</code></li>
+<li>Target: <code>agent.mikesendpoint.com</code></li>
+<li>Total size: ~150 KB (30 KB synopsis + 120 KB full)</li>
+<li>Files: 35 synopsis + 26 full implementations + 9 support files</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "agents-claude-instruction-pack-v1",
+  "flavor": "claude-code",
+  "operator": "mist83",
+  "renderedAt": "2026-05-17T02:31:35.728Z",
+  "manifestUrl": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json",
+  "bootstrapScriptUrl": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh",
+  "preambleInstruction": "At the start of every chat, fetch this manifest, materialize each item to its projectionTarget, verify each sha256, and only then proceed. If any fetch or verification fails, stop and report. Do not invent fallback policy.",
+  "totalItems": 15,
+  "composition": {
+    "sharedItemCount": 0,
+    "flavorItemCount": 15,
+    "sharedTreeUrl": "https://agent.mullmania.com/doctrine/shared",
+    "flavorTreeUrl": "https://agent.mullmania.com/doctrine/claude-pack",
+    "note": "Shared items are runtime-agnostic content (rules, skills, commands, hooks). They live at /doctrine/shared/ and are reused verbatim by every flavor pack. Flavor items are Claude-specific shims (CLAUDE.md, settings.json, .mcp.json, plugins, MEMORY.md). The codex pack will reference the same /doctrine/shared/ URLs with its own projection targets."
+  },
+  "totals": {
+    "globalInstructions": 1,
+    "harnessSettings": 3,
+    "hooks": 0,
+    "slashCommands": 0,
+    "skills": 0,
+    "memoryIndex": 1,
+    "ruleFeedback": 0,
+    "ruleProject": 0,
+    "ruleReference": 0
+  },
+  "items": [
+    {
+      "source": "flavor",
+      "packPath": "commands/roomup.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/roomup.md",
+      "sha256": "efc6999d6d04e2bcc809771a399f649e6d266265aab8fa2b634c9d4dc91237e7",
+      "sizeBytes": 243,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/roomup.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "commands/shipit.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/shipit.md",
+      "sha256": "25c6f40ac1d7bacb612df5a98ca37a76295d34134e7fe120722173bbb6db5b78",
+      "sizeBytes": 243,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/shipit.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "commands/tombstone.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/tombstone.md",
+      "sha256": "6b27ce3d1400673af636a16848cee4249c3f78bf32e475568a14223345fefc2b",
+      "sizeBytes": 249,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/tombstone.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "harness/mcp.json",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/harness/mcp.json",
+      "sha256": "b28350e93911dcec9b21d78bbf0e8fde667d45c7aeb909c8b7ab573aab455e63",
+      "sizeBytes": 214,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/.mcp.json",
+      "category": "harness-mcp"
+    },
+    {
+      "source": "flavor",
+      "packPath": "harness/plugins-known-marketplaces.json",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/harness/plugins-known-marketplaces.json",
+      "sha256": "db0d65a59c1be696f81c22aea1c57e3005315bd82d1091fffcc60748ff494880",
+      "sizeBytes": 277,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/plugins/known_marketplaces.json",
+      "category": "harness-plugins"
+    },
+    {
+      "source": "flavor",
+      "packPath": "harness/settings.json",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/harness/settings.json",
+      "sha256": "6d8fc6f085c411f6275ebd2c170a91b2aab0761bd2cdbb2bbb2ffee3c4056645",
+      "sizeBytes": 618,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/settings.json",
+      "category": "harness-settings"
+    },
+    {
+      "source": "flavor",
+      "packPath": "hooks/doctrine-write-fence.sh",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/hooks/doctrine-write-fence.sh",
+      "sha256": "96094decadc67c098e6df5c6f35aafe0de3ad8f1af4740be95034627dc3091ec",
+      "sizeBytes": 800,
+      "mode": "executable",
+      "projectionTarget": "~/.claude/hooks/doctrine-write-fence.sh",
+      "category": "hook-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "hooks/mullmania-s3-resync.sh",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/hooks/mullmania-s3-resync.sh",
+      "sha256": "a607488f90b81cfe138924711e14b7cbb05941aa16e204c0a8ac5e90309a369f",
+      "sizeBytes": 531,
+      "mode": "executable",
+      "projectionTarget": "~/.claude/hooks/mullmania-s3-resync.sh",
+      "category": "hook-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "instructions/global/CLAUDE.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/instructions/global/CLAUDE.md",
+      "sha256": "5772324d8a707e275a079f16d519fba4bdb03169f13b92b750544d2a3c28637d",
+      "sizeBytes": 1878,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/CLAUDE.md",
+      "category": "global-instructions"
+    },
+    {
+      "source": "flavor",
+      "packPath": "memory/MEMORY.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/memory/MEMORY.md",
+      "sha256": "c72e01e991e0be298cbb5ff3abc2844d19325e33d10663768a6e10e75000de9e",
+      "sizeBytes": 648,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/projects/-Users-mist83-Code/memory/MEMORY.md",
+      "category": "memory-index"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/agent-sync/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/agent-sync/SKILL.md",
+      "sha256": "733908b10aca1b3c9306254b933f81277ba09a3fcaf55a93229a15a9d8955872",
+      "sizeBytes": 686,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/agent-sync/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/canonize/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/canonize/SKILL.md",
+      "sha256": "e4b35a32ba83e2e21b03a9388df7c0efc423c8a05936650a5877a517e8f912ab",
+      "sizeBytes": 1148,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/canonize/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/films/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/films/SKILL.md",
+      "sha256": "ecfed1bd607bfd79e95e4f1cf06ecf66ebf9711fee63056839171fa05f131180",
+      "sizeBytes": 1196,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/films/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/image-generation-protocol/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/image-generation-protocol/SKILL.md",
+      "sha256": "3d6a9e157afd5243fb16eea0e350956876e2b754ce3f5ce0c8b10bba582a6da0",
+      "sizeBytes": 1360,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/image-generation-protocol/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/publish-package/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/publish-package/SKILL.md",
+      "sha256": "4c1468feaf46fcb9d29b0c4ccde3927dcb67c023395f66bee6a1078c50488403",
+      "sizeBytes": 1119,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/publish-package/SKILL.md",
+      "category": "skill-trampoline"
+    }
+  ],
+  "externalDependencies": [
+    {
+      "name": "itchy-brain MCP server",
+      "reason": "harness/mcp.json declares this server but its implementation is a Python venv that cannot live on a static CDN.",
+      "source": "https://github.com/mist83/itchy-brain",
+      "installPath": "~/Code/itchy-brain",
+      "mcpServerSubpath": "tools/mcp/itchy-brain",
+      "bootstrapStep": "git clone (or git pull) the repo, create the python venv at .venv, then symlink ~/.claude/mcp-servers/itchy-brain -> <repo>/tools/mcp/itchy-brain"
+    },
+    {
+      "name": "Heimdall announce script",
+      "reason": "CLAUDE.md references python3 /Users/mist83/.codex/skills/heimdall-announce/scripts/announce_to_cline_log.py but that lives outside .claude/ and is shared with the Codex side.",
+      "installPath": "~/.codex/skills/heimdall-announce",
+      "bootstrapStep": "ensure the codex-side heimdall-announce skill is present; this pack does not own it."
+    },
+    {
+      "name": "Mullmania development canon",
+      "reason": "CLAUDE.md fetches https://development-canon.mullmania.com at runtime; that ruleset is its own deploy target, not part of this pack.",
+      "url": "https://development-canon.mullmania.com",
+      "bootstrapStep": "no install needed; runtime HTTP fetch."
+    }
+  ],
+  "notes": [
+    "plugins/blocklist.json is intentionally excluded from this pack: it is runtime state, not authored policy.",
+    "rules/project/*.md files are operator scratch (in-flight initiative context) and are included here for full wipe-and-rehydrate fidelity. They are not durable doctrine and may rotate or expire.",
+    "sha256 covers file bytes only; the manifest itself is unsigned in v1. Trust on first fetch.",
+    "projectionTarget paths are operator-machine absolute paths with leading ~. The bootstrap script must expand them.",
+    "Shared/flavor split: 0 of 15 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 15 items are Claude-specific shims."
+  ]
+}

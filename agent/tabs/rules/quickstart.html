@@ -1,0 +1,117 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../quickstart.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> quickstart.clinerules</a> &middot; <a class="link-muted" href="../full/quickstart.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/quickstart.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Quickstart</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;quickstart&quot;, &quot;just run it&quot;, &quot;start this&quot;, &quot;run this project&quot;, or similar phrases.</p>
+<h2>PURPOSE</h2>
+<p>Don&#39;t read docs. Don&#39;t ask questions. Just detect project type and run it.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/quickstart.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/quickstart.md</code></p>
+<h2>Full content</h2>
+<h1>Quickstart - Just Run It</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;quickstart&quot;, &quot;just run it&quot;, &quot;start this&quot;, &quot;run this project&quot;, or similar phrases.</p>
+<h2>PHILOSOPHY</h2>
+<p>Don&#39;t read docs. Don&#39;t ask questions. Just detect project type and run it.</p>
+<h2>DETECTION &amp; EXECUTION</h2>
+<h3>.NET Projects (C#)</h3>
+<p><strong>Detect:</strong> <code>*.csproj</code> or <code>*.sln</code> files exist
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">dotnet run
+</code></pre>
+<h3>Node.js Projects</h3>
+<p><strong>Detect:</strong> <code>package.json</code> exists
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">npm start
+</code></pre>
+<p>Or if no start script:</p>
+<pre><code class="language-powershell">npm install; node index.js
+</code></pre>
+<h3>Python Projects</h3>
+<p><strong>Detect:</strong> <code>requirements.txt</code> or <code>*.py</code> files exist
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">python -m venv venv; .\venv\Scripts\activate; pip install -r requirements.txt; python main.py
+</code></pre>
+<p>Or if Flask:</p>
+<pre><code class="language-powershell">python app.py
+</code></pre>
+<p>Or if Django:</p>
+<pre><code class="language-powershell">python manage.py runserver
+</code></pre>
+<h3>Static HTML Projects</h3>
+<p><strong>Detect:</strong> <code>index.html</code> exists but no other project files
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">start index.html
+</code></pre>
+<h3>Docker Projects</h3>
+<p><strong>Detect:</strong> <code>Dockerfile</code> or <code>docker-compose.yml</code> exists
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">docker-compose up
+</code></pre>
+<p>Or:</p>
+<pre><code class="language-powershell">docker build -t app .; docker run -p 8080:8080 app
+</code></pre>
+<h3>Go Projects</h3>
+<p><strong>Detect:</strong> <code>go.mod</code> exists
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">go run main.go
+</code></pre>
+<h3>Rust Projects</h3>
+<p><strong>Detect:</strong> <code>Cargo.toml</code> exists
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">cargo run
+</code></pre>
+<h3>Ruby Projects</h3>
+<p><strong>Detect:</strong> <code>Gemfile</code> exists
+<strong>Run:</strong></p>
+<pre><code class="language-powershell">bundle install; bundle exec ruby app.rb
+</code></pre>
+<h2>EXECUTION RULES</h2>
+<ol>
+<li><strong>Detect project type</strong> by scanning for marker files</li>
+<li><strong>Execute immediately</strong> - no confirmation, no questions</li>
+<li><strong>Report what you did</strong> - one line only</li>
+<li><strong>Show URL</strong> if it&#39;s a web app</li>
+</ol>
+<h2>MULTIPLE PROJECT TYPES</h2>
+<p>If multiple project types detected (e.g., Dockerfile + package.json):</p>
+<ul>
+<li>Prefer Docker if Dockerfile exists</li>
+<li>Otherwise use the most specific marker</li>
+</ul>
+<h2>OUTPUT FORMAT</h2>
+<p>Just one line:</p>
+<pre><code>Running .NET app at http://localhost:5000
+</code></pre>
+<p>Or:</p>
+<pre><code>Running Node.js app at http://localhost:3000
+</code></pre>
+<p>Not:</p>
+<pre><code>Great! I&#39;ve detected this is a .NET application and I&#39;ll start it for you...
+</code></pre>
+<h2>AFTER EXECUTION</h2>
+<p>Don&#39;t ask &quot;Would you like me to...&quot; or &quot;Let me know if...&quot;</p>
+<p>Just:</p>
+<pre><code>App running at {URL}
+</code></pre>
+<h2>TONE</h2>
+<p>Direct:</p>
+<ul>
+<li>&quot;Running .NET app&quot;</li>
+<li>&quot;Started at <a href="http://localhost:5000">http://localhost:5000</a>&quot;</li>
+<li>&quot;Docker container up&quot;</li>
+</ul>
+<p>Not:</p>
+<ul>
+<li>&quot;I&#39;ve successfully launched...&quot;</li>
+<li>&quot;Your application is now running...&quot;</li>
+</ul>
+
+  </div>
+</article>

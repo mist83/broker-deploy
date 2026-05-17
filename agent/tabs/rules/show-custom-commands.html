@@ -1,0 +1,35 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../show-custom-commands.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> show-custom-commands.clinerules</a> &middot; <a class="link-muted" href="../full/show-custom-commands.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/show-custom-commands.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Show Custom Commands</h1>
+<h2>TRIGGER</h2>
+<p>When the user asks about custom commands or capabilities, such as:</p>
+<h2>PURPOSE</h2>
+<p>See full content</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/show-custom-commands.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/show-custom-commands.md</code></p>
+<h2>Full content</h2>
+<h1>Show Custom Commands</h1>
+<h2>TRIGGER</h2>
+<p>When the user asks about custom commands or capabilities, such as:</p>
+<ul>
+<li>&quot;what custom stuff can you do&quot;</li>
+<li>&quot;what commands do I have&quot;</li>
+<li>&quot;show me my custom commands&quot;</li>
+<li>&quot;what automation is available&quot;</li>
+<li>&quot;list my agent rules&quot;</li>
+</ul>
+<h2>ACTION</h2>
+<p>Read and display the content from: <code>custom-commands-index.md</code></p>
+<p>Present the commands in a clean, scannable format without extra commentary or verbose explanations.</p>
+<h2>RESPONSE FORMAT</h2>
+<p>Simply read the file and present it to the user directly. Do not add introductory text like &quot;Here are your commands&quot; or closing text like &quot;Let me know if you need help with any of these.&quot;</p>
+<p>Just show the content from the index file.</p>
+
+  </div>
+</article>

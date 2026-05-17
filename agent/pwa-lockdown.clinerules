@@ -1,0 +1,16 @@
+# Pwa Lockdown
+
+## TRIGGER
+ALWAYS ACTIVE when creating or modifying PWA files.
+
+## PURPOSE
+PWAs should feel like native apps - no browser chrome, no zoom, no scroll, no text selection. Lock it down completely.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/pwa-lockdown.md" -Raw
+```
+
+Or use read_file tool:
+`full/pwa-lockdown.md`

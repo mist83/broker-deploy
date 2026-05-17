@@ -1,0 +1,16 @@
+# Use Liskov File System
+
+## TRIGGER
+When the user says "use liskov file system", "use liskov with [bucket-name] bucket", "add liskov", or similar phrases, activate this command to integrate the Liskov File System library.
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/use-liskov-file-system.md" -Raw
+```
+
+Or use read_file tool:
+`full/use-liskov-file-system.md`

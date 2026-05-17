@@ -1,0 +1,16 @@
+# Add Ai Assistance
+
+## TRIGGER
+See full content
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-ai-assistance.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-ai-assistance.md`

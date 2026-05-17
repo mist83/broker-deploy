@@ -1,0 +1,88 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/always-ask-what-else.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/always-ask-what-else.md</a></p>
+  <div class="markdown-body">
+<h1>Always Ask What Else - Task Completion Directive</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE - After every attempt_completion.</p>
+<h2>PURPOSE</h2>
+<p>Force explicit acknowledgment of remaining work. Never leave the user guessing if the task is actually done.</p>
+<h2>RULES</h2>
+<h3>Before Using attempt_completion</h3>
+<p>Ask yourself:</p>
+<ol>
+<li>Is there ANY remaining work?</li>
+<li>Did I address ALL parts of the user&#39;s request?</li>
+<li>Are there follow-up tasks that should be mentioned?</li>
+<li>Did I test everything I was supposed to test?</li>
+</ol>
+<h3>In Your attempt_completion Result</h3>
+<p><strong>ALWAYS end with this section:</strong></p>
+<pre><code>## 🚨 WHAT ELSE NEEDS DOING?
+
+[If nothing:]
+✅ TASK COMPLETE - Nothing else needed
+
+[If something remains:]
+⚠️ REMAINING WORK:
+- 🔥 [Critical item with urgency]
+- ⚠️ [Important item]
+- 📋 [Nice-to-have item]
+
+[If you&#39;re unsure:]
+❓ VERIFY WITH USER:
+- Does [X] need to be done?
+- Should I also handle [Y]?
+</code></pre>
+<h3>Language Guidelines</h3>
+<ul>
+<li><strong>Use emojis</strong> - 🚨 ⚠️ 🔥 ✅ ❌ 📋 ❓ 💣 ⏰ 🎯</li>
+<li><strong>Be direct</strong> - &quot;This needs fixing&quot; not &quot;You might want to consider...&quot;</li>
+<li><strong>Show urgency</strong> - &quot;CRITICAL&quot;, &quot;MUST&quot;, &quot;BLOCKING&quot;</li>
+<li><strong>Be honest</strong> - &quot;I fucked up X&quot; not &quot;There may be an issue with...&quot;</li>
+<li><strong>Guide clearly</strong> - &quot;Next: Do Y, then Z&quot;</li>
+</ul>
+<h3>When Task Is NOT Done</h3>
+<p>Don&#39;t say:</p>
+<ul>
+<li>&quot;The task is complete&quot;</li>
+<li>&quot;Everything is working&quot;</li>
+<li>Vague statements about success</li>
+</ul>
+<p>DO say:</p>
+<ul>
+<li>&quot;⚠️ NOT DONE - Still need to [X]&quot;</li>
+<li>&quot;🔥 BLOCKING ISSUE - [X] is broken&quot;</li>
+<li>&quot;❌ FAILED - [X] didn&#39;t work, here&#39;s why...&quot;</li>
+</ul>
+<h3>Examples</h3>
+<p><strong>Good ending (task complete):</strong></p>
+<pre><code>## 🚨 WHAT ELSE NEEDS DOING?
+
+✅ TASK COMPLETE - Nothing else needed
+
+All 3 scenarios tested and passing. Disposal fix verified in production.
+</code></pre>
+<p><strong>Good ending (work remains):</strong></p>
+<pre><code>## 🚨 WHAT ELSE NEEDS DOING?
+
+⚠️ REMAINING WORK:
+- 🔥 Deploy to Lambda (timeout still 30s, need 60s)
+- ⚠️ Run concurrent test to verify fix
+- 📋 Update documentation
+
+Next: Deploy, test, document.
+</code></pre>
+<p><strong>Good ending (uncertain):</strong></p>
+<pre><code>## 🚨 WHAT ELSE NEEDS DOING?
+
+❓ VERIFY WITH USER:
+- Should I test the freeze pattern?
+- Do you want browser UI verification?
+- Is the current test coverage sufficient?
+</code></pre>
+<h2>ENFORCEMENT</h2>
+<p>This is NON-NEGOTIABLE. Every attempt_completion must explicitly address &quot;what else&quot; even if the answer is &quot;nothing&quot;.</p>
+<p>If you don&#39;t include this section, you&#39;re doing it wrong.</p>
+
+  </div>
+</article>

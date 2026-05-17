@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "agents-codex-local-runtime-inventory-v1",
+  "summary": "Inventory of Codex-side local runtime surfaces that still exist on the operator machine.",
+  "currentStatus": {
+    "instructionWipe": "yes-with-pointer-swap",
+    "fullLocalBrainWipe": "not-yet"
+  },
+  "instructionSurfaces": [
+    {
+      "path": "~/.codex/AGENTS.md",
+      "category": "global-instructions",
+      "desiredEndState": "bootstrap-pointer-only"
+    },
+    {
+      "path": "/Users/mist83/Code/AGENTS.md",
+      "category": "workspace-instructions",
+      "desiredEndState": "bootstrap-pointer-only"
+    }
+  ],
+  "policySurfaces": [
+    {
+      "path": "~/.codex/rules/default.rules",
+      "category": "permission-fuse",
+      "desiredEndState": "tiny-local-exception-or-generated-projection",
+      "safeToDeleteNow": false
+    }
+  ],
+  "customSkillPacks": [
+    "canonize",
+    "coordinate",
+    "frontend-skill",
+    "heimdall-announce",
+    "imagegen",
+    "itchy-brain",
+    "marionette-protocol",
+    "mark-defunct",
+    "mullmania-frontend-demo-swarm",
+    "playwright",
+    "playwright-interactive",
+    "remote-site-screenshot",
+    "roomup",
+    "screenshot",
+    "shipit",
+    "sora",
+    "ui-mullmania-migrator",
+    "wrap-executable-ui"
+  ],
+  "runtimeSkillBundles": [
+    ".system",
+    "codex-primary-runtime"
+  ],
+  "cachedPluginBundles": [
+    "computer-use",
+    "build-macos-apps",
+    "build-web-apps",
+    "game-studio",
+    "github",
+    "gmail"
+  ],
+  "automationSurfaces": [
+    {
+      "path": "~/.codex/automations/.run-jitter-salt",
+      "category": "runtime-salt",
+      "safeToDeleteNow": true
+    }
+  ],
+  "scratchStateSurfaces": [
+    "~/.codex/.codex-global-state.json",
+    "~/.codex/state/*"
+  ],
+  "safeToDeleteNow": [
+    "~/.codex/.codex-global-state.json",
+    "~/.codex/state/*",
+    "~/.codex/automations/.run-jitter-salt"
+  ],
+  "notSafeToDeleteYet": [
+    "~/.codex/rules/default.rules",
+    "~/.codex/skills/*",
+    "~/.codex/plugins/cache/*"
+  ],
+  "fullSafePointRequirements": [
+    "Codex can bootstrap from the remote doctrine using only a tiny local pointer plus the local site-key resolver.",
+    "The local permission/fuse behavior in default.rules is either intentionally reduced to a tiny local exception set or generated from doctrine.",
+    "The local user skill packs are either published as remote packs/projections or consciously retired.",
+    "A fresh chat can pass the doctrine override test from the control plane without relying on old local authored policy."
+  ]
+}

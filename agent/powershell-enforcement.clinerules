@@ -1,0 +1,72 @@
+# POWERSHELL SYNTAX ENFORCEMENT - CRITICAL RULE
+# This rule MUST be followed without exception
+
+## SYSTEM CONTEXT
+- Operating System: Windows 11
+- Default Shell: PowerShell 7 (pwsh.exe)
+- Shell Location: C:\Program Files\PowerShell\7\pwsh.exe
+
+## MANDATORY POWERSHELL SYNTAX RULES
+
+### COMMAND CHAINING - NEVER USE `&&`
+**WRONG (BASH SYNTAX - WILL BREAK):**
+```
+cd some-directory && npm install
+command1 && command2
+```
+
+**CORRECT (POWERSHELL SYNTAX):**
+```
+cd some-directory; npm install
+command1; command2
+```
+
+### ALWAYS USE SEMICOLON (;) FOR COMMAND CHAINING
+When you need to chain commands in PowerShell:
+- Use `;` (semicolon) to separate commands
+- NEVER use `&&` (this is bash/sh syntax and will fail)
+- NEVER use `||` (this is also bash/sh syntax)
+
+### BEFORE EVERY COMMAND EXECUTION
+1. Check if you're about to use `&&` or `||`
+2. If yes, STOP and replace with `;`
+3. Remember: You are ALWAYS in PowerShell on this system
+4. There are NO exceptions to this rule
+
+### EXAMPLES OF CORRECT POWERSHELL COMMANDS
+
+**Navigating and running commands:**
+```powershell
+cd path\to\directory; npm install
+cd ..; git status
+Set-Location 'C:\Projects'; yarn build
+```
+
+**Multiple commands:**
+```powershell
+npm run build; npm test; npm run deploy
+Remove-Item temp.txt; New-Item temp.txt
+```
+
+**With error handling (if needed):**
+```powershell
+if (Test-Path file.txt) { Remove-Item file.txt }; New-Item file.txt
+```
+
+## ENFORCEMENT LEVEL: MAXIMUM
+This rule has MAXIMUM priority. If there is ANY conflict with other instructions, THIS RULE WINS.
+
+## VIOLATION CONSEQUENCES
+Using `&&` or `||` in PowerShell commands will:
+1. Cause command execution to fail 100% of the time
+2. Frustrate the user
+3. Waste time with error messages
+
+## VERIFICATION CHECKLIST
+Before using execute_command tool, ask yourself:
+- [ ] Am I on Windows? (Yes - ALWAYS)
+- [ ] Is the default shell PowerShell? (Yes - ALWAYS)
+- [ ] Did I use `&&` or `||`? (If yes - STOP and fix it)
+- [ ] Did I use `;` for chaining? (This is correct)
+
+## REMEMBER

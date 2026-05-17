@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "agents-doctrine-profile-toc-v1",
+  "summary": "Profile table of contents for the shared doctrine core.",
+  "generatedAt": "2026-05-17T02:31:35.686Z",
+  "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
+  "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
+  "defaultProfileIdsByRuntime": {
+    "codex": [
+      "shared-operator-core",
+      "shared-ui-stack",
+      "shared-live-ship",
+      "shared-multi-agent",
+      "shared-retirement",
+      "shared-platform-systems"
+    ],
+    "claude": [
+      "shared-operator-core",
+      "shared-ui-stack",
+      "shared-live-ship",
+      "shared-multi-agent",
+      "shared-retirement",
+      "shared-platform-systems"
+    ]
+  },
+  "profiles": [
+    {
+      "id": "shared-operator-core",
+      "label": "Shared operator core",
+      "description": "Cross-runtime standing behavior: simplicity, verification, dictation normalization, canon-first policy, and operator style.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "feedback_grugbrain",
+        "feedback_no_hallucination",
+        "feedback_speech_normalization",
+        "feedback_development_canon_source_of_truth",
+        "feedback_deployment_completion",
+        "feedback_heimdall_announce",
+        "feedback_dev_diary_log",
+        "feedback_stop_when_unproductive",
+        "feedback_communication_style",
+        "feedback_bootstrap_quiet_by_default",
+        "feedback_context_sidecar_plain_context",
+        "feedback_preempt_adhd_spiral",
+        "feedback_domain_agnostic",
+        "feedback_interconnect_and_suggest",
+        "feedback_no_ai_stink",
+        "feedback_remote_doctrine_only_no_new_local_rules"
+      ]
+    },
+    {
+      "id": "shared-ui-stack",
+      "label": "Shared UI stack",
+      "description": "UI framework, DAG, and visual quality rules for browser-facing work.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "feedback_ui_canon_first",
+        "feedback_ui_compose_dont_invent",
+        "feedback_use_dag_always",
+        "feedback_visual_programming_mantra",
+        "reference_ui_mullmania_contract_renderer"
+      ]
+    },
+    {
+      "id": "shared-live-ship",
+      "label": "Shared live-ship discipline",
+      "description": "Deploy, bucket safety, package publishing, and live-state verification rules.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "feedback_ship_to_deployed",
+        "feedback_mullmania_bucket_safety",
+        "feedback_mullmania_403_check_whitelist_first",
+        "reference_mullmania_access_logs",
+        "reference_mullmania_packages_site",
+        "reference_passthrough_routing",
+        "reference_codeartifact_mullmania"
+      ]
+    },
+    {
+      "id": "shared-multi-agent",
+      "label": "Shared multi-agent workflow",
+      "description": "PM-A2A defaults and room protocol references.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "feedback_pm_a2a_default_workflow",
+        "reference_itchy_brain_rooms"
+      ]
+    },
+    {
+      "id": "shared-retirement",
+      "label": "Shared retirement flow",
+      "description": "Repo retirement and tombstone safety rules.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "feedback_tombstone_safety"
+      ]
+    },
+    {
+      "id": "shared-platform-systems",
+      "label": "Shared platform systems",
+      "description": "Reference points for major Mullmania shared systems.",
+      "durability": "standing",
+      "selection": "default",
+      "defaultFor": [
+        "codex",
+        "claude"
+      ],
+      "itemIds": [
+        "reference_signal_argh",
+        "reference_gha_runner",
+        "reference_tv_telemetry"
+      ]
+    },
+    {
+      "id": "shared-operator-scratch",
+      "label": "Shared operator scratch",
+      "description": "In-flight initiative context. Useful for continuity, not durable doctrine.",
+      "durability": "scratch",
+      "selection": "optional",
+      "defaultFor": [],
+      "itemIds": [
+        "project_json_tools_vs_json_anon",
+        "project_mec_initiative",
+        "project_scaffold_generator_initiative",
+        "project_universe_prototype"
+      ]
+    },
+    {
+      "id": "shared-niche-reference",
+      "label": "Shared niche reference",
+      "description": "Non-default references for narrower workflows.",
+      "durability": "standing",
+      "selection": "optional",
+      "defaultFor": [],
+      "itemIds": [
+        "reference_codex_cli",
+        "reference_nsmenu_live_updates"
+      ]
+    }
+  ],
+  "notes": [
+    "Profiles are bundles of shared rule ids. They are intended to be composed, deduplicated, and ordered by the compose service.",
+    "Runtime overlays remain outside this TOC. Claude/Codex-specific projection mechanics belong in flavor manifests and bootstrap prompts."
+  ]
+}

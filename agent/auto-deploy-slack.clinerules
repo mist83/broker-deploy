@@ -1,0 +1,16 @@
+# Auto Deploy Slack
+
+## TRIGGER
+After any successful Lambda deployment that completes with a Function URL.
+
+## PURPOSE
+Automatically post to Slack whenever you deploy an app, providing immediate notification with the deployed URL.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/auto-deploy-slack.md" -Raw
+```
+
+Or use read_file tool:
+`full/auto-deploy-slack.md`

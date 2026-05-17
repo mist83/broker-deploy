@@ -1,0 +1,52 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../SAFE-TO-WIPE-CODEX.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> SAFE-TO-WIPE-CODEX.md</a></p>
+  <div class="markdown-body">
+<h1>Safe To Wipe Codex</h1>
+<p>This is the honest cutoff for wiping local Codex-side memory/customization.</p>
+<h2>Current Status</h2>
+<p>Instruction wipe: <code>yes, with a pointer swap</code></p>
+<p>Full local brain wipe: <code>no, not yet</code></p>
+<h2>Safe Now</h2>
+<p>It is safe now to replace the authored contents of these files with a minimal bootstrap pointer:</p>
+<ul>
+<li><code>~/.codex/AGENTS.md</code></li>
+<li><code>/Users/mist83/Code/AGENTS.md</code></li>
+</ul>
+<p>That is safe because the standing behavior from those files now exists in the remote doctrine artifacts:</p>
+<ul>
+<li><code>https://agent.mullmania.com/CODEX-BOOTSTRAP-PROMPT.md</code></li>
+<li><code>https://agent.mullmania.com/doctrine/codex-memory-seed-v1.json</code></li>
+<li><code>https://agent.mullmania.com/DOCTRINE-BOOTSTRAP-GUIDE.md</code></li>
+</ul>
+<h2>Not Safe Yet</h2>
+<p>It is not safe yet to blindly delete these if you expect Codex to behave &quot;like now&quot;:</p>
+<ul>
+<li><code>~/.codex/rules/default.rules</code>
+Codex still uses this as a local permission/fuse surface.</li>
+<li>local user skill packs under <code>~/.codex/skills/*</code>
+Codex still uses these as local triggerable skill definitions and script roots.</li>
+<li>locally cached plugin bundles under <code>~/.codex/plugins/cache/*</code>
+These still back runtime capabilities.</li>
+</ul>
+<h2>Safe If You Accept Reduced Behavior</h2>
+<p>It is safe to delete scratch/state surfaces if you do not care about their local history:</p>
+<ul>
+<li><code>~/.codex/.codex-global-state.json</code></li>
+<li><code>~/.codex/state/*</code></li>
+<li><code>~/.codex/automations/.run-jitter-salt</code></li>
+</ul>
+<p>That may reset convenience/history, but it should not erase doctrine because doctrine is remote.</p>
+<h2>Full Safe Point</h2>
+<p>It will be fully safe to nuke the rest only after all of these are true:</p>
+<ol>
+<li>Codex can bootstrap from the remote doctrine using only a tiny local pointer.</li>
+<li>The local permission/fuse behavior in <code>default.rules</code> is either intentionally reduced to a tiny local exception set or generated from the doctrine.</li>
+<li>The local user skill packs are either published as remote packs/projections or consciously retired.</li>
+<li>A fresh chat can pass the doctrine override test from the control plane without relying on old local authored policy.</li>
+</ol>
+<h2>Bottom Line</h2>
+<p>If your goal is &quot;one tiny local pointer and the rest remote,&quot; you can do the instruction cutover now.</p>
+<p>If your goal is &quot;delete every local custom Codex surface and keep behavior basically unchanged,&quot; it is not safe yet.</p>
+
+  </div>
+</article>

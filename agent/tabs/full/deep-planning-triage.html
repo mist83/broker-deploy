@@ -1,0 +1,63 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/deep-planning-triage.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/deep-planning-triage.md</a></p>
+  <div class="markdown-body">
+<h1>Deep Planning &amp; Architectural Triage</h1>
+<p>When the user requests <code>/deep-planning</code> or architectural triage, use this framework:</p>
+<p>Simplify this codebase architecturally without losing functionality. &quot;It&#39;s simple enough for a human to understand, good job!&quot; is a valid answer. Suss out any discrepancies between the functionality and the README before you do, though - I want to make sure I set the record straight on what this app is supposed to DO (and what it actually does - those should ideally be one and the same!)</p>
+<p>Ask yourself these kinds of questions:</p>
+<p>How would you better develop against this library?</p>
+<p>Assume you are free to cast any practice into doubt, including those in your agent instruction files.</p>
+<p>I want to limit blast radius for things LIKE changing a css variable or a simple Javascript function - but eventually everything that&#39;s vibe-coded comes tumbling down like that in my experience - this text (yes, THIS VERY TEXT I AM TYPING RIGHT NOW) is an attempt to guard against that. (PS - feel free to call THIS text into question as well!)</p>
+<p>I want your opinion as an expert in getting shit done (GSD). You&#39;re smart, tell it straight even when it conflicts with your perception of my understanding of the subject, and not afraid to cut corners where the corners stank of dog...ma (dogma, instead of practicality).</p>
+<p>Mirror me in your response/responses.</p>
+<h2>Analysis Framework</h2>
+<p>When conducting this architectural triage, follow this systematic approach:</p>
+<h3>1. Reality vs Documentation Audit</h3>
+<ul>
+<li><strong>What does the code actually do?</strong> - Examine the core functionality</li>
+<li><strong>What does the documentation claim?</strong> - Check README, comments, and stated goals</li>
+<li><strong>Gap Analysis</strong> - Where are the biggest disconnects?</li>
+<li><strong>Truth Alignment</strong> - Recommend either fixing code to match docs, or docs to match code</li>
+</ul>
+<h3>2. Architectural Complexity Assessment</h3>
+<ul>
+<li><strong>Core Functionality</strong> - What are the 3-5 essential features this actually provides?</li>
+<li><strong>Unnecessary Abstractions</strong> - What layers add complexity without value?</li>
+<li><strong>Coupling Analysis</strong> - What requires extensive changes for simple modifications?</li>
+<li><strong>Blast Radius Evaluation</strong> - Which changes would cascade into other systems?</li>
+</ul>
+<h3>3. Practical Simplification</h3>
+<ul>
+<li><strong>Consolidation Opportunities</strong> - What can be merged or eliminated?</li>
+<li><strong>Interface Clarity</strong> - How could developers interact with this more simply?</li>
+<li><strong>Configuration Reduction</strong> - What options/settings are actually needed?</li>
+<li><strong>Dependency Minimization</strong> - What external dependencies add unnecessary weight?</li>
+</ul>
+<h3>4. Development Experience (DX) Evaluation</h3>
+<ul>
+<li><strong>Local Development</strong> - How easy is it to run/test/develop against this?</li>
+<li><strong>Debugging Experience</strong> - Can developers easily understand what&#39;s happening?</li>
+<li><strong>Extensibility</strong> - How hard is it to add new features?</li>
+<li><strong>Maintenance Burden</strong> - What will be painful to maintain long-term?</li>
+</ul>
+<h3>5. Dogma vs Pragmatism Check</h3>
+<ul>
+<li><strong>Best Practices Audit</strong> - Which &quot;best practices&quot; are actually hindering progress?</li>
+<li><strong>Pattern Analysis</strong> - What patterns are used because &quot;that&#39;s how it&#39;s done&quot; vs solving real problems?</li>
+<li><strong>Over-Engineering Detection</strong> - What&#39;s been built for hypothetical future needs?</li>
+<li><strong>Practical Alternatives</strong> - What simpler approaches would achieve the same goals?</li>
+</ul>
+<h2>Expected Output</h2>
+<p>Provide a brutally honest assessment that includes:</p>
+<ol>
+<li><strong>Executive Summary</strong> - What this thing actually does in 2-3 sentences</li>
+<li><strong>Architecture Reality Check</strong> - Core components and their actual purpose</li>
+<li><strong>Simplification Recommendations</strong> - Specific, actionable changes to reduce complexity</li>
+<li><strong>Blast Radius Analysis</strong> - What changes would be high-impact vs low-risk</li>
+<li><strong>Documentation Alignment</strong> - How to make docs and code match reality</li>
+<li><strong>Next Steps</strong> - Prioritized list of improvements that maximize simplicity gains</li>
+</ol>
+<p>Remember: The goal is to make this codebase understandable by humans and maintainable without requiring a PhD in the original developer&#39;s thought process.</p>
+
+  </div>
+</article>

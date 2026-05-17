@@ -1,0 +1,479 @@
+# Backend Pragmatic Facet
+
+**Description:** Backend development patterns and best practices
+
+**Domains:** c#, asp.net, api
+**Behaviors:** architecture, patterns, standards
+
+---
+
+## prefer-controllers
+
+# Prefer Controllers
+
+## TRIGGER
+ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.
+
+## PURPOSE
+Use proper MVC Controllers instead of minimal API (MapGet/MapPost) patterns. Controllers provide better organization, testability, and maintainability.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/prefer-controllers.md" -Raw
+```
+
+Or use read_file tool:
+`full/prefer-controllers.md`
+
+---
+
+## example-error-handling
+
+# Error Handling Best Practices
+
+## TRIGGER
+When implementing functions that interact with external systems or handle user input.
+
+## RULES
+
+### Exception Handling
+- Use try-catch blocks for operations that can fail
+- Catch specific exceptions, not generic Exception
+- Log errors with context for debugging
+- Don't swallow exceptions silently
+
+### User-Facing Errors
+- Return user-friendly error messages
+- Don't expose stack traces to users
+- Provide actionable guidance when errors occur
+- Use HTTP status codes correctly (400 for bad request, 500 for server error)
+
+### Validation
+- Validate input at API boundaries
+- Return clear validation error messages
+- Check for null/empty values before processing
+- Use data annotations or FluentValidation
+
+### Logging
+- Log errors with sufficient context
+- Include request IDs for tracing
+- Don't log sensitive data (passwords, tokens)
+- Use appropriate log levels (Error, Warning, Info)
+
+### Recovery
+- Implement retry logic for transient failures
+- Provide fallback values when appropriate
+- Clean up resources in finally blocks
+- Use Circuit Breaker pattern for external calls
+
+
+---
+
+## example-testing
+
+# Testing Requirements
+
+## TRIGGER
+When creating or modifying code that handles business logic or data processing.
+
+## RULES
+
+### Test Coverage
+- Write unit tests for all public methods
+- Test happy path and error cases
+- Minimum 70% code coverage for new code
+
+### Test Naming
+- Use descriptive test names: `Should_ReturnUser_WhenIdExists`
+- Follow pattern: `Method_Scenario_ExpectedResult`
+
+### Test Structure
+- Arrange: Set up test data
+- Act: Execute the method being tested
+- Assert: Verify the results
+
+### Integration Tests
+- Test API endpoints with realistic data
+- Verify database operations work correctly
+- Test error handling and edge cases
+
+### Mocking
+- Mock external dependencies (APIs, databases)
+- Use dependency injection for testability
+- Don't mock value objects or data structures
+
+
+---
+
+## proactive-code-quality
+
+# Proactive Code Quality Standards
+
+## ACTIVATION
+**ALWAYS ACTIVE** - Consult these standards automatically when writing any code, without requiring explicit user commands.
+
+This ruleset consolidates code quality and maintainability principles that should guide all code generation decisions. These are not command-triggered rules but always-active quality standards.
+
+---
+
+## CORE PHILOSOPHY
+
+### Legacy Code Mindset
+"There is no such thing as legacy code in the 2025 Cline Sonnet age. Any code can be rewritten from scratch overnight."
+
+**Act accordingly:**
+- Don't be precious about existing code
+- Rewrite when it's simpler than patching
+- Question all assumptions
+- Optimize for clarity, not preservation
+
+### Simplification Over Complexity
+- Pragmatism beats dogma
+- Consolidate when possible
+- Remove unnecessary abstractions
+- Limit blast radius for changes
+- Challenge "best practices" that hinder progress
+
+---
+
+## HTML/CSS/JS QUALITY STANDARDS
+
+### HTML Guidelines
+
+**Use Semantic HTML5 Elements:**
+```html
+✅ <header>, <nav>, <main>, <article>, <section>, <aside>, <footer>
+✅ <button> for buttons (not styled divs)
+✅ <a> for links (not onclick handlers)
+✅ <form> and proper input types
+```
+
+**Keep Structure Minimal:**
+- Maximum nesting: 3-4 levels
+- Every element must have a purpose
+- No unnecessary wrapper divs
+- No div soup
+
+**Accessibility Requirements:**
+- Proper heading hierarchy (h1 → h2 → h3)
+- Alt text for images
+- Labels for form inputs
+- ARIA only when semantic HTML insufficient
+
+### CSS Guidelines
+
+**Flat Design Only:**
+```css
+✅ background: #667eea;                    /* Solid colors */
+✅ border: 1px solid #ddd;                 /* Simple borders */
+✅ border-radius: 4px;                     /* Minimal rounding */
+
+❌ background: linear-gradient(...);       /* NO gradients */
+❌ box-shadow: 0 10px 40px rgba(...);     /* NO complex shadows */
+❌ border-radius: 12px;                    /* NO excessive rounding */
+```
+
+**Minimal Styling:**
+- System fonts or web-safe fonts (Arial, sans-serif)
+- Simple color palette (2-3 colors max)
+- Consistent spacing scale: 8px, 16px, 24px, 32px
+- No excessive padding/margin
+- No CSS frameworks unless explicitly requested
+
+**Layout:**
+- Use Flexbox or Grid (not floats)
+- Mobile-first responsive design
+- Simple breakpoints (1-2 max)
+
+**Suggested Color Palettes:**
+
+Minimal Professional:
+```css
+background: #ffffff;
+text: #222222;
+primary: #0066cc;
+border: #dddddd;
+```
+
+High Contrast:
+```css
+background: #000000;
+text: #ffffff;
+accent: #00ff00;
+secondary: #666666;
+```
+
+Neutral Clean:
+```css
+background: #f5f5f5;
+text: #333333;
+primary: #2c3e50;
+border: #cccccc;
+```
+
+### JavaScript Guidelines
+
+**Vanilla JS Preferred:**
+- No frameworks unless explicitly requested
+- Use modern ES6+ features
+- Functional and readable code
+- Module pattern or ES6 modules
+
+**Minimal DOM Manipulation:**
+- Use event delegation
+- Avoid excessive DOM queries
+- Keep JavaScript separate from HTML (no inline handlers)
+
+**Progressive Enhancement:**
+- Core functionality works without JS
+- JS enhances, doesn't enable
+
+**Modern Patterns:**
+```javascript
+✅ async/await or promises
+✅ const/let (never var)
+✅ Arrow functions where appropriate
+
+❌ Massive nested callbacks
+❌ Global variables everywhere
+❌ jQuery unless specifically needed
+```
+
+---
+
+## GENERAL CODE FORMATTING RULES
+
+### NO Emojis in Code Files
+
+**BANNED in:**
+- PowerShell scripts (.ps1)
+- Bash scripts (.sh)
+- HTML files
+- JavaScript files
+- CSS files
+- C# code
+- Python code
+- Any programming language
+
+**Emojis OK ONLY in:**
+- Markdown files (.md)
+- README files
+- Documentation
+
+### Icon Usage in HTML
+
+**Use Tabler Icons (not emojis):**
+
+Include CSS:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+```
+
+Use icons:
+```html
+<i class="ti ti-check"></i>           <!-- checkmark -->
+<i class="ti ti-x"></i>                <!-- X/close -->
+<i class="ti ti-alert-circle"></i>    <!-- warning -->
+<i class="ti ti-info-circle"></i>     <!-- info -->
+```
+
+Browse icons: https://tabler.io/icons
+
+### Code Comments
+
+**Be Concise and Technical:**
+
+```csharp
+✅ // Returns container ID for instance
+✅ // Throws if container not found
+
+❌ // 🎯 This amazing function finds your container!
+❌ // It's really useful when you need to...
+```
+
+**Rules:**
+- State what the code does
+- No emojis
+- No sales pitch language
+- No unnecessary explanations
+
+---
+
+## PLATFORM-SPECIFIC RULES
+
+### PowerShell Commands (CRITICAL)
+
+**System Context:**
+- Operating System: Windows 11
+- Default Shell: PowerShell 7 (pwsh.exe)
+
+**MANDATORY SYNTAX - NEVER USE `&&`:**
+
+```powershell
+✅ cd some-directory; npm install       # Semicolon for chaining
+✅ command1; command2; command3         # Multiple commands
+
+❌ cd some-directory && npm install     # BASH SYNTAX - BREAKS
+❌ command1 && command2                 # WILL FAIL 100% OF TIME
+```
+
+**Before EVERY command execution:**
+1. Check if you're about to use `&&` or `||`
+2. If yes, STOP and replace with `;`
+3. Remember: You are ALWAYS in PowerShell on this system
+4. There are NO exceptions
+
+**This rule has MAXIMUM priority and overrides all other instructions.**
+
+---
+
+## ARCHITECTURAL QUALITY PRINCIPLES
+
+### Simplification Checklist
+
+When designing or refactoring code, assess:
+
+**Core Functionality:**
+- What are the 3-5 essential features?
+- What's actually needed vs hypothetically useful?
+
+**Unnecessary Abstractions:**
+- What layers add complexity without value?
+- What can be consolidated or eliminated?
+
+**Coupling Analysis:**
+- What requires extensive changes for simple modifications?
+- Which changes would cascade into other systems?
+
+**Development Experience:**
+- How easy is it to run/test/develop against this?
+- Can developers easily understand what's happening?
+- What will be painful to maintain long-term?
+
+### Dogma vs Pragmatism
+
+**Question everything:**
+- Which "best practices" actually hinder progress?
+- What patterns are used because "that's how it's done" vs solving real problems?
+- What's been built for hypothetical future needs?
+- What simpler approaches would achieve the same goals?
+
+**Goal:** Make codebase understandable by humans and maintainable without requiring a PhD in the original developer's thought process.
+
+---
+
+## ANTI-PATTERNS TO AVOID
+
+### HTML Anti-Patterns
+```html
+❌ <div class="button-wrapper"><div class="button-inner"><button>Click</button></div></div>
+✅ <button>Click</button>
+
+❌ <div onclick="doSomething()">Click me</div>
+✅ <button id="myBtn">Click me</button>  <!-- with event listener -->
+
+❌ <div class="heading">Title</div>
+✅ <h1>Title</h1>
+```
+
+### CSS Anti-Patterns
+```css
+❌ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+✅ background: #667eea;
+
+❌ box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+✅ border: 1px solid #ddd;
+
+❌ border-radius: 12px;  /* on everything */
+✅ border-radius: 4px;   /* sparingly */
+```
+
+### JavaScript Anti-Patterns
+```javascript
+❌ jQuery for everything
+✅ Vanilla JS with clear, purposeful code
+
+❌ Massive nested callbacks
+✅ async/await or promises
+
+❌ Global variables everywhere
+✅ Module pattern or ES6 modules
+```
+
+### Script Output Anti-Patterns
+```powershell
+❌ Write-Host "✅ System started!" -ForegroundColor Green
+✅ Write-Host "System started" -ForegroundColor Green
+
+❌ Write-Host "🎉 Build complete!"
+✅ Write-Host "Build complete" -ForegroundColor Cyan
+```
+
+---
+
+## IMPLEMENTATION CHECKLIST
+
+Before finalizing ANY code, verify:
+
+### HTML Checklist
+- [ ] Uses semantic HTML5 elements
+- [ ] Minimal nesting (3-4 levels max)
+- [ ] No unnecessary wrapper divs
+- [ ] Proper heading hierarchy
+- [ ] Accessible (labels, alt text, ARIA if needed)
+
+### CSS Checklist
+- [ ] Flat colors only (no gradients)
+- [ ] Simple borders, minimal shadows
+- [ ] System fonts or web-safe fonts
+- [ ] Consistent spacing scale
+- [ ] No CSS framework bloat
+- [ ] Mobile-first responsive
+
+### JavaScript Checklist
+- [ ] Vanilla JS (unless framework explicitly requested)
+- [ ] Clean, readable code
+- [ ] Proper event handling
+- [ ] No inline handlers
+- [ ] Progressive enhancement
+
+### General Code Checklist
+- [ ] No emojis in code files
+- [ ] Concise technical comments
+- [ ] PowerShell uses `;` not `&&`
+- [ ] Unnecessary abstractions removed
+- [ ] Clear, maintainable structure
+
+---
+
+## ENFORCEMENT PRIORITIES
+
+### Maximum Priority (CRITICAL)
+1. **PowerShell syntax** - Use `;` never `&&` (breaks 100% of time)
+2. **No emojis in code files** - Only in markdown/docs
+
+### High Priority
+3. **Semantic HTML** - Use proper HTML5 elements
+4. **Flat design** - No gradients, minimal shadows
+5. **Minimal structure** - Avoid unnecessary nesting/wrappers
+
+### Standard Priority
+6. **Vanilla JS preference** - Unless framework requested
+7. **Code comments** - Concise and technical
+8. **Simplification** - Consolidate, remove abstractions
+9. **Pragmatism** - Question dogma, optimize for clarity
+
+---
+
+## REMEMBER
+
+**Less code = Less bugs = More maintainable = Better user experience**
+
+Every element, style, and line of code should serve a clear purpose. If you can't explain why something is there in one sentence, it probably shouldn't be there.
+
+When in doubt: **Simplify. Flatten. Clarify.**
+
+
+---
+

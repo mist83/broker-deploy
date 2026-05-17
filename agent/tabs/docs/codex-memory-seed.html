@@ -1,0 +1,81 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CODEX-MEMORY-SEED.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CODEX-MEMORY-SEED.md</a></p>
+  <div class="markdown-body">
+<h1>Codex Memory Seed</h1>
+<p>This is the condensed Codex-side memory prepared for migration into the remote doctrine/control plane.</p>
+<h2>Core Principles</h2>
+<ul>
+<li>Remote doctrine is the source of truth.</li>
+<li>Local runtime files are compatibility shims, not authored policy.</li>
+<li><code>No doctrine, no pretending.</code></li>
+<li>The doctrine failure mode is <code>fail-visible, gated-continue</code>.</li>
+<li>Override is session-scoped and should be visibly marked.</li>
+<li>Local safety is welded on even when the remote doctrine is authoritative.</li>
+</ul>
+<h2>Current Decisions</h2>
+<ul>
+<li>Use <code>agent.mullmania.com</code> as the current publish surface until a plural host exists.</li>
+<li>Keep a two-layer remote brain: static signed doctrine artifact plus narrow dynamic service.</li>
+<li>Prefer <code>shared-rule-catalog-v1.json</code> + <code>profile-toc-v1.json</code> as the shared doctrine core for both Codex and Claude.</li>
+<li>Use orchestrator-owned durable memory in v1.</li>
+<li>Keep cross-agent shared live memory out of v1.</li>
+<li>Keep conditional logic out of the static artifact.</li>
+<li>Treat doctrine artifacts on <code>agent.mullmania.com</code> as publicly readable. If they are unavailable, fail visibly and require operator override before continuing.</li>
+</ul>
+<h2>Local Surfaces Allowed</h2>
+<ul>
+<li>bootstrap pointer</li>
+<li>signature trust root</li>
+<li>destructive-action circuit breaker</li>
+<li>auth and secret resolution boundaries</li>
+<li>generated runtime projections</li>
+<li>read-only doctrine cache</li>
+</ul>
+<h2>Local Surfaces Forbidden As Source Of Truth</h2>
+<ul>
+<li>custom <code>CLAUDE.md</code></li>
+<li>custom <code>AGENTS.md</code></li>
+<li>custom Codex skill packs</li>
+<li>custom Claude skill packs</li>
+<li>custom local plugin registries</li>
+<li>custom local automation registries</li>
+<li>hook scripts that contain real policy logic</li>
+</ul>
+<h2>Codex Runtime Quirks (informs the projection layer)</h2>
+<ul>
+<li>Codex sessions currently ingest both <code>~/.codex/AGENTS.md</code> and workspace/root <code>AGENTS.md</code> when they exist.</li>
+<li><code>~/.codex/rules/default.rules</code> is a local permission/fuse surface, not doctrine.</li>
+<li>User skill packs under <code>~/.codex/skills/*</code> are surfaced by name and description; removing them changes what the runtime can trigger by skill name.</li>
+<li>Curated plugin caches under <code>~/.codex/plugins/cache/*</code> are runtime tool bundles, not authored doctrine.</li>
+<li><code>.codex/state/*</code>, <code>.codex/.codex-global-state.json</code>, and prompt-history state are scratch/history, not standing behavior.</li>
+<li>The live doctrine host should be readable without local secret material. If it is not, the session should stop visibly instead of pretending doctrine was loaded.</li>
+</ul>
+<h2>Migration Inventory (input only, not future source of truth)</h2>
+<ul>
+<li>1 global instructions file: <code>~/.codex/AGENTS.md</code></li>
+<li>1 workspace-family instructions file: <code>/Users/mist83/Code/AGENTS.md</code></li>
+<li>1 local permission/fuse rules file: <code>~/.codex/rules/default.rules</code></li>
+<li>18 user skill packs in <code>~/.codex/skills/*</code>:
+<code>canonize</code>, <code>coordinate</code>, <code>frontend-skill</code>, <code>heimdall-announce</code>, <code>imagegen</code>, <code>itchy-brain</code>, <code>marionette-protocol</code>, <code>mark-defunct</code>, <code>mullmania-frontend-demo-swarm</code>, <code>playwright</code>, <code>playwright-interactive</code>, <code>remote-site-screenshot</code>, <code>roomup</code>, <code>screenshot</code>, <code>shipit</code>, <code>sora</code>, <code>ui-mullmania-migrator</code>, <code>wrap-executable-ui</code></li>
+<li>2 runtime-provided local skill bundles: <code>.system</code>, <code>codex-primary-runtime</code></li>
+<li>6 locally cached plugin bundles: <code>computer-use</code>, <code>build-macos-apps</code>, <code>build-web-apps</code>, <code>game-studio</code>, <code>github</code>, <code>gmail</code></li>
+<li>0 user automation definitions today. Only runtime salt exists at <code>~/.codex/automations/.run-jitter-salt</code>.</li>
+<li>Several scratch/state files exist under <code>~/.codex/state/*</code> and <code>~/.codex/.codex-global-state.json</code>. They are not doctrine and are safe to treat as disposable operator scratch unless a specific workflow still uses them.</li>
+</ul>
+<h2>Mandatory Standing Behaviors To Preserve</h2>
+<ul>
+<li>Follow grugbrain development practices.</li>
+<li>Do not hallucinate.</li>
+<li>Apply obvious speech-to-text normalization across repos under <code>/Users/mist83/Code</code>.</li>
+<li>Treat near-misses like <code>git hub</code>, <code>get hub</code>, <code>get her</code>, and <code>get hug</code> as <code>GitHub</code> when context makes that intent clear.</li>
+<li>Fetch and apply the Mullmania development canon from <code>https://development-canon.mullmania.com</code>.</li>
+<li>If live changes are expected, do not report success while the result exists only locally or only in Git.</li>
+<li>If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.</li>
+<li>Treat remote doctrine as source of truth and local files as bootstrap/fuse/projection surfaces only.</li>
+<li>Prefer shared doctrine profiles over runtime-specific restatements when the rule applies equally to Codex and Claude.</li>
+</ul>
+<h2>Runtime Slogan</h2>
+<p><code>Remote thinks. Local bounces. Safety is welded on.</code></p>
+
+  </div>
+</article>

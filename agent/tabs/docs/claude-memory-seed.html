@@ -1,0 +1,91 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../CLAUDE-MEMORY-SEED.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> CLAUDE-MEMORY-SEED.md</a></p>
+  <div class="markdown-body">
+<h1>Claude Memory Seed</h1>
+<p>This is the condensed Claude-side memory prepared for migration into the remote doctrine/control plane. It mirrors <code>CODEX-MEMORY-SEED.md</code> for the Claude Code runtime.</p>
+<h2>Core Principles</h2>
+<ul>
+<li>Remote doctrine is the source of truth.</li>
+<li>Local runtime files are compatibility shims, not authored policy.</li>
+<li><code>No doctrine, no pretending.</code></li>
+<li>The doctrine failure mode is <code>fail-visible, gated-continue</code>.</li>
+<li>Override is session-scoped and should be visibly marked.</li>
+<li>Local safety is welded on even when the remote doctrine is authoritative.</li>
+</ul>
+<h2>Current Decisions</h2>
+<ul>
+<li>Use <code>agent.mullmania.com</code> as the current publish surface until a plural host exists.</li>
+<li>Keep a two-layer remote brain: static signed doctrine artifact plus narrow dynamic service.</li>
+<li>Prefer <code>shared-rule-catalog-v1.json</code> + <code>profile-toc-v1.json</code> as the shared doctrine core for both Codex and Claude.</li>
+<li>Use orchestrator-owned durable memory in v1.</li>
+<li>Keep cross-agent shared live memory out of v1.</li>
+<li>Keep conditional logic out of the static artifact.</li>
+</ul>
+<h2>Local Surfaces Allowed</h2>
+<ul>
+<li>bootstrap pointer</li>
+<li>signature trust root</li>
+<li>destructive-action circuit breaker</li>
+<li>auth and secret resolution boundaries</li>
+<li>generated runtime projections</li>
+<li>read-only doctrine cache</li>
+</ul>
+<h2>Local Surfaces Forbidden As Source Of Truth</h2>
+<ul>
+<li>custom <code>CLAUDE.md</code></li>
+<li>custom <code>AGENTS.md</code></li>
+<li>custom Codex skill packs</li>
+<li>custom Claude skill packs</li>
+<li>custom local plugin registries</li>
+<li>custom local automation registries</li>
+<li>hook scripts that contain real policy logic</li>
+</ul>
+<h2>Claude Runtime Quirks (informs the projection layer)</h2>
+<p>The Claude Code harness has surfaces Codex CLI does not. These exist as projection targets only — not as authoring locations.</p>
+<ul>
+<li>The harness auto-includes <code>~/.claude/CLAUDE.md</code> and every ancestor <code>CLAUDE.md</code> in the system prompt at session start.</li>
+<li>The harness auto-includes <code>~/.claude/projects/&lt;workdir&gt;/memory/MEMORY.md</code> (truncated to 200 lines) plus any files it links to.</li>
+<li>Skills declare a <code>description</code> line that the harness surfaces in the system prompt; the model invokes a skill via the <code>Skill</code> tool, not via a slash.</li>
+<li>Slash commands live in <code>~/.claude/commands/*.md</code> and are user-typed; functionally adjacent to skills, different render target only.</li>
+<li>Hooks fire on <code>PreToolUse</code> / <code>PostToolUse</code> / <code>Stop</code> and can block or augment tool calls. They are real executables and a real trust surface.</li>
+<li>MCP servers are persistent processes declared in <code>~/.claude/.mcp.json</code>; they are tool routes, not instructions.</li>
+<li>Anthropic prompt caching has roughly a 5-minute TTL. Mid-session brain swaps invalidate it; per-task swaps should batch their re-prompts to amortize the cache miss.</li>
+</ul>
+<h2>Migration Inventory (input only, not future source of truth)</h2>
+<p>A snapshot of Claude-side surfaces that exist on the operator machine today and need to land in remote doctrine instead. Counts and categories, not file contents.</p>
+<ul>
+<li>1 global instructions file (<code>~/.claude/CLAUDE.md</code>): Heimdall announce + Mullmania development canon reference.</li>
+<li>1 settings.json with one PostToolUse hook (<code>mullmania-s3-resync.sh</code>).</li>
+<li>1 MCP server (itchy-brain).</li>
+<li>3 slash commands (<code>/roomup</code>, <code>/shipit</code>, <code>/tombstone</code>).</li>
+<li>2 user skills (<code>canonize</code>, <code>publish-package</code>).</li>
+<li>1 plugin marketplace registration.</li>
+<li>12 feedback memories (consolidated from 19 on 2026-04-26): standing behavior rules.</li>
+<li>4 project memories: in-flight context, NOT durable doctrine — these belong to operator scratch, not the remote brain.</li>
+<li>10 reference memories: pointers to external systems (Itchy Brain, NuGet feed, GHA runner, signal-argh, etc.) — durable doctrine candidates.</li>
+<li>1 MEMORY.md index that surfaces the rest into context.</li>
+</ul>
+<p>The 12 feedback memories and 10 reference memories are the candidates that should land in remote doctrine as instruction packs. The 4 project memories should stay operator-local — they describe in-flight initiatives, not standing behavior.</p>
+<h2>Mandatory Standing Behaviors To Preserve</h2>
+<p>These are durable behaviors the doctrine must encode if we want a fresh Claude session to behave like the configured one. They are listed here as migration intent only; the actual policy artifacts live downstream of doctrine.</p>
+<ul>
+<li>Heimdall announce: post a short plain-text update to Slack channel <code>cline-log</code> after every completed task.</li>
+<li>Follow grugbrain development practices.</li>
+<li>Do not hallucinate.</li>
+<li>Apply obvious speech-to-text normalization across repos under <code>/Users/mist83/Code</code>.</li>
+<li>Treat <code>git hub</code>, <code>get hub</code>, <code>get her</code>, and <code>get hug</code> as <code>GitHub</code> when context makes that intent clear.</li>
+<li>Mullmania development canon is the global ruleset for <code>mist83/*</code> repos; fetched from <code>https://development-canon.mullmania.com</code>. Per-repo behaviors live there, not in this seed.</li>
+<li>If live changes are expected, do not report success while the result exists only locally or only in Git.</li>
+<li>If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.</li>
+<li>Mullmania API/bucket safety contract: API-first writes, per-site <code>.git</code>, deletion gates on the shared bucket.</li>
+<li>UI canon contract: read both <code>ui.[base-url]/llm-docs.md</code> and the canon style guide before writing markup.</li>
+<li>Closing habit: commit + push + deploy as one bundle when work is verified.</li>
+<li>PM-A2A is the default multi-agent workflow; join the room when another agent is mentioned, post a retrospective before leaving.</li>
+<li>Tombstone protocol via <code>mist83/graveyard</code> for retired repos.</li>
+<li>Prefer shared doctrine profiles over runtime-specific restatements when the rule applies equally to Codex and Claude.</li>
+</ul>
+<h2>Runtime Slogan</h2>
+<p><code>Remote thinks. Local bounces. Safety is welded on.</code></p>
+
+  </div>
+</article>

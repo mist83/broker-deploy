@@ -1,0 +1,54 @@
+# Facet Loader - Smart Context-Based Loading
+
+## TRIGGER
+ALWAYS ACTIVE - Loads relevant facets based on detected context.
+
+## PURPOSE
+Token optimization: Load only relevant facets instead of all 35 rules.
+
+## FACETS AVAILABLE
+
+### Web Minimalist
+**File:** `facets/web-minimalist.facet`
+**Description:** HTML/CSS/JS minimalism and anti-bloat patterns
+**Domains:** html, css, javascript
+**Load when:** User mentions html, css, javascript or minimalism, semantic design, maintainability
+
+### Backend Pragmatic
+**File:** `facets/backend-pragmatic.facet`
+**Description:** Backend development patterns and best practices
+**Domains:** c#, asp.net, api
+**Load when:** User mentions c#, asp.net, api or architecture, patterns, standards
+
+### Code Generators
+**File:** `facets/generators.facet`
+**Description:** Scaffolding and code generation tools
+**Domains:** tooling, automation
+**Load when:** User mentions tooling, automation or generation, scaffolding
+
+### Quality Tools
+**File:** `facets/quality-tools.facet`
+**Description:** Code quality and maintenance tools
+**Domains:** debugging, maintenance
+**Load when:** User mentions debugging, maintenance or refactoring, analysis
+
+### External Integrations
+**File:** `facets/integrations.facet`
+**Description:** External service and API integrations
+**Domains:** apis, services
+**Load when:** User mentions apis, services or integration, connectivity
+
+### Process Workflows
+**File:** `facets/workflows.facet`
+**Description:** Process automation and workflow management
+**Domains:** automation, process
+**Load when:** User mentions automation, process or workflow, automation
+
+## LOADING LOGIC
+
+When user request detected:
+1. Analyze request for domain keywords
+2. Load matching facets (1-3 facets typically)
+3. If no match, load all facets
+
+**Token savings:** 5-8 KB per request vs 30 KB loading all rules

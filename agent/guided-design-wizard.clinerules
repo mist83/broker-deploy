@@ -1,0 +1,16 @@
+# Guided Design Wizard
+
+## TRIGGER
+When the user says any of:
+
+## PURPOSE
+Transform vague ideas into concrete app specifications through an HTML questionnaire. Answer everything at once in a browser instead of back-and-forth chat.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/guided-design-wizard.md" -Raw
+```
+
+Or use read_file tool:
+`full/guided-design-wizard.md`

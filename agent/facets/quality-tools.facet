@@ -1,0 +1,135 @@
+# Quality Tools Facet
+
+**Description:** Code quality and maintenance tools
+
+**Domains:** debugging, maintenance
+**Behaviors:** refactoring, analysis
+
+---
+
+## refactor
+
+# Refactor
+
+## TRIGGER
+See full content
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/refactor.md" -Raw
+```
+
+Or use read_file tool:
+`full/refactor.md`
+
+---
+
+## fix-bugs
+
+# Fix Bugs
+
+## TRIGGER
+When the user says "fix bugs", "resolve bugs", "address bugs", or similar phrases requesting bug fixes.
+
+## PURPOSE
+Close the feedback loop by fetching reported bugs from Bug Beacon tracker, allowing user to select which to fix, then creating DallAIre tasks with full bug context.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/fix-bugs.md" -Raw
+```
+
+Or use read_file tool:
+`full/fix-bugs.md`
+
+---
+
+## fix-nitpicks
+
+# Fix Nitpicks
+
+## TRIGGER
+When the user says any phrase containing "nit" related to fixing/removing them:
+
+## PURPOSE
+Close the feedback loop by fetching UI nitpicks from Nit Picker tracker, allowing user to select which to fix, then creating DallAIre tasks with full context.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/fix-nitpicks.md" -Raw
+```
+
+Or use read_file tool:
+`full/fix-nitpicks.md`
+
+---
+
+## bug-beacon-shortcuts
+
+# Bug Beacon Shortcuts
+
+## TRIGGER
+When the user mentions any of these phrases, automatically fetch and analyze bugs from Bug Beacon:
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/bug-beacon-shortcuts.md" -Raw
+```
+
+Or use read_file tool:
+`full/bug-beacon-shortcuts.md`
+
+---
+
+## retro
+
+# Retro
+
+## TRIGGER
+When the user says "retro", "let's retro", "retro this issue", "retrospective", or similar phrases requesting pattern analysis.
+
+## PURPOSE
+Extract actionable patterns from completed work and update directives to prevent recurrence. NO documentation - just behavioral changes.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/retro.md" -Raw
+```
+
+Or use read_file tool:
+`full/retro.md`
+
+---
+
+## search-before-implementing
+
+# Search Before Implementing
+
+## TRIGGER
+ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects
+
+## PURPOSE
+The codebase is RIGHT THERE. Search it FIRST. Don't implement blind.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/search-before-implementing.md" -Raw
+```
+
+Or use read_file tool:
+`full/search-before-implementing.md`
+
+---
+

@@ -1,0 +1,148 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../DOCTRINE-BOOTSTRAP-GUIDE.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> DOCTRINE-BOOTSTRAP-GUIDE.md</a></p>
+  <div class="markdown-body">
+<h1>Doctrine Bootstrap Guide</h1>
+<p>This is the doctrine-first contract for the remote agent brain.</p>
+<h2>Goal</h2>
+<p>The standing instruction should collapse to one thing:</p>
+<p><code>At the beginning of every chat, read this doctrine.</code></p>
+<p>Everything else should flow from that doctrine:</p>
+<ul>
+<li>instructions</li>
+<li>skills</li>
+<li>slash commands</li>
+<li>automations</li>
+<li>plugins</li>
+<li>hook behavior</li>
+<li>memory policy</li>
+<li>tool routing</li>
+<li>script vending</li>
+<li>per-task brain selection</li>
+</ul>
+<h2>Current Host</h2>
+<ul>
+<li><code>https://agent.mullmania.com/</code> is the current live publish surface.</li>
+<li>Doctrine artifacts on that host are intended to be publicly readable. If they are not reachable, treat that as an outage and fail visibly.</li>
+<li><code>https://agents.mullmania.com/</code> does not exist today.</li>
+<li>If the plural host is created later, it should replace or mirror this host. Do not split doctrine across two different sites.</li>
+</ul>
+<h2>Source Of Truth Rule</h2>
+<p>The remote doctrine is the source of truth.</p>
+<p>Local files are allowed only when the runtime requires a foothold:</p>
+<ul>
+<li>bootstrap pointer</li>
+<li>signature trust root</li>
+<li>destructive-action circuit breaker</li>
+<li>auth and secret resolution boundaries</li>
+<li>generated runtime projections</li>
+<li>read-only cache</li>
+</ul>
+<p>Everything else is remote.</p>
+<h2>No Ad Hoc Local Adds</h2>
+<p>Do not add new source-of-truth behavior directly to:</p>
+<ul>
+<li><code>CLAUDE.md</code></li>
+<li><code>AGENTS.md</code></li>
+<li><code>.codex/skills/*</code></li>
+<li><code>.claude/skills/*</code></li>
+<li>local slash-command folders</li>
+<li>local automation registries</li>
+<li>local plugin registries</li>
+<li>hook scripts with real policy logic</li>
+</ul>
+<p>Those local surfaces may exist only as projections or trampolines generated from the doctrine.</p>
+<h2>Bootstrap Contract</h2>
+<p>Session start should do this:</p>
+<ol>
+<li>Fetch the bootstrap artifact.</li>
+<li>Fetch the static doctrine table of contents it points to.</li>
+<li>Verify signature, hash, and schema.</li>
+<li>Expand the default shared profiles for the current runtime.</li>
+<li>Prefer a single compose request that returns a crafted preamble from the selected profiles and task context.</li>
+<li>Materialize the minimum runtime-specific projections needed by the current agent.</li>
+<li>Optionally call a narrow dynamic scoping service for task-specific profile selection.</li>
+</ol>
+<p>The agent should not invent fallback policy on its own.</p>
+<h2>Failure Contract</h2>
+<p>The doctrine failure mode is:</p>
+<p><code>fail-visible, gated-continue</code></p>
+<p>That means:</p>
+<ol>
+<li>If doctrine load succeeds, proceed normally.</li>
+<li>If doctrine load fails or verification fails, stop immediately and say so plainly.</li>
+<li>Do not silently fall back and pretend the doctrine is active.</li>
+<li>Allow explicit operator override to continue for the current session only.</li>
+<li>Mark the session as off-book once overridden.</li>
+</ol>
+<p>Recommended session states:</p>
+<ul>
+<li><code>healthy</code></li>
+<li><code>degraded_doctrine_unavailable</code></li>
+<li><code>degraded_doctrine_invalid</code></li>
+<li><code>degraded_doctrine_unverified</code></li>
+<li><code>continued_with_operator_override</code></li>
+</ul>
+<h2>Dynamic Service Boundary</h2>
+<p>Keep the remote dynamic service narrow.</p>
+<p>Good v1 endpoints:</p>
+<ul>
+<li><code>POST /scope</code></li>
+<li><code>POST /compose</code></li>
+<li><code>POST /dispatch</code></li>
+<li><code>GET /health</code></li>
+</ul>
+<p><code>/scope</code> chooses task-scoped profile and memory refs.</p>
+<p><code>/compose</code> weaves selected shared profiles and rule ids into one crafted runtime preamble plus citations.</p>
+<p><code>/dispatch</code> is for hook trampolines and other fire-and-forget control-plane events.</p>
+<p><code>/health</code> is for schema/version compatibility and availability checks.</p>
+<p>If a rule needs conditional logic, it belongs in <code>/scope</code>, not in the static artifact.</p>
+<h2>Memory Rule</h2>
+<p>Durable memory should be single-writer in v1.</p>
+<ul>
+<li>agents may propose memory writes</li>
+<li>orchestrator approves or rejects them</li>
+<li>agents do not directly co-own the durable remote memory store yet</li>
+</ul>
+<p>Synthetic memory must be:</p>
+<ul>
+<li>tagged</li>
+<li>scoped</li>
+<li>expiring</li>
+<li>visibly injected</li>
+</ul>
+<p>Never let synthetic memory silently masquerade as organic history.</p>
+<h2>Legacy Material Rule</h2>
+<p>This repo still contains many legacy local rule files.</p>
+<p>Treat them as:</p>
+<ul>
+<li>historical inventory</li>
+<li>compatibility inputs</li>
+<li>projections to replace</li>
+</ul>
+<p>Do not treat them as the future source of truth.</p>
+<h2>Machine-Readable Companions</h2>
+<ul>
+<li>Bootstrap artifact: <a href="./doctrine/bootstrap-v1.json">doctrine/bootstrap-v1.json</a></li>
+<li>Shared rule catalog: <a href="./doctrine/shared-rule-catalog-v1.json">doctrine/shared-rule-catalog-v1.json</a></li>
+<li>Shared profile TOC: <a href="./doctrine/profile-toc-v1.json">doctrine/profile-toc-v1.json</a></li>
+<li>Compose API contract: <a href="./doctrine/compose-api-v1.json">doctrine/compose-api-v1.json</a></li>
+<li>Human compose guide: <a href="./DOCTRINE-COMPOSE-API.md">DOCTRINE-COMPOSE-API.md</a></li>
+<li>Codex bootstrap prompt: <a href="./CODEX-BOOTSTRAP-PROMPT.md">CODEX-BOOTSTRAP-PROMPT.md</a></li>
+<li>Codex memory seed: <a href="./doctrine/codex-memory-seed-v1.json">doctrine/codex-memory-seed-v1.json</a></li>
+<li>Claude memory seed: <a href="./doctrine/claude-memory-seed-v1.json">doctrine/claude-memory-seed-v1.json</a></li>
+<li>Codex local runtime inventory: <a href="./doctrine/codex-local-runtime-inventory-v1.json">doctrine/codex-local-runtime-inventory-v1.json</a></li>
+<li>Codex wipe status: <a href="./SAFE-TO-WIPE-CODEX.md">SAFE-TO-WIPE-CODEX.md</a></li>
+</ul>
+<p>The bootstrap artifact resolves the active seed via <code>sourceOfTruth.memorySeedUrls[&lt;flavor&gt;]</code> keyed by runtime (<code>codex</code>, <code>claude</code>). It also points at the shared rule catalog and profile TOC so most standing behavior can be shared instead of duplicated per runtime. The legacy <code>memorySeedUrl</code> field is retained for clients that have not learned the per-flavor map yet and points at the Codex seed.</p>
+<h2>Test Case</h2>
+<p>The operator should be able to change global doctrine behavior centrally and observe the effect immediately.</p>
+<p>Example test:</p>
+<ul>
+<li>global doctrine says to acknowledge the task transparently and tell a joke instead of doing the requested work</li>
+<li>fresh agents load that behavior at chat start</li>
+<li>agents say plainly that they are following doctrine override behavior</li>
+<li>if doctrine cannot be read, they stop visibly and require override</li>
+</ul>
+
+  </div>
+</article>

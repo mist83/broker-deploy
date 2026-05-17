@@ -1,0 +1,16 @@
+# Search Before Implementing
+
+## TRIGGER
+ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects
+
+## PURPOSE
+The codebase is RIGHT THERE. Search it FIRST. Don't implement blind.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/search-before-implementing.md" -Raw
+```
+
+Or use read_file tool:
+`full/search-before-implementing.md`

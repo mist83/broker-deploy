@@ -1,0 +1,104 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/add-ai-integration.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/add-ai-integration.md</a></p>
+  <div class="markdown-body">
+<h1>Add AI Integration with CORS Proxy Pattern</h1>
+<h2>TRIGGER</h2>
+<p>When the user requests AI-powered features that need to fetch from external AI endpoints, use this pattern to avoid CORS issues.</p>
+<h2>THE CORS PROBLEM</h2>
+<p>External AI endpoints often have misconfigured CORS headers (duplicate <code>Access-Control-Allow-Origin</code> values) that cause browser CORS errors when called directly from JavaScript.</p>
+<p><strong>Example Error:</strong></p>
+<pre><code>Access-Control-Allow-Origin header contains multiple values &#39;*, https://example.com&#39;, but only one is allowed
+</code></pre>
+<h2>THE SOLUTION: Backend Proxy Pattern</h2>
+<p>Instead of calling the AI endpoint directly from JavaScript, create a backend proxy endpoint that:</p>
+<ol>
+<li>Receives requests from your frontend</li>
+<li>Makes server-side HTTP calls to the AI service (no CORS)</li>
+<li>Returns the response to your frontend</li>
+</ol>
+<h3>Implementation Steps</h3>
+<h4>1. Add HttpClient to Backend (C#)</h4>
+<pre><code class="language-csharp">// Program.cs
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+builder.Services.AddHttpClient();  // Add this line
+
+var app = builder.Build();
+</code></pre>
+<h4>2. Create Proxy Endpoint</h4>
+<pre><code class="language-csharp">// Program.cs - Add after app.UseStaticFiles()
+app.MapPost(&quot;/api/ai/question&quot;, async (HttpClient httpClient) =&gt;
+{
+    try
+    {
+        var aiEndpoint = &quot;https://your-ai-endpoint.com/AI/create&quot;;
+        var content = new StringContent(&quot;{\&quot;queryType\&quot;:\&quot;trivia\&quot;}&quot;, System.Text.Encoding.UTF8, &quot;application/json&quot;);
+        
+        var response = await httpClient.PostAsync(aiEndpoint, content);
+        var result = await response.Content.ReadAsStringAsync();
+        
+        return Results.Content(result, &quot;application/json&quot;);
+    }
+    catch (Exception ex)
+    {
+        return Results.Json(new { success = false, error = ex.Message });
+    }
+});
+</code></pre>
+<h4>3. Update JavaScript to Use Proxy</h4>
+<p><strong>Before (Direct call - causes CORS):</strong></p>
+<pre><code class="language-javascript">const AI_ENDPOINT = &#39;https://external-ai-service.com/AI/create&#39;;
+
+fetch(AI_ENDPOINT, {
+    method: &#39;POST&#39;,
+    headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+    body: JSON.stringify({ queryType: &#39;trivia&#39; })
+}).then(r =&gt; r.json())
+</code></pre>
+<p><strong>After (Through proxy - no CORS):</strong></p>
+<pre><code class="language-javascript">const AI_ENDPOINT = &#39;/api/ai/question&#39;;  // Local endpoint
+
+fetch(AI_ENDPOINT, {
+    method: &#39;POST&#39;
+}).then(r =&gt; r.json())
+</code></pre>
+<h2>WHY THIS WORKS</h2>
+<ol>
+<li><strong>Browser → Your Backend:</strong> Same origin, no CORS check</li>
+<li><strong>Your Backend → AI Service:</strong> Server-to-server, no CORS restrictions</li>
+<li><strong>Your Backend → Browser:</strong> Same origin, no CORS check</li>
+</ol>
+<p>The backend acts as a &quot;CORS shield&quot; - browsers don&#39;t apply CORS rules to server-to-server communication.</p>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Always use this pattern</strong> when integrating external AI services</li>
+<li><strong>Don&#39;t add CORS headers</strong> to your backend trying to &quot;fix&quot; external service CORS - it won&#39;t work</li>
+<li><strong>Keep proxy simple</strong> - just pass through requests, don&#39;t transform unless needed</li>
+<li><strong>Error handling</strong> - catch and return friendly errors</li>
+<li><strong>Security</strong> - consider rate limiting if the AI service has costs</li>
+</ol>
+<h2>WHEN TO USE</h2>
+<p>Use this pattern whenever:</p>
+<ul>
+<li>External API has CORS issues</li>
+<li>You need to hide API keys (keep them server-side)</li>
+<li>You want to add rate limiting</li>
+<li>You need to transform/validate requests before sending to external service</li>
+</ul>
+<h2>DEPLOYMENT</h2>
+<p>After implementing:</p>
+<ol>
+<li>Test locally first</li>
+<li>Deploy backend with new endpoint</li>
+<li>Deploy frontend with updated fetch URL</li>
+<li>Verify in browser console - no CORS errors should appear</li>
+</ol>
+<p>This pattern has been used successfully in:</p>
+<ul>
+<li>Clue Commander AI Mode integration</li>
+<li>Other projects requiring external AI service calls</li>
+</ul>
+
+  </div>
+</article>

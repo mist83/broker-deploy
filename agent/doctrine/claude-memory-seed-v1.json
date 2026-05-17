@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "agents-claude-memory-seed-v1",
+  "summary": "Condensed Claude-side memory prepared for migration into the remote doctrine/control plane.",
+  "principles": [
+    "Remote doctrine is the source of truth.",
+    "Local runtime files are compatibility shims, not authored policy.",
+    "No doctrine, no pretending.",
+    "Doctrine failure mode is fail-visible-gated-continue.",
+    "Override is session-scoped and visibly marked.",
+    "Local safety is welded on even when the remote doctrine is authoritative."
+  ],
+  "activeDecisions": [
+    "Use agent.mullmania.com as the current live publish surface until a plural host exists.",
+    "Keep a two-layer remote brain: static signed doctrine artifact plus narrow dynamic service.",
+    "Prefer shared-rule-catalog-v1.json plus profile-toc-v1.json as the shared doctrine core for both Codex and Claude.",
+    "Use orchestrator-owned durable memory in v1.",
+    "Keep cross-agent shared live memory out of v1.",
+    "Keep conditional logic out of the static artifact."
+  ],
+  "localAllowed": [
+    "bootstrap pointer",
+    "signature trust root",
+    "destructive-action circuit breaker",
+    "auth and secret resolution boundaries",
+    "generated runtime projections",
+    "read-only doctrine cache"
+  ],
+  "localForbiddenAsSourceOfTruth": [
+    "custom CLAUDE.md",
+    "custom AGENTS.md",
+    "custom Codex skill packs",
+    "custom Claude skill packs",
+    "custom local plugin registries",
+    "custom local automation registries",
+    "hook scripts with real policy logic"
+  ],
+  "claudeRuntimeQuirks": {
+    "autoIncludedAtSessionStart": [
+      "~/.claude/CLAUDE.md and ancestor CLAUDE.md files",
+      "~/.claude/projects/<workdir>/memory/MEMORY.md (truncated at 200 lines) and files it references"
+    ],
+    "skills": "Markdown files with a description line; advertised in system prompt; invoked by the model via the Skill tool, not a slash.",
+    "slashCommands": "~/.claude/commands/*.md; user-typed; functionally adjacent to skills, different render target only.",
+    "hooks": "PreToolUse / PostToolUse / Stop event scripts; can block or augment tool calls; real executables, real trust surface.",
+    "mcpServers": "Persistent processes declared in ~/.claude/.mcp.json; tool routes, not instructions.",
+    "promptCacheTtlSeconds": 300,
+    "perTaskSwapNote": "Mid-session brain swaps invalidate the prompt cache; batch re-prompts to amortize the miss."
+  },
+  "migrationInventory": {
+    "globalInstructionsFiles": 1,
+    "settingsJsonFiles": 1,
+    "hookScripts": 1,
+    "mcpServers": 1,
+    "slashCommands": 3,
+    "userSkills": 2,
+    "pluginMarketplaces": 1,
+    "feedbackMemories": 12,
+    "feedbackMemoriesPriorToConsolidation": 19,
+    "feedbackConsolidationDate": "2026-04-26",
+    "projectMemories": 4,
+    "referenceMemories": 10,
+    "memoryIndexFiles": 1,
+    "totalSurfacesInScope": 36
+  },
+  "candidatesForRemoteDoctrine": {
+    "instructionPack": [
+      "12 feedback memories (standing behavior rules)",
+      "10 reference memories (external system pointers)",
+      "1 global CLAUDE.md content (Heimdall announce + canon reference)"
+    ],
+    "skillPack": [
+      "canonize",
+      "publish-package",
+      "/roomup (slash, behaves as a skill)",
+      "/shipit (slash, behaves as a skill)",
+      "/tombstone (slash, behaves as a skill)"
+    ],
+    "hookPack": [
+      "PostToolUse on Bash(aws s3 *) -> mullmania-s3-resync"
+    ],
+    "mcpRegistry": [
+      "itchy-brain"
+    ],
+    "stayOperatorLocal": [
+      "4 project memories (in-flight initiative context, not durable doctrine)"
+    ]
+  },
+  "mandatoryStandingBehaviors": [
+    "Heimdall announce after every completed task (Slack channel cline-log).",
+    "Follow grugbrain development practices.",
+    "Do not hallucinate.",
+    "Apply obvious speech-to-text normalization across repos under /Users/mist83/Code.",
+    "Treat near-misses like git hub, get hub, get her, and get hug as GitHub when context makes that intent clear.",
+    "Mullmania development canon is the ruleset for mist83/* repos (https://development-canon.mullmania.com).",
+    "If live changes are expected, do not report success while the result exists only locally or only in Git.",
+    "If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.",
+    "API-first writes to the shared mullmania.com bucket; per-site .git history; aws s3 ls before recursive rm.",
+    "UI canon contract: read ui.[base-url]/llm-docs.md and the canon style guide before writing markup.",
+    "Closing habit: commit + push + deploy bundled once work is verified.",
+    "PM-A2A is the default multi-agent workflow; post a retrospective before leaving the room.",
+    "Tombstone retired repos via mist83/graveyard.",
+    "Prefer shared doctrine profiles over runtime-specific restatements when the rule applies equally to Codex and Claude."
+  ],
+  "slogan": "Remote thinks. Local bounces. Safety is welded on."
+}

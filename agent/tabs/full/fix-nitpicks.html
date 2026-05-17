@@ -1,0 +1,111 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/fix-nitpicks.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/fix-nitpicks.md</a></p>
+  <div class="markdown-body">
+<h1>Fix Nitpicks - Automated UI Issue Resolution</h1>
+<h2>TRIGGER</h2>
+<p>When the user says any phrase containing &quot;nit&quot; related to fixing/removing them:</p>
+<ul>
+<li>&quot;fix nitpicks&quot;</li>
+<li>&quot;fix nits&quot;</li>
+<li>&quot;resolve nitpicks&quot;</li>
+<li>&quot;obliterate nits&quot;</li>
+<li>&quot;address nitpicks&quot;</li>
+<li>&quot;nit fix&quot;</li>
+<li>Or similar phrases requesting nitpick fixes</li>
+</ul>
+<h2>PURPOSE</h2>
+<p>Close the feedback loop by fetching UI nitpicks from Nit Picker tracker, allowing user to select which to fix, then creating DallAIre tasks with full context.</p>
+<h2>NIT PICKER API</h2>
+<p><strong>Base URL:</strong> <a href="https://ap32hythbvomw6gm4t5amch5n40bpkqn.lambda-url.us-west-2.on.aws">https://ap32hythbvomw6gm4t5amch5n40bpkqn.lambda-url.us-west-2.on.aws</a></p>
+<p><strong>Endpoints:</strong></p>
+<ul>
+<li>GET <code>/api/nits/list</code> - List all nitpick files</li>
+<li>GET <code>/api/nits/{fileName}</code> - Get specific nitpick file</li>
+<li>DELETE <code>/api/nits/{fileName}</code> - Delete nitpick file after fixing</li>
+</ul>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>Step 1: Fetch Nitpick List</h3>
+<pre><code class="language-powershell">$response = Invoke-RestMethod -Uri &quot;https://ap32hythbvomw6gm4t5amch5n40bpkqn.lambda-url.us-west-2.on.aws/api/nits/list&quot;
+$nitFiles = $response
+</code></pre>
+<h3>Step 2: Present Nitpicks to User</h3>
+<p>Use <code>ask_followup_question</code> to let user select which nitpick files to fix:</p>
+<ul>
+<li>Show fileName and timestamp</li>
+<li>Allow multiple selection</li>
+<li>Include &quot;Fix all&quot; option</li>
+</ul>
+<h3>Step 3: Fetch Nitpick Details</h3>
+<p>For each selected file:</p>
+<pre><code class="language-powershell">$nitDetails = Invoke-RestMethod -Uri &quot;https://ap32hythbvomw6gm4t5amch5n40bpkqn.lambda-url.us-west-2.on.aws/api/nits/$fileName&quot;
+</code></pre>
+<h3>Step 4: Create Fix Task</h3>
+<p>Create a task in DallAIre with comprehensive context:</p>
+<p><strong>Task Prompt Format:</strong></p>
+<pre><code>Fix UI nitpicks: {fileName}
+
+Page URL: {nitDetails.pageUrl}
+Timestamp: {nitDetails.timestamp}
+
+Notes ({count}):
+{formatted list of UI issues with selectors}
+
+For each note:
+- Selector: {note.selector}
+- Element: {note.tagName}.{note.className}
+- Issue: {note.note}
+
+Please analyze these UI issues, identify the root cause, and implement fixes.
+</code></pre>
+<h3>Step 5: Delete Fixed Nitpicks</h3>
+<p>After task created successfully:</p>
+<pre><code class="language-powershell">Invoke-RestMethod -Uri &quot;https://ap32hythbvomw6gm4t5amch5n40bpkqn.lambda-url.us-west-2.on.aws/api/nits/$fileName&quot; -Method Delete
+</code></pre>
+<h2>USER WORKFLOW</h2>
+<ol>
+<li>User sees UI issue in app</li>
+<li>UI Nit Picker FAB (orange target icon)</li>
+<li>User clicks &quot;Start Picking Elements&quot;</li>
+<li>User clicks problem element, adds note</li>
+<li>User clicks &quot;Send All Notes to API&quot; → submits to tracker</li>
+<li>Later: User says &quot;fix nitpicks&quot;</li>
+<li>Cline lists nitpick files, user selects</li>
+<li>Task created with full context</li>
+<li>Nitpick file automatically deleted after task creation</li>
+</ol>
+<h2>COMPLETION MESSAGE</h2>
+<p>After creating tasks:</p>
+<pre><code>Created {count} nitpick fix tasks:
+- Task {taskId}: {fileName}
+- ...
+
+Nitpick files automatically deleted from tracker.
+Navigate to Tasks tab to monitor progress.
+</code></pre>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Auto-delete after task creation</strong> - Nitpick file is removed from tracker once task is queued</li>
+<li><strong>Full context preservation</strong> - Selectors, element info, user notes all included in task</li>
+<li><strong>DallAIre integration</strong> - Uses existing task creation API</li>
+<li><strong>No manual cleanup needed</strong> - Nitpicks vanish once addressed</li>
+</ol>
+<h2>ERROR HANDLING</h2>
+<p>If nitpick fetch fails:</p>
+<ul>
+<li>Inform user tracker may be unavailable</li>
+<li>Suggest manual viewing at Lambda URL</li>
+</ul>
+<p>If task creation fails:</p>
+<ul>
+<li>DO NOT delete nitpick file from tracker</li>
+<li>Inform user to retry</li>
+</ul>
+<h2>EXAMPLE USAGE</h2>
+<p>User: &quot;obliterate nits&quot;
+Cline: Lists 2 nitpick files with timestamps
+User: Selects both
+Cline: Creates 2 tasks with full UI issue context, deletes files from tracker
+Result: Tasks queued, nitpicks removed, loop closed</p>
+
+  </div>
+</article>

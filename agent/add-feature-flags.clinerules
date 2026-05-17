@@ -1,0 +1,16 @@
+# Add Feature Flags
+
+## TRIGGER
+When the user says "add feature flags", "add f3", "use feature flags", or similar phrases requesting feature flag functionality.
+
+## PURPOSE
+Integrate the F3 Feature Flag FAB into HTML files to enable localStorage-based feature flag management with event broadcasting.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-feature-flags.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-feature-flags.md`

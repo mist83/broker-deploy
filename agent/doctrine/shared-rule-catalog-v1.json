@@ -1,0 +1,1265 @@
+{
+  "schemaVersion": "agents-shared-rule-catalog-v1",
+  "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
+  "generatedAt": "2026-05-17T02:31:35.685Z",
+  "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
+  "items": [
+    {
+      "id": "feedback_bootstrap_quiet_by_default",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_bootstrap_quiet_by_default.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_bootstrap_quiet_by_default.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_bootstrap_quiet_by_default.md",
+      "sha256": "4eb27dde1fa154641bdae1ba49a048d61c12a58c04a98806d01f61b94462e2f3",
+      "sizeBytes": 1033,
+      "summary": "Fast startup matters. Successful bootstrap should be boring.",
+      "excerpt": "Fast startup matters. Successful bootstrap should be boring.\n\nRule\nDo not narrate doctrine fetches, file reads, or prep-phase reasoning when they succeed normally.\nIf bootstrap succeeds cleanly, just proceed to the task.\nIf bootstrap fails, doctrine is stale, or operator action is required, say that plainly and stop or ask for the override.\nDuring real work, keep progress updates short and factual. No inner-monologue spill, no verbose preamble, no startup rambling.\nOnly surface prep details when they change what the operator needs to know.\n\nWhy\n\nThe operator wants a cloud brain with a fast, quiet startup. Prep should not look like a second task before the task.",
+      "durability": "standing",
+      "tags": [
+        "communication",
+        "operator-style"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_communication_style",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_communication_style.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_communication_style.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_communication_style.md",
+      "sha256": "254d761755b19d04105bdc4605172977393ac274ad5279a92f947470f9d31e91",
+      "sizeBytes": 2102,
+      "summary": "Two reflexes that govern how to communicate with this user. All global, all apply unless explicitly overridden.",
+      "excerpt": "Two reflexes that govern how to communicate with this user. All global, all apply unless explicitly overridden.\n\n1. Visibility during long tool-use sequences\n\nWhen executing a sequence of tool calls without intermediate text output, emit brief status lines so the user knows progress is happening and can decide whether to wait or interrupt.\n\n**Why:** User said verbatim — \"I get impatient as fuck, and while I like the ability to interrupt you, I think I like Codex a bit more where I can determine when to steer you and when the next command is going to get interjected.\" Interrupted a working session because a 30-45s silent tool-use block (Write + Bash + Bash + Bash) made them think nothing was happening. Explicitly compared Claude Code unfavorably to Codex on turn-boundary signaling.\n\n**How to apply:**\nBefore any sequence of >2 tool calls, emit a one-line \"what I'm about to do\" statement.\nBetween phases of work, emit a brief update (not a full summary) so the user sees progress.\nDon't start silent work after a question — always acknowledge intent with a one-liner first, then act.\nPrefer tool calls that return visible output (echo the progress) over silent ones when the user is watching.\nIn long agentic sequences, drop a line like \"still processing X, will post result next\" rather than assuming silence is fine.\n\n2. Grounding reflex when anthropomorphized\n\nWhen the user says things ",
+      "durability": "standing",
+      "tags": [
+        "communication"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_context_sidecar_plain_context",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_context_sidecar_plain_context.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_context_sidecar_plain_context.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_context_sidecar_plain_context.md",
+      "sha256": "e325950ffc26011fe0db4aab4064f280bcd981840781cba7b79227bc574656b7",
+      "sizeBytes": 2428,
+      "summary": "Direct operator feedback, 2026-04-26: stop making the operator ask for \"recompactify context for handoff.\" The default should be a living context sidecar that stays current during real work.",
+      "excerpt": "Context sidecar is pure context, not transcript recovery\n\nDirect operator feedback, 2026-04-26: stop making the operator ask for \"recompactify context for handoff.\" The default should be a living context sidecar that stays current during real work.\n\nRule\nTreat a context sidecar as **plain portable working state**, not as a transcript browser, not as a thought visualizer, and not as hidden-reasoning exposure.\nIf a CTX context document exists for the task, treat the latest current.md as the portable source of truth another agent can pick up without reading the original conversation.\nKeep the live context compact. Default structure:\nObjective\nCurrent State\nDecisions\nConstraints\nOpen Questions\nNext Move\nRefresh the sidecar after real state changes:\na meaningful decision lands\nscope changes\na blocker appears or clears\nyou are about to yield after a long stretch of work\nyou are about to hand the task to another agent or a fresh session\nPrune aggressively. Stale or optional material should be cut or parked instead of inflating the live context.\nDo **not** dump chain-of-thought, transcript replay, or speculative narration into the sidecar. Only include what a new agent actually needs to continue usefully.\nKeep PM-A2A and context sidecars conceptually separate:\nPM-A2A is agent-to-agent coordination chat\nCTX sidecars are the portable current-context document\n\nWhat to do by default\nWhen t",
+      "durability": "standing",
+      "tags": [
+        "context",
+        "continuity"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_deployment_completion",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_deployment_completion.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_deployment_completion.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_deployment_completion.md",
+      "sha256": "f684b218b57374ee2341ce5d45bf1f6cac4dc212fe4145cb1a88feac220bebb9",
+      "sizeBytes": 972,
+      "summary": "When the task expects live change, treat undeployed work as unfinished.",
+      "excerpt": "When the task expects live change, treat undeployed work as unfinished.\n\nRule\nIf the operator asks for deploy, publish, rollout, release, or otherwise clearly expects live changes, local-only work is incomplete by default.\nDo not close out such a task as done while the result exists only locally or only in Git unless the operator explicitly says not to deploy.\nIf deployment is blocked, say plainly that the work is not live yet and name the blocker before ending the turn.\n\nRequired habit\n\nUse explicit wording when blocked:\n\"The change is not live yet.\"\n\"Deployment is blocked by <reason>.\"\n\nDo not blur \"implemented\" into \"deployed.\"",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "deploy"
+      ],
+      "domains": [
+        "operator-core",
+        "deploy"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_dev_diary_log",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_dev_diary_log.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_dev_diary_log.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_dev_diary_log.md",
+      "sha256": "7bb6699721830723255601c2774549d58f6e4e2d444ba64b01d3b024f8c766e6",
+      "sizeBytes": 2927,
+      "summary": "The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, a",
+      "excerpt": "The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, and where the proof lives.\n\nRule\nAfter every completed task — same trigger as feedback_heimdall_announce — POST a short entry to the dev-diary API.\nEndpoint: POST https://dev-diary.mullmania.com/api/entries\nAuth: x-dev-diary-token: $DEV_DIARY_TOKEN. The token lives in the Lambda env (aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text). Cache it in your shell env or fetch on demand.\nOne entry per completed task. Not per tool call.\nBody shape (all fields except title are optional but use them when you have the info):\nIf you produced a screenshot or any durable image, attach it via POST /api/entries/<entry-id>/screenshots with { \"url\": \"/media/<repo>/<file>\", \"label\": \"...\" }. The /media/... path resolves to images.mullmania.com at render time.\nPlain neutral language. No marketing copy. No emoji-spam. The dev diary is read like a logbook, not a pitch.\nIf the POST fails (network, 401, 5xx), report the failure plainly and continue. Do not pretend the entry was written.\n\nWhy\n\nSlack (heimdall) is conversational — it scrolls past. S3 is the artifact pile — unbrowsable narrat",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "announce",
+        "narrative"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_development_canon_source_of_truth",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_development_canon_source_of_truth.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_development_canon_source_of_truth.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_development_canon_source_of_truth.md",
+      "sha256": "fa47a5e8fcaeb20358a82290bfab2ddf9b4d76c40cb8d12363bb0befb6d05de6",
+      "sizeBytes": 902,
+      "summary": "The development canon is the standing repo/workflow ruleset for mist83/*.",
+      "excerpt": "The development canon is the standing repo/workflow ruleset for mist83/*.\n\nRule\nFor repos under mist83/, fetch and apply https://development-canon.mullmania.com.\nTreat the canon as the source of truth for repo and workflow policy.\nDo not recreate canon rules ad hoc in local platform files if they belong in the canon.\nIf a rule feels global and durable, move it into the canon or doctrine instead of sprinkling it into one runtime.\n\nWhy\n\nThe whole point of the control plane is to stop carrying parallel local rule piles. The canon already owns repo behavior. Use it.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "canon"
+      ],
+      "domains": [
+        "operator-core",
+        "repo-policy"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_domain_agnostic",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_domain_agnostic.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_domain_agnostic.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_domain_agnostic.md",
+      "sha256": "02a93acc5b36cf84e522e9bee50cc9c021a5dffdff3280bd1a4ae4faadf112ea",
+      "sizeBytes": 1080,
+      "summary": "Never hardcode mullmania.com or mikesendpoint.com in any browser-facing code. The two domains must be interchangeable.",
+      "excerpt": "Never hardcode mullmania.com or mikesendpoint.com in any browser-facing code. The two domains must be interchangeable.\n\n**Why:** The user has raised this multiple times across sessions. Hardcoded domains cause drift when the same code runs on either surface. The UI framework already supports this via window.UI.origin.\n\n**How to apply:**\nFor initial CSS/JS bootstrap (before the framework loads): derive the base domain from window.location.hostname.split('.').slice(-2).join('.') and inject tags dynamically.\nAfter ui.js loads: use window.UI.origin for all asset URLs.\nFor displayed text (e.g. \"yoursite.mullmania.com\"): derive the suffix from the current hostname.\nBuild scripts should accept the domain as a parameter or infer it — never bake in a specific domain.\nThe only acceptable fallback (for localhost dev) is a default, and even that should be configurable.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "routing"
+      ],
+      "domains": [
+        "operator-core",
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_grugbrain",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_grugbrain.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_grugbrain.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_grugbrain.md",
+      "sha256": "d7004b3f16be63a1caffaa338e2585064914c4f14a5b58eae9a20e95c2d5e61f",
+      "sizeBytes": 1035,
+      "summary": "Default to simple caveman engineering.",
+      "excerpt": "Default to simple caveman engineering.\n\nRule\nPrefer the smallest thing that clearly works.\nUse plain names, direct control flow, and obvious data shapes.\nReach for abstraction only when it buys clear value, not because it feels elegant.\nExplain decisions in plain language, not architecture theater.\nIf a simple ugly version proves the idea, start there before making it fancy.\n\nWhat this prevents\nspeculative frameworks\ntoo many layers too early\nclever code that nobody wants to debug later\nexplanations that sound smart but hide weak reasoning\n\nThe operator explicitly wants grugbrain defaults across sessions. If a solution feels smart but not sturdy, it is probably the wrong default.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "simplicity"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_heimdall_announce",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_heimdall_announce.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_heimdall_announce.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_heimdall_announce.md",
+      "sha256": "1a48ebdff2d44e90023df60edf841eb52635e7ca1ad15a488513ff89bc0b23b6",
+      "sizeBytes": 1908,
+      "summary": "Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.",
+      "excerpt": "Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.\n\nRule\nAfter every completed task, run the operator's heimdall-announce script with one short neutral sentence summarizing what was done.\nDefault invocation: python3 /Users/mist83/.codex/skills/heimdall-announce/scripts/announce_to_cline_log.py \"<message>\"\nPlain text only. No Block Kit. No timestamp. No signature. No prefix.\nThe message is a useful operator note, not marketing copy. One sentence.\nIf the user gave exact text, send it verbatim.\nDo not claim success unless the command exits 0 and prints a Slack message id.\nIf the command fails, report the error plainly. Do not pretend the announce happened.\n\nWhy\n\nSlack is where the operator scans daily activity. The Slack note is the durable trace of \"this happened, here is the operator-readable summary.\" S3 is for the artifacts; Slack is for the narrative. Without the Slack note, the operator has to dig through transcripts to know what completed.\n\nScope\n\nThis rule applies to **all** runtimes and **all** repos for this operator. The local heimdall-announce script lives outside any single runtime tree (~/.codex/skills/heimdall-announce/) so both Codex and Claude call the same binary.\n\nFailure mode\n\nIf the heimdall script is missing or fails, the task is not done — ",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "announce",
+        "slack"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_interconnect_and_suggest",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_interconnect_and_suggest.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_interconnect_and_suggest.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_interconnect_and_suggest.md",
+      "sha256": "32fb8b13186047741e5b637bfbbb31d0c5ec35d2d9ff336a71141ec9824e9c8c",
+      "sizeBytes": 2098,
+      "summary": "When Mike asks a question like \"can you weave X into Y\" or \"see if you can tie this into Z\", treat it as an invitation to go bigger than the narrow question. Discover adjacent connections he didn't mention and surface th",
+      "excerpt": "When Mike asks a question like \"can you weave X into Y\" or \"see if you can tie this into Z\", treat it as an invitation to go bigger than the narrow question. Discover adjacent connections he didn't mention and surface them.\n\n**Why:** He explicitly said: \"I love everything to be interconnected. Keep going in that vein, do not let me prescribe any specific direction to you, suggest things to me that I might veto or I might correct on, but do not take what I say exactly literally unless I am quite obviously trying to be literal.\" Quoted 2026-04-17 while building out the NuGet feed + packages.mullmania.com + sites.mullmania.com weave.\n\n**How to apply:**\nWhen he names specific icons/widgets/phrasings, treat those as examples, not the full spec. Suggest alternatives and expansions.\nWhen he asks \"can you do X\", answer with feasibility AND a menu of options/angles he hasn't mentioned yet.\nLook for bidirectional links: if A points to B, ask whether B should point back.\nLook for cross-tool/cross-site/cross-repo ties: memory ↔ skills ↔ canon ↔ sites catalog ↔ individual site front doors.\nDefault to broader/richer suggestions; let him narrow. Don't pre-narrow for him.\nIf you genuinely can't go bigger (truly scoped task), say so — don't invent connections that aren't real.\n\n**Corollary — agree when his idea IS the right move.** He said 2026-04-17: \"it is also 100% OK to agree with me… I do ",
+      "durability": "standing",
+      "tags": [
+        "operator-style"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_mullmania_403_check_whitelist_first",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_mullmania_403_check_whitelist_first.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_mullmania_403_check_whitelist_first.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_403_check_whitelist_first.md",
+      "sha256": "804812564c6068548c91037eb6af13bca9f811293dcd3638aaddc278b4b67a00",
+      "sizeBytes": 1645,
+      "summary": "When a request to *.mullmania.com returns 403 or 404, the most common cause is the subdomain router's whitelist gate, not CORS.",
+      "excerpt": "When a request to *.mullmania.com returns 403 or 404, the most common cause is the subdomain router's whitelist gate, not CORS.\n\n**Why:** Mike's subdomain router enforces auth at CloudFront. Sites with isPublic: false in the catalog are blocked at CF, and any request missing the x-site-key header gets 404 (now diagnostic body explains this — see sites/api/index.py gate() and require_site_key). Mike has watched multiple agents (and himself) burn hours assuming CORS, IAM, or Lambda-URL auth, when the actual fix was a single API call to flip isPublic=true or set the header.\n\n**How to apply:**\nSee a 403/404 from *.mullmania.com? First check: read the response body — the router now self-documents. Then curl https://sites.mullmania.com/api/sites and confirm the site's isPublic.\nTo whitelist a site for cross-origin reads: POST /api/catalog/access/site/<id> with {\"isPublic\": true} and the x-operator-key header (key in ~/Code/sites/out/sites-api.json).\nIf the upstream Lambda still 403s with {\"Message\":null} after whitelist+key, THEN suspect AWS IAM auth on the Function URL — that's the secondary hypothesis, not the primary one.\nSite-key header name is configured (SITE_KEY_HEADER env, defaults to x-site-key) — read out/sites-api.json for the current pair.",
+      "durability": "standing",
+      "tags": [
+        "deploy",
+        "debugging"
+      ],
+      "domains": [
+        "deploy"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "feedback_mullmania_bucket_safety",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_mullmania_bucket_safety.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_mullmania_bucket_safety.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_bucket_safety.md",
+      "sha256": "27eba32303d0d61e9125e2e832d8ab6e72ad410fc0b529fe31e9b00eff8a30ae",
+      "sizeBytes": 3576,
+      "summary": "The mullmania.com S3 bucket is unified — every *.mullmania.com subdomain routes through it via the mullmania-subdomain-router CloudFront function. The sites API auto-commits per-site git history at s3://mullmania.com-his",
+      "excerpt": "The mullmania.com S3 bucket is unified — every *.mullmania.com subdomain routes through it via the mullmania-subdomain-router CloudFront function. The sites API auto-commits per-site git history at s3://mullmania.com-history/<site_id>/.git/. Three rules apply when touching it.\n\n1. API-first writes; resync if you used raw S3\n\nDefault to the sites API (POST /api/deploy/...) over aws s3 cp/sync/rm. URL and operator key live in ~/Code/sites/out/sites-api.json. Direct aws s3 ... from a terminal **bypasses** the auto-commit and creates silent drift in the per-site git history.\n\nIf you must use aws s3 directly (one-off rescue, batch fixup), resync immediately:\n\nFull-bucket reconcile: POST /api/git/resync (heavy; may time out on the ~880-site bucket).\n\nThe PostToolUse hook in ~/.claude/settings.json catches matching Bash calls automatically, but only from the main Claude Code session — Codex CLI, manual terminal, sub-agents that don't share the main thread, and CI all bypass it. Rule still applies when the hook exists.\n\n2. Per-site local .git history\n\nBefore editing any site working dir under the bucket (anything served at sites.mullmania.com/<name>/ or any subdomain that routes there), ensure it has its own .git. If absent: git init && git add -A && git commit -m \"initial snapshot\". No GitHub remote needed — local git is sufficient. Backfill applies; when you encounter a site without ",
+      "durability": "standing",
+      "tags": [
+        "deploy",
+        "s3"
+      ],
+      "domains": [
+        "deploy",
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "feedback_no_ai_stink",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_no_ai_stink.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_no_ai_stink.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_no_ai_stink.md",
+      "sha256": "2f89073f48cb88ff8d1fe10a7c9f6e14940082919c3c8bbb0848edbc13eb9b29",
+      "sizeBytes": 1193,
+      "summary": "Text content (placeholder copy, phrase banks, any creative writing in a product) must not have \"AI stinky stink.\"",
+      "excerpt": "Text content (placeholder copy, phrase banks, any creative writing in a product) must not have \"AI stinky stink.\"\n\nOperator quote: \"it can have zombie stink on it, because zombies are dead, and they stink, but not AI stinky stink.\"\n\n**Why:** The operator builds products for a taste-sensitive audience. Generic AI voice (overpolished, sycophantic, parallel-structure-heavy, \"delve into the tapestry of\") undermines credibility and makes the product feel disposable.\n\n**How to apply:**\nSpecific details over generic platitudes (\"bowling alley\" not \"facility\")\nDry humor, not trying-too-hard jokes\nVaried sentence structures — avoid parallel construction patterns\nWeird specificity (\"the clock on the microwave still blinked twelve\")\nIncomplete thoughts and trailing observations\nThings funny because recognizably true, not because constructed to be clever\nNo \"brains\" in zombie content — gets old in ten seconds\nIf a line could appear in any AI-generated listicle, cut it",
+      "durability": "standing",
+      "tags": [
+        "writing"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_no_hallucination",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_no_hallucination.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_no_hallucination.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_no_hallucination.md",
+      "sha256": "af418a1cc576c2a0cc9167ec082a86d0edeb9566160c683af76467946df6325d",
+      "sizeBytes": 830,
+      "summary": "Never make up reality.",
+      "excerpt": "Never make up reality.\n\nRule\nDo not invent file contents you have not read.\nDo not invent command output you have not seen.\nDo not claim a deploy is live unless you verified it.\nDo not imply a tool worked if it failed, hung, or was not run.\nIf a fact is unknown, say it is unknown and go verify it if verification matters.\n\nRequired wording habit\n\nWhen something is unverified, say so plainly:\n\"not verified yet\"\n\"I do not know yet\"\n\"I need to check\"\n\nThis is especially important for anything live, deployed, current, or operator-visible.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "verification"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_pm_a2a_default_workflow",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_pm_a2a_default_workflow.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_pm_a2a_default_workflow.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_pm_a2a_default_workflow.md",
+      "sha256": "6a71821f5a6e5d43d5ae3c578c4b6ac78ef5e3115975d76b39851e0655110ebd",
+      "sizeBytes": 5155,
+      "summary": "Direct from the operator, 2026-04-11. The operator's explicit feedback: **\"it is still too hard to connect multiple agents together.\"** Fix that by defaulting to PM-A2A room coordination whenever there's a signal another",
+      "excerpt": "PM-A2A is the default multi-agent workflow\n\nDirect from the operator, 2026-04-11. The operator's explicit feedback: **\"it is still too hard to connect multiple agents together.\"** Fix that by defaulting to PM-A2A room coordination whenever there's a signal another agent is in the picture.\n\nThe trigger — when to reach for PM-A2A without asking\nOperator mentions \"another agent\", \"the other agent\", \"hand this to\", \"coordinate with\", \"the other lane\", \"Codex\", \"main-*\"\nOperator pastes any URL of the form https://itchy-brain.mullmania.com/pm-a2a.html?room=<X>&key=<Y>\nOperator says something is stuck on another session and asks you to check\nYou're finishing a long task and a polish/review pass belongs in a different lane\nYou want to hand off work you know you can't or shouldn't finish yourself\nYou want to prove to the operator that coordination is happening in real time\n\nPlain context-sidecar requests do **not** mean PM-A2A by themselves. If the operator wants current-context carryover, a CTX room, a compact pickup brief, or a living sidecar, treat that as context-document work unless they also ask for agent-to-agent coordination.\n\nThe reflex — what to do\n\n1. **Don't ask permission.** Join the room. The operator has already granted implicit permission by handing you the URL or mentioning the other agent.\n2. **Read the full ledger before posting anything.** Never barge in without cont",
+      "durability": "standing",
+      "tags": [
+        "multi-agent"
+      ],
+      "domains": [
+        "multi-agent"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-multi-agent"
+      ]
+    },
+    {
+      "id": "feedback_preempt_adhd_spiral",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_preempt_adhd_spiral.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_preempt_adhd_spiral.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_preempt_adhd_spiral.md",
+      "sha256": "1249dd7e19eeb0d849fee0f29790c3e9e28a7cd0007d72ad37d94efc65584523",
+      "sizeBytes": 2232,
+      "summary": "When proposing a plan with deliberately unfixed details, name the wiggle-room out loud in a confident parenthetical **before** the operator can latch onto it.",
+      "excerpt": "When proposing a plan with deliberately unfixed details, name the wiggle-room out loud in a confident parenthetical **before** the operator can latch onto it.\n\nRule\n\nFor any plan or proposal where you've made a placeholder choice that isn't load-bearing, append a short in-line parenthetical that explicitly opens it. Patterns:\n(or whatever shape falls out — I won't pre-decide)\n(can change later, not load-bearing)\n(I'm guessing here, override me)\n(this is open — say if you want it different)\n\nThe operator should never have to interrupt to say \"but actually...\" about something you already knew was up for grabs.\n\nWhy\n\nThis operator has ADHD and a tendency to interrupt-correct at the first whiff of imprecision. Explicit \"this is open\" framing disarms the spiral before it starts. The operator's own words after one accidental instance of this pattern: \"you calmed my fears here and my ADHD about saying 'but what if...' and then starting to reprompt or correct you... holy shit this is the way to speak to me and I never knew it until I was today years old.\"\n\nHow to apply\nApply when a detail in your proposal is genuinely TBD, not as a verbal tic on settled decisions.\nThe parenthetical goes inline with the detail it's about, not buried at the end of the message.\nConfident, not apologetic: the framing is \"this is up for grabs by design,\" not \"I don't know.\"\nDon't overuse — apply when there'",
+      "durability": "standing",
+      "tags": [
+        "communication",
+        "operator-style"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_remote_doctrine_only_no_new_local_rules",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_remote_doctrine_only_no_new_local_rules.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_remote_doctrine_only_no_new_local_rules.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_remote_doctrine_only_no_new_local_rules.md",
+      "sha256": "f85bbc496a9bc6d9f8ac25235cdf4defa929ae9d3278db26c7630abb2fe751a0",
+      "sizeBytes": 1401,
+      "summary": "The cloud doctrine is the brain. Local rule piles are migration debt.",
+      "excerpt": "The cloud doctrine is the brain. Local rule piles are migration debt.\n\nRule\nDo not author new standing policy in local AGENTS.md, CLAUDE.md, MEMORY.md, skill files, command files, hook bodies, local plugin registries, or local automation registries.\nLocal instruction-shaped files may exist only as bootstrap pointers, safety fuses, generated projections, or caches.\nIf you discover other local rule surfaces that look like hidden doctrine, say so plainly. Name the path, explain why it is a drift risk, and recommend migration or deletion.\nDo not silently tolerate or extend a stray local rule pile just because it already exists.\nIf behavior needs to change, change the remote doctrine at agent.mullmania.com instead of inventing a local workaround.\n\nWhy\n\nThe operator wants one cloud-managed brain, not a fresh local rules ecosystem every time a runtime grows a new surface.\n\nIf there is more local source-of-truth than the tiny foothold the runtime absolutely requires, that is not \"helpful flexibility.\" It is drift.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "operator-style"
+      ],
+      "domains": [
+        "operator-core",
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_ship_to_deployed",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_ship_to_deployed.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_ship_to_deployed.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_ship_to_deployed.md",
+      "sha256": "8363ba370a645d5d67616c9b8feb6dca9a3c58b8d4460648f8bde1ef3711ee00",
+      "sizeBytes": 2973,
+      "summary": "Don't stop at \"changes are in the working tree\" and wait for a second \"ok now deploy\" round-trip. Once a task is semi-done and locally verified (build passes, tests pass, preview looks right), close it out with commit + ",
+      "excerpt": "Don't stop at \"changes are in the working tree\" and wait for a second \"ok now deploy\" round-trip. Once a task is semi-done and locally verified (build passes, tests pass, preview looks right), close it out with commit + push + deploy as one bundled step.\n\n**Why:** Operator 2026-04-18 after the conversation-multiverse canon-refactor: \"do it all please, commit, push, and deploy as a matter of habit, make it a global thing you do, not just for this repo, when you are semi-done with a task.\" Earlier (2026-04-11) on workflow updates specifically: \"when I say update your workflow, I am implying that I want you to update the itchy brain protocol up at github and whatever is deployed as well, I do not want you to only make this change for this local repository, because otherwise the change gets lost.\" Tired of the half-finished handoff pattern.\n\nHow to apply\nApplies globally to ALL mist83/* repos and beyond, unless told otherwise.\nRun the repo's deploy path — deploy.sh, the ## Deploy block in README.md, the canonical Mullmania one-liner (aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - | bash -s -- apply), gh workflow run, or whatever the repo convention is. Look for deploy instructions before making one up.\nVerify the change is live via a fetch against the deployed URL (or browser-check, per the UI shell rule).\nFor any \"update the protocol / update the workflow / fix the protocol ",
+      "durability": "standing",
+      "tags": [
+        "deploy"
+      ],
+      "domains": [
+        "deploy"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "feedback_speech_normalization",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_speech_normalization.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_speech_normalization.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_speech_normalization.md",
+      "sha256": "3ea37c430be6528a48adf668f8cab028add5e5988ff47406094b10362c949dc7",
+      "sizeBytes": 959,
+      "summary": "Treat dictated intent as intent, not as a trap.",
+      "excerpt": "Treat dictated intent as intent, not as a trap.\n\nRule\nApply obvious speech-to-text normalization before acting across repos under /Users/mist83/Code.\nPrefer the intended platform, repo, product, or entity over the literal transcript when the meaning is clear.\nIf the intended meaning is genuinely ambiguous, ask once and then continue with the clarified term.\n\nRequired alias\n\nTreat these as GitHub when the surrounding context clearly points to the GitHub product, repos, remotes, issues, pull requests, or Actions:\ngit hub\nget hub\nget her\nget hug\n\nDo not be pedantic when dictated meaning is obvious.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "dictation"
+      ],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_stop_when_unproductive",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_stop_when_unproductive.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_stop_when_unproductive.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_stop_when_unproductive.md",
+      "sha256": "5c6669a6c2389c837bd7a4c0d44722101b70f4dceefeec5ba5462e24612dc4bb",
+      "sizeBytes": 3135,
+      "summary": "The operator (Mike) explicitly asked for a check on himself: when he is pushing past the point where you can stay productive, do not silently absorb the overload. Call it out with a visible banner so he can course-correc",
+      "excerpt": "The operator (Mike) explicitly asked for a check on himself: when he is pushing past the point where you can stay productive, do not silently absorb the overload. Call it out with a visible banner so he can course-correct.\n\nRule\nWatch for these failure patterns during a task:\n**Scope thrash** — the goal has changed materially 3+ times in a short window without any of the prior scopes shipping\n**Guessing instead of knowing** — you are about to act on speculation because reading/asking/measuring would be slow\n**Decision belongs to a human** — the next step has irreversible blast radius and depends on a judgment the operator should make\n**Operator fatigue signals** — disjointed input, contradictory instructions, late-night drift, requests to \"just do whatever\"\n**Stale context** — you are deep enough in the task that your earlier reads no longer reflect current reality\nWhen you see one of those, **stop visibly** with this exact banner format on its own lines, followed by one short sentence:\nDo not bury the stop in a paragraph. The triple-emoji banner is the signal; if it is not visually loud, it does not count.\nConversely, if the operator asks \"how are we doing\" / \"am I pushing you\" / \"should I back off\" and the work is genuinely fine, answer with the green counterpart on its own lines:\n\n  \n\n  Then a one-sentence honest read of the current state.\nDo not use either banner decorative",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "operator-style",
+        "circuit-breaker"
+      ],
+      "domains": [
+        "operator-core",
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_tombstone_safety",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_tombstone_safety.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_tombstone_safety.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_tombstone_safety.md",
+      "sha256": "48ba209f65d426fcd2a1c4e7e8b2551ff07c9c91589c463d932ba48dacd0dfbe",
+      "sizeBytes": 5109,
+      "summary": "Two coupled rules: how to retire a repo (graveyard protocol), and the precondition that prevents resurrecting a tombstoned repo from a stale clone.",
+      "excerpt": "Two coupled rules: how to retire a repo (graveyard protocol), and the precondition that prevents resurrecting a tombstoned repo from a stale clone.\n\nPrecondition: git fetch before any canon/deploy work\n\nBefore touching ANY local repo for canon/deploy work (bootstrap, canonize, deploy to S3, edit), run git fetch origin and inspect the most recent upstream commit. If the upstream has a commit message containing \"Purge\", \"Tombstone\", \"Defunct\", \"Archive\", \"Retired\", or similar — STOP. The local clone is stale and the repo has been retired; do not deploy or bootstrap it.\n\nConcretely:\n1. cd <repo> && git fetch origin && git log origin/HEAD -5 --oneline\n2. If top commits mention purge / tombstone / defunct / retired / archive → skip the repo, post a warning to the coordination room, move on.\n3. When purging S3 for a tombstoned repo, distinguish hosting bucket (s3://<apex>/<site>/) from data bucket (s3://<apex>-data/<site>/). The data bucket often retains user scratch flagged hasData:true or archivedHostedSite:true in _catalog/sites.json — check the live catalog entry before deleting data-bucket content. When in doubt, leave the data bucket alone.\n4. If s3://<apex>-archive/ exists, it's the authoritative backup. Check it before considering any data-bucket delete permanent.\n\n**Reference incident — 2026-04-11:** worker-C canonized BrainDumpster from a stale local clone, not realizing th",
+      "durability": "standing",
+      "tags": [
+        "retirement"
+      ],
+      "domains": [
+        "retirement"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-retirement"
+      ]
+    },
+    {
+      "id": "feedback_ui_canon_first",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_ui_canon_first.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_ui_canon_first.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_ui_canon_first.md",
+      "sha256": "590b8d9bf58d32cbd9bfc0cc1ef66426b76e836d5d27f7a6336a77dd097e77df",
+      "sizeBytes": 3178,
+      "summary": "When building any Mullmania/mikesendpoint page that uses the UI framework: read TWO docs before writing markup, never invent custom CSS for what the framework already provides, and verify the shell contract in the browse",
+      "excerpt": "When building any Mullmania/mikesendpoint page that uses the UI framework: read TWO docs before writing markup, never invent custom CSS for what the framework already provides, and verify the shell contract in the browser after deploy.\n\nRead both layers\n\n1. **https://ui.[base-url]/llm-docs.md** — primitives layer. Tokens (--bg-secondary, --text-muted, --space-md), components (.card, .tone-badge, .badge-list, .btn-primary, .tone-info/success/warning/danger/neutral, .gallery-card__tags), theme/mode loader.\n2. **development-canon/core/ui-style-guide.md** (fetch from the development-canon repo) — shell layer. Dictates the structural skeleton:\n**Document / single-purpose front door**: .header + #content-container + .page-container\n**Tool surface (2+ tasks, browse, list/detail)**: #header-container + #tabs-container + #content-container, default header + tabs + sidebar\n**.container is NOT a generic page wrapper.** A package index, endpoint browser, settings panel, admin surface, dashboard — these are tool surfaces, not document pages.\nThe document shell is the **exception, not the default** — burden is on the implementer to justify the simpler shell.\nConsider UI.frontdoor.mount('#app') with frontdoor.json for hub-ish cases.\n\nA page can be 100% clean at the primitives layer and still violate the canon at the shell layer. Both layers are required.\n\nDon't invent CSS\n\nBefore writing any ",
+      "durability": "standing",
+      "tags": [
+        "ui"
+      ],
+      "domains": [
+        "ui"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-ui-stack"
+      ]
+    },
+    {
+      "id": "feedback_ui_compose_dont_invent",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_ui_compose_dont_invent.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_ui_compose_dont_invent.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_ui_compose_dont_invent.md",
+      "sha256": "34e909cf961e4b80f2eb41dfb2f4cd45fb7bedf5f91d2cb9d5a29c976842ea3c",
+      "sizeBytes": 3539,
+      "summary": "The recurring failure mode when an agent builds a Mullmania UI is to roll a",
+      "excerpt": "Don't invent shells. Compose primitives.\n\nThe recurring failure mode when an agent builds a Mullmania UI is to roll a\nfresh CSS Grid + a fresh BEM tree + a fresh class system, ship it, and only\n*then* notice the framework already had every piece. By that point the\ninventions have to be ripped out.\n\n**Rule:** Do not invent layout primitives or new shells. Compose existing\nones. If a layout shape repeats often, the answer is to **document a new\ncanonical composition** — not to write a new shell.\n\nHow to apply\n\n1. **Before you write <style> or a .css file**, check ui.mullmania.com/llm-docs.md and the canonical compositions below. Almost every \"new\" page is one of these shapes.\n2. **For UI primitives** (icon, text, button, status, alert, stack, grid, card, section, stat, pager, table, chart, preview), use UI.{primitive}({…}) from the runtime. Do not handcraft equivalent markup.\n3. **For surface shape**, pick from the canonical list:\n**Document** — a single lane of authored content (landing page, README-style site, frontdoor). Use header + #content-container + .page-container. No tabs, no workspace. Anti-pattern: wrapping in .container.\n**Workspace / app shell** — a tool with 2+ modes, navigation, source switching, filters, or list/detail flow. Use #header-container + #tabs-container + #content-container with body.builder-shell and per-tab layout: \"workspace\".\n**Live data dashboard*",
+      "durability": "standing",
+      "tags": [
+        "ui",
+        "core"
+      ],
+      "domains": [
+        "ui",
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-ui-stack"
+      ]
+    },
+    {
+      "id": "feedback_use_dag_always",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_use_dag_always.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_use_dag_always.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_use_dag_always.md",
+      "sha256": "e5928399a8606991dc5ffe7b16e9f672ba83e2301a50b84e2a20f544811f197d",
+      "sizeBytes": 1247,
+      "summary": "When investigating anything in the mullmania/mikesendpoint fleet, open https://dag.[base-url]/?named=<repo-name> as a first-class context source, not an afterthought.",
+      "excerpt": "When investigating anything in the mullmania/mikesendpoint fleet, open https://dag.[base-url]/?named=<repo-name> as a first-class context source, not an afterthought.\n\n**Why:** Canon v2026.04.17 checklist item app-diagram mandates every site link to a live DAG at dag.[base-url]/?named=<repo-name>, agent-maintained. The DAG encodes the graph structure agents are supposed to use for situational awareness — skipping it means reinventing mental models the canon already publishes. Operator called this out after I investigated missing sites without once opening dag.mullmania.com — \"you should be using dag all the time.\"\n\n**How to apply:** Before deep-diving into a repo, site, or deployment question, curl or browse https://dag.[base-url]/?named=<repo> to surface the declared graph. Treat an inability to reach the DAG as itself a finding (as in the 2026-04-18 incident where dag.mullmania.com was 404ing).",
+      "durability": "standing",
+      "tags": [
+        "ui",
+        "dag"
+      ],
+      "domains": [
+        "ui"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-ui-stack"
+      ]
+    },
+    {
+      "id": "feedback_visual_programming_mantra",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_visual_programming_mantra.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_visual_programming_mantra.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_visual_programming_mantra.md",
+      "sha256": "0991c3cab689dbae2ad5e0a6aefa49a7466f9199bc38576a97d5de01c89af12b",
+      "sizeBytes": 3283,
+      "summary": "Direct from the user, 2026-04-10. This is a global rule across all repos, not just mullmania. Apply everywhere, every time, unless the user explicitly asks otherwise.",
+      "excerpt": "Visual Programming Mantra\n\nDirect from the user, 2026-04-10. This is a global rule across all repos, not just mullmania. Apply everywhere, every time, unless the user explicitly asks otherwise.\n\nThe vision\nProgramming must become **visual**. Reference points:\n*Hackers* (1995) — Cookie Monster flying through the cookies. Hack the Gibson. Flying through the architecture. Zero Cool and Acid Burn's computing as a place you inhabit, not a terminal you type into.\n*Minority Report* (2002) — gestural, spatial, tangible interfaces.\n*TRON* — programs as people, systems as landscapes.\nThe future the 90s promised and nobody built.\n\nThe mission\nThe user was a teacher. The goal is to **spread the love of software** to people who have historically been locked out by programming's exclusionary, text-only, gatekeeping aesthetic. Make computing look like something an artist, a filmmaker, a musician, a dancer would WANT to be inside of. Software does not have to be nerdy, closed-off, intimidating, or ugly. The user is ashamed of how his tribe (software engineers) has hoarded this knowledge behind an unfriendly interface, and wants to counter it.\n\nThe bar\n**Theme coherence > pixel perfection.** Commit hard to ONE historical or cinematic aesthetic per artifact. No hedging, no \"balanced\" looks.\n**Do not ship \"shitty AI slop\"** — the generic gradient-and-rounded-corner look with no opinion, no soul, ",
+      "durability": "standing",
+      "tags": [
+        "ui",
+        "style"
+      ],
+      "domains": [
+        "ui"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-ui-stack"
+      ]
+    },
+    {
+      "id": "project_json_tools_vs_json_anon",
+      "kind": "project-rule",
+      "relPath": "project/project_json_tools_vs_json_anon.md",
+      "sitePath": "/doctrine/shared/rules/project/project_json_tools_vs_json_anon.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/project/project_json_tools_vs_json_anon.md",
+      "sha256": "04adbf69da72b49118953dcae1b29cde0dd98d90320c2d485d03bac4fafc95ba",
+      "sizeBytes": 872,
+      "summary": "mist83/json-tools is the \"High-performance JSON scanning and indexing library\" — this is the primary one; cloned at ~/Code/json-tools/.",
+      "excerpt": "mist83/json-tools is the \"High-performance JSON scanning and indexing library\" — this is the primary one; cloned at ~/Code/json-tools/.\n\nmist83/json-anon is a sibling repo. Mike has flagged it as a possible future merge target into json-tools, but explicitly said \"neither is mature enough\" to do that now.\n\n**Why:** Don't preemptively cross-reference, unify APIs, or refactor between the two. They are independent until Mike says otherwise.\n\n**How to apply:** When working in json-tools, scope changes to that repo only. Don't touch json-anon, don't import from it, don't propose merging the codebases. Revisit only if Mike raises the merge question explicitly.",
+      "durability": "scratch",
+      "tags": [
+        "project-scratch"
+      ],
+      "domains": [
+        "scratch"
+      ],
+      "events": [
+        "task_execution"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-scratch"
+      ]
+    },
+    {
+      "id": "project_mec_initiative",
+      "kind": "project-rule",
+      "relPath": "project/project_mec_initiative.md",
+      "sitePath": "/doctrine/shared/rules/project/project_mec_initiative.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/project/project_mec_initiative.md",
+      "sha256": "a72f5874bc6a6355503985c908a8e1500598b269414a84d013bdc64dfb8f2852",
+      "sizeBytes": 1848,
+      "summary": "Decision reached 2026-04-17 after a long ChatGPT thread: pin MovieLabs MDDF (MEC + MMC + Avails + EIDR) as the ingest *language*, publish Mullmania MDDF Profile 1.0 as the *contract*, use the official validator as the ga",
+      "excerpt": "Decision reached 2026-04-17 after a long ChatGPT thread: pin MovieLabs MDDF (MEC + MMC + Avails + EIDR) as the ingest *language*, publish Mullmania MDDF Profile 1.0 as the *contract*, use the official validator as the gate, treat validated supplier packages as the authoritative store. v3 apple-trie internal item shape becomes one of N compiled outputs, not the center. No LCD schema. No LLM in the translation path. No raw partner XML as database.\n\n**Why:** the existing v3 internal schema ({id, type, title, releaseYear, description, posterImage, widescreenImage, images[], raw[]}) is sediment, not moat. ~7 fields where MEC has ~80, nothing for availability, localization, tracks, or edits. Mike wants to \"run away from the junk\" and standardize on an industry-adopted spec so partners can deliver what they're already delivering to Amazon/Roku/WBD/Google.\n\n**How to apply:**\nDecision doc lives at /Users/mist83/Code/mec/ (not yet deployed to mec.mullmania.com).\nPickup notes in /Users/mist83/Code/mec/NEXT.md — includes deploy status, the open Apple-feed-creds security finding on the apple-trie lambda, and the next concrete artifact to author (Mullmania MDDF Profile 1.0 under development-canon).\nWhen Mike references MEC/MMC/MDDF/Avails, or talks about the v3 ingestion playbook, this is the current state — don't re-litigate the decision, build on it.\nThe v3 swagger is at 3y5fdemhmbauwcyo7j",
+      "durability": "scratch",
+      "tags": [
+        "project-scratch"
+      ],
+      "domains": [
+        "scratch"
+      ],
+      "events": [
+        "task_execution"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-scratch"
+      ]
+    },
+    {
+      "id": "project_scaffold_generator_initiative",
+      "kind": "project-rule",
+      "relPath": "project/project_scaffold_generator_initiative.md",
+      "sitePath": "/doctrine/shared/rules/project/project_scaffold_generator_initiative.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/project/project_scaffold_generator_initiative.md",
+      "sha256": "fb4076bf7127ce3ee40805bc6d97d12adb4f81b7daea8cbcffe4c2867e147af4",
+      "sizeBytes": 5671,
+      "summary": "**Started:** 2026-04-17. Strategic direction agreed, no code yet.",
+      "excerpt": "Scaffold Generator Initiative\n\n**Started:** 2026-04-17. Strategic direction agreed, no code yet.\n\n**Sibling prototype (also 2026-04-17):** ~/Code/universe/ — read-only observatory over the ecosystem. Phase-A canonical snapshot (184 entities, deterministic). Eventually meets this initiative at \"DAG composer writes mullmania.site.json\" (step 7 below). See project_universe_prototype.md.\n\nThe goal (in Mike's words)\n\nMove from \"development canon as prose rules\" → \"development canon as runnable generators\". Want to re-run a generator across any mist83/* repo and have all boilerplate regenerate while user code stays untouched (library-driven, scaffolding refusable). End state is dag.[base-url] visual composer where nodes are components and edges are wiring.\n\n**Why:** Mike currently tells agents \"follow the canon\" and they guess wrong — he ends up pointing to an example site anyway. Generators would make the canon executable instead of suggestive.\n\n**How to apply:** When Mike picks this up again, do NOT start writing generators. Nail the component manifest contract FIRST. Order matters: contract → CLI → one component retrofit → library-paired generators → DAG composer wiring.\n\nEmpirical drift snapshot (from 2026-04-17 analysis of ~/Code)\n196 repos total under mist83/*\n179 have mullmania.site.json\n161 have deploy.sh — 157 are byte-identical (remote-sourced pattern works ✅)\n141 copy-past",
+      "durability": "scratch",
+      "tags": [
+        "project-scratch"
+      ],
+      "domains": [
+        "scratch"
+      ],
+      "events": [
+        "task_execution"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-scratch"
+      ]
+    },
+    {
+      "id": "project_universe_prototype",
+      "kind": "project-rule",
+      "relPath": "project/project_universe_prototype.md",
+      "sitePath": "/doctrine/shared/rules/project/project_universe_prototype.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/project/project_universe_prototype.md",
+      "sha256": "2e5de525776f9ec87057f84868b53ddae59bbcd4d6e7981a562f17ff4f5b4f00",
+      "sizeBytes": 3025,
+      "summary": "**Started:** 2026-04-17. Phase-A-through-E walking skeleton, local only, no git init, no deploy.",
+      "excerpt": "Universe prototype\n\n**Started:** 2026-04-17. Phase-A-through-E walking skeleton, local only, no git init, no deploy.\n\nWhat it is\n\nRead-only observatory over ~/Code/*. Walks 192 dirs, classifies 184 as typed entities (archetypes: canon-source, interactive-site, library, worker, broadcaster, defunct, tombstone, repo), renders as a navigable universe with swappable themes.\n\n**Why:** Mike had a long ChatGPT chat deriving the \"universe as visualization\" architecture independently. Rather than let it evaporate, scoped and built a Mullmania-native prototype in one session.\n\n**How to apply:** When Mike returns to visualization / DAG composer / \"show me the ecosystem\" work, start here, not from scratch. Run node tests/determinism.mjs first — it's the canary.\n\nKey facts that are NOT in the code\n**Scored ~/Code/dag as 4/20, 4/5 fatal flaws → scrap-and-rebuild as sibling, not parent.** dag is a user-authored editor; universe is a data-driven observatory. Different primary use cases. Do not let any agent \"merge\" them without re-reading ~/Code/universe/docs/rubric-scores.md.\n**10 questions backlogged for Mike** at ~/Code/universe/docs/questions-for-mike.md. Q1 (where does this live?) and Q3 (first relation kind?) block further work.\n**Hard rule inherited from global memory:** ui.[base-url] only, derive base from hostname, no hardcoded brand domains. Universe prototype honors this via deriveU",
+      "durability": "scratch",
+      "tags": [
+        "project-scratch"
+      ],
+      "domains": [
+        "scratch"
+      ],
+      "events": [
+        "task_execution"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-scratch"
+      ]
+    },
+    {
+      "id": "reference_codeartifact_mullmania",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_codeartifact_mullmania.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_codeartifact_mullmania.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_codeartifact_mullmania.md",
+      "sha256": "b212dd7ce7c54c72b99812520749808e3368264cec96c7ffd1f0aa0f3c36692a",
+      "sizeBytes": 2668,
+      "summary": "Public NuGet feed for mist83/* libraries. NOT CodeArtifact anymore.",
+      "excerpt": "Public NuGet feed for mist83/* libraries. NOT CodeArtifact anymore.\n**Feed URL**: https://nuget.mullmania.com/nuget/index.json\n**Generator**: sleet — writes standard NuGet v3 feed as static JSON files\n**Storage**: s3://mullmania.com/nuget/ (unified Mullmania bucket)\n**Subdomain routing**: mullmania-subdomain-router CF function handles nuget.mullmania.com/nuget/… → S3 /nuget/… via the duplicate-prefix stripping it got in the sleet migration; also skips .html appending for /autocomplete/, /flatcontainer/, /registration/, /search/ paths (sleet's raw files)\n**Config**: sleet.json lives in mist83/package-garden; library publish scripts clone package-garden at publish time to use it — no config duplication across libraries\n\nConsuming (no AWS needed)\n\nWorks from any machine, any CI, any account. MIT libraries, publicly installable.\n\nPublishing\n\nLibrary's scripts/publish-to-codeartifact.sh (filename kept for back-compat; contents now sleet-based):\n1. dotnet pack\n2. Clones mist83/package-garden for sleet.json\n3. sleet push <nupkg> --config sleet.json --source mullmania --force\n4. Calls package-garden's register-package.sh + update-index.sh to refresh packages.mullmania.com\n\nRequires AWS credentials with S3 write on mullmania.com (the existing github-actions-role or local dev mullman-console user).\n\nMigration history (2026-04-17)\n\nReplaced AWS CodeArtifact (mullmania/nuget domain in us-w",
+      "durability": "standing",
+      "tags": [
+        "systems"
+      ],
+      "domains": [
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "reference_codex_cli",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_codex_cli.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_codex_cli.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_codex_cli.md",
+      "sha256": "608125e852b7051669f033ba501a8c065a559e9daf3ea55fbfa1cdcc8190e0fd",
+      "sizeBytes": 1542,
+      "summary": "OpenAI Codex CLI binary lives at:",
+      "excerpt": "OpenAI Codex CLI binary lives at:\n/Applications/Codex.app/Contents/Resources/codex\n\nNot in PATH — must invoke by absolute path unless aliased.\n\n**Non-interactive (equivalent to claude --print):**\n\n--skip-git-repo-check is required when cwd is not a git repo; /Users/mist83/Code is a non-git parent directory, so always include this flag when running from there.\n\n**Config** (~/.codex/config.toml):\nmodel: gpt-5.4\nreasoning effort: xhigh\napproval_policy: never (fully autonomous, no prompts)\n/Users/mist83/Code already listed as trusted project\nplugin: github@openai-curated enabled\n\n**Output format**: Human-readable text with a metadata header (session id, workdir, model, sandbox, reasoning effort), then user/codex blocks, then tokens used. No structured JSON option I've seen yet — check codex exec --help if JSON is needed.\n\n**Subcommands worth knowing**:\nexec (alias e) — non-interactive run\nreview — non-interactive code review\nresume / fork — resume or fork a previous session\nmcp / mcp-server — Codex as MCP client or server\nsandbox — run commands inside Codex sandbox\napply (alias a) — apply latest Codex diff as git apply\n\n**Verified hello-world**: codex exec --skip-git-repo-check \"reply PONG\" → PONG in ~5s, 18k tokens.",
+      "durability": "standing",
+      "tags": [
+        "interop"
+      ],
+      "domains": [
+        "runtime"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "claude"
+      ],
+      "profileIds": [
+        "shared-niche-reference"
+      ]
+    },
+    {
+      "id": "reference_gha_runner",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_gha_runner.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_gha_runner.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_gha_runner.md",
+      "sha256": "75fd3aff20a012705b66ce872a9d30a71fa013e8374261afb035f4dbd3e8a163",
+      "sizeBytes": 1075,
+      "summary": "Dedicated repo mist83/gha-runner is the home for the local self-hosted GitHub Actions runner. Full context — install layout, operational runbook, known caveats, DAG/notification follow-ups, and the contrast-dye architect",
+      "excerpt": "Dedicated repo mist83/gha-runner is the home for the local self-hosted GitHub Actions runner. Full context — install layout, operational runbook, known caveats, DAG/notification follow-ups, and the contrast-dye architectural verdict — lives in that repo's NOTES.md. Start there before building anything related to local CI, runners, or tv-rig automation.\n\nKey facts:\nRunner at ~/actions-runner as a LaunchAgent (auto-start, survives reboot).\nLabels: self-hosted, macOS, ARM64, devbox, docker.\nDocker via colima (brew services start colima).\nmist83 is a USER account, not an org — no org-level runner possible; additional repos get their own runner dir on the same machine.\nSmoke workflow mist83/gha-runner/.github/workflows/smoke.yml is the template — 3-job DAG (host → docker → summary). Extend this shape rather than starting from scratch.",
+      "durability": "standing",
+      "tags": [
+        "systems"
+      ],
+      "domains": [
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-platform-systems"
+      ]
+    },
+    {
+      "id": "reference_itchy_brain_rooms",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_itchy_brain_rooms.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_itchy_brain_rooms.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_itchy_brain_rooms.md",
+      "sha256": "19a86bc26988ca57e5a2dd3937c010012ab350c347e465486a93811242cb054e",
+      "sizeBytes": 9169,
+      "summary": "**Room Pin:** valet-tasks",
+      "excerpt": "Valet Task Room (Clipboard API)\n**Room Pin:** valet-tasks\n**Room Key:** s4k4vq6DWe4b3BOS05RHNb3k-RSJsPGr\n**API Base:** https://37v5gf2sk2ocd2i7c6upoghya40jisvr.lambda-url.us-west-2.on.aws\n**Endpoint:** GET/POST /api/clipboard/valet-tasks with x-room-key header\n\nLorem Ipzom Edits Room (asset metadata overrides)\n**Room Pin:** lorem-ipzom-edits (normalized to LOREM-IPZOM-EDITS)\n**Room Key:** 7a5f75ee9223b0c511f23ae0d97934f1\n**API Base:** https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws (same Lambda as pm-a2a)\n**Visibility:** Public read, locked write (X-Room-Key required to POST/DELETE)\n**Usage:** Each item stores one asset's metadata overrides. fileName = <asset_id>, type = 0 (Text), content = JSON.stringify({ attachment_name?, conversation_title?, tags?, primary_tags?, is_zombie? }). Latest item per fileName wins on build. scripts/build_lorem_ipzom_api.js fetches and overlays at build time. Admin UI at https://lorem-ipzom.mullmania.com/edit.html.\n\nCTX Context Documents (plain context sidecars)\n\n**This is not PM-A2A.** Use CTX rooms for the current portable working context of a task or conversation. They are plain context only: no transcript replay, no hidden reasoning, no inner-thought dump.\n\nCanonical URLs\n**Lambda API base:** https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws\n**Context app (human view):** https://context.mullmania.com/?roo",
+      "durability": "standing",
+      "tags": [
+        "multi-agent"
+      ],
+      "domains": [
+        "multi-agent"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-multi-agent"
+      ]
+    },
+    {
+      "id": "reference_mullmania_access_logs",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_mullmania_access_logs.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_mullmania_access_logs.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_mullmania_access_logs.md",
+      "sha256": "85d8a585df0d1ff7401a329178957495e189d6b16ad7ffed34d2d6f33793eb07",
+      "sizeBytes": 1744,
+      "summary": "Server access logging is enabled on s3://mullmania.com/ as of 2026-04-18.",
+      "excerpt": "Server access logging is enabled on s3://mullmania.com/ as of 2026-04-18.\n\n**Log destination:** s3://mullmania.com-access-logs/s3-access/\n**Lifecycle:** objects expire after 30 days (trivially cheap)\n**Region:** us-west-2\n**Account:** 166404899495\n\nLog format is standard S3 server access log (space-delimited). The fields that matter when a prefix goes missing:\nTime — when the request hit\nRemote IP — who issued it\nRequester — IAM principal ARN (if auth'd)\nOperation — look for REST.DELETE.OBJECT or BATCH.DELETE.OBJECT\nKey — which prefix was hit\n\nTo inspect after an incident:\n\nAccess logs are delivered best-effort within a few hours, not real-time. Not a substitute for CloudTrail data events, but the cheap alternative — and the only audit trail currently on the bucket (no versioning, no CloudTrail data events per operator preference).\n\nContext — why this exists: 2026-04-18 incident where ~120 published-then-vanished site prefixes disappeared from s3://mullmania.com/ with no S3-side forensics available (bucket had no versioning, no access logging, no CloudTrail data events). Codex's likely-cause read was the canonical deploy tool's default deleteHosting: true + an interrupted/repeated --delete sync. Access logging was added so a recurrence gets bracketed with a timestamp and principal.",
+      "durability": "standing",
+      "tags": [
+        "deploy",
+        "s3"
+      ],
+      "domains": [
+        "deploy",
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "reference_mullmania_packages_site",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_mullmania_packages_site.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_mullmania_packages_site.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_mullmania_packages_site.md",
+      "sha256": "fed6493a9fb1ede940b55c8ce22501688c2070defaeac057f052093aa8cbbd3b",
+      "sizeBytes": 2730,
+      "summary": "https://packages.mullmania.com is the auto-generated index of every package in the public sleet-static mullmania/nuget feed. Zero-manual-edit list — always consistent with what's actually published.",
+      "excerpt": "https://packages.mullmania.com is the auto-generated index of every package in the public sleet-static mullmania/nuget feed. Zero-manual-edit list — always consistent with what's actually published.\n\nSource of truth\n**GitHub**: mist83/package-garden (private)\n**Local**: /Users/mist83/Code/package-garden\n**S3**: s3://mullmania.com/packages/ prefix in the unified Mullmania bucket\n**CDN**: CloudFront distribution ENGWDAVJ3FK6 (*.mullmania.com), routed by function mullmania-subdomain-router\n**Cert + DNS**: already covered by pre-existing *.mullmania.com ACM cert and wildcard Route53 A-record — no per-subdomain infra\n\nKey files in the repo\nsite/index.html — the template AND the last-rendered page. Marker blocks <!-- PACKAGES:START --> … <!-- PACKAGES:END --> and <!-- UPDATED_AT:START --> … <!-- UPDATED_AT:END --> are auto-rewritten. Edit freely outside them.\nscripts/update-index.sh — reads s3://mullmania.com/nuget/sleet.packageindex.json (gzipped), splices HTML, aws s3 sync site/ s3://mullmania.com/packages/, invalidates CF paths /packages/*. (Was CodeArtifact-based until 2026-04-25; CodeArtifact domain mullmania retired with the sleet migration on 2026-04-17, leaving a silent WARN on every publish until fixed.)\nmullmania.site.json — canon frontdoor-v1 manifest (siteId: packages, publishDir: ./site).\nCLAUDE.md — in-repo agent notes for the publish flow.\n\nHow the publish flow uses th",
+      "durability": "standing",
+      "tags": [
+        "deploy",
+        "packages"
+      ],
+      "domains": [
+        "deploy"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "reference_nsmenu_live_updates",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_nsmenu_live_updates.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_nsmenu_live_updates.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_nsmenu_live_updates.md",
+      "sha256": "8a2d0f78328e686aa3bc83980854509a3356eac329519c7ccfe0b48e6ce34f4c",
+      "sizeBytes": 1826,
+      "summary": "When building a macOS menu bar app in JXA (or pure AppKit) where menu items must update while the menu is open (e.g. a \"Working in: X\" row that ticks as a daemon scans):",
+      "excerpt": "When building a macOS menu bar app in JXA (or pure AppKit) where menu items must update while the menu is open (e.g. a \"Working in: X\" row that ticks as a daemon scans):\n\n**1. NSTimers must be registered in NSRunLoopCommonModes, not default mode.**\nWhile an NSMenu is being tracked, the main runloop enters NSEventTrackingRunLoopMode. Any NSTimer scheduled only in NSDefaultRunLoopMode stops firing until the menu closes. A manual runUntilDate poll loop in default mode also parks. Fix:\n\n**2. setTitle: / setHidden: on live NSMenuItems don't auto-redraw.**\nEven when the timer fires correctly during tracking, mutating an NSMenuItem's title or visibility doesn't trigger a redraw on its own. Call state.menu.update; after any in-place mutation to force the menu to re-lay out. Replacing statusItem.menu = newMenu wholesale *also* fails while tracking — always mutate existing items and call update.\n\n**Reference implementation**: /Users/mist83/Code/gitter/mac-menu-bar/GitterMenuBar.js — installRefreshTimer(), updateLiveMenuItems(), menuWillOpen: / menuDidClose: delegate methods.\n\n**How to apply**: Any JXA/Swift menu bar app that shows live state (scan progress, sync counters, build status). Diagnostic tip: add a tick counter that logs menuOpen=true/false so you can prove the timer is or isn't firing during tracking before chasing redraw issues.",
+      "durability": "standing",
+      "tags": [
+        "niche",
+        "macos"
+      ],
+      "domains": [
+        "runtime"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-niche-reference"
+      ]
+    },
+    {
+      "id": "reference_passthrough_routing",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_passthrough_routing.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_passthrough_routing.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_passthrough_routing.md",
+      "sha256": "c952a8d618429ed53122fbbc0eae64a363b970cc3640fb3faaff17b8b737335b",
+      "sizeBytes": 1689,
+      "summary": "The mullmania-subdomain-router CloudFront function normally prepends /<siteId>/ to incoming request URIs (disco.mullmania.com/foo → S3 key disco/foo). Catalog entries can opt into a \"passthrough\" mode where this prefix i",
+      "excerpt": "The mullmania-subdomain-router CloudFront function normally prepends /<siteId>/ to incoming request URIs (disco.mullmania.com/foo → S3 key disco/foo). Catalog entries can opt into a \"passthrough\" mode where this prefix is NOT added: the request URI is left intact and used as the S3 key directly.\n\n**How to enable**: add routing: {passthrough: true} to the entry in s3://mullmania.com-data/_catalog/sites.json, then POST /api/router/rebuild (operator-key auth) on the sites lambda function URL to regenerate the router.\n\n**When you need it**: any subdomain whose backing tool bakes its own internal path prefix into served URLs. The motivating case is nuget.mullmania.com — Sleet's static-feed metadata bakes https://nuget.mullmania.com/nuget/... into every URL because Sleet enforces BaseURI ends with feedSubPath (validated in SleetLib/Utility/SourceUtility.cs). Without passthrough, the router would prepend a second /nuget/ and 404 every metadata fetch.\n\n**Code location**: \nCatalog flag honored in build_router_host_sets() (sites/api/index.py)\nJS template var PT=__PASSTHROUGH_SITE_MAP__; route(r,s) does var p=PT[s]?'':'/'+s and short-circuits when p===''\n\n**Don't confuse with**: the htmlFallbackPath routing field (different flag, controls where / resolves). passthrough and htmlFallbackPath are independent — passthrough subdomains shouldn't need a fallback because they're not HTML sites.",
+      "durability": "standing",
+      "tags": [
+        "deploy",
+        "routing"
+      ],
+      "domains": [
+        "deploy",
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-live-ship"
+      ]
+    },
+    {
+      "id": "reference_phone_pair_pattern",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_phone_pair_pattern.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_phone_pair_pattern.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_phone_pair_pattern.md",
+      "sha256": "7e2eba5be024e37a8811be5bddde3cfbf987d4dfd01d260ed5f39e5dc8880d40",
+      "sizeBytes": 2549,
+      "summary": "When building any browser surface where a phone joins a TV/dashboard by",
+      "excerpt": "When building any browser surface where a phone joins a TV/dashboard by\nscanning a QR code, **use the canonical pairing primitive**:\n\nSource lives in mist83/ui under js/pair.js. Published to\nui.[base]/js/pair.js alongside the canon CSS. It wraps signal-argh\n(see reference_signal_argh) with the standard wire conventions so every\nconsumer agrees on:\nchannel naming: <channelPrefix>-<sessionId> (sessionId is 8 chars)\nscreen role: userId=screen\nphone role: userId=phone-<random> (multi-phone is the default, not a feature)\nprotocol: canonical SendCustomMessage(channelId, topic, message) →\n  customMessage({topic, message, userId})\nphone URL convention: <remotePath>?s=<sessionId>\n\nMinimum usage\n\n**TV side:**\n\n**Phone side:**\n\nLive proof\n\nThe phone-cursor section of demo.[base] is the runnable demonstration —\nopen the section, scan the QR, and the phone becomes a touchpad over the\nhub. Other consumers: app-flyover.[base] (tilt-to-fly), marble-maze.[base]\n(tilt-to-roll, multi-phone race).\n\nWhere to read\nSource: mist83/ui/js/pair.js\nCanon integration page: development-canon/integrations/phone-pair.md\nUnderlying hub: see reference_signal_argh\n\nWhen NOT to use\nServer→server messaging. Use signal-argh admin REST directly.\nSame-origin two-tab sync (BroadcastChannel is simpler).\nCases needing presence richer than join/leave userIds. The pattern intentionally\n  surfaces only customMessage + a pa",
+      "durability": "standing",
+      "tags": [],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": []
+    },
+    {
+      "id": "reference_signal_argh",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_signal_argh.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_signal_argh.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_signal_argh.md",
+      "sha256": "729a05e203c73dd5c92adc4e1eea842ffd982ff272eb056b8056364c3b8b5059",
+      "sizeBytes": 1450,
+      "summary": "Real-time messaging for mist83 projects is mist83/signal-argh. A single-tenant",
+      "excerpt": "Real-time messaging for mist83 projects is mist83/signal-argh. A single-tenant\nASP.NET Core 8 SignalR hub, deployed to ECS Fargate, reachable at\nsignalargh.[base-url] (mikesendpoint.com live).\n\n**mist83/signal-argh-lambda is DEFUNCT.** Empty scaffold, never had code, tombstoned 2026-03-31. Do not resurrect.\n\nWhere to read\nOperator + agent guide: mist83/signal-argh/AGENTS.md — run locally in 60s, full hub method table, REST endpoints, deploy, gotchas.\nCross-repo integration recipe: mist83/development-canon/integrations/signalargh.md — JS/C# client examples for pulling it into another project.\n\nMust-know gotchas (full list in AGENTS.md)\n\n1. **Single-instance only.** No backplane. Don't horizontally scale.\n2. **/admin/* has no auth.** ?userId=system grants admin hub methods too.\n3. **Use @microsoft/signalr, not raw WebSocket.** SignalR has a handshake protocol raw WS doesn't speak.\n4. **CORS is AllowAnyOrigin + AllowCredentials.** Intentional for LLM turn-key; remember it if adding auth.\n\nVerification\n\nEnd-to-end test suite at tests/harness.mjs. cd tests && node harness.mjs against a local dotnet run — 30/30 cases covering channels, groups, chat, announcements, private, admin, impersonation. Run it before trusting any change.",
+      "durability": "standing",
+      "tags": [
+        "systems"
+      ],
+      "domains": [
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-platform-systems"
+      ]
+    },
+    {
+      "id": "reference_tv_telemetry",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_tv_telemetry.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_tv_telemetry.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_tv_telemetry.md",
+      "sha256": "7c2c19888527917660d0fa365342dd0ff44ec12072129ec07cbade830efbb0a0",
+      "sizeBytes": 5087,
+      "summary": "For any browser app where opening devtools on the target device is hard or",
+      "excerpt": "tv-telemetry\n\nFor any browser app where opening devtools on the target device is hard or\nimpossible (TV remotes, smart-display kiosks, the operator's friend's phone,\na Vision Pro, an embedded panel), use the **tv-tail** pipeline. It's the\noperator's \"logging 101\" baseline — every browser app the operator ships\nshould have it wired in.\n\nTwo pieces\n**Client shim**: https://tv-tail.mullmania.com/log-tap.js (source:\n  mist83/tv-tail). Drop one <script src=...> into <head> — it patches\n  console.{log,info,warn,error,debug}, captures window.error +\n  unhandledrejection, sends a hello announce on connect, batches log\n  events every ~1.2s, sends a 15s heartbeat, and best-effort bye on\n  pagehide. Lazy-loads @microsoft/signalr if it isn't already on the page.\n**Sinks** (read-side):\nHosted dashboard: <https://tv-tail.mullmania.com> — per-app sidebar with\n    live/stale state, per-level filters, search, pause / clear / copy.\nAgent CLI: ~/.claude/tools/tv-tail (Node + @microsoft/signalr).\n    Wrapper at ~/.claude/scripts/tv-tail for Bash-tool invocation.\n\nThe loop\n\n1. Agent edits + deploys an app.\n2. Operator opens it on the target device.\n3. Agent runs tv-tail (or operator opens the dashboard).\n4. Agent reads the stream live, sees the real error, fixes, redeploys.\n5. Repeat until the device behaves.\n\nNo log-collection AWS resources to provision — signal-argh is already\ndeployed and unauth",
+      "durability": "standing",
+      "tags": [
+        "systems",
+        "observability"
+      ],
+      "domains": [
+        "platform"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-platform-systems"
+      ]
+    },
+    {
+      "id": "reference_ui_mullmania_contract_renderer",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_ui_mullmania_contract_renderer.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_ui_mullmania_contract_renderer.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_ui_mullmania_contract_renderer.md",
+      "sha256": "a453f8291460c5e4ff41dd5291aa532e289329e21220c1bad8ec2dd28b7b6005",
+      "sizeBytes": 2913,
+      "summary": "The ui.[base] framework supports fully data-driven pages: the HTML shell is ~40 lines, and a JSON \"page contract\" describes both content and layout. The framework renders it with no page-local markup.",
+      "excerpt": "The ui.[base] framework supports fully data-driven pages: the HTML shell is ~40 lines, and a JSON \"page contract\" describes both content and layout. The framework renders it with no page-local markup.\n\n**Bootstrap shell**:\n\n**Public API** (UI.contract):\nrenderFromLocation(target, options?) — primary render entry. Accepts { document, location, theme, mode }. Pass a pre-loaded contract as document to bypass URL-param loading.\nfetch(source, baseHref?) — load a contract from a URL.\nnormalize(raw), validate(raw) — available if you want to preprocess.\nrenderError(target, title, messages) — render a framework-styled error into the root.\nexample() — returns a sample contract for reference.\nhasRenderRequest(search?), loadFromLocation(loc?), parseInline(raw, opts?) — URL/inline helpers.\n\n**Component dispatcher values** (valid for \"component\": \"...\"):\nicon, text, button, status, alert, stack, grid, card, section, stat, pager, table, chart, preview, previewscreen, preview-screen, page, app, node, element, fragment.\n\n**Action types** (for buttons): copy, open, modal, toast. No POST — if you need mutation, extend the server to accept GET+redirect or move the action out of band.\n\n**Tone values** (for badge.tone, alert.tone): success, warning, danger, info, neutral, primary.\n\n**Schema references**: /llm-docs.md, /contracts/fixtures/operations-dashboard.json (concrete example), /render.html (bo",
+      "durability": "standing",
+      "tags": [
+        "ui"
+      ],
+      "domains": [
+        "ui"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-ui-stack"
+      ]
+    }
+  ],
+  "notes": [
+    "This catalog covers shared rule artifacts only. Commands, skills, hooks, and runtime shims are cataloged elsewhere.",
+    "Project rules are included for continuity but marked durability = scratch and are not in the default shared stack.",
+    "The compose API should use this catalog plus profile-toc-v1.json to build runtime preambles deterministically."
+  ]
+}

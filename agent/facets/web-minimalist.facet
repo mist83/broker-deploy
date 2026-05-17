@@ -1,0 +1,93 @@
+# Web Minimalist Facet
+
+**Description:** HTML/CSS/JS minimalism and anti-bloat patterns
+
+**Domains:** html, css, javascript
+**Behaviors:** minimalism, semantic design, maintainability
+
+---
+
+## kiss-html-css-js
+
+# Kiss Html Css Js
+
+## TRIGGER
+When the user says "KISS the html", "KISS the css", "KISS the js", or variations like "keep it simple html", activate this rule to enforce minimalist, semantic web design principles.
+
+## PURPOSE
+This rule enforces a strict anti-bloat, anti-AI-stink approach to web development:
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/kiss-html-css-js.md" -Raw
+```
+
+Or use read_file tool:
+`full/kiss-html-css-js.md`
+
+---
+
+## no-inline-styles
+
+# No Inline Styles
+
+## TRIGGER
+ALWAYS ACTIVE - Enforced during code generation and review.
+
+## PURPOSE
+Inline styles in JavaScript are a code smell. They mix concerns, make dark mode difficult, and create maintenance nightmares. Always use CSS classes.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/no-inline-styles.md" -Raw
+```
+
+Or use read_file tool:
+`full/no-inline-styles.md`
+
+---
+
+## pwa-lockdown
+
+# Pwa Lockdown
+
+## TRIGGER
+ALWAYS ACTIVE when creating or modifying PWA files.
+
+## PURPOSE
+PWAs should feel like native apps - no browser chrome, no zoom, no scroll, no text selection. Lock it down completely.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/pwa-lockdown.md" -Raw
+```
+
+Or use read_file tool:
+`full/pwa-lockdown.md`
+
+---
+
+## destank
+
+# Destank
+
+## TRIGGER
+When the user says any of: "destank", "destink", "unslop", "unsloppify", "remove ai stink", "remove ai stank", "this code reeks of ai", "this is stinky with AI", "this is stanky with ai", or similar phrases indicating AI-generated code patterns should be removed.
+
+## PURPOSE
+AI-generated code often has telltale patterns that make it obvious it wasn't written by a human. This command removes those patterns while maintaining functionality.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/destank.md" -Raw
+```
+
+Or use read_file tool:
+`full/destank.md`
+
+---
+

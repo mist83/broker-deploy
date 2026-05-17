@@ -1,0 +1,16 @@
+# Kiss Html Css Js
+
+## TRIGGER
+When the user says "KISS the html", "KISS the css", "KISS the js", or variations like "keep it simple html", activate this rule to enforce minimalist, semantic web design principles.
+
+## PURPOSE
+This rule enforces a strict anti-bloat, anti-AI-stink approach to web development:
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/kiss-html-css-js.md" -Raw
+```
+
+Or use read_file tool:
+`full/kiss-html-css-js.md`

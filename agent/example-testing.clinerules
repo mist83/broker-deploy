@@ -1,0 +1,30 @@
+# Testing Requirements
+
+## TRIGGER
+When creating or modifying code that handles business logic or data processing.
+
+## RULES
+
+### Test Coverage
+- Write unit tests for all public methods
+- Test happy path and error cases
+- Minimum 70% code coverage for new code
+
+### Test Naming
+- Use descriptive test names: `Should_ReturnUser_WhenIdExists`
+- Follow pattern: `Method_Scenario_ExpectedResult`
+
+### Test Structure
+- Arrange: Set up test data
+- Act: Execute the method being tested
+- Assert: Verify the results
+
+### Integration Tests
+- Test API endpoints with realistic data
+- Verify database operations work correctly
+- Test error handling and edge cases
+
+### Mocking
+- Mock external dependencies (APIs, databases)
+- Use dependency injection for testability
+- Don't mock value objects or data structures

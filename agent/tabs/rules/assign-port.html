@@ -1,0 +1,141 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../assign-port.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> assign-port.clinerules</a> &middot; <a class="link-muted" href="../full/assign-port.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/assign-port.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Assign Port</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;assign port&quot;, &quot;register port&quot;, &quot;add port&quot;, &quot;new port for [project]&quot;, or similar phrases requesting port assignment.</p>
+<h2>PURPOSE</h2>
+<p>Automatically assign and register a new port for a project using the Port Directory API.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/assign-port.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/assign-port.md</code></p>
+<h2>Full content</h2>
+<h1>Assign Port - Register New Project Port</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;assign port&quot;, &quot;register port&quot;, &quot;add port&quot;, &quot;new port for [project]&quot;, or similar phrases requesting port assignment.</p>
+<h2>PURPOSE</h2>
+<p>Automatically assign and register a new port for a project using the Port Directory API.</p>
+<h2>PORT DIRECTORY API</h2>
+<p><strong>Base URL:</strong> <a href="https://jq654klina2q4yts42o5qkrp3m0yvlit.lambda-url.us-west-2.on.aws">https://jq654klina2q4yts42o5qkrp3m0yvlit.lambda-url.us-west-2.on.aws</a></p>
+<p><strong>Endpoints:</strong></p>
+<ul>
+<li>GET <code>/api/ports</code> - List all ports</li>
+<li>GET <code>/api/ports/{projectName}</code> - Get specific port</li>
+<li>POST <code>/api/ports</code> - Add/update port (body: <code>{&quot;projectName&quot;:&quot;name&quot;,&quot;port&quot;:5001}</code>)</li>
+<li>DELETE <code>/api/ports/{projectName}</code> - Delete port</li>
+<li>GET <code>/api/ports/check/{port}</code> - Check if port in use</li>
+</ul>
+<p><strong>Web Interface:</strong> <a href="https://ports.mikesendpoint.com">https://ports.mikesendpoint.com</a></p>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>Step 1: Determine Project Name</h3>
+<p>If user provided project name, use it. Otherwise, ask:</p>
+<p><strong>Question:</strong> &quot;What is the project name?&quot;
+<strong>Validation:</strong> Should be a valid project/folder name (alphanumeric, hyphens, underscores)</p>
+<h3>Step 2: Determine Port Number</h3>
+<p>If user provided port, use it. Otherwise, randomly select an available port between 2000-9999.</p>
+<p>To find random available port:</p>
+<pre><code class="language-powershell">$response = Invoke-RestMethod -Uri &quot;https://jq654klina2q4yts42o5qkrp3m0yvlit.lambda-url.us-west-2.on.aws/api/ports&quot;
+$usedPorts = $response.ports | ForEach-Object { $_.port }
+$randomPort = Get-Random -Minimum 2000 -Maximum 10000
+while ($usedPorts -contains $randomPort) { 
+    $randomPort = Get-Random -Minimum 2000 -Maximum 10000 
+}
+</code></pre>
+<p><strong>Question:</strong> &quot;What port number? (Suggested: {randomPort})&quot;
+<strong>Validation:</strong> 2000-9999, not already in use</p>
+<h3>Step 3: Check if Port is Available</h3>
+<pre><code class="language-powershell">$checkResponse = Invoke-RestMethod -Uri &quot;https://jq654klina2q4yts42o5qkrp3m0yvlit.lambda-url.us-west-2.on.aws/api/ports/check/$port&quot;
+if ($checkResponse.inUse) {
+    # Port is taken, suggest another
+}
+</code></pre>
+<h3>Step 4: Register Port</h3>
+<pre><code class="language-powershell">$body = @{
+    projectName = $projectName
+    port = $port
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri &quot;https://jq654klina2q4yts42o5qkrp3m0yvlit.lambda-url.us-west-2.on.aws/api/ports&quot; `
+    -Method Post `
+    -ContentType &quot;application/json&quot; `
+    -Body $body
+</code></pre>
+<h3>Step 5: Confirm Registration</h3>
+<p>Report success with:</p>
+<ul>
+<li>Project name</li>
+<li>Assigned port</li>
+<li>Link to web interface</li>
+</ul>
+<h2>COMPLETION MESSAGE</h2>
+<pre><code>Port assigned! ✅
+
+Project: {projectName}
+Port: {port}
+
+View all ports: https://ports.mikesendpoint.com
+
+To use this port in your project:
+dotnet run --urls &quot;http://localhost:{port}&quot;
+</code></pre>
+<h2>EXAMPLE WORKFLOWS</h2>
+<h3>Example 1: User provides everything</h3>
+<pre><code>User: &quot;assign port 5001 to my-api&quot;
+Cline: Checks if 5001 is available
+Cline: Registers my-api on port 5001
+Cline: Confirms registration
+</code></pre>
+<h3>Example 2: User provides project only</h3>
+<pre><code>User: &quot;assign port for dashboard-app&quot;
+Cline: Finds next available port (e.g., 5003)
+Cline: Suggests port 5003
+User: Confirms
+Cline: Registers dashboard-app on port 5003
+</code></pre>
+<h3>Example 3: User provides nothing</h3>
+<pre><code>User: &quot;assign port&quot;
+Cline: &quot;What is the project name?&quot;
+User: &quot;analytics-service&quot;
+Cline: Finds next available port (e.g., 5004)
+Cline: &quot;What port number? (Suggested: 5004)&quot;
+User: &quot;5004&quot;
+Cline: Registers analytics-service on port 5004
+</code></pre>
+<h2>ERROR HANDLING</h2>
+<p><strong>If port is already in use:</strong></p>
+<pre><code>Port {port} is already assigned to {existingProject}.
+Suggested alternative: {nextAvailablePort}
+</code></pre>
+<p><strong>If project already has a port:</strong></p>
+<pre><code>Project {projectName} already has port {existingPort} assigned.
+Do you want to update it to {newPort}?
+</code></pre>
+<p><strong>If API is unavailable:</strong></p>
+<pre><code>Port Directory API is unavailable. Please try again later.
+</code></pre>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Always check availability</strong> before assigning</li>
+<li><strong>Suggest next available</strong> starting from 5000</li>
+<li><strong>Confirm before registering</strong> if user didn&#39;t provide port</li>
+<li><strong>Update existing</strong> if project already registered</li>
+<li><strong>Link to web interface</strong> in completion message</li>
+</ol>
+<h2>TONE</h2>
+<p>Direct and helpful:</p>
+<ul>
+<li>&quot;Port 5001 assigned to my-api&quot;</li>
+<li>&quot;Next available port: 5003&quot;</li>
+<li>&quot;View at <a href="https://ports.mikesendpoint.com">https://ports.mikesendpoint.com</a>&quot;</li>
+</ul>
+<p>Not:</p>
+<ul>
+<li>&quot;Great! I&#39;ve successfully assigned...&quot;</li>
+</ul>
+
+  </div>
+</article>

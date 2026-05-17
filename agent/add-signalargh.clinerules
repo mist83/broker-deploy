@@ -1,0 +1,29 @@
+# Add SignalArgh Command
+
+## TRIGGER
+"add signalargh", "use signalargh", "add signalr"
+
+## PURPOSE
+Integrates SignalArgh real-time messaging - free, no-registration SignalR hub for JavaScript, Python, or C# projects.
+
+## WHAT IT DOES
+- Detects project language (JS/Python/C#)
+- Prompts for: Channel ID, User ID strategy, Features needed
+- Creates: SignalR client helper file with complete implementation
+- Supports: Channels, Groups, Announcements, Auto-reconnect
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-signalargh.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-signalargh.md`
+
+## QUICK REFERENCE
+- **Hub URL:** https://signalargh.mikesendpoint.com/hub
+- **No Auth:** Just channelId + userId query params
+- **Channel Isolation:** Messages never cross channels
+- **Auto-Reconnect:** Built-in reconnection on connection loss
+- **Multi-Language:** JavaScript (browser/Node), Python, C#

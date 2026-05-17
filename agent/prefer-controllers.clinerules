@@ -1,0 +1,16 @@
+# Prefer Controllers
+
+## TRIGGER
+ALWAYS ACTIVE - When creating or modifying ASP.NET Core APIs.
+
+## PURPOSE
+Use proper MVC Controllers instead of minimal API (MapGet/MapPost) patterns. Controllers provide better organization, testability, and maintainability.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/prefer-controllers.md" -Raw
+```
+
+Or use read_file tool:
+`full/prefer-controllers.md`

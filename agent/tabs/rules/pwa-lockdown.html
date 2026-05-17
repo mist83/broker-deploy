@@ -1,0 +1,111 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../pwa-lockdown.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> pwa-lockdown.clinerules</a> &middot; <a class="link-muted" href="../full/pwa-lockdown.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/pwa-lockdown.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Pwa Lockdown</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE when creating or modifying PWA files.</p>
+<h2>PURPOSE</h2>
+<p>PWAs should feel like native apps - no browser chrome, no zoom, no scroll, no text selection. Lock it down completely.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/pwa-lockdown.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/pwa-lockdown.md</code></p>
+<h2>Full content</h2>
+<h1>PWA Lockdown Standards - Native App Experience</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE when creating or modifying PWA files.</p>
+<h2>PHILOSOPHY</h2>
+<p>PWAs should feel like native apps - no browser chrome, no zoom, no scroll, no text selection. Lock it down completely.</p>
+<h2>MANDATORY PWA LOCKDOWN</h2>
+<h3>HTML Meta Tags</h3>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;
+&lt;meta name=&quot;mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
+&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
+&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black-translucent&quot;&gt;
+</code></pre>
+<h3>CSS Lockdown</h3>
+<pre><code class="language-css">* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+</code></pre>
+<h3>Manifest.json</h3>
+<pre><code class="language-json">{
+  &quot;display&quot;: &quot;standalone&quot;,
+  &quot;orientation&quot;: &quot;portrait&quot;
+}
+</code></pre>
+<h2>COMPLETE LOCKDOWN CHECKLIST</h2>
+<h3>Viewport</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <code>user-scalable=no</code> - No pinch zoom</li>
+<li><input checked="" disabled="" type="checkbox"> <code>maximum-scale=1.0</code> - Lock zoom level</li>
+<li><input checked="" disabled="" type="checkbox"> <code>initial-scale=1.0</code> - Start at 100%</li>
+</ul>
+<h3>Selection</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <code>user-select: none</code> - No text selection</li>
+<li><input checked="" disabled="" type="checkbox"> <code>-webkit-touch-callout: none</code> - No context menu</li>
+<li><input checked="" disabled="" type="checkbox"> <code>-webkit-tap-highlight-color: transparent</code> - No tap flash</li>
+</ul>
+<h3>Scroll</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <code>overflow: hidden</code> - No scroll</li>
+<li><input checked="" disabled="" type="checkbox"> <code>position: fixed</code> - Lock position</li>
+<li><input checked="" disabled="" type="checkbox"> <code>overscroll-behavior: none</code> - No pull-to-refresh</li>
+<li><input checked="" disabled="" type="checkbox"> <code>100vh/100vw</code> - Fullscreen</li>
+</ul>
+<h3>Touch</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <code>touch-action: manipulation</code> - No double-tap zoom</li>
+<li><input checked="" disabled="" type="checkbox"> Inputs/textareas allow selection (exception)</li>
+</ul>
+<h3>Orientation</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <code>orientation: portrait</code> in manifest</li>
+<li><input checked="" disabled="" type="checkbox"> <code>apple-mobile-web-app-capable</code> for iOS</li>
+</ul>
+<h2>EXCEPTIONS</h2>
+<p><strong>Allow selection in:</strong></p>
+<ul>
+<li><code>&lt;input&gt;</code> elements</li>
+<li><code>&lt;textarea&gt;</code> elements</li>
+</ul>
+<p>These need <code>user-select: text</code> override.</p>
+<h2>ENFORCEMENT</h2>
+<p>When creating PWA:</p>
+<ol>
+<li>Add all meta tags to <code>&lt;head&gt;</code></li>
+<li>Add lockdown CSS to stylesheet</li>
+<li>Set manifest orientation to portrait</li>
+<li>Test on mobile device</li>
+<li>Verify no zoom, no scroll, no selection</li>
+</ol>
+<h2>REMEMBER</h2>
+<p>PWA = Native app experience. If it feels like a website, you&#39;re doing it wrong.</p>
+
+  </div>
+</article>

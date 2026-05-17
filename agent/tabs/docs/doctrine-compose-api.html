@@ -1,0 +1,84 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../DOCTRINE-COMPOSE-API.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> DOCTRINE-COMPOSE-API.md</a></p>
+  <div class="markdown-body">
+<h1>Doctrine Compose API</h1>
+<p>This is the preferred long-term flow for the remote brain.</p>
+<h2>Goal</h2>
+<p>Do not make every runtime hand-stitch the same prompt from a pile of markdown files.</p>
+<p>Instead:</p>
+<ol>
+<li>fetch a small static table of contents</li>
+<li>choose shared profiles and any extra rule ids</li>
+<li>make one compose request</li>
+<li>get back a crafted preamble plus citations</li>
+</ol>
+<p>That lets the control plane decide ordering, pruning, grouping, and phrasing without forcing each runtime to reinvent the weave.</p>
+<h2>Static Artifacts</h2>
+<p>These are fetched first:</p>
+<ul>
+<li><code>doctrine/bootstrap-v1.json</code></li>
+<li><code>doctrine/shared-rule-catalog-v1.json</code></li>
+<li><code>doctrine/profile-toc-v1.json</code></li>
+</ul>
+<p>The catalog says what rules exist.</p>
+<p>The profile TOC says which groups of rules belong together and which ones are the default shared stack for each runtime.</p>
+<h2>Compose Flow</h2>
+<p>Preferred flow:</p>
+<ol>
+<li>Fetch <code>bootstrap-v1.json</code></li>
+<li>Fetch <code>shared-rule-catalog-v1.json</code></li>
+<li>Fetch <code>profile-toc-v1.json</code></li>
+<li>Optionally call <code>/scope</code> to choose profile ids for the task</li>
+<li>Call <code>/compose</code> once with runtime + selected profiles + task context</li>
+<li>Use the returned <code>craftedPreamble</code></li>
+<li>Keep the returned rule ids and citations for audit/debug</li>
+</ol>
+<h2>Why This Beats Flat Files</h2>
+<ul>
+<li>shared rules live once</li>
+<li>runtime overlays stay thin</li>
+<li>prompt order becomes deterministic</li>
+<li>task-specific pruning becomes normal</li>
+<li>the operator can swap profiles without touching local files</li>
+<li>the API can eventually inject synthetic memory with provenance instead of pasting random prose</li>
+</ul>
+<h2><code>/compose</code> Request Shape</h2>
+<p>See machine-readable contract:</p>
+<ul>
+<li><a href="./doctrine/compose-api-v1.json">doctrine/compose-api-v1.json</a></li>
+<li><a href="./doctrine/compose-request-example-v1.json">doctrine/compose-request-example-v1.json</a></li>
+<li><a href="./doctrine/compose-response-example-v1.json">doctrine/compose-response-example-v1.json</a></li>
+</ul>
+<p>High-level request fields:</p>
+<ul>
+<li><code>runtime</code></li>
+<li><code>profileIds</code></li>
+<li><code>includeRuleIds</code></li>
+<li><code>excludeRuleIds</code></li>
+<li><code>task</code></li>
+<li><code>sessionState</code></li>
+<li><code>operatorOverride</code></li>
+<li><code>maxChars</code></li>
+</ul>
+<h2><code>/compose</code> Response Shape</h2>
+<p>The response should return:</p>
+<ul>
+<li><code>craftedPreamble</code></li>
+<li><code>selectedProfileIds</code></li>
+<li><code>orderedRuleIds</code></li>
+<li><code>citations</code></li>
+<li><code>warnings</code></li>
+<li><code>sessionState</code></li>
+</ul>
+<p>That gives the agent one crafted block to use, plus a paper trail showing which exact rule artifacts were woven into it.</p>
+<h2>Compatibility Reality</h2>
+<p>The live doctrine site does not have a real <code>/compose</code> service today.</p>
+<p>Today:</p>
+<ul>
+<li>Codex still uses static compatibility artifacts like <code>CODEX-BOOTSTRAP-PROMPT.md</code> and <code>codex-memory-seed-v1.json</code></li>
+<li>Claude still uses its instruction pack manifest plus shared rule projections</li>
+</ul>
+<p>The contract in this doc is the shape those static compatibility artifacts should converge toward.</p>
+
+  </div>
+</article>

@@ -1,0 +1,114 @@
+# Process Workflows Facet
+
+**Description:** Process automation and workflow management
+
+**Domains:** automation, process
+**Behaviors:** workflow, automation
+
+---
+
+## quickstart
+
+# Quickstart
+
+## TRIGGER
+When the user says "quickstart", "just run it", "start this", "run this project", or similar phrases.
+
+## PURPOSE
+Don't read docs. Don't ask questions. Just detect project type and run it.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/quickstart.md" -Raw
+```
+
+Or use read_file tool:
+`full/quickstart.md`
+
+---
+
+## auto-deploy-slack
+
+# Auto Deploy Slack
+
+## TRIGGER
+After any successful Lambda deployment that completes with a Function URL.
+
+## PURPOSE
+Automatically post to Slack whenever you deploy an app, providing immediate notification with the deployed URL.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/auto-deploy-slack.md" -Raw
+```
+
+Or use read_file tool:
+`full/auto-deploy-slack.md`
+
+---
+
+## deep-planning-triage
+
+# Deep Planning Triage
+
+## TRIGGER
+See full content
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/deep-planning-triage.md" -Raw
+```
+
+Or use read_file tool:
+`full/deep-planning-triage.md`
+
+---
+
+## always-ask-what-else
+
+# Always Ask What Else
+
+## TRIGGER
+ALWAYS ACTIVE - After every attempt_completion.
+
+## PURPOSE
+Force explicit acknowledgment of remaining work. Never leave the user guessing if the task is actually done.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/always-ask-what-else.md" -Raw
+```
+
+Or use read_file tool:
+`full/always-ask-what-else.md`
+
+---
+
+## assign-port
+
+# Assign Port
+
+## TRIGGER
+When the user says "assign port", "register port", "add port", "new port for [project]", or similar phrases requesting port assignment.
+
+## PURPOSE
+Automatically assign and register a new port for a project using the Port Directory API.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/assign-port.md" -Raw
+```
+
+Or use read_file tool:
+`full/assign-port.md`
+
+---
+

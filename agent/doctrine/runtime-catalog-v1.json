@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "agents-doctrine-runtime-catalog-v1",
+  "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
+  "generatedAt": "2026-05-17T02:31:35.686Z",
+  "runtimes": [
+    {
+      "id": "codex",
+      "label": "Codex",
+      "launchKind": "codex-task",
+      "composeRuntime": "codex",
+      "defaultProfileIds": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "supportedEvents": [
+        "session_start",
+        "task_execution",
+        "memory_read",
+        "skill_load",
+        "command_resolve",
+        "hook_dispatch"
+      ]
+    },
+    {
+      "id": "claude",
+      "label": "Claude",
+      "launchKind": "claude-task",
+      "composeRuntime": "claude",
+      "defaultProfileIds": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "supportedEvents": [
+        "session_start",
+        "task_execution",
+        "memory_read",
+        "skill_load",
+        "command_resolve",
+        "hook_dispatch"
+      ]
+    }
+  ],
+  "notes": [
+    "Runtime identity is input to doctrine composition, not the organizing principle of the shared rule tree.",
+    "Launch kinds are the Valet-facing names for unattended worker execution."
+  ]
+}

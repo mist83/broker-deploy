@@ -1,0 +1,44 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../README.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> README.md</a></p>
+  <div class="markdown-body">
+<h1>agent</h1>
+<p>Prompt rules, scaffolds, workflows, and doctrine artifacts for agents. This repo absorbs the old <code>clinerules</code> and <code>agent-rules</code> names; <code>.clinerules</code> remains only because some tools still load that file extension directly.</p>
+<p>Browse the site at <a href="https://agent.mullmania.com/">https://agent.mullmania.com/</a>.</p>
+<h2>Layout</h2>
+<ul>
+<li><strong>Rules</strong> (<code>*.clinerules</code>): synopsis-style trigger/purpose files. The <code>.clinerules</code> extension stays because some agent shells still load that format directly.</li>
+<li><strong>Full guides</strong> (<code>full/*.md</code>): the expanded how-to for each rule. The synopsis points at these.</li>
+<li><strong>Meta docs</strong> (<code>README.md</code>, <code>RULE-CREATION-GUIDE.md</code>, <code>rules-index.md</code>, <code>custom_instructions.md</code>, etc.): project-level writeups.</li>
+<li><strong>Facets</strong> (<code>facets/*.facet</code>): category rollups used by the loader.</li>
+<li><strong>Doctrine</strong> (<code>doctrine/*</code>): machine-readable bootstrap and memory seed artifacts intended to become the remote source of truth.</li>
+</ul>
+<h2>Doctrine Direction</h2>
+<ul>
+<li><code>agent.mullmania.com</code> is the current live host. If <code>agents.mullmania.com</code> is introduced later, it should replace or mirror this host instead of forking the doctrine.</li>
+<li>Doctrine artifacts should be publicly readable from the current host. If they are not reachable, consumers should fail visibly instead of silently falling back.</li>
+<li>The shared doctrine core now lives in <code>doctrine/shared-rule-catalog-v1.json</code> plus <code>doctrine/profile-toc-v1.json</code>. Runtime packs are overlays, not separate brains.</li>
+<li>Existing <code>.clinerules</code>, <code>full/*.md</code>, <code>custom_instructions.md</code>, and similar platform-shaped files are now legacy compatibility material and historical inputs.</li>
+<li>New source-of-truth behavior belongs in the doctrine artifacts and their guiding docs, not in ad hoc local Codex/Claude files.</li>
+<li>Local platform files should become generated projections or tiny bootstrap/fuse shims, not authored policy.</li>
+</ul>
+<h2>Site</h2>
+<ul>
+<li>Shell: canon tool surface (<code>#header-container</code> + <code>#tabs-container</code> + <code>#content-container</code>) loaded from <code>https://ui.mullmania.com</code>.</li>
+<li>Tabs: Overview / Rules / Full Guides / Docs.</li>
+<li>Rules, Full Guides, and Docs tabs use the <code>layout: &quot;workspace&quot;</code> sidebar split.</li>
+<li><code>scripts/build.mjs</code> renders every source into an HTML fragment under <code>tabs/</code> and regenerates <code>sitemap.json</code>. Run <code>node scripts/build.mjs</code> after editing any rule or doc.</li>
+</ul>
+<h2>Deploy</h2>
+<ul>
+<li><code>mullmania.site.json</code> is the publish contract. The deploy workflow runs <code>npm install</code> + <code>node scripts/build.mjs</code> on push to <code>master</code>, then syncs the root to <code>s3://mullmania.com/agent/</code>.</li>
+<li>GitHub Pages also mirrors the repo root from <code>master</code>.</li>
+</ul>
+<h2>Working locally</h2>
+<pre><code class="language-bash">npm install
+node scripts/build.mjs
+python3 -m http.server 8732
+# open http://localhost:8732
+</code></pre>
+
+  </div>
+</article>

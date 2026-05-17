@@ -1,0 +1,16 @@
+# Destank
+
+## TRIGGER
+When the user says any of: "destank", "destink", "unslop", "unsloppify", "remove ai stink", "remove ai stank", "this code reeks of ai", "this is stinky with AI", "this is stanky with ai", or similar phrases indicating AI-generated code patterns should be removed.
+
+## PURPOSE
+AI-generated code often has telltale patterns that make it obvious it wasn't written by a human. This command removes those patterns while maintaining functionality.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/destank.md" -Raw
+```
+
+Or use read_file tool:
+`full/destank.md`

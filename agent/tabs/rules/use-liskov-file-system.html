@@ -1,0 +1,183 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../use-liskov-file-system.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> use-liskov-file-system.clinerules</a> &middot; <a class="link-muted" href="../full/use-liskov-file-system.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/use-liskov-file-system.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Use Liskov File System</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;use liskov file system&quot;, &quot;use liskov with [bucket-name] bucket&quot;, &quot;add liskov&quot;, or similar phrases, activate this command to integrate the Liskov File System library.</p>
+<h2>PURPOSE</h2>
+<p>See full content</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/use-liskov-file-system.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/use-liskov-file-system.md</code></p>
+<h2>Full content</h2>
+<h1>Use Liskov File System Command</h1>
+<h2>TRIGGER</h2>
+<p>When the user says &quot;use liskov file system&quot;, &quot;use liskov with [bucket-name] bucket&quot;, &quot;add liskov&quot;, or similar phrases, activate this command to integrate the Liskov File System library.</p>
+<h2>WHAT IS LISKOV FILE SYSTEM?</h2>
+<p>A unified C# library that provides a consistent file system interface for both local storage and AWS S3. It abstracts away the differences between storage providers so you can switch between local and S3 without changing your code.</p>
+<p><strong>Location:</strong> C:\code\git\liskov-file-system</p>
+<h2>DETECTION LOGIC</h2>
+<p>First, detect the project language:</p>
+<ol>
+<li><strong>C# Project:</strong> Check for <code>*.csproj</code> or <code>*.sln</code> files</li>
+<li><strong>JavaScript/Node.js Project:</strong> Check for <code>package.json</code></li>
+</ol>
+<h2>USER PROMPTS</h2>
+<p>Use <code>ask_followup_question</code> tool to gather required information:</p>
+<h3>Prompt 1: Storage Provider</h3>
+<p><strong>Question:</strong> &quot;Which storage provider do you want to use?&quot;
+<strong>Options:</strong> [&quot;Local Storage&quot;, &quot;AWS S3&quot;]</p>
+<h3>Prompt 2: Bucket/Path Name (Required)</h3>
+<p>If S3 was selected:
+<strong>Question:</strong> &quot;What is the S3 bucket name?&quot;
+<strong>Example:</strong> &quot;vizio-data-ingestion&quot;, &quot;my-app-files&quot;</p>
+<p>If Local was selected:
+<strong>Question:</strong> &quot;What local path should be used for storage?&quot;
+<strong>Default suggestion:</strong> &quot;./data&quot;</p>
+<h3>Prompt 3: AWS Region (if S3 selected)</h3>
+<p><strong>Question:</strong> &quot;What AWS region is the S3 bucket in?&quot;
+<strong>Default:</strong> &quot;us-west-2&quot;
+<strong>Options:</strong> [&quot;us-west-2&quot;, &quot;us-east-1&quot;, &quot;eu-west-1&quot;, &quot;Other&quot;]</p>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>For C# Projects</h3>
+<h4>1. Add NuGet Package Reference</h4>
+<p>Add to the .csproj file within <code>&lt;ItemGroup&gt;</code>:</p>
+<pre><code class="language-xml">&lt;PackageReference Include=&quot;LiskovFileSystem&quot; Version=&quot;*&quot; /&gt;
+</code></pre>
+<p>Or use command:</p>
+<pre><code class="language-bash">dotnet add package LiskovFileSystem
+</code></pre>
+<h4>2. Configure appsettings.json</h4>
+<p>Add configuration section:</p>
+<p><strong>For Local Storage:</strong></p>
+<pre><code class="language-json">{
+  &quot;LiskovFileSystem&quot;: {
+    &quot;Provider&quot;: &quot;Local&quot;,
+    &quot;LocalSettings&quot;: {
+      &quot;RootPath&quot;: &quot;./data&quot;
+    }
+  }
+}
+</code></pre>
+<p><strong>For S3 Storage:</strong></p>
+<pre><code class="language-json">{
+  &quot;LiskovFileSystem&quot;: {
+    &quot;Provider&quot;: &quot;S3&quot;,
+    &quot;S3Settings&quot;: {
+      &quot;BucketName&quot;: &quot;{{bucket-name}}&quot;,
+      &quot;Region&quot;: &quot;{{region}}&quot;
+    }
+  }
+}
+</code></pre>
+<p>Note: AWS credentials should be configured via AWS CLI or environment variables, not in appsettings.json.</p>
+<h4>3. Register Service in Program.cs</h4>
+<p>Add after <code>var builder = WebApplication.CreateBuilder(args);</code>:</p>
+<pre><code class="language-csharp">// Register Liskov File System
+builder.Services.AddLiskovFileSystem(builder.Configuration);
+</code></pre>
+<p>Add using statement at top:</p>
+<pre><code class="language-csharp">using LiskovFileSystem;
+</code></pre>
+<h4>4. Create Example Usage File</h4>
+<p>Create <code>Services/FileService.cs</code> or similar:</p>
+<pre><code class="language-csharp">using LiskovFileSystem;
+
+namespace {{ProjectName}}.Services
+{
+    public class FileService
+    {
+        private readonly IFileSystem _fileSystem;
+
+        public FileService(IFileSystem fileSystem)
+        {
+            _fileSystem = fileSystem;
+        }
+
+        public async Task&lt;string&gt; ReadFileAsync(string path)
+        {
+            return await _fileSystem.ReadTextFileAsync(path);
+        }
+
+        public async Task WriteFileAsync(string path, string content)
+        {
+            await _fileSystem.WriteTextFileAsync(path, content);
+        }
+
+        public async Task&lt;bool&gt; FileExistsAsync(string path)
+        {
+            return await _fileSystem.FileExistsAsync(path);
+        }
+
+        public async Task&lt;IEnumerable&lt;string&gt;&gt; ListFilesAsync(string prefix = &quot;&quot;)
+        {
+            return await _fileSystem.ListFilesAsync(prefix);
+        }
+    }
+}
+</code></pre>
+<h3>For JavaScript/Node.js Projects</h3>
+<h4>1. Inform User About MCP Server</h4>
+<p>Since Liskov File System is primarily a C# library with an MCP server interface, inform the user:</p>
+<p>&quot;Liskov File System is available as an MCP server that you can connect to Cline. This allows you to use file system operations through MCP tools rather than direct library integration.</p>
+<p>To use it:</p>
+<ol>
+<li>Start the Liskov API: <code>cd C:\code\git\liskov-file-system\src\LiskovFileSystem.Api &amp;&amp; dotnet run</code></li>
+<li>Build the MCP server: <code>cd C:\code\git\liskov-file-system\mcp-server &amp;&amp; npm run build</code></li>
+<li>Configure it in Cline&#39;s MCP settings</li>
+</ol>
+<p>Would you prefer to:</p>
+<ul>
+<li>Use it as an MCP server for Cline tool access</li>
+<li>Look for a JavaScript S3 library alternative (like <code>@aws-sdk/client-s3</code>)
+&quot;</li>
+</ul>
+<h2>COMPLETION MESSAGE</h2>
+<p>After successful setup, inform the user:</p>
+<h3>For C# Projects</h3>
+<pre><code>Liskov File System integrated! ✅
+
+**Configuration:**
+- Provider: {{Local or S3}}
+- {{Bucket/Path}}: {{bucket-name or path}}
+{{- Region: {{region}} (if S3)}}
+
+**Available via dependency injection:**
+```csharp
+public class MyService
+{
+    private readonly IFileSystem _fileSystem;
+    
+    public MyService(IFileSystem fileSystem)
+    {
+        _fileSystem = fileSystem;
+    }
+}
+</code></pre>
+<p><strong>Common operations:</strong></p>
+<ul>
+<li>Read text: <code>await _fileSystem.ReadTextFileAsync(path)</code></li>
+<li>Write text: <code>await _fileSystem.WriteTextFileAsync(path, content)</code></li>
+<li>Check exists: <code>await _fileSystem.FileExistsAsync(path)</code></li>
+<li>List files: <code>await _fileSystem.ListFilesAsync(prefix)</code></li>
+<li>Delete: <code>await _fileSystem.DeleteFileAsync(path)</code></li>
+<li>Copy: <code>await _fileSystem.CopyFileAsync(source, dest)</code></li>
+<li>Move: <code>await _fileSystem.MoveFileAsync(source, dest)</code></li>
+</ul>
+<p><strong>Switch providers:</strong> Just change &quot;Provider&quot; in appsettings.json. Your code stays the same!</p>
+<pre><code>
+## IMPORTANT NOTES
+
+1. **Provider Abstraction:** The beauty of Liskov is you can switch between Local and S3 by just changing configuration
+2. **AWS Credentials:** For S3, ensure AWS CLI is configured or environment variables are set
+3. **Self-Explanatory:** Once you know the bucket name, that&#39;s all you need - the interface is intuitive
+4. **Testing:** Always test with local provider first, then switch to S3
+5. **MCP Server Option:** Can also be used as an MCP server for tool-based access
+</code></pre>
+
+  </div>
+</article>

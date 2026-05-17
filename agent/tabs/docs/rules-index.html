@@ -1,0 +1,82 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../rules-index.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> rules-index.md</a></p>
+  <div class="markdown-body">
+<h1>Agent Rules Index</h1>
+<p><strong>Token-Optimized Loading System</strong></p>
+<p>This index provides summaries of all available rules. Full content is loaded on-demand when trigger patterns match.</p>
+<hr>
+<h2>Always-Active Rules (Loaded Every Request)</h2>
+<h3>custom_instructions.md</h3>
+<p><strong>Always loaded</strong> - Core personality and workflow preferences</p>
+<h3>proactive-code-quality.clinerules</h3>
+<p><strong>Always loaded</strong> - Code quality standards for HTML/CSS/JS, formatting, PowerShell syntax</p>
+<h3>powershell-enforcement.clinerules</h3>
+<p><strong>Always loaded</strong> - CRITICAL: Use <code>;</code> not <code>&amp;&amp;</code> in PowerShell commands</p>
+<hr>
+<h2>Command-Triggered Rules (Load on Demand)</h2>
+<h3>add-ai-assistance</h3>
+<p><strong>Triggers:</strong> &quot;add AI assistance&quot;, &quot;add ai assistance&quot;<br><strong>Summary:</strong> Creates AI helper code for JavaScript or C# projects to interact with AI endpoint<br><strong>Full content:</strong> <code>full/add-ai-assistance.md</code></p>
+<h3>add-ai-integration</h3>
+<p><strong>Triggers:</strong> When adding AI features with CORS issues<br><strong>Summary:</strong> Backend proxy pattern to avoid CORS errors with external AI endpoints<br><strong>Full content:</strong> <code>full/add-ai-integration.md</code></p>
+<h3>add-signalargh</h3>
+<p><strong>Triggers:</strong> &quot;add signalargh&quot;, &quot;use signalargh&quot;, &quot;add signalr&quot;<br><strong>Summary:</strong> Integrates SignalArgh real-time messaging (no-registration SignalR hub)<br><strong>Full content:</strong> <code>full/add-signalargh.md</code></p>
+<h3>always-ask-what-else</h3>
+<p><strong>Triggers:</strong> After every attempt_completion<br><strong>Summary:</strong> Force explicit acknowledgment of remaining work with &quot;What else?&quot; section<br><strong>Full content:</strong> <code>full/always-ask-what-else.md</code></p>
+<h3>auto-deploy-slack</h3>
+<p><strong>Triggers:</strong> After successful Lambda deployment<br><strong>Summary:</strong> Posts Slack notification with deployment URL and cache-busted link<br><strong>Full content:</strong> <code>full/auto-deploy-slack.md</code></p>
+<h3>bug-beacon-shortcuts</h3>
+<p><strong>Triggers:</strong> &quot;bbfix&quot;, &quot;bug beacon&quot;, &quot;BB&quot;, &quot;check bug beacon&quot;<br><strong>Summary:</strong> Auto-fetch and analyze bugs from Bug Beacon tracker<br><strong>Full content:</strong> <code>full/bug-beacon-shortcuts.md</code></p>
+<h3>deep-planning-triage</h3>
+<p><strong>Triggers:</strong> &quot;/deep-planning&quot;, &quot;architectural triage&quot;<br><strong>Summary:</strong> Simplify codebase architecturally, question dogma, reduce blast radius<br><strong>Full content:</strong> <code>full/deep-planning-triage.md</code></p>
+<h3>destank</h3>
+<p><strong>Triggers:</strong> &quot;destank&quot;, &quot;destink&quot;, &quot;unslop&quot;, &quot;remove ai stink&quot;<br><strong>Summary:</strong> Removes AI-generated code patterns (verbose comments, gradients, sales pitch language)<br><strong>Full content:</strong> <code>full/destank.md</code></p>
+<h3>fix-bugs</h3>
+<p><strong>Triggers:</strong> &quot;fix bugs&quot;, &quot;resolve bugs&quot;, &quot;address bugs&quot;<br><strong>Summary:</strong> Fetches bugs from Bug Beacon, creates DallAIre tasks, deletes from tracker<br><strong>Full content:</strong> <code>full/fix-bugs.md</code></p>
+<h3>fix-nitpicks</h3>
+<p><strong>Triggers:</strong> &quot;fix nitpicks&quot;, &quot;fix nits&quot;, &quot;obliterate nits&quot;<br><strong>Summary:</strong> Fetches UI nitpicks from Nit Picker, creates DallAIre tasks, deletes from tracker<br><strong>Full content:</strong> <code>full/fix-nitpicks.md</code></p>
+<h3>kiss-html-css-js</h3>
+<p><strong>Triggers:</strong> &quot;KISS the html&quot;, &quot;KISS the css&quot;, &quot;KISS the js&quot;, &quot;keep it simple&quot;<br><strong>Summary:</strong> Enforces minimalist web design: no gradients, semantic HTML, flat colors, vanilla JS<br><strong>Full content:</strong> <code>full/kiss-html-css-js.md</code></p>
+<h3>make-fab</h3>
+<p><strong>Triggers:</strong> &quot;make a fab&quot;, &quot;make this into a fab&quot;, &quot;turn this into a fab&quot;<br><strong>Summary:</strong> Wraps HTML in Floating Action Button (FAB) Collection library for S3 deployment<br><strong>Full content:</strong> <code>full/make-fab.md</code></p>
+<h3>make-lambda</h3>
+<p><strong>Triggers:</strong> &quot;make this into a lambda&quot;, &quot;make lambda&quot;, &quot;convert to lambda&quot;<br><strong>Summary:</strong> Converts C# project to deployable AWS Lambda with proven template pattern<br><strong>Full content:</strong> <code>full/make-lambda.md</code></p>
+<h3>make-tv-app</h3>
+<p><strong>Triggers:</strong> &quot;make a tv app&quot;, &quot;convert to tv&quot;, &quot;make this tv-friendly&quot;<br><strong>Summary:</strong> Creates fullscreen, keyboard-driven TV interface optimized for 10-foot viewing<br><strong>Full content:</strong> <code>full/make-tv-app.md</code></p>
+<h3>no-emojis-no-fluff</h3>
+<p><strong>Triggers:</strong> Always active during communication<br><strong>Summary:</strong> No emojis in code files, use Tabler icons, matter-of-fact communication style<br><strong>Full content:</strong> <code>full/no-emojis-no-fluff.md</code></p>
+<h3>no-inline-styles</h3>
+<p><strong>Triggers:</strong> When writing JavaScript/HTML<br><strong>Summary:</strong> Use CSS classes instead of inline styles, CSS variables for themes<br><strong>Full content:</strong> <code>full/no-inline-styles.md</code></p>
+<h3>prefer-controllers</h3>
+<p><strong>Triggers:</strong> When creating ASP.NET Core APIs<br><strong>Summary:</strong> Use proper MVC Controllers instead of minimal API MapGet/MapPost patterns<br><strong>Full content:</strong> <code>full/prefer-controllers.md</code></p>
+<h3>refactor</h3>
+<p><strong>Triggers:</strong> &quot;/refactor&quot;<br><strong>Summary:</strong> Reads refactor.txt for quick architectural alignment checks<br><strong>Full content:</strong> <code>full/refactor.md</code></p>
+<h3>refresh-me</h3>
+<p><strong>Triggers:</strong> &quot;refresh me&quot;, &quot;I have selective amnesia&quot;, &quot;tell me about this&quot;<br><strong>Summary:</strong> Provides brief high-level synopsis for engineers, highlights clever bits<br><strong>Full content:</strong> <code>full/refresh-me.md</code></p>
+<h3>retro</h3>
+<p><strong>Triggers:</strong> &quot;retro&quot;, &quot;let&#39;s retro&quot;, &quot;retrospective&quot;<br><strong>Summary:</strong> Extract actionable patterns from work and update directives to prevent recurrence<br><strong>Full content:</strong> <code>full/retro.md</code></p>
+<h3>search-before-implementing</h3>
+<p><strong>Triggers:</strong> Always active when starting implementation<br><strong>Summary:</strong> Search codebase FIRST before implementing to find existing patterns<br><strong>Full content:</strong> <code>full/search-before-implementing.md</code></p>
+<h3>show-custom-commands</h3>
+<p><strong>Triggers:</strong> User asks about custom commands/capabilities<br><strong>Summary:</strong> Displays custom-commands-index.md with all available automation<br><strong>Full content:</strong> <code>full/show-custom-commands.md</code></p>
+<h3>use-liskov-file-system</h3>
+<p><strong>Triggers:</strong> &quot;use liskov file system&quot;, &quot;use liskov with [bucket]&quot;, &quot;add liskov&quot;<br><strong>Summary:</strong> Integrates Liskov File System library for unified local/S3 storage interface<br><strong>Full content:</strong> <code>full/use-liskov-file-system.md</code></p>
+<hr>
+<h2>Example Rules (Reference Only)</h2>
+<h3>example-error-handling</h3>
+<p><strong>Summary:</strong> Best practices for exception handling, validation, logging<br><strong>Full content:</strong> <code>full/example-error-handling.md</code></p>
+<h3>example-formatting</h3>
+<p><strong>Summary:</strong> Indentation, line length, naming conventions, code organization<br><strong>Full content:</strong> <code>full/example-formatting.md</code></p>
+<h3>example-testing</h3>
+<p><strong>Summary:</strong> Test coverage requirements, naming, structure, integration tests<br><strong>Full content:</strong> <code>full/example-testing.md</code></p>
+<hr>
+<h2>Loading Instructions</h2>
+<p>When a trigger pattern matches:</p>
+<ol>
+<li>Read the full content from the <code>full/</code> directory</li>
+<li>Apply the rule&#39;s instructions</li>
+<li>Unload after use to keep context clean</li>
+</ol>
+<p><strong>Token savings:</strong> ~45-75k tokens per request by loading only what&#39;s needed.</p>
+
+  </div>
+</article>

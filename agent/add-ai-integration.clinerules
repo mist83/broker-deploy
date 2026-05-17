@@ -1,0 +1,16 @@
+# Add Ai Integration
+
+## TRIGGER
+When the user requests AI-powered features that need to fetch from external AI endpoints, use this pattern to avoid CORS issues.
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/add-ai-integration.md" -Raw
+```
+
+Or use read_file tool:
+`full/add-ai-integration.md`

@@ -1,0 +1,16 @@
+# Fix Bugs
+
+## TRIGGER
+When the user says "fix bugs", "resolve bugs", "address bugs", or similar phrases requesting bug fixes.
+
+## PURPOSE
+Close the feedback loop by fetching reported bugs from Bug Beacon tracker, allowing user to select which to fix, then creating DallAIre tasks with full bug context.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/fix-bugs.md" -Raw
+```
+
+Or use read_file tool:
+`full/fix-bugs.md`

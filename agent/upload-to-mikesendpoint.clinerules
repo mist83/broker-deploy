@@ -1,0 +1,16 @@
+# Upload To Mikesendpoint
+
+## TRIGGER
+When the user says "upload to mikesendpoint" or similar phrases, deploy the current workspace to a subdomain at mikesendpoint.com.
+
+## PURPOSE
+Universal deployment command that works from ANY repo. Automatically uses the workspace folder name as the subdomain.
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/upload-to-mikesendpoint.md" -Raw
+```
+
+Or use read_file tool:
+`full/upload-to-mikesendpoint.md`

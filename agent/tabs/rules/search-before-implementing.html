@@ -1,0 +1,111 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../search-before-implementing.clinerules" target="_blank" rel="noopener"><i class="ti ti-file-code"></i> search-before-implementing.clinerules</a> &middot; <a class="link-muted" href="../full/search-before-implementing.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/search-before-implementing.md</a></p>
+  <div class="markdown-body">
+<h2>Synopsis</h2>
+<h1>Search Before Implementing</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects</p>
+<h2>PURPOSE</h2>
+<p>The codebase is RIGHT THERE. Search it FIRST. Don&#39;t implement blind.</p>
+<h2>FULL IMPLEMENTATION</h2>
+<p>When trigger detected, read complete implementation:</p>
+<pre><code class="language-powershell">$content = Get-Content &quot;C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/search-before-implementing.md&quot; -Raw
+</code></pre>
+<p>Or use read_file tool:
+<code>full/search-before-implementing.md</code></p>
+<h2>Full content</h2>
+<h1>Search Before Implementing - Pattern Discovery First</h1>
+<h2>TRIGGER</h2>
+<p>ALWAYS ACTIVE when working in ANY codebase, especially Angular/TypeScript projects</p>
+<h2>PHILOSOPHY</h2>
+<p>The codebase is RIGHT THERE. Search it FIRST. Don&#39;t implement blind.</p>
+<h2>MANDATORY WORKFLOW</h2>
+<h3>When Starting ANY Implementation Task:</h3>
+<p><strong>Step 1: Read the Ticket/Request</strong></p>
+<ul>
+<li>Identify key terms and features mentioned</li>
+<li>Note any references to &quot;similar to...&quot;, &quot;we already do this in...&quot;, &quot;like the existing...&quot;</li>
+</ul>
+<p><strong>Step 2: SEARCH THE CODEBASE (Required)</strong>
+Before writing ANY code:</p>
+<pre><code class="language-bash"># Search for similar features
+git grep &quot;similar_feature_keyword&quot;
+
+# Search for specific patterns
+search_files tool with relevant regex
+
+# Check existing implementations
+read_file on similar components
+
+# Look at model definitions
+read_file on relevant model files
+</code></pre>
+<p><strong>Step 3: Search Git History (If Needed)</strong>
+Only AFTER searching current code:</p>
+<pre><code class="language-bash">git log --grep=&quot;feature_keyword&quot;
+git log -S &quot;code_pattern&quot; --oneline
+</code></pre>
+<p><strong>Step 4: Model Your Implementation</strong>
+Base your code on what you found:</p>
+<ul>
+<li>Copy patterns, not invent new ones</li>
+<li>Match naming conventions</li>
+<li>Use same libraries/components</li>
+<li>Follow established structure</li>
+</ul>
+<p><strong>Step 5: Implement</strong>
+Now you can write code with confidence.</p>
+<h2>RED FLAGS - Stop and Search</h2>
+<p>When you see these phrases, STOP and SEARCH first:</p>
+<ul>
+<li>&quot;We already do this in...&quot;</li>
+<li>&quot;Similar to existing...&quot;</li>
+<li>&quot;Like the [feature] we have...&quot;</li>
+<li>&quot;Following the pattern of...&quot;</li>
+<li>&quot;This should work like...&quot;</li>
+</ul>
+<h2>EXAMPLE: This Task</h2>
+<p><strong>Ticket said:</strong> &quot;We already do this in WFP AVOD text search&quot;</p>
+<p><strong>What I should have done:</strong></p>
+<ol>
+<li><code>git grep &quot;itemMetadata&quot;</code> - find existing usage</li>
+<li><code>search_files</code> for similar UI patterns</li>
+<li><code>read_file</code> on similar components</li>
+<li>Model implementation after findings</li>
+<li>Implement with confidence</li>
+</ol>
+<p><strong>What I actually did:</strong></p>
+<ol>
+<li>Implement based on assumptions ❌</li>
+<li>Get questioned</li>
+<li>Then search (backwards)</li>
+</ol>
+<h2>FOR ANGULAR/TYPESCRIPT PROJECTS</h2>
+<p><strong>Always search for:</strong></p>
+<ul>
+<li>Model interfaces (<code>*.model.ts</code>)</li>
+<li>Existing component patterns (<code>*component.ts</code>)</li>
+<li>Service methods (<code>*.service.ts</code>)</li>
+<li>Similar UI sections in templates (<code>*.html</code>)</li>
+</ul>
+<p><strong>Common patterns to look for:</strong></p>
+<ul>
+<li>How metadata is stored (arrays vs objects)</li>
+<li>How form controls are named</li>
+<li>How change handlers are structured</li>
+<li>Which UI component libraries are used</li>
+</ul>
+<h2>ENFORCEMENT</h2>
+<p>Before ANY implementation:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Searched codebase for similar features?</li>
+<li><input disabled="" type="checkbox"> Found existing patterns to follow?</li>
+<li><input disabled="" type="checkbox"> Understood the established conventions?</li>
+</ul>
+<p>If all three are YES → proceed with implementation
+If any are NO → search more first</p>
+<h2>REMEMBER</h2>
+<p>&quot;The codebase is your documentation. Read it before you extend it.&quot;</p>
+
+  </div>
+</article>

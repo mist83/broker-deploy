@@ -1,0 +1,16 @@
+# Show Custom Commands
+
+## TRIGGER
+When the user asks about custom commands or capabilities, such as:
+
+## PURPOSE
+See full content
+
+## FULL IMPLEMENTATION
+When trigger detected, read complete implementation:
+```powershell
+$content = Get-Content "C:/Users/mike.ullman/OneDrive - Vizio, Inc/Documents/Cline/Rules/full/show-custom-commands.md" -Raw
+```
+
+Or use read_file tool:
+`full/show-custom-commands.md`

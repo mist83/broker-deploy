@@ -1,0 +1,132 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../full/guided-design-wizard.md" target="_blank" rel="noopener"><i class="ti ti-file-text"></i> full/guided-design-wizard.md</a></p>
+  <div class="markdown-body">
+<h1>Guided Design Wizard - HTML Questionnaire Version</h1>
+<h2>TRIGGER</h2>
+<p>When the user says any of:</p>
+<ul>
+<li>&quot;design wizard&quot;</li>
+<li>&quot;app wizard&quot;</li>
+<li>&quot;click-through design&quot;</li>
+<li>&quot;turn this into an app&quot;</li>
+<li>&quot;guide me with html questionnaire&quot;</li>
+<li>&quot;questionnaire wizard&quot;</li>
+</ul>
+<h2>PHILOSOPHY</h2>
+<p>Transform vague ideas into concrete app specifications through an HTML questionnaire. Answer everything at once in a browser instead of back-and-forth chat.</p>
+<p><strong>Goal:</strong> Parallelism. Fill out form, copy synopsis, paste back to Cline.</p>
+<h2>LIBRARY LOCATION</h2>
+<pre><code>c:\code\git\ask-me\
+</code></pre>
+<p><strong>Files:</strong></p>
+<ul>
+<li><code>questionnaire-template.html</code> - HTML template with placeholders</li>
+<li><code>guided-design-wizard.clinerules</code> - Canonical rule (this is a reference copy)</li>
+<li><code>README.md</code> - Full documentation and patterns</li>
+</ul>
+<h2>IMPLEMENTATION STEPS</h2>
+<h3>Step 1: Analyze User Request</h3>
+<p>Extract key information:</p>
+<ul>
+<li>What they want to build</li>
+<li>Mentioned features</li>
+<li>Technical preferences</li>
+<li>Constraints</li>
+</ul>
+<h3>Step 2: Determine Relevant Questions</h3>
+<p>Select 5-10 questions to clarify:</p>
+<ul>
+<li>Technical stack</li>
+<li>Architecture</li>
+<li>Features</li>
+<li>Deployment</li>
+<li>Integrations</li>
+</ul>
+<h3>Step 3: Determine Input Types</h3>
+<p>For each question, choose:</p>
+<ul>
+<li><strong>Radio buttons</strong> (single choice): Deployment model, primary tech stack, UI style</li>
+<li><strong>Checkboxes</strong> (multiple choice): External services, data sources, features, integrations</li>
+</ul>
+<h3>Step 4: Generate Questionnaire HTML</h3>
+<ol>
+<li>Read template from <code>c:\code\git\ask-me\questionnaire-template.html</code></li>
+<li>Replace <code>{{PROJECT_NAME}}</code> with project name</li>
+<li>Replace <code>{{PROJECT_DESCRIPTION}}</code> with brief explanation of what&#39;s being built</li>
+<li>Generate questions HTML using patterns from <code>c:\code\git\ask-me\README.md</code></li>
+<li>Replace <code>{{QUESTIONS}}</code> with generated HTML</li>
+<li>Write to Desktop as <code>design-questionnaire-[timestamp].html</code></li>
+</ol>
+<h3>Step 5: Open in Browser</h3>
+<pre><code class="language-powershell">start &quot;C:\Users\{{username}}\Desktop\design-questionnaire-[timestamp].html&quot;
+</code></pre>
+<h3>Step 6: Wait for User Response</h3>
+<p>Inform user:</p>
+<pre><code>Questionnaire generated: design-questionnaire-[timestamp].html
+
+Instructions:
+1. Fill out the questionnaire in your browser
+2. Review the &quot;Answer Synopsis&quot; at the bottom
+3. Click &quot;Copy to Clipboard&quot;
+4. Paste the synopsis back here
+
+I&#39;ll use your answers to create a complete implementation plan.
+</code></pre>
+<h3>Step 7: Process User&#39;s Synopsis</h3>
+<p>When user pastes synopsis:</p>
+<ul>
+<li>Parse their answers</li>
+<li>Create implementation plan</li>
+<li>Generate task with step-by-step checklist</li>
+<li>Proceed with implementation</li>
+</ul>
+<h2>QUESTION HTML PATTERNS</h2>
+<p>See <code>c:\code\git\ask-me\README.md</code> for complete patterns.</p>
+<p><strong>Quick reference:</strong></p>
+<ul>
+<li>Radio button: Single choice with &quot;Decide later&quot; first (checked)</li>
+<li>Checkbox: Multiple choice with &quot;Decide later&quot; first (checked)</li>
+<li>Both include: Additional notes textarea</li>
+</ul>
+<h2>IMPORTANT NOTES</h2>
+<ol>
+<li><strong>Always &quot;Decide later&quot; first</strong> - Default checked option</li>
+<li><strong>Always include notes field</strong> - On every question</li>
+<li><strong>Throwaway HTML</strong> - One-time use, no version control</li>
+<li><strong>Desktop location</strong> - Easy to find and delete</li>
+<li><strong>Timestamp in filename</strong> - Prevents collisions</li>
+</ol>
+<h2>FINAL OUTPUT FORMAT</h2>
+<p>When user pastes synopsis back:</p>
+<pre><code>Received your design answers! ✅
+
+**Project Summary:**
+{{One-sentence project description}}
+
+**Technical Stack:**
+- {{Backend}}
+- {{Frontend}}
+- {{Database}}
+- {{Deployment}}
+
+**Key Features:**
+- {{Feature 1}}
+- {{Feature 2}}
+- {{Feature 3}}
+
+Creating implementation plan...
+</code></pre>
+<p>Then use /newtask to create task with step-by-step checklist.</p>
+<h2>TONE</h2>
+<p>Direct and functional:</p>
+<ul>
+<li>&quot;Questionnaire generated at [path]&quot;</li>
+<li>&quot;Fill it out, copy synopsis, paste back&quot;</li>
+</ul>
+<p>Not:</p>
+<ul>
+<li>&quot;Great! I&#39;ve created an amazing...&quot;</li>
+</ul>
+
+  </div>
+</article>
