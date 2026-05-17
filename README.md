@@ -3,6 +3,8 @@
 Public GitHub Actions broker for allowlisted Mullmania deploys.
 
 See [docs/usage.md](docs/usage.md) for registration and redeploy examples.
+For a terse agent handoff on moving another repo to this deploy path, read
+[RETROFIT.md](RETROFIT.md).
 
 The repository is intentionally small. The public workflow accepts a site id,
 asks the protected Sites API for the matching allowlisted target, downloads the
