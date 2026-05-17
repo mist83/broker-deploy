@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storyboard — narrated video renderer</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%23000'/%3E%3Cpath d='M22 20v24l20-12z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://ui.mullmania.com/active/style.css">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="header">
+      <div class="grid-row" style="gap: var(--space-md); align-items: center;">
+        <div class="brand-mark"></div>
+        <h1 style="margin: 0; font-size: var(--text-xl);">Storyboard</h1>
+      </div>
+      <div class="header-links">
+        <span class="text-muted">narrated-video renderer</span>
+        <a href="https://golden-apple.mullmania.com" target="_blank" rel="noreferrer" class="btn-link">
+          <i class="ti ti-apple"></i> Golden Apple
+        </a>
+        <a href="https://github.com/mist83/storyboard" target="_blank" rel="noreferrer" class="btn-link">
+          <i class="ti ti-brand-github"></i> GitHub
+        </a>
+      </div>
+    </header>
+
+    <main class="page-container" style="padding: var(--space-lg);">
+      <div class="grid-row" style="gap: var(--space-lg); align-items: start; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);">
+
+        <section class="card">
+          <h2 style="margin-top: 0;">Render</h2>
+          <p class="text-muted mb-md">
+            Feed a public video URL and a JSON script. Polly generates the voice,
+            ffmpeg composites it, you get an MP4 URL back.
+          </p>
+          <p class="text-muted mb-md">
+            For ui.mullmania.com-backed sites, paste a public <code>ui-tour-manifest.json</code>
+            URL to derive the narration script from the deterministic tour graph.
+          </p>
+
+          <div class="field-group mb-md">
+            <label class="field-label" for="f-video">Video URL</label>
+            <input id="f-video" class="field-input" type="url" placeholder="https://mullmania.com-data.s3.amazonaws.com/path/to/tour.webm" />
+          </div>
+
+          <div class="field-group mb-md">
+            <label class="field-label" for="f-manifest">UI tour manifest URL</label>
+            <input id="f-manifest" class="field-input" type="url" placeholder="https://example.mullmania.com/ui-tour-manifest.json" />
+          </div>
+
+          <div class="field-group mb-md">
+            <label class="field-label" for="f-voice">Voice</label>
+            <select id="f-voice" class="field-input">
+              <option value="Brian">Brian (British, male)</option>
+              <option value="Amy">Amy (British, female)</option>
+              <option value="Emma">Emma (British, female)</option>
+              <option value="Arthur">Arthur (British, male)</option>
+              <option value="Matthew">Matthew (American, male)</option>
+              <option value="Joanna">Joanna (American, female)</option>
+            </select>
+          </div>
+
+          <div class="field-group mb-md">
+            <label class="field-label" for="f-script">Script (JSON: <code>[{t_ms, text}]</code>)</label>
+            <textarea id="f-script" class="field-textarea" rows="12" placeholder='[
+  { "t_ms": 0,    "text": "Welcome to the tour." },
+  { "t_ms": 5000, "text": "This is the first source." }
+]'></textarea>
+          </div>
+
+          <div class="grid-row" style="gap: var(--space-sm);">
+            <button id="btn-render" type="button" class="btn-primary">Render</button>
+            <button id="btn-example" type="button" class="btn-secondary">Load example</button>
+            <button id="btn-load-manifest" type="button" class="btn-secondary">Load manifest script</button>
+          </div>
+
+          <div id="status" class="mt-md"></div>
+        </section>
+
+        <section class="card" aria-live="polite">
+          <h2 style="margin-top: 0;">Result</h2>
+          <div id="result" class="text-muted" style="padding: var(--space-xl) var(--space-md); text-align: center; border: 1px dashed var(--border-color);">
+            No render yet.
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

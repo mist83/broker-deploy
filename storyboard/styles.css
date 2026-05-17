@@ -1,0 +1,27 @@
+/* Local additions on top of ui.mullmania.com/active/style.css.
+   Keep this file small — everything the framework handles (buttons,
+   fields, cards, alerts, data rows, typography, spacing) lives there.
+   Only storyboard-specific visuals belong here. */
+
+/* Brand swatch — split red/blue diagonal. Storyboard's only custom art. */
+.brand-mark {
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, #e64940 0%, #e64940 50%, #3a8dde 50%, #3a8dde 100%);
+    border: 1px solid var(--border-color);
+}
+
+/* Rendered-video surface inside .result card. */
+#result video {
+    width: 100%;
+    background: #000;
+    border: 1px solid var(--border-color);
+    display: block;
+}
+
+/* Single-column on narrow viewports. Grid utility doesn't know our breakpoint. */
+@media (max-width: 960px) {
+    .page-container > .grid-row {
+        grid-template-columns: 1fr !important;
+    }
+}

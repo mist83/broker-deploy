@@ -1,0 +1,12 @@
+{
+  "siteId": "storyboard",
+  "host": "storyboard.mullmania.com",
+  "publishedAt": "2026-05-17T02:37:57.711Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/public",
+  "counts": {
+    "hostingFiles": 3,
+    "hostingBytes": 11053,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}
