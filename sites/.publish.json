@@ -1,11 +1,11 @@
 {
   "siteId": "sites",
   "host": "sites.mullmania.com",
-  "publishedAt": "2026-05-17T10:10:45.536Z",
+  "publishedAt": "2026-05-17T10:14:47.086Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/dist",
   "counts": {
     "hostingFiles": 350,
-    "hostingBytes": 17134987,
+    "hostingBytes": 17134988,
     "dataFiles": 0,
     "dataBytes": 0
   }

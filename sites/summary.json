@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-17T09:52:21.149Z",
-  "updatedAt": "2026-05-17T09:52:21.149Z",
+  "generatedAt": "2026-05-17T10:10:45.536Z",
+  "updatedAt": "2026-05-17T10:10:45.536Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
@@ -39,9 +39,9 @@
     "ok": 20,
     "unknown": 1
   },
-  "lastPublishedSite": "todo",
+  "lastPublishedSite": "sites",
   "visibleHostedSites": 1078,
-  "launchpadBuiltAt": "2026-05-17T10:10:41.704Z",
+  "launchpadBuiltAt": "2026-05-17T10:14:43.892Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"
