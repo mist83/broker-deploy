@@ -24737,7 +24737,7 @@ function normalizeComposerSourceFiles(files) {
 function buildComposerFallbackSourceFiles(siteId = normalizeSiteId(composerSiteIdEl?.value || '')) {
   const safeSiteId = siteId || state.composer.loadedSiteId || 'site';
   const apiPath = `/api/source/${safeSiteId}`;
-  const writeApiPath = `/api/deploy/editor/${safeSiteId}`;
+  const writeApiPath = `/api/deploy/${safeSiteId}`;
   return [
     { id: 'html', label: 'index.html', apiPath, writeApiPath, generates: 'index.html' },
     { id: 'css', label: 'styles.css', apiPath, writeApiPath, generates: 'index.html' },
@@ -25655,6 +25655,7 @@ function buildComposerCatalogTagAttribution() {
 
 function buildComposerEditorPayload(validation = validateComposerSiteId()) {
   return {
+    mode: 'editor',
     overwrite: Boolean(validation?.exists),
     html: composerHtmlEl.value || '',
     css: composerCssEl.value || '',
@@ -25667,6 +25668,7 @@ function buildComposerEditorPayload(validation = validateComposerSiteId()) {
 
 function buildComposerTemplatePayload(validation = validateComposerSiteId()) {
   return {
+    mode: 'template',
     templateId: 'tv-app',
     config: normalizeComposerTvConfig(state.composer.tvConfig),
     overwrite: Boolean(validation?.exists),
@@ -25683,6 +25685,7 @@ function buildComposerCopyPayload(validation = validateComposerSiteId()) {
   }
 
   return {
+    mode: 'copy',
     sourceSiteId,
     overwrite: Boolean(validation?.exists),
     source: location.hostname,
@@ -26132,7 +26135,7 @@ async function submitComposerBlank() {
         : `Creating ${validation.siteId} as a TV app…`,
       invalidKeyAction: protectedAction,
       execute: () => sendComposerRequest({
-        endpoint: `/api/deploy/template/${encodeURIComponent(validation.siteId)}`,
+        endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
         payload: buildComposerTemplatePayload(validation),
         invalidKeyAction: protectedAction,
       }),
@@ -26153,7 +26156,7 @@ async function submitComposerBlank() {
         : `Copying ${copyPayload.sourceSiteId} into ${validation.siteId}…`,
       invalidKeyAction: protectedAction,
       execute: () => sendComposerRequest({
-        endpoint: `/api/deploy/copy/${encodeURIComponent(validation.siteId)}`,
+        endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
         payload: copyPayload,
         invalidKeyAction: protectedAction,
       }),
@@ -26168,7 +26171,7 @@ async function submitComposerBlank() {
   }
 
   await submitComposerRequest({
-    endpoint: `/api/deploy/editor/${encodeURIComponent(validation.siteId)}`,
+    endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
     payload: editorPayload,
     loadingLabel: validation.exists ? `Overwriting ${validation.siteId}…` : `Creating ${validation.siteId}…`,
     invalidKeyAction: protectedAction,
@@ -26216,12 +26219,12 @@ async function submitComposerEditor() {
       invalidKeyAction: protectedAction,
       execute: async () => {
         await sendComposerRequest({
-          endpoint: `/api/deploy/template/${encodeURIComponent(validation.siteId)}`,
+          endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
           payload: buildComposerTemplatePayload(validation),
           invalidKeyAction: protectedAction,
         });
         return sendComposerRequest({
-          endpoint: `/api/deploy/editor/${encodeURIComponent(validation.siteId)}`,
+          endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
           payload: {
             ...editorPayload,
             overwrite: true,
@@ -26234,7 +26237,7 @@ async function submitComposerEditor() {
   }
 
   await submitComposerRequest({
-    endpoint: `/api/deploy/editor/${encodeURIComponent(validation.siteId)}`,
+    endpoint: `/api/deploy/${encodeURIComponent(validation.siteId)}`,
     payload: editorPayload,
     loadingLabel: validation.exists ? `Updating ${validation.siteId} from Editor…` : `Deploying ${validation.siteId} from Editor…`,
     invalidKeyAction: protectedAction,

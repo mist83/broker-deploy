@@ -12045,7 +12045,7 @@
       "durationSec": null,
       "mode": "poster",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -17789,7 +17789,7 @@
       "durationSec": null,
       "mode": "screenshots-minimum",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 320,
     "manualRank": 20,
@@ -26245,7 +26245,7 @@
       "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "manualRank": 20,
@@ -34418,15 +34418,15 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:56:44.954Z",
+    "lastPublishedAt": "2026-05-17T07:47:43.432Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25984005399",
-        "runNumber": "58"
+        "runId": "25985006464",
+        "runNumber": "62"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -38901,20 +38901,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T07:37:12.028Z",
+    "lastPublishedAt": "2026-05-17T09:52:21.149Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "3b8cea82a2236cf2ac6082ad09b9b16391bc8451",
+        "sha": "f66532bfc02431adb0eed5882de204ddd0160069",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "3b8cea82a2236cf2ac6082ad09b9b16391bc8451",
+        "commit": "f66532bfc02431adb0eed5882de204ddd0160069",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -41725,7 +41725,9 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
@@ -41733,20 +41735,20 @@
       "Self-titled static front door (the repo is named wwwroot) with a single index.html entry; siteId == repo name == hostname."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T22:07:56.312Z",
+    "lastPublishedAt": "2026-05-17T08:55:12.223Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/wwwroot",
         "ref": null,
-        "sha": "b4bcca49dfd61842f63417b35883bfb9b0145ac4",
+        "sha": "81c4029e307ea629da4073c0ed713401a09432ba",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/wwwroot",
         "branch": "master",
-        "commit": "b4bcca49dfd61842f63417b35883bfb9b0145ac4",
+        "commit": "81c4029e307ea629da4073c0ed713401a09432ba",
         "remote": "https://github.com/mist83/wwwroot.git"
       }
     },
@@ -41756,7 +41758,7 @@
     "demo": {
       "sources": [],
       "posterUrl": "./demo/wwwroot/poster.png",
-      "durationSec": 30,
+      "durationSec": null,
       "mode": "screenshot-first",
       "posterKind": "showcase-reel",
       "posterNote": "Published screenshot for this repo."
@@ -41767,8 +41769,8 @@
     "testNotes": "Expanded mullmania.site.json exclude list to drop README.md.",
     "manualRankUpdatedAt": "2026-04-20T04:26:18Z",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T08:57:27Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },

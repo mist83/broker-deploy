@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'sites-20260517074738';
+const CACHE_VERSION = 'sites-20260517101041';
 const CORE_ASSETS = [
   './',
   './index.html',
