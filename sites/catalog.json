@@ -347,15 +347,15 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T07:18:24.075Z",
+    "lastPublishedAt": "2026-05-17T12:54:27.609Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25984449723",
-        "runNumber": "60"
+        "runId": "25991428494",
+        "runNumber": "74"
       },
       "git": null
     },
@@ -1122,7 +1122,12 @@
       "dual-static",
       "github",
       "curated",
-      "fun-experiment"
+      "fun-experiment",
+      "apple-trie",
+      "github-pages",
+      "mullmania-mirror",
+      "static-site",
+      "streaming-search"
     ],
     "notes": [
       "Static browser project for Apple Trie streaming search and source cycling. Publish the repo root as-is.",
@@ -1130,20 +1135,20 @@
       "Root publish shell now has a resilient source badge fallback and a useful zero-query state."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:31:22.407Z",
+    "lastPublishedAt": "2026-05-17T12:52:10.584Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/apple-trie",
         "ref": null,
-        "sha": "8d747d1906aa615db1994d7d7e430f64f9b85b4d",
+        "sha": "f7c6a7fb07a7aa9c7909c3b9b565b440d5da5976",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/apple-trie",
         "branch": "master",
-        "commit": "8d747d1906aa615db1994d7d7e430f64f9b85b4d",
+        "commit": "f7c6a7fb07a7aa9c7909c3b9b565b440d5da5976",
         "remote": "https://github.com/mist83/apple-trie.git"
       }
     },
@@ -1155,7 +1160,7 @@
     "demo": {
       "sources": [],
       "posterUrl": "./demo/apple-trie/poster.png",
-      "durationSec": 30,
+      "durationSec": null,
       "mode": "video-first",
       "posterKind": "showcase-reel",
       "posterNote": "Published screenshot for this repo."
@@ -1164,8 +1169,8 @@
     "description": "Static browser project for apple trie, with the repo root acting as the main entry point.",
     "manualRankUpdatedAt": "2026-04-20T04:26:23Z",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:14:22Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -3194,15 +3199,15 @@
       "['Static bug beacon demo published from the repository root.', 'GitHub Pages serves the root directly.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T05:46:28.135Z",
+    "lastPublishedAt": "2026-05-17T12:07:32.525Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
-        "runId": "25982718300",
-        "runNumber": "43"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25990394742",
+        "runNumber": "71"
       },
       "git": null
     },
@@ -12329,8 +12334,8 @@
     "manualRankUpdatedAt": "2026-04-14T23:20:30Z",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:02:33Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -13368,8 +13373,8 @@
     "testStatus": "smoke",
     "testNotes": "Expanded mullmania.site.json exclude list to drop legacy C# project files (Program.cs, Dong.csproj, dong.sln, appsettings.json, aws-lambda-tools-defaults.json, .env/*, scripts/deploy.ps1) so only the static surface ships.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:14:59Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -16600,6 +16605,58 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "full",
+    "host": "full.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
+    ],
+    "notes": [
+      "Repo docs page."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T12:53:14.511Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/full",
+        "ref": null,
+        "sha": "b358fd93821e9d0965b748904818861a39b626ea",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/full",
+        "branch": "master",
+        "commit": "b358fd93821e9d0965b748904818861a39b626ea",
+        "remote": "https://github.com/mist83/full.git"
+      }
+    },
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://mist83.github.io/_demo/full/poster.svg",
+      "durationSec": null,
+      "mode": null,
+      "posterKind": "generated-placeholder",
+      "posterNote": "Placeholder image."
+    },
+    "showcaseRank": 240,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:05:03Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "full-note-library",
     "host": "full-note-library.mullmania.com",
     "currentHostedSite": false,
@@ -17547,8 +17604,8 @@
     "testStatus": "smoke",
     "testNotes": "Expanded mullmania.site.json exclude list to drop legacy C# project files (Program.cs, FunkOut.csproj, appsettings.json, .env/*, scripts/deploy.ps1) so only the static surface ships.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:15:36Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -17768,15 +17825,15 @@
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:49:15.833Z",
+    "lastPublishedAt": "2026-05-17T12:08:12.430Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25983882957",
-        "runNumber": "56"
+        "runId": "25990409284",
+        "runNumber": "72"
       },
       "git": null
     },
@@ -18312,6 +18369,42 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null
+  },
+  {
+    "siteId": "hackathon",
+    "host": "hackathon.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
+    ],
+    "notes": [
+      "Repo docs page."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T13:13:28.688Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/hackathon",
+        "branch": "main",
+        "commit": "e4c7cddd571be79ed4ebb8c450e4399360a9e956",
+        "remote": "https://github.com/mist83/hackathon.git"
+      }
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:00:57Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "harbor-docket-d839",
@@ -19097,7 +19190,15 @@
       "dual-static",
       "github",
       "curated",
-      "tooling"
+      "tooling",
+      "canvas-overlay",
+      "github-pages",
+      "mullmania-mirror",
+      "static-frontend",
+      "framework",
+      "framework-support",
+      "ui-tooling",
+      "library"
     ],
     "notes": [
       "Publish the generated site/ folder. The root repo keeps the demos and library sources; the build artifact is the deploy surface for GitHub Pages and Mullmania.",
@@ -19106,20 +19207,20 @@
       "Publishes the built site/ surface instead of the older docs-only front door."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:51:55.268Z",
+    "lastPublishedAt": "2026-05-17T12:54:29.243Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/html-canvas-overlay",
         "ref": null,
-        "sha": "a4ec71c7efccada227bb1baaffb4f8bebbd232a4",
+        "sha": "7f2406e4980a80ab37685368d95e160c7aee4c4e",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/html-canvas-overlay",
         "branch": "master",
-        "commit": "a4ec71c7efccada227bb1baaffb4f8bebbd232a4",
+        "commit": "7f2406e4980a80ab37685368d95e160c7aee4c4e",
         "remote": "https://github.com/mist83/html-canvas-overlay.git"
       }
     },
@@ -19145,8 +19246,8 @@
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T12:59:44Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -20908,8 +21009,8 @@
     "description": "Repo docs and links for Lambda Builder API.",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:03:48Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -21559,7 +21660,9 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
@@ -21568,29 +21671,29 @@
       "Small CLI that converts license-weeks into weekend windows. No browser app."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T16:34:54.680Z",
+    "lastPublishedAt": "2026-05-17T14:06:29.492Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/mullmania",
+        "repository": "mist83/licensewindowshuffle",
         "ref": null,
-        "sha": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
+        "sha": "ec5101255781d2dab16078d1e01411eab5c7dad8",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/mullmania",
-        "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/mullmania.git"
+        "root": "/Users/mist83/Code/licensewindowshuffle",
+        "branch": "master",
+        "commit": "ec5101255781d2dab16078d1e01411eab5c7dad8",
+        "remote": "https://github.com/mist83/licensewindowshuffle.git"
       }
     },
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/licensewindowshuffle/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/licensewindowshuffle/poster.svg",
+      "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -21599,8 +21702,8 @@
     "description": "Honest .NET CLI front for licensewindowshuffle.",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T14:15:41Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -21830,17 +21933,22 @@
       "Publish the Liskov library demo UI to Mullmania and keep the filesystem API behind the same host /api surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T07:25:05.406Z",
+    "lastPublishedAt": "2026-05-17T14:19:46.026Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25984583809",
-        "runNumber": "61"
+        "actions": false,
+        "repository": "mist83/liskov-file-system",
+        "ref": null,
+        "sha": "861d5221993304fe3ba77bd87c878d3663ddd98c",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null
+      "git": {
+        "root": "/Users/mist83/Code/liskov-file-system",
+        "branch": "master",
+        "commit": "861d5221993304fe3ba77bd87c878d3663ddd98c",
+        "remote": "https://github.com/mist83/liskov-file-system.git"
+      }
     },
     "description": "HTTP file browser for S3 and local storage.",
     "frameworkSite": true,
@@ -21979,26 +22087,31 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "guides",
+      "llm",
+      "mullmania-mirror",
+      "static"
     ],
     "notes": [
       "Static guide site; GitHub Pages can publish docs/ while Mullmania mirrors the root app."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:25:37.232Z",
+    "lastPublishedAt": "2026-05-17T12:56:44.279Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/llm-help",
         "ref": null,
-        "sha": "d5cf6f1108ec88d0d1199b21da3cf6e07a35eece",
+        "sha": "96b9f68447bce737c8b2fa535e78dbcb0c7fb9ab",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/llm-help",
         "branch": "main",
-        "commit": "d5cf6f1108ec88d0d1199b21da3cf6e07a35eece",
+        "commit": "96b9f68447bce737c8b2fa535e78dbcb0c7fb9ab",
         "remote": "https://github.com/mist83/llm-help.git"
       }
     },
@@ -22007,8 +22120,8 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/llm-help/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/llm-help/poster.svg",
+      "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -22016,8 +22129,8 @@
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:01:55Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -22319,20 +22432,20 @@
       "zombie"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:45:14.656Z",
+    "lastPublishedAt": "2026-05-17T12:58:16.770Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/ipzom",
         "ref": null,
-        "sha": "68781f3bd712bf771dc2668898addc2e1d6765d7",
+        "sha": "3cdaa3381c9e525488323e31706f2f185c7433aa",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/lorem-ipzom",
+        "root": "/Users/mist83/Code/ipzom",
         "branch": "main",
-        "commit": "68781f3bd712bf771dc2668898addc2e1d6765d7",
+        "commit": "3cdaa3381c9e525488323e31706f2f185c7433aa",
         "remote": "https://github.com/mist83/ipzom.git"
       }
     },
@@ -22492,8 +22605,8 @@
     "testStatus": "smoke",
     "testNotes": "Replaced legacy scripts/deploy-mullmania-site.mjs with the canonical scripts/deploy.sh + scripts/deploy-site.mjs and added pages.yml; mullmania.site.json exclude list rewritten to drop the legacy script and add the canonical contract files.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:04:26Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -29764,29 +29877,32 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
       "Interactive Mullmania starfield and launch controls.",
-      "Honest front for repo-backed root; describes API endpoints and stack"
+      "Honest front for repo-backed root; describes API endpoints and stack",
+      "Canonical public front door for the PWA Registry API metadata and demo files."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T16:33:57.960Z",
+    "lastPublishedAt": "2026-05-17T13:12:14.133Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/mullmania",
+        "repository": "mist83/pwa-registry",
         "ref": null,
-        "sha": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
+        "sha": "73156c9425b2986fc27c33394c881cf3ca2c1289",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/mullmania",
-        "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/mullmania.git"
+        "root": "/Users/mist83/Code/pwa-registry",
+        "branch": "master",
+        "commit": "73156c9425b2986fc27c33394c881cf3ca2c1289",
+        "remote": "https://github.com/mist83/pwa-registry.git"
       }
     },
     "description": "pwa-registry: .NET Web API for PWA manifest configs",
@@ -29794,17 +29910,17 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/pwa-registry/poster.svg",
-      "durationSec": 120,
-      "mode": null,
+      "posterUrl": "https://mist83.github.io/_demo/pwa-registry/poster.svg",
+      "durationSec": null,
+      "mode": "metadata-frontdoor",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:00:20Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -33022,6 +33138,58 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "settings",
+    "host": "settings.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
+    ],
+    "notes": [
+      "Repo docs page."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T13:11:17.129Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/settings",
+        "ref": null,
+        "sha": "5b93af72b388bc424667fad399aac3443fed54dd",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/settings",
+        "branch": "master",
+        "commit": "5b93af72b388bc424667fad399aac3443fed54dd",
+        "remote": "https://github.com/mist83/settings.git"
+      }
+    },
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://mist83.github.io/_demo/settings/poster.svg",
+      "durationSec": null,
+      "mode": null,
+      "posterKind": "generated-placeholder",
+      "posterNote": "Placeholder image."
+    },
+    "showcaseRank": 240,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:03:11Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "settings-status-page",
     "host": "settings-status-page.mullmania.com",
     "currentHostedSite": false,
@@ -34428,15 +34596,15 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T10:27:27.071Z",
+    "lastPublishedAt": "2026-05-17T12:06:43.809Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25988277380",
-        "runNumber": "69"
+        "runId": "25990349639",
+        "runNumber": "70"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -38468,26 +38636,29 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
-      "Repo docs page."
+      "Repo docs page.",
+      "Repo docs page with links to the site and demo files."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:40:50.319Z",
+    "lastPublishedAt": "2026-05-17T14:19:45.998Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/threejs-example",
         "ref": null,
-        "sha": "69655652e05bdc33226b861a862c23916c7614c5",
+        "sha": "ba9f4a89d97ac31c3e9dccf138b38a3c5dd694c6",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/threejs-example",
         "branch": "master",
-        "commit": "69655652e05bdc33226b861a862c23916c7614c5",
+        "commit": "ba9f4a89d97ac31c3e9dccf138b38a3c5dd694c6",
         "remote": "https://github.com/mist83/threejs-example.git"
       }
     },
@@ -38496,11 +38667,11 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/threejs-example/poster.svg",
-      "durationSec": 30,
+      "posterUrl": "https://mist83.github.io/_demo/threejs-example/poster.svg",
+      "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "testNotes": "",
@@ -38911,20 +39082,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T11:48:02.853Z",
+    "lastPublishedAt": "2026-05-17T13:26:35.771Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "45c45221fe6f47df21072fd717e82e9c09794ecc",
+        "sha": "12f25f03bca6e49a6795f0c67140e18249a6fcb6",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "45c45221fe6f47df21072fd717e82e9c09794ecc",
+        "commit": "12f25f03bca6e49a6795f0c67140e18249a6fcb6",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -38934,7 +39105,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -39094,8 +39265,8 @@
     "testNotes": "Expanded mullmania.site.json exclude list to drop the legacy sourceservice/* C# project tree (16 files) and README.md so only the static scanner surface ships.",
     "description": "Static browser project for tommy scanner, combining an index.html entry point with bundled image assets.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:16:13Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -39494,7 +39665,12 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror",
+      "pages",
+      "static-frontend",
+      "tv-communication"
     ],
     "notes": [
       "The root static frontend is the deployable surface. Pages publishes a generated site/ artifact copied from root files, while Mullmania mirrors the repo root minus repo noise.",
@@ -39502,20 +39678,20 @@
       "Static front-end with app.js + styles.css served from the repo root."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:42:44.332Z",
+    "lastPublishedAt": "2026-05-17T12:53:29.176Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tv-communication",
         "ref": null,
-        "sha": "763a8edc292f6167c57f11cf4402669c2bbbfe49",
+        "sha": "5458e957ea57808b3d224e4fe019bf50661bf178",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tv-communication",
         "branch": "master",
-        "commit": "763a8edc292f6167c57f11cf4402669c2bbbfe49",
+        "commit": "5458e957ea57808b3d224e4fe019bf50661bf178",
         "remote": "https://github.com/mist83/tv-communication.git"
       }
     },
@@ -39525,7 +39701,7 @@
     "demo": {
       "sources": [],
       "posterUrl": "./demo/tv-communication/poster.png",
-      "durationSec": 120,
+      "durationSec": null,
       "mode": "video-first",
       "posterKind": "showcase-reel",
       "posterNote": "Published screenshot for this repo."
@@ -39535,8 +39711,8 @@
     "testStatus": "smoke",
     "testNotes": "Existing publish exclude list already drops README.md, .gitignore, and the legacy scripts/deploy-mullmania-site.mjs.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:16:50Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -40163,20 +40339,20 @@
       "Meteor Protocol: push the repo to GitHub, then manually deploy this root publish dir to Mullmania so the live site survives local-machine loss."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:27:59.917Z",
+    "lastPublishedAt": "2026-05-17T12:55:25.900Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/v3",
         "ref": null,
-        "sha": "5aa235e1bac535d5681a14af1ffe3828e8d144de",
+        "sha": "6bed32e765cb1cf5db5d77157e497ee451b49f46",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/v3",
         "branch": "master",
-        "commit": "5aa235e1bac535d5681a14af1ffe3828e8d144de",
+        "commit": "6bed32e765cb1cf5db5d77157e497ee451b49f46",
         "remote": "https://github.com/mist83/v3.git"
       }
     },
@@ -41678,26 +41854,31 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror",
+      "pages",
+      "static-frontend",
+      "wwb-reminder"
     ],
     "notes": [
       "The repo root is the demo surface. GitHub Pages publishes a generated site/ artifact copied from the demo files, while Mullmania mirrors the root minus repo-only docs and deployment scripts."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T22:06:55.072Z",
+    "lastPublishedAt": "2026-05-17T12:53:29.398Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/wwb-reminder",
         "ref": null,
-        "sha": "5dceb89aec46d224c4098c7c03c9e9ca82cb8839",
+        "sha": "ec25180ca32987ead7f4d27e4b013195148a8894",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/wwb-reminder",
         "branch": "master",
-        "commit": "5dceb89aec46d224c4098c7c03c9e9ca82cb8839",
+        "commit": "ec25180ca32987ead7f4d27e4b013195148a8894",
         "remote": "https://github.com/mist83/wwb-reminder.git"
       }
     },
@@ -41706,8 +41887,8 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/wwb-reminder/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/wwb-reminder/poster.svg",
+      "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -41715,8 +41896,8 @@
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:17:26Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -41840,8 +42021,8 @@
     "testStatus": "smoke",
     "testNotes": "Expanded mullmania.site.json exclude list to drop README.md and the scripts/*.md design notes (auth-*, idea, storage-*) so only the static surface ships.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T13:18:03Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -41937,7 +42118,9 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
@@ -41945,29 +42128,29 @@
       "Status page. No browser app to promote."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T16:55:40.064Z",
+    "lastPublishedAt": "2026-05-17T12:46:58.325Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/mullmania",
+        "repository": "mist83/XMLReporting",
         "ref": null,
-        "sha": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
+        "sha": "2370f7cd4435bce5b22d2f2e37d2e1674ada34bc",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/mullmania",
-        "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/mullmania.git"
+        "root": "/Users/mist83/Code/XMLReporting",
+        "branch": "master",
+        "commit": "2370f7cd4435bce5b22d2f2e37d2e1674ada34bc",
+        "remote": "https://github.com/mist83/XMLReporting.git"
       }
     },
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/xmlreporting/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/XMLReporting/poster.svg",
+      "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -41976,8 +42159,8 @@
     "description": "Blunt status page for xmlreporting.mullmania.com.",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T12:48:31Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
