@@ -78,6 +78,16 @@ jobs:
           repo = str(target["sourceRepo"]).strip()
           ref = str(target.get("sourceRef") or "main").strip()
           config = str(target.get("config") or "mullmania.site.json").strip()
+          deploy_type = str(target.get("deployType") or "static-site").strip()
+          if deploy_type not in ("static-site", "sites-control-plane"):
+            raise SystemExit(f"Unsupported deployType: {deploy_type}")
+          if deploy_type == "sites-control-plane" and (
+            site_id != "sites"
+            or repo.lower() != "mist83/sites"
+            or ref != "main"
+            or config != "mullmania.site.json"
+          ):
+            raise SystemExit("sites-control-plane is only allowed for mist83/sites main.")
           token = os.environ["PRIVATE_REPO_TOKEN"].strip()
           if not token:
             raise SystemExit("MULLMANIA_PRIVATE_REPO_TOKEN is not configured.")
@@ -110,6 +120,7 @@ jobs:
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
             output.write(f"config={config}\n")
+            output.write(f"deploy_type={deploy_type}\n")
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -121,6 +132,15 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::166404899495:role/github-actions-role
           aws-region: us-west-2
+
+      - name: Deploy Sites control-plane backend
+        if: steps.target.outputs.deploy_type == 'sites-control-plane'
+        working-directory: target-site
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run deploy-api
 
       - name: Deploy target site
         working-directory: target-site

@@ -17,6 +17,7 @@ async function main() {
   const sourceRepo = requireArg(args, 'source');
   const sourceRef = args.ref || 'main';
   const config = args.config || DEFAULT_CONFIG;
+  const deployType = args.deployType || 'static-site';
   const apiBase = (args.api || process.env.SITES_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, '');
   const operatorKey = args.operatorKey || process.env.SITES_OPERATOR_KEY || process.env.OPERATOR_KEY || '';
 
@@ -36,6 +37,7 @@ async function main() {
     sourceRepo,
     sourceRef,
     config,
+    deployType,
     autoRedeploy: args.autoRedeploy !== 'false',
     enabled: true,
     url: args.url || `https://${siteId}.mullmania.com/`,
@@ -117,6 +119,7 @@ Required:
 Common:
   --ref <branch>            Source branch/ref. Default: main
   --config <path>           Repo config file. Default: mullmania.site.json
+  --deploy-type <type>      Deploy recipe. Default: static-site
   --label <text>            Display label. Default: site id
   --url <url>               Public site URL. Default: https://<site>.mullmania.com/
 
