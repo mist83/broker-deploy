@@ -1,0 +1,25 @@
+{
+  "siteId": "bug-beacon",
+  "latest": {
+    "siteId": "bug-beacon",
+    "status": "success",
+    "deployedAt": "2026-05-17T05:47:26.368Z",
+    "trigger": "github-webhook",
+    "brokerRunId": "25982718300",
+    "brokerRunNumber": "43",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25982718300",
+    "brokerSha": "085030cb50e3"
+  },
+  "history": [
+    {
+      "siteId": "bug-beacon",
+      "status": "success",
+      "deployedAt": "2026-05-17T05:47:26.368Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "25982718300",
+      "brokerRunNumber": "43",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25982718300",
+      "brokerSha": "085030cb50e3"
+    }
+  ]
+}
