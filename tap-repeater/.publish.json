@@ -1,0 +1,12 @@
+{
+  "siteId": "tap-repeater",
+  "host": "tap-repeater.mullmania.com",
+  "publishedAt": "2026-05-17T02:02:53.373Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/wwwroot",
+  "counts": {
+    "hostingFiles": 9,
+    "hostingBytes": 81364,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}
