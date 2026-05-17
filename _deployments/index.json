@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T17:23:05.595Z",
+  "generatedAt": "2026-05-17T17:44:41.306Z",
   "sites": [
     {
       "siteId": "agent",
@@ -136,13 +136,13 @@
       "status": "success",
       "liveUrl": "https://nikitakramar.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/nikitakramar/",
-      "lastPublishedAt": "2026-05-17T17:23:05.585Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25997600692",
-      "latestBrokerRunNumber": "84",
+      "lastPublishedAt": "2026-05-17T17:44:41.297Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25998105001",
+      "latestBrokerRunNumber": "85",
       "trigger": "github-webhook",
       "hostingFiles": 13,
-      "hostingBytes": 68216,
-      "recordedDeployments": 2
+      "hostingBytes": 37626,
+      "recordedDeployments": 3
     },
     {
       "siteId": "rhythm-engine",

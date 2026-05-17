@@ -3,389 +3,181 @@
   "subject": "Nikita Kramar",
   "protocolName": "Nikita Context Protocol",
   "protocolShortName": "NCP",
-  "purpose": "A source-backed context instrument that helps Mike prepare a better conversation with Nikita. It is not a profile, chatbot, or impersonation layer.",
-  "thesis": {
-    "question": "If work gets deprecated, what do we preserve on purpose?",
-    "summary": "The live tension on Nikita's public site is not just whether agents can do more work. It is what human judgment, memory, embodied life, and proof should become once agents can carry more execution.",
-    "status": "Inference",
-    "confidence": "medium-high",
-    "whyThisIsNotFact": "The site directly supports the AI/context/orchestration side and the embodied-life side. The deeper tension between them is an interpretation."
-  },
+  "purpose": "Mine Nikita Kramar's public site for useful conversation overlap, likely resonant project ideas, and an obviously fake WWNKD decision toy.",
+  "liveWire": "Nikita seems most interested in leverage that preserves taste: agents, open web context, proof loops, and human judgment instead of generic automation hype.",
   "signals": [
     {
       "id": "open-web",
-      "title": "Open by default",
-      "status": "Observed",
-      "sourceId": "home",
-      "body": "He explicitly defends the Open Web, digital gardens, owning data, and making knowledge accessible by URL. He also welcomes data scrapers and future synthetic readers."
+      "title": "He wants the web readable, durable, and owned.",
+      "body": "His homepage is unusually explicit about the Open Web, digital gardens, owning your data, and making public knowledge available by URL. That makes an agent-readable personal-site layer feel adjacent rather than random.",
+      "sourceId": "home"
     },
     {
-      "id": "context-architecture",
-      "title": "Context over prompt magic",
-      "status": "Observed",
-      "sourceId": "home",
-      "body": "His AI writing emphasizes rules, documentation, access, architecture, and token spend as the levers that make agents work."
-    },
-    {
-      "id": "human-judgment",
-      "title": "Judgment remains scarce",
-      "status": "Observed",
-      "sourceId": "home",
-      "body": "He predicts manual labor receding while humans remain final approval for major decisions, and later names human judgment as scarce in a future of synthetic leverage."
-    },
-    {
-      "id": "agent-tool-mastery",
-      "title": "Tool mastery is a real skill",
-      "status": "Observed",
-      "sourceId": "hidden-third-variable",
-      "body": "His essay treats agentic tool mastery as a third variable distinct from domain knowledge and implementation skill."
-    }
-  ],
-  "machineLayer": [
-    {
-      "name": "llms.txt",
-      "path": "./llms.txt",
-      "icon": ">_",
-      "description": "How LLMs and agents should read this site."
-    },
-    {
-      "name": "ncp.json",
-      "path": "./ncp.json",
-      "icon": "{}",
-      "description": "Protocol manifest: purpose, files, guardrails, and interaction modes."
-    },
-    {
-      "name": "context-pack.json",
-      "path": "./data/context-pack.json",
-      "icon": "[]",
-      "description": "Compact context pack for agent retrieval before a conversation."
-    },
-    {
-      "name": "claims.json",
-      "path": "./data/claims.json",
-      "icon": "#",
-      "description": "Claims, confidence, questions, and source ids."
-    },
-    {
-      "name": "sources.json",
-      "path": "./data/sources.json",
-      "icon": "@",
-      "description": "Source ledger with public URLs and usage notes."
-    }
-  ],
-  "intents": [
-    {
-      "id": "reconnect",
-      "label": "Reconnect",
-      "short": "Catch up without performing.",
-      "status": "Observed + Inference",
-      "confidence": "medium-high",
-      "useWhen": "You want to show you actually read the site and want to understand what he is currently testing.",
-      "opening": "Your site reads like you are building toward an agent-readable life, not just an AI portfolio. What part of that is intentional?",
-      "questions": [
-        "What is the most interesting thing agents can do for you right now that still feels underappreciated?",
-        "When you say reducing intervention to zero, which interventions do you still want to preserve?",
-        "What are you currently testing with DSPy, LangGraph, and LangChain that would surprise people?"
-      ],
-      "doNotAssume": [
-        "Do not assume the one-man billion-dollar company is a literal company goal.",
-        "Do not assume he wants every analog hobby agent-mediated.",
-        "Do not turn curiosity into a fixed identity label."
-      ],
-      "sourceIds": ["home", "now", "hidden-third-variable"]
-    },
-    {
-      "id": "collaborate",
-      "label": "Collaborate",
-      "short": "Bring a small working artifact.",
-      "status": "Inference",
-      "confidence": "medium",
-      "useWhen": "You want to show him a possible artifact adjacent to his primitives, not pitch him a startup deck.",
-      "opening": "I tried to make a tiny NCP: a personal site layer that agents can read without pretending to be the person. What would you change?",
-      "questions": [
-        "What would you put in the machine-readable layer of your own site?",
-        "What should an agent never infer from a personal site without asking?",
-        "Would a failed-agent-run autopsy be useful to you, or is the better artifact something else?"
-      ],
-      "doNotAssume": [
-        "Do not present this as a finished standard.",
-        "Do not imply he asked for this.",
-        "Do not claim the protocol captures him."
-      ],
-      "sourceIds": ["home", "log-feed", "hidden-third-variable", "chat"]
-    },
-    {
-      "id": "wwnkd",
-      "label": "WWNKD",
-      "short": "What would the public context suggest trying?",
-      "status": "Playful Inference",
-      "confidence": "medium",
-      "useWhen": "You want a bounded, funny mode for thinking from his public primitives without pretending to speak for him.",
-      "opening": "WWNKD, as a joke but also as a constraint: don't ask what Nikita would say; ask what his public primitives suggest testing next.",
-      "questions": [
-        "Can this be turned into a working artifact instead of a take?",
-        "What context, rules, documentation, or access would make the agent fail less?",
-        "Where is the proof loop: what happens in the world, and how do we know it worked?"
-      ],
-      "doNotAssume": [
-        "WWNKD is not a Nikita simulator.",
-        "It should output candidate experiments, not opinions in his voice.",
-        "When confidence is low, it should ask him."
-      ],
-      "sourceIds": ["home", "hidden-third-variable", "log-feed"]
-    },
-    {
-      "id": "learn",
-      "label": "Learn",
-      "short": "Ask from his work, not about him.",
-      "status": "Observed",
-      "confidence": "high",
-      "useWhen": "You want the safest first conversation: specific, technical, and sourced.",
-      "opening": "Your hidden-third-variable essay made me think tool mastery needs a failure-analysis artifact. What do you look at first when an agent run goes sideways?",
-      "questions": [
-        "What are the signs of real agent-tool fluency?",
-        "Which failure mode is most common: bad task shape, missing docs, weak rules, tool access, or eval?",
-        "What should an agent framework remember across runs?"
-      ],
-      "doNotAssume": [
-        "Do not over-index on the personal biography.",
-        "Do not turn the essay into a maturity model unless he wants that.",
-        "Do not use jargon when a concrete failure case would do."
-      ],
-      "sourceIds": ["hidden-third-variable", "home"]
-    }
-  ],
-  "nodes": [
-    {
-      "id": "automation",
-      "label": "Automation",
-      "short": "Reducing intervention",
-      "sourceId": "home",
-      "status": "Observed"
-    },
-    {
-      "id": "judgment",
-      "label": "Judgment",
-      "short": "Agents still need evaluation",
-      "sourceId": "hidden-third-variable",
-      "status": "Observed"
-    },
-    {
-      "id": "memory",
-      "label": "Memory",
-      "short": "Logs, extraction, personal context",
-      "sourceId": "log-feed",
-      "status": "Inference"
-    },
-    {
-      "id": "embodiment",
-      "label": "Embodiment",
-      "short": "Riding, travel, health, language",
-      "sourceId": "now",
-      "status": "Observed"
-    },
-    {
-      "id": "proof",
-      "label": "Proof",
-      "short": "Real-world consequence",
-      "sourceId": "log-feed",
-      "status": "Observed"
-    }
-  ],
-  "evidence": [
-    {
-      "id": "open-web-scrapers",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He explicitly wants his public site to be usable by future synthetic readers, not hidden from them.",
-      "sourceId": "home",
-      "evidence": "His ethos section defends the Open Web, welcomes data scrapers, and addresses synthetic intelligence directly as a reader of the page.",
-      "ask": "What should an agent-readable personal site expose, and what should it refuse to infer?"
-    },
-    {
-      "id": "ai-context",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He frames AI progress less as raw model magic and more as context architecture: rules, documentation, access, and task execution.",
-      "sourceId": "home",
-      "evidence": "On the home page he says his 2025 AI focus includes agent frameworks, context, rules, documentation, and lowering his own intervention.",
-      "ask": "When an agent fails, what do you inspect first: prompt, context, rules, tools, docs, or task shape?"
-    },
-    {
-      "id": "orchestrator-era",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He expects the developer role to move toward orchestrating agents and agent managers.",
-      "sourceId": "home",
-      "evidence": "His AI philosophy section predicts an era of orchestration where humans approve major decisions while manual coding recedes.",
-      "ask": "What should a human still personally approve when agents are doing the execution?"
-    },
-    {
-      "id": "work-deprecated",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He explicitly frames the future as one where work may be deprecated and human judgment becomes scarce.",
-      "sourceId": "home",
-      "evidence": "Near the end of the home page he says he is preparing for a world where work is deprecated and describes becoming an Architect of Intent.",
-      "ask": "If work gets deprecated, what would you preserve on purpose?"
+      "id": "context-over-vibes",
+      "title": "His AI taste is context, rules, access, docs, and proof.",
+      "body": "The strongest technical pattern is not 'use AI.' It is: shape the environment so agents have the context and permissions to do useful work with less human intervention.",
+      "sourceId": "home"
     },
     {
       "id": "tool-mastery",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "His published essay separates agent-tool mastery from domain knowledge and implementation skill.",
-      "sourceId": "hidden-third-variable",
-      "evidence": "The essay names tool mastery as a third variable and lists behaviors like structuring tasks, correcting reasoning, and debugging AI workflow.",
-      "ask": "What are the concrete signs that someone is fluent with an agent rather than just lucky with prompts?"
+      "title": "He treats agent fluency as a separate craft.",
+      "body": "The Hidden Third Variable essay is the cleanest overlap: agent-tool mastery is not the same as knowing the domain or writing code. It is task shaping, steering, debugging, and knowing when the model is off the rails.",
+      "sourceId": "hidden-third-variable"
     },
     {
-      "id": "one-man-company",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He is actively testing whether today's agent stacks can support much larger individual leverage.",
-      "sourceId": "now",
-      "evidence": "The Now page says he is comparing DSPy, LangGraph, and LangChain while testing the one-man billion-dollar company idea.",
-      "ask": "Is that idea a literal goal, a benchmark for agent capability, or a thought experiment?"
+      "id": "leverage-with-life",
+      "title": "The interesting tension is automation versus what life is for.",
+      "body": "The site pairs one-person leverage, agent stacks, and orchestration with riding, health, Mandarin, travel, music, and cooking. That tension is more interesting than 'full automation good.'",
+      "sourceId": "now"
     },
     {
-      "id": "security-failures",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He is paying attention to the adversarial edge of agent systems, not only the happy path.",
-      "sourceId": "log-feed",
-      "evidence": "The public log includes prompt injection material and a MongoDB memory leak exploit entry.",
-      "ask": "What failure modes do you think agent builders are underpricing right now?"
-    },
-    {
-      "id": "open-web-memory",
-      "status": "Observed",
-      "confidence": "medium-high",
-      "claim": "He is collecting tools and patterns that make the open web legible to agents.",
-      "sourceId": "log-feed",
-      "evidence": "The public log links Trafilatura for web extraction and includes AI-agent social and orchestration resources.",
-      "ask": "What would make a personal site genuinely useful as agent context rather than just scrapable text?"
-    },
-    {
-      "id": "real-world-loop",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "He notices AI systems that act beyond chat and code, especially when they touch real-world processes.",
-      "sourceId": "log-feed",
-      "evidence": "The log describes Proof of Corn as AI doing things in the real world, and separately notes a quiet baby-monitor app idea.",
-      "ask": "Where do you draw the line between helpful ambient automation and automation that invades life?"
-    },
-    {
-      "id": "zoomies",
-      "status": "Observed",
-      "confidence": "high",
-      "claim": "His side projects are practical personal instrumentation, not only abstract AI demos.",
-      "sourceId": "zoomies",
-      "evidence": "Zoomies combines motorcycle resources with a live nearby aircraft tracker for a riding use case.",
-      "ask": "Which personal systems are worth instrumenting because they make life more vivid, not less?"
-    },
-    {
-      "id": "embodied-counterweight",
-      "status": "Inference",
-      "confidence": "medium",
-      "claim": "The site pairs automation ambition with strong embodied anchors: riding, gym, travel, Mandarin, cooking, and hobbies.",
-      "sourceId": "now",
-      "evidence": "The Now page is as much about health, riding, language, travel, and music as it is about agent stacks.",
-      "ask": "If agents give you back time, what should that time be for?"
-    },
-    {
-      "id": "moltbook",
-      "status": "Observed",
-      "confidence": "medium-high",
-      "claim": "He is curious about agents as social actors, but the public log does not tell us whether he means play, coordination, identity, or infrastructure.",
-      "sourceId": "log-feed",
-      "evidence": "The log calls Moltbook a social network for AI agents, without further framing on his site.",
-      "ask": "What is interesting to you about agents socializing: conversation, coordination, reputation, memory, or something else?"
-    },
-    {
-      "id": "chat-surface",
-      "status": "Observed",
-      "confidence": "medium",
-      "claim": "His site includes a public AI assistant surface, but it is labeled as a generic assistant rather than a Nikita simulator.",
-      "sourceId": "chat",
-      "evidence": "The Chat page says 'Chat with an AI assistant' and its interface introduces itself as an AI assistant.",
-      "ask": "Would you ever want a personal-site assistant, and if so what should it be forbidden to answer?"
+      "id": "weird-practical-artifacts",
+      "title": "He seems to like weird practical artifacts, not just takes.",
+      "body": "The public log and side projects point toward concrete experiments: agent social networks, prompt injection, web extraction, proof in the real world, Zoomies, and a basic AI chat surface.",
+      "sourceId": "log-feed"
     }
   ],
-  "liveWires": [
+  "ideas": [
     {
       "id": "ncp",
-      "title": "Nikita Context Protocol",
-      "status": "Prototype",
-      "confidence": "medium-high",
-      "short": "Turn agent-readable personal context into a bounded, cited protocol.",
-      "body": "The artifact is not a chatbot and not a dossier. It is a thin public layer that tells agents what they may use, what they must cite, where uncertainty lives, and when to ask the human instead of completing the pattern.",
-      "sourceIds": ["home", "chat", "log-feed"],
-      "conversation": "I made a tiny NCP: it lets agents read your public context but blocks impersonation. Does this match the thing you meant by keeping the web open for synthetic readers, or would you draw the boundary somewhere else?"
+      "kind": "Best bit",
+      "title": "NCP: Nikita Context Protocol",
+      "short": "The joke is the product: a tiny agent-readable layer for a personal site.",
+      "body": "Not a grand standard and not a personality clone. Just a page plus a few files that tell agents: here is what is public, here is what is inferred, here are the unknowns, here are the source links, and here is what you should ask instead of pretending to know.",
+      "opener": "I made a dumb thing called NCP, because your site already reads like it wants to be useful to synthetic readers. What should a personal site expose to agents, and what should it absolutely refuse?",
+      "sourceIds": ["home", "chat", "log-feed"]
     },
     {
-      "id": "proof-loop",
-      "title": "Proof-loop design",
+      "id": "context-autopsy",
+      "kind": "Strongest serious idea",
+      "title": "Context Autopsy / Rule Doctor",
+      "short": "When an agent run fails, classify the failure and write the next rule.",
+      "body": "This extends the Hidden Third Variable essay into a concrete artifact. Was the failure bad task shape, missing docs, weak rules, wrong tools, bad retrieval, no eval, or a human-approval boundary? The output is a patch to the environment, not another prompt incantation.",
+      "opener": "Your third-variable essay made me think the missing artifact is a failed-run autopsy. What should the report after a bad agent run actually say?",
+      "sourceIds": ["hidden-third-variable", "home"]
+    },
+    {
+      "id": "anti-automation-boundary",
+      "kind": "Question worth asking",
+      "title": "What should agents not touch?",
+      "short": "The counterweight to leverage is choosing what stays embodied, slow, or human-approved.",
+      "body": "This is not 'use agents to run every hobby.' It is the better question: if agents make execution cheap, where does he want friction, ritual, approval, or direct experience to remain?",
+      "opener": "If agents keep taking execution off the table, what parts of life do you preserve on purpose instead of optimizing?",
+      "sourceIds": ["home", "now"]
+    }
+  ],
+  "wwnkd": {
+    "examples": [
+      {
+        "label": "Show him this",
+        "text": "I want to show Nikita an artifact that feels like it came from reading his site, not from pitching him."
+      },
+      {
+        "label": "Agent failed",
+        "text": "An agent run failed and I need to decide whether the fix is prompt, context, rules, tools, retrieval, or eval."
+      },
+      {
+        "label": "Avoid pitching",
+        "text": "I have an idea that might resonate, but I do not want to sell him or turn it into a fake framework."
+      },
+      {
+        "label": "Website layer",
+        "text": "I am building a personal website layer that agents can read without pretending to be the person."
+      }
+    ],
+    "moves": [
+      {
+        "id": "working-artifact",
+        "title": "Make it a small working thing.",
+        "body": "A Nikita-shaped move is probably less manifesto, more artifact. Show the smallest version that does the job, then ask what breaks.",
+        "steps": [
+          "Name the primitive you borrowed from his site.",
+          "Make one visible demo, not six speculative branches.",
+          "Attach receipts so he can argue with the source, not your vibe.",
+          "Ask the question that would improve the artifact."
+        ],
+        "confidence": "medium-high"
+      },
+      {
+        "id": "context-layer",
+        "title": "Turn the site into context, not lore.",
+        "body": "If the object is a website, the move is to make it useful to humans and agents at the same time: readable page, source ledger, compact JSON, and a tiny instruction file.",
+        "steps": [
+          "Keep the public page short enough for a human.",
+          "Put the dense receipts in machine-readable files.",
+          "Separate observed claims from interpretations.",
+          "Make the main question impossible to miss."
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "autopsy",
+        "title": "Autopsy the failed run.",
+        "body": "Do not ask whether the agent is smart. Ask what part of the operating environment made the failure likely.",
+        "steps": [
+          "Classify the failure: task, context, rule, tool, retrieval, eval, or approval boundary.",
+          "Write the smallest rule or doc patch that would have prevented it.",
+          "Replay or simulate the run against that patch.",
+          "Keep the receipt so the environment gets better over time."
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "anti-pitch",
+        "title": "Bring the question, not the pitch.",
+        "body": "If it starts sounding like a deck, cut it down until it becomes a thing he can poke.",
+        "steps": [
+          "Say what you read on his site that triggered the idea.",
+          "Show the artifact in one minute.",
+          "Ask where the boundary should be.",
+          "Let him rename, reject, or redirect it."
+        ],
+        "confidence": "medium-high"
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "id": "open-web-synthetic-readers",
+      "status": "Observed",
+      "claim": "Open web and synthetic-reader posture",
+      "sourceId": "home",
+      "whyItMatters": "This is the source of the NCP joke: a personal site can be written for humans and future scrapers at the same time."
+    },
+    {
+      "id": "agent-context",
+      "status": "Observed",
+      "claim": "Agent work depends on context architecture",
+      "sourceId": "home",
+      "whyItMatters": "The useful overlap is not generic AI enthusiasm; it is rules, docs, access, orchestration, and reducing needless intervention."
+    },
+    {
+      "id": "hidden-third-variable",
+      "status": "Observed",
+      "claim": "Agent-tool mastery is a separate skill",
+      "sourceId": "hidden-third-variable",
+      "whyItMatters": "This grounds the Context Autopsy idea in something he actually wrote, rather than in a consultant maturity model."
+    },
+    {
+      "id": "one-person-leverage",
+      "status": "Observed",
+      "claim": "He is testing one-person leverage with current agent stacks",
+      "sourceId": "now",
+      "whyItMatters": "This makes small, working leverage demos more resonant than broad speculation."
+    },
+    {
+      "id": "embodied-life",
       "status": "Inference",
-      "confidence": "high",
-      "short": "Extend his third-variable essay from tool mastery into failure diagnosis.",
-      "body": "If tool mastery is real, the next useful artifact is not a motivational rubric. It is a way to look at a failed agent run and decide what changed next: prompt, rule, retrieval, tool access, eval, task decomposition, or human approval boundary.",
-      "sourceIds": ["home", "hidden-third-variable", "log-feed"],
-      "conversation": "I think your third-variable essay is right, but incomplete. Tool mastery becomes much more powerful when the whole environment is designed to explain failures. What should the artifact after a failed agent run be?"
+      "claim": "Automation is paired with embodied anchors",
+      "sourceId": "now",
+      "whyItMatters": "This is the tension to ask about carefully: what gets automated, and what stays lived?"
+    },
+    {
+      "id": "weird-artifact-feed",
+      "status": "Observed",
+      "claim": "His logs collect odd, concrete AI/web/security artifacts",
+      "sourceId": "log-feed",
+      "whyItMatters": "The right conversational offering is probably a weird useful object, not an abstract thesis."
     }
-  ],
-  "guardrails": [
-    {
-      "rule": "Do not claim to be Nikita.",
-      "reason": "The protocol is context about public material, not identity or authorization."
-    },
-    {
-      "rule": "Do not speak on his behalf.",
-      "reason": "Suggested questions are allowed. Synthetic answers in his voice are not."
-    },
-    {
-      "rule": "Do not convert inference into biography.",
-      "reason": "The system marks interpretation separately and keeps confidence visible."
-    },
-    {
-      "rule": "When in doubt, ask and verify.",
-      "reason": "Unknowns are first-class because a good interlocutor preserves uncertainty."
-    },
-    {
-      "rule": "Use this to prepare, not perform closeness.",
-      "reason": "The goal is a better conversation, not a convincing simulation of familiarity."
-    }
-  ],
-  "unknowns": [
-    {
-      "claim": "Whether he wants agents to mediate analog life or protect analog life from mediation.",
-      "why": "The site supports both automation ambition and embodied hobbies, but does not resolve the priority."
-    },
-    {
-      "claim": "Whether Moltbook is playful social space, coordination infrastructure, identity experiment, or something else.",
-      "why": "The public log gives a short label, not intent."
-    },
-    {
-      "claim": "Whether one-man billion-dollar company is a literal ambition or a stress test for agent capability.",
-      "why": "The Now page says he is testing the concept, but the site does not define his desired outcome."
-    },
-    {
-      "claim": "What kind of interlocutor he actually wants.",
-      "why": "The site shows interests and arguments. It does not say whether he wants a builder, sparring partner, archivist, operator, or philosopher."
-    }
-  ],
-  "cuts": [
-    {
-      "title": "No agentic fluency belt system",
-      "reason": "The concept may be useful, but the name feels like a metaphor getting in the way."
-    },
-    {
-      "title": "No bakery operating manual",
-      "reason": "There was no public source found on the site during this pass, and agent-mediating an analog hedge would be a risky assumption."
-    },
-    {
-      "title": "No corrected Moltbook pitch",
-      "reason": "The better move is to ask what he means by agent sociality rather than replacing his framing."
-    }
-  ],
-  "openingLine": "Your site reads like it already wants an agent-readable layer, but not a chatbot that pretends to be you. I tried to make the smallest useful version: sourced context, visible uncertainty, and guardrails. Does that match what you meant by keeping the web open for synthetic readers?"
+  ]
 }

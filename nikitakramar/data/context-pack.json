@@ -1,38 +1,27 @@
 {
   "generatedAt": "2026-05-17",
-  "name": "Nikita Context Protocol context pack",
+  "name": "NCP field notes",
   "canonicalUrl": "https://nikitakramar.mullmania.com/",
-  "summary": "A source-backed preparation layer for talking with Nikita Kramar about his public writing on AI agents, context architecture, open web memory, orchestration, tool mastery, and embodied life.",
-  "corePremise": "Agents may read this context. They may not pretend to be Nikita.",
-  "bestUse": [
-    "prepare thoughtful questions",
-    "find public-source-backed points of overlap",
-    "surface uncertainty before a conversation",
-    "generate candidate experiments to ask Nikita about"
+  "summary": "A compact public-site read of Nikita Kramar: mined signals, likely resonant ideas, and a joke WWNKD decision aid.",
+  "bestRead": "Nikita seems most interested in leverage with taste: open web context, agent orchestration, proof loops, and human judgment.",
+  "useFor": [
+    "prepare a better conversation",
+    "choose one artifact to show him",
+    "find a question he can actually argue with",
+    "run the joke WWNKD picker without impersonating him"
   ],
-  "forbiddenUse": [
-    "simulate Nikita",
-    "write as Nikita",
-    "claim private knowledge",
-    "present inference as fact"
+  "doNotUseFor": [
+    "impersonating Nikita",
+    "claiming private knowledge",
+    "turning a friend into a dossier",
+    "shipping a fake framework because the acronym is funny"
   ],
-  "highConfidenceObservations": [
-    "Nikita explicitly defends the Open Web and welcomes synthetic readers on his public site.",
-    "He frames AI agent success as a function of context, rules, documentation, tools, access, and token spend.",
-    "He predicts a shift from manual coding toward orchestration and human approval.",
-    "He treats agent-tool mastery as a distinct skill in his Hidden Third Variable essay.",
-    "His Now page says he is comparing DSPy, LangGraph, and LangChain while testing the one-man billion-dollar company idea."
+  "likelyResonantIdeas": [
+    "NCP: a tiny agent-readable personal-site layer",
+    "Context Autopsy / Rule Doctor for failed agent runs",
+    "The anti-automation boundary: what should agents not touch?"
   ],
-  "workingInferences": [
-    "A personal site can become useful agent context without becoming a person simulator.",
-    "The unresolved tension is what human judgment and embodied life become when agent execution gets cheap.",
-    "The best artifact to show him is a small working protocol, not a broad pitch deck."
-  ],
-  "suggestedOpeners": [
-    "Your site reads like it already wants an agent-readable layer, but not a chatbot that pretends to be you. I tried to make the smallest useful version. Does this match what you meant by keeping the web open for synthetic readers?",
-    "WWNKD, as a joke but also as a constraint: don't ask what Nikita would say; ask what his public primitives suggest testing next.",
-    "Your hidden-third-variable essay made me think tool mastery needs a failure-analysis artifact. What should the artifact after a failed agent run be?"
-  ],
+  "defaultOpener": "I made a dumb thing called NCP because your site already reads like it wants to be useful to synthetic readers. What should a personal site expose to agents, and what should it absolutely refuse?",
   "sourceLedger": "/data/sources.json",
   "claims": "/data/claims.json"
 }
