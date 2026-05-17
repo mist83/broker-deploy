@@ -1,0 +1,18 @@
+{
+  "name": "Tap Repeater",
+  "short_name": "Tap Repeater",
+  "description": "Record tap rhythms and play them back with timing precision.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0071CE",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

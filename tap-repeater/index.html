@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Tap Repeater">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0071CE">
     <title>Tap Repeater</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icon.svg">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230071CE'/%3E%3Cpath d='M18 34c0-7.7 6.3-14 14-14 6.6 0 12.2 4.6 13.5 10.8H40l9 9 9-9h-5.4C51.4 19.3 43.3 12 32 12 20.9 12 12 20.9 12 32c0 4.8 1.7 9.2 4.6 12.6L22 39.2A13.8 13.8 0 0 1 18 34zm28 14c0 7.7-6.3 14-14 14-6.6 0-12.2-4.6-13.5-10.8H24l-9-9-9 9h5.4C12.6 44.7 20.7 52 32 52c11.1 0 20-8.9 20-20 0-4.8-1.7-9.2-4.6-12.6L42 24.8A13.8 13.8 0 0 1 46 30z' fill='%23FFC220'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <style>
@@ -1364,6 +1368,14 @@
 
     loadInitialPatternFromURL();
     updateUI();
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch((error) => {
+                    console.warn('tap-repeater service worker registration failed', error);
+                });
+            });
+        }
 
     // ─── Pair to target ───────────────────────────────────────────────────
     // Lets tap-repeater stream taps + (optional) device tilt to any pair.js
