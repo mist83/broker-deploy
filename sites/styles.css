@@ -493,12 +493,22 @@ body.is-dependencies-mode #content-container {
   overflow: hidden;
 }
 
+body.is-features-mode #content-container {
+  height: 100% !important;
+  overflow: hidden;
+}
+
 body:has(#categorize-view:not(.is-hidden)) #content-container {
   height: 100% !important;
   overflow: hidden;
 }
 
 body:has(#dependencies-view:not(.is-hidden)) #content-container {
+  height: 100% !important;
+  overflow: hidden;
+}
+
+body:has(#features-view:not(.is-hidden)) #content-container {
   height: 100% !important;
   overflow: hidden;
 }
@@ -515,11 +525,19 @@ body.is-dependencies-mode {
   grid-template-rows: auto minmax(0, 1fr) !important;
 }
 
+body.is-features-mode {
+  grid-template-rows: auto minmax(0, 1fr) !important;
+}
+
 body:has(#categorize-view:not(.is-hidden)) {
   grid-template-rows: auto minmax(0, 1fr) !important;
 }
 
 body:has(#dependencies-view:not(.is-hidden)) {
+  grid-template-rows: auto minmax(0, 1fr) !important;
+}
+
+body:has(#features-view:not(.is-hidden)) {
   grid-template-rows: auto minmax(0, 1fr) !important;
 }
 
@@ -5474,6 +5492,243 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
 .category-board-control select {
   width: 100%;
   min-height: 40px;
+}
+
+.feature-matrix-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--space-sm);
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 var(--space-md) var(--space-md);
+  box-sizing: border-box;
+}
+
+.feature-matrix-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0 0;
+  min-width: 0;
+}
+
+.feature-matrix-heading {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.feature-matrix-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--text-primary);
+  font-weight: var(--weight-bold);
+}
+
+.feature-matrix-title i {
+  color: var(--color-primary);
+}
+
+.feature-matrix-summary,
+.feature-matrix-status {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.feature-matrix-status[data-tone="warning"] {
+  color: var(--color-warning);
+}
+
+.feature-matrix-status[data-tone="success"] {
+  color: var(--color-success);
+}
+
+.feature-matrix-status[data-tone="error"] {
+  color: var(--color-danger);
+}
+
+.feature-matrix-actions {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feature-matrix-control {
+  display: grid;
+  gap: 4px;
+}
+
+.feature-matrix-control span {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.feature-matrix-control select {
+  min-height: 40px;
+  min-width: 150px;
+}
+
+.feature-matrix-table-wrap {
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+}
+
+.feature-matrix-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.feature-matrix-table th,
+.feature-matrix-table td {
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.feature-matrix-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg-secondary);
+}
+
+.feature-matrix-app,
+.feature-matrix-site {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
+  background: var(--bg-primary);
+  box-shadow: 1px 0 0 var(--border-color);
+}
+
+.feature-matrix-app {
+  z-index: 4;
+  background: var(--bg-secondary);
+}
+
+.feature-matrix-facet {
+  width: 112px;
+  min-width: 112px;
+  max-width: 112px;
+  text-align: center;
+}
+
+.feature-matrix-facet span,
+.feature-matrix-facet small,
+.feature-matrix-site a,
+.feature-matrix-site span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feature-matrix-facet small {
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: var(--weight-regular);
+}
+
+.feature-matrix-site {
+  text-align: left;
+}
+
+.feature-matrix-site a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.feature-matrix-site span {
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: var(--weight-regular);
+}
+
+.feature-matrix-cell {
+  text-align: center;
+}
+
+.feature-matrix-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 88px;
+  min-height: 32px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+}
+
+.feature-matrix-state.is-on {
+  border-color: color-mix(in srgb, var(--color-success) 56%, var(--border-color));
+  background: color-mix(in srgb, var(--color-success) 14%, var(--bg-primary));
+  color: var(--color-success);
+}
+
+.feature-matrix-state.is-off {
+  border-color: color-mix(in srgb, var(--color-danger) 46%, var(--border-color));
+  background: color-mix(in srgb, var(--color-danger) 10%, var(--bg-primary));
+  color: var(--color-danger);
+}
+
+.feature-matrix-state.is-deferred {
+  border-color: color-mix(in srgb, var(--color-warning) 52%, var(--border-color));
+  background: color-mix(in srgb, var(--color-warning) 12%, var(--bg-primary));
+  color: var(--color-warning);
+}
+
+.feature-matrix-state:hover,
+.feature-matrix-state:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.feature-matrix-footer {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+
+.feature-matrix-synopsis {
+  width: 100%;
+  min-height: 96px;
+  max-height: 140px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.feature-matrix-empty {
+  padding: var(--space-lg);
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 .category-editor-modal__panel {
@@ -10677,6 +10932,7 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   .audit-shell:not(.is-hidden),
   .categorize-shell:not(.is-hidden),
   .dependencies-shell:not(.is-hidden),
+  .feature-matrix-shell:not(.is-hidden),
   .json-shell:not(.is-hidden) {
     display: grid !important;
   }

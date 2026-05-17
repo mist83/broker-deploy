@@ -32,6 +32,50 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
     { id: 'audio-visual', label: 'Audio / Visual', aliases: ['audio', 'music'] },
     { id: 'backend-api', label: 'Backend / API', aliases: ['api', 'backend', 'lambda-api', 'lambda-backed'] },
   ],
+  featureFacets: [
+    {
+      id: 'phone-remote',
+      label: 'Phone Remote',
+      shortLabel: 'Remote',
+      rule: 'Use the canonical phone pairing primitive from ui/js/pair.js when a phone controls the app, TV, or dashboard surface.',
+    },
+    {
+      id: 'signalr',
+      label: 'SignalR',
+      shortLabel: 'SignalR',
+      rule: 'Use signal-argh through the SignalR client for real-time messaging; do not hand-roll raw WebSocket protocol code.',
+    },
+    {
+      id: 's3-storage',
+      label: 'S3 Storage',
+      shortLabel: 'S3',
+      rule: 'Use the Mullmania hosting/data bucket conventions for static artifacts, persisted metadata, and deploy-safe storage.',
+    },
+    {
+      id: 'lambda-api',
+      label: 'Lambda API',
+      shortLabel: 'Lambda',
+      rule: 'Use a Lambda/API-backed route when the feature needs trusted mutation, shared state, or server-owned integration.',
+    },
+    {
+      id: 'frontend-canon',
+      label: 'Frontend Canon',
+      shortLabel: 'Canon',
+      rule: 'Follow the development canon and ui.mullmania.com shell rules for browser-facing UI.',
+    },
+    {
+      id: 'threejs',
+      label: 'Three.js',
+      shortLabel: '3D',
+      rule: 'Use Three.js for 3D surfaces, keep the primary scene visible and interactive, and verify the canvas is not blank.',
+    },
+    {
+      id: 'tv-telemetry',
+      label: 'TV Telemetry',
+      shortLabel: 'Logs',
+      rule: 'Wire tv-tail/log-tap for browser surfaces where target-device debugging is difficult.',
+    },
+  ],
   ui: {
     activeThemeId: 'active',
     defaultThemeId: 'walmart',
@@ -134,6 +178,25 @@ const VSCODE_OPEN_URI_BASE = 'vscode://mist83.mullmania-sites/open';
 const VSCODE_DEPLOY_COMMAND = 'aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - | bash -s -- apply';
 const TABLE_PAGE_SIZE_ALL = 'all';
 const DEFAULT_TABLE_PAGE_SIZE = 50;
+const FEATURE_MATRIX_STORAGE_KEY = 'mullmania-launchpad-feature-matrix';
+const FEATURE_MATRIX_SCOPE_VISIBLE = 'visible';
+const FEATURE_MATRIX_SCOPE_ALL = 'all';
+const FEATURE_MATRIX_STATE_UNKNOWN = 'unknown';
+const FEATURE_MATRIX_STATE_ON = 'on';
+const FEATURE_MATRIX_STATE_OFF = 'off';
+const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
+const FEATURE_MATRIX_STATES = Object.freeze({
+  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Unknown', shortLabel: '?', icon: 'ti ti-circle-dotted' },
+  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'On', shortLabel: 'Yes', icon: 'ti ti-check' },
+  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Off', shortLabel: 'No', icon: 'ti ti-x' },
+  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Deferred', shortLabel: 'Later', icon: 'ti ti-clock' },
+});
+const FEATURE_MATRIX_STATE_ORDER = Object.freeze([
+  FEATURE_MATRIX_STATE_UNKNOWN,
+  FEATURE_MATRIX_STATE_ON,
+  FEATURE_MATRIX_STATE_OFF,
+  FEATURE_MATRIX_STATE_DEFERRED,
+]);
 const SEARCH_FIELD_DEFINITIONS = Object.freeze([
   { id: 'title', label: 'Title', ariaLabel: 'Search titles' },
   { id: 'url', label: 'URL', ariaLabel: 'Search URLs and subdomains' },
@@ -146,6 +209,7 @@ let CATEGORY_TAG_LABEL_BY_ID = new Map(CATEGORY_TAG_DEFINITIONS.map((tag) => [ta
 let CATEGORY_TAG_ALIAS_BY_ID = new Map(CATEGORY_TAG_DEFINITIONS.flatMap((tag) => (
   [tag.id, ...tag.aliases].map((alias) => [alias, tag.id])
 )));
+let FEATURE_MATRIX_FACETS = Object.freeze(DEFAULT_SITE_PLATFORM.featureFacets.map((facet) => ({ ...facet })));
 const COMPOSER_UNAVAILABLE_MESSAGE = 'Protected launchpad actions are not enabled on this build.';
 const OPERATOR_KEY_HELP_MESSAGE = 'Management actions include create, overwrite, delete, notes, tags, rank, preview refresh, and main-site changes.';
 const COMPOSER_INTENT_AUTHORING = 'authoring';
@@ -532,6 +596,13 @@ const state = {
     pendingFullGraphRender: false,
     hasFit: false,
   },
+  featureMatrix: {
+    saved: null,
+    draft: null,
+    scope: FEATURE_MATRIX_SCOPE_VISIBLE,
+    statusMessage: '',
+    statusTone: '',
+  },
   listScrollTop: 0,
   galleryPage: 0,
   galleryPageSize: 18,
@@ -716,6 +787,7 @@ const DEFAULT_VIEW_CONFIG = {
   flightdeck: { value: 'flightdeck', label: 'Now', icon: 'ti ti-radar-2' },
   gallery: { value: 'gallery', label: 'Gallery', icon: 'ti ti-layout-grid' },
   tv: { value: 'tv', label: 'Showcase', icon: 'ti ti-device-tv' },
+  features: { value: 'features', label: 'Features', icon: 'ti ti-checklist' },
   categorize: { value: 'categorize', label: 'Categorize', icon: 'ti ti-layout-kanban' },
   dependencies: { value: 'dependencies', label: 'Dependencies', icon: 'ti ti-graph' },
   audit: { value: 'audit', label: 'Review', icon: 'ti ti-clipboard-check' },
@@ -752,6 +824,16 @@ const listViewEl = document.getElementById('list-view');
 const galleryViewEl = document.getElementById('gallery-view');
 const wallViewEl = document.getElementById('wall-view');
 const tvViewEl = document.getElementById('tv-view');
+const featureMatrixViewEl = document.getElementById('features-view');
+const featureMatrixSummaryEl = document.getElementById('feature-matrix-summary');
+const featureMatrixScopeEl = document.getElementById('feature-matrix-scope');
+const featureMatrixSaveButton = document.getElementById('feature-matrix-save');
+const featureMatrixResetButton = document.getElementById('feature-matrix-reset');
+const featureMatrixCopyButton = document.getElementById('feature-matrix-copy');
+const featureMatrixStatusEl = document.getElementById('feature-matrix-status');
+const featureMatrixTableHeadEl = document.getElementById('feature-matrix-head');
+const featureMatrixTableBodyEl = document.getElementById('feature-matrix-body');
+const featureMatrixSynopsisEl = document.getElementById('feature-matrix-synopsis');
 const categorizeViewEl = document.getElementById('categorize-view');
 const auditViewEl = document.getElementById('audit-view');
 const auditQueueEl = document.getElementById('audit-queue');
@@ -1133,6 +1215,7 @@ function markLaunchpadBootReady() {
 
 async function init() {
   await loadSitePlatformContract();
+  restoreFeatureMatrixState();
   applyStoredAppStyle();
   state.galleryPageSize = calculateGalleryPageSize();
   state.wallPageSize = calculateWallPageSize();
@@ -1202,6 +1285,7 @@ function applySitePlatformContract(contract) {
       ...DEFAULT_SITE_PLATFORM.siteIds,
       ...(contract.siteIds || {}),
     },
+    featureFacets: normalizeFeatureMatrixFacets(contract.featureFacets, DEFAULT_SITE_PLATFORM.featureFacets),
     ui: {
       ...DEFAULT_SITE_PLATFORM.ui,
       ...(contract.ui || {}),
@@ -1227,6 +1311,7 @@ function applySitePlatformContract(contract) {
   CATEGORY_TAG_ALIAS_BY_ID = new Map(CATEGORY_TAG_DEFINITIONS.flatMap((tag) => (
     [tag.id, ...tag.aliases].map((alias) => [alias, tag.id])
   )));
+  FEATURE_MATRIX_FACETS = Object.freeze(normalizeFeatureMatrixFacets(sitePlatform.featureFacets, DEFAULT_SITE_PLATFORM.featureFacets));
 
   const themeIds = normalizePlatformStringList(sitePlatform.ui.themeIds, DEFAULT_SITE_PLATFORM.ui.themeIds)
     .filter((themeId) => themeId !== APP_STYLE_DEFAULT_ID);
@@ -1270,6 +1355,30 @@ function normalizeCategoryTagDefinitions(value, fallback = []) {
     return normalized;
   }
   return normalizeCategoryTagDefinitions(fallback, []);
+}
+
+function normalizeFeatureMatrixFacets(value, fallback = []) {
+  const source = Array.isArray(value) ? value : fallback;
+  const seen = new Set();
+  const normalized = [];
+  for (const item of source) {
+    const id = normalizeCatalogToken(item?.id || item?.label || '');
+    const label = String(item?.label || '').trim();
+    if (!id || !label || seen.has(id)) {
+      continue;
+    }
+    seen.add(id);
+    normalized.push({
+      id,
+      label,
+      shortLabel: String(item?.shortLabel || label).trim() || label,
+      rule: String(item?.rule || '').trim(),
+    });
+  }
+  if (normalized.length > 0 || source === fallback) {
+    return normalized;
+  }
+  return normalizeFeatureMatrixFacets(fallback, []);
 }
 
 function renderStartupError(title, message) {
@@ -1549,6 +1658,7 @@ function buildDefaultShell() {
         { id: 'view-flightdeck', value: 'flightdeck', label: 'Now', icon: 'ti ti-radar-2', className: 'surface-toggle' },
         { id: 'view-gallery', value: 'gallery', label: 'Gallery', icon: 'ti ti-layout-grid', className: 'surface-toggle' },
         { id: 'view-tv', value: 'tv', label: 'Showcase', icon: 'ti ti-device-tv', className: 'surface-toggle' },
+        { id: 'view-features', value: 'features', label: 'Features', icon: 'ti ti-checklist', className: 'surface-toggle' },
         { id: 'view-categorize', value: 'categorize', label: 'Categorize', icon: 'ti ti-layout-kanban', className: 'surface-toggle' },
         { id: 'view-dependencies', value: 'dependencies', label: 'Dependencies', icon: 'ti ti-graph', className: 'surface-toggle' },
         { id: 'view-audit', value: 'audit', label: 'Review', icon: 'ti ti-clipboard-check', className: 'surface-toggle' },
@@ -2228,6 +2338,15 @@ function bindEvents() {
   dependenciesGraphEl?.addEventListener('wheel', handleDependenciesGraphWheel, { passive: false });
   dependenciesGraphStageEl?.addEventListener('dragover', handleDependenciesGraphDragOver);
   dependenciesGraphStageEl?.addEventListener('drop', handleDependenciesGraphDrop);
+  featureMatrixScopeEl?.addEventListener('change', () => {
+    setFeatureMatrixScope(featureMatrixScopeEl.value);
+  });
+  featureMatrixTableBodyEl?.addEventListener('click', handleFeatureMatrixClick);
+  featureMatrixSaveButton?.addEventListener('click', saveFeatureMatrixDraft);
+  featureMatrixResetButton?.addEventListener('click', resetFeatureMatrixDraft);
+  featureMatrixCopyButton?.addEventListener('click', () => {
+    void copyFeatureMatrixSynopsis();
+  });
 
   wallPrevButton?.addEventListener('click', () => {
     if (state.wallPage === 0) {
@@ -5148,6 +5267,8 @@ function render() {
     renderFlightDeckView();
   } else if (state.viewMode === 'dependencies') {
     renderDependenciesView();
+  } else if (state.viewMode === 'features') {
+    renderFeatureMatrixView();
   } else if (state.viewMode === 'gallery') {
     renderGallery(state.visibleEntries);
   } else if (state.viewMode === 'wall') {
@@ -5208,6 +5329,7 @@ function syncActiveView() {
   const swipeMode = state.swipeMode;
   flightDeckViewEl?.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'flightdeck');
   dependenciesViewEl?.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'dependencies');
+  featureMatrixViewEl?.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'features');
   tableViewEl.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'table');
   listViewEl?.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'list');
   galleryViewEl.classList.toggle('is-hidden', swipeMode || state.viewMode !== 'gallery');
@@ -5221,6 +5343,7 @@ function syncActiveView() {
   document.body.classList.toggle('is-gallery-mode', state.viewMode === 'gallery');
   document.body.classList.toggle('is-flightdeck-mode', state.viewMode === 'flightdeck');
   document.body.classList.toggle('is-dependencies-mode', state.viewMode === 'dependencies');
+  document.body.classList.toggle('is-features-mode', state.viewMode === 'features');
   document.body.classList.toggle('is-categorize-mode', state.viewMode === 'categorize');
   document.body.classList.toggle('is-audit-mode', state.viewMode === 'audit');
   document.body.classList.toggle('is-slideshow-mode', state.viewMode === 'slideshow');
@@ -8296,6 +8419,482 @@ async function copyJsonView() {
   } catch {
     window.prompt('Copy the JSON below:', text);
   }
+}
+
+function restoreFeatureMatrixState() {
+  const saved = loadStoredFeatureMatrixState();
+  state.featureMatrix.saved = saved;
+  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
+  state.featureMatrix.scope = FEATURE_MATRIX_SCOPE_VISIBLE;
+  state.featureMatrix.statusMessage = '';
+  state.featureMatrix.statusTone = '';
+}
+
+function loadStoredFeatureMatrixState() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(FEATURE_MATRIX_STORAGE_KEY) || 'null');
+    return normalizeFeatureMatrixState(raw);
+  } catch {
+    return createFeatureMatrixState();
+  }
+}
+
+function createFeatureMatrixState(assignments = {}, updatedAt = '') {
+  return {
+    version: 1,
+    updatedAt: String(updatedAt || '').trim(),
+    assignments,
+  };
+}
+
+function cloneFeatureMatrixState(matrixState) {
+  return normalizeFeatureMatrixState(JSON.parse(JSON.stringify(matrixState || createFeatureMatrixState())));
+}
+
+function normalizeFeatureMatrixState(raw) {
+  const source = raw && typeof raw === 'object' ? raw : {};
+  const facetIds = new Set(FEATURE_MATRIX_FACETS.map((facet) => facet.id));
+  const rawAssignments = source.assignments && typeof source.assignments === 'object'
+    ? source.assignments
+    : {};
+  const assignments = {};
+
+  for (const [rawSiteId, rawFacets] of Object.entries(rawAssignments)) {
+    const siteId = normalizeCatalogToken(rawSiteId);
+    if (!siteId || !rawFacets || typeof rawFacets !== 'object') {
+      continue;
+    }
+
+    const nextFacets = {};
+    for (const [rawFacetId, rawCell] of Object.entries(rawFacets)) {
+      const facetId = normalizeCatalogToken(rawFacetId);
+      if (!facetIds.has(facetId)) {
+        continue;
+      }
+      const cellState = normalizeFeatureMatrixCellState(
+        typeof rawCell === 'string' ? rawCell : rawCell?.state
+      );
+      if (cellState === FEATURE_MATRIX_STATE_UNKNOWN) {
+        continue;
+      }
+      nextFacets[facetId] = {
+        state: cellState,
+        updatedAt: String(rawCell?.updatedAt || source.updatedAt || '').trim(),
+      };
+    }
+
+    if (Object.keys(nextFacets).length > 0) {
+      assignments[siteId] = nextFacets;
+    }
+  }
+
+  return createFeatureMatrixState(assignments, source.updatedAt);
+}
+
+function normalizeFeatureMatrixCellState(value) {
+  const normalized = normalizeCatalogToken(value);
+  return Object.prototype.hasOwnProperty.call(FEATURE_MATRIX_STATES, normalized)
+    ? normalized
+    : FEATURE_MATRIX_STATE_UNKNOWN;
+}
+
+function getFeatureMatrixDraft() {
+  if (!state.featureMatrix.draft) {
+    restoreFeatureMatrixState();
+  }
+  return state.featureMatrix.draft;
+}
+
+function getFeatureMatrixSaved() {
+  if (!state.featureMatrix.saved) {
+    restoreFeatureMatrixState();
+  }
+  return state.featureMatrix.saved;
+}
+
+function getFeatureMatrixRows() {
+  const source = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL
+    ? state.entries
+    : state.visibleSiteEntries;
+  return (Array.isArray(source) ? source : [])
+    .filter((entry) => entry?.siteId && entry.siteId !== ROOT_SITE_ID && entry.hasHostedSite !== false)
+    .sort(compareEntriesByTitle);
+}
+
+function getFeatureMatrixCellState(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  return normalizeFeatureMatrixCellState(matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId]?.state);
+}
+
+function setFeatureMatrixCellState(siteId, facetId, cellState) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  const normalizedState = normalizeFeatureMatrixCellState(cellState);
+  if (!normalizedSiteId || !FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
+    return;
+  }
+
+  const draft = getFeatureMatrixDraft();
+  if (!draft.assignments[normalizedSiteId]) {
+    draft.assignments[normalizedSiteId] = {};
+  }
+
+  if (normalizedState === FEATURE_MATRIX_STATE_UNKNOWN) {
+    delete draft.assignments[normalizedSiteId][normalizedFacetId];
+    if (Object.keys(draft.assignments[normalizedSiteId]).length === 0) {
+      delete draft.assignments[normalizedSiteId];
+    }
+  } else {
+    draft.assignments[normalizedSiteId][normalizedFacetId] = {
+      state: normalizedState,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  draft.updatedAt = new Date().toISOString();
+  setFeatureMatrixStatus('Draft changed.', 'warning');
+  renderFeatureMatrixView();
+}
+
+function getNextFeatureMatrixCellState(currentState) {
+  const normalized = normalizeFeatureMatrixCellState(currentState);
+  const currentIndex = FEATURE_MATRIX_STATE_ORDER.indexOf(normalized);
+  return FEATURE_MATRIX_STATE_ORDER[(Math.max(currentIndex, 0) + 1) % FEATURE_MATRIX_STATE_ORDER.length];
+}
+
+function setFeatureMatrixScope(value) {
+  const nextScope = normalizeCatalogToken(value) === FEATURE_MATRIX_SCOPE_ALL
+    ? FEATURE_MATRIX_SCOPE_ALL
+    : FEATURE_MATRIX_SCOPE_VISIBLE;
+  if (state.featureMatrix.scope === nextScope) {
+    renderFeatureMatrixView();
+    return;
+  }
+  state.featureMatrix.scope = nextScope;
+  renderFeatureMatrixView();
+}
+
+function handleFeatureMatrixClick(event) {
+  const button = event.target instanceof Element
+    ? event.target.closest('[data-feature-cell]')
+    : null;
+  if (!(button instanceof HTMLButtonElement)) {
+    return;
+  }
+  const siteId = button.getAttribute('data-site-id') || '';
+  const facetId = button.getAttribute('data-feature-id') || '';
+  const nextState = getNextFeatureMatrixCellState(button.getAttribute('data-feature-state') || '');
+  setFeatureMatrixCellState(siteId, facetId, nextState);
+}
+
+function renderFeatureMatrixView() {
+  if (!featureMatrixViewEl || !featureMatrixTableHeadEl || !featureMatrixTableBodyEl) {
+    return;
+  }
+
+  getFeatureMatrixDraft();
+  const rows = getFeatureMatrixRows();
+  const changes = getFeatureMatrixChanges(rows);
+  const dirty = isFeatureMatrixDirty();
+  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all apps' : 'visible apps';
+
+  if (featureMatrixScopeEl && featureMatrixScopeEl.value !== state.featureMatrix.scope) {
+    featureMatrixScopeEl.value = state.featureMatrix.scope;
+  }
+
+  featureMatrixTableHeadEl.innerHTML = renderFeatureMatrixHeader(rows);
+  featureMatrixTableBodyEl.innerHTML = rows.length
+    ? rows.map((entry) => renderFeatureMatrixRow(entry)).join('')
+    : '<tr><td class="feature-matrix-empty" colspan="99">No apps match this scope.</td></tr>';
+
+  if (featureMatrixSummaryEl) {
+    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} ${scopeLabel} - ${FEATURE_MATRIX_FACETS.length.toLocaleString()} facets - ${changes.length.toLocaleString()} changed`;
+  }
+
+  if (featureMatrixStatusEl) {
+    const fallback = dirty ? 'Unsaved local changes' : (getFeatureMatrixSaved().updatedAt ? 'Saved locally' : 'No saved decisions yet');
+    featureMatrixStatusEl.textContent = state.featureMatrix.statusMessage || fallback;
+    featureMatrixStatusEl.dataset.tone = state.featureMatrix.statusTone || (dirty ? 'warning' : 'info');
+  }
+
+  if (featureMatrixSaveButton) {
+    featureMatrixSaveButton.disabled = !dirty;
+  }
+  if (featureMatrixResetButton) {
+    featureMatrixResetButton.disabled = !dirty;
+  }
+  if (featureMatrixSynopsisEl) {
+    featureMatrixSynopsisEl.value = buildFeatureMatrixSynopsis(rows, changes);
+  }
+}
+
+function renderFeatureMatrixHeader(rows) {
+  const countsByFacet = getFeatureMatrixCounts(rows);
+  const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
+    const counts = countsByFacet[facet.id] || {};
+    const countLabel = [
+      `${counts[FEATURE_MATRIX_STATE_ON] || 0} on`,
+      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} off`,
+      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} later`,
+    ].join(' / ');
+    return `
+      <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
+        <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
+        <small>${escapeHtml(countLabel)}</small>
+      </th>
+    `;
+  }).join('');
+  return `
+    <tr>
+      <th class="feature-matrix-app">App</th>
+      ${facetHeaders}
+    </tr>
+  `;
+}
+
+function renderFeatureMatrixRow(entry) {
+  const title = buildDisplayTitle(entry) || entry.siteId;
+  const host = entry.host || `${entry.siteId}.${BASE_DOMAIN}`;
+  const cells = FEATURE_MATRIX_FACETS.map((facet) => {
+    const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
+    const stateMeta = FEATURE_MATRIX_STATES[cellState] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+    return `
+      <td class="feature-matrix-cell">
+        <button
+          type="button"
+          class="feature-matrix-state is-${escapeHtml(cellState)}"
+          data-feature-cell="true"
+          data-site-id="${escapeHtml(entry.siteId)}"
+          data-feature-id="${escapeHtml(facet.id)}"
+          data-feature-state="${escapeHtml(cellState)}"
+          title="${escapeHtml(`${title} / ${facet.label}: ${stateMeta.label}. ${facet.rule || ''}`)}"
+          aria-label="${escapeHtml(`${title} ${facet.label} ${stateMeta.label}`)}"
+        >
+          <i class="${escapeHtml(stateMeta.icon)}" aria-hidden="true"></i>
+          <span>${escapeHtml(stateMeta.shortLabel)}</span>
+        </button>
+      </td>
+    `;
+  }).join('');
+
+  return `
+    <tr data-feature-matrix-row="${escapeHtml(entry.siteId)}">
+      <th class="feature-matrix-site" scope="row">
+        <a href="${escapeHtml(entry.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
+        <span>${escapeHtml(host)}</span>
+      </th>
+      ${cells}
+    </tr>
+  `;
+}
+
+function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
+  const countsByFacet = Object.fromEntries(FEATURE_MATRIX_FACETS.map((facet) => [facet.id, {
+    [FEATURE_MATRIX_STATE_UNKNOWN]: 0,
+    [FEATURE_MATRIX_STATE_ON]: 0,
+    [FEATURE_MATRIX_STATE_OFF]: 0,
+    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
+  }]));
+  for (const entry of rows) {
+    for (const facet of FEATURE_MATRIX_FACETS) {
+      const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
+      countsByFacet[facet.id][cellState] += 1;
+    }
+  }
+  return countsByFacet;
+}
+
+function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
+  const saved = getFeatureMatrixSaved();
+  const draft = getFeatureMatrixDraft();
+  const changes = [];
+  for (const entry of rows) {
+    for (const facet of FEATURE_MATRIX_FACETS) {
+      const fromState = getFeatureMatrixCellState(entry.siteId, facet.id, saved);
+      const toState = getFeatureMatrixCellState(entry.siteId, facet.id, draft);
+      if (fromState === toState) {
+        continue;
+      }
+      changes.push({
+        siteId: entry.siteId,
+        title: buildDisplayTitle(entry) || entry.siteId,
+        facet,
+        fromState,
+        toState,
+      });
+    }
+  }
+  return changes;
+}
+
+function getFeatureMatrixAssignmentSignature(matrixState) {
+  return JSON.stringify((matrixState || createFeatureMatrixState()).assignments || {});
+}
+
+function isFeatureMatrixDirty() {
+  return getFeatureMatrixAssignmentSignature(getFeatureMatrixSaved()) !== getFeatureMatrixAssignmentSignature(getFeatureMatrixDraft());
+}
+
+function saveFeatureMatrixDraft() {
+  const saved = cloneFeatureMatrixState(getFeatureMatrixDraft());
+  saved.updatedAt = new Date().toISOString();
+  state.featureMatrix.saved = saved;
+  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
+  try {
+    localStorage.setItem(FEATURE_MATRIX_STORAGE_KEY, JSON.stringify(saved));
+    setFeatureMatrixStatus('Saved locally.', 'success');
+  } catch {
+    setFeatureMatrixStatus('Local save failed. Copy the prompt before leaving.', 'error');
+  }
+  renderFeatureMatrixView();
+}
+
+function resetFeatureMatrixDraft() {
+  state.featureMatrix.draft = cloneFeatureMatrixState(getFeatureMatrixSaved());
+  setFeatureMatrixStatus('Reset to saved matrix.', 'info');
+  renderFeatureMatrixView();
+}
+
+async function copyFeatureMatrixSynopsis() {
+  const text = buildFeatureMatrixSynopsis();
+  const result = await copyTextWithFeatureMatrixFallback(text);
+  if (result.copied) {
+    if (featureMatrixCopyButton) {
+      flashButton(featureMatrixCopyButton, 'Copied');
+    }
+    setFeatureMatrixStatus('Prompt copied.', 'success');
+  } else {
+    setFeatureMatrixStatus('Prompt selected. Use your copy shortcut.', 'warning');
+  }
+  renderFeatureMatrixView();
+  if (!result.copied && featureMatrixSynopsisEl) {
+    featureMatrixSynopsisEl.focus({ preventScroll: true });
+    featureMatrixSynopsisEl.select();
+  }
+}
+
+async function copyTextWithFeatureMatrixFallback(text) {
+  const clipboardText = String(text || '');
+  if (navigator.clipboard?.writeText) {
+    let timeoutId = 0;
+    try {
+      await Promise.race([
+        navigator.clipboard.writeText(clipboardText),
+        new Promise((_, reject) => {
+          timeoutId = window.setTimeout(() => reject(new Error('Clipboard write timed out.')), 900);
+        }),
+      ]);
+      window.clearTimeout(timeoutId);
+      return { copied: true };
+    } catch {
+      window.clearTimeout(timeoutId);
+    }
+  }
+
+  if (!featureMatrixSynopsisEl) {
+    return { copied: false };
+  }
+
+  featureMatrixSynopsisEl.value = clipboardText;
+  featureMatrixSynopsisEl.focus({ preventScroll: true });
+  featureMatrixSynopsisEl.select();
+  try {
+    return { copied: document.execCommand('copy') === true };
+  } catch {
+    return { copied: false };
+  }
+}
+
+function setFeatureMatrixStatus(message, tone = '') {
+  state.featureMatrix.statusMessage = message || '';
+  state.featureMatrix.statusTone = tone || '';
+}
+
+function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = getFeatureMatrixChanges(rows)) {
+  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all apps' : 'currently visible apps';
+  const searchText = String(searchEl?.value || '').trim();
+  const activeTags = getActiveCatalogTagIds().map((tagId) => getCatalogTagLabel(tagId)).filter(Boolean);
+  const lines = [
+    'Feature Matrix handoff for sites.mullmania.com',
+    '',
+    `Scope: ${scopeLabel}`,
+    `Apps in scope: ${rows.length}`,
+    `Generated: ${new Date().toISOString()}`,
+  ];
+
+  if (searchText) {
+    lines.push(`Search filter: ${searchText}`);
+  }
+  if (activeTags.length) {
+    lines.push(`Tag filters: ${activeTags.join(', ')}`);
+  }
+
+  lines.push(
+    '',
+    'Interpretation:',
+    '- ON means implement or preserve the facet according to its rule.',
+    '- OFF means the absence is intentional. Do not add that facet unless the matrix changes.',
+    '- DEFERRED means leave it alone for this pass and call out the follow-up.',
+    '- UNKNOWN means audit first; do not assume support either way.',
+    '',
+    'Facet rules:'
+  );
+
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    lines.push(`- ${facet.label}: ${facet.rule || 'Use the operator-provided rule for this facet.'}`);
+  }
+
+  lines.push('', 'Changes since last saved matrix:');
+  if (changes.length === 0) {
+    lines.push('- No changed cells in this scope.');
+  } else {
+    for (const change of changes) {
+      lines.push(`- ${change.siteId} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixState(change.fromState)} -> ${formatFeatureMatrixState(change.toState)}`);
+    }
+  }
+
+  lines.push('', 'Current explicit decisions in scope:');
+  let explicitDecisionCount = 0;
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    const byState = {
+      [FEATURE_MATRIX_STATE_ON]: [],
+      [FEATURE_MATRIX_STATE_OFF]: [],
+      [FEATURE_MATRIX_STATE_DEFERRED]: [],
+    };
+    for (const entry of rows) {
+      const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
+      if (byState[cellState]) {
+        byState[cellState].push(entry.siteId);
+      }
+    }
+    const chunks = [];
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED]) {
+      if (byState[stateId].length > 0) {
+        explicitDecisionCount += byState[stateId].length;
+        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join(', ')}`);
+      }
+    }
+    if (chunks.length > 0) {
+      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
+    }
+  }
+  if (explicitDecisionCount === 0) {
+    lines.push('- No explicit ON/OFF/DEFERRED decisions yet.');
+  }
+
+  lines.push(
+    '',
+    'Agent request:',
+    'Use the matrix as operator intent. For ON cells, make the matching app follow the facet rule exactly. For OFF cells, keep the facet absent and document that the absence is intentional. For DEFERRED cells, do not implement now. For UNKNOWN cells, inspect before proposing changes.'
+  );
+
+  return `${lines.join('\n')}\n`;
+}
+
+function formatFeatureMatrixState(stateId) {
+  const stateMeta = FEATURE_MATRIX_STATES[normalizeFeatureMatrixCellState(stateId)] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+  return stateMeta.label.toUpperCase();
 }
 
 function renderFlightDeckView() {

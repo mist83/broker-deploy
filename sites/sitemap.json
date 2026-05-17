@@ -58,6 +58,13 @@
         "className": "secondary"
       },
       {
+        "id": "view-features",
+        "value": "features",
+        "label": "Features",
+        "icon": "ti ti-checklist",
+        "className": "secondary"
+      },
+      {
         "id": "view-categorize",
         "value": "categorize",
         "label": "Categorize",

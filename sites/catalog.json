@@ -3174,6 +3174,36 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "bucket-relay",
+    "host": "bucket-relay.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "phone-pair",
+      "signal-argh",
+      "qr",
+      "cross-device",
+      "party-game"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:08:49.327Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T21:44:20Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "bug-beacon",
     "host": "bug-beacon.mullmania.com",
     "currentHostedSite": false,
@@ -4164,6 +4194,39 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "chipper",
+    "host": "chipper.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "particles",
+      "three-js",
+      "chipper",
+      "satisfying"
+    ],
+    "notes": [
+      "Feed branches in; chips erupt out. Drag the tube to aim."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:40:50.111Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:42:02Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "chladni",
     "host": "chladni.mullmania.com",
     "currentHostedSite": false,
@@ -4199,6 +4262,42 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null
+  },
+  {
+    "siteId": "chrome-site-key-proof",
+    "host": "chrome-site-key-proof.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T16:50:20.859Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/chrome-site-key-proof",
+        "ref": null,
+        "sha": "1807488971ea4885d5084a71fad78dc9e8a537a4",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/chrome-site-key-proof",
+        "branch": "main",
+        "commit": "1807488971ea4885d5084a71fad78dc9e8a537a4",
+        "remote": "https://github.com/mist83/chrome-site-key-proof.git"
+      }
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:50:43Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "civitas-automata",
@@ -12024,20 +12123,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T07:31:01.516Z",
+    "lastPublishedAt": "2026-05-17T22:38:05.353Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "302f73a34a1c9ab8089906a8f136d9f70b667df4",
+        "sha": "1c8590897b5bb5aa50d1e169bd03c573795ba2ab",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dag.mullmania.com",
         "branch": "main",
-        "commit": "302f73a34a1c9ab8089906a8f136d9f70b667df4",
+        "commit": "1c8590897b5bb5aa50d1e169bd03c573795ba2ab",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -19149,6 +19248,40 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "hot-wire",
+    "host": "hot-wire.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "voxel",
+      "three-js",
+      "hot-wire",
+      "styrofoam",
+      "satisfying"
+    ],
+    "notes": [
+      "Hot wire cuts styrofoam. Pick a shape, set the wire, watch the foam vanish."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:08:49.488Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:02:47Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "html-better-builtins",
     "host": "html-better-builtins.mullmania.com",
     "currentHostedSite": false,
@@ -19347,6 +19480,39 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "hydropress",
+    "host": "hydropress.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "soft-body",
+      "three-js",
+      "hydropress",
+      "satisfying"
+    ],
+    "notes": [
+      "A hydraulic press squashes 3D objects flat. Tap to fire."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:43:39.897Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:40:00Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "iamverysmart",
     "host": "iamverysmart.mullmania.com",
     "currentHostedSite": false,
@@ -19484,20 +19650,20 @@
       "Gallery sister site for Image Fiber with upload, browse, preview, and download support."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:35:55.546Z",
+    "lastPublishedAt": "2026-05-17T22:43:34.774Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/images.mullmania.com",
         "ref": null,
-        "sha": "78f6b0ad6b8effc096e9b972cc20a7d9aa80c699",
+        "sha": "bd83dfd97f1b88972a200e357c7c17e01b0e6924",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/images.mullmania.com",
         "branch": "main",
-        "commit": "78f6b0ad6b8effc096e9b972cc20a7d9aa80c699",
+        "commit": "bd83dfd97f1b88972a200e357c7c17e01b0e6924",
         "remote": "https://github.com/mist83/images.mullmania.com.git"
       }
     },
@@ -22214,6 +22380,39 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null
+  },
+  {
+    "siteId": "logsplit",
+    "host": "logsplit.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "rigid-body",
+      "three-js",
+      "logsplit",
+      "satisfying"
+    ],
+    "notes": [
+      "Tap to swing the maul. One round, two halves."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:20:19.301Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:34:07Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "lonetree-brewing-sign",
@@ -25060,20 +25259,20 @@
       "Mullformed is a browser-native 3D sketchpad for quickly shaping rough ideas into usable 3D assets."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:41:49.684Z",
+    "lastPublishedAt": "2026-05-17T22:06:35.135Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mullformed",
         "ref": null,
-        "sha": "89a1fbb0eb12512d74456a7918cfb6a2f328c802",
+        "sha": "1eb287ab6f2e236598e38e8c6196f31d2b4de2a2",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mullformed",
         "branch": "main",
-        "commit": "89a1fbb0eb12512d74456a7918cfb6a2f328c802",
+        "commit": "1eb287ab6f2e236598e38e8c6196f31d2b4de2a2",
         "remote": "https://github.com/mist83/mullformed.git"
       }
     },
@@ -25085,7 +25284,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.2",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "mullman-websites-aws-associate-architect-review",
@@ -25631,15 +25833,15 @@
       "Lane-runner + bank mobile PWA. Three-lane swipe controls, combo+gate mechanics, bank screen with SUCCESS/PENDING/FAILED status cards."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:39:38.667Z",
+    "lastPublishedAt": "2026-05-17T16:57:14.282Z",
     "publishContext": {
       "github": null,
       "git": null
     },
     "description": "Catch the change. Bank the run. One-thumb mobile coin-runner PWA where Adam Nichols is the coin machine.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:46:28Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "testNotes": ""
@@ -25662,15 +25864,15 @@
       "Static site for nikitakramar.mullmania.com. Claims and sources are structured in docs/data."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:41:25.418Z",
+    "lastPublishedAt": "2026-05-17T17:55:32.967Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25996660867",
-        "runNumber": "82"
+        "runId": "25998366060",
+        "runNumber": "86"
       },
       "git": null
     },
@@ -29364,6 +29566,39 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "powerwasher",
+    "host": "powerwasher.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "texture",
+      "three-js",
+      "powerwasher",
+      "satisfying"
+    ],
+    "notes": [
+      "Drag the nozzle, grime peels off in clean stripes."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:29:47.581Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:35:07Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "prism",
     "host": "prism.mullmania.com",
     "currentHostedSite": false,
@@ -31941,6 +32176,36 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "rotoscope",
+    "host": "rotoscope.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "rotoscope",
+      "endless",
+      "mashup",
+      "arcade"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:27:28.268Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": false,
+    "siteAccessUpdatedAt": null,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "rsvp",
@@ -34721,17 +34986,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T15:12:32.968Z",
+    "lastPublishedAt": "2026-05-17T22:45:19.329Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25994543432",
-        "runNumber": "77"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "a2c506ea5d70fc9200b9e322a8f2173a4058be1c",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "a2c506ea5d70fc9200b9e322a8f2173a4058be1c",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -35336,6 +35606,39 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "soapcut",
+    "host": "soapcut.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "sim",
+      "physics",
+      "soap",
+      "three-js",
+      "soapcut",
+      "satisfying"
+    ],
+    "notes": [
+      "A blade peels rainbow curls off a soap loaf."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T22:28:19.354Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T22:36:11Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "soft-alarm",
@@ -39211,20 +39514,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:30:33.906Z",
+    "lastPublishedAt": "2026-05-17T18:36:46.467Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "f1fd9effa7e0683c5dc9d50feafc2d2e7a0bbee0",
+        "sha": "b33a22f96741634bf617f21677eb212ca90c0544",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "f1fd9effa7e0683c5dc9d50feafc2d2e7a0bbee0",
+        "commit": "b33a22f96741634bf617f21677eb212ca90c0544",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -39959,7 +40262,7 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:23:06.928Z",
+    "lastPublishedAt": "2026-05-17T16:45:17.611Z",
     "publishContext": {
       "github": {
         "actions": false,

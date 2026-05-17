@@ -33,6 +33,50 @@
     { "id": "audio-visual", "label": "Audio / Visual", "aliases": ["audio", "music"] },
     { "id": "backend-api", "label": "Backend / API", "aliases": ["api", "backend", "lambda-api", "lambda-backed"] }
   ],
+  "featureFacets": [
+    {
+      "id": "phone-remote",
+      "label": "Phone Remote",
+      "shortLabel": "Remote",
+      "rule": "Use the canonical phone pairing primitive from ui/js/pair.js when a phone controls the app, TV, or dashboard surface."
+    },
+    {
+      "id": "signalr",
+      "label": "SignalR",
+      "shortLabel": "SignalR",
+      "rule": "Use signal-argh through the SignalR client for real-time messaging; do not hand-roll raw WebSocket protocol code."
+    },
+    {
+      "id": "s3-storage",
+      "label": "S3 Storage",
+      "shortLabel": "S3",
+      "rule": "Use the Mullmania hosting/data bucket conventions for static artifacts, persisted metadata, and deploy-safe storage."
+    },
+    {
+      "id": "lambda-api",
+      "label": "Lambda API",
+      "shortLabel": "Lambda",
+      "rule": "Use a Lambda/API-backed route when the feature needs trusted mutation, shared state, or server-owned integration."
+    },
+    {
+      "id": "frontend-canon",
+      "label": "Frontend Canon",
+      "shortLabel": "Canon",
+      "rule": "Follow the development canon and ui.mullmania.com shell rules for browser-facing UI."
+    },
+    {
+      "id": "threejs",
+      "label": "Three.js",
+      "shortLabel": "3D",
+      "rule": "Use Three.js for 3D surfaces, keep the primary scene visible and interactive, and verify the canvas is not blank."
+    },
+    {
+      "id": "tv-telemetry",
+      "label": "TV Telemetry",
+      "shortLabel": "Logs",
+      "rule": "Wire tv-tail/log-tap for browser surfaces where target-device debugging is difficult."
+    }
+  ],
   "ui": {
     "defaultThemeId": "walmart",
     "activeThemeId": "active",

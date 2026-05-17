@@ -697,6 +697,49 @@
       </div>
     </section>
 
+    <section id="features-view" class="surface feature-matrix-shell is-hidden" aria-label="Feature matrix">
+      <div class="feature-matrix-toolbar">
+        <div class="feature-matrix-heading">
+          <div class="feature-matrix-title">
+            <i class="ti ti-checklist"></i>
+            <span>Feature Matrix</span>
+          </div>
+          <span id="feature-matrix-summary" class="feature-matrix-summary">No rows</span>
+        </div>
+        <div class="feature-matrix-actions">
+          <label class="feature-matrix-control">
+            <span>Scope</span>
+            <select id="feature-matrix-scope" aria-label="Feature matrix scope">
+              <option value="visible">Visible apps</option>
+              <option value="all">All apps</option>
+            </select>
+          </label>
+          <button id="feature-matrix-copy" type="button" class="secondary">
+            <i class="ti ti-clipboard-copy"></i>
+            <span>Copy prompt</span>
+          </button>
+          <button id="feature-matrix-reset" type="button" class="secondary">
+            <i class="ti ti-restore"></i>
+            <span>Reset</span>
+          </button>
+          <button id="feature-matrix-save" type="button">
+            <i class="ti ti-device-floppy"></i>
+            <span>Save local</span>
+          </button>
+        </div>
+      </div>
+      <div class="feature-matrix-table-wrap surface-scroll-viewport">
+        <table class="feature-matrix-table">
+          <thead id="feature-matrix-head"></thead>
+          <tbody id="feature-matrix-body"></tbody>
+        </table>
+      </div>
+      <div class="feature-matrix-footer surface-rail surface-rail--footer">
+        <div id="feature-matrix-status" class="feature-matrix-status" aria-live="polite"></div>
+        <textarea id="feature-matrix-synopsis" class="feature-matrix-synopsis" readonly aria-label="Feature matrix AI handoff prompt"></textarea>
+      </div>
+    </section>
+
     <section id="audit-view" class="surface audit-shell is-hidden">
       <div class="audit-layout">
         <aside class="audit-queue-panel">

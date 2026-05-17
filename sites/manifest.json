@@ -61,6 +61,12 @@
       "short_name": "Categories",
       "url": "./?view=categorize",
       "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Feature Matrix",
+      "short_name": "Features",
+      "url": "./?view=features",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
