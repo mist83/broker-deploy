@@ -24,5 +24,22 @@
   "wave": "wave-1-ready-root",
   "deployMode": "canonical-mullmania-site",
   "demoMode": "screenshot-first",
-  "primaryLanguage": "PowerShell"
+  "primaryLanguage": "PowerShell",
+  "canon": {
+    "version": "2026.04.26",
+    "source": "https://development-canon.mullmania.com/canon.json",
+    "profile": "frontdoor-v1",
+    "syncPrompt": "Look at the new canon and sync yourself with canon.",
+    "summary": "agent frontdoor proof checked against canon 2026.04.26.",
+    "checklist": [
+      "Site metadata declares the canon version and source.",
+      "Browser-facing shells expose the owning repo with <meta name=\"repo-name\">.",
+      "A canonical deploy plan is available from mullmania.site.json.",
+      "Proof artifacts are linked from site metadata."
+    ],
+    "proof": {
+      "manifestPath": "./demo/manifest.json",
+      "posterPath": "./demo/poster.png"
+    }
+  }
 }
