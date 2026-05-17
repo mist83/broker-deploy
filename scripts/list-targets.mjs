@@ -41,6 +41,7 @@ async function main() {
     source: target.repo,
     dispatcher: target.dispatcherRepo,
     workflow: target.workflow,
+    type: target.deployType || 'static-site',
     auto: target.autoRedeploy ? 'yes' : 'no',
     url: target.url,
   }));
@@ -48,13 +49,14 @@ async function main() {
   const widths = {
     site: Math.max(4, ...rows.map((row) => row.site.length)),
     source: Math.max(6, ...rows.map((row) => row.source.length)),
+    type: Math.max(4, ...rows.map((row) => row.type.length)),
     auto: 4,
   };
 
-  console.log(`${pad('site', widths.site)}  ${pad('source', widths.source)}  auto  url`);
-  console.log(`${'-'.repeat(widths.site)}  ${'-'.repeat(widths.source)}  ----  ${'-'.repeat(40)}`);
+  console.log(`${pad('site', widths.site)}  ${pad('source', widths.source)}  ${pad('type', widths.type)}  auto  url`);
+  console.log(`${'-'.repeat(widths.site)}  ${'-'.repeat(widths.source)}  ${'-'.repeat(widths.type)}  ----  ${'-'.repeat(40)}`);
   for (const row of rows) {
-    console.log(`${pad(row.site, widths.site)}  ${pad(row.source, widths.source)}  ${pad(row.auto, widths.auto)}  ${row.url}`);
+    console.log(`${pad(row.site, widths.site)}  ${pad(row.source, widths.source)}  ${pad(row.type, widths.type)}  ${pad(row.auto, widths.auto)}  ${row.url}`);
   }
 }
 
