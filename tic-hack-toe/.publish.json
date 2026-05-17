@@ -1,11 +1,11 @@
 {
   "siteId": "tic-hack-toe",
   "host": "tic-hack-toe.mullmania.com",
-  "publishedAt": "2026-05-17T03:20:05.823Z",
+  "publishedAt": "2026-05-17T16:04:44.156Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site",
   "counts": {
     "hostingFiles": 22,
-    "hostingBytes": 80454,
+    "hostingBytes": 82843,
     "dataFiles": 0,
     "dataBytes": 0
   }

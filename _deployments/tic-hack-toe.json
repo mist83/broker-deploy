@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "tic-hack-toe",
     "status": "success",
-    "deployedAt": "2026-05-17T03:21:20.128Z",
-    "trigger": "operator",
-    "brokerRunId": "25980085960",
-    "brokerRunNumber": "33",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25980085960",
-    "brokerSha": "6a7da7f34e80"
+    "deployedAt": "2026-05-17T16:05:51.144Z",
+    "trigger": "github-webhook",
+    "brokerRunId": "25995811135",
+    "brokerRunNumber": "78",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25995811135",
+    "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "tic-hack-toe",
+      "status": "success",
+      "deployedAt": "2026-05-17T16:05:51.144Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "25995811135",
+      "brokerRunNumber": "78",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25995811135",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "tic-hack-toe",
       "status": "success",
