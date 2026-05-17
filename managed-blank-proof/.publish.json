@@ -1,0 +1,12 @@
+{
+  "siteId": "managed-blank-proof",
+  "host": "managed-blank-proof.mullmania.com",
+  "publishedAt": "2026-05-17T00:54:08.590Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/sites/managed-blank-proof",
+  "counts": {
+    "hostingFiles": 3,
+    "hostingBytes": 2932,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}
