@@ -9,6 +9,10 @@ asks the protected Sites API for the matching allowlisted target, downloads the
 matching private repository archive, and runs the canonical Mullmania deploy
 script with AWS OIDC.
 
+Most targets are static-site deploys. The one backend recipe currently allowed
+is `sites-control-plane`, locked to `mist83/sites`, which deploys the protected
+Sites API before publishing `sites.mullmania.com`.
+
 No AWS keys live here. No target repository list is checked into this repo or
 duplicated in broker secrets.
 

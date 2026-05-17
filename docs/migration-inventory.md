@@ -10,11 +10,13 @@ per-repo deploy Actions and onto the public `mist83/broker-deploy` workflow.
 - Register or update one target:
   `SITES_OPERATOR_KEY=... node scripts/register-target.mjs --site <site-id> --source mist83/<repo> --ref <branch>`
 - Manual redeploy:
-  `POST https://sites.mullmania.com/api/redeploy/<site-id>`
+  `POST https://sites.mullmania.com/api/redeploy/target/<site-id>`
 - Direct broker dispatch:
   `gh workflow run deploy-mullmania-site.yml --repo mist83/broker-deploy -f site_id=<site-id>`
 - Source repo push redeploy:
   a signed GitHub `push` webhook posts to `https://sites.mullmania.com/api/redeploy/github-webhook`
+- Read-only repo inventory:
+  `node scripts/inventory-repos.mjs --owner mist83 --limit 100 --output inventory.json`
 
 The source of truth is the protected target store:
 
@@ -36,6 +38,7 @@ target list.
 | `liskov-file-system` | `mist83/liskov-file-system` | `master` | `625120506` | disabled | disabled | `25979137625` | AWS 200, Pages 200 |
 | `agent` | `mist83/agent` | `master` | `625123310` | disabled | disabled | `25979196035` | AWS 200, Pages 200 |
 | `ui` | `mist83/ui` | `main` | `625125790` | disabled | disabled | `25979309174` | AWS 200, Pages 200 |
+| `sites` | `mist83/sites` | `main` | `625150543` | disabled | none | `25980391465` | AWS 200, Pages 200 |
 
 Notes:
 
@@ -48,6 +51,9 @@ Notes:
   broker is now the only registered deploy path for that repo.
 - `ui` `.github/workflows/deploy-site.yml` was disabled too. Its
   `screenshot-canonical.yml` test workflow was left active.
+- `sites` is the first backend/control-plane recipe. The broker deploys the
+  Sites API backend first, then publishes `sites.mullmania.com`, then mirrors
+  the public artifact. `Root Starfield Smoke` remains active.
 - The canonical deploy tool at `s3://mullmania.com-data/_tools/deploy-site.mjs`
   now runs configured install/build commands through `/bin/bash`, expands
   directory excludes such as `tests/` for AWS sync, and uploads with
@@ -63,7 +69,6 @@ batch:
 
 | repo | reason held |
 | --- | --- |
-| `sites` | Control-plane repo for `sites.mullmania.com`; its workflow deploys the protected Sites API before the static app. The current broker is static-artifact-only, so it must not replace this until API deploy support is deliberately added. |
 | repos with CI/test workflows | Non-deploy workflows were left active unless they were duplicate deploy/Page workflows. Disable or throttle those separately if the goal changes from "one deploy path" to "minimum Actions minutes." |
 
 ## Operator Rule
