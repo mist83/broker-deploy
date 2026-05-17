@@ -158,22 +158,6 @@ https://agent.mikesendpoint.com
 - `../aidea-bloom/wwwroot/agent-rules-canvas.js` - Added facet functions
 - `../aidea-bloom/Program.cs` - Registered FacetAnalysisService
 
-## Next Steps
-
-### Immediate (Required)
-1. ✅ AideaBloom running at http://localhost:5000
-2. ⏳ Generate facets via UI (Steps 1-11 above)
-3. ⏳ Test visualization (Step 2 above)
-4. ⏳ Deploy to mikesendpoint.com (Step 3 above)
-
-### Future Enhancements (Optional)
-- Add facet filter panel to visualization
-- Export visualization as PNG
-- Add facet conflict resolution UI
-- Implement facet versioning
-- Add facet analytics (usage tracking)
-- Create standalone visualization page
-
 ## Technical Details
 
 ### AI Model
