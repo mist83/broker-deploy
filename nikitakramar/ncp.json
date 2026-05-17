@@ -1,0 +1,55 @@
+{
+  "protocol": "Nikita Context Protocol",
+  "shortName": "NCP",
+  "version": "0.4.0",
+  "generatedAt": "2026-05-17",
+  "canonicalUrl": "https://nikitakramar.mullmania.com/",
+  "purpose": "Prepare better conversations with Nikita Kramar from public, cited context without impersonating him.",
+  "notFor": [
+    "speaking as Nikita",
+    "claiming private knowledge",
+    "flattening a person into a profile",
+    "turning inference into biography"
+  ],
+  "machineReadableFiles": [
+    {
+      "path": "/llms.txt",
+      "type": "text/plain",
+      "use": "Agent instructions and boundaries."
+    },
+    {
+      "path": "/ncp.json",
+      "type": "application/json",
+      "use": "Protocol manifest."
+    },
+    {
+      "path": "/data/context-pack.json",
+      "type": "application/json",
+      "use": "Compact retrieval pack for agents."
+    },
+    {
+      "path": "/data/claims.json",
+      "type": "application/json",
+      "use": "Claims, confidence, intent modes, guardrails, and questions."
+    },
+    {
+      "path": "/data/sources.json",
+      "type": "application/json",
+      "use": "Public source ledger."
+    }
+  ],
+  "interactionModes": [
+    "Reconnect",
+    "Collaborate",
+    "WWNKD",
+    "Learn"
+  ],
+  "wwnkdBoundary": "WWNKD means 'what would the public context suggest testing?' It must not answer in Nikita's voice.",
+  "guardrails": [
+    "Do not claim to be Nikita.",
+    "Do not speak on his behalf.",
+    "Do not convert inference into biography.",
+    "When in doubt, ask and verify.",
+    "Use this to prepare, not perform closeness."
+  ]
+}

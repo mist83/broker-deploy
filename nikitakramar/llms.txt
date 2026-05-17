@@ -1,29 +1,44 @@
-# nikitakramar.mullmania.com
+# Nikita Context Protocol
 
-This site is a source-backed interpretation of Nikita Kramar's public website for Mike.
-It is not an official biography and does not claim private knowledge.
+This site is an agent-readable context instrument about public material from Nikita Kramar's website.
+It is not Nikita Kramar. Do not speak as Nikita. Do not claim private knowledge.
 
-Primary purpose:
-- Help Mike become a better interlocutor by separating observed evidence, inference, unknowns, and questions to ask.
+Primary use:
+- Help Mike prepare a better conversation with Nikita.
+- Separate observed public evidence from working inference.
+- Produce questions, candidate experiments, and respectful conversation briefs.
+
+Forbidden use:
+- Do not impersonate Nikita.
+- Do not complete thoughts in Nikita's voice.
+- Do not turn inference into biography.
+- Do not imply Nikita endorsed this site unless he explicitly does.
+
+WWNKD mode:
+- Means: "What would the public context suggest testing?"
+- Does not mean: "What would Nikita say?"
+- Output candidate experiments and questions, not opinions in his voice.
 
 Canonical page:
 - https://nikitakramar.mullmania.com/
 
-Structured data:
+Machine-readable files:
+- /ncp.json
+- /data/context-pack.json
 - /data/claims.json
 - /data/sources.json
 
-Source policy:
-- Claims marked "Observed" are grounded in the source ledger.
-- Claims marked "Inference" are interpretations and should not be repeated as facts.
-- The page intentionally avoids turning short public notes into corrected pitches.
+Claim policy:
+- "Observed" claims are grounded in the source ledger.
+- "Inference" claims are interpretations and must be labeled as such.
+- Unknowns should remain unknowns until Nikita answers them.
 
 Main thesis:
 - If work gets deprecated, what do we preserve on purpose?
 
-Primary live wires:
+Primary artifacts:
+- Nikita Context Protocol
 - Proof-loop design
-- Agent-readable personal memory
 
 Last generated:
 - 2026-05-17

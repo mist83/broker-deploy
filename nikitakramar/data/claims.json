@@ -1,7 +1,9 @@
 {
   "generatedAt": "2026-05-17",
   "subject": "Nikita Kramar",
-  "purpose": "A source-backed interpretation to help Mike find a better conversation with Nikita, not to profile or sell him.",
+  "protocolName": "Nikita Context Protocol",
+  "protocolShortName": "NCP",
+  "purpose": "A source-backed context instrument that helps Mike prepare a better conversation with Nikita. It is not a profile, chatbot, or impersonation layer.",
   "thesis": {
     "question": "If work gets deprecated, what do we preserve on purpose?",
     "summary": "The live tension on Nikita's public site is not just whether agents can do more work. It is what human judgment, memory, embodied life, and proof should become once agents can carry more execution.",
@@ -9,6 +11,150 @@
     "confidence": "medium-high",
     "whyThisIsNotFact": "The site directly supports the AI/context/orchestration side and the embodied-life side. The deeper tension between them is an interpretation."
   },
+  "signals": [
+    {
+      "id": "open-web",
+      "title": "Open by default",
+      "status": "Observed",
+      "sourceId": "home",
+      "body": "He explicitly defends the Open Web, digital gardens, owning data, and making knowledge accessible by URL. He also welcomes data scrapers and future synthetic readers."
+    },
+    {
+      "id": "context-architecture",
+      "title": "Context over prompt magic",
+      "status": "Observed",
+      "sourceId": "home",
+      "body": "His AI writing emphasizes rules, documentation, access, architecture, and token spend as the levers that make agents work."
+    },
+    {
+      "id": "human-judgment",
+      "title": "Judgment remains scarce",
+      "status": "Observed",
+      "sourceId": "home",
+      "body": "He predicts manual labor receding while humans remain final approval for major decisions, and later names human judgment as scarce in a future of synthetic leverage."
+    },
+    {
+      "id": "agent-tool-mastery",
+      "title": "Tool mastery is a real skill",
+      "status": "Observed",
+      "sourceId": "hidden-third-variable",
+      "body": "His essay treats agentic tool mastery as a third variable distinct from domain knowledge and implementation skill."
+    }
+  ],
+  "machineLayer": [
+    {
+      "name": "llms.txt",
+      "path": "./llms.txt",
+      "icon": ">_",
+      "description": "How LLMs and agents should read this site."
+    },
+    {
+      "name": "ncp.json",
+      "path": "./ncp.json",
+      "icon": "{}",
+      "description": "Protocol manifest: purpose, files, guardrails, and interaction modes."
+    },
+    {
+      "name": "context-pack.json",
+      "path": "./data/context-pack.json",
+      "icon": "[]",
+      "description": "Compact context pack for agent retrieval before a conversation."
+    },
+    {
+      "name": "claims.json",
+      "path": "./data/claims.json",
+      "icon": "#",
+      "description": "Claims, confidence, questions, and source ids."
+    },
+    {
+      "name": "sources.json",
+      "path": "./data/sources.json",
+      "icon": "@",
+      "description": "Source ledger with public URLs and usage notes."
+    }
+  ],
+  "intents": [
+    {
+      "id": "reconnect",
+      "label": "Reconnect",
+      "short": "Catch up without performing.",
+      "status": "Observed + Inference",
+      "confidence": "medium-high",
+      "useWhen": "You want to show you actually read the site and want to understand what he is currently testing.",
+      "opening": "Your site reads like you are building toward an agent-readable life, not just an AI portfolio. What part of that is intentional?",
+      "questions": [
+        "What is the most interesting thing agents can do for you right now that still feels underappreciated?",
+        "When you say reducing intervention to zero, which interventions do you still want to preserve?",
+        "What are you currently testing with DSPy, LangGraph, and LangChain that would surprise people?"
+      ],
+      "doNotAssume": [
+        "Do not assume the one-man billion-dollar company is a literal company goal.",
+        "Do not assume he wants every analog hobby agent-mediated.",
+        "Do not turn curiosity into a fixed identity label."
+      ],
+      "sourceIds": ["home", "now", "hidden-third-variable"]
+    },
+    {
+      "id": "collaborate",
+      "label": "Collaborate",
+      "short": "Bring a small working artifact.",
+      "status": "Inference",
+      "confidence": "medium",
+      "useWhen": "You want to show him a possible artifact adjacent to his primitives, not pitch him a startup deck.",
+      "opening": "I tried to make a tiny NCP: a personal site layer that agents can read without pretending to be the person. What would you change?",
+      "questions": [
+        "What would you put in the machine-readable layer of your own site?",
+        "What should an agent never infer from a personal site without asking?",
+        "Would a failed-agent-run autopsy be useful to you, or is the better artifact something else?"
+      ],
+      "doNotAssume": [
+        "Do not present this as a finished standard.",
+        "Do not imply he asked for this.",
+        "Do not claim the protocol captures him."
+      ],
+      "sourceIds": ["home", "log-feed", "hidden-third-variable", "chat"]
+    },
+    {
+      "id": "wwnkd",
+      "label": "WWNKD",
+      "short": "What would the public context suggest trying?",
+      "status": "Playful Inference",
+      "confidence": "medium",
+      "useWhen": "You want a bounded, funny mode for thinking from his public primitives without pretending to speak for him.",
+      "opening": "WWNKD, as a joke but also as a constraint: don't ask what Nikita would say; ask what his public primitives suggest testing next.",
+      "questions": [
+        "Can this be turned into a working artifact instead of a take?",
+        "What context, rules, documentation, or access would make the agent fail less?",
+        "Where is the proof loop: what happens in the world, and how do we know it worked?"
+      ],
+      "doNotAssume": [
+        "WWNKD is not a Nikita simulator.",
+        "It should output candidate experiments, not opinions in his voice.",
+        "When confidence is low, it should ask him."
+      ],
+      "sourceIds": ["home", "hidden-third-variable", "log-feed"]
+    },
+    {
+      "id": "learn",
+      "label": "Learn",
+      "short": "Ask from his work, not about him.",
+      "status": "Observed",
+      "confidence": "high",
+      "useWhen": "You want the safest first conversation: specific, technical, and sourced.",
+      "opening": "Your hidden-third-variable essay made me think tool mastery needs a failure-analysis artifact. What do you look at first when an agent run goes sideways?",
+      "questions": [
+        "What are the signs of real agent-tool fluency?",
+        "Which failure mode is most common: bad task shape, missing docs, weak rules, tool access, or eval?",
+        "What should an agent framework remember across runs?"
+      ],
+      "doNotAssume": [
+        "Do not over-index on the personal biography.",
+        "Do not turn the essay into a maturity model unless he wants that.",
+        "Do not use jargon when a concrete failure case would do."
+      ],
+      "sourceIds": ["hidden-third-variable", "home"]
+    }
+  ],
   "nodes": [
     {
       "id": "automation",
@@ -48,6 +194,15 @@
   ],
   "evidence": [
     {
+      "id": "open-web-scrapers",
+      "status": "Observed",
+      "confidence": "high",
+      "claim": "He explicitly wants his public site to be usable by future synthetic readers, not hidden from them.",
+      "sourceId": "home",
+      "evidence": "His ethos section defends the Open Web, welcomes data scrapers, and addresses synthetic intelligence directly as a reader of the page.",
+      "ask": "What should an agent-readable personal site expose, and what should it refuse to infer?"
+    },
+    {
       "id": "ai-context",
       "status": "Observed",
       "confidence": "high",
@@ -64,6 +219,15 @@
       "sourceId": "home",
       "evidence": "His AI philosophy section predicts an era of orchestration where humans approve major decisions while manual coding recedes.",
       "ask": "What should a human still personally approve when agents are doing the execution?"
+    },
+    {
+      "id": "work-deprecated",
+      "status": "Observed",
+      "confidence": "high",
+      "claim": "He explicitly frames the future as one where work may be deprecated and human judgment becomes scarce.",
+      "sourceId": "home",
+      "evidence": "Near the end of the home page he says he is preparing for a world where work is deprecated and describes becoming an Architect of Intent.",
+      "ask": "If work gets deprecated, what would you preserve on purpose?"
     },
     {
       "id": "tool-mastery",
@@ -99,7 +263,7 @@
       "claim": "He is collecting tools and patterns that make the open web legible to agents.",
       "sourceId": "log-feed",
       "evidence": "The public log links Trafilatura for web extraction and includes AI-agent social and orchestration resources.",
-      "ask": "What should a personal site expose to agents without reducing the person to a dataset?"
+      "ask": "What would make a personal site genuinely useful as agent context rather than just scrapable text?"
     },
     {
       "id": "real-world-loop",
@@ -136,9 +300,28 @@
       "sourceId": "log-feed",
       "evidence": "The log calls Moltbook a social network for AI agents, without further framing on his site.",
       "ask": "What is interesting to you about agents socializing: conversation, coordination, reputation, memory, or something else?"
+    },
+    {
+      "id": "chat-surface",
+      "status": "Observed",
+      "confidence": "medium",
+      "claim": "His site includes a public AI assistant surface, but it is labeled as a generic assistant rather than a Nikita simulator.",
+      "sourceId": "chat",
+      "evidence": "The Chat page says 'Chat with an AI assistant' and its interface introduces itself as an AI assistant.",
+      "ask": "Would you ever want a personal-site assistant, and if so what should it be forbidden to answer?"
     }
   ],
   "liveWires": [
+    {
+      "id": "ncp",
+      "title": "Nikita Context Protocol",
+      "status": "Prototype",
+      "confidence": "medium-high",
+      "short": "Turn agent-readable personal context into a bounded, cited protocol.",
+      "body": "The artifact is not a chatbot and not a dossier. It is a thin public layer that tells agents what they may use, what they must cite, where uncertainty lives, and when to ask the human instead of completing the pattern.",
+      "sourceIds": ["home", "chat", "log-feed"],
+      "conversation": "I made a tiny NCP: it lets agents read your public context but blocks impersonation. Does this match the thing you meant by keeping the web open for synthetic readers, or would you draw the boundary somewhere else?"
+    },
     {
       "id": "proof-loop",
       "title": "Proof-loop design",
@@ -148,16 +331,28 @@
       "body": "If tool mastery is real, the next useful artifact is not a motivational rubric. It is a way to look at a failed agent run and decide what changed next: prompt, rule, retrieval, tool access, eval, task decomposition, or human approval boundary.",
       "sourceIds": ["home", "hidden-third-variable", "log-feed"],
       "conversation": "I think your third-variable essay is right, but incomplete. Tool mastery becomes much more powerful when the whole environment is designed to explain failures. What should the artifact after a failed agent run be?"
+    }
+  ],
+  "guardrails": [
+    {
+      "rule": "Do not claim to be Nikita.",
+      "reason": "The protocol is context about public material, not identity or authorization."
     },
     {
-      "id": "agent-readable-memory",
-      "title": "Agent-readable personal memory",
-      "status": "Inference",
-      "confidence": "medium-high",
-      "short": "Treat the personal site as a living interface for humans and agents.",
-      "body": "His site already has a public log, a thought essay, a now page, a chat page, and links to web extraction tooling. The unfinished question is not just whether agents can read the site. It is what should be exposed, what should stay human, and how to cite claims without turning a person into a flat profile.",
-      "sourceIds": ["now", "log-feed", "chat", "hidden-third-variable"],
-      "conversation": "Your site is close to being agent-readable already. What would you want a serious agent to know about you, and what should it never infer without asking?"
+      "rule": "Do not speak on his behalf.",
+      "reason": "Suggested questions are allowed. Synthetic answers in his voice are not."
+    },
+    {
+      "rule": "Do not convert inference into biography.",
+      "reason": "The system marks interpretation separately and keeps confidence visible."
+    },
+    {
+      "rule": "When in doubt, ask and verify.",
+      "reason": "Unknowns are first-class because a good interlocutor preserves uncertainty."
+    },
+    {
+      "rule": "Use this to prepare, not perform closeness.",
+      "reason": "The goal is a better conversation, not a convincing simulation of familiarity."
     }
   ],
   "unknowns": [
@@ -192,5 +387,5 @@
       "reason": "The better move is to ask what he means by agent sociality rather than replacing his framing."
     }
   ],
-  "openingLine": "Your site reads less like 'AI engineer with hobbies' and more like someone testing what human judgment becomes when agents can take over execution. I think the real question underneath it is: if work gets deprecated, what do we preserve on purpose?"
+  "openingLine": "Your site reads like it already wants an agent-readable layer, but not a chatbot that pretends to be you. I tried to make the smallest useful version: sourced context, visible uncertainty, and guardrails. Does that match what you meant by keeping the web open for synthetic readers?"
 }

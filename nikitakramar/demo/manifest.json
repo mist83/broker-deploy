@@ -1,14 +1,14 @@
 {
   "repo": "mist83/nikitakramar",
   "name": "nikitakramar",
-  "title": "Nikita Kramar, Read As A Question",
-  "description": "A source-backed interpretation site for becoming a better interlocutor.",
+  "title": "Nikita Context Protocol",
+  "description": "A source-backed context protocol for preparing a better conversation without impersonation.",
   "liveUrl": "https://nikitakramar.mullmania.com/",
   "posterPath": "./poster.svg",
   "createdAt": "2026-05-17",
   "proof": [
-    "The page separates Observed, Inference, Ask Him, and Unknowns.",
-    "Claims are stored in data/claims.json and point to data/sources.json.",
-    "The site exposes llms.txt for agent-readable context."
+    "The page separates Observed, Inference, Unknowns, and guardrails.",
+    "The cockpit compiles sourced prep packets for conversation intents including WWNKD.",
+    "The site exposes llms.txt, ncp.json, context-pack.json, claims.json, and sources.json."
   ]
 }

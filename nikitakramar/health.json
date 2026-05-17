@@ -1,8 +1,11 @@
 {
   "status": "ok",
   "siteId": "nikitakramar",
+  "protocol": "NCP",
   "generatedAt": "2026-05-17",
   "checks": {
+    "protocolManifest": "./ncp.json",
+    "contextPack": "./data/context-pack.json",
     "claimData": "./data/claims.json",
     "sources": "./data/sources.json",
     "llms": "./llms.txt"

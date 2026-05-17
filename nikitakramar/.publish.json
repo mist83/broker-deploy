@@ -1,11 +1,11 @@
 {
   "siteId": "nikitakramar",
   "host": "nikitakramar.mullmania.com",
-  "publishedAt": "2026-05-17T16:41:25.418Z",
+  "publishedAt": "2026-05-17T17:22:13.038Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/docs",
   "counts": {
-    "hostingFiles": 9,
-    "hostingBytes": 39512,
+    "hostingFiles": 13,
+    "hostingBytes": 68216,
     "dataFiles": 0,
     "dataBytes": 0
   }

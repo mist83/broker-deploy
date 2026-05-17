@@ -4,96 +4,176 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="repo-name" content="nikitakramar">
-    <title>Nikita Kramar, Read As A Question</title>
-    <meta name="description" content="A source-backed interpretation of Nikita Kramar's public site for becoming a better interlocutor.">
+    <title>Nikita Context Protocol</title>
+    <meta name="description" content="A source-backed context protocol for preparing a better conversation with Nikita Kramar without impersonating him.">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" aria-label="Site header">
-      <a class="brand" href="#top" aria-label="Nikita Kramar interpretation home">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Nikita Kramar</span>
+      <a class="brand" href="#top" aria-label="Nikita Context Protocol home">
+        <span class="brand-mark" aria-hidden="true">></span>
+        <span>NCP</span>
       </a>
       <nav class="site-nav" aria-label="Sections">
+        <a href="#cockpit">Cockpit</a>
+        <a href="#machine">Machine layer</a>
         <a href="#evidence">Evidence</a>
-        <a href="#live-wires">Live wires</a>
-        <a href="#unknowns">Unknowns</a>
-        <a href="#opener">Opener</a>
+        <a href="#guardrails">Guardrails</a>
+        <a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-map" aria-hidden="true">
-          <svg viewBox="0 0 760 620" role="img">
+        <div class="hero-copy">
+          <p class="terminal-label">nikitakramar.mullmania.com / public context</p>
+          <h1 id="hero-title">Nikita Context Protocol</h1>
+          <p class="hero-line">A context instrument, not a profile.</p>
+          <p class="hero-summary">
+            This site turns Nikita's own open-web posture into a working demo: agents can read sourced context, humans can prepare better questions, and nobody gets to pretend the output is Nikita.
+          </p>
+          <div class="hero-rule" role="note">
+            <span>This is not Nikita.</span>
+            <span>This is context about public things Nikita created, said, built, or linked.</span>
+          </div>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#cockpit">Open the cockpit</a>
+            <a class="button secondary" href="./ncp.json">Read ncp.json</a>
+          </div>
+          <dl class="status-strip" aria-label="Protocol status">
+            <div>
+              <dt>Mode</dt>
+              <dd>context only</dd>
+            </div>
+            <div>
+              <dt>Sources</dt>
+              <dd id="source-count">loading</dd>
+            </div>
+            <div>
+              <dt>Guardrails</dt>
+              <dd>non-negotiable</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="protocol-visual" aria-label="Protocol map">
+          <div class="visual-topline">
+            <span>NCP v0.4</span>
+            <span>live index</span>
+          </div>
+          <svg viewBox="0 0 760 520" role="img" aria-labelledby="map-title">
+            <title id="map-title">Protocol map showing sources flowing through claims, questions, guardrails, and conversation prep.</title>
             <defs>
-              <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#6ff6ff" stop-opacity="0.9" />
-                <stop offset="100%" stop-color="#6ff6ff" stop-opacity="0" />
+              <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7df4ff" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#7df4ff" stop-opacity="0" />
               </radialGradient>
-              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8af6ff" stop-opacity="0.1" />
-                <stop offset="50%" stop-color="#8af6ff" stop-opacity="0.75" />
-                <stop offset="100%" stop-color="#f2efe8" stop-opacity="0.18" />
+              <linearGradient id="signal" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7df4ff" stop-opacity="0.08" />
+                <stop offset="50%" stop-color="#7df4ff" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#d8b46b" stop-opacity="0.65" />
               </linearGradient>
             </defs>
-            <path class="map-line line-one" d="M155 380 C255 160, 500 120, 608 254" />
-            <path class="map-line line-two" d="M154 380 C270 500, 495 505, 608 254" />
-            <path class="map-line line-three" d="M379 103 C336 240, 323 360, 392 510" />
-            <path class="map-line line-four" d="M122 254 C312 200, 482 280, 652 408" />
-            <circle class="node-glow" cx="379" cy="306" r="142" />
-            <circle class="node core" cx="379" cy="306" r="56" />
-            <circle class="node" cx="379" cy="103" r="12" />
-            <circle class="node" cx="608" cy="254" r="12" />
-            <circle class="node" cx="652" cy="408" r="12" />
-            <circle class="node" cx="392" cy="510" r="12" />
-            <circle class="node" cx="122" cy="254" r="12" />
-            <text x="379" y="311" text-anchor="middle" class="core-text">human</text>
-            <text x="379" y="74" text-anchor="middle">Automation</text>
-            <text x="628" y="245">Judgment</text>
-            <text x="646" y="414">Memory</text>
-            <text x="392" y="556" text-anchor="middle">Embodiment</text>
-            <text x="74" y="258" text-anchor="end">Proof</text>
+            <path class="signal-line" d="M90 116 H260 C318 116 318 190 376 190 H650" />
+            <path class="signal-line delay-one" d="M90 260 H210 C304 260 304 334 396 334 H650" />
+            <path class="signal-line delay-two" d="M156 418 C260 392 285 286 386 286 C480 286 522 176 650 158" />
+            <circle class="pulse" cx="382" cy="260" r="132" />
+            <g class="node-group">
+              <circle class="node source" cx="90" cy="116" r="13" />
+              <text x="122" y="121">public site</text>
+            </g>
+            <g class="node-group">
+              <circle class="node source" cx="90" cy="260" r="13" />
+              <text x="122" y="265">logs + essays</text>
+            </g>
+            <g class="node-group">
+              <circle class="node source" cx="156" cy="418" r="13" />
+              <text x="188" y="423">experiments</text>
+            </g>
+            <g class="node-group">
+              <circle class="node core" cx="382" cy="260" r="54" />
+              <text class="core-text" x="382" y="255" text-anchor="middle">context</text>
+              <text class="core-text small" x="382" y="278" text-anchor="middle">not identity</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="158" r="13" />
+              <text x="604" y="135">questions</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="190" r="13" />
+              <text x="590" y="225">guardrails</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="334" r="13" />
+              <text x="600" y="372">prep packet</text>
+            </g>
           </svg>
-        </div>
-        <div class="hero-copy">
-          <p class="context-line">A cited read of a friend's public site.</p>
-          <h1 id="hero-title">If work gets deprecated, what do we preserve on purpose?</h1>
-          <p class="hero-summary">
-            This site is built for one job: help Mike see the live wire in Nikita's writing without flattening him into a pitch.
-          </p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button primary" href="#tension">Start with the tension</a>
-            <a class="button secondary" href="#sources">Open the source ledger</a>
+          <div class="visual-footer">
+            <span>agents may read</span>
+            <span>agents may not impersonate</span>
           </div>
         </div>
       </section>
 
-      <section class="section tension" id="tension" aria-labelledby="tension-title">
-        <div class="section-kicker">The read</div>
-        <div class="two-column">
+      <section class="section cockpit" id="cockpit" aria-labelledby="cockpit-title">
+        <div class="section-heading">
           <div>
-            <h2 id="tension-title">Not AI engineer with hobbies. A person testing what survives automation.</h2>
+            <p class="terminal-label">conversation cockpit</p>
+            <h2 id="cockpit-title">Choose the intent before choosing the words.</h2>
           </div>
-          <div class="body-copy">
-            <p>
-              The public site directly supports both sides: agents, context, orchestration, and automation on one side; riding, health, travel, Mandarin, cooking, stories, and hobbies on the other.
-            </p>
-            <p>
-              The bridge is an inference: Nikita may be circling how a human remains useful and alive when agents can carry more execution.
-            </p>
-          </div>
+          <p>
+            This is the interactive part. It compiles a respectful conversation brief from sourced observations, working inferences, unknowns, and guardrails.
+          </p>
         </div>
+
+        <div class="cockpit-shell">
+          <div class="intent-rail" id="intent-rail" aria-label="Conversation intents"></div>
+          <article class="intent-panel" id="intent-panel" aria-live="polite"></article>
+          <aside class="prep-panel" aria-labelledby="prep-title">
+            <div class="panel-header">
+              <h3 id="prep-title">Prep packet</h3>
+              <button class="text-button" type="button" id="copy-prep">Copy</button>
+            </div>
+            <pre id="prep-output"></pre>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section machine" id="machine" aria-labelledby="machine-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">machine-readable layer</p>
+            <h2 id="machine-title">The page has an API-shaped shadow.</h2>
+          </div>
+          <p>
+            Nikita's site explicitly values the Open Web and agent-readable context. This one makes that premise executable with files agents can fetch before talking to Mike or Nikita.
+          </p>
+        </div>
+        <div class="machine-grid" id="machine-list"></div>
+      </section>
+
+      <section class="section signals" aria-labelledby="signals-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">what this mirrors</p>
+            <h2 id="signals-title">The sane read of what Nikita seems to want.</h2>
+          </div>
+          <p>
+            Not a dossier. Not a sales page. A small working proof that open, cited, machine-readable personal context can make conversation better.
+          </p>
+        </div>
+        <div class="signal-list" id="signal-list"></div>
       </section>
 
       <section class="section ledger" id="evidence" aria-labelledby="evidence-title">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Evidence spine</div>
+            <p class="terminal-label">evidence spine</p>
             <h2 id="evidence-title">Claims stay attached to sources.</h2>
           </div>
-          <p>Each row separates what is public, what is inferred, and what should become a question.</p>
+          <p>Rows distinguish observation from interpretation and end in a question, because the point is to talk with him.</p>
         </div>
         <div class="evidence-controls" aria-label="Evidence filters">
           <button class="filter is-active" type="button" data-filter="all">All</button>
@@ -106,39 +186,40 @@
       <section class="section live-wires" id="live-wires" aria-labelledby="live-wires-title">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Two live wires</div>
-            <h2 id="live-wires-title">Pick one of these. Do not bring six.</h2>
+            <p class="terminal-label">live wires</p>
+            <h2 id="live-wires-title">Two artifacts he might recognize as adjacent to his own thinking.</h2>
           </div>
-          <p>The point is not to arrive with a deck. It is to arrive with one question he recognizes.</p>
+          <p>Bring one, maybe two. The proof is that he can argue with it immediately.</p>
         </div>
         <div class="wire-list" id="wire-list"></div>
       </section>
 
-      <section class="section cuts" aria-labelledby="cuts-title">
-        <div class="two-column">
+      <section class="section guardrails" id="guardrails" aria-labelledby="guardrails-title">
+        <div class="section-heading">
           <div>
-            <div class="section-kicker">What got cut</div>
-            <h2 id="cuts-title">No forced cleverness.</h2>
+            <p class="terminal-label">guardrails against impersonation</p>
+            <h2 id="guardrails-title">The protocol refuses the creepy version.</h2>
           </div>
-          <div class="cut-list" id="cut-list"></div>
+          <p>Agents can use this to prepare. They cannot use it to complete, simulate, or speak for the person.</p>
         </div>
+        <div class="guardrail-list" id="guardrail-list"></div>
       </section>
 
       <section class="section unknowns" id="unknowns" aria-labelledby="unknowns-title">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Honest gaps</div>
-            <h2 id="unknowns-title">What the site cannot tell us.</h2>
+            <p class="terminal-label">known unknowns</p>
+            <h2 id="unknowns-title">The places where asking beats inferring.</h2>
           </div>
-          <p>These are not weaknesses. They are where the real conversation starts.</p>
+          <p>These gaps are intentional. A context protocol should expose uncertainty instead of hiding it behind confidence.</p>
         </div>
         <div class="unknown-grid" id="unknown-list"></div>
       </section>
 
       <section class="section opener" id="opener" aria-labelledby="opener-title">
         <div class="opener-panel">
-          <div class="section-kicker">Conversation opener</div>
-          <h2 id="opener-title">Say this, then stop talking.</h2>
+          <p class="terminal-label">opening move</p>
+          <h2 id="opener-title">Say this, then let him steer.</h2>
           <blockquote id="opening-line"></blockquote>
         </div>
       </section>
@@ -146,18 +227,21 @@
       <section class="section sources" id="sources" aria-labelledby="sources-title">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Source ledger</div>
+            <p class="terminal-label">source ledger</p>
             <h2 id="sources-title">Public pages used.</h2>
           </div>
-          <p>No private knowledge, no scraped biography, no claim without a pointer.</p>
+          <p>No private knowledge, no invented biography, no claim without a pointer.</p>
         </div>
         <div class="sources-list" id="sources-list"></div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Built as an interpretive field note. Observed is not the same as inferred. Ask him before turning any read into certainty.</p>
-      <a href="./llms.txt">llms.txt</a>
+      <p>NCP is a working demo of agent-readable context with human boundaries. It prepares better questions; it does not answer as Nikita.</p>
+      <div class="footer-links">
+        <a href="./llms.txt">llms.txt</a>
+        <a href="./ncp.json">ncp.json</a>
+      </div>
     </footer>
 
     <script src="./app.js" type="module"></script>
