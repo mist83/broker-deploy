@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gitter for Mac</title>
+    <meta name="description" content="Gitter watches repos under ~/Code, auto-commits safe mainline changes, and starts itself at login on macOS.">
+    <script src="https://ui.mullmania.com/ui.js"></script>
+    <style>
+      body {
+        min-height: 100vh;
+      }
+
+      #content-container {
+        padding-bottom: 4rem;
+      }
+
+      .page-container {
+        padding-top: 2.5rem;
+      }
+
+      .hero {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .hero-copy {
+        max-width: 42rem;
+      }
+
+      .hero-copy h1 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        line-height: 0.95;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.85rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+      }
+
+      .actions a {
+        text-decoration: none;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .panel {
+        padding: 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        background: var(--bg-elevated);
+      }
+
+      .panel h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1rem;
+      }
+
+      .panel p,
+      .panel li {
+        margin: 0;
+        color: var(--text-secondary);
+      }
+
+      .panel ul,
+      .panel ol {
+        margin: 0;
+        padding-left: 1.1rem;
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .command-card {
+        margin-top: 1rem;
+        padding: 1rem 1.1rem;
+        border-radius: 1rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+      }
+
+      .command-card pre {
+        margin: 0;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .fine-print {
+        margin-top: 1rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .local-links {
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .local-links a {
+        width: fit-content;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1><i class="ti ti-git-branch"></i> <span>Gitter</span></h1>
+      <div><a href="https://github.com/mist83/gitter" target="_blank" rel="noreferrer">GitHub</a></div>
+    </div>
+
+    <div id="content-container">
+      <main class="page-container">
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><i class="ti ti-device-imac"></i> macOS background daemon</div>
+            <h1>Gitter for Mac</h1>
+            <p>Gitter watches repos under <code>~/Code</code>, auto-commits safe mainline changes, pushes them, and keeps a menu bar status view running in the background.</p>
+          </div>
+
+          <div class="actions">
+            <a class="btn-primary" href="./downloads/gitter-mac.zip">Download Mac Bundle</a>
+            <a class="btn-secondary" href="https://github.com/mist83/gitter" target="_blank" rel="noreferrer">Open Repo</a>
+            <a class="btn-secondary" href="http://127.0.0.1:9477/">Open Local Dashboard</a>
+          </div>
+
+          <div class="grid">
+            <section class="panel">
+              <h2>What It Does</h2>
+              <ul>
+                <li>Watches Git repos under <code>~/Code</code>.</li>
+                <li>Auto-commits and pushes <code>main</code> and <code>master</code>.</li>
+                <li>Starts itself at login with <code>launchd</code>.</li>
+                <li>Keeps a local loopback dashboard at <code>127.0.0.1:9477</code>.</li>
+              </ul>
+            </section>
+
+            <section class="panel">
+              <h2>Install On Mac</h2>
+              <ol>
+                <li>Download <code>gitter-mac.zip</code>.</li>
+                <li>Open <code>Install Gitter.command</code>.</li>
+                <li>Gitter starts now and again at every login.</li>
+              </ol>
+              <p class="fine-print">The bundle is an unsigned local build. If Gatekeeper blocks the app the first time, right-click it once and choose Open.</p>
+            </section>
+
+            <section class="panel">
+              <h2>Manual Install</h2>
+              <div class="command-card">
+                <pre>python3 -m pip install --user -r requirements.txt
+/bin/zsh install-launchd.sh
+/bin/zsh install-menubar-login.sh
+/bin/zsh install-web-launchd.sh</pre>
+              </div>
+            </section>
+
+            <section class="panel">
+              <h2>Local URLs</h2>
+              <div class="local-links">
+                <a href="http://127.0.0.1:9477/">http://127.0.0.1:9477/</a>
+                <a href="http://127.0.0.1:9481/">http://127.0.0.1:9481/</a>
+              </div>
+              <p class="fine-print">The web wrapper at <code>9481</code> is optional and only runs when <code>dotnet</code> is installed locally.</p>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+html,
+body,
+#content-container {
+  min-width: 0;
+}
+
+.gitter-page {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.gitter-page > .card {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.gitter-table-frame {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  font-size: var(--text-sm, 0.875rem);
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gitter-table-frame table {
+  width: 100%;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+.gitter-table-frame th,
+.gitter-table-frame td {
+  vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.gitter-table-frame td:nth-child(4) {
+  min-width: 0;
+  max-width: none;
+  white-space: normal;
+}
+
+.gitter-table-frame th:nth-child(1),
+.gitter-table-frame td:nth-child(1) {
+  width: 13%;
+}
+
+.gitter-table-frame th:nth-child(2),
+.gitter-table-frame td:nth-child(2) {
+  width: 18%;
+}
+
+.gitter-table-frame th:nth-child(3),
+.gitter-table-frame td:nth-child(3) {
+  width: 12%;
+}
+
+.gitter-table-frame th:nth-child(4),
+.gitter-table-frame td:nth-child(4) {
+  width: 20%;
+}
+
+.gitter-table-frame th:nth-child(5),
+.gitter-table-frame td:nth-child(5),
+.gitter-table-frame th:nth-child(6),
+.gitter-table-frame td:nth-child(6),
+.gitter-table-frame th:nth-child(7),
+.gitter-table-frame td:nth-child(7),
+.gitter-table-frame th:nth-child(9),
+.gitter-table-frame td:nth-child(9) {
+  width: 7%;
+}
+
+.gitter-table-frame th:nth-child(8),
+.gitter-table-frame td:nth-child(8) {
+  width: 9%;
+}
