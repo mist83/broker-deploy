@@ -1,0 +1,25 @@
+{
+  "siteId": "liskov-file-system",
+  "latest": {
+    "siteId": "liskov-file-system",
+    "status": "success",
+    "deployedAt": "2026-05-17T07:26:02.031Z",
+    "trigger": "github-webhook",
+    "brokerRunId": "25984583809",
+    "brokerRunNumber": "61",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25984583809",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "liskov-file-system",
+      "status": "success",
+      "deployedAt": "2026-05-17T07:26:02.031Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "25984583809",
+      "brokerRunNumber": "61",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25984583809",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}

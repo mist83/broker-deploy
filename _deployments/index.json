@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T07:19:43.215Z",
+  "generatedAt": "2026-05-17T07:26:02.041Z",
   "sites": [
     {
       "siteId": "agent",
@@ -68,16 +68,16 @@
     },
     {
       "siteId": "liskov-file-system",
-      "status": "mirrored",
+      "status": "success",
       "liveUrl": "https://liskov-file-system.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/liskov-file-system/",
-      "lastPublishedAt": "2026-05-17T02:28:33.684Z",
-      "latestBrokerRunUrl": "",
-      "latestBrokerRunNumber": "",
-      "trigger": "",
+      "lastPublishedAt": "2026-05-17T07:26:02.031Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25984583809",
+      "latestBrokerRunNumber": "61",
+      "trigger": "github-webhook",
       "hostingFiles": 13,
       "hostingBytes": 86843,
-      "recordedDeployments": 0
+      "recordedDeployments": 1
     },
     {
       "siteId": "managed-blank-proof",
