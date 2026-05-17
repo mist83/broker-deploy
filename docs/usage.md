@@ -160,7 +160,14 @@ https://sites.mullmania.com/api/redeploy/github-webhook
 ```
 
 The webhook must use the shared GitHub webhook signing secret configured on the
-Sites API. `tic-hack-toe` and `mullmania-managed-sites` are wired this way.
+Sites API. `tic-hack-toe`, `mullmania-managed-sites`, `bug-beacon`,
+`tap-repeater`, `rhythm-engine`, `gitter`, `liskov-file-system`, `agent`, and
+`ui` are wired this way.
+
+Push-triggered redeploys are intentionally literal: if an auto-committer pushes
+every few minutes, the broker redeploys every few minutes. That is correct for
+freshness, but noisy repos should get source-side throttling or fewer
+auto-commits if Actions cost becomes the concern.
 
 ## Proof Targets
 
@@ -182,3 +189,19 @@ Example mirrors:
 
 - `https://managed-broker-proof.mullmania.com/`
 - `https://mist83.github.io/broker-deploy/managed-broker-proof/`
+
+Migrated source-repo proofs:
+
+- `bug-beacon`, run `25978586770`
+- `tap-repeater`, run `25978629075`
+- `rhythm-engine`, run `25978661473`
+- `gitter`, run `25979137933`
+- `liskov-file-system`, run `25979137625`
+- `agent`, run `25979196035`
+- `ui`, run `25979309174`
+
+Control-plane exception:
+
+- `sites.mullmania.com` is still deployed by the `sites` repo because that
+  workflow deploys the protected Sites API and then the static app. The current
+  broker is static-artifact-only.
