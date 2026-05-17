@@ -22,7 +22,7 @@
   "publishDir": ".",
   "status": "ready-root",
   "wave": "wave-1-ready-root",
-  "deployMode": "bootstrap-dual-static-deploy-now",
+  "deployMode": "canonical-mullmania-site",
   "demoMode": "screenshot-first",
   "primaryLanguage": "PowerShell"
 }

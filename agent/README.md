@@ -30,7 +30,7 @@ Browse the site at <https://agent.mullmania.com/>.
 
 ## Deploy
 
-- `mullmania.site.json` is the publish contract. The deploy workflow runs `npm install` + `node scripts/build.mjs` on push to `master`, then syncs the root to `s3://mullmania.com/agent/`.
+- `mullmania.site.json` is the publish contract. The deploy workflow runs the configured install/build commands (`npm install` and `npm run build`) on push to `master`, then syncs the configured publish root to `s3://mullmania.com/agent/`.
 - GitHub Pages also mirrors the repo root from `master`.
 
 ## Working locally

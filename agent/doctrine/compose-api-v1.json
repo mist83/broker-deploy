@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-compose-api-v1",
   "summary": "Contract for building a crafted runtime instruction block from shared doctrine profiles, semantic rules, and task context.",
-  "generatedAt": "2026-05-17T06:19:05.214Z",
+  "generatedAt": "2026-05-17T06:49:38.910Z",
   "contractUrl": "https://agent.mullmania.com/doctrine/compose-api-v1.json",
   "staticInputs": {
     "bootstrapUrl": "https://agent.mullmania.com/doctrine/bootstrap-v1.json",

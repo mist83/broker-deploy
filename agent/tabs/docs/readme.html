@@ -30,7 +30,7 @@
 </ul>
 <h2>Deploy</h2>
 <ul>
-<li><code>mullmania.site.json</code> is the publish contract. The deploy workflow runs <code>npm install</code> + <code>node scripts/build.mjs</code> on push to <code>master</code>, then syncs the root to <code>s3://mullmania.com/agent/</code>.</li>
+<li><code>mullmania.site.json</code> is the publish contract. The deploy workflow runs the configured install/build commands (<code>npm install</code> and <code>npm run build</code>) on push to <code>master</code>, then syncs the configured publish root to <code>s3://mullmania.com/agent/</code>.</li>
 <li>GitHub Pages also mirrors the repo root from <code>master</code>.</li>
 </ul>
 <h2>Working locally</h2>
