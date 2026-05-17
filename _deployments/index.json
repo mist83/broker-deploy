@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T16:05:51.154Z",
+  "generatedAt": "2026-05-17T16:07:58.333Z",
   "sites": [
     {
       "siteId": "agent",
@@ -133,16 +133,16 @@
     },
     {
       "siteId": "rhythm-engine",
-      "status": "mirrored",
+      "status": "success",
       "liveUrl": "https://rhythm-engine.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/rhythm-engine/",
-      "lastPublishedAt": "2026-05-17T02:04:26.444Z",
-      "latestBrokerRunUrl": "",
-      "latestBrokerRunNumber": "",
-      "trigger": "",
-      "hostingFiles": 37,
-      "hostingBytes": 593556,
-      "recordedDeployments": 0
+      "lastPublishedAt": "2026-05-17T16:07:58.323Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25995861537",
+      "latestBrokerRunNumber": "79",
+      "trigger": "github-webhook",
+      "hostingFiles": 4385,
+      "hostingBytes": 43625333,
+      "recordedDeployments": 1
     },
     {
       "siteId": "sites",

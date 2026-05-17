@@ -202,7 +202,7 @@ async function main() {
                 }
             });
             await page.goto(`${viewerUrl}?rhythm=${encodeURIComponent(serialized)}`, {
-                waitUntil: 'networkidle2',
+                waitUntil: 'domcontentloaded',
                 timeout: 30000
             });
             try {
@@ -251,7 +251,7 @@ async function main() {
             assert.ok(desktopLayout.canvasRect?.width > 0);
 
             await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
-            await page.reload({ waitUntil: 'networkidle2', timeout: 30000 });
+            await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
             await page.waitForFunction(() => !!window.rhythmSceneApp, {
                 timeout: 10000,
                 polling: 100

@@ -1,11 +1,11 @@
 {
   "siteId": "rhythm-engine",
   "host": "rhythm-engine.mullmania.com",
-  "publishedAt": "2026-05-17T02:04:26.444Z",
+  "publishedAt": "2026-05-17T16:06:48.953Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site",
   "counts": {
-    "hostingFiles": 37,
-    "hostingBytes": 593556,
+    "hostingFiles": 4385,
+    "hostingBytes": 43625333,
     "dataFiles": 0,
     "dataBytes": 0
   }
