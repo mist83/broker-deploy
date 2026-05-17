@@ -1,0 +1,9 @@
+{
+  "$schema": "https://ui.mullmania.com/page-contract.schema.json",
+  "version": 1,
+  "title": "Invalid Example",
+  "theme": "editorial",
+  "page": {
+    "html": "<div>This should be rejected.</div>"
+  }
+}

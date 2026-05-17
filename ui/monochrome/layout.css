@@ -1,0 +1,28 @@
+/**
+ * Monochrome Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/monochrome/layout.css
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background: var(--bg-primary);
+}
+
+.header {
+    background: var(--color-primary) !important;
+    box-shadow: none;
+}
+
+.card,
+.modal,
+.surface-card {
+    box-shadow: var(--shadow-sm);
+}
+
+button,
+.button,
+.btn {
+    box-shadow: none;
+}

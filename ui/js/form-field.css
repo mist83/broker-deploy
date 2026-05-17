@@ -1,0 +1,264 @@
+/**
+ * Form Field - Canon Primitive
+ * Single source of truth for stacked-label-plus-input rows used in property
+ * editors, settings panels, modal forms, and other config surfaces.
+ *
+ * Pattern:
+ *   .property-field                       — vertical stack, one per row
+ *     .property-label                     — uppercase eyebrow label above input
+ *     .property-input                     — full-width input wrapper
+ *       (text/number/textarea/select)    — picks up canon input defaults
+ *     .property-description               — optional helper text under input
+ *
+ * Variants for non-text controls:
+ *   .property-checkbox-wrapper            — checkbox row with custom box + label
+ *     .custom-checkbox                    — square checkbox indicator
+ *     .property-checkbox-label            — clickable label
+ *
+ *   .property-select-wrapper              — flex row of toggle-style buttons
+ *     .property-select-btn[.active]       — single-select pill, .active = chosen
+ *
+ *   .property-color-wrapper               — color picker + hex text together
+ *     input[type="color"]                 — square swatch
+ *     .property-color-text                — mono hex string
+ *
+ *   .property-stylemode-wrapper           — flex row of stylemode buttons
+ *     .property-stylemode-btn[.active]
+ *
+ *   .property-alignment-wrapper           — 3-column grid for icon-aligned controls
+ *     .property-alignment-btn[.active]
+ *
+ * No JS required. Consumers wire their own input/change handlers and add/remove
+ * `.active` on toggle buttons themselves. Visual tokens come from canon
+ * (--bg-primary, --bg-secondary, --border-color, --color-primary, etc.).
+ */
+
+/* Property field container — vertical stack */
+.property-field {
+    margin-bottom: 20px;
+}
+
+/* Eyebrow-style label above the input */
+.property-label {
+    display: block;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-xs);
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input wrapper — input itself inherits canon defaults */
+.property-input {
+    width: 100%;
+}
+
+.property-input input[type="text"],
+.property-input input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.property-input input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* Optional helper text under the input */
+.property-description {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+/* ---------- Checkbox variant ---------- */
+
+.property-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.property-checkbox-wrapper:hover {
+    border-color: var(--color-primary);
+}
+
+.custom-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.custom-checkbox.checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.custom-checkbox.checked::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: bold;
+}
+
+.property-checkbox-label {
+    color: var(--text-primary);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-sm);
+    cursor: pointer;
+}
+
+/* ---------- Select-button-row variant ---------- */
+
+.property-select-wrapper {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.property-select-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    transition: all 0.2s;
+}
+
+.property-select-btn:hover {
+    border-color: var(--color-primary);
+}
+
+.property-select-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+/* ---------- Color-picker variant ---------- */
+
+.property-color-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.property-color-wrapper input[type="color"] {
+    width: 60px;
+    height: 44px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    background: var(--bg-primary);
+}
+
+.property-color-text {
+    flex: 1;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+}
+
+.property-color-text:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* ---------- Stylemode variant (flex row of toggle buttons) ---------- */
+
+.property-stylemode-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.property-stylemode-btn {
+    flex: 1;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    transition: all 0.2s;
+}
+
+.property-stylemode-btn:hover {
+    border-color: var(--color-primary);
+}
+
+.property-stylemode-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+/* ---------- Alignment variant (3-column grid) ---------- */
+
+.property-alignment-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.property-alignment-btn {
+    padding: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.property-alignment-btn:hover {
+    border-color: var(--color-primary);
+}
+
+.property-alignment-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}

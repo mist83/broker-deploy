@@ -1,0 +1,26 @@
+/**
+ * Green Colors
+ * @url https://ui.mullmania.com/green/colors.css
+ *
+ * Clean simple-theme surfaces with a green accent.
+ */
+
+@import url('../simple/colors.css');
+
+:root {
+    --color-primary: #2E7D32;
+    --color-primary-hover: #1B5E20;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    --shadow-hover: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+}
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    --color-primary: #66BB6A;
+    --color-primary-hover: #2E7D32;
+    --shadow-hover: 0 0 0 0.25rem rgba(102, 187, 106, 0.3);
+}

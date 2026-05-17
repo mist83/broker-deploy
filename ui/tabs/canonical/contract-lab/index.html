@@ -1,0 +1,447 @@
+<script src="/js/theme-catalog.js"></script>
+
+<div class="p-lg">
+    <h2><i class="ti ti-file-code"></i> Contract Lab</h2>
+    <p class="text-secondary mb-lg">Edit page-contract JSON on the left and render the same contract-safe surface on the right.</p>
+
+    <div class="grid-2 gap-md mb-lg">
+        <div class="card">
+            <div class="grid-between mb-md">
+                <h3 class="mb-xs"><i class="ti ti-code"></i> page-contract.json</h3>
+                <span class="status-badge status-info" id="contract-status">Ready</span>
+            </div>
+
+            <div class="grid gap-md">
+                <div class="grid-row gap-sm">
+                    <button class="btn-secondary" id="contract-format"><i class="ti ti-align-left"></i> Format</button>
+                    <button class="btn-secondary" id="contract-copy-json"><i class="ti ti-copy"></i> Copy JSON</button>
+                    <button class="btn-secondary" id="contract-copy-url"><i class="ti ti-link"></i> Copy URL</button>
+                    <button class="btn-secondary" id="contract-load-example"><i class="ti ti-sparkles"></i> Load Example</button>
+                </div>
+
+                <div class="grid-2 gap-md">
+                    <div>
+                        <label class="field-label" for="contract-fixture">Fixture</label>
+                        <select id="contract-fixture">
+                            <option value="__example__">Starter example</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="contract-theme">Theme</label>
+                        <select id="contract-theme"></select>
+                    </div>
+                </div>
+
+                <div class="grid-2 gap-md">
+                    <div>
+                        <label class="field-label" for="contract-mode">Mode</label>
+                        <select id="contract-mode">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="contract-renderer">Renderer</label>
+                        <input id="contract-renderer" type="text" value="/render.html" readonly>
+                    </div>
+                </div>
+
+                <textarea id="contract-editor" class="live-preview-editor"></textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="grid-between mb-md">
+                <h3 class="mb-xs"><i class="ti ti-browser"></i> Rendered Page</h3>
+                <a class="btn-link" id="contract-open" href="/render.html?theme=active&mode=light" target="_blank" rel="noreferrer">
+                    <i class="ti ti-external-link"></i> Open
+                </a>
+            </div>
+
+            <div class="alert alert-error is-hidden mb-md" id="contract-error">
+                <i class="ti ti-alert-circle"></i>
+                <span id="contract-error-text">Error</span>
+            </div>
+
+            <div class="preview-screen">
+                <div class="preview-screen__frame">
+                    <div class="preview-screen__chrome">
+                        <span class="preview-screen__chrome-dot" aria-hidden="true"></span>
+                        <span class="preview-screen__chrome-label" id="contract-preview-label">active / light</span>
+                        <span class="preview-screen__read-only">
+                            <i class="ti ti-lock"></i>
+                            Read only
+                        </span>
+                    </div>
+                    <div class="preview-screen__viewport">
+                        <iframe
+                            id="contract-preview-frame"
+                            class="preview-screen__media preview-screen__media--iframe preview-screen__media--read-only"
+                            src="/render.html?theme=active&mode=light"
+                            title="Page contract preview"
+                            loading="lazy"
+                            tabindex="-1"
+                            referrerpolicy="no-referrer"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 class="mb-md">Contract Shape</h3>
+        <p class="text-secondary mb-md">Use `page` for explicit JSON structure or `preset` for a built-in specimen. Query params can override document theme and mode without changing the JSON itself.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>version</code></td>
+                        <td>number</td>
+                        <td>Use <code>1</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>theme</code></td>
+                        <td>string</td>
+                        <td>Optional document default. Query param still wins.</td>
+                    </tr>
+                    <tr>
+                        <td><code>mode</code></td>
+                        <td>string</td>
+                        <td>Optional document default. Supports <code>light</code> and <code>dark</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>page</code></td>
+                        <td>object</td>
+                        <td>Use shared components, safe tags, and declarative actions.</td>
+                    </tr>
+                    <tr>
+                        <td><code>preset</code></td>
+                        <td>string</td>
+                        <td>Optional shortcut to a built-in specimen.</td>
+                    </tr>
+                    <tr>
+                        <td><code>spec64</code></td>
+                        <td>query param</td>
+                        <td>Base64url encoded contract for share links and iframe previews.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const standalonePath = '/tabs/canonical/contract-lab/index.html';
+        const isStandalonePage = window.location.pathname.endsWith(standalonePath);
+        const editor = document.getElementById('contract-editor');
+        const status = document.getElementById('contract-status');
+        const errorBox = document.getElementById('contract-error');
+        const errorText = document.getElementById('contract-error-text');
+        const previewFrame = document.getElementById('contract-preview-frame');
+        const previewOpen = document.getElementById('contract-open');
+        const previewLabel = document.getElementById('contract-preview-label');
+        const fixtureSelect = document.getElementById('contract-fixture');
+        const themeSelect = document.getElementById('contract-theme');
+        const modeSelect = document.getElementById('contract-mode');
+        const themeRegistry = window.UIThemeRegistry;
+        const starterDocument = {
+            $schema: '/page-contract.schema.json',
+            version: 1,
+            title: 'Starter Example',
+            page: {
+                component: 'app',
+                title: 'Starter Example',
+                subtitle: 'Edit this contract and render it through the shared runtime.',
+                sections: [
+                    {
+                        component: 'section',
+                        title: 'Overview',
+                        children: [
+                            {
+                                component: 'grid',
+                                columns: 2,
+                                children: [
+                                    {
+                                        component: 'stat',
+                                        label: 'Status',
+                                        value: 'Ready',
+                                        badge: {
+                                            label: 'Live',
+                                            tone: 'success'
+                                        }
+                                    },
+                                    {
+                                        component: 'alert',
+                                        tone: 'info',
+                                        title: 'Contract-safe',
+                                        message: 'Use shared components and safe tags instead of page-local HTML.'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let renderTimer = null;
+        let lastValidDocument = starterDocument;
+        let lastPreviewUrl = buildPreviewUrl(starterDocument);
+
+        themeRegistry.list().forEach((theme) => {
+            const option = document.createElement('option');
+            option.value = theme.id;
+            option.textContent = theme.name;
+            themeSelect.appendChild(option);
+        });
+        themeSelect.value = document.documentElement.dataset.uiTheme || 'active';
+        modeSelect.value = document.documentElement.dataset.uiMode || 'light';
+
+        function setStatus(text, tone) {
+            status.textContent = text;
+            status.className = `status-badge status-${tone}`;
+        }
+
+        function setError(message) {
+            errorText.textContent = message;
+            errorBox.classList.remove('is-hidden');
+        }
+
+        function clearError() {
+            errorText.textContent = '';
+            errorBox.classList.add('is-hidden');
+        }
+
+        function encodeSpec64(value) {
+            return btoa(JSON.stringify(value))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=+$/g, '');
+        }
+
+        function decodeSpec64(value) {
+            const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
+            const padded = normalized + '='.repeat((4 - (normalized.length % 4 || 4)) % 4);
+            return JSON.parse(atob(padded));
+        }
+
+        function fallbackNormalizeDocument(rawDocument) {
+            if (!rawDocument || typeof rawDocument !== 'object' || Array.isArray(rawDocument)) {
+                return {
+                    version: 1,
+                    page: rawDocument
+                };
+            }
+
+            const documentKeys = new Set(['$schema', 'version', 'title', 'description', 'theme', 'mode', 'preset', 'presetOptions', 'page', 'meta']);
+            const isEnvelope = Object.keys(rawDocument).some((key) => documentKeys.has(key));
+
+            if (isEnvelope) {
+                return {
+                    version: rawDocument.version ?? 1,
+                    ...rawDocument
+                };
+            }
+
+            return {
+                version: 1,
+                page: rawDocument
+            };
+        }
+
+        function normalizeDocument(rawDocument) {
+            if (window.UI?.contract?.normalize) {
+                return window.UI.contract.normalize(rawDocument);
+            }
+
+            return fallbackNormalizeDocument(rawDocument);
+        }
+
+        function validateDocument(rawDocument) {
+            if (window.UI?.contract?.validate) {
+                return window.UI.contract.validate(rawDocument);
+            }
+
+            return {
+                valid: true,
+                errors: [],
+                document: normalizeDocument(rawDocument)
+            };
+        }
+
+        function buildPreviewUrl(documentContract) {
+            const spec64 = encodeSpec64(documentContract);
+            const theme = themeSelect.value;
+            const mode = modeSelect.value;
+            return `/render.html?theme=${encodeURIComponent(theme)}&mode=${encodeURIComponent(mode)}&spec64=${encodeURIComponent(spec64)}`;
+        }
+
+        function applyPreview(url) {
+            lastPreviewUrl = url;
+            previewFrame.src = url;
+            previewOpen.href = url;
+            previewLabel.textContent = `${themeSelect.value} / ${modeSelect.value}`;
+        }
+
+        function updateHash(documentContract) {
+            if (!isStandalonePage) {
+                return;
+            }
+
+            const nextUrl = new URL(window.location.href);
+            nextUrl.hash = `spec64=${encodeSpec64(documentContract)}`;
+            history.replaceState(null, '', nextUrl);
+        }
+
+        function scheduleRender() {
+            clearTimeout(renderTimer);
+            renderTimer = setTimeout(renderNow, 300);
+        }
+
+        function renderNow() {
+            try {
+                const parsed = JSON.parse(editor.value);
+                const validation = validateDocument(parsed);
+                if (!validation.valid) {
+                    throw new Error(validation.errors[0] || 'Contract is invalid.');
+                }
+
+                clearError();
+                setStatus(window.UI?.contract?.validate ? 'Valid Contract' : 'JSON Ready', window.UI?.contract?.validate ? 'success' : 'info');
+                lastValidDocument = validation.document || normalizeDocument(parsed);
+                applyPreview(buildPreviewUrl(lastValidDocument));
+                updateHash(lastValidDocument);
+            } catch (error) {
+                setStatus('Needs Fix', 'warning');
+                setError(error.message || 'Could not render contract.');
+                if (lastPreviewUrl) {
+                    previewFrame.src = lastPreviewUrl;
+                }
+            }
+        }
+
+        function loadIntoEditor(documentContract) {
+            const normalized = normalizeDocument(documentContract);
+            editor.value = JSON.stringify(normalized, null, 2);
+            renderNow();
+        }
+
+        async function loadFixtureFromSource(source) {
+            const response = await fetch(source);
+            if (!response.ok) {
+                throw new Error(`Could not load fixture from ${source}.`);
+            }
+
+            const documentContract = await response.json();
+            loadIntoEditor(documentContract);
+            setStatus('Fixture Loaded', 'info');
+        }
+
+        async function populateFixtures() {
+            try {
+                const response = await fetch('/contracts/fixtures/manifest.json');
+                if (!response.ok) {
+                    throw new Error('Fixture manifest request failed.');
+                }
+
+                const manifest = await response.json();
+                manifest.fixtures.forEach((fixture) => {
+                    const option = document.createElement('option');
+                    option.value = fixture.source;
+                    option.textContent = fixture.label;
+                    fixtureSelect.appendChild(option);
+                });
+            } catch (_) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'Fixtures unavailable';
+                option.disabled = true;
+                fixtureSelect.appendChild(option);
+            }
+        }
+
+        document.getElementById('contract-format').addEventListener('click', () => {
+            try {
+                const parsed = JSON.parse(editor.value);
+                editor.value = JSON.stringify(parsed, null, 2);
+                renderNow();
+            } catch (error) {
+                setStatus('Needs Fix', 'warning');
+                setError(error.message || 'Could not format JSON.');
+            }
+        });
+
+        document.getElementById('contract-copy-json').addEventListener('click', async () => {
+            await navigator.clipboard.writeText(editor.value);
+            setStatus('JSON Copied', 'info');
+        });
+
+        document.getElementById('contract-copy-url').addEventListener('click', async () => {
+            if (lastValidDocument) {
+                updateHash(lastValidDocument);
+            }
+            const shareUrl = isStandalonePage
+                ? window.location.href
+                : new URL(previewOpen.href, window.location.origin).toString();
+            await navigator.clipboard.writeText(shareUrl);
+            setStatus('URL Copied', 'info');
+        });
+
+        document.getElementById('contract-load-example').addEventListener('click', () => {
+            fixtureSelect.value = '__example__';
+            loadIntoEditor(starterDocument);
+            setStatus('Loaded Example', 'info');
+        });
+
+        fixtureSelect.addEventListener('change', async () => {
+            if (fixtureSelect.value === '__example__') {
+                loadIntoEditor(starterDocument);
+                setStatus('Loaded Example', 'info');
+                return;
+            }
+
+            try {
+                await loadFixtureFromSource(fixtureSelect.value);
+            } catch (error) {
+                setStatus('Needs Fix', 'warning');
+                setError(error.message || 'Could not load fixture.');
+            }
+        });
+
+        editor.addEventListener('input', scheduleRender);
+        themeSelect.addEventListener('change', () => {
+            if (lastValidDocument) {
+                applyPreview(buildPreviewUrl(lastValidDocument));
+            }
+        });
+        modeSelect.addEventListener('change', () => {
+            if (lastValidDocument) {
+                applyPreview(buildPreviewUrl(lastValidDocument));
+            }
+        });
+
+        populateFixtures().finally(() => {
+            if (isStandalonePage && window.location.hash.startsWith('#spec64=')) {
+                try {
+                    loadIntoEditor(decodeSpec64(window.location.hash.slice('#spec64='.length)));
+                    setStatus('Loaded Shared URL', 'info');
+                    return;
+                } catch (error) {
+                    setError('Could not load the shared URL. Showing the starter contract instead.');
+                }
+            }
+
+            loadIntoEditor(starterDocument);
+            setStatus('Ready', 'info');
+        });
+    })();
+</script>

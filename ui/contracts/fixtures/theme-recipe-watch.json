@@ -1,0 +1,599 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Watch",
+  "description": "Dogfood walkthrough for making a new theme or remaking the shipped looks from a shared recipe model.",
+  "page": {
+    "component": "app",
+    "title": "Watch",
+    "subtitle": "Dogfood walkthrough for making a new theme or remaking the shipped looks from a shared recipe model.",
+    "actions": [
+      {
+        "label": "Open Recipe",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html?theme=editorial&mode=light#docs/theme-builder"
+        }
+      },
+      {
+        "label": "Open Knobs",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html?theme=ocean&mode=light#builder/colors"
+        }
+      },
+      {
+        "label": "Open Remakes",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html?theme=ocean&mode=light#themes/ocean"
+        }
+      },
+      {
+        "label": "Open Proof",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/preview.html?theme=mockup&mode=dark"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "component": "section",
+        "title": "Main reel",
+        "description": "Dogfood walkthrough for making a new theme or remaking the shipped looks from a shared recipe model.",
+        "children": [
+          {
+            "component": "preview-screen",
+            "title": "Theme Recipe Reel",
+            "subtitle": "Dogfood walkthrough for making a new theme or remaking the shipped looks from a shared recipe model.",
+            "caption": "39s",
+            "label": "Theme Recipe Reel",
+            "videoSrc": "/docs/theme-demo/demo.mp4",
+            "poster": "/docs/theme-demo/poster.png",
+            "openHref": "/docs/theme-demo/demo.mp4",
+            "openLabel": "Open reel",
+            "readOnly": false,
+            "preload": "metadata",
+            "actions": [
+              {
+                "label": "Open files",
+                "variant": "secondary",
+                "icon": "ti ti-files",
+                "action": {
+                  "type": "open",
+                  "href": "/docs/index.html?variant=evidence"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "What is covered",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 4,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Clips",
+                "value": "13",
+                "caption": "One per route"
+              },
+              {
+                "component": "stat",
+                "label": "Themes",
+                "value": "6",
+                "caption": "editorial, walmart, ocean, pumpkin, cyberpink, mockup"
+              },
+              {
+                "component": "stat",
+                "label": "Modes",
+                "value": "2",
+                "caption": "light, dark"
+              },
+              {
+                "component": "stat",
+                "label": "Buckets",
+                "value": "4",
+                "caption": "recipe, knobs, remakes, proof"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Recipe",
+        "description": "The tutorial surface that defines the real theme composition model.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Recipe",
+                "subtitle": "The structured recipe page: what really changes across themes and where builder parity stops.",
+                "caption": "Editorial · Light · 3s",
+                "label": "Recipe",
+                "videoSrc": "/docs/theme-demo/clips/01-theme-recipe.mp4",
+                "poster": "/docs/theme-demo/chapters/01-theme-recipe.png",
+                "openHref": "/docs/theme-demo/clips/01-theme-recipe.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=editorial&mode=light#docs/theme-builder"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/01-theme-recipe.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Routing",
+                "subtitle": "Published versus pinned theme behavior and why the active alias matters.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Routing",
+                "videoSrc": "/docs/theme-demo/clips/02-theme-routing.mp4",
+                "poster": "/docs/theme-demo/chapters/02-theme-routing.png",
+                "openHref": "/docs/theme-demo/clips/02-theme-routing.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#docs/themes"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/02-theme-routing.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Knobs",
+        "description": "The shared primitives you actually tune while building a theme.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Colors",
+                "subtitle": "Semantic palette roles are the first builder lane and the cleanest shared knob.",
+                "caption": "Ocean · Light · 3s",
+                "label": "Colors",
+                "videoSrc": "/docs/theme-demo/clips/03-colors.mp4",
+                "poster": "/docs/theme-demo/chapters/03-colors.png",
+                "openHref": "/docs/theme-demo/clips/03-colors.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=ocean&mode=light#builder/colors"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/03-colors.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Type",
+                "subtitle": "Display, body, label, and mono roles matter as much as color once the themes get more opinionated.",
+                "caption": "Editorial · Light · 3s",
+                "label": "Type",
+                "videoSrc": "/docs/theme-demo/clips/04-type.mp4",
+                "poster": "/docs/theme-demo/chapters/04-type.png",
+                "openHref": "/docs/theme-demo/clips/04-type.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=editorial&mode=light#builder/typography"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/04-type.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Spacing",
+                "subtitle": "Density and rhythm are part of the recipe, not an afterthought.",
+                "caption": "Pumpkin · Light · 3s",
+                "label": "Spacing",
+                "videoSrc": "/docs/theme-demo/clips/05-spacing.mp4",
+                "poster": "/docs/theme-demo/chapters/05-spacing.png",
+                "openHref": "/docs/theme-demo/clips/05-spacing.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=pumpkin&mode=light#builder/spacing"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/05-spacing.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Effects",
+                "subtitle": "Shadows, glow, border emphasis, and motion split the louder looks from the calmer ones.",
+                "caption": "Cyberpink · Dark · 3s",
+                "label": "Effects",
+                "videoSrc": "/docs/theme-demo/clips/06-effects.mp4",
+                "poster": "/docs/theme-demo/chapters/06-effects.png",
+                "openHref": "/docs/theme-demo/clips/06-effects.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=cyberpink&mode=dark#builder/effects"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/06-effects.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Remakes",
+        "description": "How the shipped themes map back onto the recipe.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Ocean",
+                "subtitle": "Ocean proves the direct token-and-shell path.",
+                "caption": "Ocean · Light · 3s",
+                "label": "Ocean",
+                "videoSrc": "/docs/theme-demo/clips/07-ocean.mp4",
+                "poster": "/docs/theme-demo/chapters/07-ocean.png",
+                "openHref": "/docs/theme-demo/clips/07-ocean.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=ocean&mode=light#themes/ocean"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/07-ocean.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Pumpkin",
+                "subtitle": "Pumpkin adds rounded shape language without abandoning the core shell.",
+                "caption": "Pumpkin · Light · 3s",
+                "label": "Pumpkin",
+                "videoSrc": "/docs/theme-demo/clips/08-pumpkin.mp4",
+                "poster": "/docs/theme-demo/chapters/08-pumpkin.png",
+                "openHref": "/docs/theme-demo/clips/08-pumpkin.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=pumpkin&mode=light#themes/pumpkin"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/08-pumpkin.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Editorial",
+                "subtitle": "Editorial needs role-based typography and calmer chrome, not just a new accent color.",
+                "caption": "Editorial · Light · 3s",
+                "label": "Editorial",
+                "videoSrc": "/docs/theme-demo/clips/09-editorial.mp4",
+                "poster": "/docs/theme-demo/chapters/09-editorial.png",
+                "openHref": "/docs/theme-demo/clips/09-editorial.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=editorial&mode=light#themes/editorial"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/09-editorial.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Mockup",
+                "subtitle": "Mockup is a mode family: sketch font, border-first surfaces, and motion dialed down hard.",
+                "caption": "Mockup · Dark · 3s",
+                "label": "Mockup",
+                "videoSrc": "/docs/theme-demo/clips/10-mockup.mp4",
+                "poster": "/docs/theme-demo/chapters/10-mockup.png",
+                "openHref": "/docs/theme-demo/clips/10-mockup.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=mockup&mode=dark#themes/mockup"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/10-mockup.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Walmart",
+                "subtitle": "Walmart is still the fork case and needs shell cleanup before a recipe builder can claim full parity.",
+                "caption": "Walmart · Dark · 3s",
+                "label": "Walmart",
+                "videoSrc": "/docs/theme-demo/clips/11-walmart.mp4",
+                "poster": "/docs/theme-demo/chapters/11-walmart.png",
+                "openHref": "/docs/theme-demo/clips/11-walmart.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=dark#themes/walmart"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/11-walmart.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Proof",
+        "description": "Contract-safe preview surfaces for verifying the result.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Preview Surface",
+                "subtitle": "The standalone preview surface is the fastest proof loop for checking a theme and mode in isolation.",
+                "caption": "Mockup · Dark · 3s",
+                "label": "Preview Surface",
+                "videoSrc": "/docs/theme-demo/clips/12-live-preview.mp4",
+                "poster": "/docs/theme-demo/chapters/12-live-preview.png",
+                "openHref": "/docs/theme-demo/clips/12-live-preview.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/preview.html?theme=mockup&mode=dark"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/12-live-preview.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Render Surface",
+                "subtitle": "The hosted renderer can mount the shared preview preset under any theme and mode without the shell around it.",
+                "caption": "Ocean · Dark · 3s",
+                "label": "Render Surface",
+                "videoSrc": "/docs/theme-demo/clips/13-render-surface.mp4",
+                "poster": "/docs/theme-demo/chapters/13-render-surface.png",
+                "openHref": "/docs/theme-demo/clips/13-render-surface.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/render.html?preset=preview.theme&theme=ocean&mode=dark"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/theme-demo/chapters/13-render-surface.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

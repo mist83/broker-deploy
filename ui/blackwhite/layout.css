@@ -1,0 +1,28 @@
+/**
+ * Black And White Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/blackwhite/layout.css
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background: var(--bg-primary);
+}
+
+.header {
+    background: var(--color-primary) !important;
+    box-shadow: none;
+}
+
+button,
+.button,
+.btn,
+.card,
+.modal,
+.surface-card,
+input,
+select,
+textarea {
+    box-shadow: none !important;
+}

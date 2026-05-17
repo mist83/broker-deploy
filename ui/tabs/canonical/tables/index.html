@@ -1,0 +1,202 @@
+<div class="p-lg">
+    <h2><i class="ti ti-table"></i> Table Patterns</h2>
+    <p class="text-secondary mb-lg">Data tables with sorting, hover states, and responsive overflow.</p>
+
+    <!-- Pattern 48: Basic Data Table -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">48</span> Basic Data Table (.data-table)</h3>
+        <p class="text-secondary mb-md">Yellow bottom border on thead, hover on rows, last row no border.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Alice Johnson</td>
+                        <td>Lead Engineer</td>
+                        <td>Platform</td>
+                        <td><span class="status-badge status-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bob Martinez</td>
+                        <td>Product Manager</td>
+                        <td>Growth</td>
+                        <td><span class="status-badge status-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Carol Chen</td>
+                        <td>Designer</td>
+                        <td>UX</td>
+                        <td><span class="status-badge status-warning">On Leave</span></td>
+                    </tr>
+                    <tr>
+                        <td>David Kim</td>
+                        <td>DevOps Engineer</td>
+                        <td>Infrastructure</td>
+                        <td><span class="status-badge status-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Elena Petrov</td>
+                        <td>Data Scientist</td>
+                        <td>Analytics</td>
+                        <td><span class="status-badge status-info">Onboarding</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pattern 49: Sortable Table -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">49</span> Sortable Table Headers (.sortable)</h3>
+        <p class="text-secondary mb-md">Sortable columns get pointer cursor and hover background.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="sortable">ID <i class="ti ti-arrows-sort"></i></th>
+                        <th class="sortable">Service <i class="ti ti-arrows-sort"></i></th>
+                        <th class="sortable">Requests <i class="ti ti-arrows-sort"></i></th>
+                        <th class="sortable">Latency <i class="ti ti-arrows-sort"></i></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SVC-001</td>
+                        <td>Auth API</td>
+                        <td>12,847</td>
+                        <td>45ms</td>
+                        <td><button class="btn-link">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>SVC-002</td>
+                        <td>User Service</td>
+                        <td>8,392</td>
+                        <td>62ms</td>
+                        <td><button class="btn-link">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>SVC-003</td>
+                        <td>Payment Gateway</td>
+                        <td>3,156</td>
+                        <td>189ms</td>
+                        <td><button class="btn-link">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>SVC-004</td>
+                        <td>Notification Hub</td>
+                        <td>24,591</td>
+                        <td>28ms</td>
+                        <td><button class="btn-link">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pattern 50: Dynamic Table (TablesEverywhere) -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">50</span> Dynamic Table (TablesEverywhere)</h3>
+        <p class="text-secondary mb-md">Rendered by the TablesEverywhere JS class with inline data and sort.</p>
+        <div id="demo-table-container"></div>
+    </div>
+
+    <!-- Pattern 51: Table with Mixed Content -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">51</span> Table with Rich Cell Content</h3>
+        <p class="text-secondary mb-md">Table cells can contain badges, icons, buttons, and other components.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Deployment</th>
+                        <th>Environment</th>
+                        <th>Status</th>
+                        <th>Last Deploy</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="ti ti-git-branch" style="color: var(--color-primary);"></i> main</td>
+                        <td><span class="status-badge status-enabled">Production</span></td>
+                        <td><span class="text-success"><i class="ti ti-circle-check"></i> Healthy</span></td>
+                        <td class="text-muted">2 hours ago</td>
+                        <td>
+                            <div class="grid-row gap-sm">
+                                <button class="btn-link">Logs</button>
+                                <button class="btn-link">Rollback</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="ti ti-git-branch" style="color: var(--color-primary);"></i> staging</td>
+                        <td><span class="status-badge status-warning">Staging</span></td>
+                        <td><span class="text-warning"><i class="ti ti-alert-triangle"></i> Degraded</span></td>
+                        <td class="text-muted">45 min ago</td>
+                        <td>
+                            <div class="grid-row gap-sm">
+                                <button class="btn-link">Logs</button>
+                                <button class="btn-link">Rollback</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="ti ti-git-branch" style="color: var(--color-primary);"></i> develop</td>
+                        <td><span class="status-badge status-info">Development</span></td>
+                        <td><span class="text-danger"><i class="ti ti-circle-x"></i> Down</span></td>
+                        <td class="text-muted">10 min ago</td>
+                        <td>
+                            <div class="grid-row gap-sm">
+                                <button class="btn-link">Logs</button>
+                                <button class="btn-link">Redeploy</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    if (typeof TablesEverywhere !== 'undefined') {
+        const table = new TablesEverywhere({
+            containerId: 'demo-table-container',
+            headers: [
+                { key: 'id', label: 'Order ID', sortable: true },
+                { key: 'customer', label: 'Customer', sortable: true },
+                { key: 'amount', label: 'Amount', sortable: true },
+                { key: 'status', label: 'Status' }
+            ],
+            inlineData: [
+                { id: 'ORD-1001', customer: 'Acme Corp', amount: '$2,450.00', status: 'Completed' },
+                { id: 'ORD-1002', customer: 'Globex Inc', amount: '$890.50', status: 'Processing' },
+                { id: 'ORD-1003', customer: 'Initech LLC', amount: '$1,200.00', status: 'Shipped' },
+                { id: 'ORD-1004', customer: 'Umbrella Co', amount: '$3,100.00', status: 'Pending' }
+            ],
+            rowTemplate: function(item) {
+                var statusClass = item.status === 'Completed' ? 'status-success' :
+                    item.status === 'Processing' ? 'status-warning' :
+                    item.status === 'Shipped' ? 'status-enabled' : 'status-info';
+                return '<td>' + item.id + '</td>' +
+                    '<td>' + item.customer + '</td>' +
+                    '<td>' + item.amount + '</td>' +
+                    '<td><span class="status-badge ' + statusClass + '">' + item.status + '</span></td>';
+            }
+        });
+        table.render();
+    } else {
+        document.getElementById('demo-table-container').innerHTML =
+            '<div class="alert alert-warning"><i class="ti ti-alert-triangle"></i><span>TablesEverywhere not loaded. Load via ui.js to see dynamic tables.</span></div>';
+    }
+})();
+</script>

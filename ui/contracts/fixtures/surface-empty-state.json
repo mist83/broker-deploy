@@ -1,0 +1,57 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Surface Empty State Fixture",
+  "description": "Shared empty-state shells for browse, stage, and fullscreen surfaces.",
+  "page": {
+    "component": "app",
+    "title": "Surface Empty State Fixture",
+    "subtitle": "One shared empty-state primitive replacing repeated gallery, TV, and slideshow zero states.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Catalog Empty States",
+        "description": "The same primitive handles scrollable browse shells and full-height stages.",
+        "children": [
+          {
+            "component": "node",
+            "tag": "div",
+            "className": "grid-3 gap-md",
+            "children": [
+              {
+                "component": "emptyState",
+                "scroll": true,
+                "className": "card",
+                "style": {
+                  "minHeight": "220px"
+                },
+                "icon": "ti ti-search-off",
+                "message": "Nothing matches the current search and filters."
+              },
+              {
+                "component": "emptyState",
+                "scroll": true,
+                "className": "card",
+                "style": {
+                  "minHeight": "220px"
+                },
+                "icon": "ti ti-device-tv-off",
+                "message": "No sites with a playable demo or live preview match the current search and filters."
+              },
+              {
+                "component": "emptyState",
+                "fill": true,
+                "className": "card",
+                "style": {
+                  "minHeight": "220px"
+                },
+                "icon": "ti ti-photo-off",
+                "message": "No preview images match the current search."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

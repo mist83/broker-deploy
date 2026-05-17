@@ -1,0 +1,6 @@
+/**
+ * Canonical current-theme layout token alias.
+ * Use /active/layout.css?v=<token> for explicit cache busting when needed.
+ */
+
+@import url('/active/layout.css');

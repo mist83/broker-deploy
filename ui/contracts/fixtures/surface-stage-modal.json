@@ -1,0 +1,292 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Surface Stage Modal Fixture",
+  "description": "Framework-owned modal foundation and fullscreen stage shell extracted from the sites launchpad.",
+  "page": {
+    "component": "app",
+    "title": "Surface Stage Modal Fixture",
+    "subtitle": "Shared modal wrappers and fullscreen preview chrome without consumer-owned shell CSS.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Fullscreen Stage Shell",
+        "description": "The framework owns the modal wrapper, title row, action rail, and preview stage. Consumer repos keep only the domain-specific docks.",
+        "children": [
+          {
+            "component": "node",
+            "tag": "div",
+            "style": {
+              "position": "relative",
+              "minHeight": "820px",
+              "border": "1px solid var(--border-color)",
+              "borderRadius": "var(--radius-sm)",
+              "overflow": "hidden"
+            },
+            "children": [
+              {
+                "component": "node",
+                "tag": "div",
+                "className": "surface-modal surface-stage-modal",
+                "style": {
+                  "position": "absolute"
+                },
+                "children": [
+                  {
+                    "component": "node",
+                    "tag": "div",
+                    "className": "surface-modal__backdrop"
+                  },
+                  {
+                    "component": "node",
+                    "tag": "div",
+                    "className": "surface-modal__panel surface-stage-modal__panel",
+                    "children": [
+                      {
+                        "component": "node",
+                        "tag": "div",
+                        "className": "surface-modal__header",
+                        "children": [
+                          {
+                            "component": "node",
+                            "tag": "div",
+                            "className": "surface-modal__title-block",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "div",
+                                "className": "surface-modal__title-row",
+                                "children": [
+                                  {
+                                    "component": "icon",
+                                    "name": "ti ti-browser"
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "h2",
+                                    "className": "modal-title",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "a",
+                                        "className": "surface-stage-modal__title-link",
+                                        "attrs": {
+                                          "href": "#"
+                                        },
+                                        "text": "sites.mullmania.com"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "component": "node",
+                                "tag": "p",
+                                "text": "Live site preview with shared action chrome and stage layout."
+                              }
+                            ]
+                          },
+                          {
+                            "component": "node",
+                            "tag": "div",
+                            "className": "surface-stage-modal__aside",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "div",
+                                "className": "surface-modal__actions",
+                                "children": [
+                                  {
+                                    "component": "button",
+                                    "label": "Phone",
+                                    "variant": "secondary",
+                                    "icon": "ti ti-device-mobile",
+                                    "className": "surface-stage-modal__qr surface-stage-modal__icon-button"
+                                  },
+                                  {
+                                    "component": "button",
+                                    "label": "Live site",
+                                    "variant": "secondary",
+                                    "icon": "ti ti-world",
+                                    "className": "surface-stage-modal__icon-button"
+                                  },
+                                  {
+                                    "component": "button",
+                                    "label": "Refresh snapshot",
+                                    "variant": "secondary",
+                                    "icon": "ti ti-refresh",
+                                    "className": "surface-stage-modal__icon-button"
+                                  }
+                                ]
+                              },
+                              {
+                                "component": "node",
+                                "tag": "span",
+                                "className": "surface-stage-modal__action-divider",
+                                "text": "|"
+                              },
+                              {
+                                "component": "node",
+                                "tag": "div",
+                                "className": "surface-modal__actions surface-stage-modal__actions--nav",
+                                "children": [
+                                  {
+                                    "component": "button",
+                                    "label": "Previous",
+                                    "variant": "secondary",
+                                    "icon": "ti ti-chevron-left",
+                                    "className": "surface-stage-modal__icon-button"
+                                  },
+                                  {
+                                    "component": "button",
+                                    "label": "Next",
+                                    "variant": "secondary",
+                                    "icon": "ti ti-chevron-right",
+                                    "className": "surface-stage-modal__icon-button"
+                                  }
+                                ]
+                              },
+                              {
+                                "component": "node",
+                                "tag": "button",
+                                "className": "modal-close surface-modal__close",
+                                "attrs": {
+                                  "type": "button",
+                                  "aria-label": "Close"
+                                },
+                                "text": "x"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "component": "node",
+                        "tag": "div",
+                        "className": "surface-stage-modal__stage",
+                        "children": [
+                          {
+                            "component": "node",
+                            "tag": "div",
+                            "className": "surface-stage-modal__preview-loading",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "div",
+                                "className": "surface-stage-modal__preview-loading-card",
+                                "children": [
+                                  {
+                                    "component": "icon",
+                                    "name": "ti ti-loader-2 surface-stage-modal__spinner"
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "span",
+                                    "text": "Refreshing snapshot..."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "component": "node",
+                            "tag": "div",
+                            "className": "surface-stage-modal__image-shell",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "div",
+                                "className": "surface-stage-modal__image-stack",
+                                "children": [
+                                  {
+                                    "component": "node",
+                                    "tag": "button",
+                                    "className": "surface-stage-modal__image-card surface-stage-modal__image-card--left",
+                                    "attrs": {
+                                      "type": "button"
+                                    },
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "div",
+                                        "className": "surface-stage-modal__image-card-image",
+                                        "style": {
+                                          "background": "linear-gradient(180deg, #fde68a 0%, #f97316 100%)"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "div",
+                                    "className": "surface-stage-modal__image-card surface-stage-modal__image-card--center",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "div",
+                                        "className": "surface-stage-modal__media surface-stage-modal__image surface-stage-modal__image-card-image",
+                                        "style": {
+                                          "background": "linear-gradient(180deg, #38bdf8 0%, #1d4ed8 100%)"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "button",
+                                    "className": "surface-stage-modal__image-card surface-stage-modal__image-card--right",
+                                    "attrs": {
+                                      "type": "button"
+                                    },
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "div",
+                                        "className": "surface-stage-modal__image-card-image",
+                                        "style": {
+                                          "background": "linear-gradient(180deg, #c4b5fd 0%, #7c3aed 100%)"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "component": "node",
+                        "tag": "div",
+                        "className": "surface-empty-state surface-empty-state--fill",
+                        "children": [
+                          {
+                            "component": "icon",
+                            "name": "ti ti-notes",
+                            "className": "surface-empty-state__icon"
+                          },
+                          {
+                            "component": "node",
+                            "tag": "strong",
+                            "className": "surface-empty-state__title",
+                            "text": "Consumer docks stay local"
+                          },
+                          {
+                            "component": "node",
+                            "tag": "p",
+                            "className": "surface-empty-state__message",
+                            "text": "Tags, notes, and other operator-specific controls still live in the app until their behavior contracts are stable."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+/* GraphEverywhere - Graph Navigation Styles */
+
+#graph-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 350px;
+    background: var(--bg-primary);
+    border-right: 2px solid var(--color-primary);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding: 16px;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.2);
+    overflow-y: auto;
+}
+
+/* Color swatches */
+.graph-color-swatch,
+.graph-edge-color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.graph-color-swatch:hover,
+.graph-edge-color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.graph-color-swatch:active,
+.graph-edge-color-swatch:active {
+    transform: scale(0.95);
+}
+
+/* Style, arrow, size, and text-size buttons */
+.graph-style-btn,
+.graph-arrow-btn,
+.graph-size-btn,
+.graph-text-size-btn {
+    padding: 10px 16px;
+    background: #404040;
+    border: 2px solid #606060;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.graph-style-btn:hover,
+.graph-arrow-btn:hover,
+.graph-size-btn:hover,
+.graph-text-size-btn:hover {
+    background: #505050;
+    border-color: #707070;
+}
+
+.graph-style-btn:active,
+.graph-arrow-btn:active,
+.graph-size-btn:active,
+.graph-text-size-btn:active {
+    transform: scale(0.95);
+}
+
+.graph-style-btn i,
+.graph-arrow-btn i {
+    font-size: 18px;
+}

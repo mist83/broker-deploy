@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.mullmania.com/page-contract.schema.json",
+  "title": "ui.mullmania.com Page Contract",
+  "description": "Top-level contract for remotely rendered pages on ui.mullmania.com.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "enum": [1, "1"]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["active", "blackwhite", "blue", "cyberblue", "cyberpink", "editorial", "ghoul", "green", "indigo", "mac", "mockup", "monochrome", "ocean", "orange", "pastelzom", "precog", "pumpkin", "red", "simple", "sunset", "terminal", "violet", "walmart", "windows31", "yellow"]
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["light", "dark"]
+    },
+    "preset": {
+      "type": "string"
+    },
+    "presetOptions": {
+      "type": "object"
+    },
+    "page": {
+      "description": "A UI component/page definition accepted by the runtime validator.",
+      "type": ["object", "array", "string", "number", "null"]
+    },
+    "meta": {
+      "type": "object"
+    }
+  },
+  "oneOf": [
+    {
+      "required": ["preset"]
+    },
+    {
+      "required": ["page"]
+    }
+  ]
+}

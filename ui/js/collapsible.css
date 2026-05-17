@@ -1,0 +1,93 @@
+/**
+ * Collapsible Section - Canon Primitive
+ * Single source of truth for expandable/collapsible sections.
+ * Used in sidebars, panels, settings surfaces.
+ *
+ * API: window.UI.collapsible.init(container, namespace)
+ * See js/collapsible.js for behavior + localStorage persistence.
+ */
+
+/* Container */
+.collapsible-section {
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Header - clickable area */
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    border-radius: 0;
+}
+
+.collapsible-header:hover {
+    background: var(--bg-primary);
+}
+
+.collapsible-header.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Toggle icon (chevron) */
+.collapsible-toggle {
+    font-size: var(--text-base);
+    color: var(--text-muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+/* Section icon */
+.collapsible-icon {
+    font-size: var(--text-md);
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+/* Title text */
+.collapsible-title {
+    flex: 1;
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Optional badge (count, status, etc) */
+.collapsible-badge {
+    background: var(--color-primary);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 0;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    min-width: 28px;
+    text-align: center;
+}
+
+.collapsible-badge.no-matches {
+    background: var(--text-muted);
+}
+
+/* Content area */
+.collapsible-content {
+    display: none;
+    padding: 12px;
+    background: var(--bg-primary);
+}
+
+.collapsible-content.expanded {
+    display: block;
+}
+
+/* State classes for toggle icon */
+.collapsible-section.expanded .collapsible-toggle {
+    transform: rotate(90deg);
+}

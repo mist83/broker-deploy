@@ -1,0 +1,202 @@
+<div class="p-lg">
+    <h2><i class="ti ti-grid-dots"></i> Grid System Patterns</h2>
+    <p class="text-secondary mb-lg">CSS Grid only. No flexbox. Every grid utility class demonstrated.</p>
+
+    <!-- Pattern 9: grid-2 -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">9</span> .grid-2 (Two Equal Columns)</h3>
+        <p class="text-secondary mb-md">Stacks to 1 column on mobile (&lt;768px).</p>
+        <div class="grid-2 gap-md">
+            <div class="card"><p class="text-center">Column 1 of 2</p></div>
+            <div class="card"><p class="text-center">Column 2 of 2</p></div>
+        </div>
+    </div>
+
+    <!-- Pattern 10: grid-3 -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">10</span> .grid-3 (Three Equal Columns)</h3>
+        <p class="text-secondary mb-md">Stacks to 1 column on mobile.</p>
+        <div class="grid-3 gap-md">
+            <div class="card"><p class="text-center">Col 1</p></div>
+            <div class="card"><p class="text-center">Col 2</p></div>
+            <div class="card"><p class="text-center">Col 3</p></div>
+        </div>
+    </div>
+
+    <!-- Pattern 11: grid-4 -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">11</span> .grid-4 (Four Equal Columns)</h3>
+        <p class="text-secondary mb-md">2 columns on tablet (769-1024px), 1 column on mobile.</p>
+        <div class="grid-4 gap-md">
+            <div class="card"><span class="stat-value">42</span><p class="text-muted mb-xs">Servers</p></div>
+            <div class="card"><span class="stat-value">98%</span><p class="text-muted mb-xs">Uptime</p></div>
+            <div class="card"><span class="stat-value">3.2s</span><p class="text-muted mb-xs">Latency</p></div>
+            <div class="card"><span class="stat-value">1.5K</span><p class="text-muted mb-xs">Requests/s</p></div>
+        </div>
+    </div>
+
+    <!-- Pattern 12: grid-auto -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">12</span> .grid-auto (Auto-fit, min 200px)</h3>
+        <p class="text-secondary mb-md">Responsive columns that auto-wrap. Each column is at least 200px.</p>
+        <div class="grid-auto gap-md">
+            <div class="card"><p class="text-center"><i class="ti ti-device-laptop"></i></p><p class="text-center">Laptop</p></div>
+            <div class="card"><p class="text-center"><i class="ti ti-device-mobile"></i></p><p class="text-center">Mobile</p></div>
+            <div class="card"><p class="text-center"><i class="ti ti-device-tablet"></i></p><p class="text-center">Tablet</p></div>
+            <div class="card"><p class="text-center"><i class="ti ti-device-tv"></i></p><p class="text-center">TV</p></div>
+            <div class="card"><p class="text-center"><i class="ti ti-device-watch"></i></p><p class="text-center">Watch</p></div>
+        </div>
+    </div>
+
+    <!-- Pattern 13: cards-grid -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">13</span> .cards-grid (Auto-fill, min 280px)</h3>
+        <p class="text-secondary mb-md">Purpose-built for card layouts. Wider minimum than grid-auto.</p>
+        <div class="cards-grid" style="padding: 0;">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-star"></i> Featured Project</div>
+                    <div class="card-subtitle">A sample card in the cards-grid layout</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-code"></i> Code Review</div>
+                    <div class="card-subtitle">Another card showing auto-fill behavior</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-bug"></i> Bug Tracker</div>
+                    <div class="card-subtitle">Cards wrap to new rows as needed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 14: grid-center -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">14</span> .grid-center (place-items: center)</h3>
+        <p class="text-secondary mb-md">Centers content both horizontally and vertically.</p>
+        <div class="grid-center bg-tertiary" style="height: 150px; border: 1px solid var(--border-color);">
+            <div class="text-center">
+                <i class="ti ti-target" style="font-size: 32px; color: var(--color-primary);"></i>
+                <p class="mt-sm">Perfectly centered content</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 15: grid-between -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">15</span> .grid-between (1fr auto, aligned center)</h3>
+        <p class="text-secondary mb-md">Left content stretches, right content hugs. Vertically centered.</p>
+        <div class="grid-between bg-tertiary p-md" style="border: 1px solid var(--border-color);">
+            <div>
+                <h4 class="mb-xs">Document Title</h4>
+                <p class="text-muted mb-xs">Left side takes remaining space (1fr)</p>
+            </div>
+            <button class="btn-primary">Action</button>
+        </div>
+        <div class="grid-between bg-secondary p-md mt-sm" style="border: 1px solid var(--border-color);">
+            <span><i class="ti ti-file"></i> report-2024.pdf</span>
+            <span class="status-badge status-success">Uploaded</span>
+        </div>
+    </div>
+
+    <!-- Pattern 16: grid-column -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">16</span> .grid-column (Vertical Stack)</h3>
+        <p class="text-secondary mb-md">Items flow top-to-bottom (grid-auto-flow: row).</p>
+        <div class="grid-column gap-sm" style="max-width: 400px;">
+            <div class="card p-sm"><i class="ti ti-circle-1"></i> First item</div>
+            <div class="card p-sm"><i class="ti ti-circle-2"></i> Second item</div>
+            <div class="card p-sm"><i class="ti ti-circle-3"></i> Third item</div>
+        </div>
+    </div>
+
+    <!-- Pattern 17: grid-row -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">17</span> .grid-row (Horizontal Flow)</h3>
+        <p class="text-secondary mb-md">Items flow left-to-right, each sized to content (max-content).</p>
+        <div class="grid-row gap-sm">
+            <span class="status-badge status-success">Active</span>
+            <span class="status-badge status-warning">Pending</span>
+            <span class="status-badge status-error">Failed</span>
+            <span class="status-badge status-info">Draft</span>
+        </div>
+    </div>
+
+    <!-- Pattern 18: Gap Utilities -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">18</span> Gap Utilities (.gap-sm / .gap-md / .gap-lg)</h3>
+        <p class="text-secondary mb-md">Three gap sizes for grid layouts.</p>
+        <div class="grid gap-lg">
+            <div>
+                <p class="mb-sm"><code>.gap-sm</code> (8px)</p>
+                <div class="grid-3 gap-sm">
+                    <div class="bg-tertiary p-sm text-center">A</div>
+                    <div class="bg-tertiary p-sm text-center">B</div>
+                    <div class="bg-tertiary p-sm text-center">C</div>
+                </div>
+            </div>
+            <div>
+                <p class="mb-sm"><code>.gap-md</code> (16px)</p>
+                <div class="grid-3 gap-md">
+                    <div class="bg-tertiary p-sm text-center">A</div>
+                    <div class="bg-tertiary p-sm text-center">B</div>
+                    <div class="bg-tertiary p-sm text-center">C</div>
+                </div>
+            </div>
+            <div>
+                <p class="mb-sm"><code>.gap-lg</code> (24px)</p>
+                <div class="grid-3 gap-lg">
+                    <div class="bg-tertiary p-sm text-center">A</div>
+                    <div class="bg-tertiary p-sm text-center">B</div>
+                    <div class="bg-tertiary p-sm text-center">C</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 19: Nested Grids -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">19</span> Nested Grid Composition</h3>
+        <p class="text-secondary mb-md">Grids inside grids for complex layouts.</p>
+        <div class="grid-2 gap-lg">
+            <div class="card">
+                <h4 class="mb-md">Left Panel</h4>
+                <div class="grid-column gap-sm">
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>CPU Usage</span>
+                        <span class="text-success">23%</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Memory</span>
+                        <span class="text-warning">67%</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Disk</span>
+                        <span class="text-danger">91%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="mb-md">Right Panel</h4>
+                <div class="grid-2 gap-sm">
+                    <div class="bg-tertiary p-sm text-center grid-center" style="height: 60px;">
+                        <span class="stat-value">A</span>
+                    </div>
+                    <div class="bg-tertiary p-sm text-center grid-center" style="height: 60px;">
+                        <span class="stat-value">B</span>
+                    </div>
+                    <div class="bg-tertiary p-sm text-center grid-center" style="height: 60px;">
+                        <span class="stat-value">C</span>
+                    </div>
+                    <div class="bg-tertiary p-sm text-center grid-center" style="height: 60px;">
+                        <span class="stat-value">D</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

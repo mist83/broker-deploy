@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Framework</title>
+    <link rel="stylesheet" href="/core/detail-shell.css">
+</head>
+<body>
+    <header id="header-container"></header>
+
+    <!-- Fixed Top Tabs -->
+    <div id="tabs-container" class="tabs">
+        <!-- Tabs loaded by framework -->
+    </div>
+
+    <!-- Content Area -->
+    <div id="content-container">
+        <!-- Tab content loaded by framework -->
+    </div>
+
+    <!-- Load UI Framework -->
+    <script src="/ui.js"></script>
+    
+    <script>
+        (async () => {
+            await window.UI.ready();
+            await loadActiveThemeManifest();
+            const params = new URLSearchParams(window.location.search);
+            const renderMode = window.UI.contract?.hasRenderRequest(window.location.search);
+            const response = await fetch('/sitemap.json');
+            const sitemap = await response.json();
+            const shell = window.UI.createShell({
+                tabsContainerId: 'tabs-container',
+                contentContainerId: 'content-container',
+                sitemap: sitemap
+            });
+
+            if (renderMode) {
+                const tabsContainer = document.getElementById('tabs-container');
+                const contentContainer = document.getElementById('content-container');
+                const renderHeader = {
+                    ...(sitemap.header || {}),
+                    title: params.get('title') || 'UI Renderer'
+                };
+
+                if (tabsContainer) {
+                    tabsContainer.style.display = 'none';
+                }
+
+                if (contentContainer) {
+                    contentContainer.style.height = 'auto';
+                    contentContainer.style.minHeight = 'calc(100vh - 72px)';
+                    contentContainer.style.overflowY = 'visible';
+                }
+
+                document.body.style.overflowY = 'auto';
+                shell.renderHeader(renderHeader);
+
+                await window.UI.contract.renderFromLocation('#content-container');
+                return;
+            }
+
+            console.log('[App] UI Framework ready, initializing tabs...');
+
+            await shell.init();
+
+            console.log('[App] Tabs initialized with', sitemap.tabs.length, 'tabs');
+        })().catch((error) => {
+            console.error(error);
+        });
+
+        async function loadActiveThemeManifest() {
+            try {
+                const response = await fetch('/active-theme.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`active-theme.json returned ${response.status}`);
+                }
+
+                window.UIActiveThemeManifest = await response.json();
+            } catch (error) {
+                console.warn('[App] Failed to load active-theme.json', error);
+                window.UIActiveThemeManifest = {
+                    themeId: 'walmart',
+                    publishedAt: '',
+                    publishedBy: 'fallback',
+                };
+            }
+        }
+    </script>
+</body>
+</html>

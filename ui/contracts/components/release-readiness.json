@@ -1,0 +1,97 @@
+{
+  "component": "app",
+  "title": "Release Readiness",
+  "subtitle": "Raw component JSON mounted straight into the shell without a page-local HTML wrapper.",
+  "sections": [
+    {
+      "component": "section",
+      "title": "Checks",
+      "children": [
+        {
+          "component": "grid",
+          "columns": 2,
+          "children": [
+            {
+              "component": "card",
+              "title": "Build",
+              "children": [
+                {
+                  "component": "status",
+                  "label": "Green",
+                  "tone": "success"
+                },
+                {
+                  "tag": "p",
+                  "className": "text-secondary mt-sm",
+                  "text": "CI and local smoke checks are passing."
+                }
+              ]
+            },
+            {
+              "component": "card",
+              "title": "Risk",
+              "children": [
+                {
+                  "component": "status",
+                  "label": "Review",
+                  "tone": "warning"
+                },
+                {
+                  "tag": "p",
+                  "className": "text-secondary mt-sm",
+                  "text": "Visual proof still needs a final screenshot sweep."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "section",
+      "title": "Open Work",
+      "children": [
+        {
+          "component": "table",
+          "columns": [
+            {
+              "key": "area",
+              "label": "Area"
+            },
+            {
+              "key": "owner",
+              "label": "Owner"
+            },
+            {
+              "key": "status",
+              "label": "Status"
+            }
+          ],
+          "rows": [
+            {
+              "area": "Screenshots",
+              "owner": "QA",
+              "status": "Queued"
+            },
+            {
+              "area": "Docs",
+              "owner": "UI",
+              "status": "Ready"
+            },
+            {
+              "area": "Deploy",
+              "owner": "Ops",
+              "status": "Blocked"
+            }
+          ]
+        },
+        {
+          "component": "pager",
+          "summary": "Showing 1-3 of 3 checks",
+          "page": 1,
+          "pageCount": 1
+        }
+      ]
+    }
+  ]
+}

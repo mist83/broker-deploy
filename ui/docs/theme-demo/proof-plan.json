@@ -1,0 +1,135 @@
+{
+  "title": "Theme Recipe Reel",
+  "description": "Dogfood walkthrough for making a new theme or remaking the shipped looks from a shared recipe model.",
+  "artifactBaseUrl": "https://ui.mullmania.com/docs/theme-demo/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captureDelayMs": 5000,
+  "chapterDurationSeconds": 3,
+  "chapters": [
+    {
+      "id": "01-theme-recipe",
+      "title": "Recipe",
+      "description": "The structured recipe page: what really changes across themes and where builder parity stops.",
+      "group": "recipe",
+      "theme": "editorial",
+      "mode": "light",
+      "href": "../index.html?theme=editorial&mode=light#docs/theme-builder",
+      "poster": true
+    },
+    {
+      "id": "02-theme-routing",
+      "title": "Routing",
+      "description": "Published versus pinned theme behavior and why the active alias matters.",
+      "group": "recipe",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#docs/themes"
+    },
+    {
+      "id": "03-colors",
+      "title": "Colors",
+      "description": "Semantic palette roles are the first builder lane and the cleanest shared knob.",
+      "group": "knobs",
+      "theme": "ocean",
+      "mode": "light",
+      "href": "../index.html?theme=ocean&mode=light#builder/colors",
+      "poster": true
+    },
+    {
+      "id": "04-type",
+      "title": "Type",
+      "description": "Display, body, label, and mono roles matter as much as color once the themes get more opinionated.",
+      "group": "knobs",
+      "theme": "editorial",
+      "mode": "light",
+      "href": "../index.html?theme=editorial&mode=light#builder/typography"
+    },
+    {
+      "id": "05-spacing",
+      "title": "Spacing",
+      "description": "Density and rhythm are part of the recipe, not an afterthought.",
+      "group": "knobs",
+      "theme": "pumpkin",
+      "mode": "light",
+      "href": "../index.html?theme=pumpkin&mode=light#builder/spacing"
+    },
+    {
+      "id": "06-effects",
+      "title": "Effects",
+      "description": "Shadows, glow, border emphasis, and motion split the louder looks from the calmer ones.",
+      "group": "knobs",
+      "theme": "cyberpink",
+      "mode": "dark",
+      "href": "../index.html?theme=cyberpink&mode=dark#builder/effects",
+      "poster": true
+    },
+    {
+      "id": "07-ocean",
+      "title": "Ocean",
+      "description": "Ocean proves the direct token-and-shell path.",
+      "group": "remakes",
+      "theme": "ocean",
+      "mode": "light",
+      "href": "../index.html?theme=ocean&mode=light#themes/ocean"
+    },
+    {
+      "id": "08-pumpkin",
+      "title": "Pumpkin",
+      "description": "Pumpkin adds rounded shape language without abandoning the core shell.",
+      "group": "remakes",
+      "theme": "pumpkin",
+      "mode": "light",
+      "href": "../index.html?theme=pumpkin&mode=light#themes/pumpkin"
+    },
+    {
+      "id": "09-editorial",
+      "title": "Editorial",
+      "description": "Editorial needs role-based typography and calmer chrome, not just a new accent color.",
+      "group": "remakes",
+      "theme": "editorial",
+      "mode": "light",
+      "href": "../index.html?theme=editorial&mode=light#themes/editorial",
+      "poster": true
+    },
+    {
+      "id": "10-mockup",
+      "title": "Mockup",
+      "description": "Mockup is a mode family: sketch font, border-first surfaces, and motion dialed down hard.",
+      "group": "remakes",
+      "theme": "mockup",
+      "mode": "dark",
+      "href": "../index.html?theme=mockup&mode=dark#themes/mockup"
+    },
+    {
+      "id": "11-walmart",
+      "title": "Walmart",
+      "description": "Walmart is still the fork case and needs shell cleanup before a recipe builder can claim full parity.",
+      "group": "remakes",
+      "theme": "walmart",
+      "mode": "dark",
+      "href": "../index.html?theme=walmart&mode=dark#themes/walmart"
+    },
+    {
+      "id": "12-live-preview",
+      "title": "Preview Surface",
+      "description": "The standalone preview surface is the fastest proof loop for checking a theme and mode in isolation.",
+      "group": "proof",
+      "theme": "mockup",
+      "mode": "dark",
+      "href": "../preview.html?theme=mockup&mode=dark",
+      "poster": true
+    },
+    {
+      "id": "13-render-surface",
+      "title": "Render Surface",
+      "description": "The hosted renderer can mount the shared preview preset under any theme and mode without the shell around it.",
+      "group": "proof",
+      "theme": "ocean",
+      "mode": "dark",
+      "href": "../render.html?preset=preview.theme&theme=ocean&mode=dark"
+    }
+  ]
+}

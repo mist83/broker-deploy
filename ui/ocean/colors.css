@@ -1,0 +1,58 @@
+/**
+ * Ocean Depths Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/ocean/colors.css
+ * 
+ * Deep blue, teal, seafoam - underwater aesthetic
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    /* ===== OCEAN BRAND COLORS ===== */
+    --ocean-deep: #003D5B;
+    --ocean-teal: #00B4D8;
+    --ocean-seafoam: #90E0EF;
+    
+    /* ===== PRIMARY COLORS ===== */
+    --color-primary: #00B4D8;
+    --color-secondary: #90E0EF;
+    --color-primary-hover: #0096B8;
+    --color-secondary-hover: #70C0CF;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    
+    /* ===== BACKGROUNDS ===== */
+    --bg-primary: #001219;
+    --bg-secondary: #003D5B;
+    --bg-tertiary: #005F73;
+    --bg-card: #0A1929;
+    --bg-hover: #004A5F;
+    
+    /* ===== TEXT COLORS ===== */
+    --text-primary: #CAF0F8;
+    --text-secondary: #90E0EF;
+    --text-muted: #48CAE4;
+    --text-dark: #00B4D8;
+    --text-on-primary: #001219;
+    
+    /* ===== BORDERS ===== */
+    --border-color: #005F73;
+    --border-light: #003D5B;
+    --border-medium: #0077B6;
+    --border-dark: #00B4D8;
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: "Avenir Next", "Segoe UI", Roboto, sans-serif;
+    
+    /* ===== EFFECTS - FLOWING CURVES ===== */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 32px;
+    --radius-full: 50%;
+    
+    --shadow-sm: 0 4px 12px rgba(0, 180, 216, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 180, 216, 0.3);
+    --shadow-lg: 0 12px 36px rgba(0, 180, 216, 0.4);
+    --shadow-hover: 0 0 30px rgba(0, 180, 216, 0.6);
+}

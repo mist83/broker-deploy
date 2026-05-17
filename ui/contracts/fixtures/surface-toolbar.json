@@ -1,0 +1,216 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Surface Toolbar Fixture",
+  "description": "Framework-owned masthead and toolbar shells extracted from the sites launchpad.",
+  "page": {
+    "component": "app",
+    "title": "Surface Toolbar Fixture",
+    "subtitle": "Shared masthead actions, tag chips, and selection actions without page-local CSS.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Shared Shell Chrome",
+        "description": "Neutral masthead and toolbar primitives that preserve the launchpad feel without repo-local selectors.",
+        "children": [
+          {
+            "component": "node",
+            "tag": "div",
+            "className": "bg-tertiary",
+            "style": {
+              "border": "1px solid var(--border-color)",
+              "borderRadius": "var(--radius-sm)",
+              "overflow": "hidden"
+            },
+            "children": [
+              {
+                "component": "surfaceMasthead",
+                "brand": {
+                  "component": "node",
+                  "tag": "h1",
+                  "className": "surface-masthead__title",
+                  "children": [
+                    {
+                      "component": "icon",
+                      "name": "ti ti-stack-3"
+                    },
+                    {
+                      "component": "node",
+                      "tag": "span",
+                      "text": "Mullmania"
+                    }
+                  ]
+                },
+                "search": {
+                  "component": "node",
+                  "tag": "input",
+                  "className": "surface-masthead__search",
+                  "attrs": {
+                    "type": "search",
+                    "placeholder": "Search sites by title, subdomain, or description...",
+                    "aria-label": "Search sites"
+                  }
+                },
+                "actions": [
+                  {
+                    "component": "node",
+                    "tag": "label",
+                    "className": "surface-shell-action surface-shell-action--select-shell",
+                    "children": [
+                      {
+                        "component": "icon",
+                        "name": "ti ti-table"
+                      },
+                      {
+                        "component": "node",
+                        "tag": "select",
+                        "className": "surface-shell-action__select-input",
+                        "attrs": {
+                          "aria-label": "Choose view"
+                        },
+                        "children": [
+                          {
+                            "component": "node",
+                            "tag": "option",
+                            "attrs": {
+                              "selected": true
+                            },
+                            "text": "Table"
+                          },
+                          {
+                            "component": "node",
+                            "tag": "option",
+                            "text": "Gallery"
+                          },
+                          {
+                            "component": "node",
+                            "tag": "option",
+                            "text": "TV"
+                          }
+                        ]
+                      },
+                      {
+                        "component": "icon",
+                        "name": "ti ti-chevron-down surface-shell-action__select-caret"
+                      }
+                    ]
+                  },
+                  {
+                    "component": "button",
+                    "label": "Sweep",
+                    "variant": "secondary",
+                    "icon": "ti ti-layout-kanban",
+                    "className": "surface-shell-action"
+                  },
+                  {
+                    "component": "button",
+                    "label": "Notes",
+                    "variant": "secondary",
+                    "icon": "ti ti-notes",
+                    "className": "surface-shell-action"
+                  },
+                  {
+                    "component": "button",
+                    "label": "Create site",
+                    "variant": "secondary",
+                    "icon": "ti ti-plus",
+                    "className": "surface-shell-action"
+                  },
+                  {
+                    "component": "node",
+                    "tag": "button",
+                    "className": "surface-shell-action",
+                    "attrs": {
+                      "type": "button",
+                      "aria-label": "Settings"
+                    },
+                    "children": [
+                      {
+                        "component": "icon",
+                        "name": "ti ti-settings"
+                      },
+                      {
+                        "component": "node",
+                        "tag": "span",
+                        "text": "Settings"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "surfaceToolbar",
+                "className": "surface",
+                "children": [
+                  {
+                    "component": "surfaceToolbarRow",
+                    "layout": "split",
+                    "children": [
+                      {
+                        "component": "node",
+                        "tag": "div",
+                        "className": "surface-chip-bar",
+                        "children": [
+                          {
+                            "component": "surfaceChip",
+                            "tone": "manager",
+                            "glyph": "...",
+                            "attrs": {
+                              "aria-label": "Browse tags and manage operator tags"
+                            }
+                          },
+                          {
+                            "component": "surfaceChip",
+                            "label": "Featured",
+                            "active": true,
+                            "attrs": {
+                              "aria-pressed": "true"
+                            }
+                          },
+                          {
+                            "component": "surfaceChip",
+                            "label": "Playable",
+                            "count": 18
+                          },
+                          {
+                            "component": "surfaceChip",
+                            "label": "External",
+                            "count": 7
+                          }
+                        ]
+                      },
+                      {
+                        "component": "node",
+                        "tag": "div",
+                        "className": "surface-context-actions",
+                        "children": [
+                          {
+                            "component": "node",
+                            "tag": "div",
+                            "className": "surface-context-slot",
+                            "dataset": {
+                              "selectionActive": "true"
+                            },
+                            "children": [
+                              {
+                                "component": "surfaceChip",
+                                "tone": "quiet",
+                                "className": "surface-chip--selection",
+                                "icon": "ti ti-pencil",
+                                "label": "Rename"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

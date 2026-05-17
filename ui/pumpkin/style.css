@@ -1,0 +1,10 @@
+/**
+ * Pumpkin Complete Stylesheet
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/pumpkin/style.css
+ * 
+ * Combined colors + layout for convenience
+ */
+
+@import url('colors.css');
+@import url('layout.css');

@@ -1,0 +1,48 @@
+<div class="theme-preview-walmart" style="overflow-y: auto; background: #ffffff;  padding: 32px;">
+    <style>
+        .theme-preview-walmart {
+            --color-primary: #0071CE;
+            --color-secondary: #FFC220;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f7f7;
+            --bg-tertiary: #eeeeee;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --border-color: #cccccc;
+        }
+    </style>
+    <div>
+        <h2>Walmart Theme</h2>
+        <p class="mb-lg">Walmart brand colors - blue and yellow.</p>
+        <div class="grid gap-lg">
+            <div class="card">
+                <h3 class="mb-md"><i class="ti ti-palette"></i> Color Palette</h3>
+                <div class="grid grid-2 gap-md">
+                    <div>
+                        <div style="overflow-y: auto; background: #0071CE; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
+                        <strong>Primary: #0071CE</strong>
+                        <p class="text-muted">Walmart Blue</p>
+                    </div>
+                    <div>
+                        <div style="overflow-y: auto; background: #FFC220; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
+                        <strong>Secondary: #FFC220</strong>
+                        <p class="text-muted">Walmart Yellow</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="mb-md"><i class="ti ti-code"></i> Usage</h3>
+                <pre><code>&lt;link rel="stylesheet" href="https://ui.mullmania.com/walmart/style.css"&gt;</code></pre>
+                <button onclick="navigator.clipboard.writeText('https://ui.mullmania.com/walmart/style.css').then(() => alert('URL copied!'))" class="btn-primary mt-md">
+                    <i class="ti ti-copy"></i> Copy URL
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+pre { background: var(--bg-tertiary); padding: var(--space-md); border-radius: var(--radius-sm); overflow-x: auto; border-left: 3px solid var(--color-primary); }
+code { font-family: var(--font-mono); font-size: var(--text-sm); }
+ul li i { color: var(--color-success); margin-right: var(--space-xs); }
+</style>

@@ -1,0 +1,10 @@
+/**
+ * Mac Complete Stylesheet
+ * @url https://ui.mullmania.com/mac/style.css
+ *
+ * Apple/macOS control language. SF system font, system blue,
+ * pill segmented tabs, rounded chrome, traffic-light modal close.
+ */
+
+@import url('colors.css');
+@import url('layout.css');

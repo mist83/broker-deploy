@@ -1,0 +1,157 @@
+{
+  "fixtures": [
+    {
+      "id": "operations-dashboard",
+      "label": "Operations Dashboard",
+      "source": "/contracts/fixtures/operations-dashboard.json",
+      "description": "App shell with stats, alert, table, and pager.",
+      "smokeText": [
+        "Operations Dashboard",
+        "Latest orders",
+        "Showing 1-3 of 128 orders"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".status-badge",
+        ".alert",
+        ".data-table",
+        ".pager"
+      ]
+    },
+    {
+      "id": "quality-queue",
+      "label": "Quality Queue",
+      "source": "/contracts/fixtures/quality-queue.json",
+      "description": "Page root with cards, chart, actions, and rich text.",
+      "smokeText": [
+        "Quality Queue",
+        "Failures by step",
+        "Escalation note"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".card",
+        "svg",
+        ".btn-secondary"
+      ]
+    },
+    {
+      "id": "preview-catalog",
+      "label": "Preview Catalog",
+      "source": "/contracts/fixtures/preview-catalog.json",
+      "description": "Preview screen fixture with iframe media and supporting notes.",
+      "smokeText": [
+        "Preview Catalog",
+        "Shared preview surface",
+        "Read-only"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".preview-screen",
+        ".preview-screen__media--iframe",
+        ".preview-screen__actions"
+      ]
+    },
+    {
+      "id": "theme-preset",
+      "label": "Theme Preset",
+      "source": "/contracts/fixtures/theme-preset.json",
+      "description": "Preset-backed document to prove the preset path stays supported.",
+      "smokeText": [
+        "Walmart",
+        "Published Default",
+        "Live Preview"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".card",
+        ".preview-screen"
+      ]
+    },
+    {
+      "id": "surface-rail",
+      "label": "Surface Rail Fixture",
+      "source": "/contracts/fixtures/surface-rail.json",
+      "description": "Pinned footer rail and reserved scroll viewport rendered from shared contract data.",
+      "smokeText": [
+        "Surface Rail Fixture",
+        "Pinned Footer Rail",
+        "Showing 1-6 of 42 sites"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".surface-scroll-viewport",
+        ".surface-rail--footer",
+        ".pager--rail"
+      ]
+    },
+    {
+      "id": "surface-toolbar",
+      "label": "Surface Toolbar Fixture",
+      "source": "/contracts/fixtures/surface-toolbar.json",
+      "description": "Shared masthead and toolbar shells rendered from contract data.",
+      "smokeText": [
+        "Surface Toolbar Fixture",
+        "Shared Shell Chrome",
+        "Create site"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".surface-masthead",
+        ".surface-toolbar",
+        ".surface-chip-bar"
+      ]
+    },
+    {
+      "id": "surface-empty-state",
+      "label": "Surface Empty State Fixture",
+      "source": "/contracts/fixtures/surface-empty-state.json",
+      "description": "Reusable empty-state shells for browse surfaces and full-height stages.",
+      "smokeText": [
+        "Surface Empty State Fixture",
+        "Catalog Empty States",
+        "No preview images match the current search."
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".surface-empty-state",
+        ".surface-empty-state__icon",
+        ".card"
+      ]
+    },
+    {
+      "id": "surface-workspace-table",
+      "label": "Workspace Table Fixture",
+      "source": "/contracts/fixtures/surface-workspace-table.json",
+      "description": "Catalog-style workspace table shell with sticky headers and footer-safe scroll padding.",
+      "smokeText": [
+        "Workspace Table Fixture",
+        "Sticky Catalog Table",
+        "sites.mullmania.com"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".workspace-table-shell",
+        ".workspace-table",
+        ".workspace-table__sortable"
+      ]
+    },
+    {
+      "id": "surface-stage-modal",
+      "label": "Surface Stage Modal Fixture",
+      "source": "/contracts/fixtures/surface-stage-modal.json",
+      "description": "Shared modal foundation and fullscreen preview shell for stage-style experiences.",
+      "smokeText": [
+        "Surface Stage Modal Fixture",
+        "Fullscreen Stage Shell",
+        "Consumer docks stay local"
+      ],
+      "smokeSelectors": [
+        ".page-container",
+        ".surface-modal",
+        ".surface-stage-modal__panel",
+        ".surface-stage-modal__image-card--center"
+      ]
+    }
+  ]
+}

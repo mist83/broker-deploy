@@ -1,0 +1,157 @@
+/**
+ * Ghoul Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/ghoul/layout.css
+ *
+ * Inherits the shared core layout, then ghoul-specific overrides
+ * tuned for terminal-density information surfaces (log streams,
+ * dashboards, dense lists). Monospace-first.
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background:
+        radial-gradient(ellipse at 30% 0%, rgba(26, 23, 53, 0.55) 0%, transparent 55%),
+        var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+
+.header {
+    background: linear-gradient(180deg, #15172a, #0c0d18) !important;
+    border-bottom: 1px solid var(--border-medium);
+    box-shadow: var(--shadow-md);
+    color: var(--text-primary);
+}
+.header h1,
+.header .shell-wordmark,
+.header .type-brand {
+    font-family: var(--font-display);
+    color: var(--ghoul-acid);
+    text-shadow: 0 0 12px rgba(179, 255, 44, 0.4);
+    letter-spacing: 0.04em;
+}
+
+.tabs {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+
+button,
+.btn {
+    background: var(--color-primary-soft);
+    color: var(--ghoul-acid);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-medium);
+    transition: background var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+}
+button:hover,
+.btn:hover {
+    background: rgba(179, 255, 44, 0.18);
+    box-shadow: var(--shadow-glow-acid);
+}
+button:active,
+.btn:active { transform: translateY(1px); }
+button[aria-pressed="true"],
+.btn-toggle[aria-pressed="true"] {
+    background: var(--ghoul-acid);
+    color: var(--text-on-primary);
+}
+
+button.btn-danger,
+.btn.btn-danger {
+    background: rgba(255, 44, 77, 0.14);
+    color: var(--ghoul-blood);
+    border-color: var(--border-dark);
+}
+button.btn-danger:hover { box-shadow: var(--shadow-glow-blood); }
+
+/* ── Inputs ───────────────────────────────────────────────── */
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    padding: 6px 10px;
+    outline: none;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--ghoul-acid);
+    box-shadow: 0 0 0 1px var(--ghoul-acid), var(--shadow-glow-acid);
+}
+
+/* ── Cards ────────────────────────────────────────────────── */
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+.card:hover {
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-glow-acid);
+}
+
+/* ── Code & log feeds ────────────────────────────────────── */
+
+code, pre {
+    font-family: var(--font-mono);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 1px 6px;
+}
+pre {
+    padding: 12px 16px;
+    overflow: auto;
+}
+
+/* ── Status accents (log levels, badges) ─────────────────── */
+
+.status-success, .lvl-info  { color: var(--color-info); }
+.status-error,   .lvl-error { color: var(--ghoul-blood); }
+.status-warning, .lvl-warn  { color: var(--ghoul-warn); }
+.lvl-debug { color: var(--text-very-muted); }
+
+/* ── Scrollbars ──────────────────────────────────────────── */
+
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--bg-secondary); }
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--ghoul-acid) 0%, var(--ghoul-rot) 100%);
+    border-radius: var(--radius-pill);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--ghoul-acid); }
+
+/* ── Dot indicators (for app lists, presence, etc.) ───────── */
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 8px currentColor;
+}
+.dot-acid  { color: var(--ghoul-acid);   background: currentColor; }
+.dot-blood { color: var(--ghoul-blood);  background: currentColor; }
+.dot-rot   { color: var(--ghoul-rot);    background: currentColor; }
+.dot-bruise{ color: var(--ghoul-bruise); background: currentColor; }
+.dot-warn  { color: var(--ghoul-warn);   background: currentColor; }

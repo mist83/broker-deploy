@@ -1,0 +1,54 @@
+/**
+ * Pumpkin Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/pumpkin/colors.css
+ * 
+ * Black, orange, white, gray with rounded corners
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    /* ===== PUMPKIN BRAND COLORS ===== */
+    --pumpkin-orange: #FF6600;
+    --pumpkin-black: #000000;
+    --pumpkin-white: #ffffff;
+    --pumpkin-gray: #666666;
+    
+    /* ===== PRIMARY COLORS ===== */
+    --color-primary: #FF6600;
+    --color-secondary: #000000;
+    --color-primary-hover: #CC5200;
+    --color-secondary-hover: #333333;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    
+    /* ===== BACKGROUNDS ===== */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-tertiary: #eeeeee;
+    --bg-card: #fafafa;
+    --bg-hover: #e8e8e8;
+    
+    /* ===== TEXT COLORS ===== */
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --text-dark: #333333;
+    --text-on-primary: #ffffff;
+    
+    /* ===== BORDERS ===== */
+    --border-color: #cccccc;
+    --border-light: #eeeeee;
+    --border-medium: #999999;
+    --border-dark: #666666;
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: "Avenir Next", "Segoe UI", Roboto, sans-serif;
+    
+    /* ===== EFFECTS - ROUNDED CORNERS ===== */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 50%;
+}

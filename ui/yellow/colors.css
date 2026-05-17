@@ -1,0 +1,27 @@
+/**
+ * Yellow Colors
+ * @url https://ui.mullmania.com/yellow/colors.css
+ *
+ * Clean simple-theme surfaces with a deep-amber accent.
+ * Pure yellow is unreadable on white, so the primary leans amber for AA contrast.
+ */
+
+@import url('../simple/colors.css');
+
+:root {
+    --color-primary: #B58A1A;
+    --color-primary-hover: #8C6913;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    --shadow-hover: 0 0 0 0.25rem rgba(181, 138, 26, 0.25);
+}
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    --color-primary: #E6C44A;
+    --color-primary-hover: #B58A1A;
+    --shadow-hover: 0 0 0 0.25rem rgba(230, 196, 74, 0.3);
+}

@@ -1,0 +1,90 @@
+/**
+ * Windows 3.1 Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/windows31/colors.css
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    --color-primary: #000080;
+    --color-secondary: #C0C0C0;
+    --color-primary-hover: #0000A8;
+    --color-secondary-hover: #D8D8D8;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    --color-primary-soft: rgba(0, 0, 128, 0.12);
+    --color-secondary-soft: rgba(192, 192, 192, 0.5);
+
+    --bg-primary: #C0C0C0;
+    --bg-secondary: #D6D3CE;
+    --bg-tertiary: #AFAFAF;
+    --bg-card: #D6D3CE;
+    --bg-card-soft: #E6E3DD;
+    --bg-hover: #E8E8E8;
+    --bg-overlay: rgba(0, 0, 0, 0.55);
+
+    --text-primary: #000000;
+    --text-secondary: #202020;
+    --text-muted: #4C4C4C;
+    --text-very-muted: #707070;
+    --text-dark: #000000;
+    --text-on-primary: #FFFFFF;
+
+    --border-color: #808080;
+    --border-light: #FFFFFF;
+    --border-medium: #A0A0A0;
+    --border-dark: #404040;
+
+    --color-success: #008000;
+    --color-success-action: #006400;
+    --color-success-bg: #D8EED8;
+    --color-danger: #B00000;
+    --color-danger-hover: #800000;
+    --color-danger-bg: #F0D8D8;
+    --color-warning: #A06000;
+    --color-warning-bg: #FFF2CC;
+    --color-info: #000080;
+    --color-info-bg: #D8E8FF;
+    --color-error: #B00000;
+
+    --font-family: "Times New Roman", Times, serif;
+    --font-mono: "Courier New", Courier, monospace;
+    --font-display: "Times New Roman", Times, serif;
+
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-pill: 0;
+    --radius-full: 50%;
+
+    --shadow-sm: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080;
+    --shadow-md: 2px 2px 0 #404040;
+    --shadow-lg: 4px 4px 0 #404040;
+    --shadow-hover: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #404040;
+
+    --button-disabled-bg: #D6D3CE;
+    --button-disabled-text: #808080;
+    --button-disabled-border: #A0A0A0;
+    --input-disabled-bg: #C8C8C8;
+}
+
+:root[data-ui-mode="dark"] {
+    --bg-primary: #202020;
+    --bg-secondary: #303030;
+    --bg-tertiary: #181818;
+    --bg-card: #303030;
+    --bg-card-soft: #383838;
+    --bg-hover: #404040;
+
+    --text-primary: #F2F2F2;
+    --text-secondary: #E2E2E2;
+    --text-muted: #BDBDBD;
+    --text-very-muted: #8A8A8A;
+    --text-dark: #000000;
+
+    --border-color: #909090;
+    --border-light: #606060;
+    --border-medium: #707070;
+    --border-dark: #101010;
+}

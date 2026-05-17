@@ -1,0 +1,167 @@
+<div class="p-lg" style="height: auto;">
+    <h2>Shared UI Library</h2>
+    <p class="mb-lg">Canonical component and theme system hosted at <code>ui.mullmania.com</code>. Start from the runtime and shared helpers, but build with hierarchy, restraint, and clear section purpose instead of generic component piles.</p>
+
+    <div class="grid gap-lg">
+        <div class="card" style="border-left: 4px solid var(--color-danger);">
+            <h3 class="mb-md"><i class="ti ti-map-2"></i> Sitemap First</h3>
+            <ol>
+                <li>Declare tabs, panels, and nested navigation in <code>sitemap.json</code>.</li>
+                <li>Prefer <code>preset</code>, <code>component</code>, or <code>componentSource</code> over <code>htmlSource</code>.</li>
+                <li>Drop into raw HTML only when the shared runtime genuinely cannot express the surface yet.</li>
+            </ol>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--color-primary);">
+            <h3 class="mb-md"><i class="ti ti-sparkles"></i> Consumer Design Rules</h3>
+            <ol>
+                <li>Start with composition, not components.</li>
+                <li>Give each section one job and one takeaway.</li>
+                <li>Make the brand or product name the loudest text on branded pages.</li>
+                <li>Default to cardless layout. Use cards only when the card itself is the interaction.</li>
+                <li>Use no more than two typefaces and one accent color by default.</li>
+                <li>Use utility copy for product UI and product copy for branded pages.</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-rocket"></i> One-Line Start</h3>
+            <pre><code>&lt;script src="https://ui.mullmania.com/ui.js"&gt;&lt;/script&gt;</code></pre>
+            <p class="text-muted">The runtime injects the current published default theme, Tabler icons, and the shared JS primitives automatically.</p>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-world"></i> Published Default</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="ti ti-check"></i> Bare <code>ui.js</code>, <code>data-ui-theme="active"</code>, and <code>/active/*</code> follow the published global default.</li>
+                <li><i class="ti ti-check"></i> Use a concrete theme id like <code>ocean</code> or <code>walmart</code> when a site should stay pinned.</li>
+                <li><i class="ti ti-check"></i> <code>UI.setTheme()</code> previews locally and does not publish a new default.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-layout-dashboard"></i> Branded Page Rules</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="ti ti-check"></i> Treat the first viewport like a poster.</li>
+                <li><i class="ti ti-check"></i> Use one dominant visual idea in the hero.</li>
+                <li><i class="ti ti-check"></i> Put the order in this sequence: brand, headline, support copy, CTA.</li>
+                <li><i class="ti ti-check"></i> Avoid hero cards, stat strips, and floating dashboard clutter by default.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-app-window"></i> Product UI Rules</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="ti ti-check"></i> Default to calm surface hierarchy.</li>
+                <li><i class="ti ti-check"></i> Use headings that orient the operator immediately.</li>
+                <li><i class="ti ti-check"></i> Use spacing and typography before adding more chrome.</li>
+                <li><i class="ti ti-check"></i> If a panel can become plain layout without losing meaning, remove the card treatment.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-typography"></i> Typography Rules</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="ti ti-check"></i> One sans family for controls, forms, tables, and body text.</li>
+                <li><i class="ti ti-check"></i> One display family only for high-impact moments.</li>
+                <li><i class="ti ti-check"></i> Mono for labels, tabs, token names, and diagnostics.</li>
+                <li><i class="ti ti-check"></i> Use scale and spacing before decorative effects.</li>
+                <li><i class="ti ti-check"></i> Prefer semantic role classes or <code>UI.text({ role: ... })</code> over page-specific selectors.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-braces"></i> JS-First Rendering</h3>
+            <pre><code>&lt;div id="app"&gt;&lt;/div&gt;
+&lt;script src="https://ui.mullmania.com/ui.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+UI.ready().then(() => {
+  UI.mount('#app', {
+    title: 'Agent Workspace',
+    subtitle: 'Operational UI with clear hierarchy.',
+    sections: [
+      UI.section({
+        title: 'Overview',
+        description: 'Use structure and spacing before adding more containers.',
+        children: [
+          UI.grid({
+            columns: 2,
+            children: [
+              UI.stat({ label: 'Status', value: 'Live' }),
+              UI.alert({
+                tone: 'info',
+                title: 'Working Rule',
+                message: 'Do not default to a generic card mosaic.'
+              })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+});
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-package"></i> Primary Helpers</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><i class="ti ti-check"></i> <code>UI.mount(target, definition)</code></li>
+                <li><i class="ti ti-check"></i> <code>UI.text({ role: 'brand' | 'display' | 'ui-title' | 'body' | 'label' })</code></li>
+                <li><i class="ti ti-check"></i> <code>UI.section(options)</code></li>
+                <li><i class="ti ti-check"></i> <code>UI.stat(options)</code></li>
+                <li><i class="ti ti-check"></i> <code>UI.grid(options)</code></li>
+                <li><i class="ti ti-check"></i> <code>UI.card(options)</code> when a card is truly the right interaction</li>
+                <li><i class="ti ti-check"></i> <code>UI.table(options)</code></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md"><i class="ti ti-book"></i> Canonical Docs</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li class="mb-sm"><i class="ti ti-typography"></i> <a href="/active/typography.html" target="_blank">Typography & Visual Reference</a></li>
+                <li class="mb-sm"><i class="ti ti-robot"></i> <a href="/llm-docs.md" target="_blank">Consumer Guidance</a></li>
+                <li class="mb-sm"><i class="ti ti-info-circle"></i> <a href="/llms.txt" target="_blank">llms.txt</a></li>
+                <li class="mb-sm"><i class="ti ti-layout-dashboard"></i> <a href="/examples/mullmania-editorial-demo.html" target="_blank">Editorial Demo Example</a></li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--color-danger);">
+            <h3 class="mb-md"><i class="ti ti-alert-triangle"></i> Reject These Failures</h3>
+            <ol>
+                <li>Generic SaaS card grid as the first impression.</li>
+                <li>Weak brand presence in the first screen.</li>
+                <li>Too many accent colors.</li>
+                <li>Theme-specific hacks in generic work.</li>
+                <li>Ad hoc local CSS for patterns that should live in the library.</li>
+                <li>Using <code>htmlSource</code> when a sitemap-driven preset or component would do the job.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<style>
+pre {
+    background: var(--bg-tertiary);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    border-left: 3px solid var(--color-primary);
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+}
+
+ul li,
+ol li {
+    margin-bottom: var(--space-sm);
+}
+
+ul li i {
+    color: var(--color-success);
+    margin-right: var(--space-xs);
+}
+</style>

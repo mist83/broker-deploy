@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mullmania Editorial Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4efe6;
+      --paper-deep: #e8decd;
+      --wash: #ddd0bc;
+      --ink: #121212;
+      --muted: #645c50;
+      --line: rgba(18, 18, 18, 0.14);
+      --line-strong: rgba(18, 18, 18, 0.3);
+      --blue: #2450ff;
+      --blue-deep: #1735ab;
+      --orange: #c7682d;
+      --white: #fffdf8;
+      --shadow: 0 24px 80px rgba(36, 80, 255, 0.12);
+      --font-body: "Manrope", sans-serif;
+      --font-display: "Instrument Serif", serif;
+      --font-mono: "IBM Plex Mono", monospace;
+      --max: 1600px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top right, rgba(36, 80, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 15% 20%, rgba(199, 104, 45, 0.1), transparent 22%),
+        linear-gradient(180deg, var(--paper) 0%, #f8f4ed 100%);
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(rgba(18, 18, 18, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 18, 18, 0.03) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.5));
+    }
+
+    .shell {
+      width: min(var(--max), calc(100vw - 32px));
+      margin: 16px auto;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 253, 248, 0.76);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1.4fr auto;
+      gap: 24px;
+      padding: 24px 28px 18px;
+      border-bottom: 1px solid var(--line);
+      align-items: end;
+    }
+
+    .eyebrow,
+    .meta,
+    .tab,
+    .rail-title,
+    .small-label,
+    .chip {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .brand-row {
+      display: grid;
+      gap: 8px;
+      animation: settle 700ms cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: clamp(56px, 12vw, 144px);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+
+    .brand .serif {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-style: italic;
+      margin-left: 10px;
+    }
+
+    .brand-copy {
+      max-width: 56ch;
+      font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .mast-aside {
+      display: grid;
+      gap: 18px;
+      align-content: end;
+      justify-items: end;
+      min-width: 260px;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
+    .chip {
+      border: 1px solid var(--line-strong);
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.76);
+    }
+
+    .chip strong {
+      font-family: var(--font-body);
+      letter-spacing: normal;
+      text-transform: none;
+      margin-left: 6px;
+      font-size: 14px;
+    }
+
+    .nav {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: 20px;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      padding: 14px 0 12px;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      animation: rise 650ms cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .tab.active {
+      color: var(--ink);
+      border-color: var(--blue);
+    }
+
+    .tab:nth-child(2) { animation-delay: 70ms; }
+    .tab:nth-child(3) { animation-delay: 140ms; }
+    .tab:nth-child(4) { animation-delay: 210ms; }
+    .tab:nth-child(5) { animation-delay: 280ms; }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr) 296px;
+      min-height: 840px;
+    }
+
+    .rail,
+    .inspector {
+      background: rgba(232, 222, 205, 0.38);
+    }
+
+    .rail,
+    .canvas,
+    .inspector {
+      min-width: 0;
+    }
+
+    .rail {
+      border-right: 1px solid var(--line);
+      padding: 18px 16px 22px;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .rail-section,
+    .inspector-section {
+      display: grid;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .rail-title,
+    .small-label {
+      color: var(--muted);
+    }
+
+    .action {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 13px 14px;
+      color: var(--ink);
+    }
+
+    .action.primary {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+
+    .action strong,
+    .component strong,
+    .inspector-section strong {
+      font-size: 15px;
+    }
+
+    .action span,
+    .component span,
+    .inspector-section span,
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .component-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .component {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.8);
+    }
+
+    .canvas {
+      position: relative;
+      padding: 24px;
+      background:
+        linear-gradient(rgba(18, 18, 18, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 18, 18, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      overflow: hidden;
+    }
+
+    .canvas-sheet {
+      height: 100%;
+      min-height: 760px;
+      border: 1px solid var(--line-strong);
+      background:
+        radial-gradient(circle at top left, rgba(36, 80, 255, 0.08), transparent 32%),
+        linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(246, 240, 230, 0.98));
+      position: relative;
+      padding: 34px 34px 32px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 26px;
+    }
+
+    .canvas-kicker {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .canvas-kicker .small-label:last-child {
+      color: var(--orange);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) 320px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .hero-block {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6.2vw, 100px);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      font-weight: 400;
+      max-width: 10ch;
+    }
+
+    .hero-title .sans {
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-style: normal;
+      letter-spacing: -0.08em;
+    }
+
+    .hero-subcopy {
+      margin: 0;
+      max-width: 38ch;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .metric-stack {
+      display: grid;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric {
+      display: grid;
+      gap: 4px;
+    }
+
+    .metric strong {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .mini-panel {
+      align-self: stretch;
+      border-left: 1px solid var(--line);
+      padding-left: 22px;
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .mini-panel h3,
+    .story-strip h3 {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .note {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: rgba(244, 239, 230, 0.7);
+      display: grid;
+      gap: 6px;
+    }
+
+    .note strong {
+      font-size: 15px;
+    }
+
+    .story-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-self: end;
+    }
+
+    .story {
+      border-top: 1px solid var(--line-strong);
+      padding-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .story strong {
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .story span {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .cursor-glow {
+      position: absolute;
+      right: 12%;
+      bottom: 17%;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36, 80, 255, 0.3) 0%, rgba(36, 80, 255, 0) 72%);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    .cursor {
+      position: absolute;
+      right: 12%;
+      bottom: 17%;
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 30px solid var(--blue);
+      transform: rotate(316deg);
+      filter: drop-shadow(0 8px 18px rgba(36, 80, 255, 0.25));
+    }
+
+    .inspector {
+      border-left: 1px solid var(--line);
+      padding: 18px 16px 22px;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .inspector h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.05em;
+    }
+
+    .swatch {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .swatch:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+    }
+
+    .type-sample {
+      display: grid;
+      gap: 10px;
+    }
+
+    .type-sample .display {
+      font-family: var(--font-display);
+      font-size: 40px;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+    }
+
+    .type-sample .ui {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .type-sample .micro {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    @keyframes settle {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.55;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .workspace,
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-panel {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 18px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        width: min(calc(100vw - 20px), var(--max));
+        margin: 10px auto;
+      }
+
+      .masthead {
+        grid-template-columns: 1fr;
+      }
+
+      .mast-aside,
+      .chip-row {
+        justify-items: start;
+        justify-content: start;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .rail,
+      .inspector {
+        border: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .story-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .canvas {
+        padding: 14px;
+      }
+
+      .canvas-sheet {
+        padding: 22px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture"></div>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand-row">
+        <div class="eyebrow">Frontend Skill Demo / Mullmania Rewrite</div>
+        <h1 class="brand">MULLMANIA <span class="serif">edited</span></h1>
+        <p class="brand-copy">Same builder bones, different voice. The rewrite swaps generic system chrome for an editorial workbench: serif drama only where it matters, mono labels for scanability, and a paper-and-cobalt palette that feels authored instead of default.</p>
+      </div>
+      <aside class="mast-aside">
+        <div class="chip-row">
+          <div class="chip">Display <strong>Instrument Serif</strong></div>
+          <div class="chip">UI <strong>Manrope</strong></div>
+          <div class="chip">Microcopy <strong>IBM Plex Mono</strong></div>
+        </div>
+        <div class="meta">No hero cards. No dashboard mush. One accent. Real hierarchy.</div>
+      </aside>
+    </header>
+
+    <nav class="nav" aria-label="Primary">
+      <div class="tab active">Visual Builder</div>
+      <div class="tab">Documentation</div>
+      <div class="tab">Themes</div>
+      <div class="tab">Typography</div>
+      <div class="tab">Test Results</div>
+    </nav>
+
+    <section class="workspace">
+      <aside class="rail">
+        <div class="rail-section">
+          <div class="rail-title">Actions</div>
+          <div class="action primary">
+            <strong>New Composition</strong>
+            <span>Poster-like first viewport</span>
+          </div>
+          <div class="action">
+            <strong>Load Tokens</strong>
+            <span>Color, type, spacing, motion</span>
+          </div>
+          <div class="action">
+            <strong>Export Theme</strong>
+            <span>Ready for `ui.mullmania.com`</span>
+          </div>
+        </div>
+
+        <div class="rail-section">
+          <div class="rail-title">Components</div>
+          <div class="component-list">
+            <div class="component">
+              <strong>Brand Header</strong>
+              <span>The product name becomes the loudest object in the frame.</span>
+            </div>
+            <div class="component">
+              <strong>Poster Canvas</strong>
+              <span>One dominant idea, not a stack of utility cards.</span>
+            </div>
+            <div class="component">
+              <strong>Inspector Rail</strong>
+              <span>Utility copy stays sharp and operational.</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="canvas">
+        <div class="canvas-sheet">
+          <div class="canvas-kicker">
+            <div class="small-label">Editorial Theme</div>
+            <div class="small-label">Calm surface hierarchy</div>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-block">
+              <h2 class="hero-title">Make the <span class="sans">builder</span> feel designed.</h2>
+              <p class="hero-subcopy">This is the typographic move the frontend skill wants: keep the work surface practical, then spend the visual budget on the product name, the opening composition, and a small number of memorable type moments.</p>
+              <div class="metric-stack">
+                <div class="metric">
+                  <strong>2 typefaces + mono</strong>
+                  <span>Display for theater, sans for product UI, mono for labels and diagnostics.</span>
+                </div>
+                <div class="metric">
+                  <strong>1 accent color</strong>
+                  <span>Cobalt carries action and state; orange appears only as a controlled warm counterpoint.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mini-panel">
+              <h3>Interaction Thesis</h3>
+              <div class="note">
+                <strong>Entrance sequence</strong>
+                <span>Wordmark settles first, tabs rise second, cursor pulse keeps the empty canvas alive.</span>
+              </div>
+              <div class="note">
+                <strong>Scroll/story behavior</strong>
+                <span>Inspector sections should reveal with small offsets instead of heavy overlays.</span>
+              </div>
+              <div class="note">
+                <strong>Affordance sharpeners</strong>
+                <span>Tab underline slides. Buttons stay dense and confident, not glossy.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-strip">
+            <div class="story">
+              <h3>Hero</h3>
+              <strong>Poster first</strong>
+              <span>The first screen should read in one glance: brand, action, visual idea.</span>
+            </div>
+            <div class="story">
+              <h3>Support</h3>
+              <strong>Utility second</strong>
+              <span>Sidebars and inspectors should sound like tools, not marketing copy.</span>
+            </div>
+            <div class="story">
+              <h3>Detail</h3>
+              <strong>Texture without clutter</strong>
+              <span>Paper, grid, and type rhythm do the atmospheric work instead of shadows and boxes.</span>
+            </div>
+          </div>
+
+          <div class="footer-line">
+            <div class="small-label">Proposed for `ui.mullmania.com`</div>
+            <div class="small-label">Editorial workbench / typography-led app shell</div>
+          </div>
+
+          <div class="cursor-glow" aria-hidden="true"></div>
+          <div class="cursor" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <aside class="inspector">
+        <div class="inspector-section">
+          <div class="small-label">Typography Stack</div>
+          <div class="type-sample">
+            <div class="display">Edited, not default.</div>
+            <div class="ui">Body copy stays crisp, calm, and legible at operational sizes.</div>
+            <div class="micro">Tabs / labels / diagnostics / token names</div>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="small-label">Palette</div>
+          <div class="swatch">
+            <div class="dot" style="background:#2450ff"></div>
+            <div><strong>Cobalt</strong><br><span>Primary action and active states</span></div>
+          </div>
+          <div class="swatch">
+            <div class="dot" style="background:#f4efe6"></div>
+            <div><strong>Paper</strong><br><span>Main working surface</span></div>
+          </div>
+          <div class="swatch">
+            <div class="dot" style="background:#c7682d"></div>
+            <div><strong>Burnt Orange</strong><br><span>Sparse warmth, not a second system accent</span></div>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="small-label">Skill Verdict</div>
+          <h2>Less component demo. More authored product.</h2>
+          <span>The rewrite should remove card-default thinking from the shell and use typography, spacing, alignment, and one visual anchor to carry the premium feeling.</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+/**
+ * Ghoul Complete Stylesheet
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/ghoul/style.css
+ *
+ * Combined colors + layout for convenience.
+ * Imports JetBrains Mono + Rubik Mono One from Google Fonts.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rubik+Mono+One&display=swap');
+@import url('colors.css');
+@import url('layout.css');

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://ui.mullmania.com/page-contract.schema.json",
+  "version": 1,
+  "title": "Tiny Launch Page",
+  "description": "A complete site surface described as JSON and rendered by ui.mullmania.com.",
+  "theme": "walmart",
+  "mode": "light",
+  "page": {
+    "component": "app",
+    "title": "Tiny Launch Page",
+    "subtitle": "No bespoke HTML. No CSS fork. This page is a JSON contract rendered by the shared UI framework.",
+    "children": [
+      {
+        "component": "section",
+        "title": "Ship The Page",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 3,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Input",
+                "value": "JSON",
+                "icon": "ti ti-braces"
+              },
+              {
+                "component": "stat",
+                "label": "Renderer",
+                "value": "ui.js",
+                "icon": "ti ti-wand"
+              },
+              {
+                "component": "stat",
+                "label": "Output",
+                "value": "Site",
+                "icon": "ti ti-world"
+              }
+            ]
+          },
+          {
+            "component": "alert",
+            "tone": "success",
+            "title": "The framework owns the chrome",
+            "message": "The contract names intent. ui.mullmania.com supplies layout, type, spacing, cards, icons, and theme behavior."
+          }
+        ]
+      },
+      {
+        "component": "grid",
+        "columns": 2,
+        "children": [
+          {
+            "component": "card",
+            "title": "What you write",
+            "subtitle": "A small, structured document.",
+            "children": [
+              {
+                "component": "text",
+                "role": "body",
+                "text": "Title, subtitle, sections, stats, alerts, tables, previews, and actions can travel as data."
+              }
+            ]
+          },
+          {
+            "component": "table",
+            "title": "What you get",
+            "columns": ["part", "owner"],
+            "rows": [
+              { "part": "Layout", "owner": "Shared framework" },
+              { "part": "Theme", "owner": "Shared framework" },
+              { "part": "Content", "owner": "JSON contract" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

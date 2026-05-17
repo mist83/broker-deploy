@@ -1,0 +1,140 @@
+<div class="p-lg">
+    <h2><i class="ti ti-alert-circle"></i> Alerts &amp; Status Badges</h2>
+    <p class="text-secondary mb-lg">Every alert type and status badge variant.</p>
+
+    <!-- Pattern 52: Alert Banners -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">52</span> Alert Banners</h3>
+        <p class="text-secondary mb-md">Grid layout: icon column + text column. Tinted backgrounds with matching borders.</p>
+        <div class="alert alert-success">
+            <i class="ti ti-circle-check"></i>
+            <span><strong>Success:</strong> Your changes have been saved. The deployment will begin shortly.</span>
+        </div>
+        <div class="alert alert-error">
+            <i class="ti ti-circle-x"></i>
+            <span><strong>Error:</strong> Failed to connect to the database. Check your connection string and try again.</span>
+        </div>
+        <div class="alert alert-warning">
+            <i class="ti ti-alert-triangle"></i>
+            <span><strong>Warning:</strong> Your API key expires in 3 days. Rotate it to avoid service disruption.</span>
+        </div>
+        <div class="alert alert-info">
+            <i class="ti ti-info-circle"></i>
+            <span><strong>Info:</strong> A new version is available. Update to v2.4.1 for the latest features.</span>
+        </div>
+    </div>
+
+    <!-- Pattern 53: Status Badges - Semantic -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">53</span> Status Badges (Semantic Names)</h3>
+        <p class="text-secondary mb-md">Inline-block, 4px/12px padding, semibold text, 4px radius.</p>
+        <div class="grid-2 gap-lg">
+            <div>
+                <h4 class="mb-md">State-Based Names</h4>
+                <div class="grid gap-sm">
+                    <div class="grid-between">
+                        <code>.status-success / .status-completed</code>
+                        <span class="status-badge status-success">Success</span>
+                    </div>
+                    <div class="grid-between">
+                        <code>.status-error / .status-failed</code>
+                        <span class="status-badge status-error">Error</span>
+                    </div>
+                    <div class="grid-between">
+                        <code>.status-warning / .status-executing</code>
+                        <span class="status-badge status-warning">Warning</span>
+                    </div>
+                    <div class="grid-between">
+                        <code>.status-info / .status-created</code>
+                        <span class="status-badge status-info">Info</span>
+                    </div>
+                    <div class="grid-between">
+                        <code>.status-enabled</code>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="grid-between">
+                        <code>.status-cancelled / .status-disabled</code>
+                        <span class="status-badge status-cancelled">Cancelled</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-md">Real-World Usage</h4>
+                <div class="grid gap-sm">
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Build #1284</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Build #1285</span>
+                        <span class="status-badge status-executing">Executing</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Build #1286</span>
+                        <span class="status-badge status-failed">Failed</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Build #1287</span>
+                        <span class="status-badge status-planning">Planning</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span>Build #1288</span>
+                        <span class="status-badge status-created">Created</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 54: Badges in Different Contexts -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">54</span> Badges in Context</h3>
+        <p class="text-secondary mb-md">Badges used inline with text, in table cells, card headers, and lists.</p>
+
+        <h4 class="mb-sm">Inline with text</h4>
+        <p class="mb-lg">The service is currently <span class="status-badge status-enabled">Enabled</span> and running in <span class="status-badge status-warning">Staging</span> mode.</p>
+
+        <h4 class="mb-sm">In a sidebar item</h4>
+        <div style="max-width: 250px; border: 1px solid var(--border-color);">
+            <div class="sidebar-item active">
+                <i class="ti ti-inbox"></i>
+                <div class="grid-between">
+                    <span>Inbox</span>
+                    <span class="status-badge status-success">12</span>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <i class="ti ti-send"></i>
+                <div class="grid-between">
+                    <span>Sent</span>
+                    <span class="status-badge status-info">3</span>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <i class="ti ti-archive"></i>
+                <div class="grid-between">
+                    <span>Archive</span>
+                    <span class="status-badge status-cancelled">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 55: Loading Spinner -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">55</span> Loading States</h3>
+        <p class="text-secondary mb-md">Spinner (40px circle, primary border-top), pulse animation.</p>
+        <div class="grid-row gap-lg" style="align-items: center;">
+            <div>
+                <p class="text-muted mb-sm">.spinner</p>
+                <div class="spinner"></div>
+            </div>
+            <div>
+                <p class="text-muted mb-sm">.pulse</p>
+                <div class="pulse">
+                    <i class="ti ti-loader" style="font-size: 32px; color: var(--color-primary);"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Surface Rail Fixture",
+  "description": "Framework-owned pinned footer rail and reserved scroll viewport.",
+  "page": {
+    "component": "app",
+    "title": "Surface Rail Fixture",
+    "subtitle": "Shared footer shells and denser workspace pagers without page-local CSS.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Pinned Footer Rail",
+        "description": "The viewport reserves space for the rail, and the rail owns the sites-style pager variant.",
+        "children": [
+          {
+            "component": "node",
+            "tag": "div",
+            "className": "bg-tertiary",
+            "style": {
+              "border": "1px solid var(--border-color)",
+              "minHeight": "320px",
+              "position": "relative",
+              "overflow": "hidden"
+            },
+            "children": [
+              {
+                "component": "scrollViewport",
+                "reserve": "96px",
+                "className": "p-md",
+                "style": {
+                  "height": "280px",
+                  "overflowY": "auto"
+                },
+                "children": [
+                  {
+                    "component": "node",
+                    "tag": "div",
+                    "className": "grid gap-sm",
+                    "children": [
+                      {
+                        "component": "card",
+                        "title": "sites.mullmania.com",
+                        "subtitle": "Workspace launchpad shell"
+                      },
+                      {
+                        "component": "card",
+                        "title": "lorem-ipzom.mullmania.com",
+                        "subtitle": "Asset browser consumer"
+                      },
+                      {
+                        "component": "card",
+                        "title": "ui.mullmania.com",
+                        "subtitle": "Shared framework host"
+                      },
+                      {
+                        "component": "card",
+                        "title": "frontdoor.mullmania.com",
+                        "subtitle": "Frontdoor contract surface"
+                      },
+                      {
+                        "component": "card",
+                        "title": "reel.mullmania.com",
+                        "subtitle": "Video proof reel"
+                      },
+                      {
+                        "component": "card",
+                        "title": "catalog.mullmania.com",
+                        "subtitle": "Catalog browse surface"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "surfaceRail",
+                "placement": "footer",
+                "style": {
+                  "position": "absolute",
+                  "--surface-rail-inline": "12px",
+                  "--surface-rail-block": "12px"
+                },
+                "children": [
+                  {
+                    "component": "pager",
+                    "className": "pager--rail",
+                    "summary": "Showing 1-6 of 42 sites",
+                    "status": "Page 1 of 7",
+                    "page": 1,
+                    "pageCount": 7,
+                    "before": {
+                      "component": "node",
+                      "tag": "div",
+                      "className": "pager__size",
+                      "children": [
+                        {
+                          "component": "node",
+                          "tag": "span",
+                          "className": "pager__size-label",
+                          "text": "Rows"
+                        },
+                        {
+                          "component": "node",
+                          "tag": "span",
+                          "className": "pager__status",
+                          "text": "50"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

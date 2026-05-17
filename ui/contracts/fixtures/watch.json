@@ -1,0 +1,1331 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Watch",
+  "description": "Clip-by-clip demo coverage for the shipped UI framework routes.",
+  "page": {
+    "component": "app",
+    "title": "Watch",
+    "subtitle": "One clip per shipped route. Open the route, watch the clip, and check the same shared parts in every look.",
+    "actions": [
+      {
+        "label": "Open start",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html"
+        }
+      },
+      {
+        "label": "Open examples",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html#canonical/structure"
+        }
+      },
+      {
+        "label": "Open looks",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html#themes/walmart"
+        }
+      },
+      {
+        "label": "Open how to",
+        "variant": "primary",
+        "icon": "ti ti-arrow-up-right",
+        "action": {
+          "type": "open",
+          "href": "/index.html#docs"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "component": "section",
+        "title": "Main reel",
+        "description": "Fast pass through the whole shipped surface.",
+        "children": [
+          {
+            "component": "preview-screen",
+            "title": "UI Everywhere reel",
+            "subtitle": "Stable route demos for the shipped shell, looks, pages, and style tools.",
+            "caption": "102s",
+            "label": "UI Everywhere reel",
+            "videoSrc": "/docs/demo/demo.mp4",
+            "poster": "/docs/demo/poster.png",
+            "openHref": "/docs/demo/demo.mp4",
+            "openLabel": "Open reel",
+            "readOnly": false,
+            "preload": "metadata",
+            "actions": [
+              {
+                "label": "Open files",
+                "variant": "secondary",
+                "icon": "ti ti-files",
+                "action": {
+                  "type": "open",
+                  "href": "/docs/index.html?variant=evidence"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "What is covered",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 4,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Clips",
+                "value": "34",
+                "caption": "One per route"
+              },
+              {
+                "component": "stat",
+                "label": "Themes",
+                "value": "3",
+                "caption": "walmart, ocean, mockup"
+              },
+              {
+                "component": "stat",
+                "label": "Modes",
+                "value": "2",
+                "caption": "light, dark"
+              },
+              {
+                "component": "stat",
+                "label": "Buckets",
+                "value": "7",
+                "caption": "start, examples, pages, looks, style, map, how-to"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Start",
+        "description": "The simple first stop and the main clicks.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Start",
+                "subtitle": "The simple first stop with the main clicks and the big reel.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Start",
+                "videoSrc": "/docs/demo/clips/01-start.mp4",
+                "poster": "/docs/demo/chapters/01-start.png",
+                "openHref": "/docs/demo/clips/01-start.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/01-start.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Examples",
+        "description": "Shared parts and patterns.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Layout",
+                "subtitle": "Shell, page skeleton, and layout primitives.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Layout",
+                "videoSrc": "/docs/demo/clips/02-page-shape.mp4",
+                "poster": "/docs/demo/chapters/02-page-shape.png",
+                "openHref": "/docs/demo/clips/02-page-shape.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/structure"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/02-page-shape.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Grids",
+                "subtitle": "Columns, cards, and responsive layout patterns.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Grids",
+                "videoSrc": "/docs/demo/clips/03-grids.mp4",
+                "poster": "/docs/demo/chapters/03-grids.png",
+                "openHref": "/docs/demo/clips/03-grids.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/grids"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/03-grids.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Type",
+                "subtitle": "Text scale, headings, body copy, and hierarchy.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Type",
+                "videoSrc": "/docs/demo/clips/04-type.mp4",
+                "poster": "/docs/demo/chapters/04-type.png",
+                "openHref": "/docs/demo/clips/04-type.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/typography"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/04-type.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Buttons",
+                "subtitle": "Primary, secondary, danger, and action patterns.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Buttons",
+                "videoSrc": "/docs/demo/clips/05-buttons.mp4",
+                "poster": "/docs/demo/chapters/05-buttons.png",
+                "openHref": "/docs/demo/clips/05-buttons.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/buttons"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/05-buttons.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Forms",
+                "subtitle": "Inputs, labels, validation, and shared field rules.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Forms",
+                "videoSrc": "/docs/demo/clips/06-forms.mp4",
+                "poster": "/docs/demo/chapters/06-forms.png",
+                "openHref": "/docs/demo/clips/06-forms.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/forms"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/06-forms.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Cards",
+                "subtitle": "Grouped content blocks and quick summaries.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Cards",
+                "videoSrc": "/docs/demo/clips/07-cards.mp4",
+                "poster": "/docs/demo/chapters/07-cards.png",
+                "openHref": "/docs/demo/clips/07-cards.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/cards"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/07-cards.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Tables",
+                "subtitle": "Shared table and pager patterns.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Tables",
+                "videoSrc": "/docs/demo/clips/08-tables.mp4",
+                "poster": "/docs/demo/chapters/08-tables.png",
+                "openHref": "/docs/demo/clips/08-tables.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/tables"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/08-tables.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Alerts",
+                "subtitle": "Messages, badges, and state callouts.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Alerts",
+                "videoSrc": "/docs/demo/clips/09-alerts.mp4",
+                "poster": "/docs/demo/chapters/09-alerts.png",
+                "openHref": "/docs/demo/clips/09-alerts.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/alerts"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/09-alerts.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Popups",
+                "subtitle": "Modals and toasts.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Popups",
+                "videoSrc": "/docs/demo/clips/10-popups.mp4",
+                "poster": "/docs/demo/chapters/10-popups.png",
+                "openHref": "/docs/demo/clips/10-popups.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/modals"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/10-popups.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Detail",
+                "subtitle": "Detail page layouts and record views.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Detail",
+                "videoSrc": "/docs/demo/clips/11-details.mp4",
+                "poster": "/docs/demo/chapters/11-details.png",
+                "openHref": "/docs/demo/clips/11-details.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/detail"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/11-details.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Spacing",
+                "subtitle": "Shared gaps, rhythm, and utility layout space.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Spacing",
+                "videoSrc": "/docs/demo/clips/12-spacing.mp4",
+                "poster": "/docs/demo/chapters/12-spacing.png",
+                "openHref": "/docs/demo/clips/12-spacing.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#canonical/spacing"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/12-spacing.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Screens",
+                "subtitle": "Composed screens in dark mode.",
+                "caption": "Walmart · Dark · 3s",
+                "label": "Screens",
+                "videoSrc": "/docs/demo/clips/13-whole-pages.mp4",
+                "poster": "/docs/demo/chapters/13-whole-pages.png",
+                "openHref": "/docs/demo/clips/13-whole-pages.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=dark#canonical/full-page"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/13-whole-pages.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Preview",
+                "subtitle": "JSON-left and render-right proof surface.",
+                "caption": "Walmart · Dark · 3s",
+                "label": "Preview",
+                "videoSrc": "/docs/demo/clips/14-json-preview.mp4",
+                "poster": "/docs/demo/chapters/14-json-preview.png",
+                "openHref": "/docs/demo/clips/14-json-preview.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=dark#canonical/live-preview"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/14-json-preview.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Build Page",
+                "subtitle": "Page-contract editing, fixture loading, and renderer share links.",
+                "caption": "Walmart · Dark · 3s",
+                "label": "Build Page",
+                "videoSrc": "/docs/demo/clips/15-page-lab.mp4",
+                "poster": "/docs/demo/chapters/15-page-lab.png",
+                "openHref": "/docs/demo/clips/15-page-lab.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=dark#canonical/contract-lab"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/15-page-lab.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Pages",
+        "description": "Full JSON-mounted page routes.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Ops Board",
+                "subtitle": "A JSON page mounted straight into the shell.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Ops Board",
+                "videoSrc": "/docs/demo/clips/16-ops-board.mp4",
+                "poster": "/docs/demo/chapters/16-ops-board.png",
+                "openHref": "/docs/demo/clips/16-ops-board.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/operations-dashboard"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/16-ops-board.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Quality Queue",
+                "subtitle": "Another JSON page mounted straight into the shell.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Quality Queue",
+                "videoSrc": "/docs/demo/clips/17-quality-queue.mp4",
+                "poster": "/docs/demo/chapters/17-quality-queue.png",
+                "openHref": "/docs/demo/clips/17-quality-queue.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/quality-queue"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/17-quality-queue.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Preview Shelf",
+                "subtitle": "A preview-heavy JSON page route.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Preview Shelf",
+                "videoSrc": "/docs/demo/clips/18-preview-shelf.mp4",
+                "poster": "/docs/demo/chapters/18-preview-shelf.png",
+                "openHref": "/docs/demo/clips/18-preview-shelf.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/preview-catalog"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/18-preview-shelf.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Docs",
+                "subtitle": "Preset-backed page mounted without an HTML fragment.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Docs",
+                "videoSrc": "/docs/demo/clips/19-docs-page.mp4",
+                "poster": "/docs/demo/chapters/19-docs-page.png",
+                "openHref": "/docs/demo/clips/19-docs-page.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/docs-overview"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/19-docs-page.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Theme Page",
+                "subtitle": "Theme page mounted as a shell route.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Theme Page",
+                "videoSrc": "/docs/demo/clips/20-theme-page.mp4",
+                "poster": "/docs/demo/chapters/20-theme-page.png",
+                "openHref": "/docs/demo/clips/20-theme-page.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/active-theme"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/20-theme-page.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Ship Check",
+                "subtitle": "Component JSON loaded from disk and mounted straight into the shell.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Ship Check",
+                "videoSrc": "/docs/demo/clips/21-ship-check.mp4",
+                "poster": "/docs/demo/chapters/21-ship-check.png",
+                "openHref": "/docs/demo/clips/21-ship-check.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/release-readiness"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/21-ship-check.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Inline Page",
+                "subtitle": "Inline JSON mounted right out of the sitemap.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Inline Page",
+                "videoSrc": "/docs/demo/clips/22-inline-example.mp4",
+                "poster": "/docs/demo/chapters/22-inline-example.png",
+                "openHref": "/docs/demo/clips/22-inline-example.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#contracts/inline-component"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/22-inline-example.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Looks",
+        "description": "The same library in each look and mode.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Ocean Light",
+                "subtitle": "Ocean theme in light mode.",
+                "caption": "Ocean · Light · 3s",
+                "label": "Ocean Light",
+                "videoSrc": "/docs/demo/clips/23-ocean-light.mp4",
+                "poster": "/docs/demo/chapters/23-ocean-light.png",
+                "openHref": "/docs/demo/clips/23-ocean-light.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=ocean&mode=light#themes/ocean"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/23-ocean-light.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Ocean Dark",
+                "subtitle": "Ocean theme in dark mode.",
+                "caption": "Ocean · Dark · 3s",
+                "label": "Ocean Dark",
+                "videoSrc": "/docs/demo/clips/24-ocean-dark.mp4",
+                "poster": "/docs/demo/chapters/24-ocean-dark.png",
+                "openHref": "/docs/demo/clips/24-ocean-dark.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=ocean&mode=dark#themes/ocean"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/24-ocean-dark.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Walmart Light",
+                "subtitle": "Walmart theme in light mode.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Walmart Light",
+                "videoSrc": "/docs/demo/clips/25-walmart-light.mp4",
+                "poster": "/docs/demo/chapters/25-walmart-light.png",
+                "openHref": "/docs/demo/clips/25-walmart-light.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#themes/walmart"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/25-walmart-light.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Walmart Dark",
+                "subtitle": "Walmart theme in dark mode.",
+                "caption": "Walmart · Dark · 3s",
+                "label": "Walmart Dark",
+                "videoSrc": "/docs/demo/clips/26-walmart-dark.mp4",
+                "poster": "/docs/demo/chapters/26-walmart-dark.png",
+                "openHref": "/docs/demo/clips/26-walmart-dark.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=dark#themes/walmart"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/26-walmart-dark.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Mockup Light",
+                "subtitle": "Mockup theme in light mode.",
+                "caption": "Mockup · Light · 3s",
+                "label": "Mockup Light",
+                "videoSrc": "/docs/demo/clips/27-mockup-light.mp4",
+                "poster": "/docs/demo/chapters/27-mockup-light.png",
+                "openHref": "/docs/demo/clips/27-mockup-light.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=mockup&mode=light#themes/mockup"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/27-mockup-light.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Mockup Dark",
+                "subtitle": "Mockup theme in dark mode.",
+                "caption": "Mockup · Dark · 3s",
+                "label": "Mockup Dark",
+                "videoSrc": "/docs/demo/clips/28-mockup-dark.mp4",
+                "poster": "/docs/demo/chapters/28-mockup-dark.png",
+                "openHref": "/docs/demo/clips/28-mockup-dark.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=mockup&mode=dark#themes/mockup"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/28-mockup-dark.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Style",
+        "description": "Token and specimen surfaces.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Colors",
+                "subtitle": "Color tokens and sample surfaces.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Colors",
+                "videoSrc": "/docs/demo/clips/29-colors.mp4",
+                "poster": "/docs/demo/chapters/29-colors.png",
+                "openHref": "/docs/demo/clips/29-colors.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#builder/colors"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/29-colors.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Type",
+                "subtitle": "Font roles and specimen scale.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Type",
+                "videoSrc": "/docs/demo/clips/30-style-type.mp4",
+                "poster": "/docs/demo/chapters/30-style-type.png",
+                "openHref": "/docs/demo/clips/30-style-type.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#builder/typography"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/30-style-type.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Spacing",
+                "subtitle": "Gap scale and spacing specimens.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Spacing",
+                "videoSrc": "/docs/demo/clips/31-style-spacing.mp4",
+                "poster": "/docs/demo/chapters/31-style-spacing.png",
+                "openHref": "/docs/demo/clips/31-style-spacing.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#builder/spacing"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/31-style-spacing.png"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "preview-screen",
+                "title": "Effects",
+                "subtitle": "Depth, hover, and interaction effects.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Effects",
+                "videoSrc": "/docs/demo/clips/32-effects.mp4",
+                "poster": "/docs/demo/chapters/32-effects.png",
+                "openHref": "/docs/demo/clips/32-effects.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#builder/effects"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/32-effects.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Map",
+        "description": "The maintenance hatch for laying out sitemap structure.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "Map",
+                "subtitle": "The maintenance hatch for laying out sitemap structure visually.",
+                "caption": "Walmart · Light · 3s",
+                "label": "Map",
+                "videoSrc": "/docs/demo/clips/33-map.mp4",
+                "poster": "/docs/demo/chapters/33-map.png",
+                "openHref": "/docs/demo/clips/33-map.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#visual-builder"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/33-map.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "How To",
+        "description": "Built-in notes for using the library.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "preview-screen",
+                "title": "How To",
+                "subtitle": "The built-in notes for using the library.",
+                "caption": "Walmart · Light · 3s",
+                "label": "How To",
+                "videoSrc": "/docs/demo/clips/34-how-to.mp4",
+                "poster": "/docs/demo/chapters/34-how-to.png",
+                "openHref": "/docs/demo/clips/34-how-to.mp4",
+                "openLabel": "Open clip",
+                "readOnly": false,
+                "preload": "none",
+                "actions": [
+                  {
+                    "label": "Open route",
+                    "variant": "secondary",
+                    "icon": "ti ti-arrow-up-right",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html?theme=walmart&mode=light#docs"
+                    }
+                  },
+                  {
+                    "label": "Open still",
+                    "variant": "secondary",
+                    "icon": "ti ti-photo",
+                    "action": {
+                      "type": "open",
+                      "href": "/docs/demo/chapters/34-how-to.png"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

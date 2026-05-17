@@ -1,0 +1,148 @@
+<div class="p-lg">
+    <h2><i class="ti ti-layout-cards"></i> Card Patterns</h2>
+    <p class="text-secondary mb-lg">Every card variant: static cards, photo cards, card grids, and dynamic CardsEverywhere.</p>
+
+    <!-- Pattern 43: Basic Card -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">43</span> Basic Card (.card / .content-card)</h3>
+        <p class="text-secondary mb-md">Secondary background, 1px border, 4px radius, lg padding, md margin-bottom.</p>
+        <div class="grid-2 gap-md">
+            <div class="card">
+                <h4>Card Title</h4>
+                <p class="text-secondary mb-xs">This is a basic .card with default styling. Same as .content-card.</p>
+            </div>
+            <div class="content-card">
+                <h4>Content Card</h4>
+                <p class="text-secondary mb-xs">.content-card is an alias for .card. Identical styling.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 44: Card with Photo -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">44</span> Card with Photo Area</h3>
+        <p class="text-secondary mb-md">Photo area (200px height) + header + subtitle. Placeholder variant with icon.</p>
+        <div class="grid-3 gap-md">
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <div class="card-photo placeholder">
+                    <i class="ti ti-photo"></i>
+                </div>
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-building"></i> Headquarters</div>
+                    <div class="card-subtitle">San Francisco, CA</div>
+                </div>
+            </div>
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <div class="card-photo placeholder">
+                    <i class="ti ti-map-pin"></i>
+                </div>
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-building"></i> East Office</div>
+                    <div class="card-subtitle">New York, NY</div>
+                </div>
+            </div>
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <div class="card-photo placeholder">
+                    <i class="ti ti-world"></i>
+                </div>
+                <div class="card-header">
+                    <div class="card-title"><i class="ti ti-building"></i> EU Hub</div>
+                    <div class="card-subtitle">London, UK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 45: Stat Cards -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">45</span> Stat Cards (.stat-value)</h3>
+        <p class="text-secondary mb-md">Large primary-colored numbers for KPIs and dashboards.</p>
+        <div class="grid-4 gap-md">
+            <div class="card text-center">
+                <span class="stat-value">2,847</span>
+                <p class="text-muted mb-xs mt-sm">Total Users</p>
+            </div>
+            <div class="card text-center">
+                <span class="stat-value">99.9%</span>
+                <p class="text-muted mb-xs mt-sm">Uptime</p>
+            </div>
+            <div class="card text-center">
+                <span class="stat-value">$12.4K</span>
+                <p class="text-muted mb-xs mt-sm">Revenue</p>
+            </div>
+            <div class="card text-center">
+                <span class="stat-value">143ms</span>
+                <p class="text-muted mb-xs mt-sm">Avg Response</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 46: Cards Grid with CardsEverywhere -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">46</span> Dynamic Cards (CardsEverywhere)</h3>
+        <p class="text-secondary mb-md">Rendered by the CardsEverywhere JS class with inline data.</p>
+        <div id="demo-cards-container"></div>
+    </div>
+
+    <!-- Pattern 47: Card Composition -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">47</span> Card Composition (Mixed Content)</h3>
+        <p class="text-secondary mb-md">Cards can contain any components: alerts, badges, buttons, tables.</p>
+        <div class="grid-2 gap-md">
+            <div class="card">
+                <div class="grid-between mb-md">
+                    <h4 class="mb-xs">Server Status</h4>
+                    <span class="status-badge status-success">Healthy</span>
+                </div>
+                <div class="grid gap-sm">
+                    <div class="grid-between">
+                        <span class="text-secondary">API Gateway</span>
+                        <span class="text-success"><i class="ti ti-circle-check"></i> Online</span>
+                    </div>
+                    <div class="grid-between">
+                        <span class="text-secondary">Database</span>
+                        <span class="text-success"><i class="ti ti-circle-check"></i> Online</span>
+                    </div>
+                    <div class="grid-between">
+                        <span class="text-secondary">Cache Layer</span>
+                        <span class="text-warning"><i class="ti ti-alert-triangle"></i> Degraded</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="mb-md">Quick Actions</h4>
+                <div class="grid gap-sm">
+                    <button class="btn-primary"><i class="ti ti-refresh"></i> Restart Services</button>
+                    <button class="btn-secondary"><i class="ti ti-download"></i> Export Logs</button>
+                    <button class="btn-danger"><i class="ti ti-power"></i> Shutdown</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    if (typeof CardsEverywhere !== 'undefined') {
+        const cards = new CardsEverywhere({
+            containerId: 'demo-cards-container',
+            inlineData: [
+                { id: 1, title: 'Project Alpha', subtitle: 'Web Application', icon: 'ti ti-app-window' },
+                { id: 2, title: 'Project Beta', subtitle: 'Mobile App', icon: 'ti ti-device-mobile' },
+                { id: 3, title: 'Project Gamma', subtitle: 'API Service', icon: 'ti ti-api' },
+                { id: 4, title: 'Project Delta', subtitle: 'Data Pipeline', icon: 'ti ti-database' }
+            ],
+            cardTemplate: function(item) {
+                return '<div class="card-header">' +
+                    '<div class="card-title"><i class="' + item.icon + '"></i> ' + item.title + '</div>' +
+                    '<div class="card-subtitle">' + item.subtitle + '</div>' +
+                '</div>';
+            }
+        });
+        cards.render();
+    } else {
+        document.getElementById('demo-cards-container').innerHTML =
+            '<div class="alert alert-warning"><i class="ti ti-alert-triangle"></i><span>CardsEverywhere not loaded. Load via ui.js to see dynamic cards.</span></div>';
+    }
+})();
+</script>

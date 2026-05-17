@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        (function() {
+            const themeOptions = ['active', 'blackwhite', 'blue', 'cyberblue', 'cyberpink', 'editorial', 'ghoul', 'green', 'indigo', 'mac', 'mockup', 'monochrome', 'ocean', 'orange', 'pastelzom', 'precog', 'pumpkin', 'red', 'sunset', 'terminal', 'violet', 'walmart', 'windows31', 'yellow'];
+            const modeOptions = ['light', 'dark'];
+            const params = new URLSearchParams(window.location.search);
+            const theme = themeOptions.includes(params.get('theme')) ? params.get('theme') : 'active';
+            const mode = modeOptions.includes(params.get('mode')) ? params.get('mode') : 'light';
+            const script = document.createElement('script');
+            script.src = `/ui.js?theme=${encodeURIComponent(theme)}&mode=${encodeURIComponent(mode)}`;
+            script.async = false;
+            document.head.appendChild(script);
+
+            script.addEventListener('load', async () => {
+                await window.UI.ready();
+                document.title = `Theme Preview · ${theme} · ${mode}`;
+                window.UI.presets.mount('#app', 'preview.theme', { themeId: theme });
+            }, { once: true });
+        })();
+    </script>
+</body>
+</html>

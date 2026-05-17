@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Results</title>
+</head>
+<body>
+    <div class="detail-header">
+        <h2>Latest Test Results</h2>
+        <p class="detail-subtitle">Comprehensive proof test with visual validation</p>
+    </div>
+    
+    <div class="detail-body">
+        <!-- Test Summary Stats -->
+        <div class="grid-4 gap-md mb-lg">
+            <div class="card">
+                <div class="text-success" style="font-size: 32px; font-weight: 600; margin-bottom: 4px;" id="passed-count">10</div>
+                <div class="text-secondary" style="font-size: 14px;">Passed</div>
+            </div>
+            <div class="card">
+                <div class="text-danger" style="font-size: 32px; font-weight: 600; margin-bottom: 4px;" id="failed-count">0</div>
+                <div class="text-secondary" style="font-size: 14px;">Failed</div>
+            </div>
+            <div class="card">
+                <div class="text-primary" style="font-size: 32px; font-weight: 600; margin-bottom: 4px;" id="total-count">10</div>
+                <div class="text-secondary" style="font-size: 14px;">Total</div>
+            </div>
+            <div class="card">
+                <div class="text-primary" style="font-size: 32px; font-weight: 600; margin-bottom: 4px;" id="duration">9.7s</div>
+                <div class="text-secondary" style="font-size: 14px;">Duration</div>
+            </div>
+        </div>
+        
+        <!-- Test List -->
+        <div class="card mb-lg">
+            <h3 class="mb-md">Test Cases</h3>
+            <div id="test-list">
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 1: Ready promise exists and resolves</div>
+                    <div class="text-muted" style="font-size: 13px;">1383 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 2: Timing constants are exported</div>
+                    <div class="text-muted" style="font-size: 13px;">492 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 3: State query API exists for tabs</div>
+                    <div class="text-muted" style="font-size: 13px;">739 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 4: State query API exists for modals</div>
+                    <div class="text-muted" style="font-size: 13px;">687 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 5: State query API exists for toasts</div>
+                    <div class="text-muted" style="font-size: 13px;">453 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 6: State query API exists for sidebar</div>
+                    <div class="text-muted" style="font-size: 13px;">691 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 7: Tabs have predictable IDs</div>
+                    <div class="text-muted" style="font-size: 13px;">956 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 8: Tabs have aria-current when active</div>
+                    <div class="text-muted" style="font-size: 13px;">1193 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 9: Can use timing constants in real scenario</div>
+                    <div class="text-muted" style="font-size: 13px;">834 ms</div>
+                </div>
+                <div class="card mb-sm" style="border-left: 4px solid var(--color-success);">
+                    <div style="font-weight: 600; margin-bottom: 4px;">✓ PROOF 10: Complete integration</div>
+                    <div class="text-muted" style="font-size: 13px;">441 ms</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screenshot Gallery -->
+        <div class="card">
+            <h3 class="mb-md">Visual Proof Screenshots</h3>
+            <div class="grid-3 gap-md" id="screenshot-gallery">
+                <!-- Screenshots will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load screenshots from comprehensive-proof directory
+        function loadScreenshots() {
+            const gallery = document.getElementById('screenshot-gallery');
+            const screenshots = [
+                { file: '01-initial-load.png', label: 'Initial Load' },
+                { file: '02-vb-add-tab-node.png', label: 'Add Tab Node' },
+                { file: '03-vb-add-sidebar-node.png', label: 'Add Sidebar Node' },
+                { file: '04-vb-add-detail-node.png', label: 'Add Detail Node' },
+                { file: '05-vb-auto-layout.png', label: 'Auto Layout' },
+                { file: '06-docs-tab.png', label: 'Docs Tab' },
+                { file: '07-themes-tab-walmart.png', label: 'Themes - Walmart' },
+                { file: '08-themes-cyberpink-header.png', label: 'Cyberpink Header' },
+                { file: '09-builder-colors-header.png', label: 'Builder - Colors' },
+                { file: '10-builder-typography-header.png', label: 'Builder - Typography' },
+                { file: '11-vb-final-state.png', label: 'Visual Builder Final' }
+            ];
+            
+            gallery.innerHTML = screenshots.map(shot => `
+                <div class="card" style="padding: 0; cursor: pointer;" onclick="viewScreenshot('${shot.file}')">
+                    <img src="/screenshots/${shot.file}" 
+                         alt="${shot.label}" 
+                         style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+                    <div style="padding: 12px;">
+                        <div style="font-weight: 600; font-size: 14px;">${shot.label}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function viewScreenshot(filename) {
+            if (window.UI && window.UI.modals) {
+                window.UI.modals.show({
+                    title: filename,
+                    content: `<img src="/screenshots/${filename}" style="width: 100%; border-radius: var(--radius-sm);">`,
+                    buttons: [{ text: 'Close', action: 'close' }]
+                });
+            }
+        }
+        
+        // Load screenshots when tab becomes active
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadScreenshots);
+        } else {
+            loadScreenshots();
+        }
+    </script>
+</body>
+</html>

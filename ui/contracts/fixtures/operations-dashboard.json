@@ -1,0 +1,119 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Operations Dashboard",
+  "description": "Summary cards and latest orders rendered from the shared page contract.",
+  "page": {
+    "component": "app",
+    "title": "Operations Dashboard",
+    "subtitle": "Shared contract rendering across all themes and both modes.",
+    "actions": [
+      {
+        "label": "Copy token",
+        "variant": "secondary",
+        "icon": "ti ti-copy",
+        "action": {
+          "type": "copy",
+          "text": "ops-token-42",
+          "successMessage": "Token copied."
+        }
+      },
+      {
+        "label": "Open docs",
+        "variant": "secondary",
+        "icon": "ti ti-book",
+        "action": {
+          "type": "open",
+          "href": "/llm-docs.md"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "component": "section",
+        "title": "Summary",
+        "description": "Numbers and health states without page-local HTML.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 3,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Orders",
+                "value": "128",
+                "caption": "Last 24 hours",
+                "badge": {
+                  "label": "Healthy",
+                  "tone": "success"
+                }
+              },
+              {
+                "component": "stat",
+                "label": "Refunds",
+                "value": "4",
+                "caption": "Watch list",
+                "badge": {
+                  "label": "Review",
+                  "tone": "warning"
+                }
+              },
+              {
+                "component": "alert",
+                "tone": "info",
+                "title": "Shared renderer",
+                "message": "This dashboard is rendered from JSON, not page-local HTML."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Latest orders",
+        "children": [
+          {
+            "component": "table",
+            "columns": [
+              {
+                "key": "order",
+                "label": "Order"
+              },
+              {
+                "key": "status",
+                "label": "Status"
+              },
+              {
+                "key": "owner",
+                "label": "Owner"
+              }
+            ],
+            "rows": [
+              {
+                "order": "#1042",
+                "status": "Packed",
+                "owner": "Ava"
+              },
+              {
+                "order": "#1043",
+                "status": "Queued",
+                "owner": "Ben"
+              },
+              {
+                "order": "#1044",
+                "status": "Review",
+                "owner": "Kai"
+              }
+            ]
+          },
+          {
+            "component": "pager",
+            "summary": "Showing 1-3 of 128 orders",
+            "page": 1,
+            "pageCount": 43
+          }
+        ]
+      }
+    ]
+  }
+}

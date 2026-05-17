@@ -1,0 +1,140 @@
+<div class="p-lg">
+    <h2>Effects Variables</h2>
+    <p class="mb-lg">Customize border radius, shadows, transitions, and z-index layers.</p>
+    
+    <div class="grid gap-lg mb-xl">
+        <!-- Border Radius -->
+        <div class="card">
+            <h3 class="mb-md">Border Radius</h3>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>Small (radius-sm)</label>
+                    <input type="text" id="radius-sm" value="4px" class="text-input">
+                </div>
+                <div>
+                    <label>Medium (radius-md)</label>
+                    <input type="text" id="radius-md" value="8px" class="text-input">
+                </div>
+                <div>
+                    <label>Large (radius-lg)</label>
+                    <input type="text" id="radius-lg" value="12px" class="text-input">
+                </div>
+                <div>
+                    <label>Full (radius-full)</label>
+                    <input type="text" id="radius-full" value="50%" class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Shadows -->
+        <div class="card">
+            <h3 class="mb-md">Box Shadows</h3>
+            <div class="grid gap-md">
+                <div>
+                    <label>Small Shadow (shadow-sm)</label>
+                    <input type="text" id="shadow-sm" value="0 2px 4px rgba(0, 0, 0, 0.1)" class="text-input">
+                </div>
+                <div>
+                    <label>Medium Shadow (shadow-md)</label>
+                    <input type="text" id="shadow-md" value="0 4px 8px rgba(0, 0, 0, 0.15)" class="text-input">
+                </div>
+                <div>
+                    <label>Large Shadow (shadow-lg)</label>
+                    <input type="text" id="shadow-lg" value="0 8px 16px rgba(0, 0, 0, 0.2)" class="text-input">
+                </div>
+                <div>
+                    <label>Hover Shadow (shadow-hover)</label>
+                    <input type="text" id="shadow-hover" value="0 0 20px var(--color-primary)" class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Transitions -->
+        <div class="card">
+            <h3 class="mb-md">Transitions</h3>
+            <div class="grid grid-3 gap-md">
+                <div>
+                    <label>Fast (transition-fast)</label>
+                    <input type="text" id="transition-fast" value="0.1s ease" class="text-input">
+                </div>
+                <div>
+                    <label>Base (transition-base)</label>
+                    <input type="text" id="transition-base" value="0.2s ease" class="text-input">
+                </div>
+                <div>
+                    <label>Slow (transition-slow)</label>
+                    <input type="text" id="transition-slow" value="0.3s ease" class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Z-Index Layers -->
+        <div class="card">
+            <h3 class="mb-md">Z-Index Layers</h3>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>Base (z-base)</label>
+                    <input type="number" id="z-base" value="1" class="text-input">
+                </div>
+                <div>
+                    <label>Dropdown (z-dropdown)</label>
+                    <input type="number" id="z-dropdown" value="1000" class="text-input">
+                </div>
+                <div>
+                    <label>Modal (z-modal)</label>
+                    <input type="number" id="z-modal" value="10000" class="text-input">
+                </div>
+                <div>
+                    <label>Tooltip (z-tooltip)</label>
+                    <input type="number" id="z-tooltip" value="100000" class="text-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="card">
+        <h3 class="mb-md">Effects Preview</h3>
+        <div id="preview-area" style="padding: 20px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div style="display: inline-block; padding: var(--space-md); background: var(--color-primary); color: white; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); margin-right: var(--space-md);">
+                Small Radius + Small Shadow
+            </div>
+            <div style="display: inline-block; padding: var(--space-md); background: var(--color-secondary); color: black; border-radius: var(--radius-md); box-shadow: var(--shadow-md); margin-right: var(--space-md);">
+                Medium Radius + Medium Shadow
+            </div>
+            <div style="display: inline-block; padding: var(--space-md); background: var(--color-success); color: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                Large Radius + Large Shadow
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+}
+</style>
+
+<script>
+(function() {
+    // Update CSS variables on input change
+    document.querySelectorAll('.text-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+            const varName = '--' + e.target.id;
+            document.documentElement.style.setProperty(varName, e.target.value);
+        });
+    });
+})();
+</script>

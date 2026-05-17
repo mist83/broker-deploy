@@ -1,0 +1,156 @@
+/**
+ * Ghoul — moody dev-console palette
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/ghoul/colors.css
+ *
+ * Acid green + blood red + bone on near-black. Born on the tv-tail
+ * dashboard and disem-bowling arena: tight, monospace-first, visible
+ * across a TV-room, made for log streams, party-game HUDs, and
+ * anything that wants the "unread terminal at 2am" energy.
+ */
+
+:root {
+    /* ===== GHOUL BRAND COLORS ===== */
+    --ghoul-acid:   #B3FF2C;   /* primary accent — "alive" signals */
+    --ghoul-blood:  #FF2C4D;   /* danger / error / pin-down */
+    --ghoul-bruise: #5D3BFF;   /* secondary accent */
+    --ghoul-rot:    #45FFAE;   /* success / reanimated */
+    --ghoul-bone:   #F4ECD6;   /* paper-bright text */
+    --ghoul-warn:   #FFB02E;   /* caution */
+
+    /* ===== PRIMARY COLORS ===== */
+    --color-primary:           #B3FF2C;
+    --color-secondary:         #FF2C4D;
+    --color-primary-hover:     #88CC1F;
+    --color-secondary-hover:   #C92238;
+    --color-shell-accent:      var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    --color-primary-soft:      rgba(179, 255, 44, 0.18);
+    --color-secondary-soft:    rgba(255, 44, 77, 0.18);
+
+    /* ===== BACKGROUNDS ===== */
+    --bg-primary:    #08080d;
+    --bg-secondary:  #11131c;
+    --bg-tertiary:   #1a1d2c;
+    --bg-card:       rgba(255, 255, 255, 0.04);
+    --bg-card-soft:  rgba(255, 255, 255, 0.02);
+    --bg-hover:      rgba(255, 255, 255, 0.06);
+    --bg-overlay:    rgba(2, 2, 8, 0.78);
+
+    /* ===== TEXT COLORS ===== */
+    --text-primary:    #f1efe3;
+    --text-secondary:  #B3FF2C;
+    --text-muted:      #9b9a8c;
+    --text-very-muted: #565548;
+    --text-dark:       #08080d;
+    --text-on-primary: #08080d;
+    --text-on-danger:  #ffffff;
+
+    /* ===== BORDERS ===== */
+    --border-color:  rgba(179, 255, 44, 0.4);
+    --border-light:  rgba(255, 255, 255, 0.06);
+    --border-medium: rgba(179, 255, 44, 0.18);
+    --border-dark:   rgba(255, 44, 77, 0.5);
+
+    /* ===== SEMANTIC COLORS ===== */
+    --color-success:        #B3FF2C;
+    --color-success-action: #88CC1F;
+    --color-success-bg:     rgba(179, 255, 44, 0.07);
+    --color-danger:         #FF2C4D;
+    --color-danger-hover:   #C92238;
+    --color-danger-bg:      rgba(255, 44, 77, 0.08);
+    --color-warning:        #FFB02E;
+    --color-warning-bg:     rgba(255, 176, 46, 0.08);
+    --color-info:           #6dcaff;
+    --color-info-bg:        rgba(109, 202, 255, 0.08);
+    --color-error:          #FF2C4D;
+
+    /* ===== SPACING SCALE ===== */
+    --space-xs:  4px;
+    --space-sm:  8px;
+    --space-md:  16px;
+    --space-lg:  24px;
+    --space-xl:  32px;
+    --space-xxl: 64px;
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --font-mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-display:'Rubik Mono One', 'JetBrains Mono', monospace;
+    --font-hand:   'JetBrains Mono', monospace;
+
+    /* Font Sizes */
+    --text-xs:   11px;
+    --text-sm:   13px;
+    --text-base: 14px;
+    --text-md:   16px;
+    --text-lg:   18px;
+    --text-xl:   22px;
+    --text-2xl:  28px;
+    --text-3xl:  36px;
+    --text-4xl:  48px;
+    --text-5xl:  64px;
+    --text-6xl:  96px;
+
+    /* Font Weights */
+    --weight-normal:   400;
+    --weight-medium:   500;
+    --weight-semibold: 600;
+    --weight-bold:     700;
+
+    /* ===== EFFECTS ===== */
+    --radius-sm:   4px;
+    --radius-md:   8px;
+    --radius-lg:   12px;
+    --radius-pill: 999px;
+    --radius-full: 50%;
+
+    --shadow-sm:    0 0 10px rgba(179, 255, 44, 0.18);
+    --shadow-md:    0 4px 18px rgba(0, 0, 0, 0.45);
+    --shadow-lg:    0 10px 30px rgba(0, 0, 0, 0.55);
+    --shadow-hover: 0 0 26px rgba(179, 255, 44, 0.45);
+    --shadow-glow-acid:  0 0 22px rgba(179, 255, 44, 0.55);
+    --shadow-glow-blood: 0 0 22px rgba(255, 44, 77, 0.55);
+
+    --transition-fast: 0.12s ease;
+    --transition-base: 0.22s ease;
+    --transition-slow: 0.32s ease;
+
+    /* ===== Z-INDEX LAYERS ===== */
+    --z-base:     1;
+    --z-dropdown: 1000;
+    --z-modal:    10000;
+    --z-tooltip:  100000;
+
+    /* ===== DISABLED STATES ===== */
+    --button-disabled-bg:     rgba(255, 255, 255, 0.04);
+    --button-disabled-text:   #565548;
+    --button-disabled-border: rgba(255, 255, 255, 0.08);
+    --input-disabled-bg:      rgba(255, 255, 255, 0.04);
+}
+
+/* ==================== DARK MODE ==================== */
+/* Ghoul is dark-first by design; the dark variant pushes contrast even further. */
+
+:root[data-ui-mode="dark"] {
+    --bg-primary:    #04050a;
+    --bg-secondary:  #08080d;
+    --bg-tertiary:   #11131c;
+    --bg-card:       rgba(255, 255, 255, 0.05);
+    --bg-card-soft:  rgba(255, 255, 255, 0.025);
+    --bg-hover:      rgba(255, 255, 255, 0.08);
+
+    --text-primary:    #f4ecd6;
+    --text-secondary:  #B3FF2C;
+    --text-muted:      #a3a299;
+    --text-very-muted: #4a493e;
+
+    --border-color:  rgba(179, 255, 44, 0.55);
+    --border-light:  rgba(255, 255, 255, 0.07);
+    --border-medium: rgba(179, 255, 44, 0.22);
+    --border-dark:   rgba(255, 44, 77, 0.6);
+
+    --shadow-sm: 0 0 12px rgba(179, 255, 44, 0.22);
+    --shadow-md: 0 6px 22px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.7);
+}

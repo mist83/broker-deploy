@@ -1,0 +1,91 @@
+/**
+ * Windows 3.1 Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/windows31/layout.css
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+}
+
+.header {
+    background: var(--color-primary) !important;
+    border-bottom: 2px solid var(--border-dark);
+    color: var(--text-on-primary);
+    box-shadow: none;
+}
+
+.header h1,
+.header .shell-wordmark,
+.header .type-brand {
+    color: var(--text-on-primary);
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+button,
+.btn {
+    border-radius: 0;
+    border: 1px solid var(--border-dark);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: inset 1px 1px 0 var(--border-light), inset -1px -1px 0 var(--border-dark);
+    font-family: var(--font-family);
+    font-weight: 700;
+}
+
+button:hover,
+.btn:hover {
+    background: var(--bg-hover);
+}
+
+button:active,
+.btn:active,
+button[aria-pressed="true"],
+.btn-toggle[aria-pressed="true"] {
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+    box-shadow: inset 1px 1px 0 var(--border-dark), inset -1px -1px 0 var(--border-light);
+}
+
+input,
+textarea,
+select {
+    border-radius: 0;
+    border: 1px solid var(--border-dark);
+    background: #FFFFFF;
+    color: #000000;
+    box-shadow: inset 1px 1px 0 var(--border-medium);
+    font-family: var(--font-family);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 1px dotted #000000;
+    outline-offset: -4px;
+    border-color: var(--color-primary);
+}
+
+.card,
+.modal,
+.panel,
+.surface-card {
+    border-radius: 0;
+    border: 1px solid var(--border-dark);
+    background: var(--bg-card);
+    box-shadow: inset 1px 1px 0 var(--border-light), inset -1px -1px 0 var(--border-color);
+}
+
+.badge,
+.tag,
+.pill {
+    border-radius: 0;
+    border-color: var(--border-dark);
+    background: var(--bg-secondary);
+    box-shadow: inset 1px 1px 0 var(--border-light), inset -1px -1px 0 var(--border-color);
+}

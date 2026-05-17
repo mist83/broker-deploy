@@ -1,0 +1,191 @@
+<div class="p-lg">
+    <h2><i class="ti ti-forms"></i> Form Control Patterns</h2>
+    <p class="text-secondary mb-lg">Every input type, state, and form layout the framework supports.</p>
+
+    <!-- Pattern 36: Text Inputs -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">36</span> Text Input Types</h3>
+        <p class="text-secondary mb-md">All text-like inputs share the same styling: 1px border, 8px/12px padding, primary color on focus.</p>
+        <div class="grid-2 gap-md">
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Text</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Email</label>
+                <input type="email" placeholder="user@example.com">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Password</label>
+                <input type="password" placeholder="Enter password">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Number</label>
+                <input type="number" placeholder="42" value="42">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Search</label>
+                <input type="search" placeholder="Search...">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">URL</label>
+                <input type="url" placeholder="https://example.com">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Telephone</label>
+                <input type="tel" placeholder="+1 (555) 123-4567">
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 37: Textarea -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">37</span> Textarea</h3>
+        <p class="text-secondary mb-md">Same border/focus styling as text inputs. User-selectable text.</p>
+        <textarea rows="4" placeholder="Enter a longer message here. Textareas support user-select: text for copy/paste."></textarea>
+    </div>
+
+    <!-- Pattern 38: Select -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">38</span> Select Dropdown</h3>
+        <p class="text-secondary mb-md">Native select with framework styling. Accent color matches --color-primary.</p>
+        <div class="grid-2 gap-md">
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Environment</label>
+                <select>
+                    <option>Production</option>
+                    <option>Staging</option>
+                    <option>Development</option>
+                    <option>Local</option>
+                </select>
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Region</label>
+                <select>
+                    <option>US East</option>
+                    <option>US West</option>
+                    <option>EU Central</option>
+                    <option>Asia Pacific</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 39: Checkbox & Radio -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">39</span> Checkbox &amp; Radio Buttons</h3>
+        <p class="text-secondary mb-md">Native controls with accent-color set to --color-primary.</p>
+        <div class="grid-2 gap-lg">
+            <div>
+                <h4 class="mb-sm">Checkboxes</h4>
+                <div class="grid gap-sm">
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="checkbox" checked> Enable notifications
+                    </label>
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="checkbox" checked> Auto-save drafts
+                    </label>
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="checkbox"> Send analytics
+                    </label>
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="checkbox" disabled> Premium feature (disabled)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-sm">Radio Buttons</h4>
+                <div class="grid gap-sm">
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="radio" name="plan" checked> Free Plan
+                    </label>
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="radio" name="plan"> Pro Plan ($9/mo)
+                    </label>
+                    <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                        <input type="radio" name="plan"> Enterprise (Custom)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 40: Range Slider -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">40</span> Range Slider</h3>
+        <p class="text-secondary mb-md">Native range input with --color-primary accent.</p>
+        <div class="grid gap-md" style="max-width: 400px;">
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Volume</label>
+                <input type="range" min="0" max="100" value="65">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Brightness</label>
+                <input type="range" min="0" max="100" value="80">
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 41: Disabled Form Controls -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">41</span> Disabled States</h3>
+        <p class="text-secondary mb-md">Disabled inputs get reduced opacity (0.6) and no-pointer cursor.</p>
+        <div class="grid-2 gap-md">
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Disabled Text</label>
+                <input type="text" value="Cannot edit this" disabled>
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Disabled Select</label>
+                <select disabled>
+                    <option>Locked Option</option>
+                </select>
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Disabled Textarea</label>
+                <textarea disabled>This content is read-only.</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 42: Complete Form Example -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">42</span> Complete Form (Real-World)</h3>
+        <p class="text-secondary mb-md">A realistic settings form combining multiple input types.</p>
+        <div class="grid gap-md" style="max-width: 600px;">
+            <div class="grid-2 gap-md">
+                <div class="grid gap-sm">
+                    <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">First Name</label>
+                    <input type="text" value="Mike">
+                </div>
+                <div class="grid gap-sm">
+                    <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Last Name</label>
+                    <input type="text" value="Smith">
+                </div>
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Email Address</label>
+                <input type="email" value="mike@example.com">
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Role</label>
+                <select>
+                    <option>Administrator</option>
+                    <option selected>Developer</option>
+                    <option>Viewer</option>
+                </select>
+            </div>
+            <div class="grid gap-sm">
+                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Bio</label>
+                <textarea rows="3" placeholder="Tell us about yourself..."></textarea>
+            </div>
+            <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                <input type="checkbox" checked> Receive email notifications
+            </label>
+            <div class="grid-row gap-md mt-md">
+                <button class="btn-primary"><i class="ti ti-check"></i> Save Profile</button>
+                <button class="btn-cancel">Discard</button>
+            </div>
+        </div>
+    </div>
+</div>

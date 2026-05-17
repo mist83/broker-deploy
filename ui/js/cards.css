@@ -1,0 +1,107 @@
+/**
+ * Cards Everywhere - Styles
+ * Uses CSS variables from styles-everywhere for theming
+ */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg, 24px);
+    padding: var(--space-lg, 24px);
+    overflow-y: auto;
+}
+
+.card {
+    background: var(--color-bg-card, #ffffff);
+    border: 3px solid transparent;
+    border-radius: var(--radius-sm, 4px);
+    cursor: pointer;
+    transition: all var(--transition-base, 0.2s);
+    display: grid;
+    grid-template-rows: auto auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    background: var(--color-bg-hover, #f5f5f5);
+    border-color: var(--color-accent, #FFC220);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.card-photo {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg, #f0f0f0);
+}
+
+.card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-photo.placeholder {
+    background: var(--color-border-light, #e0e0e0);
+}
+
+.card-photo.placeholder i {
+    font-size: 64px;
+    color: var(--color-border-dark, #bdc3c7);
+}
+
+.card-header {
+    padding: var(--space-md, 16px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs, 4px);
+}
+
+.card-title {
+    font-size: var(--text-lg, 18px);
+    font-weight: var(--weight-semibold, 600);
+    color: var(--color-text, #1a1a1a);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm, 8px);
+}
+
+.card-subtitle {
+    font-size: var(--text-base, 14px);
+    color: var(--color-text-secondary, #666);
+}
+
+.card-delete {
+    position: absolute;
+    top: var(--space-md, 16px);
+    right: var(--space-md, 16px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-danger, #dc3545);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: var(--text-xl, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all var(--transition-base, 0.2s);
+    z-index: 10;
+}
+
+.card:hover .card-delete {
+    opacity: 1;
+}
+
+.card-delete:hover {
+    background: var(--color-danger-hover, #c82333);
+    transform: scale(1.1);
+}

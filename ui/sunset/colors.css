@@ -1,0 +1,58 @@
+/**
+ * Sunset Blaze Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/sunset/colors.css
+ * 
+ * Purple, pink, gold - warm sunset vibes
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    /* ===== SUNSET BRAND COLORS ===== */
+    --sunset-purple: #6A0572;
+    --sunset-pink: #FF006E;
+    --sunset-gold: #FFB703;
+    
+    /* ===== PRIMARY COLORS ===== */
+    --color-primary: #FF006E;
+    --color-secondary: #FFB703;
+    --color-primary-hover: #CC0058;
+    --color-secondary-hover: #CC9202;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    
+    /* ===== BACKGROUNDS ===== */
+    --bg-primary: #1A0321;
+    --bg-secondary: #2D0A3E;
+    --bg-tertiary: #3F1052;
+    --bg-card: #250533;
+    --bg-hover: #3A0F4A;
+    
+    /* ===== TEXT COLORS ===== */
+    --text-primary: #FFE5EC;
+    --text-secondary: #FFB3C6;
+    --text-muted: #FF8FA3;
+    --text-dark: #FFC2D1;
+    --text-on-primary: #1A0321;
+    
+    /* ===== BORDERS ===== */
+    --border-color: #6A0572;
+    --border-light: #3F1052;
+    --border-medium: #AB47BC;
+    --border-dark: #FF006E;
+    
+    /* ===== EFFECTS - SOFT GLOWS ===== */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-full: 50%;
+    
+    --shadow-sm: 0 4px 12px rgba(255, 0, 110, 0.3);
+    --shadow-md: 0 8px 24px rgba(255, 0, 110, 0.4);
+    --shadow-lg: 0 12px 36px rgba(255, 0, 110, 0.5);
+    --shadow-hover: 0 0 40px rgba(255, 183, 3, 0.6);
+    
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: 'Georgia', 'Times New Roman', serif;
+}

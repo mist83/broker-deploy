@@ -1,0 +1,48 @@
+<div class="theme-preview-sunset" style="overflow-y: auto; background: #FFE8D6;  padding: 32px;">
+    <style>
+        .theme-preview-sunset {
+            --color-primary: #FF6B35;
+            --color-secondary: #F7931E;
+            --bg-primary: #FFF8F0;
+            --bg-secondary: #FFE8D6;
+            --bg-tertiary: #FFD4B8;
+            --text-primary: #5C3D2E;
+            --text-secondary: #8B5A3C;
+            --text-muted: #A67C52;
+            --border-color: #F7931E;
+        }
+    </style>
+    <div>
+        <h2>Sunset Theme</h2>
+        <p class="mb-lg">Warm oranges and yellows like a desert sunset.</p>
+        <div class="grid gap-lg">
+            <div class="card">
+                <h3 class="mb-md"><i class="ti ti-palette"></i> Color Palette</h3>
+                <div class="grid grid-2 gap-md">
+                    <div>
+                        <div style="overflow-y: auto; background: #FF6B35; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
+                        <strong>Primary: #FF6B35</strong>
+                        <p class="text-muted">Sunset Orange</p>
+                    </div>
+                    <div>
+                        <div style="overflow-y: auto; background: #F7931E; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
+                        <strong>Secondary: #F7931E</strong>
+                        <p class="text-muted">Golden Yellow</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="mb-md"><i class="ti ti-code"></i> Usage</h3>
+                <pre><code>&lt;link rel="stylesheet" href="https://ui.mullmania.com/sunset/style.css"&gt;</code></pre>
+                <button onclick="navigator.clipboard.writeText('https://ui.mullmania.com/sunset/style.css').then(() => alert('URL copied!'))" class="btn-primary mt-md">
+                    <i class="ti ti-copy"></i> Copy URL
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+pre { background: var(--bg-tertiary); padding: var(--space-md); border-radius: var(--radius-sm); overflow-x: auto; border-left: 3px solid var(--color-primary); }
+code { font-family: var(--font-mono); font-size: var(--text-sm); }
+ul li i { color: var(--color-success); margin-right: var(--space-xs); }
+</style>

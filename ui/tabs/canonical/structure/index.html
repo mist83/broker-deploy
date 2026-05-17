@@ -1,0 +1,164 @@
+<div class="p-lg">
+    <h2><i class="ti ti-layout"></i> Page Structure Patterns</h2>
+    <p class="text-secondary mb-lg">Every structural container the framework provides. Reference badges for review.</p>
+
+    <!-- Pattern 1: Header -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">1</span> Header</h3>
+        <p class="text-secondary mb-md">Permanently blue top bar with icon, title, and right-aligned actions.</p>
+        <header class="header">
+            <h1>
+                <i class="ti ti-rocket"></i>
+                <span>App Title Here</span>
+            </h1>
+            <div class="header-links">
+                <a class="header-link" href="#">
+                    <i class="ti ti-settings"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </header>
+    </div>
+
+    <!-- Pattern 2: Container -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">2</span> Container (grid: auto/auto/1fr)</h3>
+        <p class="text-secondary mb-md">Root app wrapper. Three grid rows: header, nav, content. Full viewport height.</p>
+        <div class="bg-tertiary p-md" style="height: 300px; overflow: hidden; border: 1px solid var(--border-color);">
+            <div style="display: grid; grid-template-rows: auto auto 1fr; height: 100%; overflow: hidden;">
+                <header class="header" style="margin-bottom: 0;">
+                    <h1 style="font-size: var(--text-lg);"><i class="ti ti-box"></i><span>Container Demo</span></h1>
+                    <div class="header-links"></div>
+                </header>
+                <div class="tabs">
+                    <button class="tab active"><i class="ti ti-home"></i> Home</button>
+                    <button class="tab"><i class="ti ti-chart-bar"></i> Analytics</button>
+                    <button class="tab"><i class="ti ti-users"></i> Users</button>
+                </div>
+                <div class="p-md bg-primary" style="overflow-y: auto;">
+                    <p>Scrollable content area fills remaining space.</p>
+                    <p class="text-muted">This is the 1fr row that stretches to fill.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 3: Page Container -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">3</span> Page Container (centered, max-width 1200px)</h3>
+        <p class="text-secondary mb-md">For documentation and content-heavy pages. Auto-centered with padding.</p>
+        <div class="bg-tertiary p-md" style="border: 1px solid var(--border-color);">
+            <div class="page-container" style="border: 2px dashed var(--color-primary);">
+                <h3>Centered Content Area</h3>
+                <p class="text-secondary">This container is max-width 1200px, margin 0 auto, padding 2rem. Used for docs, articles, and long-form content pages.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 4: Single Column Layout -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">4</span> Single Column Layout (.layout.single)</h3>
+        <p class="text-secondary mb-md">Full-width scrollable content with no sidebar.</p>
+        <div style="height: 200px; border: 1px solid var(--border-color);">
+            <div class="layout single" style="height: 100%;">
+                <div class="content">
+                    <h4>Full Width Content</h4>
+                    <p class="text-secondary">No sidebar. Content scrolls vertically. Ideal for simple pages, forms, or dashboards without navigation.</p>
+                    <div class="grid-2 gap-md mt-md">
+                        <div class="card"><span class="stat-value">1,234</span><p class="text-muted mb-xs">Users</p></div>
+                        <div class="card"><span class="stat-value">567</span><p class="text-muted mb-xs">Orders</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 5: Workspace Layout -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">5</span> Workspace Layout</h3>
+        <p class="text-secondary mb-md">Fixed navigation rail with an independently scrollable detail pane. Collapses on mobile.</p>
+        <div style="height: 300px; border: 1px solid var(--border-color);">
+            <div class="layout workspace" style="height: 100%;">
+                <div class="sidebar">
+                    <div class="sidebar-scroll">
+                        <div class="sidebar-header">Navigation</div>
+                        <div class="sidebar-item active">
+                            <i class="ti ti-home"></i>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-users"></i>
+                            <span>Team Members</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-settings"></i>
+                            <span>Settings</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-chart-bar"></i>
+                            <span>Reports</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-mail"></i>
+                            <span>Messages</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>Dashboard</h3>
+                    <p class="text-secondary">Content area scrolls independently. Sidebar stays fixed at 250px width.</p>
+                    <div class="alert alert-info mt-md">
+                        <i class="ti ti-info-circle"></i>
+                        <span>On mobile (&lt;768px), sidebar collapses off-screen with a hamburger toggle.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 6: Tabs Navigation -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">6</span> Tabs Navigation</h3>
+        <p class="text-secondary mb-md">Horizontal tab bar with icons. Yellow bottom border. Active tab is bold with white background.</p>
+        <div class="tabs">
+            <button class="tab active"><i class="ti ti-home"></i> Overview</button>
+            <button class="tab"><i class="ti ti-database"></i> Data</button>
+            <button class="tab"><i class="ti ti-chart-pie"></i> Charts</button>
+            <button class="tab"><i class="ti ti-bell"></i> Notifications</button>
+            <button class="tab"><i class="ti ti-adjustments"></i> Config</button>
+        </div>
+    </div>
+
+    <!-- Pattern 7: Section Show/Hide -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">7</span> Section Show/Hide (.section / .section.active)</h3>
+        <p class="text-secondary mb-md">Sections are hidden by default. Only .section.active is visible. Used for tab content switching.</p>
+        <div class="bg-tertiary p-md" style="border: 1px solid var(--border-color);">
+            <div class="section active">
+                <p><i class="ti ti-eye"></i> This section has class="section active" and is visible.</p>
+            </div>
+            <div class="section">
+                <p>This section has class="section" only and is hidden.</p>
+            </div>
+            <p class="text-muted mt-md">The second section above exists in the DOM but is display:none.</p>
+        </div>
+    </div>
+
+    <!-- Pattern 8: Scrollbar Styling -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">8</span> Scrollbar Styling</h3>
+        <p class="text-secondary mb-md">All scrollbars use the secondary color (yellow by default) with thin styling.</p>
+        <div style="height: 120px; overflow-y: scroll; border: 1px solid var(--border-color); padding: var(--space-md);">
+            <p>Line 1 - Scroll to see the styled scrollbar</p>
+            <p>Line 2 - Scrollbar thumb uses --color-secondary</p>
+            <p>Line 3 - Track uses --bg-tertiary</p>
+            <p>Line 4 - Width is 12px with 2px border</p>
+            <p>Line 5 - Hover brightens to --color-secondary-hover</p>
+            <p>Line 6 - Applied globally via * selector</p>
+            <p>Line 7 - Works on webkit and Firefox</p>
+            <p>Line 8 - Consistent across the entire app</p>
+            <p>Line 9 - Extra content for scrolling</p>
+            <p>Line 10 - End of scrollbar demo</p>
+        </div>
+    </div>
+</div>

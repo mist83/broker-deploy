@@ -1,0 +1,202 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Workspace Table Fixture",
+  "description": "Shared catalog table shell with sticky headers, sort affordances, and empty cells.",
+  "page": {
+    "component": "app",
+    "title": "Workspace Table Fixture",
+    "subtitle": "Catalog-style table shells without repo-local table chrome.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Sticky Catalog Table",
+        "description": "The shell owns the scroll region, header rhythm, sort affordance, and footer-safe padding.",
+        "children": [
+          {
+            "component": "node",
+            "tag": "div",
+            "className": "bg-tertiary",
+            "style": {
+              "border": "1px solid var(--border-color)",
+              "borderRadius": "var(--radius-sm)",
+              "overflow": "hidden",
+              "minHeight": "320px"
+            },
+            "children": [
+              {
+                "component": "node",
+                "tag": "section",
+                "className": "workspace-table-shell",
+                "children": [
+                  {
+                    "component": "node",
+                    "tag": "div",
+                    "className": "workspace-table-scroll",
+                    "children": [
+                      {
+                        "component": "node",
+                        "tag": "table",
+                        "className": "workspace-table",
+                        "children": [
+                          {
+                            "component": "node",
+                            "tag": "thead",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "tr",
+                                "children": [
+                                  {
+                                    "component": "node",
+                                    "tag": "th",
+                                    "className": "workspace-table__col--type-icon workspace-table__sortable",
+                                    "children": [
+                                      {
+                                        "component": "icon",
+                                        "name": "ti ti-arrows-sort workspace-table__sort-icon"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "th",
+                                    "className": "workspace-table__col--preview",
+                                    "text": "Preview"
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "th",
+                                    "className": "workspace-table__col--site workspace-table__sortable",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "span",
+                                        "text": "Site"
+                                      },
+                                      {
+                                        "component": "icon",
+                                        "name": "ti ti-sort-ascending workspace-table__sort-icon workspace-table__sort-icon--active"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "th",
+                                    "className": "workspace-table__sortable",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "span",
+                                        "className": "workspace-table__count",
+                                        "text": "Summary"
+                                      },
+                                      {
+                                        "component": "icon",
+                                        "name": "ti ti-arrows-sort workspace-table__sort-icon"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "component": "node",
+                            "tag": "tbody",
+                            "children": [
+                              {
+                                "component": "node",
+                                "tag": "tr",
+                                "children": [
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "text": "🎛️"
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "children": [
+                                      {
+                                        "component": "preview",
+                                        "interactive": false,
+                                        "state": "loaded",
+                                        "width": 144,
+                                        "height": 90
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "strong",
+                                        "text": "sites.mullmania.com"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "text": "Shared launchpad shell with extracted pager rail and toolbar primitives."
+                                  }
+                                ]
+                              },
+                              {
+                                "component": "node",
+                                "tag": "tr",
+                                "children": [
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "text": "🖼️"
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "children": [
+                                      {
+                                        "component": "preview",
+                                        "interactive": false,
+                                        "state": "unavailable",
+                                        "width": 144,
+                                        "height": 90
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "children": [
+                                      {
+                                        "component": "node",
+                                        "tag": "strong",
+                                        "text": "lorem-ipzom.mullmania.com"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "component": "node",
+                                    "tag": "td",
+                                    "text": "Asset catalog consumer with shared previews and static thumbs."
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

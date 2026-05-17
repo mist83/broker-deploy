@@ -1,0 +1,144 @@
+<div class="p-lg">
+    <h2><i class="ti ti-app-window"></i> Modals &amp; Toasts</h2>
+    <p class="text-secondary mb-lg">Interactive overlay components: modal dialogs and toast notifications.</p>
+
+    <!-- Pattern 56: Modal Structure -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">56</span> Modal Structure (Static Preview)</h3>
+        <p class="text-secondary mb-md">Modal overlay with centered dialog. Header has title + close button (grid: 1fr auto).</p>
+        <div class="bg-tertiary p-lg" style="border: 1px solid var(--border-color); position: relative; min-height: 300px;">
+            <div style="background: rgba(0,0,0,0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; place-items: center;">
+                <div class="modal" style="position: relative; max-width: 500px;">
+                    <div class="modal-header">
+                        <span class="modal-title">Confirm Action</span>
+                        <button class="modal-close"><i class="ti ti-x"></i></button>
+                    </div>
+                    <p class="mb-lg">Are you sure you want to deploy this build to production? This action will replace the current live version.</p>
+                    <div class="grid-row gap-md">
+                        <button class="btn-primary"><i class="ti ti-rocket"></i> Deploy</button>
+                        <button class="btn-cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 57: Interactive Modals -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">57</span> Interactive Modals (ModalsEverywhere)</h3>
+        <p class="text-secondary mb-md">Click buttons to trigger live modals via the ModalsEverywhere JS class.</p>
+        <div class="grid-row gap-md">
+            <button class="btn-primary" id="demo-modal-confirm"><i class="ti ti-check"></i> Confirm Modal</button>
+            <button class="btn-secondary" id="demo-modal-info"><i class="ti ti-info-circle"></i> Info Modal</button>
+            <button class="btn-danger" id="demo-modal-danger"><i class="ti ti-alert-triangle"></i> Danger Modal</button>
+        </div>
+    </div>
+
+    <!-- Pattern 58: Toast Notifications -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">58</span> Toast Notifications (ToastsEverywhere)</h3>
+        <p class="text-secondary mb-md">Auto-dismiss notifications in 6 positions. Click to trigger live toasts.</p>
+        <h4 class="mb-sm">Toast Types</h4>
+        <div class="grid-row gap-md mb-lg">
+            <button class="btn-primary" id="demo-toast-success"><i class="ti ti-circle-check"></i> Success</button>
+            <button class="btn-danger" id="demo-toast-error"><i class="ti ti-circle-x"></i> Error</button>
+            <button class="btn-cancel" id="demo-toast-warning"><i class="ti ti-alert-triangle"></i> Warning</button>
+            <button class="btn-secondary" id="demo-toast-info"><i class="ti ti-info-circle"></i> Info</button>
+        </div>
+        <h4 class="mb-sm">Toast Positions</h4>
+        <div class="grid-3 gap-sm">
+            <button class="btn-secondary" id="demo-toast-tl">Top Left</button>
+            <button class="btn-secondary" id="demo-toast-tc">Top Center</button>
+            <button class="btn-secondary" id="demo-toast-tr">Top Right</button>
+            <button class="btn-secondary" id="demo-toast-bl">Bottom Left</button>
+            <button class="btn-secondary" id="demo-toast-bc">Bottom Center</button>
+            <button class="btn-secondary" id="demo-toast-br">Bottom Right</button>
+        </div>
+    </div>
+
+    <!-- Pattern 59: Modal Sizes -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">59</span> Modal Sizes</h3>
+        <p class="text-secondary mb-md">Small (400px), Medium (600px default), Large (800px).</p>
+        <div class="grid-3 gap-md">
+            <div class="bg-tertiary p-md text-center" style="border: 2px dashed var(--border-color);">
+                <p class="text-muted mb-sm">Small</p>
+                <p style="font-size: var(--text-xs);">max-width: 400px</p>
+            </div>
+            <div class="bg-tertiary p-md text-center" style="border: 2px dashed var(--color-primary);">
+                <p class="mb-sm">Medium (default)</p>
+                <p style="font-size: var(--text-xs);">max-width: 600px</p>
+            </div>
+            <div class="bg-tertiary p-md text-center" style="border: 2px dashed var(--border-color);">
+                <p class="text-muted mb-sm">Large</p>
+                <p style="font-size: var(--text-xs);">max-width: 800px</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // Modal demos
+    function setupModalDemo(btnId, options) {
+        var btn = document.getElementById(btnId);
+        if (btn && typeof ModalsEverywhere !== 'undefined') {
+            btn.addEventListener('click', function() {
+                window.UI.modals.show(options);
+            });
+        }
+    }
+
+    setupModalDemo('demo-modal-confirm', {
+        title: 'Confirm Deployment',
+        content: '<p>Deploy build <strong>#1284</strong> to production?</p><p class="text-muted">This will replace the current live version.</p>',
+        actions: [
+            { label: 'Deploy', type: 'primary', onClick: function() { window.UI.modals.close(); window.UI.toasts.show('Deployed successfully!', 'success'); } },
+            { label: 'Cancel', type: 'secondary', onClick: function() { window.UI.modals.close(); } }
+        ]
+    });
+
+    setupModalDemo('demo-modal-info', {
+        title: 'System Information',
+        content: '<p>Framework: UI Everywhere v1.1.0</p><p>Theme: Active (Walmart)</p><p>Components loaded: 6</p>',
+        actions: [
+            { label: 'OK', type: 'primary', onClick: function() { window.UI.modals.close(); } }
+        ]
+    });
+
+    setupModalDemo('demo-modal-danger', {
+        title: 'Delete Environment',
+        content: '<div class="alert alert-error"><i class="ti ti-alert-triangle"></i><span>This will permanently delete the staging environment and all associated data. This cannot be undone.</span></div>',
+        actions: [
+            { label: 'Delete Environment', type: 'danger', onClick: function() { window.UI.modals.close(); window.UI.toasts.show('Environment deleted', 'error'); } },
+            { label: 'Keep It', type: 'secondary', onClick: function() { window.UI.modals.close(); } }
+        ]
+    });
+
+    // Toast demos
+    function setupToastDemo(btnId, message, type, position) {
+        var btn = document.getElementById(btnId);
+        if (btn && window.UI && window.UI.toasts) {
+            btn.addEventListener('click', function() {
+                if (position) {
+                    window.UI.toasts.show({ message: 'Toast at ' + position, type: 'info', position: position });
+                } else {
+                    window.UI.toasts.show(message, type);
+                }
+            });
+        }
+    }
+
+    setupToastDemo('demo-toast-success', 'Changes saved successfully!', 'success');
+    setupToastDemo('demo-toast-error', 'Failed to save changes.', 'error');
+    setupToastDemo('demo-toast-warning', 'API rate limit approaching.', 'warning');
+    setupToastDemo('demo-toast-info', 'New version available.', 'info');
+
+    setupToastDemo('demo-toast-tl', null, null, 'top-left');
+    setupToastDemo('demo-toast-tc', null, null, 'top-center');
+    setupToastDemo('demo-toast-tr', null, null, 'top-right');
+    setupToastDemo('demo-toast-bl', null, null, 'bottom-left');
+    setupToastDemo('demo-toast-bc', null, null, 'bottom-center');
+    setupToastDemo('demo-toast-br', null, null, 'bottom-right');
+})();
+</script>

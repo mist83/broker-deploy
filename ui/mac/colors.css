@@ -1,0 +1,135 @@
+/**
+ * Mac Colors
+ * @url https://ui.mullmania.com/mac/colors.css
+ *
+ * Emulates Apple/macOS system controls — SF font stack, system blue accent,
+ * Apple gray surfaces, soft borders, subtle elevation. Rounded chrome.
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    /* ===== APPLE SYSTEM BLUE ===== */
+    --color-primary: #007AFF;
+    --color-primary-hover: #0062CC;
+    --color-secondary: #8E8E93;
+    --color-secondary-hover: #636366;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    /* ===== APPLE GRAY SURFACES ===== */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F7;
+    --bg-tertiary: #E8E8ED;
+    --bg-card: #FFFFFF;
+    --bg-hover: #EEEEF2;
+
+    /* ===== TEXT — APPLE LABEL COLORS ===== */
+    --text-primary: #1D1D1F;
+    --text-secondary: #6E6E73;
+    --text-muted: #A1A1A6;
+    --text-dark: #1D1D1F;
+    --text-on-primary: #FFFFFF;
+    --text-on-secondary: #FFFFFF;
+
+    /* ===== BORDERS — APPLE SEPARATOR ===== */
+    --border-color: #D2D2D7;
+    --border-light: #E5E5EA;
+    --border-medium: #C7C7CC;
+    --border-dark: #8E8E93;
+
+    /* ===== APPLE SEMANTIC COLORS ===== */
+    --color-success: #34C759;
+    --color-success-action: #248A3D;
+    --color-success-bg: #E8F8EC;
+    --color-danger: #FF3B30;
+    --color-danger-hover: #D70015;
+    --color-danger-bg: #FFEAE9;
+    --color-warning: #FF9500;
+    --color-warning-bg: #FFF4E5;
+    --color-info: #5AC8FA;
+    --color-info-bg: #E5F6FE;
+    --color-error: #FF3B30;
+
+    /* ===== APPLE SF SYSTEM FONT ===== */
+    --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+    --font-mono: "SF Mono", ui-monospace, Menlo, Monaco, "Cascadia Code", monospace;
+    --font-family-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Helvetica Neue", sans-serif;
+
+    /* ===== ROUNDED APPLE CHROME ===== */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-full: 9999px;
+
+    /* ===== APPLE-STYLE ELEVATION ===== */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 0 0 4px rgba(0, 122, 255, 0.25);
+
+    --transition-base: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ===== DISABLED STATES ===== */
+    --button-disabled-bg: #F2F2F7;
+    --button-disabled-text: #C7C7CC;
+    --button-disabled-border: #E5E5EA;
+    --input-disabled-bg: #F2F2F7;
+
+    /* ===== MAC TRAFFIC LIGHTS (modal close) ===== */
+    --mac-traffic-close: #FF5F57;
+    --mac-traffic-min: #FEBC2E;
+    --mac-traffic-max: #28C840;
+    --mac-traffic-rim: rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== DARK MODE ==================== */
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    /* Apple dark system blue */
+    --color-primary: #0A84FF;
+    --color-primary-hover: #409CFF;
+    --color-secondary: #98989D;
+    --color-secondary-hover: #AEAEB2;
+
+    /* Apple dark surfaces */
+    --bg-primary: #1E1E1E;
+    --bg-secondary: #2C2C2E;
+    --bg-tertiary: #3A3A3C;
+    --bg-card: #2C2C2E;
+    --bg-hover: #3A3A3C;
+
+    --text-primary: #F5F5F7;
+    --text-secondary: #AEAEB2;
+    --text-muted: #8E8E93;
+    --text-dark: #F5F5F7;
+
+    --border-color: #38383A;
+    --border-light: #2C2C2E;
+    --border-medium: #48484A;
+    --border-dark: #636366;
+
+    --color-success: #30D158;
+    --color-success-bg: #0F2A14;
+    --color-danger: #FF453A;
+    --color-danger-hover: #FF6961;
+    --color-danger-bg: #2A0E0C;
+    --color-warning: #FF9F0A;
+    --color-warning-bg: #2A1F00;
+    --color-info: #64D2FF;
+    --color-info-bg: #0F2530;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.6);
+    --shadow-hover: 0 0 0 4px rgba(10, 132, 255, 0.35);
+
+    --button-disabled-bg: #2C2C2E;
+    --button-disabled-text: #636366;
+    --button-disabled-border: #38383A;
+    --input-disabled-bg: #2C2C2E;
+}

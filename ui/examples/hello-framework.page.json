@@ -1,0 +1,73 @@
+{
+  "$schema": "https://ui.mullmania.com/page-contract.schema.json",
+  "version": 1,
+  "title": "Hello Framework",
+  "description": "Example remote page contract for ui.mullmania.com.",
+  "theme": "ocean",
+  "page": {
+    "component": "app",
+    "title": "Hello Framework",
+    "subtitle": "This page was fetched as JSON, validated by ui.mullmania.com, and rendered entirely through shared primitives.",
+    "children": [
+      {
+        "component": "section",
+        "title": "Overview",
+        "children": [
+          {
+            "component": "text",
+            "role": "body",
+            "text": "The framework now accepts semantic text roles in remote contracts, so typography can stay framework-owned too."
+          },
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Renderer",
+                "value": "Live",
+                "icon": "ti ti-circle-check",
+                "badge": {
+                  "component": "status",
+                  "label": "Validated",
+                  "tone": "success"
+                }
+              },
+              {
+                "component": "alert",
+                "tone": "info",
+                "title": "Contract Loaded",
+                "message": "The host fetched this document, checked it, applied the selected theme, and mounted it without custom page HTML."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "grid",
+        "columns": 2,
+        "children": [
+          {
+            "component": "table",
+            "title": "Capabilities",
+            "columns": ["surface", "status"],
+            "rows": [
+              { "surface": "Cards", "status": "Framework-owned" },
+              { "surface": "Tables", "status": "Framework-owned" },
+              { "surface": "Charts", "status": "Framework-owned" },
+              { "surface": "Toasts", "status": "Framework-owned" }
+            ]
+          },
+          {
+            "component": "chart",
+            "title": "Weekly Velocity",
+            "variant": "line",
+            "labels": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+            "series": [4, 7, 9, 8, 12],
+            "caption": "Standard charts can travel as data instead of bespoke code."
+          }
+        ]
+      }
+    ]
+  }
+}

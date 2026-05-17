@@ -1,0 +1,89 @@
+<div class="p-lg">
+    <h2>Spacing Variables</h2>
+    <p class="mb-lg">Customize spacing scale for padding and margins.</p>
+    
+    <div class="grid gap-lg mb-xl">
+        <!-- Spacing Scale -->
+        <div class="card">
+            <h3 class="mb-md">Spacing Scale</h3>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>Extra Small (space-xs)</label>
+                    <input type="text" id="space-xs" value="4px" class="text-input">
+                </div>
+                <div>
+                    <label>Small (space-sm)</label>
+                    <input type="text" id="space-sm" value="8px" class="text-input">
+                </div>
+                <div>
+                    <label>Medium (space-md)</label>
+                    <input type="text" id="space-md" value="16px" class="text-input">
+                </div>
+                <div>
+                    <label>Large (space-lg)</label>
+                    <input type="text" id="space-lg" value="24px" class="text-input">
+                </div>
+                <div>
+                    <label>Extra Large (space-xl)</label>
+                    <input type="text" id="space-xl" value="32px" class="text-input">
+                </div>
+                <div>
+                    <label>2X Large (space-xxl)</label>
+                    <input type="text" id="space-xxl" value="64px" class="text-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="card">
+        <h3 class="mb-md">Spacing Preview</h3>
+        <div id="preview-area" style="padding: 20px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div style="background: var(--bg-tertiary); padding: var(--space-xs); margin-bottom: var(--space-sm); border: 1px solid var(--border-color);">
+                <strong>space-xs padding</strong> (4px default)
+            </div>
+            <div style="background: var(--bg-tertiary); padding: var(--space-sm); margin-bottom: var(--space-sm); border: 1px solid var(--border-color);">
+                <strong>space-sm padding</strong> (8px default)
+            </div>
+            <div style="background: var(--bg-tertiary); padding: var(--space-md); margin-bottom: var(--space-sm); border: 1px solid var(--border-color);">
+                <strong>space-md padding</strong> (16px default)
+            </div>
+            <div style="background: var(--bg-tertiary); padding: var(--space-lg); margin-bottom: var(--space-sm); border: 1px solid var(--border-color);">
+                <strong>space-lg padding</strong> (24px default)
+            </div>
+            <div style="background: var(--bg-tertiary); padding: var(--space-xl); border: 1px solid var(--border-color);">
+                <strong>space-xl padding</strong> (32px default)
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+}
+</style>
+
+<script>
+(function() {
+    // Update CSS variables on input change
+    document.querySelectorAll('.text-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+            const varName = '--' + e.target.id;
+            document.documentElement.style.setProperty(varName, e.target.value);
+        });
+    });
+})();
+</script>

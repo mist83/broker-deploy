@@ -1,0 +1,11 @@
+/**
+ * Simple Complete Stylesheet
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/simple/style.css
+ *
+ * Combined colors + layout for convenience.
+ * Clean, flat, enterprise-utility aesthetic.
+ */
+
+@import url('colors.css');
+@import url('layout.css');

@@ -1,0 +1,70 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Quality Queue",
+  "description": "Queue review view with chart, cards, and safe rich content.",
+  "page": {
+    "component": "page",
+    "title": "Quality Queue",
+    "subtitle": "Review failures without escaping the shared contract.",
+    "actions": [
+      {
+        "label": "Show toast",
+        "variant": "secondary",
+        "icon": "ti ti-bell",
+        "action": {
+          "type": "toast",
+          "message": "Queue refreshed",
+          "toastType": "info"
+        }
+      }
+    ],
+    "children": [
+      {
+        "component": "grid",
+        "columns": 2,
+        "children": [
+          {
+            "component": "card",
+            "title": "Failures by step",
+            "subtitle": "Simple chart path through the contract renderer.",
+            "children": [
+              {
+                "component": "chart",
+                "variant": "bar",
+                "labels": ["Load", "Parse", "Render", "Ship"],
+                "series": [2, 5, 1, 3],
+                "caption": "Failures by step"
+              }
+            ]
+          },
+          {
+            "component": "card",
+            "title": "Escalation note",
+            "children": [
+              {
+                "tag": "blockquote",
+                "children": [
+                  {
+                    "tag": "strong",
+                    "text": "Escalation note"
+                  },
+                  {
+                    "tag": "p",
+                    "text": "Extend the shared contract when the page needs a new primitive. Do not patch an app with local CSS first."
+                  }
+                ]
+              },
+              {
+                "component": "alert",
+                "tone": "warning",
+                "title": "One backlog item",
+                "message": "Keep raw HTML fragments as the exception path, not the first path."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

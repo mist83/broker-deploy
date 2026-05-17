@@ -1,0 +1,9 @@
+/**
+ * Precog Style
+ * Signal-room theme bundle.
+ */
+
+@import url('./colors.css');
+@import url('./layout.css');
+@import url('../core/swipe.css');
+@import url('../core/hero.css');

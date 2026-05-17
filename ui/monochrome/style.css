@@ -1,0 +1,8 @@
+/**
+ * Monochrome Complete Stylesheet
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/monochrome/style.css
+ */
+
+@import url('colors.css');
+@import url('layout.css');

@@ -1,0 +1,26 @@
+/**
+ * Orange Colors
+ * @url https://ui.mullmania.com/orange/colors.css
+ *
+ * Clean simple-theme surfaces with an orange accent.
+ */
+
+@import url('../simple/colors.css');
+
+:root {
+    --color-primary: #E65100;
+    --color-primary-hover: #B23900;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    --shadow-hover: 0 0 0 0.25rem rgba(230, 81, 0, 0.25);
+}
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    --color-primary: #FB8C00;
+    --color-primary-hover: #E65100;
+    --shadow-hover: 0 0 0 0.25rem rgba(251, 140, 0, 0.3);
+}

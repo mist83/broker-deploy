@@ -1,0 +1,123 @@
+/**
+ * Black And White Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/blackwhite/colors.css
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    --color-primary: #000000;
+    --color-secondary: #000000;
+    --color-primary-hover: #000000;
+    --color-secondary-hover: #000000;
+    --color-primary-soft: #ffffff;
+    --color-secondary-soft: #ffffff;
+    --color-shell-accent: #000000;
+    --color-shell-accent-hover: #000000;
+
+    --bg-primary: #ffffff;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-soft: #ffffff;
+    --bg-hover: #ffffff;
+    --bg-overlay: #000000;
+
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-muted: #000000;
+    --text-very-muted: #000000;
+    --text-dark: #000000;
+    --text-on-primary: #ffffff;
+    --text-on-secondary: #ffffff;
+
+    --border-color: #000000;
+    --border-light: #000000;
+    --border-medium: #000000;
+    --border-dark: #000000;
+
+    --color-success: #000000;
+    --color-success-action: #000000;
+    --color-success-bg: #ffffff;
+    --color-danger: #000000;
+    --color-danger-hover: #000000;
+    --color-danger-bg: #ffffff;
+    --color-warning: #000000;
+    --color-warning-bg: #ffffff;
+    --color-info: #000000;
+    --color-info-bg: #ffffff;
+    --color-error: #000000;
+
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+    --font-display: var(--font-family);
+
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-pill: 0;
+    --radius-full: 0;
+
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-hover: none;
+
+    --button-disabled-bg: #ffffff;
+    --button-disabled-text: #000000;
+    --button-disabled-border: #000000;
+    --input-disabled-bg: #ffffff;
+}
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    --color-primary: #ffffff;
+    --color-secondary: #ffffff;
+    --color-primary-hover: #ffffff;
+    --color-secondary-hover: #ffffff;
+    --color-primary-soft: #000000;
+    --color-secondary-soft: #000000;
+    --color-shell-accent: #ffffff;
+    --color-shell-accent-hover: #ffffff;
+
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-tertiary: #000000;
+    --bg-card: #000000;
+    --bg-card-soft: #000000;
+    --bg-hover: #000000;
+    --bg-overlay: #ffffff;
+
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-muted: #ffffff;
+    --text-very-muted: #ffffff;
+    --text-dark: #ffffff;
+    --text-on-primary: #000000;
+    --text-on-secondary: #000000;
+
+    --border-color: #ffffff;
+    --border-light: #ffffff;
+    --border-medium: #ffffff;
+    --border-dark: #ffffff;
+
+    --color-success: #ffffff;
+    --color-success-action: #ffffff;
+    --color-success-bg: #000000;
+    --color-danger: #ffffff;
+    --color-danger-hover: #ffffff;
+    --color-danger-bg: #000000;
+    --color-warning: #ffffff;
+    --color-warning-bg: #000000;
+    --color-info: #ffffff;
+    --color-info-bg: #000000;
+    --color-error: #ffffff;
+
+    --button-disabled-bg: #000000;
+    --button-disabled-text: #ffffff;
+    --button-disabled-border: #ffffff;
+    --input-disabled-bg: #000000;
+}

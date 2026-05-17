@@ -1,0 +1,74 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Preview Catalog",
+  "description": "Preview screen fixture for iframe-based proof.",
+  "page": {
+    "component": "app",
+    "title": "Preview Catalog",
+    "subtitle": "Shared preview surface rendered through the contract runtime.",
+    "sections": [
+      {
+        "component": "section",
+        "title": "Shared preview surface",
+        "children": [
+          {
+            "component": "preview-screen",
+            "label": "Preview Catalog",
+            "title": "Shared preview surface",
+            "subtitle": "The same iframe wrapper is available through JSON.",
+            "caption": "Read-only preview keeps demos and proof pages consistent.",
+            "src": "/preview.html?theme=active&mode=light",
+            "openHref": "/preview.html?theme=active&mode=light",
+            "actions": [
+              {
+                "label": "Open sample",
+                "variant": "secondary",
+                "icon": "ti ti-external-link",
+                "action": {
+                  "type": "open",
+                  "href": "/preview.html?theme=active&mode=light"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Notes",
+        "children": [
+          {
+            "tag": "article",
+            "dataset": {
+              "fixture": "preview-catalog"
+            },
+            "children": [
+              {
+                "tag": "p",
+                "text": "Preview screens let contract docs show real surfaces without hand-written wrapper HTML."
+              },
+              {
+                "tag": "ul",
+                "children": [
+                  {
+                    "tag": "li",
+                    "text": "Same chrome"
+                  },
+                  {
+                    "tag": "li",
+                    "text": "Same iframe rules"
+                  },
+                  {
+                    "tag": "li",
+                    "text": "Same open-link behavior"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

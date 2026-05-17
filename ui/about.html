@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="repo-name" content="ui">
+    <title>About ui.mullmania.com</title>
+    <meta name="description" content="About the shared UI framework used by Mullmania browser surfaces.">
+    <script src="./ui.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1><i class="ti ti-palette"></i><span>ui.mullmania.com</span></h1>
+      <div class="header-links">
+        <a class="header-link" href="./"><i class="ti ti-home"></i><span>Home</span></a>
+        <a class="header-link" href="./llm-docs.md"><i class="ti ti-robot"></i><span>LLM docs</span></a>
+      </div>
+    </header>
+    <div id="content-container">
+      <main class="page-container">
+        <div id="app"></div>
+      </main>
+    </div>
+    <script>
+      UI.ready().then(() => {
+        UI.mount('#app', {
+          tag: 'div',
+          className: 'ui-page-root',
+          children: [
+            {
+              tag: 'section',
+              className: 'ui-page-heading',
+              children: [
+                { tag: 'p', className: 'eyebrow', text: 'Shared UI framework' },
+                { tag: 'h2', text: 'About the framework tab' },
+                {
+                  tag: 'p',
+                  className: 'lead',
+                  text: 'Every sitemap-backed Mullmania site gets a final UI Framework tab. It is a small shared surface for explaining the shell, linking back to the framework, and growing site-alignment tools without editing every consumer app.'
+                }
+              ]
+            },
+            {
+              tag: 'section',
+              className: 'ui-about-section',
+              children: [
+                { tag: 'h2', text: 'What it owns' },
+                UI.grid({
+                  columns: 3,
+                  children: [
+                    UI.card({ title: 'Shell', body: 'Headers, tabs, sidebars, detail surfaces, and scroll ownership.' }),
+                    UI.card({ title: 'Tokens', body: 'Theme and mode variables that keep sites visually consistent.' }),
+                    UI.card({ title: 'Contracts', body: 'JSON-to-page rendering for data-driven app and documentation surfaces.' })
+                  ]
+                })
+              ]
+            },
+            {
+              tag: 'section',
+              className: 'ui-about-section',
+              children: [
+                { tag: 'h2', text: 'What comes next' },
+                { tag: 'p', text: 'The framework tab is meant to grow into a live checklist: theme drift, sitemap structure, renderer health, proof links, and canon alignment. The tab belongs in the shared runtime so those tools can improve once and appear everywhere.' },
+                {
+                  tag: 'div',
+                  className: 'ui-framework-action-row',
+                  children: [
+                    { tag: 'a', className: 'btn-primary', attrs: { href: './' }, children: [{ tag: 'i', className: 'ti ti-palette' }, { tag: 'span', text: 'Open framework home' }] },
+                    { tag: 'a', className: 'btn-secondary', attrs: { href: './llm-docs.md' }, children: [{ tag: 'i', className: 'ti ti-robot' }, { tag: 'span', text: 'Read LLM docs' }] },
+                    { tag: 'a', className: 'btn-secondary', attrs: { href: './ui-tour-manifest.json' }, children: [{ tag: 'i', className: 'ti ti-route' }, { tag: 'span', text: 'View tour manifest' }] }
+                  ]
+                }
+              ]
+            }
+          ]
+        });
+      }).catch((error) => {
+        document.body.textContent = error.message || String(error);
+      });
+    </script>
+  </body>
+</html>

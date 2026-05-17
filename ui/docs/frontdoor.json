@@ -1,0 +1,7 @@
+{
+  "repo": "mist83/ui",
+  "name": "ui",
+  "title": "UI Framework",
+  "description": "Shared UI runtime, theme system, and JSON-first shell demos.",
+  "artifactBaseUrl": "https://ui.mullmania.com/docs/demo/"
+}

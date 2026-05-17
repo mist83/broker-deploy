@@ -1,0 +1,6 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "Theme Preset",
+  "preset": "themes.walmart"
+}

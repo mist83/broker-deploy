@@ -1,0 +1,6 @@
+/**
+ * Canonical current-theme stylesheet alias.
+ * Use /active/style.css?v=<token> for explicit cache busting when needed.
+ */
+
+@import url('/active/style.css');

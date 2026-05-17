@@ -1,0 +1,392 @@
+<script src="/js/theme-catalog.js"></script>
+
+<div class="p-lg">
+    <h2><i class="ti ti-eye"></i> Live Sitemap Preview</h2>
+    <p class="text-secondary mb-lg">Edit sitemap JSON, keep the last valid render alive, and preview the same app shell under any supported theme and mode.</p>
+
+    <div class="grid-2 gap-md mb-lg">
+        <div class="card">
+            <div class="grid-between mb-md">
+                <h3 class="mb-xs"><i class="ti ti-code"></i> sitemap.json</h3>
+                <span class="status-badge status-info" id="editor-status">Ready</span>
+            </div>
+
+            <div class="grid gap-md">
+                <div class="grid-row gap-sm">
+                    <button class="btn-secondary" id="preview-format"><i class="ti ti-align-left"></i> Format</button>
+                    <button class="btn-secondary" id="preview-copy-json"><i class="ti ti-copy"></i> Copy JSON</button>
+                    <button class="btn-secondary" id="preview-copy-url"><i class="ti ti-link"></i> Copy URL</button>
+                    <button class="btn-secondary" id="preview-download"><i class="ti ti-download"></i> Download</button>
+                    <button class="btn-secondary" id="preview-load-current"><i class="ti ti-refresh"></i> Load Current</button>
+                </div>
+
+                <div class="grid-2 gap-md">
+                    <div>
+                        <label class="field-label" for="preview-theme">Theme</label>
+                        <select id="preview-theme"></select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="preview-mode">Mode</label>
+                        <select id="preview-mode">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+
+                <textarea id="sitemap-editor" class="live-preview-editor"></textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="grid-between mb-md">
+                <h3 class="mb-xs"><i class="ti ti-browser"></i> Rendered App</h3>
+                <a class="btn-link" id="preview-open" href="/preview.html?theme=active&mode=light" target="_blank" rel="noreferrer">
+                    <i class="ti ti-external-link"></i> Open
+                </a>
+            </div>
+
+            <div class="alert alert-error is-hidden mb-md" id="preview-error">
+                <i class="ti ti-alert-circle"></i>
+                <span id="preview-error-text">Error</span>
+            </div>
+
+            <div class="preview-screen">
+                <div class="preview-screen__frame">
+                    <div class="preview-screen__chrome">
+                        <span class="preview-screen__chrome-dot" aria-hidden="true"></span>
+                        <span class="preview-screen__chrome-label" id="preview-chrome-label">Preview</span>
+                        <span class="preview-screen__read-only">
+                            <i class="ti ti-lock"></i>
+                            Read only
+                        </span>
+                    </div>
+                    <div class="preview-screen__viewport">
+                        <iframe
+                            id="preview-frame"
+                            class="preview-screen__media preview-screen__media--iframe"
+                            src="/preview.html?theme=active&mode=light"
+                            title="Live sitemap preview"
+                            loading="lazy"
+                            referrerpolicy="no-referrer"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 class="mb-md">Supported Shape</h3>
+        <p class="text-secondary mb-md">Top-level tabs use `sections` for list/detail flows. Legacy `sidebar` arrays are still imported and normalized to `sections` when you paste older JSON.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>tabs</code></td>
+                        <td>array</td>
+                        <td>Required. Each tab needs `id` and `label`.</td>
+                    </tr>
+                    <tr>
+                        <td><code>layout</code></td>
+                        <td>string</td>
+                        <td>Defaults to <code>workspace</code> when omitted.</td>
+                    </tr>
+                    <tr>
+                        <td><code>sections</code></td>
+                        <td>array</td>
+                        <td>Preferred list/detail shape.</td>
+                    </tr>
+                    <tr>
+                        <td><code>sidebar</code></td>
+                        <td>array</td>
+                        <td>Legacy import path. Normalized into `sections` on load.</td>
+                    </tr>
+                    <tr>
+                        <td><code>contractSource</code></td>
+                        <td>string</td>
+                        <td>Preferred path for JSON-first tabs and list items.</td>
+                    </tr>
+                    <tr>
+                        <td><code>htmlSource</code></td>
+                        <td>string</td>
+                        <td>Legacy compatibility path for static fragments. Do not use for new work.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const standalonePath = '/tabs/canonical/live-preview/index.html';
+        const isStandalonePage = window.location.pathname.endsWith(standalonePath);
+        const editor = document.getElementById('sitemap-editor');
+        const status = document.getElementById('editor-status');
+        const errorBox = document.getElementById('preview-error');
+        const errorText = document.getElementById('preview-error-text');
+        const previewFrame = document.getElementById('preview-frame');
+        const previewOpen = document.getElementById('preview-open');
+        const previewChromeLabel = document.getElementById('preview-chrome-label');
+        const themeSelect = document.getElementById('preview-theme');
+        const modeSelect = document.getElementById('preview-mode');
+        const themeRegistry = window.UIThemeRegistry;
+        const defaultSitemap = {
+            tabs: [
+                {
+                    id: 'overview',
+                    label: 'Overview',
+                    icon: 'ti ti-home',
+                    contractSource: '/contracts/fixtures/operations-dashboard.json'
+                },
+                {
+                    id: 'components',
+                    label: 'Components',
+                    icon: 'ti ti-components',
+                    layout: 'workspace',
+                    sections: [
+                        {
+                            type: 'list',
+                            inlineData: [
+                                { id: 'queue', name: 'Quality Queue', icon: 'ti ti-checklist', contractSource: '/contracts/fixtures/quality-queue.json' },
+                                { id: 'preview', name: 'Preview Catalog', icon: 'ti ti-device-desktop', contractSource: '/contracts/fixtures/preview-catalog.json' },
+                                { id: 'readiness', name: 'Release Readiness', icon: 'ti ti-list-check', componentSource: '/contracts/components/release-readiness.json' }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        let renderTimer = null;
+        let lastValidSitemap = null;
+        let lastPreviewUrl = buildPreviewUrl(defaultSitemap);
+
+        themeRegistry.list().forEach((theme) => {
+            const option = document.createElement('option');
+            option.value = theme.id;
+            option.textContent = theme.name;
+            themeSelect.appendChild(option);
+        });
+        themeSelect.value = document.documentElement.dataset.uiTheme || 'active';
+        modeSelect.value = document.documentElement.dataset.uiMode || 'light';
+
+        function setStatus(text, tone) {
+            status.textContent = text;
+            status.className = `status-badge status-${tone}`;
+        }
+
+        function setError(message) {
+            errorText.textContent = message;
+            errorBox.classList.remove('is-hidden');
+        }
+
+        function clearError() {
+            errorText.textContent = '';
+            errorBox.classList.add('is-hidden');
+        }
+
+        function encodeSpec64(value) {
+            return btoa(JSON.stringify(value))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=+$/g, '');
+        }
+
+        function decodeSpec64(value) {
+            const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
+            const padded = normalized + '='.repeat((4 - (normalized.length % 4 || 4)) % 4);
+            return JSON.parse(atob(padded));
+        }
+
+        function normalizeSitemap(rawSitemap) {
+            if (!rawSitemap || !Array.isArray(rawSitemap.tabs)) {
+                throw new Error('Sitemap must be a JSON object with a `tabs` array.');
+            }
+
+            return {
+                tabs: rawSitemap.tabs.map((tab) => {
+                    const normalizedTab = { ...tab };
+                    if (!normalizedTab.id || !normalizedTab.label) {
+                        throw new Error('Every tab needs `id` and `label`.');
+                    }
+
+                    if (!normalizedTab.layout) {
+                        normalizedTab.layout = 'workspace';
+                    }
+
+                    if (!normalizedTab.sections && Array.isArray(normalizedTab.sidebar)) {
+                        normalizedTab.sections = [{
+                            type: 'list',
+                            inlineData: normalizedTab.sidebar.map((item) => ({
+                                id: item.id,
+                                name: item.name || item.label || item.id,
+                                icon: item.icon || '',
+                                htmlSource: item.htmlSource || null,
+                                contractSource: item.contractSource || null,
+                                preset: item.preset || null,
+                                componentSource: item.componentSource || null,
+                                componentSpec: item.componentSpec || null
+                            }))
+                        }];
+                    }
+
+                    return normalizedTab;
+                })
+            };
+        }
+
+        function validateSitemap(sitemap) {
+            sitemap.tabs.forEach((tab) => {
+                if (!['workspace', 'document', 'single', 'tabs'].includes(tab.layout)) {
+                    throw new Error(`Tab "${tab.id}" has unsupported layout "${tab.layout}".`);
+                }
+
+                if (tab.sections) {
+                    tab.sections.forEach((section) => {
+                        if (!section.type) {
+                            throw new Error(`Tab "${tab.id}" has a section without a type.`);
+                        }
+
+                        if (section.type === 'list' && section.inlineData && !Array.isArray(section.inlineData)) {
+                            throw new Error(`Tab "${tab.id}" list section needs an array of inlineData items.`);
+                        }
+                    });
+                }
+            });
+        }
+
+        function buildPreviewUrl(sitemap) {
+            const spec64 = encodeSpec64(sitemap);
+            const theme = themeSelect.value;
+            const mode = modeSelect.value;
+            return `/preview.html?theme=${encodeURIComponent(theme)}&mode=${encodeURIComponent(mode)}&spec64=${encodeURIComponent(spec64)}`;
+        }
+
+        function applyPreview(url) {
+            lastPreviewUrl = url;
+            previewFrame.src = url;
+            previewOpen.href = url;
+            previewChromeLabel.textContent = `${themeSelect.value} / ${modeSelect.value}`;
+        }
+
+        function updateHashFromSitemap(sitemap) {
+            if (!isStandalonePage) {
+                return;
+            }
+
+            const nextUrl = new URL(window.location.href);
+            nextUrl.hash = `spec64=${encodeSpec64(sitemap)}`;
+            history.replaceState(null, '', nextUrl);
+        }
+
+        function scheduleRender() {
+            clearTimeout(renderTimer);
+            renderTimer = setTimeout(renderNow, 300);
+        }
+
+        function renderNow() {
+            try {
+                const sitemap = normalizeSitemap(JSON.parse(editor.value));
+                validateSitemap(sitemap);
+                clearError();
+                setStatus('Valid JSON', 'success');
+                lastValidSitemap = sitemap;
+                applyPreview(buildPreviewUrl(sitemap));
+                updateHashFromSitemap(sitemap);
+            } catch (error) {
+                setStatus('Needs Fix', 'warning');
+                setError(error.message || 'Could not render preview.');
+                if (lastPreviewUrl) {
+                    previewFrame.src = lastPreviewUrl;
+                }
+            }
+        }
+
+        function loadIntoEditor(sitemap) {
+            editor.value = JSON.stringify(normalizeSitemap(sitemap), null, 2);
+            renderNow();
+        }
+
+        document.getElementById('preview-format').addEventListener('click', () => {
+            try {
+                const parsed = JSON.parse(editor.value);
+                editor.value = JSON.stringify(parsed, null, 2);
+                renderNow();
+            } catch (error) {
+                setStatus('Needs Fix', 'warning');
+                setError(error.message || 'Could not format JSON.');
+            }
+        });
+
+        document.getElementById('preview-copy-json').addEventListener('click', async () => {
+            await navigator.clipboard.writeText(editor.value);
+            setStatus('JSON Copied', 'info');
+        });
+
+        document.getElementById('preview-copy-url').addEventListener('click', async () => {
+            if (lastValidSitemap) {
+                updateHashFromSitemap(lastValidSitemap);
+            }
+            const shareUrl = isStandalonePage
+                ? window.location.href
+                : new URL(previewOpen.href, window.location.origin).toString();
+            await navigator.clipboard.writeText(shareUrl);
+            setStatus('URL Copied', 'info');
+        });
+
+        document.getElementById('preview-download').addEventListener('click', () => {
+            const blob = new Blob([editor.value], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'sitemap.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            setStatus('Downloaded', 'info');
+        });
+
+        document.getElementById('preview-load-current').addEventListener('click', async () => {
+            const response = await fetch('/sitemap.json');
+            const sitemap = await response.json();
+            loadIntoEditor(sitemap);
+            setStatus('Loaded Current Sitemap', 'info');
+        });
+
+        editor.addEventListener('input', scheduleRender);
+        themeSelect.addEventListener('change', () => {
+            if (lastValidSitemap) {
+                applyPreview(buildPreviewUrl(lastValidSitemap));
+            }
+        });
+        modeSelect.addEventListener('change', () => {
+            if (lastValidSitemap) {
+                applyPreview(buildPreviewUrl(lastValidSitemap));
+            }
+        });
+
+        if (isStandalonePage && window.location.hash.startsWith('#spec64=')) {
+            try {
+                loadIntoEditor(decodeSpec64(window.location.hash.slice('#spec64='.length)));
+                setStatus('Loaded Shared URL', 'info');
+            } catch (error) {
+                editor.value = JSON.stringify(defaultSitemap, null, 2);
+                setStatus('Ready', 'info');
+                setError('Could not load the shared URL. Showing the starter sitemap instead.');
+                renderNow();
+            }
+        } else {
+            editor.value = JSON.stringify(defaultSitemap, null, 2);
+            setStatus('Ready', 'info');
+            renderNow();
+        }
+    })();
+</script>

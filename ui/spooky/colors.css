@@ -1,0 +1,140 @@
+/**
+ * Spooky Colors
+ * Nocturnal memorial-garden tokens with ember, moss, and soot.
+ */
+
+:root {
+    --color-primary: #b55a1f;
+    --color-secondary: #66753b;
+    --color-primary-hover: #964617;
+    --color-secondary-hover: #53612f;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    --bg-primary: #f2eadf;
+    --bg-secondary: #e8dccd;
+    --bg-tertiary: #d4c5b0;
+    --bg-card: #fbf5ee;
+    --bg-hover: #ded0bc;
+
+    --text-primary: #241913;
+    --text-secondary: #57463a;
+    --text-muted: #7a6553;
+    --text-dark: #140d09;
+    --text-on-primary: #fff6ec;
+
+    --border-color: #b59880;
+    --border-light: #ece1d5;
+    --border-medium: #997a61;
+    --border-dark: #5d4635;
+
+    --color-success: #496b39;
+    --color-success-action: #38542c;
+    --color-success-bg: #e4eedf;
+    --color-danger: #8d3828;
+    --color-danger-hover: #742b1d;
+    --color-danger-bg: #f3dfda;
+    --color-warning: #b55a1f;
+    --color-warning-bg: #f6e2d2;
+    --color-info: #66753b;
+    --color-info-bg: #ebf0df;
+    --color-error: #8d3828;
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 64px;
+
+    --font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+    --font-hand: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+
+    --text-xs: 11px;
+    --text-sm: 13px;
+    --text-base: 14px;
+    --text-md: 16px;
+    --text-lg: 18px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
+    --text-3xl: 36px;
+    --text-4xl: 48px;
+    --text-5xl: 64px;
+    --text-6xl: 96px;
+
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 50%;
+
+    --shadow-sm: 0 2px 5px rgba(27, 17, 11, 0.08);
+    --shadow-md: 0 10px 20px rgba(27, 17, 11, 0.12);
+    --shadow-lg: 0 18px 42px rgba(27, 17, 11, 0.18);
+    --shadow-hover: 0 0 24px rgba(181, 90, 31, 0.22);
+
+    --transition-fast: 0.1s ease;
+    --transition-base: 0.2s ease;
+    --transition-slow: 0.3s ease;
+
+    --z-base: 1;
+    --z-dropdown: 1000;
+    --z-modal: 10000;
+    --z-tooltip: 100000;
+
+    --button-disabled-bg: #dfd4c6;
+    --button-disabled-text: #887665;
+    --button-disabled-border: #c1ab97;
+    --input-disabled-bg: #ebe2d7;
+}
+
+:root[data-ui-mode="dark"] {
+    --color-primary: #d97b2d;
+    --color-secondary: #7c8c48;
+    --color-primary-hover: #eda35f;
+    --color-secondary-hover: #95a760;
+
+    --bg-primary: #090705;
+    --bg-secondary: #120f0b;
+    --bg-tertiary: #1b1610;
+    --bg-card: #110e0a;
+    --bg-hover: #241d15;
+
+    --text-primary: #f3e8d7;
+    --text-secondary: #c8b59d;
+    --text-muted: #8f7b66;
+    --text-dark: #fff8ef;
+    --text-on-primary: #140c07;
+
+    --border-color: #392d20;
+    --border-light: #241b13;
+    --border-medium: #5b4734;
+    --border-dark: #b48b61;
+
+    --color-success: #93bb6a;
+    --color-success-action: #b0d58a;
+    --color-success-bg: #1d2412;
+    --color-danger: #d36a54;
+    --color-danger-hover: #e48a76;
+    --color-danger-bg: #2e120f;
+    --color-warning: #d97b2d;
+    --color-warning-bg: #311d0e;
+    --color-info: #7c8c48;
+    --color-info-bg: #182012;
+    --color-error: #d36a54;
+
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.26);
+    --shadow-md: 0 12px 26px rgba(0, 0, 0, 0.36);
+    --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.48);
+    --shadow-hover: 0 0 28px rgba(217, 123, 45, 0.24);
+
+    --button-disabled-bg: #221b14;
+    --button-disabled-text: #6d6154;
+    --button-disabled-border: #3f3225;
+    --input-disabled-bg: #1c1510;
+}

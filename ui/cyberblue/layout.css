@@ -1,0 +1,9 @@
+/**
+ * Cyberblue Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/cyberblue/layout.css
+ *
+ * Reuses Cyberpink's token-driven recipe layout.
+ */
+
+@import url('../cyberpink/layout.css');

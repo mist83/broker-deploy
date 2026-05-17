@@ -1,0 +1,145 @@
+<div class="p-lg">
+    <h2><i class="ti ti-file-text"></i> Detail Page Patterns</h2>
+    <p class="text-secondary mb-lg">Detail header + body layouts for item views, profiles, and content pages.</p>
+
+    <!-- Pattern 60: Detail Header + Body -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">60</span> Detail Header + Body</h3>
+        <p class="text-secondary mb-md">Header with 32px padding, bottom border, secondary background. Body with 32px padding.</p>
+        <div style="border: 1px solid var(--border-color);">
+            <div class="detail-header">
+                <h2>Project Alpha - Release v2.4.1</h2>
+                <p class="detail-subtitle">Deployed by Alice Johnson on March 15, 2025 at 14:30 UTC</p>
+            </div>
+            <div class="detail-body">
+                <h3>Release Notes</h3>
+                <p>This release includes performance improvements to the data pipeline and fixes a critical bug in the authentication flow.</p>
+                <h3>Changes</h3>
+                <div class="grid gap-sm">
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span><i class="ti ti-bug" style="color: var(--color-danger);"></i> Fix token refresh race condition</span>
+                        <span class="status-badge status-completed">Merged</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span><i class="ti ti-rocket" style="color: var(--color-success);"></i> Optimize batch processing throughput</span>
+                        <span class="status-badge status-completed">Merged</span>
+                    </div>
+                    <div class="grid-between p-sm bg-tertiary">
+                        <span><i class="ti ti-database" style="color: var(--color-info);"></i> Add connection pooling for PostgreSQL</span>
+                        <span class="status-badge status-completed">Merged</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 61: Detail with Stats -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">61</span> Detail Page with Stats Row</h3>
+        <p class="text-secondary mb-md">Common pattern: detail header, stat cards row, then content body.</p>
+        <div style="border: 1px solid var(--border-color);">
+            <div class="detail-header">
+                <h2><i class="ti ti-server" style="color: var(--color-primary);"></i> API Gateway</h2>
+                <p class="detail-subtitle">Primary load balancer serving production traffic across 3 regions</p>
+            </div>
+            <div class="detail-body">
+                <div class="grid-4 gap-md mb-lg">
+                    <div class="card text-center">
+                        <span class="stat-value">99.97%</span>
+                        <p class="text-muted mb-xs">Uptime (30d)</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">2.1M</span>
+                        <p class="text-muted mb-xs">Requests Today</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">47ms</span>
+                        <p class="text-muted mb-xs">P50 Latency</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">0</span>
+                        <p class="text-muted mb-xs">Active Errors</p>
+                    </div>
+                </div>
+                <h3>Recent Events</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Event</th>
+                                <th>Severity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-muted">14:30</td>
+                                <td>Auto-scaled to 8 instances</td>
+                                <td><span class="status-badge status-info">Info</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">12:15</td>
+                                <td>SSL certificate renewed</td>
+                                <td><span class="status-badge status-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">09:00</td>
+                                <td>Daily health check passed</td>
+                                <td><span class="status-badge status-success">Success</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 62: Detail with Sidebar Context -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">62</span> Detail within Sidebar Layout</h3>
+        <p class="text-secondary mb-md">How a detail page looks inside the workspace layout (the most common product-tool pattern).</p>
+        <div style="height: 350px; border: 1px solid var(--border-color);">
+            <div class="layout workspace" style="height: 100%;">
+                <div class="sidebar">
+                    <div class="sidebar-scroll">
+                        <div class="sidebar-header">Environments</div>
+                        <div class="sidebar-item active">
+                            <i class="ti ti-server"></i>
+                            <span>Production</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-server"></i>
+                            <span>Staging</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-server"></i>
+                            <span>Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" style="padding: 0;">
+                    <div class="detail-header">
+                        <h2>Production</h2>
+                        <p class="detail-subtitle">us-east-1 | 4 instances | Auto-scaling enabled</p>
+                    </div>
+                    <div class="detail-body">
+                        <div class="alert alert-success">
+                            <i class="ti ti-circle-check"></i>
+                            <span>All systems operational. Last deployment: 2 hours ago.</span>
+                        </div>
+                        <div class="grid-2 gap-md">
+                            <div class="card text-center">
+                                <span class="stat-value">4</span>
+                                <p class="text-muted mb-xs">Instances</p>
+                            </div>
+                            <div class="card text-center">
+                                <span class="stat-value">23%</span>
+                                <p class="text-muted mb-xs">CPU Usage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

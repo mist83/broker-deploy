@@ -1,0 +1,262 @@
+{
+  "$schema": "/page-contract.schema.json",
+  "version": 1,
+  "title": "UI Everywhere",
+  "description": "One place to see the library, inspect the theme system, and jump into JSON-driven app work.",
+  "page": {
+    "component": "app",
+    "title": "UI Everywhere",
+    "subtitle": "Shared parts, a published default, explicit theme pins, and page JSON instead of page-local CSS work.",
+    "actions": [
+      {
+        "label": "See examples",
+        "variant": "primary",
+        "icon": "ti ti-layout",
+        "action": {
+          "type": "open",
+          "href": "/index.html#canonical/structure"
+        }
+      },
+      {
+        "label": "Watch demos",
+        "variant": "secondary",
+        "icon": "ti ti-player-play",
+        "action": {
+          "type": "open",
+          "href": "/index.html#watch"
+        }
+      },
+      {
+        "label": "Try preview",
+        "variant": "secondary",
+        "icon": "ti ti-eye",
+        "action": {
+          "type": "open",
+          "href": "/index.html#canonical/live-preview"
+        }
+      },
+      {
+        "label": "Build page",
+        "variant": "secondary",
+        "icon": "ti ti-file-code",
+        "action": {
+          "type": "open",
+          "href": "/index.html#canonical/contract-lab"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "component": "section",
+        "title": "What this is",
+        "description": "A shared UI library so app work can stay about behavior instead of hand-tuning layout and colors over and over.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 4,
+            "children": [
+              {
+                "component": "stat",
+                "label": "Themes",
+                "value": "7",
+                "caption": "cyberpink, editorial, mockup, ocean, pumpkin, sunset, walmart"
+              },
+              {
+                "component": "stat",
+                "label": "Modes",
+                "value": "2",
+                "caption": "light, dark"
+              },
+              {
+                "component": "stat",
+                "label": "Clips",
+                "value": "34",
+                "caption": "Built from stable routes"
+              },
+              {
+                "component": "stat",
+                "label": "Main rule",
+                "value": "JSON first",
+                "caption": "HTML only when the library is missing something"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Watch",
+        "description": "The reel plus the full clip wall for every shipped route.",
+        "children": [
+          {
+            "component": "preview-screen",
+            "title": "Library demo",
+            "subtitle": "Built from the current shell routes.",
+            "caption": "102 seconds",
+            "label": "UI Everywhere demo",
+            "videoSrc": "/docs/demo/demo.mp4",
+            "poster": "/docs/demo/poster.png",
+            "openHref": "/docs/demo/demo.mp4",
+            "openLabel": "Open video",
+            "readOnly": false,
+            "actions": [
+              {
+                "label": "Open watch",
+                "variant": "secondary",
+                "icon": "ti ti-list-details",
+                "action": {
+                  "type": "open",
+                  "href": "/index.html#watch"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Pick a path",
+        "description": "Start in one of these five places depending on what you need.",
+        "children": [
+          {
+            "component": "grid",
+            "columns": 2,
+            "children": [
+              {
+                "component": "card",
+                "title": "Examples",
+                "subtitle": "See the shared page parts and patterns.",
+                "children": [
+                  {
+                    "component": "text",
+                    "role": "body",
+                    "text": "Use this when you want to copy a layout, form, table, card, alert, or full page."
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Open examples",
+                    "variant": "primary",
+                    "icon": "ti ti-layout",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html#canonical/structure"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "card",
+                "title": "Watch",
+                "subtitle": "Clip wall for every shipped route.",
+                "children": [
+                  {
+                    "component": "text",
+                    "role": "body",
+                    "text": "Use this when you want fast proof that the whole surface still looks right."
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Open watch",
+                    "variant": "primary",
+                    "icon": "ti ti-player-play",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html#watch"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "card",
+                "title": "Looks",
+                "subtitle": "Same parts, published default or explicit pin.",
+                "children": [
+                  {
+                    "tag": "ul",
+                    "children": [
+                      { "tag": "li", "text": "Bare ui.js and /active/* follow the published global default" },
+                      { "tag": "li", "text": "editorial: typography-led authored surfaces" },
+                      { "tag": "li", "text": "ocean: calmer blue product work" },
+                      { "tag": "li", "text": "walmart: explicit branded work only" }
+                    ]
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Open looks",
+                    "variant": "primary",
+                    "icon": "ti ti-palette",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html#themes/walmart"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "card",
+                "title": "Preview",
+                "subtitle": "Paste page JSON on the left and see the page on the right.",
+                "children": [
+                  {
+                    "component": "text",
+                    "role": "body",
+                    "text": "Use this when you are wiring app structure and want fast checks."
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Open preview",
+                    "variant": "primary",
+                    "icon": "ti ti-eye",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html#canonical/live-preview"
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "card",
+                "title": "Build Page",
+                "subtitle": "Edit full pages from JSON instead of page-local HTML.",
+                "children": [
+                  {
+                    "component": "text",
+                    "role": "body",
+                    "text": "Use this when you want the page contract itself to be the source of truth."
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Open page builder",
+                    "variant": "primary",
+                    "icon": "ti ti-file-code",
+                    "action": {
+                      "type": "open",
+                      "href": "/index.html#canonical/contract-lab"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Simple rule",
+        "children": [
+          {
+            "component": "alert",
+            "tone": "info",
+            "title": "If HTML shows up",
+            "message": "Fine for a day. Then fold that missing part back into the shared library so the next page does not need the same hack."
+          }
+        ]
+      }
+    ]
+  }
+}

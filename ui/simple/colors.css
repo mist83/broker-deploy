@@ -1,0 +1,116 @@
+/**
+ * Simple Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/simple/colors.css
+ *
+ * Clean, flat, enterprise-utility aesthetic.
+ * White and light-gray surfaces, Bootstrap blue primary,
+ * system fonts, minimal shadows, 4px border radius.
+ * The default look of major component libraries — nothing added,
+ * nothing removed, nothing to prove.
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    /* ===== PRIMARY COLORS ===== */
+    --color-primary: #0d6efd;
+    --color-secondary: #6c757d;
+    --color-primary-hover: #0b5ed7;
+    --color-secondary-hover: #5c636a;
+    --color-shell-accent: #6c757d;
+    --color-shell-accent-hover: #5c636a;
+
+    /* ===== BACKGROUNDS ===== */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-card: #ffffff;
+    --bg-hover: #e9ecef;
+
+    /* ===== TEXT COLORS ===== */
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-muted: #adb5bd;
+    --text-dark: #343a40;
+    --text-on-primary: #ffffff;
+    --text-on-secondary: #ffffff;
+
+    /* ===== BORDERS ===== */
+    --border-color: #dee2e6;
+    --border-light: #f8f9fa;
+    --border-medium: #ced4da;
+    --border-dark: #adb5bd;
+
+    /* ===== SEMANTIC COLORS ===== */
+    --color-success: #198754;
+    --color-success-action: #157347;
+    --color-success-bg: #d1e7dd;
+    --color-danger: #dc3545;
+    --color-danger-hover: #b02a37;
+    --color-danger-bg: #f8d7da;
+    --color-warning: #ffc107;
+    --color-warning-bg: #fff3cd;
+    --color-info: #0dcaf0;
+    --color-info-bg: #cff4fc;
+    --color-error: #dc3545;
+
+    /* ===== TYPOGRAPHY ===== */
+    /* System font stack — no external font loading */
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* ===== EFFECTS — FLAT/MINIMAL ===== */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+
+    /* Bootstrap-style subtle shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.075);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+    /* Bootstrap focus ring */
+    --shadow-hover: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+
+    --transition-base: 0.15s ease-in-out;
+
+    /* ===== DISABLED STATES ===== */
+    --button-disabled-bg: #e9ecef;
+    --button-disabled-text: #6c757d;
+    --button-disabled-border: #dee2e6;
+    --input-disabled-bg: #e9ecef;
+}
+
+/* ==================== DARK MODE ==================== */
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    /* Bootstrap dark palette */
+    --bg-primary: #212529;
+    --bg-secondary: #2c3034;
+    --bg-tertiary: #343a40;
+    --bg-card: #212529;
+    --bg-hover: #343a40;
+
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --text-muted: #6c757d;
+    --text-dark: #dee2e6;
+
+    --border-color: #495057;
+    --border-light: #343a40;
+    --border-medium: #495057;
+    --border-dark: #6c757d;
+
+    --button-disabled-bg: #343a40;
+    --button-disabled-text: #6c757d;
+    --button-disabled-border: #495057;
+    --input-disabled-bg: #343a40;
+
+    --color-success-bg: #051b11;
+    --color-danger-bg: #2c0b0e;
+    --color-warning-bg: #332701;
+    --color-info-bg: #032830;
+}

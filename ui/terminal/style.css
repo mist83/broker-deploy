@@ -1,0 +1,9 @@
+/**
+ * Terminal Complete Stylesheet
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/terminal/style.css
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import url('colors.css');
+@import url('layout.css');

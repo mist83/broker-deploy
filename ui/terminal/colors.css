@@ -1,0 +1,89 @@
+/**
+ * Terminal Colors
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/terminal/colors.css
+ */
+
+@import url('../core/colors.css');
+
+:root {
+    --color-primary: #38F277;
+    --color-secondary: #8AE6FF;
+    --color-primary-hover: #21C95D;
+    --color-secondary-hover: #57C9EB;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+    --color-primary-soft: rgba(56, 242, 119, 0.13);
+    --color-secondary-soft: rgba(138, 230, 255, 0.13);
+
+    --bg-primary: #050806;
+    --bg-secondary: #0A120D;
+    --bg-tertiary: #101B14;
+    --bg-card: #07100A;
+    --bg-card-soft: #0D1711;
+    --bg-hover: #132118;
+    --bg-overlay: rgba(0, 0, 0, 0.76);
+
+    --text-primary: #E7FFE7;
+    --text-secondary: #9BF5B8;
+    --text-muted: #7B9A84;
+    --text-very-muted: #506557;
+    --text-dark: #050806;
+    --text-on-primary: #031006;
+
+    --border-color: rgba(56, 242, 119, 0.48);
+    --border-light: rgba(231, 255, 231, 0.09);
+    --border-medium: rgba(56, 242, 119, 0.24);
+    --border-dark: rgba(138, 230, 255, 0.46);
+
+    --color-success: #38F277;
+    --color-success-action: #21C95D;
+    --color-success-bg: rgba(56, 242, 119, 0.1);
+    --color-danger: #FF5C7A;
+    --color-danger-hover: #D8405F;
+    --color-danger-bg: rgba(255, 92, 122, 0.11);
+    --color-warning: #FFD166;
+    --color-warning-bg: rgba(255, 209, 102, 0.12);
+    --color-info: #8AE6FF;
+    --color-info-bg: rgba(138, 230, 255, 0.11);
+    --color-error: #FF5C7A;
+
+    --font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --font-display: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
+    --radius-pill: 2px;
+    --radius-full: 50%;
+
+    --shadow-sm: 0 0 0 1px rgba(56, 242, 119, 0.08);
+    --shadow-md: 0 0 18px rgba(56, 242, 119, 0.12);
+    --shadow-lg: 0 0 34px rgba(56, 242, 119, 0.18);
+    --shadow-hover: 0 0 24px rgba(56, 242, 119, 0.22);
+
+    --button-disabled-bg: #111811;
+    --button-disabled-text: #607262;
+    --button-disabled-border: #263429;
+    --input-disabled-bg: #0E150F;
+}
+
+:root[data-ui-mode="light"] {
+    --bg-primary: #F8FFF8;
+    --bg-secondary: #EFF8F0;
+    --bg-tertiary: #E1EFE4;
+    --bg-card: #FFFFFF;
+    --bg-card-soft: #F2FAF4;
+    --bg-hover: #EAF6ED;
+
+    --text-primary: #07100A;
+    --text-secondary: #185C2C;
+    --text-muted: #4E6756;
+    --text-very-muted: #7A8B7F;
+    --text-dark: #07100A;
+
+    --border-color: rgba(24, 92, 44, 0.42);
+    --border-light: rgba(7, 16, 10, 0.12);
+    --border-medium: rgba(24, 92, 44, 0.24);
+}

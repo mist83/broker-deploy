@@ -1,0 +1,104 @@
+<div class="p-lg">
+    <h2><i class="ti ti-click"></i> Button Patterns</h2>
+    <p class="text-secondary mb-lg">Every button variant. All buttons lift 1px on hover and drop back on active.</p>
+
+    <!-- Pattern 28: Primary Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">28</span> Primary Button (default)</h3>
+        <p class="text-secondary mb-md">The default button style. Uses --color-primary background, white text.</p>
+        <div class="grid-row gap-md">
+            <button>Default Button</button>
+            <button class="btn-primary">Explicit .btn-primary</button>
+            <button class="btn-primary"><i class="ti ti-plus"></i> With Icon</button>
+        </div>
+    </div>
+
+    <!-- Pattern 29: Secondary Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">29</span> Secondary Button</h3>
+        <p class="text-secondary mb-md">Tertiary background, dark text, border. For less prominent actions.</p>
+        <div class="grid-row gap-md">
+            <button class="btn-secondary">Secondary</button>
+            <button class="btn-secondary"><i class="ti ti-x"></i> Cancel</button>
+        </div>
+    </div>
+
+    <!-- Pattern 30: Danger Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">30</span> Danger Button</h3>
+        <p class="text-secondary mb-md">Red background. For destructive actions like delete.</p>
+        <div class="grid-row gap-md">
+            <button class="btn-danger">Delete</button>
+            <button class="btn-danger"><i class="ti ti-trash"></i> Remove Item</button>
+        </div>
+    </div>
+
+    <!-- Pattern 31: Cancel Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">31</span> Cancel Button</h3>
+        <p class="text-secondary mb-md">Uses --color-secondary (yellow), black text. For cancel/back actions.</p>
+        <div class="grid-row gap-md">
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-cancel"><i class="ti ti-arrow-left"></i> Go Back</button>
+        </div>
+    </div>
+
+    <!-- Pattern 32: Link Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">32</span> Link Button (.btn-link)</h3>
+        <p class="text-secondary mb-md">Looks like a text link. No background, underlined, small padding.</p>
+        <div class="grid-row gap-md">
+            <button class="btn-link">Learn more</button>
+            <button class="btn-link">View details</button>
+            <button class="btn-link">Skip this step</button>
+        </div>
+    </div>
+
+    <!-- Pattern 33: Disabled Button -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">33</span> Disabled Buttons</h3>
+        <p class="text-secondary mb-md">Gray background, muted text, no-pointer cursor. Works on all variants.</p>
+        <div class="grid-row gap-md">
+            <button disabled>Disabled Primary</button>
+            <button class="btn-secondary" disabled>Disabled Secondary</button>
+            <button class="btn-danger" disabled>Disabled Danger</button>
+            <button class="button-disabled">CSS-only Disabled</button>
+        </div>
+    </div>
+
+    <!-- Pattern 34: Button Groups in Context -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">34</span> Button Groups (Real-World Patterns)</h3>
+        <p class="text-secondary mb-md">Common button combinations as they appear in dialogs and forms.</p>
+
+        <h4 class="mb-sm mt-lg">Dialog Footer (Save/Cancel)</h4>
+        <div class="grid-row gap-md mb-lg">
+            <button class="btn-primary"><i class="ti ti-check"></i> Save Changes</button>
+            <button class="btn-cancel">Cancel</button>
+        </div>
+
+        <h4 class="mb-sm">Confirm Delete</h4>
+        <div class="grid-row gap-md mb-lg">
+            <button class="btn-danger"><i class="ti ti-trash"></i> Delete Forever</button>
+            <button class="btn-secondary">Keep It</button>
+        </div>
+
+        <h4 class="mb-sm">Form Actions</h4>
+        <div class="grid-row gap-md">
+            <button class="btn-primary"><i class="ti ti-send"></i> Submit</button>
+            <button class="btn-secondary"><i class="ti ti-eraser"></i> Reset</button>
+            <button class="btn-link">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Pattern 35: Full Width Buttons (Mobile Pattern) -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">35</span> Full Width Buttons (Mobile)</h3>
+        <p class="text-secondary mb-md">On mobile (&lt;768px), all buttons become width:100%. Preview by resizing browser.</p>
+        <div class="grid gap-sm" style="max-width: 360px;">
+            <button class="btn-primary"><i class="ti ti-login"></i> Sign In</button>
+            <button class="btn-secondary"><i class="ti ti-user-plus"></i> Create Account</button>
+            <button class="btn-link">Forgot Password?</button>
+        </div>
+    </div>
+</div>

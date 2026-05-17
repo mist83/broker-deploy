@@ -1,0 +1,1610 @@
+{
+  "schema": "https://ui.mullmania.com/tour-manifest.schema.json",
+  "version": 1,
+  "generatedFrom": "sitemap.json",
+  "title": "UI Framework",
+  "description": "Deterministic tour graph for ui.mullmania.com-backed recorders and Storyboard handoff.",
+  "traversal": "ordered",
+  "narrationFallback": "description",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captureDelayMs": 900,
+  "actionTypes": [
+    "visit",
+    "focus",
+    "activate",
+    "scroll",
+    "zoom",
+    "pause",
+    "snapshot",
+    "callout"
+  ],
+  "nodes": [
+    {
+      "id": "docs",
+      "kind": "tab",
+      "parentId": null,
+      "label": "Start",
+      "description": "Runtime entrypoint, shell defaults, and the shortest path to a canonical consumer surface.",
+      "route": "./index.html#docs",
+      "order": 10,
+      "importance": 5,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 0
+    },
+    {
+      "id": "docs/overview",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Start Here",
+      "description": "Runtime entrypoint, shell defaults, and the shortest path to a canonical consumer surface.",
+      "route": "./index.html#docs/overview",
+      "order": 11,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/overview"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 1
+    },
+    {
+      "id": "docs/dogfood",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Dogfooding",
+      "description": "How ui.mullmania.com uses its own runtime, presets, contracts, and escape hatches.",
+      "route": "./index.html#docs/dogfood",
+      "order": 12,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/dogfood"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 2
+    },
+    {
+      "id": "docs/include",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Runtime Include",
+      "description": "Default include, pinned themes, stylesheet aliases, and Swagger skin loading.",
+      "route": "./index.html#docs/include",
+      "order": 13,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/include"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 3
+    },
+    {
+      "id": "docs/themes",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Theme Routing",
+      "description": "Published default alias behavior, pinning rules, and local preview semantics.",
+      "route": "./index.html#docs/themes",
+      "order": 14,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/themes"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 4
+    },
+    {
+      "id": "docs/theme-builder",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Theme Recipe",
+      "description": "Dogfood walkthrough of the real theme knobs, remake matrix, and the dedicated tutorial reel.",
+      "route": "./index.html#docs/theme-builder",
+      "order": 15,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/theme-builder"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 5
+    },
+    {
+      "id": "docs/shell",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Shell Contract",
+      "description": "Document vs workspace, scroll ownership, and the canonical detail shell pattern.",
+      "route": "./index.html#docs/shell",
+      "order": 16,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/shell"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 6
+    },
+    {
+      "id": "docs/authoring",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Structured Authoring",
+      "description": "Sitemap-first build order, preferred inputs, and when htmlSource is still allowed.",
+      "route": "./index.html#docs/authoring",
+      "order": 17,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/authoring"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 7
+    },
+    {
+      "id": "docs/reference",
+      "kind": "item",
+      "parentId": "docs",
+      "label": "Reference Links",
+      "description": "Canonical endpoints, render host, manifests, and consumer-facing docs.",
+      "route": "./index.html#docs/reference",
+      "order": 18,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#docs/reference"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 8
+    },
+    {
+      "id": "builder",
+      "kind": "tab",
+      "parentId": null,
+      "label": "Library",
+      "description": "Shared component and token library for reusable ui.mullmania.com-backed screens.",
+      "route": "./index.html#builder",
+      "order": 20,
+      "importance": 4,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 9
+    },
+    {
+      "id": "builder/buttons",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Buttons",
+      "description": "Primary, secondary, and action button patterns.",
+      "route": "./index.html#builder/buttons",
+      "order": 21,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/buttons"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 10
+    },
+    {
+      "id": "builder/forms",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Forms",
+      "description": "Inputs, labels, control groups, and property-field patterns.",
+      "route": "./index.html#builder/forms",
+      "order": 22,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/forms"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 11
+    },
+    {
+      "id": "builder/cards",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Cards",
+      "description": "Card composition and grouped information blocks.",
+      "route": "./index.html#builder/cards",
+      "order": 23,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/cards"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 12
+    },
+    {
+      "id": "builder/tables",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Tables",
+      "description": "Tables, density choices, and shared row-action treatment.",
+      "route": "./index.html#builder/tables",
+      "order": 24,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/tables"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 13
+    },
+    {
+      "id": "builder/alerts",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Alerts & Badges",
+      "description": "Status chips, alerts, and semantic emphasis patterns.",
+      "route": "./index.html#builder/alerts",
+      "order": 25,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/alerts"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 14
+    },
+    {
+      "id": "builder/modals",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Modals & Toasts",
+      "description": "Interruptive flows and ephemeral feedback surfaces.",
+      "route": "./index.html#builder/modals",
+      "order": 26,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/modals"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 15
+    },
+    {
+      "id": "builder/colors",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Colors",
+      "description": "Semantic color roles and how library components apply them.",
+      "route": "./index.html#builder/colors",
+      "order": 27,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/colors"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 16
+    },
+    {
+      "id": "builder/typography",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Typography",
+      "description": "Type roles, hierarchy, and the shared reading order contract.",
+      "route": "./index.html#builder/typography",
+      "order": 28,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/typography"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 17
+    },
+    {
+      "id": "builder/spacing",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Spacing",
+      "description": "Spacing tokens, rhythm, and structural utilities.",
+      "route": "./index.html#builder/spacing",
+      "order": 29,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/spacing"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 18
+    },
+    {
+      "id": "builder/effects",
+      "kind": "item",
+      "parentId": "builder",
+      "label": "Effects",
+      "description": "Shadows, radius, charts, toasts, and modal interaction primitives.",
+      "route": "./index.html#builder/effects",
+      "order": 30,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#builder/effects"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 19
+    },
+    {
+      "id": "canonical",
+      "kind": "tab",
+      "parentId": null,
+      "label": "Patterns",
+      "description": "Canonical page, layout, and interaction patterns that consumer sites can reuse.",
+      "route": "./index.html#canonical",
+      "order": 30,
+      "importance": 5,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 20
+    },
+    {
+      "id": "canonical/structure",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Page Structure",
+      "description": "Canonical page scaffolds and shared shell framing.",
+      "route": "./index.html#canonical/structure",
+      "order": 31,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/structure"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 21
+    },
+    {
+      "id": "canonical/grids",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Grid System",
+      "description": "Layout grids, columns, and responsive composition.",
+      "route": "./index.html#canonical/grids",
+      "order": 32,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/grids"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 22
+    },
+    {
+      "id": "canonical/typography",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Typography",
+      "description": "Canonical type roles, rhythm, and content hierarchy.",
+      "route": "./index.html#canonical/typography",
+      "order": 33,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/typography"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 23
+    },
+    {
+      "id": "canonical/buttons",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Buttons",
+      "description": "Primary, secondary, and action button patterns.",
+      "route": "./index.html#canonical/buttons",
+      "order": 34,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/buttons"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 24
+    },
+    {
+      "id": "canonical/forms",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Forms",
+      "description": "Inputs, labels, and control-group conventions.",
+      "route": "./index.html#canonical/forms",
+      "order": 35,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/forms"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 25
+    },
+    {
+      "id": "canonical/cards",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Cards",
+      "description": "Card composition and grouped information blocks.",
+      "route": "./index.html#canonical/cards",
+      "order": 36,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/cards"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 26
+    },
+    {
+      "id": "canonical/tables",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Tables",
+      "description": "Data tables, density choices, and row actions.",
+      "route": "./index.html#canonical/tables",
+      "order": 37,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/tables"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 27
+    },
+    {
+      "id": "canonical/alerts",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Alerts & Badges",
+      "description": "Status chips, alerts, and semantic emphasis patterns.",
+      "route": "./index.html#canonical/alerts",
+      "order": 38,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/alerts"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 28
+    },
+    {
+      "id": "canonical/modals",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Modals & Toasts",
+      "description": "Interruptive flows and ephemeral feedback surfaces.",
+      "route": "./index.html#canonical/modals",
+      "order": 39,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/modals"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 29
+    },
+    {
+      "id": "canonical/detail",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Detail Pages",
+      "description": "Sidebar-plus-detail layouts and dense operator views.",
+      "route": "./index.html#canonical/detail",
+      "order": 40,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/detail"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 30
+    },
+    {
+      "id": "themes",
+      "kind": "tab",
+      "parentId": null,
+      "label": "Themes",
+      "description": "Theme routes that prove the same canonical structure can wear different visual systems.",
+      "route": "./index.html#themes",
+      "order": 40,
+      "importance": 3,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 31
+    },
+    {
+      "id": "canonical/spacing",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Spacing & Utilities",
+      "description": "Spacing rhythm, gaps, and utility composition.",
+      "route": "./index.html#canonical/spacing",
+      "order": 41,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/spacing"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 32
+    },
+    {
+      "id": "themes/cyberpink",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Cyberpink",
+      "description": "Neon-heavy synthwave treatment for loud demos and high-energy branded work.",
+      "route": "./index.html#themes/cyberpink",
+      "order": 41,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/cyberpink"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 33
+    },
+    {
+      "id": "canonical/full-page",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Full Pages",
+      "description": "End-to-end canonical page assemblies.",
+      "route": "./index.html#canonical/full-page",
+      "order": 42,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/full-page"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 34
+    },
+    {
+      "id": "themes/editorial",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Editorial",
+      "description": "Typography-led paper-and-ink theme for authored, high-intent surfaces.",
+      "route": "./index.html#themes/editorial",
+      "order": 42,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/editorial"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 35
+    },
+    {
+      "id": "canonical/live-preview",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Live Preview",
+      "description": "Interactive preview lab for theme and contract routes.",
+      "route": "./index.html#canonical/live-preview",
+      "order": 43,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/live-preview"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 36
+    },
+    {
+      "id": "themes/mockup",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Mockup",
+      "description": "Sketch-like wireframe treatment for concept reviews and low-fidelity product planning.",
+      "route": "./index.html#themes/mockup",
+      "order": 43,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/mockup"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 37
+    },
+    {
+      "id": "canonical/contract-lab",
+      "kind": "item",
+      "parentId": "canonical",
+      "label": "Contract Lab",
+      "description": "Build and share a page contract directly in the browser.",
+      "route": "./index.html#canonical/contract-lab",
+      "order": 44,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#canonical/contract-lab"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 38
+    },
+    {
+      "id": "themes/ocean",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Ocean",
+      "description": "Cool blue system for calmer dashboards and ambient product surfaces.",
+      "route": "./index.html#themes/ocean",
+      "order": 44,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/ocean"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 39
+    },
+    {
+      "id": "themes/pumpkin",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Pumpkin",
+      "description": "Warm rounded theme for approachable and slightly playful product work.",
+      "route": "./index.html#themes/pumpkin",
+      "order": 45,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/pumpkin"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 40
+    },
+    {
+      "id": "themes/sunset",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Sunset",
+      "description": "Warmer editorial palette for expressive showcase and storytelling surfaces.",
+      "route": "./index.html#themes/sunset",
+      "order": 46,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/sunset"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 41
+    },
+    {
+      "id": "themes/walmart",
+      "kind": "item",
+      "parentId": "themes",
+      "label": "Walmart",
+      "description": "Brand-specific blue and yellow treatment for explicit Walmart-flavored work only.",
+      "route": "./index.html#themes/walmart",
+      "order": 47,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#themes/walmart"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 42
+    },
+    {
+      "id": "visual-builder",
+      "kind": "tab",
+      "parentId": null,
+      "label": "Builder (Legacy)",
+      "description": "Legacy visual maintenance hatch for sitemap structure and route layout work.",
+      "route": "./index.html#visual-builder",
+      "order": 90,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#visual-builder"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 43
+    },
+    {
+      "id": "ui-framework",
+      "kind": "tab",
+      "parentId": null,
+      "label": "UI Framework",
+      "description": "Built-in framework controls, renderer examples, and links back to the shared UI source.",
+      "route": "./index.html#ui-framework",
+      "order": 9999,
+      "importance": 2,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#ui-framework"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 44
+    },
+    {
+      "id": "ui-framework/overview",
+      "kind": "item",
+      "parentId": "ui-framework",
+      "label": "About",
+      "description": "What this shared UI framework is doing on the current site.",
+      "route": "./index.html#ui-framework/overview",
+      "order": 10000,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#ui-framework/overview"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 45
+    },
+    {
+      "id": "ui-framework/tools",
+      "kind": "item",
+      "parentId": "ui-framework",
+      "label": "Site Tools",
+      "description": "Live controls for checking this site against shared theme and rendering behavior.",
+      "route": "./index.html#ui-framework/tools",
+      "order": 10001,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#ui-framework/tools"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 46
+    },
+    {
+      "id": "ui-framework/renderer",
+      "kind": "item",
+      "parentId": "ui-framework",
+      "label": "Renderer",
+      "description": "Embedded renderer proof showing JSON becoming a page through the shared framework.",
+      "route": "./index.html#ui-framework/renderer",
+      "order": 10002,
+      "importance": 1,
+      "durationMs": 3000,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "walmart",
+      "mode": "light",
+      "narration": "",
+      "anchors": [],
+      "actions": [
+        {
+          "type": "visit",
+          "target": "./index.html#ui-framework/renderer"
+        },
+        {
+          "type": "pause",
+          "durationMs": 3000
+        },
+        {
+          "type": "snapshot"
+        }
+      ],
+      "index": 47
+    }
+  ]
+}

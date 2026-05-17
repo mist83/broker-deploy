@@ -1,0 +1,29 @@
+/**
+ * Ocean Depths Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/ocean/layout.css
+ */
+
+@import url('../core/layout.css');
+
+/* Ocean-specific overrides */
+body {
+    background: linear-gradient(180deg, #001219 0%, #003D5B 100%);
+}
+
+.header {
+    background: linear-gradient(135deg, #003D5B 0%, #0077B6 100%) !important;
+    box-shadow: 0 4px 20px rgba(0, 180, 216, 0.3);
+}
+
+button {
+    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+}
+
+button:hover {
+    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.5);
+}
+
+.card {
+    box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);
+}

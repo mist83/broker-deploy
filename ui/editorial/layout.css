@@ -1,0 +1,130 @@
+/**
+ * Editorial Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/editorial/layout.css
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background:
+        radial-gradient(circle at top right, rgba(36, 80, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 15% 20%, rgba(199, 104, 45, 0.1), transparent 22%),
+        linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.header {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    padding: 24px 28px 14px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+.header h1 {
+    font-size: clamp(36px, 4vw, 64px);
+    font-weight: var(--font-weight-brand);
+    line-height: var(--line-height-brand);
+    letter-spacing: var(--letter-spacing-brand);
+}
+
+.header h1 i,
+.header .brand-icon,
+.header .header-icon,
+.header .brand-icon-default,
+.header .brand-icon-hover {
+    color: var(--color-primary) !important;
+}
+
+.header a:hover {
+    color: var(--color-primary);
+}
+
+.tabs {
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+    border-top: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 18px 12px;
+    color: var(--text-muted);
+}
+
+.tab:hover {
+    color: var(--text-primary);
+    background: transparent;
+}
+
+.tab.active {
+    background: transparent;
+    color: var(--text-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.sidebar {
+    background: rgba(244, 239, 230, 0.38);
+}
+
+.sidebar-item.active {
+    background: transparent;
+    border-left-color: var(--color-primary);
+    color: var(--text-primary);
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 253, 248, 0.6);
+}
+
+.content {
+    background: transparent;
+}
+
+.card,
+.content-card {
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: var(--space-lg) 0;
+    box-shadow: none;
+}
+
+.card-photo {
+    border-bottom: 1px solid var(--border-color);
+}
+
+button,
+.btn-primary,
+button.btn-primary {
+    border-radius: 999px;
+    box-shadow: none;
+}
+
+.btn-secondary,
+button.secondary {
+    background: transparent;
+}
+
+code {
+    background: rgba(255, 253, 248, 0.85);
+    color: var(--color-primary);
+}
+
+pre {
+    background: rgba(255, 253, 248, 0.9);
+}
+
+.page-container > .grid-between > div:first-child > h1:first-child {
+    font-size: var(--font-size-display);
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-display);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-display);
+}
+
+.detail-header {
+    background: transparent;
+    border-bottom-width: 1px;
+}

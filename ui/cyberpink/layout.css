@@ -1,0 +1,50 @@
+/**
+ * Cyberpink Outrun Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/cyberpink/layout.css
+ * 
+ * Uses the shared core layout with cyberpink overrides
+ */
+
+@import url('../core/layout.css');
+
+/* Cyberpink-specific overrides */
+body {
+    background: var(--theme-page-background);
+}
+
+.header {
+    background: var(--theme-header-background) !important;
+    box-shadow: var(--theme-header-shadow);
+}
+
+.tabs {
+    background: var(--bg-secondary);
+    border-bottom: 3px solid var(--theme-accent-secondary);
+}
+
+button {
+    background: var(--theme-accent-primary);
+    box-shadow: var(--theme-button-shadow);
+}
+
+button:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--theme-button-hover-shadow);
+}
+
+.card {
+    background: var(--bg-card);
+    border: 2px solid var(--theme-accent-tertiary);
+    box-shadow: var(--theme-card-shadow);
+}
+
+.card:hover {
+    box-shadow: var(--theme-card-hover-shadow);
+}
+
+/* Neon scrollbar */
+*::-webkit-scrollbar-thumb {
+    background: var(--theme-scrollbar-background);
+    box-shadow: var(--theme-scrollbar-shadow);
+}

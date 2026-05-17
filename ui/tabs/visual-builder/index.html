@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual UI Builder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .builder-container {
+            display: grid;
+            grid-template-columns: 272px 1fr 300px;
+            grid-template-rows: 1fr 50px;
+            height: 100vh;
+            gap: 0;
+        }
+
+        .left-sidebar {
+            background: var(--bg-secondary);
+            border-right: 2px solid var(--border-color);
+            overflow-y: auto;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            align-content: start;
+        }
+
+        .toolbar-section {
+            padding: 20px 18px 18px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .toolbar-section h3,
+        .node-palette h3 {
+            margin: 0 0 14px 0;
+            font-size: 12px;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .toolbar-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .toolbar-buttons button {
+            width: 100%;
+            min-height: 56px;
+            padding: 14px 16px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 20px minmax(0, 1fr);
+            align-items: center;
+            justify-items: start;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: left;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .toolbar-buttons button i {
+            font-size: 18px;
+            justify-self: center;
+        }
+
+        .toolbar-buttons button span {
+            min-width: 0;
+        }
+
+        .toolbar-buttons button:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .toolbar-buttons button.secondary {
+            background: var(--color-secondary);
+            color: #000000;
+        }
+
+        .toolbar-buttons button.secondary:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .node-palette {
+            padding: 20px 18px 22px;
+            border-bottom: 2px solid var(--border-color);
+            display: grid;
+            gap: 12px;
+        }
+
+        .palette-item {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 18px;
+            padding: 14px;
+            cursor: grab;
+            display: grid;
+            grid-template-columns: 44px minmax(0, 1fr);
+            align-items: center;
+            gap: 14px;
+            min-height: 84px;
+        }
+
+        .palette-item:hover {
+            border-color: var(--color-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .palette-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .palette-item i {
+            font-size: 24px;
+        }
+
+        .palette-copy {
+            display: grid;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .palette-title {
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .palette-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .palette-item.tab { color: #2196F3; }
+        .palette-item.sidebar { color: #FFC220; }
+        .palette-item.detail { color: #4CAF50; }
+
+        #canvas {
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .properties-panel {
+            background: var(--bg-secondary);
+            border-left: 2px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .properties-panel h3 {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .property-group {
+            margin-bottom: 20px;
+        }
+
+        .property-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .property-group input,
+        .property-group select {
+            width: 100%;
+            padding: 8px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .property-group input:focus,
+        .property-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .status-bar {
+            grid-column: 1 / -1;
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="builder-container">
+        <!-- Left Sidebar: Toolbar + Components -->
+        <div class="left-sidebar">
+            <div class="toolbar-section">
+                <h3>Actions</h3>
+                <div class="toolbar-buttons">
+                    <button id="btn-new">
+                        <i class="ti ti-file-plus"></i>
+                        <span>New</span>
+                    </button>
+                    <button id="btn-load">
+                        <i class="ti ti-upload"></i>
+                        <span>Load Sitemap</span>
+                    </button>
+                    <button id="btn-save">
+                        <i class="ti ti-download"></i>
+                        <span>Export JSON</span>
+                    </button>
+                    <button id="btn-clear">
+                        <i class="ti ti-trash"></i>
+                        <span>Clear</span>
+                    </button>
+                    <button id="btn-examples" class="secondary">
+                        <i class="ti ti-bulb"></i>
+                        <span>Examples</span>
+                    </button>
+                    <button id="btn-layout">
+                        <i class="ti ti-layout-grid"></i>
+                        <span>Auto Layout</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="node-palette">
+                <h3>Components</h3>
+                <div class="palette-item tab" data-type="tab">
+                    <div class="palette-icon">
+                        <i class="ti ti-layout-navbar"></i>
+                    </div>
+                    <div class="palette-copy">
+                        <div class="palette-title">Tab</div>
+                        <div class="palette-meta">Top-level section</div>
+                    </div>
+                </div>
+                <div class="palette-item sidebar" data-type="sidebar">
+                    <div class="palette-icon">
+                        <i class="ti ti-layout-sidebar"></i>
+                    </div>
+                    <div class="palette-copy">
+                        <div class="palette-title">Sidebar Item</div>
+                        <div class="palette-meta">Sub-navigation</div>
+                    </div>
+                </div>
+                <div class="palette-item detail" data-type="detail">
+                    <div class="palette-icon">
+                        <i class="ti ti-file"></i>
+                    </div>
+                    <div class="palette-copy">
+                        <div class="palette-title">Detail View</div>
+                        <div class="palette-meta">Content page</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <div id="canvas">
+            <div class="empty-state" id="empty-state">
+                <i class="ti ti-click"></i>
+                <p>Click a component to add it to the canvas</p>
+            </div>
+        </div>
+
+        <!-- Properties Panel -->
+        <div class="properties-panel">
+            <h3>Properties</h3>
+            <div id="properties-content">
+                <p style="color: var(--text-muted); font-size: 13px;">Select a node to edit properties</p>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="status-text">Ready</span>
+            <span id="node-count">0 nodes</span>
+        </div>
+    </div>
+
+    <script>
+// Visual Sitemap Builder - Cytoscape-based sitemap editor
+if (!window.VisualSitemapBuilder) {
+class VisualSitemapBuilder {
+    constructor() {
+        this.cy = null;
+        this.selectedNode = null;
+        this.nodeCounter = 0;
+        this.iconList = [
+            'ti-book', 'ti-palette', 'ti-wand', 'ti-settings', 'ti-home',
+            'ti-user', 'ti-chart-bar', 'ti-file', 'ti-folder', 'ti-star',
+            'ti-heart', 'ti-bell', 'ti-mail', 'ti-search', 'ti-plus'
+        ];
+    }
+
+    initialize() {
+        const container = document.getElementById('canvas');
+        if (!container) {
+            console.error('[Visual Builder] Canvas container not found');
+            return;
+        }
+        
+        this.cy = cytoscape({
+            container: container,
+            style: this.getStyles(),
+            layout: { name: 'preset' },
+            minZoom: 0.3,
+            maxZoom: 3,
+            wheelSensitivity: 0.2
+        });
+
+        this.setupEventListeners();
+        this.loadFromLocalStorage();
+        
+        console.log('[Visual Builder] Initialized successfully');
+    }
+
+    getStyles() {
+        return [
+            {
+                selector: 'node',
+                style: {
+                    'label': 'data(label)',
+                    'text-valign': 'center',
+                    'text-halign': 'center',
+                    'font-size': '14px',
+                    'font-weight': 'bold',
+                    'color': '#ffffff',
+                    'text-wrap': 'wrap',
+                    'text-max-width': '120px',
+                    'width': '100px',
+                    'height': '100px',
+                    'border-width': '3px'
+                }
+            },
+            {
+                selector: 'node[type="tab"]',
+                style: {
+                    'background-color': '#2196F3',
+                    'border-color': '#1976D2',
+                    'shape': 'round-rectangle'
+                }
+            },
+            {
+                selector: 'node[type="sidebar"]',
+                style: {
+                    'background-color': '#FFC220',
+                    'border-color': '#FFA000',
+                    'shape': 'ellipse',
+                    'width': '80px',
+                    'height': '80px'
+                }
+            },
+            {
+                selector: 'node[type="detail"]',
+                style: {
+                    'background-color': '#4CAF50',
+                    'border-color': '#388E3C',
+                    'shape': 'rectangle',
+                    'width': '70px',
+                    'height': '70px'
+                }
+            },
+            {
+                selector: 'node:selected',
+                style: {
+                    'border-width': '5px',
+                    'border-color': '#FF5722',
+                    'overlay-color': '#FF5722',
+                    'overlay-opacity': 0.2
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 3,
+                    'line-color': '#999',
+                    'target-arrow-color': '#999',
+                    'target-arrow-shape': 'triangle',
+                    'curve-style': 'bezier'
+                }
+            },
+            {
+                selector: 'edge[type="tab-sidebar"]',
+                style: {
+                    'line-color': '#2196F3',
+                    'target-arrow-color': '#2196F3'
+                }
+            },
+            {
+                selector: 'edge[type="sidebar-detail"]',
+                style: {
+                    'line-color': '#FFC220',
+                    'target-arrow-color': '#FFC220'
+                }
+            }
+        ];
+    }
+
+    setupEventListeners() {
+        document.querySelectorAll('.palette-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const type = item.dataset.type;
+                this.addNode(type);
+            });
+        });
+
+        document.getElementById('btn-new').addEventListener('click', () => this.newSitemap());
+        document.getElementById('btn-load').addEventListener('click', () => this.loadSitemap());
+        document.getElementById('btn-save').addEventListener('click', () => this.exportSitemap());
+        document.getElementById('btn-clear').addEventListener('click', () => this.clearCanvas());
+        document.getElementById('btn-examples').addEventListener('click', () => this.showExamples());
+        document.getElementById('btn-layout').addEventListener('click', () => this.autoLayout());
+
+        this.cy.on('tap', 'node', (evt) => this.selectNode(evt.target));
+        this.cy.on('tap', (evt) => { if (evt.target === this.cy) this.deselectNode(); });
+        this.cy.on('taphold', 'node', (evt) => this.startConnection(evt.target));
+        this.cy.on('add remove', 'node', () => this.updateNodeCount());
+        this.cy.on('add remove data', () => this.saveToLocalStorage());
+    }
+
+    addNode(type, data = {}) {
+        const nodeId = `node-${++this.nodeCounter}`;
+        const defaultLabels = { tab: 'New Tab', sidebar: 'New Item', detail: 'Detail View' };
+
+        this.cy.add({
+            group: 'nodes',
+            data: {
+                id: nodeId,
+                type: type,
+                label: data.label || defaultLabels[type],
+                nodeId: data.nodeId || type + '-' + this.nodeCounter,
+                icon: data.icon || 'ti ti-circle',
+                ...data
+            },
+            position: { x: Math.random() * 400 + 200, y: Math.random() * 300 + 150 }
+        });
+
+        this.hideEmptyState();
+        this.updateStatus(`Added ${type} node`);
+        return nodeId;
+    }
+
+    selectNode(node) {
+        this.selectedNode = node;
+        this.cy.nodes().removeClass('selected');
+        node.addClass('selected');
+        this.showProperties(node);
+    }
+
+    deselectNode() {
+        this.selectedNode = null;
+        this.cy.nodes().removeClass('selected');
+        this.hideProperties();
+    }
+
+    showProperties(node) {
+        const data = node.data();
+        const type = data.type;
+        
+        let html = `
+            <div class="property-group">
+                <label>Type</label>
+                <input type="text" value="${type}" disabled>
+            </div>
+            <div class="property-group">
+                <label>Label</label>
+                <input type="text" id="prop-label" value="${data.label || ''}">
+            </div>
+            <div class="property-group">
+                <label>ID</label>
+                <input type="text" id="prop-id" value="${data.nodeId || ''}">
+            </div>
+            <div class="property-group">
+                <label>Icon</label>
+                <select id="prop-icon">
+                    ${this.iconList.map(icon => 
+                        `<option value="ti ${icon}" ${data.icon === 'ti ' + icon ? 'selected' : ''}>
+                            ${icon.replace('ti-', '')}
+                        </option>`
+                    ).join('')}
+                </select>
+            </div>
+        `;
+
+        if (type === 'sidebar') {
+            html += `
+                <div class="property-group">
+                    <label>Name (for sidebar)</label>
+                    <input type="text" id="prop-name" value="${data.name || data.label || ''}">
+                </div>
+            `;
+        }
+
+        html += `
+            <div style="margin-top: 24px; display: flex; gap: 8px;">
+                <button id="btn-update" style="flex: 1; padding: 10px; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer;">Update</button>
+                <button id="btn-delete" style="padding: 10px; background: var(--color-danger); color: white; border: none; border-radius: 4px; cursor: pointer;"><i class="ti ti-trash"></i></button>
+            </div>
+        `;
+
+        document.getElementById('properties-content').innerHTML = html;
+        document.getElementById('btn-update').addEventListener('click', () => this.updateNodeProperties(node));
+        document.getElementById('btn-delete').addEventListener('click', () => this.deleteNode(node));
+    }
+
+    hideProperties() {
+        document.getElementById('properties-content').innerHTML = '<p style="color: var(--text-muted); font-size: 13px;">Select a node to edit properties</p>';
+    }
+
+    updateNodeProperties(node) {
+        node.data('label', document.getElementById('prop-label').value);
+        node.data('nodeId', document.getElementById('prop-id').value);
+        node.data('icon', document.getElementById('prop-icon').value);
+        const nameInput = document.getElementById('prop-name');
+        if (nameInput) node.data('name', nameInput.value);
+        this.updateStatus('Properties updated');
+    }
+
+    deleteNode(node) {
+        if (confirm('Delete this node and all its connections?')) {
+            this.cy.remove(node);
+            this.deselectNode();
+            this.updateStatus('Node deleted');
+        }
+    }
+
+    startConnection(sourceNode) {
+        this.updateStatus('Click another node to connect');
+        const handler = (evt) => {
+            if (evt.target !== this.cy && evt.target.isNode()) {
+                const targetNode = evt.target;
+                if (targetNode.id() !== sourceNode.id()) {
+                    this.connectNodes(sourceNode, targetNode);
+                }
+            }
+            this.cy.off('tap', handler);
+            this.updateStatus('Ready');
+        };
+        this.cy.one('tap', handler);
+    }
+
+    connectNodes(source, target) {
+        const sourceType = source.data('type');
+        const targetType = target.data('type');
+        
+        if (sourceType === 'tab' && targetType === 'sidebar') {
+            this.addEdge(source.id(), target.id(), 'tab-sidebar');
+        } else if (sourceType === 'sidebar' && targetType === 'detail') {
+            this.addEdge(source.id(), target.id(), 'sidebar-detail');
+        } else {
+            alert(`Cannot connect ${sourceType} to ${targetType}`);
+        }
+    }
+
+    addEdge(sourceId, targetId, type) {
+        const edgeId = `edge-${sourceId}-${targetId}`;
+        if (this.cy.getElementById(edgeId).length > 0) {
+            this.updateStatus('Connection already exists');
+            return;
+        }
+        this.cy.add({ group: 'edges', data: { id: edgeId, source: sourceId, target: targetId, type: type } });
+        this.updateStatus('Nodes connected');
+    }
+
+    autoLayout() {
+        this.cy.layout({ name: 'breadthfirst', directed: true, spacingFactor: 1.5, padding: 50 }).run();
+        this.updateStatus('Layout applied');
+    }
+
+    exportSitemap() {
+        const sitemap = this.generateSitemap();
+        const json = JSON.stringify(sitemap, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sitemap.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        this.updateStatus('Sitemap exported');
+    }
+
+    generateSitemap() {
+        const tabs = [];
+        this.cy.nodes('[type="tab"]').forEach(tabNode => {
+            const tabData = tabNode.data();
+            const tab = { id: tabData.nodeId, label: tabData.label, icon: tabData.icon };
+            const sidebarNodes = tabNode.outgoers('node[type="sidebar"]');
+            if (sidebarNodes.length > 0) {
+                tab.sidebar = [];
+                sidebarNodes.forEach(sidebarNode => {
+                    const sidebarData = sidebarNode.data();
+                    tab.sidebar.push({ id: sidebarData.nodeId, name: sidebarData.name || sidebarData.label, icon: sidebarData.icon });
+                });
+            }
+            tabs.push(tab);
+        });
+        return { tabs };
+    }
+
+    loadSitemap() {
+        // Load THIS app's sitemap.json directly
+        fetch('/sitemap.json')
+            .then(r => r.json())
+            .then(sitemap => {
+                this.importSitemap(sitemap);
+                this.updateStatus('Loaded this app\'s sitemap');
+            })
+            .catch(err => {
+                alert('Failed to load sitemap: ' + err.message);
+            });
+    }
+
+    importSitemap(sitemap) {
+        this.clearCanvas();
+        let yOffset = 100;
+        const xSpacing = 250;
+        
+        sitemap.tabs.forEach((tab) => {
+            const tabId = this.addNode('tab', { label: tab.label, nodeId: tab.id, icon: tab.icon });
+            const tabNode = this.cy.getElementById(tabId);
+            tabNode.position({ x: 150, y: yOffset });
+
+            // Check if tab has sections with inlineData (sidebar items)
+            if (tab.sections && tab.sections.length > 0) {
+                const listSection = tab.sections.find(s => s.type === 'list');
+                if (listSection && listSection.inlineData) {
+                    listSection.inlineData.forEach((item, itemIndex) => {
+                        const sidebarId = this.addNode('sidebar', { 
+                            label: item.name, 
+                            nodeId: item.id, 
+                            name: item.name, 
+                            icon: item.icon 
+                        });
+                        const sidebarNode = this.cy.getElementById(sidebarId);
+                        sidebarNode.position({ x: 150 + xSpacing, y: yOffset + (itemIndex * 120) });
+                        this.addEdge(tabId, sidebarId, 'tab-sidebar');
+                    });
+                    yOffset += (listSection.inlineData.length * 120) + 50;
+                } else {
+                    yOffset += 150;
+                }
+            } else if (tab.sidebar && tab.sidebar.length > 0) {
+                // Alternate sitemap shape support
+                tab.sidebar.forEach((item, itemIndex) => {
+                    const sidebarId = this.addNode('sidebar', { 
+                        label: item.name, 
+                        nodeId: item.id, 
+                        name: item.name, 
+                        icon: item.icon 
+                    });
+                    const sidebarNode = this.cy.getElementById(sidebarId);
+                    sidebarNode.position({ x: 150 + xSpacing, y: yOffset + (itemIndex * 120) });
+                    this.addEdge(tabId, sidebarId, 'tab-sidebar');
+                });
+                yOffset += (tab.sidebar.length * 120) + 50;
+            } else {
+                yOffset += 150;
+            }
+        });
+        this.cy.fit(50);
+    }
+
+    newSitemap() {
+        if (confirm('Clear current sitemap and start new?')) {
+            this.clearCanvas();
+            this.updateStatus('New sitemap created');
+        }
+    }
+
+    clearCanvas() {
+        this.cy.elements().remove();
+        this.deselectNode();
+        this.showEmptyState();
+        this.nodeCounter = 0;
+    }
+
+    hideEmptyState() { document.getElementById('empty-state').style.display = 'none'; }
+    showEmptyState() { document.getElementById('empty-state').style.display = 'block'; }
+    updateNodeCount() {
+        const count = this.cy.nodes().length;
+        document.getElementById('node-count').textContent = `${count} node${count !== 1 ? 's' : ''}`;
+    }
+    updateStatus(message) { document.getElementById('status-text').textContent = message; }
+
+    saveToLocalStorage() {
+        const data = { elements: this.cy.json().elements, nodeCounter: this.nodeCounter };
+        localStorage.setItem('visual-sitemap-builder', JSON.stringify(data));
+    }
+
+    loadFromLocalStorage() {
+        const saved = localStorage.getItem('visual-sitemap-builder');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                this.cy.json({ elements: data.elements });
+                this.nodeCounter = data.nodeCounter || 0;
+                this.hideEmptyState();
+                this.updateNodeCount();
+                this.updateStatus('Loaded from local storage');
+            } catch (error) {
+                console.error('[Visual Builder] Failed to load from localStorage:', error);
+            }
+        }
+    }
+
+    showExamples() {
+        const examples = [
+            { name: 'This App (UI Framework)', file: '/sitemap.json' },
+            { name: 'DallAIre (Task Manager)', sitemap: this.getDallAIreSitemap() },
+            { name: 'Simple 2-Tab App', sitemap: this.getSimpleSitemap() }
+        ];
+        
+        let html = '<div style="display: grid; gap: 12px;">';
+        examples.forEach((ex, idx) => {
+            html += `
+                <button onclick="window.builder.loadExample(${idx})" 
+                        style="padding: 12px; background: var(--bg-primary); border: 2px solid var(--border-color); 
+                               border-radius: 4px; cursor: pointer; text-align: left; font-size: 14px;">
+                    <i class="ti ti-file-code"></i> ${ex.name}
+                </button>
+            `;
+        });
+        html += '</div>';
+        
+        if (window.UI && window.UI.modals) {
+            window.UI.modals.show({
+                title: 'Load Example Sitemap',
+                content: html,
+                buttons: [{ text: 'Cancel', action: 'close' }]
+            });
+        }
+    }
+
+    loadExample(index) {
+        const examples = [
+            { name: 'This App', file: '/sitemap.json' },
+            { name: 'DallAIre', sitemap: this.getDallAIreSitemap() },
+            { name: 'Simple', sitemap: this.getSimpleSitemap() }
+        ];
+        
+        const example = examples[index];
+        if (example.file) {
+            fetch(example.file)
+                .then(r => r.json())
+                .then(sitemap => {
+                    this.importSitemap(sitemap);
+                    this.updateStatus(`Loaded ${example.name}`);
+                    if (window.UI && window.UI.modals) window.UI.modals.close();
+                })
+                .catch(err => {
+                    alert('Failed to load example: ' + err.message);
+                });
+        } else if (example.sitemap) {
+            this.importSitemap(example.sitemap);
+            this.updateStatus(`Loaded ${example.name}`);
+            if (window.UI && window.UI.modals) window.UI.modals.close();
+        }
+    }
+
+    getDallAIreSitemap() {
+        return {
+            tabs: [
+                { id: 'tasks', label: 'Tasks', icon: 'ti ti-checkbox' },
+                { id: 'thoughts', label: 'Thoughts', icon: 'ti ti-brain' },
+                { id: 'settings', label: 'Settings', icon: 'ti ti-settings' }
+            ]
+        };
+    }
+
+    getSimpleSitemap() {
+        return {
+            tabs: [
+                { 
+                    id: 'dashboard', 
+                    label: 'Dashboard', 
+                    icon: 'ti ti-home',
+                    sidebar: [
+                        { id: 'overview', name: 'Overview', icon: 'ti ti-chart-bar' },
+                        { id: 'stats', name: 'Statistics', icon: 'ti ti-chart-line' }
+                    ]
+                },
+                { id: 'settings', label: 'Settings', icon: 'ti ti-settings' }
+            ]
+        };
+    }
+}
+
+// Wait for Cytoscape to load, then initialize
+function initWhenReady() {
+    if (typeof cytoscape !== 'undefined') {
+        window.builder = new VisualSitemapBuilder();
+        window.builder.initialize();
+    } else {
+        setTimeout(initWhenReady, 100);
+    }
+}
+
+// Start checking
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhenReady);
+} else {
+    initWhenReady();
+}
+
+// Re-fit canvas when tab becomes visible
+document.addEventListener('ui:view-changed', (e) => {
+    if (e.detail.tabId === 'visual-builder' && window.builder && window.builder.cy) {
+        setTimeout(() => {
+            window.builder.cy.resize();
+            window.builder.cy.fit(50);
+        }, 100);
+    }
+});
+
+window.VisualSitemapBuilder = VisualSitemapBuilder;
+}
+    </script>
+</body>
+</html>

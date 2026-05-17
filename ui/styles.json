@@ -1,0 +1,199 @@
+[
+  {
+    "id": "cyberblue",
+    "name": "Cyberblue",
+    "icon": "ti ti-droplet",
+    "description": "Theme Builder copy of cyberpink with the hot pink pushed to electric blue.",
+    "primary": "#008CFF",
+    "secondary": "#006DCC",
+    "sourceThemeId": "cyberpink",
+    "createdAt": "2026-05-02T23:53:32Z",
+    "createdBy": "ui.mullmania.com live verification",
+    "generatedBy": "theme-builder",
+    "locked": true
+  },
+  {
+    "id": "cyberpink",
+    "name": "Cyberpink",
+    "icon": "ti ti-bolt",
+    "description": "Neon-heavy synthwave treatment for loud demos and high-energy branded work.",
+    "primary": "#FF4FB3",
+    "secondary": "#7C4DFF"
+  },
+  {
+    "id": "editorial",
+    "name": "Editorial",
+    "icon": "ti ti-book-2",
+    "description": "Typography-led paper-and-ink theme for authored, high-intent surfaces.",
+    "primary": "#143A6B",
+    "secondary": "#A15C38"
+  },
+  {
+    "id": "ghoul",
+    "name": "Ghoul",
+    "icon": "ti ti-ghost-2",
+    "description": "Acid green and blood red on near-black for dense consoles, TV-room dashboards, and log streams.",
+    "primary": "#B3FF2C",
+    "secondary": "#FF2C4D"
+  },
+  {
+    "id": "mockup",
+    "name": "Mockup",
+    "icon": "ti ti-pencil",
+    "description": "Sketch-like wireframe treatment for concept reviews and low-fidelity product planning.",
+    "primary": "#000000",
+    "secondary": "#666666"
+  },
+  {
+    "id": "monochrome",
+    "name": "Monochrome",
+    "icon": "ti ti-contrast",
+    "description": "Neutral grayscale system with matching grayscale dark mode.",
+    "primary": "#111111",
+    "secondary": "#555555"
+  },
+  {
+    "id": "red",
+    "name": "Red",
+    "icon": "ti ti-circle-letter-r",
+    "description": "Clean simple-theme surfaces with a red accent.",
+    "primary": "#DC3545",
+    "secondary": "#B02A37"
+  },
+  {
+    "id": "orange",
+    "name": "Orange",
+    "icon": "ti ti-circle-letter-o",
+    "description": "Clean simple-theme surfaces with an orange accent.",
+    "primary": "#E65100",
+    "secondary": "#B23900"
+  },
+  {
+    "id": "yellow",
+    "name": "Yellow",
+    "icon": "ti ti-circle-letter-y",
+    "description": "Clean simple-theme surfaces with a deep-amber accent (yellow leaning amber for legibility on white).",
+    "primary": "#B58A1A",
+    "secondary": "#8C6913"
+  },
+  {
+    "id": "green",
+    "name": "Green",
+    "icon": "ti ti-circle-letter-g",
+    "description": "Clean simple-theme surfaces with a green accent.",
+    "primary": "#2E7D32",
+    "secondary": "#1B5E20"
+  },
+  {
+    "id": "blue",
+    "name": "Blue",
+    "icon": "ti ti-circle-letter-b",
+    "description": "Clean simple-theme surfaces with a blue accent.",
+    "primary": "#1976D2",
+    "secondary": "#0D47A1"
+  },
+  {
+    "id": "indigo",
+    "name": "Indigo",
+    "icon": "ti ti-circle-letter-i",
+    "description": "Clean simple-theme surfaces with an indigo accent.",
+    "primary": "#3949AB",
+    "secondary": "#1A237E"
+  },
+  {
+    "id": "violet",
+    "name": "Violet",
+    "icon": "ti ti-circle-letter-v",
+    "description": "Clean simple-theme surfaces with a violet accent.",
+    "primary": "#8E24AA",
+    "secondary": "#4A148C"
+  },
+  {
+    "id": "mac",
+    "name": "Mac",
+    "icon": "ti ti-brand-apple",
+    "description": "Apple/macOS control language — SF system font, system blue, pill segmented tabs, traffic-light modal close.",
+    "primary": "#007AFF",
+    "secondary": "#8E8E93"
+  },
+  {
+    "id": "blackwhite",
+    "name": "Black and White",
+    "icon": "ti ti-square-half",
+    "description": "Strict two-color theme: black on white, white on black in dark mode.",
+    "primary": "#000000",
+    "secondary": "#FFFFFF"
+  },
+  {
+    "id": "ocean",
+    "name": "Ocean",
+    "icon": "ti ti-wave-sine",
+    "description": "Cool blue system for calmer dashboards and ambient product surfaces.",
+    "primary": "#1098D1",
+    "secondary": "#0F6C8D"
+  },
+  {
+    "id": "pastelzom",
+    "name": "Pastel Zombie",
+    "icon": "ti ti-skull",
+    "description": "Light mint, lilac, and candy-pink zombie treatment for playful horror-adjacent tools.",
+    "primary": "#2F8F5B",
+    "secondary": "#FF9AC8"
+  },
+  {
+    "id": "precog",
+    "name": "Precog",
+    "icon": "ti ti-radar-2",
+    "description": "Signal-room palette for timeline, automation, and monitoring surfaces.",
+    "primary": "#176B8F",
+    "secondary": "#FFB547"
+  },
+  {
+    "id": "pumpkin",
+    "name": "Pumpkin",
+    "icon": "ti ti-pumpkin-scary",
+    "description": "Warm rounded theme for approachable and slightly playful product work.",
+    "primary": "#D16C1A",
+    "secondary": "#7A4317"
+  },
+  {
+    "id": "simple",
+    "name": "Simple",
+    "icon": "ti ti-layout-grid",
+    "description": "Clean, flat, enterprise-utility aesthetic. White surfaces, Bootstrap blue, system fonts, minimal shadows. The default look of major component libraries.",
+    "primary": "#0d6efd",
+    "secondary": "#6c757d"
+  },
+  {
+    "id": "sunset",
+    "name": "Sunset",
+    "icon": "ti ti-sunset-2",
+    "description": "Warmer editorial palette for expressive showcase and storytelling surfaces.",
+    "primary": "#E76F51",
+    "secondary": "#F4A261"
+  },
+  {
+    "id": "terminal",
+    "name": "Terminal",
+    "icon": "ti ti-terminal-2",
+    "description": "Sharp monochrome terminal style for command-heavy tools and operator consoles.",
+    "primary": "#38F277",
+    "secondary": "#8AE6FF"
+  },
+  {
+    "id": "walmart",
+    "name": "Walmart",
+    "icon": "ti ti-brand-walmart",
+    "description": "Brand-specific blue and yellow treatment for explicit Walmart-flavored work only.",
+    "primary": "#0071CE",
+    "secondary": "#FFC220"
+  },
+  {
+    "id": "windows31",
+    "name": "Windows 3.1",
+    "icon": "ti ti-brand-windows",
+    "description": "Sharp gray bevels, blue chrome, and Times-flavored retro desktop styling.",
+    "primary": "#000080",
+    "secondary": "#C0C0C0"
+  }
+]

@@ -1,0 +1,10 @@
+/**
+ * Walmart Complete Stylesheet
+ * @version 1.1.0
+ * @url https://ui.mullmania.com/walmart/style.css
+ * 
+ * Combined colors + layout for convenience
+ */
+
+@import url('colors.css');
+@import url('layout.css');

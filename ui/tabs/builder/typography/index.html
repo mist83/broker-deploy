@@ -1,0 +1,242 @@
+<div class="p-lg">
+    <h2>Typography Variables</h2>
+    <p class="mb-lg">Customize primitive typography tokens and the semantic role layer that sits on top of them. The goal is to change variables, not selectors.</p>
+
+    <div class="grid gap-lg mb-xl">
+        <div class="card">
+            <h3 class="mb-md">Font Families</h3>
+            <div class="grid gap-md">
+                <div>
+                    <label>Primary Font Family</label>
+                    <input type="text" id="font-family" value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" class="text-input">
+                </div>
+                <div>
+                    <label>Monospace Font</label>
+                    <input type="text" id="font-mono" value="'SF Mono', Monaco, 'Cascadia Code', monospace" class="text-input">
+                </div>
+                <div>
+                    <label>Handwriting Font</label>
+                    <input type="text" id="font-hand" value="'Patrick Hand', cursive" class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md">Semantic Type Roles</h3>
+            <p class="mb-md text-secondary">Map raw primitives into brand, display, UI, body, and label roles so projects can stay semantic.</p>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>UI / Body Family</label>
+                    <input type="text" id="font-family-ui" value="var(--font-family)" class="text-input">
+                </div>
+                <div>
+                    <label>Display Family</label>
+                    <input type="text" id="font-family-display" value="var(--font-family)" class="text-input">
+                </div>
+                <div>
+                    <label>Label / Micro Family</label>
+                    <input type="text" id="font-family-label" value="var(--font-mono)" class="text-input">
+                </div>
+                <div>
+                    <label>Brand Family</label>
+                    <input type="text" id="font-family-brand" value="var(--font-family-ui)" class="text-input">
+                </div>
+                <div>
+                    <label>Heading Family</label>
+                    <input type="text" id="font-family-heading" value="var(--font-family-ui)" class="text-input">
+                </div>
+                <div>
+                    <label>Body Family</label>
+                    <input type="text" id="font-family-body" value="var(--font-family-ui)" class="text-input">
+                </div>
+                <div>
+                    <label>Display Size</label>
+                    <input type="text" id="font-size-display" value="clamp(48px, 6vw, 96px)" class="text-input">
+                </div>
+                <div>
+                    <label>Brand Size</label>
+                    <input type="text" id="font-size-brand" value="clamp(64px, 10vw, 156px)" class="text-input">
+                </div>
+                <div>
+                    <label>Display Tracking</label>
+                    <input type="text" id="letter-spacing-display" value="-0.05em" class="text-input">
+                </div>
+                <div>
+                    <label>Label Tracking</label>
+                    <input type="text" id="letter-spacing-label" value="0.12em" class="text-input">
+                </div>
+            </div>
+            <div class="grid-row gap-sm mt-md">
+                <button type="button" class="btn-secondary" id="apply-editorial-preset">Apply Editorial Preset</button>
+                <button type="button" class="btn-link" id="reset-role-overrides">Reset Role Overrides</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md">Font Sizes</h3>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>Extra Small (text-xs)</label>
+                    <input type="text" id="text-xs" value="11px" class="text-input">
+                </div>
+                <div>
+                    <label>Small (text-sm)</label>
+                    <input type="text" id="text-sm" value="13px" class="text-input">
+                </div>
+                <div>
+                    <label>Base (text-base)</label>
+                    <input type="text" id="text-base" value="14px" class="text-input">
+                </div>
+                <div>
+                    <label>Medium (text-md)</label>
+                    <input type="text" id="text-md" value="16px" class="text-input">
+                </div>
+                <div>
+                    <label>Large (text-lg)</label>
+                    <input type="text" id="text-lg" value="18px" class="text-input">
+                </div>
+                <div>
+                    <label>Extra Large (text-xl)</label>
+                    <input type="text" id="text-xl" value="20px" class="text-input">
+                </div>
+                <div>
+                    <label>2X Large (text-2xl)</label>
+                    <input type="text" id="text-2xl" value="24px" class="text-input">
+                </div>
+                <div>
+                    <label>3X Large (text-3xl)</label>
+                    <input type="text" id="text-3xl" value="36px" class="text-input">
+                </div>
+                <div>
+                    <label>4X Large (text-4xl)</label>
+                    <input type="text" id="text-4xl" value="48px" class="text-input">
+                </div>
+                <div>
+                    <label>5X Large (text-5xl)</label>
+                    <input type="text" id="text-5xl" value="64px" class="text-input">
+                </div>
+                <div>
+                    <label>6X Large (text-6xl)</label>
+                    <input type="text" id="text-6xl" value="96px" class="text-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md">Font Weights</h3>
+            <div class="grid grid-2 gap-md">
+                <div>
+                    <label>Normal (weight-normal)</label>
+                    <input type="number" id="weight-normal" value="400" min="100" max="900" step="100" class="text-input">
+                </div>
+                <div>
+                    <label>Medium (weight-medium)</label>
+                    <input type="number" id="weight-medium" value="500" min="100" max="900" step="100" class="text-input">
+                </div>
+                <div>
+                    <label>Semibold (weight-semibold)</label>
+                    <input type="number" id="weight-semibold" value="600" min="100" max="900" step="100" class="text-input">
+                </div>
+                <div>
+                    <label>Bold (weight-bold)</label>
+                    <input type="number" id="weight-bold" value="700" min="100" max="900" step="100" class="text-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 class="mb-md">Typography Preview</h3>
+        <div id="preview-area" style="padding: 20px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div class="type-brand">MULLMANIA</div>
+            <div class="type-display">edited</div>
+            <div class="type-ui-title" style="margin-bottom: 8px;">UI text stays calm and operational.</div>
+            <p class="type-body" style="color: var(--text-secondary); max-width: 42ch;">This preview uses the semantic type roles. Keep primitives like <code>--text-3xl</code>, but style brand, display, body, and labels through role variables.</p>
+            <div class="type-label" style="color: var(--text-muted);">visual builder / documentation / themes / typography</div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+}
+</style>
+
+<script>
+(function() {
+    const previewArea = document.getElementById('preview-area');
+    const editorialPresetButton = document.getElementById('apply-editorial-preset');
+    const resetRoleOverridesButton = document.getElementById('reset-role-overrides');
+    const editorialRolePreset = {
+        'font-family': '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        'font-mono': '"IBM Plex Mono", "SF Mono", Monaco, monospace',
+        'font-family-ui': 'var(--font-family)',
+        'font-family-body': 'var(--font-family-ui)',
+        'font-family-heading': 'var(--font-family-ui)',
+        'font-family-display': '"Instrument Serif", Georgia, serif',
+        'font-family-label': 'var(--font-mono)',
+        'font-family-brand': 'var(--font-family-ui)',
+        'font-size-display': 'clamp(56px, 7vw, 104px)',
+        'font-size-brand': 'clamp(72px, 10vw, 156px)',
+        'letter-spacing-display': '-0.05em',
+        'letter-spacing-label': '0.12em',
+        'letter-spacing-brand': '-0.08em',
+        'font-weight-display': '400',
+        'font-weight-brand': '800'
+    };
+
+    function setVariable(id, value) {
+        document.documentElement.style.setProperty('--' + id, value);
+        const input = document.getElementById(id);
+        if (input) {
+            input.value = value;
+        }
+    }
+
+    function ensureEditorialFonts() {
+        if (document.getElementById('editorial-fonts-preview')) {
+            return;
+        }
+
+        const link = document.createElement('link');
+        link.id = 'editorial-fonts-preview';
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap';
+        document.head.appendChild(link);
+    }
+
+    document.querySelectorAll('.text-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+            const varName = '--' + e.target.id;
+            document.documentElement.style.setProperty(varName, e.target.value);
+        });
+    });
+
+    editorialPresetButton.addEventListener('click', () => {
+        ensureEditorialFonts();
+        Object.entries(editorialRolePreset).forEach(([id, value]) => {
+            setVariable(id, value);
+        });
+        previewArea.style.background = 'var(--bg-primary)';
+    });
+
+    resetRoleOverridesButton.addEventListener('click', () => {
+        Object.keys(editorialRolePreset).forEach((id) => {
+            document.documentElement.style.removeProperty('--' + id);
+        });
+    });
+})();
+</script>

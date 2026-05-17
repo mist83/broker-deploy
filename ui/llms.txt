@@ -1,0 +1,81 @@
+# ui.mullmania.com
+
+Canonical UI library for Mullmania apps and branded surfaces.
+
+Read in this order:
+- /llm-docs.md
+- /active/typography.html
+- /#docs
+
+Core doctrine:
+- Sitemap first. Declare tabs, panels, navigation, and content routing in `/sitemap.json`.
+- Prefer `preset`, `component`, or `componentSource` over `htmlSource`.
+- Use `htmlSource` only when the semantic/runtime path genuinely cannot express the surface.
+
+Fastest include:
+- `<script src="https://ui.mullmania.com/ui.js"></script>`
+- Bare `ui.js` follows the published global default.
+
+Fixed-theme include:
+- `<script src="https://ui.mullmania.com/ui.js" data-ui-theme="ocean"></script>`
+- `<script src="https://ui.mullmania.com/ui.js" data-ui-theme="walmart"></script>`
+
+Published default:
+- `https://ui.mullmania.com/active-theme.json` is the public source of truth for the currently published default
+- `/active/*`, bare `ui.js`, and `data-ui-theme="active"` all follow that published default
+- `UI.setTheme()` is page-local preview state only
+- `POST /api/theme/active` publishes a new global default and requires `X-Operator-Key`
+
+Primary JS API:
+- `await UI.ready()`
+- `UI.mount('#app', { title, subtitle, sections: [...] })`
+- `UI.text({ role: 'brand' | 'display' | 'ui-title' | 'body' | 'label', text })`
+- `UI.section({ title, description, children })`
+- `UI.card(...)`
+- `UI.table(...)`
+- `UI.alert(...)`
+- `UI.status(...)`
+
+Hosted renderer:
+- `https://ui.mullmania.com/render.html?source=<json-url>`
+- `https://ui.mullmania.com/?source=<json-url>`
+- `https://ui.mullmania.com/render.html?spec64=<base64url-json>`
+
+Contract:
+- top-level schema: `https://ui.mullmania.com/page-contract.schema.json`
+- use `page` or `preset`
+- supported semantic component: `text`
+- remote contracts reject raw `html` and event handlers
+- remote JSON sources must allow CORS from `https://ui.mullmania.com/`
+
+Rules:
+- Use the sitemap for structure. Do not drop into raw HTML when a sitemap entry plus shared runtime can express the screen.
+- `sitemap.header` can define the app shell header, including declarative link controls like `{ "type": "link", "label": "...", "href": "..." }`.
+- Document pages and front doors with one lane use `.header` + `#content-container` + `.page-container`.
+- Product, search, browse, admin, and operator tools should usually use `#header-container` + `#tabs-container` + `#content-container`.
+- If the surface has 2+ distinct tasks or views, make them top tabs by default.
+- If the surface has navigation, filters, record lists, or detail inspection, use `layout: "workspace"` by default.
+- An active detail page gets one surface pattern by default, and two at the absolute maximum. If you need more, split it into sidebar items or top tabs instead of stacking hero/dashboard/inspector/docs patterns together.
+- If you feel pressure to add a third surface pattern, the page is grouped wrong. Break it apart before adding more chrome.
+- App shells should have one clear vertical scroll owner per region instead of body + content + nested panel all scrolling.
+- On desktop, keep body/document pinned and let the intended inner region own scroll. On narrow mobile layouts, let the active content region scroll if that is what keeps the workspace reachable.
+- Treat the flat document shell as the exception for genuinely single-purpose pages, not the fallback for every site.
+- `.container` is the app shell, not the generic page wrapper. Do not mount document pages into `.container`.
+- Prefer the runtime and component helpers over hand-written CSS and HTML.
+- Start with composition, not components.
+- On branded pages, treat the first viewport like a poster.
+- On product UI, prioritize orientation, status, and action.
+- Use the live typography reference at `/active/typography.html` before inventing local hierarchy.
+- Default to cardless layout. Use cards only when the card is the interaction.
+- Use one UI sans for controls and body, one display face sparingly, and mono for labels and diagnostics.
+- Header = brand, sidebar = context, content masthead = current view. Do not repeat the full wordmark in all three places.
+- Browser-check scroll ownership, wordmark duplication, and source/mode state resets. For search/browse tools, prefer automated browser regression tests.
+- Start generic work from the active theme or the runtime default.
+- Bare `ui.js` and `/active/*` follow the current published default. Pin a concrete theme when the surface must stay fixed.
+- Keep theme-specific behavior scoped to explicit themes.
+- Use semantic tokens like `--color-primary`, `--bg-primary`, and `--text-primary`.
+- Use semantic type roles like `.type-brand`, `.type-display`, `.type-ui-title`, `.type-body`, `.type-label` or `UI.text({ role: ... })`.
+- Do not default to hero cards or generic SaaS card grids.
+- Do not mistake a theme swap for a finished app shell. Structure and typography come first.
+- If the library is missing a pattern, upstream it instead of styling around it locally.
+- For hard cache busting, append `?v=<build-or-date>` to `/ui.js` and any explicit theme stylesheet.

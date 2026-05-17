@@ -1,0 +1,6 @@
+/**
+ * Canonical current-theme color token alias.
+ * Use /active/colors.css?v=<token> for explicit cache busting when needed.
+ */
+
+@import url('/active/colors.css');

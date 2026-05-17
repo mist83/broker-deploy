@@ -1,0 +1,432 @@
+/**
+ * Detail Shell Surface
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/core/detail-shell.css
+ *
+ * Shared detail-pane layout and scoped theme-surface overrides for the
+ * UI Framework workspace. This must load outside the published shell theme
+ * so the detail pane can adopt the selected item theme even when the shell
+ * itself is pinned to a different look.
+ */
+
+.section.active.section-detail-shell {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.detail-header {
+    padding: 32px 32px 24px 32px;
+    border-bottom: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-lg, 24px);
+    align-items: start;
+}
+
+.detail-header-main,
+.detail-header-controls,
+.detail-body,
+.theme-specimen-grid > * {
+    min-width: 0;
+}
+
+.section.active.section-detail-shell .detail-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.detail-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-sm, 12px);
+}
+
+.detail-header h2 {
+    font-family: var(--font-family-heading, var(--font-family-ui, var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif)));
+    font-size: var(--font-size-heading-2, 28px);
+    font-weight: var(--font-weight-heading, 600);
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    line-height: var(--line-height-heading, 1.2);
+    letter-spacing: var(--letter-spacing-heading, normal);
+    overflow-wrap: break-word;
+}
+
+.detail-subtitle {
+    font-family: var(--font-family-body, var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif));
+    font-size: var(--font-size-body, 15px);
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: var(--line-height-body, 1.5);
+    letter-spacing: var(--letter-spacing-body, normal);
+    max-width: 72ch;
+    overflow-wrap: break-word;
+}
+
+.detail-body {
+    padding: 32px;
+}
+
+.section.active.section-detail-shell .detail-body {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.detail-body > h3:first-child,
+.detail-body > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.theme-specimen-preview-frame {
+    width: 100%;
+    height: clamp(560px, 70vh, 860px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm, 8px);
+    background: var(--bg-primary);
+}
+
+.theme-specimen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: var(--space-lg, 24px);
+    min-width: 0;
+}
+
+.theme-specimen-grid > * {
+    max-width: 100%;
+}
+
+.theme-specimen-grid > [data-theme-specimen-card="preview"] {
+    grid-column: 1 / -1;
+}
+
+.is-themed-detail-surface {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-family-body, var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif));
+}
+
+.is-themed-detail-surface .detail-header,
+.is-themed-detail-surface .detail-body {
+    color: var(--text-primary) !important;
+}
+
+.is-themed-detail-surface .detail-header {
+    background: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+.is-themed-detail-surface .detail-header h2 {
+    color: var(--text-primary) !important;
+    font-family: var(--font-family-display, var(--font-family-heading, var(--font-family-ui, var(--font-family)))) !important;
+    font-weight: var(--font-weight-display, var(--font-weight-heading, 700)) !important;
+    line-height: var(--line-height-heading, 1.12) !important;
+    letter-spacing: var(--letter-spacing-heading, normal) !important;
+}
+
+.is-themed-detail-surface .detail-subtitle,
+.is-themed-detail-surface .card-subtitle,
+.is-themed-detail-surface .text-secondary,
+.is-themed-detail-surface .text-muted,
+.is-themed-detail-surface p {
+    color: var(--text-secondary) !important;
+    font-family: var(--font-family-body, var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif)) !important;
+}
+
+.is-themed-detail-surface .card,
+.is-themed-detail-surface .content-card {
+    min-width: 0;
+    background: var(--color-bg-card, var(--bg-card, var(--bg-secondary))) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    color: var(--text-primary) !important;
+}
+
+.is-themed-detail-surface .card-title {
+    color: var(--text-primary) !important;
+    font-family: var(--font-family-heading, var(--font-family-ui, var(--font-family))) !important;
+    font-weight: var(--font-weight-heading, 600) !important;
+    line-height: var(--line-height-heading, 1.1) !important;
+    letter-spacing: var(--letter-spacing-heading, normal) !important;
+    overflow-wrap: break-word;
+}
+
+.is-themed-detail-surface .card-title i {
+    color: var(--color-primary) !important;
+}
+
+.is-themed-detail-surface .detail-header-actions > *,
+.is-themed-detail-surface .card button,
+.is-themed-detail-surface .card .btn-primary,
+.is-themed-detail-surface .card .btn-secondary,
+.is-themed-detail-surface .card .btn-danger,
+.is-themed-detail-surface .card .btn-cancel,
+.is-themed-detail-surface .detail-header button,
+.is-themed-detail-surface .detail-header .btn-primary,
+.is-themed-detail-surface .detail-header .btn-secondary,
+.is-themed-detail-surface .detail-header .btn-danger,
+.is-themed-detail-surface .detail-header .btn-cancel {
+    font-family: var(--font-family-ui, var(--font-family-body, var(--font-family))) !important;
+    box-shadow: none !important;
+    white-space: nowrap;
+}
+
+.is-themed-detail-surface .detail-header button,
+.is-themed-detail-surface .detail-header .btn-primary,
+.is-themed-detail-surface .card .btn-primary {
+    background: var(--color-primary) !important;
+    color: var(--text-on-primary, #ffffff) !important;
+    border: 1px solid transparent !important;
+}
+
+.is-themed-detail-surface .detail-header .btn-secondary,
+.is-themed-detail-surface .detail-header .btn-cancel,
+.is-themed-detail-surface .card .btn-secondary,
+.is-themed-detail-surface .card .btn-cancel {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.is-themed-detail-surface .detail-header .btn-danger,
+.is-themed-detail-surface .card .btn-danger {
+    background: var(--color-danger) !important;
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
+}
+
+.is-themed-detail-surface button:disabled,
+.is-themed-detail-surface .button-disabled,
+.is-themed-detail-surface [aria-disabled="true"] {
+    background: var(--button-disabled-bg, var(--bg-tertiary)) !important;
+    color: var(--button-disabled-text, var(--text-muted)) !important;
+    border-color: var(--button-disabled-border, var(--border-color)) !important;
+    box-shadow: none !important;
+}
+
+.is-themed-detail-surface .status-badge {
+    font-family: var(--font-family-ui, var(--font-family-body, var(--font-family))) !important;
+    border: 1px solid transparent;
+}
+
+.is-themed-detail-surface .status-info {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.is-themed-detail-surface .status-success {
+    background: var(--color-success) !important;
+    color: #ffffff !important;
+}
+
+.is-themed-detail-surface .status-warning {
+    background: var(--color-warning) !important;
+    color: #000000 !important;
+}
+
+.is-themed-detail-surface .status-danger {
+    background: var(--color-danger) !important;
+    color: #ffffff !important;
+}
+
+.is-themed-detail-surface pre,
+.is-themed-detail-surface code,
+.is-themed-detail-surface .table-container {
+    max-width: 100%;
+}
+
+.is-themed-detail-surface code,
+.is-themed-detail-surface pre {
+    font-family: var(--font-family-label, var(--font-mono, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace)) !important;
+}
+
+.is-themed-detail-surface pre {
+    overflow-x: auto;
+}
+
+.is-themed-detail-surface.theme-surface-cyberpink .detail-header,
+.is-themed-detail-surface.theme-surface-cyberpink .card,
+.is-themed-detail-surface.theme-surface-cyberpink .content-card {
+    box-shadow: 0 0 16px rgba(255, 0, 110, 0.28);
+}
+
+.is-themed-detail-surface.theme-surface-ocean .detail-header,
+.is-themed-detail-surface.theme-surface-ocean .card,
+.is-themed-detail-surface.theme-surface-ocean .content-card {
+    box-shadow: 0 8px 24px rgba(0, 180, 216, 0.16);
+}
+
+.is-themed-detail-surface.theme-surface-mockup .detail-header,
+.is-themed-detail-surface.theme-surface-mockup .card,
+.is-themed-detail-surface.theme-surface-mockup .content-card {
+    box-shadow: none;
+    border-width: 2px !important;
+    border-radius: 0 !important;
+}
+
+.is-themed-detail-surface.theme-surface-editorial .detail-header,
+.is-themed-detail-surface.theme-surface-editorial .card,
+.is-themed-detail-surface.theme-surface-editorial .content-card {
+    background: transparent !important;
+    box-shadow: none;
+}
+
+.ui-framework-tools {
+    display: grid;
+    gap: var(--space-lg, 24px);
+}
+
+.ui-framework-tools-hero,
+.ui-framework-tools-panel,
+.ui-framework-tools-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card, var(--bg-secondary));
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.06));
+}
+
+.ui-framework-tools-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-lg, 24px);
+    align-items: center;
+    padding: var(--space-lg, 24px);
+}
+
+.ui-framework-tools-kicker {
+    color: var(--color-primary);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs, 6px);
+}
+
+.ui-framework-tools h3 {
+    margin: 0 0 var(--space-sm, 10px);
+    font-size: var(--text-2xl, 1.5rem);
+    letter-spacing: 0;
+}
+
+.ui-framework-tools p {
+    margin: 0;
+    color: var(--text-secondary);
+    max-width: 76ch;
+}
+
+.ui-framework-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md, 16px);
+}
+
+.ui-framework-tools-card,
+.ui-framework-tools-panel {
+    padding: var(--space-lg, 24px);
+}
+
+.ui-framework-tools-card {
+    display: grid;
+    gap: var(--space-xs, 6px);
+}
+
+.ui-framework-tools-card strong,
+.ui-framework-control-row label span {
+    color: var(--text-secondary);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 800;
+}
+
+.ui-framework-tools-card span {
+    color: var(--text-primary);
+    font-size: var(--text-lg, 1.125rem);
+    font-weight: 800;
+}
+
+.ui-framework-control-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: var(--space-md, 16px);
+    margin: var(--space-lg, 24px) 0;
+}
+
+.ui-framework-control-row label {
+    display: grid;
+    gap: var(--space-xs, 6px);
+}
+
+.ui-framework-control-row select {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font: inherit;
+    padding: 0 var(--space-sm, 10px);
+}
+
+.ui-framework-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm, 10px);
+    align-items: center;
+    margin-top: var(--space-md, 16px);
+}
+
+.ui-framework-tools-note {
+    margin-top: var(--space-md, 16px);
+}
+
+.ui-framework-renderer-frame {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    margin-top: var(--space-lg, 24px);
+    min-height: 520px;
+}
+
+.ui-framework-renderer-frame iframe {
+    display: block;
+    width: 100%;
+    height: 620px;
+    border: 0;
+    background: var(--bg-primary);
+}
+
+@media (max-width: 960px) {
+    .detail-header {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detail-header-actions {
+        justify-content: flex-start;
+    }
+
+    .ui-framework-tools-hero,
+    .ui-framework-tools-grid,
+    .ui-framework-control-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ui-framework-tools-hero {
+        align-items: stretch;
+    }
+
+    .ui-framework-renderer-frame iframe {
+        height: 520px;
+    }
+}

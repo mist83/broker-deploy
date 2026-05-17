@@ -1,0 +1,123 @@
+/**
+ * Tables Everywhere - Styles
+ * Uses CSS variables from styles-everywhere for theming
+ */
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.data-table thead {
+    background: var(--color-border-light, #f0f0f0);
+    flex-shrink: 0;
+    z-index: 10;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.data-table thead tr {
+    display: table-row;
+}
+
+.data-table tbody {
+    display: block;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.data-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.data-table th {
+    padding: var(--space-md, 16px);
+    text-align: left;
+    font-weight: var(--weight-semibold, 600);
+    color: var(--color-text, #1a1a1a);
+    border-bottom: 2px solid var(--color-border-dark, #ccc);
+    display: table-cell;
+}
+
+.data-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.data-table th.sortable:hover {
+    background: var(--color-bg-hover, #e8e8e8);
+}
+
+.data-table td {
+    padding: var(--space-md, 16px);
+    border-bottom: 1px solid var(--color-border-light, #e0e0e0);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: table-cell;
+}
+
+.data-table td.loading {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    text-align: center;
+}
+
+.data-table tbody tr:hover {
+    background: var(--surface-row-hover-bg, var(--color-bg-card, #f9f9f9));
+}
+
+.data-table tbody tr.is-active > td,
+.data-table tbody tr.is-active {
+    background: var(--surface-row-active-bg, color-mix(in srgb, var(--color-primary, #2563eb) 6%, var(--bg-primary, #ffffff)));
+}
+
+.data-table tbody tr.is-selected > td,
+.data-table tbody tr[aria-selected="true"] > td,
+.data-table tbody tr.is-selected,
+.data-table tbody tr[aria-selected="true"] {
+    background: var(--surface-row-selected-bg, color-mix(in srgb, var(--color-primary, #2563eb) 8%, var(--bg-primary, #ffffff)));
+}
+
+.data-table tbody tr.is-active.is-selected > td,
+.data-table tbody tr.is-active[aria-selected="true"] > td,
+.data-table tbody tr.is-active.is-selected,
+.data-table tbody tr.is-active[aria-selected="true"] {
+    background: var(--surface-row-active-selected-bg, color-mix(in srgb, var(--color-primary, #2563eb) 12%, var(--bg-primary, #ffffff)));
+}
+
+.data-table tbody tr:focus-visible > td,
+.data-table tbody tr:focus-visible {
+    background: var(--surface-row-focus-bg, var(--surface-row-active-selected-bg, color-mix(in srgb, var(--color-primary, #2563eb) 12%, var(--bg-primary, #ffffff))));
+}
+
+.data-table tbody tr.is-active > td:first-child,
+.data-table tbody tr.is-active > th:first-child {
+    box-shadow: inset 3px 0 0 var(--surface-row-accent, var(--color-primary, #2563eb));
+}
+
+/* Column width classes */
+.col-status { width: 120px; }
+.col-ip { width: 150px; }
+.col-name { width: 300px; }
+.col-url { width: 40%; }
+.col-actions { width: 150px; }
+.col-default { width: 100px; }
+.col-items { width: 100px; }

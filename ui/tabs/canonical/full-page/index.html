@@ -1,0 +1,248 @@
+<div class="p-lg">
+    <h2><i class="ti ti-browser"></i> Full Page Compositions</h2>
+    <p class="text-secondary mb-lg">Complete real-world page layouts combining multiple patterns. These are what actual apps look like using this framework.</p>
+
+    <!-- Pattern 68: Dashboard Page -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">68</span> Dashboard (Stats + Table + Alerts)</h3>
+        <p class="text-secondary mb-md">A typical ops dashboard combining stat cards, alerts, and a data table.</p>
+        <div style="border: 1px solid var(--border-color);">
+            <header class="header" style="margin-bottom: 0;">
+                <h1 style="font-size: var(--text-lg);"><i class="ti ti-dashboard"></i><span>Operations Dashboard</span></h1>
+                <div class="header-links">
+                    <span class="status-badge status-enabled">Live</span>
+                </div>
+            </header>
+            <div class="p-lg">
+                <div class="alert alert-warning mb-lg">
+                    <i class="ti ti-alert-triangle"></i>
+                    <span>Cache layer showing elevated error rates in us-west-2. Investigation ongoing.</span>
+                </div>
+                <div class="grid-4 gap-md mb-lg">
+                    <div class="card text-center">
+                        <span class="stat-value">12</span>
+                        <p class="text-muted mb-xs">Services</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">99.8%</span>
+                        <p class="text-muted mb-xs">Availability</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">847K</span>
+                        <p class="text-muted mb-xs">Requests/hr</p>
+                    </div>
+                    <div class="card text-center">
+                        <span class="stat-value">3</span>
+                        <p class="text-muted mb-xs">Active Alerts</p>
+                    </div>
+                </div>
+                <h3 class="mb-md">Service Health</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Region</th>
+                                <th>Status</th>
+                                <th>Latency</th>
+                                <th>Error Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="ti ti-lock" style="color: var(--color-primary);"></i> Auth API</td>
+                                <td>us-east-1</td>
+                                <td><span class="status-badge status-success">Healthy</span></td>
+                                <td>23ms</td>
+                                <td class="text-success">0.01%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="ti ti-users" style="color: var(--color-primary);"></i> User Service</td>
+                                <td>us-east-1</td>
+                                <td><span class="status-badge status-success">Healthy</span></td>
+                                <td>45ms</td>
+                                <td class="text-success">0.03%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="ti ti-database" style="color: var(--color-primary);"></i> Cache Layer</td>
+                                <td>us-west-2</td>
+                                <td><span class="status-badge status-warning">Degraded</span></td>
+                                <td>189ms</td>
+                                <td class="text-warning">2.4%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="ti ti-credit-card" style="color: var(--color-primary);"></i> Payment API</td>
+                                <td>eu-west-1</td>
+                                <td><span class="status-badge status-success">Healthy</span></td>
+                                <td>67ms</td>
+                                <td class="text-success">0.00%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 69: Settings Page -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">69</span> Settings Page (Sidebar + Form)</h3>
+        <p class="text-secondary mb-md">Workspace layout with a settings form in the content area.</p>
+        <div style="height: 400px; border: 1px solid var(--border-color);">
+            <div class="layout workspace" style="height: 100%;">
+                <div class="sidebar">
+                    <div class="sidebar-scroll">
+                        <div class="sidebar-header">Settings</div>
+                        <div class="sidebar-item active">
+                            <i class="ti ti-user"></i>
+                            <span>Profile</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-bell"></i>
+                            <span>Notifications</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-shield"></i>
+                            <span>Security</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-plug"></i>
+                            <span>Integrations</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-palette"></i>
+                            <span>Appearance</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" style="padding: 0;">
+                    <div class="detail-header">
+                        <h2>Profile Settings</h2>
+                        <p class="detail-subtitle">Manage your personal information and preferences</p>
+                    </div>
+                    <div class="detail-body">
+                        <div class="grid gap-md" style="max-width: 500px;">
+                            <div class="grid-2 gap-md">
+                                <div class="grid gap-sm">
+                                    <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">First Name</label>
+                                    <input type="text" value="Mike">
+                                </div>
+                                <div class="grid gap-sm">
+                                    <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Last Name</label>
+                                    <input type="text" value="Smith">
+                                </div>
+                            </div>
+                            <div class="grid gap-sm">
+                                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Email</label>
+                                <input type="email" value="mike@example.com">
+                            </div>
+                            <div class="grid gap-sm">
+                                <label style="font-weight: var(--weight-semibold); font-size: var(--text-sm);">Timezone</label>
+                                <select>
+                                    <option>Eastern (UTC-5)</option>
+                                    <option>Central (UTC-6)</option>
+                                    <option>Pacific (UTC-8)</option>
+                                </select>
+                            </div>
+                            <label class="grid-row gap-sm" style="cursor: pointer; align-items: center;">
+                                <input type="checkbox" checked> Show online status
+                            </label>
+                            <div class="grid-row gap-md mt-md">
+                                <button class="btn-primary"><i class="ti ti-check"></i> Save</button>
+                                <button class="btn-cancel">Discard</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 70: Item List with Detail -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">70</span> Master-Detail (List + Detail View)</h3>
+        <p class="text-secondary mb-md">The canonical workspace pattern: navigation on the left, detail on the right.</p>
+        <div style="height: 350px; border: 1px solid var(--border-color);">
+            <div class="layout workspace" style="height: 100%;">
+                <div class="sidebar">
+                    <div class="sidebar-scroll">
+                        <div class="sidebar-header">Projects</div>
+                        <div class="sidebar-item active">
+                            <i class="ti ti-folder"></i>
+                            <span>UI Framework</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-folder"></i>
+                            <span>Auth Service</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-folder"></i>
+                            <span>Data Pipeline</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <i class="ti ti-folder"></i>
+                            <span>Mobile App</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" style="padding: 0;">
+                    <div class="detail-header">
+                        <h2>UI Framework</h2>
+                        <p class="detail-subtitle">CSS framework with JS component libraries</p>
+                    </div>
+                    <div class="detail-body">
+                        <div class="grid-3 gap-md mb-lg">
+                            <div class="card text-center p-md">
+                                <span class="stat-value">6</span>
+                                <p class="text-muted mb-xs">Themes</p>
+                            </div>
+                            <div class="card text-center p-md">
+                                <span class="stat-value">7</span>
+                                <p class="text-muted mb-xs">JS Modules</p>
+                            </div>
+                            <div class="card text-center p-md">
+                                <span class="stat-value">70+</span>
+                                <p class="text-muted mb-xs">CSS Variables</p>
+                            </div>
+                        </div>
+                        <div class="grid-row gap-md">
+                            <button class="btn-primary"><i class="ti ti-external-link"></i> Open</button>
+                            <button class="btn-secondary"><i class="ti ti-settings"></i> Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 71: Empty State -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">71</span> Empty State</h3>
+        <p class="text-secondary mb-md">What to show when there's no data. Centered icon, message, and CTA.</p>
+        <div class="grid-center bg-tertiary" style="height: 250px; border: 1px solid var(--border-color);">
+            <div class="text-center">
+                <i class="ti ti-inbox-off" style="font-size: 48px; color: var(--text-muted);"></i>
+                <h3 class="mt-md mb-sm" style="color: var(--text-secondary);">No items yet</h3>
+                <p class="text-muted mb-lg">Create your first project to get started.</p>
+                <button class="btn-primary"><i class="ti ti-plus"></i> Create Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 72: Error State -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">72</span> Error State</h3>
+        <p class="text-secondary mb-md">Full-page error with recovery action.</p>
+        <div class="grid-center bg-tertiary" style="height: 250px; border: 1px solid var(--border-color);">
+            <div class="text-center">
+                <i class="ti ti-alert-octagon" style="font-size: 48px; color: var(--color-danger);"></i>
+                <h3 class="mt-md mb-sm">Something went wrong</h3>
+                <p class="text-muted mb-lg">We couldn't load your data. Please try again.</p>
+                <div class="grid-row gap-md" style="justify-content: center;">
+                    <button class="btn-primary"><i class="ti ti-refresh"></i> Retry</button>
+                    <button class="btn-secondary"><i class="ti ti-home"></i> Go Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

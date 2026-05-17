@@ -1,0 +1,163 @@
+<div class="p-lg">
+    <h2><i class="ti ti-ruler"></i> Spacing &amp; Utility Patterns</h2>
+    <p class="text-secondary mb-lg">All spacing utilities, display helpers, and animation classes.</p>
+
+    <!-- Pattern 63: Padding Scale -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">63</span> Padding Utilities (.p-xs through .p-xl)</h3>
+        <p class="text-secondary mb-md">Applied uniformly on all sides.</p>
+        <div class="grid gap-sm">
+            <div class="grid-between">
+                <div class="bg-tertiary p-xs" style="border: 1px solid var(--border-color);"><code>.p-xs</code> (4px)</div>
+                <span class="text-muted">--space-xs</span>
+            </div>
+            <div class="grid-between">
+                <div class="bg-tertiary p-sm" style="border: 1px solid var(--border-color);"><code>.p-sm</code> (8px)</div>
+                <span class="text-muted">--space-sm</span>
+            </div>
+            <div class="grid-between">
+                <div class="bg-tertiary p-md" style="border: 1px solid var(--border-color);"><code>.p-md</code> (16px)</div>
+                <span class="text-muted">--space-md</span>
+            </div>
+            <div class="grid-between">
+                <div class="bg-tertiary p-lg" style="border: 1px solid var(--border-color);"><code>.p-lg</code> (24px)</div>
+                <span class="text-muted">--space-lg</span>
+            </div>
+            <div class="grid-between">
+                <div class="bg-tertiary p-xl" style="border: 1px solid var(--border-color);"><code>.p-xl</code> (32px)</div>
+                <span class="text-muted">--space-xl</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 64: Margin Utilities -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">64</span> Margin Utilities</h3>
+        <p class="text-secondary mb-md">All-side margins (.m-*), bottom margins (.mb-*), top margins (.mt-*).</p>
+        <div class="grid-3 gap-lg">
+            <div>
+                <h4 class="mb-sm">All-Side (.m-*)</h4>
+                <div class="grid gap-xs">
+                    <div class="bg-tertiary"><div class="m-xs bg-secondary p-xs" style="border: 1px solid var(--border-color);"><code>.m-xs</code></div></div>
+                    <div class="bg-tertiary"><div class="m-sm bg-secondary p-xs" style="border: 1px solid var(--border-color);"><code>.m-sm</code></div></div>
+                    <div class="bg-tertiary"><div class="m-md bg-secondary p-xs" style="border: 1px solid var(--border-color);"><code>.m-md</code></div></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-sm">Bottom (.mb-*)</h4>
+                <div class="bg-tertiary p-sm" style="border: 1px solid var(--border-color);">
+                    <div class="bg-secondary p-xs mb-xs" style="border: 1px solid var(--border-color);"><code>.mb-xs</code></div>
+                    <div class="bg-secondary p-xs mb-sm" style="border: 1px solid var(--border-color);"><code>.mb-sm</code></div>
+                    <div class="bg-secondary p-xs mb-md" style="border: 1px solid var(--border-color);"><code>.mb-md</code></div>
+                    <div class="bg-secondary p-xs" style="border: 1px solid var(--border-color);">end</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-sm">Top (.mt-*)</h4>
+                <div class="bg-tertiary p-sm" style="border: 1px solid var(--border-color);">
+                    <div class="bg-secondary p-xs" style="border: 1px solid var(--border-color);">start</div>
+                    <div class="bg-secondary p-xs mt-xs" style="border: 1px solid var(--border-color);"><code>.mt-xs</code></div>
+                    <div class="bg-secondary p-xs mt-sm" style="border: 1px solid var(--border-color);"><code>.mt-sm</code></div>
+                    <div class="bg-secondary p-xs mt-md" style="border: 1px solid var(--border-color);"><code>.mt-md</code></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 65: Display Utilities -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">65</span> Display Utilities</h3>
+        <p class="text-secondary mb-md">Show/hide elements and control display mode.</p>
+        <div class="grid gap-sm">
+            <div class="grid-between p-sm bg-tertiary">
+                <code>.hidden / .display-none</code>
+                <span class="text-muted">display: none !important</span>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <code>.display-block</code>
+                <span class="text-muted">display: block !important</span>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <code>.block</code>
+                <span class="text-muted">display: block</span>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <code>.inline-block</code>
+                <span class="text-muted">display: inline-block</span>
+            </div>
+        </div>
+        <div class="mt-md">
+            <p>Visible element <span class="hidden">[THIS IS HIDDEN]</span> <span class="inline-block bg-success p-xs" style="font-size: var(--text-xs);">inline-block</span></p>
+        </div>
+    </div>
+
+    <!-- Pattern 66: CSS Variable Reference -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">66</span> Effects Variables Reference</h3>
+        <p class="text-secondary mb-md">Border radius, shadows, and transitions.</p>
+        <div class="grid-2 gap-lg">
+            <div>
+                <h4 class="mb-sm">Border Radius</h4>
+                <div class="grid gap-sm">
+                    <div class="bg-tertiary p-md" style="border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <code>--radius-sm</code> (4px)
+                    </div>
+                    <div class="bg-tertiary p-md" style="border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <code>--radius-md</code> (8px)
+                    </div>
+                    <div class="bg-tertiary p-md" style="border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+                        <code>--radius-lg</code> (12px)
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 class="mb-sm">Shadows</h4>
+                <div class="grid gap-md">
+                    <div class="bg-primary p-md" style="box-shadow: var(--shadow-sm);">
+                        <code>--shadow-sm</code>
+                    </div>
+                    <div class="bg-primary p-md" style="box-shadow: var(--shadow-md);">
+                        <code>--shadow-md</code>
+                    </div>
+                    <div class="bg-primary p-md" style="box-shadow: var(--shadow-lg);">
+                        <code>--shadow-lg</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 67: Responsive Breakpoints Reference -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">67</span> Responsive Breakpoints</h3>
+        <p class="text-secondary mb-md">Three breakpoints control layout adaptation.</p>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Breakpoint</th>
+                        <th>Range</th>
+                        <th>Key Behaviors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status-badge status-info">Mobile</span></td>
+                        <td><code>&lt;768px</code></td>
+                        <td>Grids stack to 1 col, sidebar collapses, buttons full-width, modal 95% width</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-warning">Tablet</span></td>
+                        <td><code>769-1024px</code></td>
+                        <td>grid-4 becomes 2 cols, sidebar narrows to 200px</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-success">Desktop</span></td>
+                        <td><code>&gt;1024px</code></td>
+                        <td>Full layout, sidebar 250px, all grid columns active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

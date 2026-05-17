@@ -1,0 +1,26 @@
+/**
+ * Red Colors
+ * @url https://ui.mullmania.com/red/colors.css
+ *
+ * Clean simple-theme surfaces with a red accent.
+ */
+
+@import url('../simple/colors.css');
+
+:root {
+    --color-primary: #DC3545;
+    --color-primary-hover: #B02A37;
+    --color-shell-accent: var(--color-primary);
+    --color-shell-accent-hover: var(--color-primary-hover);
+
+    --shadow-hover: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+:root[data-ui-mode="dark"],
+body[data-ui-mode="dark"],
+body.dark-mode,
+[data-theme="dark"] {
+    --color-primary: #EF6E78;
+    --color-primary-hover: #DC3545;
+    --shadow-hover: 0 0 0 0.25rem rgba(239, 110, 120, 0.3);
+}

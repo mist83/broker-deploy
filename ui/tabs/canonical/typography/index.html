@@ -1,0 +1,125 @@
+<div class="p-lg">
+    <h2><i class="ti ti-typography"></i> Typography Patterns</h2>
+    <p class="text-secondary mb-lg">Every text size, weight, and style the framework provides.</p>
+
+    <!-- Pattern 20: Heading Scale -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">20</span> Heading Scale (h1-h6)</h3>
+        <p class="text-secondary mb-md">All headings use --weight-semibold, line-height 1.2, margin-bottom --space-md.</p>
+        <div class="bg-tertiary p-md" style="border: 1px solid var(--border-color);">
+            <h1>h1 - Page Title (36px)</h1>
+            <h2>h2 - Section Heading (24px)</h2>
+            <h3>h3 - Subsection (20px)</h3>
+            <h4>h4 - Group Label (18px)</h4>
+            <h5>h5 - Small Heading (16px)</h5>
+            <h6>h6 - Tiny Heading (14px)</h6>
+        </div>
+    </div>
+
+    <!-- Pattern 21: Body Text -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">21</span> Body Text &amp; Paragraphs</h3>
+        <p class="text-secondary mb-md">Paragraphs have margin-bottom --space-md and line-height 1.6.</p>
+        <p>This is a standard paragraph with default styling. The font family is the system stack: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto. Base font size is 14px.</p>
+        <p class="text-secondary">This paragraph uses .text-secondary for less prominent content. Color is #666666.</p>
+        <p class="text-muted">This paragraph uses .text-muted for the least prominent content. Color is #9ca3af.</p>
+    </div>
+
+    <!-- Pattern 22: Font Size Scale -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">22</span> Font Size Scale (text-xs through text-6xl)</h3>
+        <div class="grid gap-sm">
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-xs);">.text-xs - 11px</span>
+                <code>--text-xs</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-sm);">.text-sm - 13px</span>
+                <code>--text-sm</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-base);">.text-base - 14px</span>
+                <code>--text-base</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-md);">.text-md - 16px</span>
+                <code>--text-md</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-lg);">.text-lg - 18px</span>
+                <code>--text-lg</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-xl);">.text-xl - 20px</span>
+                <code>--text-xl</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-2xl);">.text-2xl - 24px</span>
+                <code>--text-2xl</code>
+            </div>
+            <div class="grid-between p-sm bg-tertiary">
+                <span style="font-size: var(--text-3xl);">.text-3xl - 36px</span>
+                <code>--text-3xl</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattern 23: Code & Pre -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">23</span> Code &amp; Pre Blocks</h3>
+        <p class="text-secondary mb-md">Inline <code>code</code> uses --font-mono with a tertiary background. Pre blocks have a left border.</p>
+        <p class="mb-md">Use <code>UI.createShell(...)</code> to initialize the shared shell after loading.</p>
+        <pre><code>// Pre block with left border accent
+const shell = UI.createShell({
+    tabsContainerId: 'tabs-container',
+    contentContainerId: 'content-container',
+    sitemap: sitemapData
+});
+await shell.init();</code></pre>
+    </div>
+
+    <!-- Pattern 24: Text Color Utilities -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">24</span> Text Color Utilities</h3>
+        <div class="grid gap-sm">
+            <p class="text-primary p-sm bg-tertiary"><code>.text-primary</code> - Primary text color</p>
+            <p class="text-secondary p-sm bg-tertiary"><code>.text-secondary</code> - Secondary text</p>
+            <p class="text-muted p-sm bg-tertiary"><code>.text-muted</code> - Muted text</p>
+            <p class="text-success p-sm bg-tertiary"><code>.text-success</code> - Success text</p>
+            <p class="text-danger p-sm bg-tertiary"><code>.text-danger</code> - Danger text</p>
+            <p class="text-warning p-sm bg-tertiary"><code>.text-warning</code> - Warning text</p>
+            <p class="text-info p-sm bg-tertiary"><code>.text-info</code> - Info text</p>
+        </div>
+    </div>
+
+    <!-- Pattern 25: Background Color Utilities -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">25</span> Background Color Utilities</h3>
+        <div class="grid gap-sm">
+            <div class="bg-primary p-sm" style="border: 1px solid var(--border-color);"><code>.bg-primary</code></div>
+            <div class="bg-secondary p-sm"><code>.bg-secondary</code></div>
+            <div class="bg-tertiary p-sm"><code>.bg-tertiary</code></div>
+            <div class="bg-success p-sm"><code>.bg-success</code> (white text)</div>
+            <div class="bg-danger p-sm"><code>.bg-danger</code> (white text)</div>
+            <div class="bg-warning p-sm"><code>.bg-warning</code> (black text)</div>
+            <div class="bg-info p-sm"><code>.bg-info</code> (white text)</div>
+        </div>
+    </div>
+
+    <!-- Pattern 26: Text Alignment -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">26</span> Text Alignment</h3>
+        <div class="grid gap-sm">
+            <div class="text-left bg-tertiary p-sm"><code>.text-left</code> - Left aligned (default)</div>
+            <div class="text-center bg-tertiary p-sm"><code>.text-center</code> - Center aligned</div>
+            <div class="text-right bg-tertiary p-sm"><code>.text-right</code> - Right aligned</div>
+        </div>
+    </div>
+
+    <!-- Pattern 27: Links -->
+    <div class="card mb-lg">
+        <h3 class="mb-md"><span class="status-badge status-info">27</span> Links</h3>
+        <p class="text-secondary mb-md">Links use --color-primary, no underline by default, underline on hover.</p>
+        <p>Here is a <a href="#">standard link</a> in a paragraph. Links transition color on hover to --color-primary-hover.</p>
+    </div>
+</div>

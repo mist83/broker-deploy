@@ -1,0 +1,98 @@
+/**
+ * Pastelzom Layout
+ * @version 1.0.0
+ * @url https://ui.mullmania.com/pastelzom/layout.css
+ */
+
+@import url('../core/layout.css');
+
+body {
+    background:
+        linear-gradient(180deg, rgba(223, 247, 234, 0.72), rgba(255, 253, 247, 0.88) 38%, var(--bg-primary)),
+        var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    background: linear-gradient(90deg, var(--pastelzom-mint), var(--pastelzom-lilac)) !important;
+    border-bottom: 1px solid var(--border-medium);
+    box-shadow: var(--shadow-sm);
+}
+
+.header h1,
+.header .shell-wordmark,
+.header .type-brand {
+    color: var(--pastelzom-ink);
+    font-family: var(--font-display);
+    font-weight: 400;
+}
+
+.tabs {
+    background: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid var(--border-light);
+}
+
+button,
+.btn {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-family: var(--font-family);
+    font-weight: 700;
+}
+
+button:hover,
+.btn:hover {
+    background: rgba(47, 143, 91, 0.2);
+    box-shadow: var(--shadow-hover);
+}
+
+button[aria-pressed="true"],
+.btn-toggle[aria-pressed="true"] {
+    background: var(--color-primary);
+    color: var(--text-on-primary);
+}
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(47, 143, 91, 0.16);
+    outline: none;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-md);
+}
+
+code,
+pre {
+    background: var(--pastelzom-bone);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--pastelzom-plum);
+}
