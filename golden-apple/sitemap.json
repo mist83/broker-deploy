@@ -1,0 +1,117 @@
+{
+  "related": ["storyboard"],
+  "header": {
+    "containerId": "header-container",
+    "title": "Golden Apple",
+    "icon": "ti ti-apple",
+    "controls": [
+      {
+        "type": "text",
+        "label": "storyboard designer",
+        "className": "text-muted"
+      },
+      {
+        "type": "link",
+        "label": "Render",
+        "icon": "ti ti-player-play",
+        "href": "#studio/workbench"
+      },
+      {
+        "type": "link",
+        "label": "Proof",
+        "icon": "ti ti-photo",
+        "href": "#proof/assets"
+      },
+      {
+        "type": "link",
+        "label": "Storyboard",
+        "icon": "ti ti-clapperboard",
+        "href": "https://storyboard.mullmania.com",
+        "target": "_blank",
+        "rel": "noreferrer"
+      },
+      {
+        "type": "link",
+        "label": "GitHub",
+        "icon": "ti ti-brand-github",
+        "href": "https://github.com/mist83/golden-apple",
+        "target": "_blank",
+        "rel": "noreferrer"
+      }
+    ]
+  },
+  "related": ["storyboard", "videos"],
+  "tabs": [
+    {
+      "id": "studio",
+      "label": "Studio",
+      "icon": "ti ti-layout-sidebar",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "workbench",
+              "name": "Workbench",
+              "icon": "ti ti-artboard",
+              "description": "Source inputs, scene strip, render controls, preview, and per-scene decisions.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workbench.html"
+            },
+            {
+              "id": "decisions",
+              "name": "Decision Map",
+              "icon": "ti ti-route",
+              "description": "How source media becomes reviewable scene packets.",
+              "componentSource": "./components/decisions.json"
+            },
+            {
+              "id": "contract",
+              "name": "Render Contract",
+              "icon": "ti ti-code",
+              "description": "Request shape sent to the Golden Apple renderer.",
+              "componentSource": "./components/contract.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proof",
+      "label": "Proof",
+      "icon": "ti ti-photo-check",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "assets",
+              "name": "Proof Assets",
+              "icon": "ti ti-photo",
+              "description": "Published demo contact sheets and manifest links.",
+              "componentSource": "./components/proof.json"
+            },
+            {
+              "id": "architecture",
+              "name": "Architecture",
+              "icon": "ti ti-book-2",
+              "description": "Repo docs for the local pipeline and Lambda shape.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/architecture.html"
+            },
+            {
+              "id": "test-plan",
+              "name": "Test Plan",
+              "icon": "ti ti-list-check",
+              "description": "Manual and automated proof checks.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/test-plan.html"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

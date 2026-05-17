@@ -1,0 +1,788 @@
+{
+  "version": 1,
+  "source": "output/live-human-proof/source.mp4",
+  "instructions": "These are narrow AI splice points. AI should answer only the requested task. Human review should only resolve ambiguity or approve an override, not do production work.",
+  "points": [
+    {
+      "id": "kf001-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 0.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-001-0.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf001-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 0.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-001-0.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf001-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 0.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-001-0.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf002-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 1.99,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-002-1.99s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf002-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 1.99,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-002-1.99s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf002-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 1.99,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-002-1.99s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Live-action people: this is the real filter check.",
+        "subtitle_start_ms": 500,
+        "subtitle_end_ms": 5000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf003-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 5.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-003-5.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf003-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 5.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-003-5.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf003-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 5.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-003-5.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf004-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 5.97,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-004-5.97s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf004-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 5.97,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-004-5.97s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf004-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 5.97,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-004-5.97s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf005-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 9.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-005-9.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf005-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 9.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-005-9.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf005-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 9.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-005-9.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Skin, faces, hands, clothing, background detail.",
+        "subtitle_start_ms": 5500,
+        "subtitle_end_ms": 11000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf006-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 11.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-006-11.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf006-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 11.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-006-11.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf006-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 11.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-006-11.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf007-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 13.93,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-007-13.93s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf007-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 13.93,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-007-13.93s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf007-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 13.93,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-007-13.93s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "The output should feel sketched, not merely posterized.",
+        "subtitle_start_ms": 11500,
+        "subtitle_end_ms": 17000
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf008-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 17.91,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-008-17.91s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf008-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 17.91,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-008-17.91s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf008-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 17.91,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-008-17.91s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf009-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 17.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-009-17.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf009-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 17.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-009-17.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf009-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 17.95,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-009-17.95s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf010-panel-role",
+      "kind": "panel_role",
+      "timestamp_sec": 21.89,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-010-21.89s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Classify this keyframe for comic layout: establishing, dialogue, reaction, action, insert, or discard.",
+      "human_prompt": "Approve or override the panel role if the AI is unsure.",
+      "override_schema": {
+        "role": [
+          "establishing",
+          "dialogue",
+          "reaction",
+          "action",
+          "insert",
+          "discard"
+        ],
+        "confidence": "0..1",
+        "note": "short reason"
+      }
+    },
+    {
+      "id": "kf010-crop",
+      "kind": "crop_subject",
+      "timestamp_sec": 21.89,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-010-21.89s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Identify the subject crop for this panel as normalized x,y,w,h coordinates. Prefer faces or active speakers.",
+      "human_prompt": "Nudge the crop box only if the selected subject is wrong.",
+      "override_schema": {
+        "crop": {
+          "x": "0..1",
+          "y": "0..1",
+          "w": "0..1",
+          "h": "0..1"
+        },
+        "subject": "short label",
+        "confidence": "0..1"
+      }
+    },
+    {
+      "id": "kf010-speech",
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 21.89,
+      "frame_path": "output/live-human-proof/decisions/frames/keyframe-010-21.89s.jpg",
+      "context": {
+        "source": "output/live-human-proof/source.mp4",
+        "subtitle_text": "Captions stay comic-clean on top of the pencil pass.",
+        "subtitle_start_ms": 17500,
+        "subtitle_end_ms": 23500
+      },
+      "ai_task": "Choose where a speech bubble should attach for this subtitle. Return normalized anchor x,y and bubble side: left, right, top, or bottom.",
+      "human_prompt": "Approve or move the bubble anchor if the speaker is ambiguous.",
+      "override_schema": {
+        "anchor": {
+          "x": "0..1",
+          "y": "0..1"
+        },
+        "bubble_side": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "speaker": "short label",
+        "confidence": "0..1"
+      }
+    }
+  ],
+  "overrides": {}
+}

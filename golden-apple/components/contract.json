@@ -1,0 +1,27 @@
+{
+  "component": "app",
+  "icon": "ti ti-code",
+  "title": "Render Contract",
+  "subtitle": "The Workbench posts this shape to the Golden Apple renderer.",
+  "sections": [
+    {
+      "component": "section",
+      "title": "Fields",
+      "children": [
+        {
+          "component": "table",
+          "columns": ["field", "type", "notes"],
+          "rows": [
+            { "field": "video_url", "type": "string", "notes": "Required source MP4 URL." },
+            { "field": "subtitles_url", "type": "string", "notes": "Optional SRT URL for captions." },
+            { "field": "style", "type": "print | sketch | comic", "notes": "Global visual treatment." },
+            { "field": "params.colors", "type": "number", "notes": "Posterization count." },
+            { "field": "params.edge_strength", "type": "number", "notes": "Line emphasis from 0 to 1." },
+            { "field": "params.saturation", "type": "number", "notes": "Color push." },
+            { "field": "max_width", "type": "number", "notes": "Output width cap." }
+          ]
+        }
+      ]
+    }
+  ]
+}

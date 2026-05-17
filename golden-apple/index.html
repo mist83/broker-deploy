@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="repo-name" content="golden-apple">
+<title>Golden Apple - storyboard designer</title>
+<meta name="description" content="Golden Apple comic-video storyboard designer with scene decisions, render controls, proof assets, and API contract.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317130f'/%3E%3Ccircle cx='32' cy='34' r='17' fill='%23f2b705' stroke='%23fff7d6' stroke-width='4'/%3E%3Cpath d='M32 16c3-7 10-8 15-5-2 7-8 10-15 5z' fill='%233a7d44'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./golden-apple.css">
+<script>window.GOLDEN_APPLE_API_URL='https://cyqhdhujuo5pt7vsb5v5ziqau40qhkua.lambda-url.us-west-2.on.aws';</script></head>
+<body>
+<div id="app">
+  <div id="header-container"></div>
+  <div id="tabs-container"></div>
+  <div id="content-container"></div>
+</div>
+<script>
+  (function loadSharedUi() {
+    var host = window.location.hostname;
+    var baseDomain = /^(localhost|127(?:\.\d{1,3}){3})$/.test(host)
+      ? 'mullmania.com'
+      : host.split('.').slice(-2).join('.');
+    var script = document.createElement('script');
+    script.src = 'https://ui.' + baseDomain + '/ui.js';
+    script.dataset.uiTheme = 'active';
+    document.head.appendChild(script);
+  })();
+</script>
+<script src="./app.js" type="module"></script>
+<script>
+  window.addEventListener('ui-ready', async () => {
+    try {
+      if (!window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search + '#studio/workbench');
+      }
+
+      const shell = new window.TabsEverywhere({
+        tabsContainerId: 'tabs-container',
+        contentContainerId: 'content-container',
+        sitemapPath: './sitemap.json',
+      });
+
+      await shell.init();
+    } catch (error) {
+      console.error('[golden-apple] render failed', error);
+      document.body.textContent = error.message || String(error);
+    }
+  });
+</script>
+</body>
+</html>

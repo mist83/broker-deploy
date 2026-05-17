@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "source": "output/live-human-proof/source.mp4",
+  "points": [],
+  "overrides": {
+    "manual-crop-still": {
+      "kind": "crop_subject",
+      "timestamp_sec": 3.0,
+      "crop": {
+        "x": 0.28,
+        "y": 0.02,
+        "w": 0.66,
+        "h": 0.92
+      },
+      "subject": "speaker and audience",
+      "confidence": 1.0
+    },
+    "manual-speech-still": {
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 3.0,
+      "anchor": {
+        "x": 0.72,
+        "y": 0.28
+      },
+      "bubble_side": "top",
+      "speaker": "presenter",
+      "text": "Human approved bubble",
+      "confidence": 1.0
+    },
+    "manual-crop-motion": {
+      "kind": "crop_subject",
+      "timestamp_sec": 11.0,
+      "crop": {
+        "x": 0.18,
+        "y": 0.04,
+        "w": 0.74,
+        "h": 0.9
+      },
+      "subject": "room action",
+      "confidence": 1.0
+    },
+    "manual-speech-motion": {
+      "kind": "speech_bubble_anchor",
+      "timestamp_sec": 11.0,
+      "anchor": {
+        "x": 0.63,
+        "y": 0.33
+      },
+      "bubble_side": "top",
+      "speaker": "audience",
+      "text": "AI asked, human nudged",
+      "confidence": 1.0
+    }
+  }
+}

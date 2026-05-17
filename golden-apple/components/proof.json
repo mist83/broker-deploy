@@ -1,0 +1,37 @@
+{
+  "component": "app",
+  "icon": "ti ti-photo-check",
+  "title": "Proof Assets",
+  "subtitle": "Published demo files used by the live Workbench preview.",
+  "actions": [
+    {
+      "label": "Open manifest",
+      "variant": "primary",
+      "icon": "ti ti-file-json",
+      "action": { "type": "open", "href": "./demo/manifest.json", "target": "_blank" }
+    },
+    {
+      "label": "Open contact sheet",
+      "variant": "secondary",
+      "icon": "ti ti-layout-grid",
+      "action": { "type": "open", "href": "./demo/print-contact-sheet.jpg", "target": "_blank" }
+    }
+  ],
+  "sections": [
+    {
+      "component": "section",
+      "title": "Assets",
+      "children": [
+        {
+          "component": "grid",
+          "columns": 3,
+          "children": [
+            { "component": "card", "title": "Panel-guided sheet", "text": "./demo/panel-guided-sheet.jpg" },
+            { "component": "card", "title": "Print contact sheet", "text": "./demo/print-contact-sheet.jpg" },
+            { "component": "card", "title": "Decision JSON", "text": "./demo/decisions.json" }
+          ]
+        }
+      ]
+    }
+  ]
+}

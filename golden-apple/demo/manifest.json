@@ -1,0 +1,25 @@
+{
+  "name": "Golden Apple Proofs",
+  "generatedBy": "golden-apple",
+  "proofs": [
+    {
+      "id": "panel-guided",
+      "label": "Guided paneled motion comic",
+      "video": "./panel-guided.mp4",
+      "poster": "./panel-guided-sheet.jpg"
+    },
+    {
+      "id": "print-live-people",
+      "label": "Live-action comic print filter",
+      "video": "./print-live-people.mp4",
+      "poster": "./print-contact-sheet.jpg"
+    },
+    {
+      "id": "decision-bundle",
+      "label": "AI/human decision packet",
+      "json": "./decisions.json",
+      "approvedExample": "./manual-approved.json"
+    }
+  ]
+}
+

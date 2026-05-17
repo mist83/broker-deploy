@@ -1,0 +1,38 @@
+{
+  "component": "app",
+  "icon": "ti ti-route",
+  "title": "Decision Map",
+  "subtitle": "Scene packets keep the AI suggestions reviewable before the render job runs.",
+  "sections": [
+    {
+      "component": "section",
+      "title": "Pipeline",
+      "children": [
+        {
+          "component": "grid",
+          "columns": 3,
+          "children": [
+            { "component": "stat", "label": "1", "value": "Detect", "caption": "Find candidate scene cuts and keyframes." },
+            { "component": "stat", "label": "2", "value": "Classify", "caption": "Assign panel role, crop subject, bubble anchor, and confidence." },
+            { "component": "stat", "label": "3", "value": "Render", "caption": "Send approved global params and scene hints to the Lambda renderer." }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "section",
+      "title": "Review States",
+      "children": [
+        {
+          "component": "table",
+          "columns": ["state", "meaning", "operator action"],
+          "rows": [
+            { "state": "Ready", "meaning": "High-confidence packet", "operator action": "Render or adjust style only" },
+            { "state": "Low confidence", "meaning": "Needs human role/crop check", "operator action": "Open Workbench and choose a role" },
+            { "state": "Discard", "meaning": "Tail, duplicate, or weak frame", "operator action": "Leave out of the final page" }
+          ]
+        }
+      ]
+    }
+  ]
+}
