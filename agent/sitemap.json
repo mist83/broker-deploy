@@ -681,10 +681,10 @@
               "allowHtmlSource": true
             },
             {
-              "id": "consolidation-todo",
-              "name": "Consolidation TODO",
+              "id": "centralized-work-items",
+              "name": "Centralized work items",
               "icon": "ti ti-checklist",
-              "htmlSource": "./tabs/docs/consolidation-todo.html",
+              "htmlSource": "./tabs/docs/centralized-work-items.html",
               "allowHtmlSource": true
             }
           ]

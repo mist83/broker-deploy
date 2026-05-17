@@ -59,6 +59,6 @@ Provide a brutally honest assessment that includes:
 3. **Simplification Recommendations** - Specific, actionable changes to reduce complexity
 4. **Blast Radius Analysis** - What changes would be high-impact vs low-risk
 5. **Documentation Alignment** - How to make docs and code match reality
-6. **Next Steps** - Prioritized list of improvements that maximize simplicity gains
+6. **Follow-up Plan** - Prioritized list of improvements that maximize simplicity gains
 
 Remember: The goal is to make this codebase understandable by humans and maintainable without requiring a PhD in the original developer's thought process.

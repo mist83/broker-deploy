@@ -562,7 +562,7 @@ function loadContent() {
         <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"&gt;
 &lt;script src="https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.js"&gt;&lt;/script&gt;</code></pre>
 
-        <h2>Next Steps</h2>
+        <h2>Publish Steps</h2>
         <ol>
             <li>Upload files to S3: <code>aws s3 cp {fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/ --content-type "application/javascript"</code></li>
             <li>If separate HTML: <code>aws s3 cp {fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/ --content-type "text/html"</code></li>
@@ -621,7 +621,7 @@ Execute in this exact order:
    - S3 upload commands
    - Test instructions
    - Integration example
-   - Next steps
+   - Follow-up instructions
 
 ## S3 UPLOAD COMMANDS
 
@@ -686,7 +686,7 @@ Add to any HTML page:
 **FAB Collection:**
 This FAB integrates with the FAB Collection system. Multiple FABs can coexist on the same page. When one opens its sidebar, all FABs hide. When the sidebar closes, all FABs reappear.
 
-**Next Steps:**
+**Publish Steps:**
 1. Test locally with test-{fab-name}.html
 2. Upload to S3 using commands above
 3. Integrate into your web page

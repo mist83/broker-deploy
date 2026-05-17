@@ -556,7 +556,7 @@ if (!window.FABCollection) {
         &lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css&quot;&amp;gt;
 &amp;lt;script src=&quot;https://vizio-data-ingestion-resources.s3.us-west-2.amazonaws.com/other/fabs/{fab-name}.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 
-        &lt;h2&gt;Next Steps&lt;/h2&gt;
+        &lt;h2&gt;Publish Steps&lt;/h2&gt;
         &lt;ol&gt;
             &lt;li&gt;Upload files to S3: &lt;code&gt;aws s3 cp {fab-name}.js s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;application/javascript&quot;&lt;/code&gt;&lt;/li&gt;
             &lt;li&gt;If separate HTML: &lt;code&gt;aws s3 cp {fab-name}.html s3://vizio-data-ingestion-resources/other/fabs/ --content-type &quot;text/html&quot;&lt;/code&gt;&lt;/li&gt;
@@ -624,7 +624,7 @@ if (!window.FABCollection) {
 <li>S3 upload commands</li>
 <li>Test instructions</li>
 <li>Integration example</li>
-<li>Next steps</li>
+<li>Follow-up instructions</li>
 </ul>
 </li>
 </ol>
@@ -684,7 +684,7 @@ Add to any HTML page:
 **FAB Collection:**
 This FAB integrates with the FAB Collection system. Multiple FABs can coexist on the same page. When one opens its sidebar, all FABs hide. When the sidebar closes, all FABs reappear.
 
-**Next Steps:**
+**Publish Steps:**
 1. Test locally with test-{fab-name}.html
 2. Upload to S3 using commands above
 3. Integrate into your web page

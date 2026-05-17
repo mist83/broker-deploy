@@ -1,6 +1,6 @@
 # Centralized Work Items
 
-This file's local task detail was moved to the central backlog.
+Local task detail was moved to the central backlog.
 
 - Source repo: `mist83/agent`
 - Central directory: `mist83/tasks/centralized/`

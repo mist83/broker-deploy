@@ -103,7 +103,7 @@ These playbooks polish and refine existing code.
 - Clever bits (exceptional implementations highlighted)
 - Tech stack (bullets)
 - Deployment model
-- Next steps
+- Follow-up items
 
 **Note:** Designed for capable engineers who can read code - focuses on what makes the implementation special, not standard patterns.
 

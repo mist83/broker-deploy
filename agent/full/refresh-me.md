@@ -66,7 +66,7 @@ You're briefing a capable software engineer who can read code. They want:
 ## Deployment
 - [Where/how it runs]
 
-## Next Steps
+## Follow-up
 - [What remains or how to use it]
 ```
 
@@ -96,7 +96,7 @@ Analyzes GitHub PRs and JIRA tickets to build an AI-powered semantic knowledge b
 ## Deployment
 Lambda with 2GB RAM, 5min timeout, Function URL enabled
 
-## Next Steps
+## Follow-up
 Configure GitHub/JIRA tokens, deploy with `.\scripts\deploy_tixplain.ps1`
 ```
 
