@@ -686,13 +686,6 @@
               "icon": "ti ti-checklist",
               "htmlSource": "./tabs/docs/consolidation-todo.html",
               "allowHtmlSource": true
-            },
-            {
-              "id": "implementation-plan",
-              "name": "Implementation plan",
-              "icon": "ti ti-map",
-              "htmlSource": "./tabs/docs/implementation-plan.html",
-              "allowHtmlSource": true
             }
           ]
         }
