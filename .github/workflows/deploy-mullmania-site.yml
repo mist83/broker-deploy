@@ -30,6 +30,11 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      - name: Checkout broker tooling
+        uses: actions/checkout@v6
+        with:
+          path: broker-tooling
+
       - name: Download allowlisted target
         id: target
         env:
@@ -126,6 +131,7 @@ jobs:
         env:
           SITE_ID: ${{ inputs.site_id }}
           GITHUB_TOKEN: ${{ github.token }}
+          REDEPLOY_SOURCE: ${{ inputs.source }}
         shell: bash
         run: |
           set -euo pipefail
@@ -144,29 +150,19 @@ jobs:
           aws s3 sync "s3://mullmania.com/${SITE_ID}/" "pages-source/${SITE_ID}/" --delete --only-show-errors
           touch pages-source/.nojekyll
 
-          cd pages-source
-          {
-            printf '%s\n' '<!doctype html>'
-            printf '%s\n' '<html lang="en">'
-            printf '%s\n' '<head>'
-            printf '%s\n' '  <meta charset="utf-8">'
-            printf '%s\n' '  <meta name="viewport" content="width=device-width, initial-scale=1">'
-            printf '%s\n' '  <title>Mullmania Deploy Mirrors</title>'
-            printf '%s\n' '</head>'
-            printf '%s\n' '<body>'
-            printf '%s\n' '  <h1>Mullmania Deploy Mirrors</h1>'
-            printf '%s\n' '  <ul>'
-            for site_dir in */; do
-              site_name="${site_dir%/}"
-              if [ -f "${site_dir}index.html" ]; then
-                printf '    <li><a href="%s/">%s</a></li>\n' "$site_name" "$site_name"
-              fi
-            done
-            printf '%s\n' '  </ul>'
-            printf '%s\n' '</body>'
-            printf '%s\n' '</html>'
-          } > index.html
+          page_base_url="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          node broker-tooling/scripts/render-transparency-index.mjs \
+            --pages-dir pages-source \
+            --site-id "${SITE_ID}" \
+            --run-id "${GITHUB_RUN_ID}" \
+            --run-number "${GITHUB_RUN_NUMBER}" \
+            --run-url "${run_url}" \
+            --broker-sha "${GITHUB_SHA}" \
+            --trigger-source "${REDEPLOY_SOURCE}" \
+            --page-base-url "${page_base_url}"
 
+          cd pages-source
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
