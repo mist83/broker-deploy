@@ -1,0 +1,63 @@
+<div class="lfs-view" data-lfs-view="reference">
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Target</h3>
+      <p>Endpoint details for the current S3 demo session.</p>
+    </div>
+    <div class="lfs-fact-grid">
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Connection</span>
+        <strong id="connectionText">Checking</strong>
+        <span class="lfs-summary-meta" id="connectionMeta">Health probe pending</span>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Base URL</span>
+        <code id="baseUrl">http://localhost:5050</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Auth header</span>
+        <code>X-Liskov-Auth-Token</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Bucket target</span>
+        <code>?bucket=name</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Endpoint family</span>
+        <code>/api/filesystem/*</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Current bucket</span>
+        <code id="activeBucket">No bucket selected</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Related links</h3>
+      <p>Related docs and live endpoints.</p>
+    </div>
+    <div class="lfs-button-row">
+      <a class="btn-secondary" href="/swagger" target="_blank" rel="noreferrer">
+        <i class="ti ti-api"></i>
+        <span>Swagger</span>
+      </a>
+      <a class="btn-secondary" href="/docs/llm-usage.md" target="_blank" rel="noreferrer">
+        <i class="ti ti-book"></i>
+        <span>Usage guide</span>
+      </a>
+      <a class="btn-secondary" href="/docs/health.json" target="_blank" rel="noreferrer">
+        <i class="ti ti-heartbeat"></i>
+        <span>Health JSON</span>
+      </a>
+      <a class="btn-secondary" href="https://github.com/mist83/liskov-file-system" target="_blank" rel="noreferrer">
+        <i class="ti ti-brand-github"></i>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </section>
+</div>
+<script>
+window.liskovApp?.mountView('reference');
+</script>

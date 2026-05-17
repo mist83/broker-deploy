@@ -1,0 +1,78 @@
+<div class="lfs-view" data-lfs-view="session">
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Session</h3>
+      <p>Set the auth token, S3 bucket, and prefix for the current demo session.</p>
+    </div>
+
+    <form class="lfs-session-form">
+      <div class="lfs-field-grid">
+        <div class="lfs-field">
+          <label for="authToken">Auth token</label>
+          <input
+            type="password"
+            id="authToken"
+            placeholder="Enter X-Liskov-Auth-Token"
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="lfs-field">
+          <label for="bucketName">Bucket name</label>
+          <select id="bucketName">
+            <option value="">Enter auth token to load buckets</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="lfs-field">
+        <label for="pathPrefix">Path prefix</label>
+        <input
+          type="text"
+          id="pathPrefix"
+          placeholder="folder/subfolder/"
+        >
+      </div>
+
+      <div class="lfs-button-row">
+        <button class="btn-primary" id="loadFilesBtn" type="button">
+          <i class="ti ti-refresh"></i>
+          <span>Load files</span>
+        </button>
+        <button class="btn-secondary" id="saveConfigBtn" type="button">
+          <i class="ti ti-device-floppy"></i>
+          <span>Save session</span>
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Connection</h3>
+      <p>Current endpoint, status, and request target.</p>
+    </div>
+    <div class="lfs-fact-grid">
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Connection</span>
+        <strong id="connectionText">Checking</strong>
+        <span class="lfs-summary-meta" id="connectionMeta">Health probe pending</span>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Base URL</span>
+        <code id="baseUrl">http://localhost:5050</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Bucket</span>
+        <code id="activeBucket">No bucket selected</code>
+      </div>
+      <div class="lfs-fact-card">
+        <span class="lfs-fact-label">Prefix</span>
+        <code id="activePrefix">(root)</code>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+window.liskovApp?.mountView('session');
+</script>

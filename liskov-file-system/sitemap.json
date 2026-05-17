@@ -1,0 +1,113 @@
+{
+  "title": "Liskov File System",
+  "header": {
+    "containerId": "header-container",
+    "title": "Liskov File System",
+    "icon": "ti ti-folder-code",
+    "controls": [
+      {
+        "type": "link",
+        "label": "GitHub",
+        "href": "https://github.com/mist83/liskov-file-system",
+        "target": "_blank",
+        "rel": "noreferrer"
+      },
+      {
+        "type": "link",
+        "label": "LLM Usage",
+        "href": "/docs/llm-usage.md",
+        "target": "_blank",
+        "rel": "noreferrer"
+      },
+      {
+        "type": "link",
+        "label": "Swagger",
+        "href": "/swagger",
+        "target": "_blank",
+        "rel": "noreferrer"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "workspace",
+      "label": "Workspace",
+      "icon": "ti ti-folders",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "files",
+              "name": "Files",
+              "icon": "ti ti-folder-open",
+              "description": "Browse folders and files under the current prefix.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workspace/files.html"
+            },
+            {
+              "id": "search",
+              "name": "Search",
+              "icon": "ti ti-search",
+              "description": "Search text files under the current prefix.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workspace/search.html"
+            },
+            {
+              "id": "session",
+              "name": "Session",
+              "icon": "ti ti-key",
+              "description": "Auth token, bucket, prefix, and connection state.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workspace/session.html"
+            },
+            {
+              "id": "selection",
+              "name": "Selection",
+              "icon": "ti ti-checklist",
+              "description": "Bulk actions for the current file selection.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workspace/selection.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reference",
+      "label": "Reference",
+      "icon": "ti ti-book-2",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "target",
+              "name": "Target",
+              "icon": "ti ti-info-circle",
+              "description": "Current endpoint, headers, and related links.",
+              "allowHtmlSource": true,
+              "htmlSource": "./tabs/workspace/reference.html"
+            },
+            {
+              "id": "api",
+              "name": "API",
+              "icon": "ti ti-braces",
+              "description": "Endpoints and request contract.",
+              "componentSource": "./components/api.json"
+            },
+            {
+              "id": "docs",
+              "name": "Docs",
+              "icon": "ti ti-book",
+              "description": "Usage guide, repo links, and published proof.",
+              "componentSource": "./components/docs.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

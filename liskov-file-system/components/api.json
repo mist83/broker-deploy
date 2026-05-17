@@ -1,0 +1,133 @@
+{
+  "component": "app",
+  "icon": "ti ti-braces",
+  "title": "API",
+  "subtitle": "Filesystem endpoints behind the S3 demo workspace.",
+  "actions": [
+    {
+      "label": "Open Swagger",
+      "variant": "primary",
+      "icon": "ti ti-api",
+      "action": {
+        "type": "open",
+        "href": "/swagger",
+        "target": "_blank"
+      }
+    },
+    {
+      "label": "Open health JSON",
+      "variant": "secondary",
+      "icon": "ti ti-heartbeat",
+      "action": {
+        "type": "open",
+        "href": "/docs/health.json",
+        "target": "_blank"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "component": "section",
+      "title": "Request contract",
+      "children": [
+        {
+          "component": "grid",
+          "columns": 4,
+          "children": [
+            {
+              "component": "stat",
+              "label": "Base path",
+              "value": "/api/filesystem",
+              "caption": "All file routes live under this prefix."
+            },
+            {
+              "component": "stat",
+              "label": "Auth header",
+              "value": "X-Liskov-Auth-Token",
+              "caption": "Required for mutating and bucket-list calls."
+            },
+            {
+              "component": "stat",
+              "label": "Bucket target",
+              "value": "?bucket=name",
+              "caption": "Or send X-Bucket-Name when needed."
+            },
+            {
+              "component": "stat",
+              "label": "Health probe",
+              "value": "GET /health",
+              "caption": "Used by the workspace connection badge."
+            },
+            {
+              "component": "stat",
+              "label": "Text search",
+              "value": "POST /search-text",
+              "caption": "Search text files under the active prefix."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "section",
+      "title": "Endpoints",
+      "children": [
+        {
+          "component": "table",
+          "columns": [
+            "method",
+            "route",
+            "purpose"
+          ],
+          "rows": [
+            {
+              "method": "GET",
+              "route": "/api/filesystem/list-prefix",
+              "purpose": "List files under a prefix."
+            },
+            {
+              "method": "GET",
+              "route": "/api/filesystem/info",
+              "purpose": "Fetch metadata for a single path."
+            },
+            {
+              "method": "GET",
+              "route": "/api/filesystem/text",
+              "purpose": "Read text content."
+            },
+            {
+              "method": "POST",
+              "route": "/api/filesystem/text",
+              "purpose": "Create or overwrite text content."
+            },
+            {
+              "method": "GET",
+              "route": "/api/filesystem/bytes",
+              "purpose": "Download binary content."
+            },
+            {
+              "method": "POST",
+              "route": "/api/filesystem/bytes",
+              "purpose": "Upload binary content."
+            },
+            {
+              "method": "DELETE",
+              "route": "/api/filesystem",
+              "purpose": "Delete one path."
+            },
+            {
+              "method": "GET",
+              "route": "/api/filesystem/buckets",
+              "purpose": "Enumerate allowed buckets for the token."
+            },
+            {
+              "method": "POST",
+              "route": "/api/filesystem/search-text",
+              "purpose": "Search text files under a prefix."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

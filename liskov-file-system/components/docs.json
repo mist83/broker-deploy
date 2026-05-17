@@ -1,0 +1,75 @@
+{
+  "component": "app",
+  "icon": "ti ti-book-2",
+  "title": "Docs",
+  "subtitle": "Library docs, repo links, and published proof for the S3 demo.",
+  "actions": [
+    {
+      "label": "Open usage guide",
+      "variant": "primary",
+      "icon": "ti ti-book",
+      "action": {
+        "type": "open",
+        "href": "/docs/llm-usage.md",
+        "target": "_blank"
+      }
+    },
+    {
+      "label": "Open GitHub repo",
+      "variant": "secondary",
+      "icon": "ti ti-brand-github",
+      "action": {
+        "type": "open",
+        "href": "https://github.com/mist83/liskov-file-system",
+        "target": "_blank"
+      }
+    },
+    {
+      "label": "Open health proof",
+      "variant": "secondary",
+      "icon": "ti ti-heartbeat",
+      "action": {
+        "type": "open",
+        "href": "/docs/health.json",
+        "target": "_blank"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "component": "section",
+      "title": "Resources",
+      "children": [
+        {
+          "tag": "ul",
+          "children": [
+            {
+              "tag": "li",
+              "text": "Usage guide at /docs/llm-usage.md"
+            },
+            {
+              "tag": "li",
+              "text": "Repository source on GitHub"
+            },
+            {
+              "tag": "li",
+              "text": "Published health artifact at /docs/health.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "section",
+      "title": "Published proof",
+      "children": [
+        {
+          "component": "alert",
+          "tone": "info",
+          "title": "Canon shell proof is published at /docs/health.json.",
+          "message": "Use it to confirm the hosted shell and related docs were published."
+        }
+      ]
+    }
+  ]
+}

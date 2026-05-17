@@ -1,0 +1,12 @@
+{
+  "siteId": "liskov-file-system",
+  "host": "liskov-file-system.mullmania.com",
+  "publishedAt": "2026-05-17T02:28:33.684Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/src/LiskovFileSystem.Api/wwwroot",
+  "counts": {
+    "hostingFiles": 13,
+    "hostingBytes": 86843,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}

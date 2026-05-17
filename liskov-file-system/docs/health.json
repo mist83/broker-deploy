@@ -1,0 +1,22 @@
+{
+  "site": "liskov-file-system",
+  "status": "pass",
+  "publishedAt": "2026-04-26",
+  "checks": [
+    {
+      "id": "canon-shell",
+      "status": "pass",
+      "detail": "Root page uses the shared ui.mullmania.com shell with header, tabs, and content container."
+    },
+    {
+      "id": "workspace-surface",
+      "status": "pass",
+      "detail": "Workspace tab mounts the live file browser against the HTTP API."
+    },
+    {
+      "id": "reference-surface",
+      "status": "pass",
+      "detail": "API and docs tabs publish shared-runtime reference content."
+    }
+  ]
+}

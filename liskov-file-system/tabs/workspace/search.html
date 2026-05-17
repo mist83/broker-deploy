@@ -1,0 +1,48 @@
+<div class="lfs-view" data-lfs-view="search">
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Search</h3>
+      <p>Search text files under the current bucket and prefix.</p>
+    </div>
+
+    <div class="lfs-field-grid">
+      <div class="lfs-field">
+        <label for="searchQuery">Query</label>
+        <input
+          type="text"
+          id="searchQuery"
+          placeholder="Search text files under the current prefix"
+          autocomplete="off"
+        >
+      </div>
+      <div class="lfs-field">
+        <label>Scope</label>
+        <div class="lfs-inline-value" id="searchScope">(root)</div>
+      </div>
+    </div>
+
+    <div class="lfs-button-row">
+      <button class="btn-primary" id="runSearchBtn" type="button">
+        <i class="ti ti-search"></i>
+        <span>Run search</span>
+      </button>
+      <button class="btn-secondary" id="clearSearchBtn" type="button">
+        <i class="ti ti-x"></i>
+        <span>Clear</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Results</h3>
+      <p id="searchCount">Run a search to inspect text matches.</p>
+    </div>
+    <div id="searchResults" class="lfs-search-results">
+      <p class="lfs-empty-state">Run a search to inspect text matches.</p>
+    </div>
+  </section>
+</div>
+<script>
+window.liskovApp?.mountView('search');
+</script>

@@ -1,0 +1,362 @@
+body.lfs-app-shell {
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 34%),
+    var(--bg-primary);
+}
+
+#content-container {
+  padding: var(--space-lg);
+}
+
+.lfs-view {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.lfs-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--bg-secondary) 94%, white 6%);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+.lfs-section-header {
+  display: grid;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.lfs-section-header h3 {
+  margin: 0;
+  font-size: var(--text-2xl);
+}
+
+.lfs-section-header p,
+.lfs-search-result p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.lfs-section-header--spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-md);
+}
+
+.lfs-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+}
+
+.lfs-summary-tile,
+.lfs-fact-card,
+.lfs-file-row,
+.lfs-selection-chip,
+.lfs-search-result {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.lfs-summary-tile,
+.lfs-fact-card {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+}
+
+.lfs-summary-label,
+.lfs-fact-label,
+.lfs-search-result-line {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lfs-summary-tile strong,
+.lfs-fact-card strong {
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.lfs-summary-meta {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.lfs-session-form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.lfs-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.lfs-field {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.lfs-field label,
+.lfs-modal-field label {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.lfs-field input,
+.lfs-field select,
+.lfs-filter input,
+.lfs-modal-stack input,
+.lfs-modal-stack textarea {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0.82rem 0.95rem;
+  font: inherit;
+}
+
+.lfs-field input:focus,
+.lfs-field select:focus,
+.lfs-filter input:focus,
+.lfs-modal-stack input:focus,
+.lfs-modal-stack textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.lfs-toolbar,
+.lfs-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.lfs-button-row a,
+.lfs-button-row .btn-primary,
+.lfs-button-row .btn-secondary,
+.lfs-button-row .btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+}
+
+.lfs-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: min(100%, 18rem);
+  flex: 1 1 18rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+}
+
+.lfs-filter input {
+  border: 0;
+  background: transparent;
+  padding: 0.85rem 0;
+}
+
+.lfs-filter input:focus {
+  outline: none;
+}
+
+.lfs-files,
+.lfs-selection-list,
+.lfs-search-results {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.lfs-empty-state {
+  margin: 0;
+  padding: var(--space-lg);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+}
+
+.lfs-file-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  align-items: center;
+  padding: 0.95rem 1rem;
+}
+
+.lfs-file-row.is-selected {
+  border-color: color-mix(in srgb, var(--color-primary) 55%, var(--border-color));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--bg-primary));
+}
+
+.lfs-file-main {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.lfs-file-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.lfs-file-heading i {
+  color: var(--text-secondary);
+}
+
+.lfs-file-name {
+  display: block;
+  font-weight: 700;
+}
+
+.lfs-file-path {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.lfs-file-actions {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.lfs-icon-btn {
+  display: inline-flex;
+  width: 2.6rem;
+  min-width: 2.6rem;
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.lfs-selection-chip {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+}
+
+.lfs-selection-chip code,
+.lfs-fact-card code {
+  overflow-wrap: anywhere;
+}
+
+.lfs-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.lfs-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.lfs-breadcrumb-btn,
+.lfs-breadcrumb-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.2rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.lfs-breadcrumb-btn {
+  cursor: pointer;
+}
+
+.lfs-breadcrumb-separator {
+  color: var(--text-muted);
+}
+
+.lfs-inline-value {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.82rem 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.lfs-search-result {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+}
+
+.lfs-search-result-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.lfs-search-result-path {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.lfs-modal-stack {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.lfs-modal-stack textarea {
+  min-height: 12rem;
+  resize: vertical;
+}
+
+.lfs-editor {
+  min-height: min(60vh, 32rem);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .lfs-field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lfs-search-result-top,
+  .lfs-section-header--spread {
+    display: grid;
+    align-items: start;
+  }
+
+  .lfs-file-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lfs-file-actions {
+    justify-content: flex-start;
+  }
+}

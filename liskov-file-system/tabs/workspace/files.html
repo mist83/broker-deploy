@@ -1,0 +1,79 @@
+<div class="lfs-view" data-lfs-view="files">
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Workspace summary</h3>
+      <p>Connection state, current target, and current result set.</p>
+    </div>
+    <div class="lfs-summary-grid" aria-label="Current target summary">
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Connection</span>
+        <strong id="connectionText">Checking</strong>
+        <span class="lfs-summary-meta" id="connectionMeta">Health probe pending</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Bucket</span>
+        <strong id="activeBucket">No bucket selected</strong>
+        <span class="lfs-summary-meta">Current request target</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Prefix</span>
+        <strong id="activePrefix">(root)</strong>
+        <span class="lfs-summary-meta">Current list scope</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Files</span>
+        <strong id="fileCount">0 files</strong>
+        <span class="lfs-summary-meta">Current result set</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Selected</span>
+        <strong id="selectedCount">0 selected</strong>
+        <span class="lfs-summary-meta">Ready for bulk actions</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lfs-section">
+    <div class="lfs-section-header lfs-section-header--spread">
+      <div>
+        <h3>Files</h3>
+        <p>Browse immediate folders and files under the current prefix.</p>
+      </div>
+      <div class="lfs-toolbar">
+        <div class="lfs-filter">
+          <i class="ti ti-search"></i>
+          <input
+            type="text"
+            id="fileFilter"
+            placeholder="Filter current result set"
+            autocomplete="off"
+          >
+        </div>
+        <button class="btn-secondary" id="refreshBtn" type="button" aria-label="Refresh files">
+          <i class="ti ti-refresh"></i>
+        </button>
+        <button class="btn-secondary" id="uploadBtn" type="button">
+          <i class="ti ti-upload"></i>
+          <span>Upload</span>
+        </button>
+        <button class="btn-secondary" id="createFileBtn" type="button">
+          <i class="ti ti-file-plus"></i>
+          <span>Create file</span>
+        </button>
+        <button class="btn-secondary" id="createFolderBtn" type="button">
+          <i class="ti ti-folder-plus"></i>
+          <span>Create folder</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="filesBreadcrumbs" class="lfs-breadcrumbs" aria-label="Current prefix"></div>
+
+    <div id="filesList" class="lfs-files">
+      <p class="lfs-empty-state">Load a bucket and prefix to list files.</p>
+    </div>
+  </section>
+</div>
+<script>
+window.liskovApp?.mountView('files');
+</script>

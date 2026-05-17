@@ -1,0 +1,49 @@
+<div class="lfs-view" data-lfs-view="selection">
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Selected files</h3>
+      <p>Current bulk-action set.</p>
+    </div>
+    <div class="lfs-summary-grid">
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Selected</span>
+        <strong id="selectedCount">0 selected</strong>
+        <span class="lfs-summary-meta">Current bulk-action set</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Bucket</span>
+        <strong id="activeBucket">No bucket selected</strong>
+        <span class="lfs-summary-meta">Current request target</span>
+      </div>
+      <div class="lfs-summary-tile">
+        <span class="lfs-summary-label">Prefix</span>
+        <strong id="activePrefix">(root)</strong>
+        <span class="lfs-summary-meta">Current list scope</span>
+      </div>
+    </div>
+
+    <div id="selectedFilesList" class="lfs-selection-list">
+      <p class="lfs-empty-state">No files selected.</p>
+    </div>
+  </section>
+
+  <section class="lfs-section">
+    <div class="lfs-section-header">
+      <h3>Bulk actions</h3>
+      <p>Download or delete the current selection.</p>
+    </div>
+    <div class="lfs-button-row">
+      <button class="btn-primary" id="downloadSelectedBtn" type="button">
+        <i class="ti ti-download"></i>
+        <span>Download selected</span>
+      </button>
+      <button class="btn-danger" id="deleteSelectedBtn" type="button">
+        <i class="ti ti-trash"></i>
+        <span>Delete selected</span>
+      </button>
+    </div>
+  </section>
+</div>
+<script>
+window.liskovApp?.mountView('selection');
+</script>
