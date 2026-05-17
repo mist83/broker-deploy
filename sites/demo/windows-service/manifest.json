@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/windows-service",
+  "name": "windows-service",
+  "posterUrl": "https://mist83.github.io/_demo/windows-service/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/windows-service/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/windows-service/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

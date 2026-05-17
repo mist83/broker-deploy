@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/roslyn-mcp",
+  "name": "roslyn-mcp",
+  "posterUrl": "https://mist83.github.io/_demo/roslyn-mcp/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/roslyn-mcp/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/roslyn-mcp/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

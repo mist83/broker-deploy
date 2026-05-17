@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/should-be-builtins",
+  "name": "should-be-builtins",
+  "posterUrl": "https://mist83.github.io/_demo/should-be-builtins/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/should-be-builtins/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/should-be-builtins/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

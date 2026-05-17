@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/tic-hack-toe",
+  "name": "tic-hack-toe",
+  "posterUrl": "https://mist83.github.io/_demo/tic-hack-toe/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/tic-hack-toe/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/tic-hack-toe/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

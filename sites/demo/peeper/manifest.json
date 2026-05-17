@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/Peeper",
+  "name": "Peeper",
+  "posterUrl": "https://mist83.github.io/_demo/Peeper/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/Peeper/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/Peeper/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

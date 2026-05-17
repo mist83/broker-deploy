@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/llm-help",
+  "name": "llm-help",
+  "posterUrl": "https://mist83.github.io/_demo/llm-help/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/llm-help/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/llm-help/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

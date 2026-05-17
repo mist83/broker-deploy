@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/gitter",
+  "name": "gitter",
+  "posterUrl": "https://mist83.github.io/_demo/gitter/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/gitter/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/gitter/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

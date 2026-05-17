@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/cline3",
+  "name": "cline3",
+  "posterUrl": "https://mist83.github.io/_demo/cline3/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/cline3/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/cline3/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

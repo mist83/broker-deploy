@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/six-seven",
+  "name": "six-seven",
+  "posterUrl": "https://mist83.github.io/_demo/six-seven/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/six-seven/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/six-seven/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

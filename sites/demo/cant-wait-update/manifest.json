@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/cant-wait-update",
+  "name": "cant-wait-update",
+  "posterUrl": "https://cant-wait-update.mullmania.com/docs/demo/poster.svg",
+  "posterPath": "./docs/demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://cant-wait-update.mullmania.com/docs/demo/manifest.json",
+  "manifestPath": "./docs/demo/manifest.json",
+  "artifactBaseUrl": "https://cant-wait-update.mullmania.com/docs/demo/",
+  "hasVideo": false,
+  "posterKind": "repo-authored-proof",
+  "posterNote": "Repo-authored proof poster for the hosted live test surface."
+}

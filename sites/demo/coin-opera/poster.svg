@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">Coin Opera Poster</title>
+  <desc id="desc">Theatrical poster for Coin Opera.</desc>
+  <rect width="1200" height="1600" fill="#14090a"/>
+  <rect x="80" y="80" width="1040" height="1440" fill="#230c10" stroke="#d7b96d" stroke-width="8"/>
+  <rect x="120" y="120" width="960" height="1360" fill="#4d121a"/>
+  <rect x="180" y="260" width="840" height="980" fill="#1a1112"/>
+  <rect x="230" y="300" width="740" height="900" fill="#f2e7cb"/>
+  <circle cx="600" cy="580" r="170" fill="#d7b96d"/>
+  <circle cx="600" cy="580" r="132" fill="#1a1112"/>
+  <path d="M438 580c0-90 73-163 162-163 90 0 163 73 163 163 0 89-73 162-163 162-89 0-162-73-162-162Z" fill="#f2e7cb"/>
+  <path d="M520 470h160v55H520Zm0 98h160v54H520Zm0 97h160v55H520Z" fill="#4d121a"/>
+  <text x="600" y="250" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="150" letter-spacing="10" fill="#f2e7cb">COIN</text>
+  <text x="600" y="370" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="150" letter-spacing="10" fill="#f2e7cb">OPERA</text>
+  <text x="600" y="1080" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="54" fill="#4d121a">three coins decide tonight's ridiculous little tragedy</text>
+  <text x="600" y="1170" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="40" fill="#4d121a">chaos / romance / dread / triumph</text>
+  <text x="600" y="1360" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="64" letter-spacing="5" fill="#d7b96d">coin-opera.mullmania.com</text>
+</svg>

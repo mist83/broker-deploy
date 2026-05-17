@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/cloudwatcher",
+  "name": "cloudwatcher",
+  "posterUrl": "https://mist83.github.io/_demo/cloudwatcher/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/cloudwatcher/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/cloudwatcher/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

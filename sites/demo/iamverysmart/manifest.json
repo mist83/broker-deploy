@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/IAmVerySmart",
+  "name": "IAmVerySmart",
+  "posterUrl": "https://mist83.github.io/_demo/IAmVerySmart/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/IAmVerySmart/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/IAmVerySmart/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

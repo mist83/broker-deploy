@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/dallAIre",
+  "name": "dallAIre",
+  "posterUrl": "https://mist83.github.io/_demo/dallAIre/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/dallAIre/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/dallAIre/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

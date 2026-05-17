@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/feedbuilder",
+  "name": "feedbuilder",
+  "posterUrl": "https://mist83.github.io/_demo/feedbuilder/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/feedbuilder/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/feedbuilder/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

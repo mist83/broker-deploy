@@ -1,0 +1,327 @@
+{
+  "title": "UI Everywhere Demos",
+  "description": "Stable route demos for the shipped shell, looks, pages, and style tools.",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captureDelayMs": 5000,
+  "chapterDurationSeconds": 3,
+  "chapters": [
+    {
+      "id": "01-start",
+      "title": "Start",
+      "description": "The simple first stop with the main clicks and the big reel.",
+      "group": "start",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light",
+      "poster": true
+    },
+    {
+      "id": "02-page-shape",
+      "title": "Layout",
+      "description": "Shell, page skeleton, and layout primitives.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/structure",
+      "poster": true
+    },
+    {
+      "id": "03-grids",
+      "title": "Grids",
+      "description": "Columns, cards, and responsive layout patterns.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/grids"
+    },
+    {
+      "id": "04-type",
+      "title": "Type",
+      "description": "Text scale, headings, body copy, and hierarchy.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/typography"
+    },
+    {
+      "id": "05-buttons",
+      "title": "Buttons",
+      "description": "Primary, secondary, danger, and action patterns.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/buttons"
+    },
+    {
+      "id": "06-forms",
+      "title": "Forms",
+      "description": "Inputs, labels, validation, and shared field rules.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/forms"
+    },
+    {
+      "id": "07-cards",
+      "title": "Cards",
+      "description": "Grouped content blocks and quick summaries.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/cards"
+    },
+    {
+      "id": "08-tables",
+      "title": "Tables",
+      "description": "Shared table and pager patterns.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/tables"
+    },
+    {
+      "id": "09-alerts",
+      "title": "Alerts",
+      "description": "Messages, badges, and state callouts.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/alerts"
+    },
+    {
+      "id": "10-popups",
+      "title": "Popups",
+      "description": "Modals and toasts.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/modals"
+    },
+    {
+      "id": "11-details",
+      "title": "Detail",
+      "description": "Detail page layouts and record views.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/detail"
+    },
+    {
+      "id": "12-spacing",
+      "title": "Spacing",
+      "description": "Shared gaps, rhythm, and utility layout space.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#canonical/spacing"
+    },
+    {
+      "id": "13-whole-pages",
+      "title": "Screens",
+      "description": "Composed screens in dark mode.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "dark",
+      "href": "../index.html?theme=walmart&mode=dark#canonical/full-page"
+    },
+    {
+      "id": "14-json-preview",
+      "title": "Preview",
+      "description": "JSON-left and render-right proof surface.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "dark",
+      "href": "../index.html?theme=walmart&mode=dark#canonical/live-preview",
+      "poster": true
+    },
+    {
+      "id": "15-page-lab",
+      "title": "Build Page",
+      "description": "Page-contract editing, fixture loading, and renderer share links.",
+      "group": "examples",
+      "theme": "walmart",
+      "mode": "dark",
+      "href": "../index.html?theme=walmart&mode=dark#canonical/contract-lab",
+      "poster": true
+    },
+    {
+      "id": "16-ops-board",
+      "title": "Ops Board",
+      "description": "A JSON page mounted straight into the shell.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/operations-dashboard"
+    },
+    {
+      "id": "17-quality-queue",
+      "title": "Quality Queue",
+      "description": "Another JSON page mounted straight into the shell.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/quality-queue"
+    },
+    {
+      "id": "18-preview-shelf",
+      "title": "Preview Shelf",
+      "description": "A preview-heavy JSON page route.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/preview-catalog"
+    },
+    {
+      "id": "19-docs-page",
+      "title": "Docs",
+      "description": "Preset-backed page mounted without an HTML fragment.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/docs-overview"
+    },
+    {
+      "id": "20-theme-page",
+      "title": "Theme Page",
+      "description": "Theme page mounted as a shell route.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/active-theme"
+    },
+    {
+      "id": "21-ship-check",
+      "title": "Ship Check",
+      "description": "Component JSON loaded from disk and mounted straight into the shell.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/release-readiness"
+    },
+    {
+      "id": "22-inline-example",
+      "title": "Inline Page",
+      "description": "Inline JSON mounted right out of the sitemap.",
+      "group": "pages",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#contracts/inline-component"
+    },
+    {
+      "id": "23-ocean-light",
+      "title": "Ocean Light",
+      "description": "Ocean theme in light mode.",
+      "group": "looks",
+      "theme": "ocean",
+      "mode": "light",
+      "href": "../index.html?theme=ocean&mode=light#themes/ocean",
+      "poster": true
+    },
+    {
+      "id": "24-ocean-dark",
+      "title": "Ocean Dark",
+      "description": "Ocean theme in dark mode.",
+      "group": "looks",
+      "theme": "ocean",
+      "mode": "dark",
+      "href": "../index.html?theme=ocean&mode=dark#themes/ocean"
+    },
+    {
+      "id": "25-walmart-light",
+      "title": "Walmart Light",
+      "description": "Walmart theme in light mode.",
+      "group": "looks",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#themes/walmart",
+      "poster": true
+    },
+    {
+      "id": "26-walmart-dark",
+      "title": "Walmart Dark",
+      "description": "Walmart theme in dark mode.",
+      "group": "looks",
+      "theme": "walmart",
+      "mode": "dark",
+      "href": "../index.html?theme=walmart&mode=dark#themes/walmart"
+    },
+    {
+      "id": "27-mockup-light",
+      "title": "Mockup Light",
+      "description": "Mockup theme in light mode.",
+      "group": "looks",
+      "theme": "mockup",
+      "mode": "light",
+      "href": "../index.html?theme=mockup&mode=light#themes/mockup",
+      "poster": true
+    },
+    {
+      "id": "28-mockup-dark",
+      "title": "Mockup Dark",
+      "description": "Mockup theme in dark mode.",
+      "group": "looks",
+      "theme": "mockup",
+      "mode": "dark",
+      "href": "../index.html?theme=mockup&mode=dark#themes/mockup"
+    },
+    {
+      "id": "29-colors",
+      "title": "Colors",
+      "description": "Color tokens and sample surfaces.",
+      "group": "style",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#builder/colors"
+    },
+    {
+      "id": "30-style-type",
+      "title": "Type",
+      "description": "Font roles and specimen scale.",
+      "group": "style",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#builder/typography"
+    },
+    {
+      "id": "31-style-spacing",
+      "title": "Spacing",
+      "description": "Gap scale and spacing specimens.",
+      "group": "style",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#builder/spacing"
+    },
+    {
+      "id": "32-effects",
+      "title": "Effects",
+      "description": "Depth, hover, and interaction effects.",
+      "group": "style",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#builder/effects"
+    },
+    {
+      "id": "33-map",
+      "title": "Map",
+      "description": "The maintenance hatch for laying out sitemap structure visually.",
+      "group": "map",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#visual-builder",
+      "poster": true
+    },
+    {
+      "id": "34-how-to",
+      "title": "How To",
+      "description": "The built-in notes for using the library.",
+      "group": "how-to",
+      "theme": "walmart",
+      "mode": "light",
+      "href": "../index.html?theme=walmart&mode=light#docs",
+      "poster": true
+    }
+  ]
+}

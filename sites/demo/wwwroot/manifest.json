@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/wwwroot",
+  "name": "wwwroot",
+  "posterUrl": "https://mist83.github.io/_demo/wwwroot/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/wwwroot/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/wwwroot/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

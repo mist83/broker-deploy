@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Cant Wait Update proof poster</title>
+  <desc id="desc">Poster showing the live root URL, docs URL, and the version-check flow for Cant Wait Update.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0c1a2b" />
+      <stop offset="100%" stop-color="#163a5c" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)" rx="24" />
+  <g fill="none" stroke="#8fc8ff" stroke-width="2" opacity="0.35">
+    <path d="M90 170h1020" />
+    <path d="M90 560h1020" />
+  </g>
+  <g fill="#f5fbff">
+    <text x="90" y="110" font-family="ui-sans-serif, system-ui, sans-serif" font-size="44" font-weight="700">Cant Wait Update</text>
+    <text x="90" y="150" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" opacity="0.86">Canon proof poster for the hosted live test surface and docs route.</text>
+    <text x="90" y="620" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">Live page: https://cant-wait-update.mullmania.com/</text>
+    <text x="90" y="652" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">Docs: https://cant-wait-update.mullmania.com/docs/</text>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect x="90" y="240" width="230" height="170" rx="18" fill="#f5fbff" />
+    <text x="120" y="290" font-size="24" font-weight="700" fill="#0f2740">1. Open page</text>
+    <text x="120" y="330" font-size="19" fill="#264763">Hosted page loads</text>
+    <text x="120" y="358" font-size="19" fill="#264763">the live root page</text>
+    <text x="120" y="386" font-size="19" fill="#264763">or docs route.</text>
+
+    <rect x="365" y="240" width="230" height="170" rx="18" fill="#ffe58b" />
+    <text x="395" y="290" font-size="24" font-weight="700" fill="#3a2a00">2. Poll version</text>
+    <text x="395" y="330" font-size="19" fill="#5f4700">cant-wait-update.js</text>
+    <text x="395" y="358" font-size="19" fill="#5f4700">checks /api/version</text>
+    <text x="395" y="386" font-size="19" fill="#5f4700">on an interval.</text>
+
+    <rect x="640" y="240" width="230" height="170" rx="18" fill="#ffd166" />
+    <text x="670" y="290" font-size="24" font-weight="700" fill="#3a2a00">3. Detect change</text>
+    <text x="670" y="330" font-size="19" fill="#5f4700">Stored version and</text>
+    <text x="670" y="358" font-size="19" fill="#5f4700">current version no</text>
+    <text x="670" y="386" font-size="19" fill="#5f4700">longer match.</text>
+
+    <rect x="915" y="240" width="200" height="170" rx="18" fill="#f5fbff" />
+    <text x="945" y="290" font-size="24" font-weight="700" fill="#0f2740">4. Update</text>
+    <text x="945" y="330" font-size="19" fill="#264763">Show FAB and</text>
+    <text x="945" y="358" font-size="19" fill="#264763">modal, then reload</text>
+    <text x="945" y="386" font-size="19" fill="#264763">after confirm.</text>
+  </g>
+  <g fill="none" stroke="#f5fbff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M320 325h28" />
+    <path d="M339 309l16 16-16 16" />
+    <path d="M595 325h28" />
+    <path d="M614 309l16 16-16 16" />
+    <path d="M870 325h18" />
+    <path d="M879 309l16 16-16 16" />
+  </g>

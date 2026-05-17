@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/search-all-apps",
+  "name": "search-all-apps",
+  "posterUrl": "https://mist83.github.io/_demo/search-all-apps/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/search-all-apps/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/search-all-apps/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

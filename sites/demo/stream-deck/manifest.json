@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/stream-deck",
+  "name": "stream-deck",
+  "posterUrl": "https://mist83.github.io/_demo/stream-deck/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/stream-deck/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/stream-deck/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

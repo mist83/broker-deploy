@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/phone-input",
+  "name": "phone-input",
+  "posterUrl": "https://mist83.github.io/_demo/phone-input/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/phone-input/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/phone-input/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

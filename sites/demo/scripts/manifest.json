@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/scripts",
+  "name": "scripts",
+  "posterUrl": "https://mist83.github.io/_demo/scripts/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/scripts/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/scripts/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/iter9",
+  "name": "iter9",
+  "posterUrl": "https://mist83.github.io/_demo/iter9/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/iter9/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/iter9/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

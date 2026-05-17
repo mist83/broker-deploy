@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/poor-mans-queue",
+  "name": "poor-mans-queue",
+  "posterUrl": "https://mist83.github.io/_demo/poor-mans-queue/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/poor-mans-queue/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/poor-mans-queue/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

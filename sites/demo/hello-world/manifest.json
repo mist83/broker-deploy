@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/hello-world",
+  "name": "hello-world",
+  "posterUrl": "https://mist83.github.io/_demo/hello-world/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/hello-world/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/hello-world/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

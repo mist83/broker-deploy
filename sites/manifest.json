@@ -1,0 +1,75 @@
+{
+  "name": "Mullmania Site Index",
+  "short_name": "Sites",
+  "description": "Mullmania app catalog, review deck, and operator surface.",
+  "id": "/",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "theme_color": "#0a6ecb",
+  "background_color": "#ffffff",
+  "categories": ["productivity", "utilities", "developer"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/sites-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Flight Deck",
+      "short_name": "Now",
+      "url": "./?view=flightdeck",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Review",
+      "short_name": "Review",
+      "url": "./?view=audit",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Gallery",
+      "short_name": "Gallery",
+      "url": "./?view=gallery",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Categories",
+      "short_name": "Categories",
+      "url": "./?view=categorize",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./demo/poster.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Sites catalog"
+    }
+  ]
+}

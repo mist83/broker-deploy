@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/licensewindowshuffle",
+  "name": "licensewindowshuffle",
+  "posterUrl": "https://mist83.github.io/_demo/licensewindowshuffle/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/licensewindowshuffle/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/licensewindowshuffle/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

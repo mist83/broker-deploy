@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/superhot",
+  "name": "superhot",
+  "posterUrl": "https://mist83.github.io/_demo/superhot/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/superhot/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/superhot/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

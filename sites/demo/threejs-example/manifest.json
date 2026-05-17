@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/threejs-example",
+  "name": "threejs-example",
+  "posterUrl": "https://mist83.github.io/_demo/threejs-example/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/threejs-example/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/threejs-example/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

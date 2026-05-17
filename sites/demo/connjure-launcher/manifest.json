@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/connjure-launcher",
+  "name": "connjure-launcher",
+  "posterUrl": "https://mist83.github.io/_demo/connjure-launcher/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/connjure-launcher/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/connjure-launcher/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

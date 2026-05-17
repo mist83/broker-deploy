@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/tests-everywhere",
+  "name": "tests-everywhere",
+  "posterUrl": "https://mist83.github.io/_demo/tests-everywhere/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/tests-everywhere/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/tests-everywhere/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/html-canvas-overlay",
+  "name": "html-canvas-overlay",
+  "posterUrl": "https://mist83.github.io/_demo/html-canvas-overlay/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/html-canvas-overlay/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/html-canvas-overlay/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

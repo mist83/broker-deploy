@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "sites-platform-contract-v1",
+  "baseDomain": "mullmania.com",
+  "canon": {
+    "version": "2026.04.26",
+    "source": "https://development-canon.mullmania.com/canon.json",
+    "profile": "frontdoor-v1",
+    "docs": {
+      "canonJson": "https://development-canon.mullmania.com/canon.json",
+      "quickstart": "https://development-canon.mullmania.com/QUICKSTART.md",
+      "syncGuide": "https://development-canon.mullmania.com/sync-site-with-canon.md",
+      "uiSection": "https://development-canon.mullmania.com/#canon/ui",
+      "exampleFrontdoor": "https://development-canon.mullmania.com/examples/host-a-site/site/frontdoor.json"
+    }
+  },
+  "siteIds": {
+    "root": "_root",
+    "current": "sites",
+    "ui": "ui",
+    "reserved": ["_root", "sites", "ui", "index"],
+    "alwaysPublic": ["_root", "sites", "ui"],
+    "reservedAliases": ["www", "sites", "ui", "index"]
+  },
+  "categoryTags": [
+    { "id": "frontend-ui", "label": "Frontend / UI", "aliases": ["shared-ui", "frontend", "css", "design", "editor"] },
+    { "id": "ui-framework", "label": "UI / Framework", "aliases": ["uses-ui-mullmania", "ui-consumer", "shared-ui-runtime"] },
+    { "id": "tooling", "label": "Tooling", "aliases": ["developer-tooling", "automation", "library", "framework-support"] },
+    { "id": "data", "label": "Data", "aliases": ["mullmania-data", "generated-assets"] },
+    { "id": "games", "label": "Games", "aliases": ["game", "arcade", "card-game", "minigame", "multiplayer"] },
+    { "id": "fun-experiment", "label": "Fun / Experiment", "aliases": ["fun", "experiment", "experiments", "playground", "prototype"] },
+    { "id": "simulation", "label": "Simulation", "aliases": ["physics", "science-art"] },
+    { "id": "docs", "label": "Docs", "aliases": ["documentation", "demo-docs"] },
+    { "id": "audio-visual", "label": "Audio / Visual", "aliases": ["audio", "music"] },
+    { "id": "backend-api", "label": "Backend / API", "aliases": ["api", "backend", "lambda-api", "lambda-backed"] }
+  ],
+  "ui": {
+    "defaultThemeId": "walmart",
+    "activeThemeId": "active",
+    "themeIds": [
+      "active",
+      "blackwhite",
+      "cyberblue",
+      "cyberpink",
+      "editorial",
+      "ghoul",
+      "mockup",
+      "monochrome",
+      "ocean",
+      "pastelzom",
+      "precog",
+      "pumpkin",
+      "sunset",
+      "terminal",
+      "walmart",
+      "windows31"
+    ],
+    "themeLabels": {
+      "blackwhite": "Black and White",
+      "cyberblue": "Cyber Blue",
+      "cyberpink": "Cyber Pink",
+      "pastelzom": "Pastel Zombie",
+      "windows31": "Windows 3.1"
+    }
+  },
+  "coreSites": [
+    {
+      "siteId": "_root",
+      "hostLabel": "",
+      "isPublic": true,
+      "currentHostedSite": true,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "surface",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Main site.",
+      "tags": ["main", "entrypoint", "framework", "framework-core"],
+      "notes": ["Main site."]
+    },
+    {
+      "siteId": "sites",
+      "hostLabel": "sites",
+      "isPublic": true,
+      "currentHostedSite": false,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "surface",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Site index.",
+      "tags": ["launchpad", "catalog", "framework", "framework-core"],
+      "notes": ["Site index."]
+    },
+    {
+      "siteId": "ui",
+      "hostLabel": "ui",
+      "isPublic": true,
+      "currentHostedSite": false,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "design-system",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Shared UI host.",
+      "tags": ["ui", "shared-styles", "framework", "framework-core"],
+      "notes": ["Shared UI host."]
+    }
+  ]
+}

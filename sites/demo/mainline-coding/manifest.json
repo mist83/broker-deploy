@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/mainline-coding",
+  "name": "mainline-coding",
+  "posterUrl": "https://mist83.github.io/_demo/mainline-coding/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/mainline-coding/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/mainline-coding/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

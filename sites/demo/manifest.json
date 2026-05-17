@@ -1,0 +1,30 @@
+{
+  "siteId": "sites",
+  "title": "Mullmania Site Index",
+  "description": "Proof artifact manifest for the Sites launchpad surface.",
+  "liveUrl": "https://sites.mullmania.com/",
+  "posterPath": "./poster.png",
+  "posterUrl": "https://sites.mullmania.com/demo/poster.png",
+  "manifestPath": "./manifest.json",
+  "healthPath": "../health.json",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Local browser capture of the canonized Sites launchpad.",
+  "captures": [
+    {
+      "id": "table",
+      "label": "Table view",
+      "path": "../docs/screenshots/table-view.png"
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery view",
+      "path": "../docs/screenshots/gallery-view.png"
+    },
+    {
+      "id": "modal",
+      "label": "Preview modal",
+      "path": "../docs/screenshots/preview-modal.png"
+    }
+  ]
+}

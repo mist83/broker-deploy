@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/angle-bang",
+  "name": "angle-bang",
+  "posterUrl": "https://mist83.github.io/_demo/angle-bang/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/angle-bang/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/angle-bang/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/ww-reminder",
+  "name": "ww-reminder",
+  "posterUrl": "https://mist83.github.io/_demo/ww-reminder/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/ww-reminder/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/ww-reminder/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

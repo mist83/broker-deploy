@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/BreakpointAllTheThings",
+  "name": "BreakpointAllTheThings",
+  "posterUrl": "https://mist83.github.io/_demo/BreakpointAllTheThings/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/BreakpointAllTheThings/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/BreakpointAllTheThings/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

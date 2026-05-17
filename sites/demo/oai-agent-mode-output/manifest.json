@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/oai-agent-mode-output",
+  "name": "oai-agent-mode-output",
+  "posterUrl": "https://mist83.github.io/_demo/oai-agent-mode-output/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/oai-agent-mode-output/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/oai-agent-mode-output/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

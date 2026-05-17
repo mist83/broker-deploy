@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/itchy-brain",
+  "name": "itchy-brain",
+  "posterUrl": "https://mist83.github.io/_demo/itchy-brain/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/itchy-brain/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/itchy-brain/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/libraries",
+  "name": "libraries",
+  "posterUrl": "https://mist83.github.io/_demo/libraries/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/libraries/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/libraries/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

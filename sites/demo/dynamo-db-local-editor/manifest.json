@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/dynamo-db-local-editor",
+  "name": "dynamo-db-local-editor",
+  "posterUrl": "https://mist83.github.io/_demo/dynamo-db-local-editor/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/dynamo-db-local-editor/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/dynamo-db-local-editor/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

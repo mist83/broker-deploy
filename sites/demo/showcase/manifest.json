@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/showcase",
+  "name": "showcase",
+  "posterUrl": "https://mist83.github.io/_demo/showcase/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "https://mist83.github.io/_demo/showcase/demo.webm",
+  "videoPath": "./demo/demo.webm",
+  "manifestUrl": "https://mist83.github.io/_demo/showcase/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/showcase/",
+  "hasVideo": true,
+  "posterKind": "live-capture",
+  "posterNote": "Frame captured from the live demo recording."
+}

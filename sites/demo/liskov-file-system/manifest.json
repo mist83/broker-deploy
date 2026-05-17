@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/liskov-file-system",
+  "name": "liskov-file-system",
+  "posterUrl": "https://mist83.github.io/_demo/liskov-file-system/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/liskov-file-system/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/liskov-file-system/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

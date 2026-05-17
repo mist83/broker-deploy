@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/neon-animals",
+  "name": "neon-animals",
+  "posterUrl": "https://mist83.github.io/_demo/neon-animals/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/neon-animals/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/neon-animals/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

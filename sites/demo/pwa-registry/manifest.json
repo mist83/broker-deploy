@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/pwa-registry",
+  "name": "pwa-registry",
+  "posterUrl": "https://mist83.github.io/_demo/pwa-registry/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/pwa-registry/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/pwa-registry/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

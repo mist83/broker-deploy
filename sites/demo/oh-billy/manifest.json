@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/oh-billy",
+  "name": "oh-billy",
+  "posterUrl": "https://mist83.github.io/_demo/oh-billy/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/oh-billy/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/oh-billy/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

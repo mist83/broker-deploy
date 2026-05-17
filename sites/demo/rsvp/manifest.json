@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/rsvp",
+  "name": "rsvp",
+  "posterUrl": "https://mist83.github.io/_demo/rsvp/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/rsvp/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/rsvp/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

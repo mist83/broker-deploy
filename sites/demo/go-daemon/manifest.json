@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/go-daemon",
+  "name": "go-daemon",
+  "posterUrl": "https://mist83.github.io/_demo/go-daemon/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/go-daemon/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/go-daemon/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

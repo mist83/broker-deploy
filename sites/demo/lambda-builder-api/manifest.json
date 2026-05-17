@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/lambda-builder-api",
+  "name": "lambda-builder-api",
+  "posterUrl": "https://mist83.github.io/_demo/lambda-builder-api/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/lambda-builder-api/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/lambda-builder-api/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

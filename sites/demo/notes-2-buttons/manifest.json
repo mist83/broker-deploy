@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/notes-2-buttons",
+  "name": "notes-2-buttons",
+  "posterUrl": "https://mist83.github.io/_demo/notes-2-buttons/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/notes-2-buttons/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/notes-2-buttons/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

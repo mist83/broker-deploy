@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/aws-hosting-system",
+  "name": "aws-hosting-system",
+  "posterUrl": "https://mist83.github.io/_demo/aws-hosting-system/poster.svg",
+  "posterPath": "./demo/poster.svg",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/aws-hosting-system/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/aws-hosting-system/",
+  "hasVideo": false,
+  "posterKind": "generated-placeholder",
+  "posterNote": "Placeholder image."
+}

@@ -1,0 +1,22 @@
+{
+  "status": "ok",
+  "siteId": "sites",
+  "generatedAt": "2026-05-17T03:33:58.531Z",
+  "checks": [
+    {
+      "id": "build",
+      "status": "pass",
+      "detail": "Launchpad build completed and dist/ was generated."
+    },
+    {
+      "id": "catalog-summary",
+      "status": "pass",
+      "detail": "1077 visible hosted sites in the generated catalog."
+    },
+    {
+      "id": "demo-proof",
+      "status": "pass",
+      "detail": "140 poster-backed demos and 7 video-backed demos indexed."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/phone-cursor",
+  "name": "phone-cursor",
+  "posterUrl": "https://mist83.github.io/_demo/phone-cursor/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/phone-cursor/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/phone-cursor/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}

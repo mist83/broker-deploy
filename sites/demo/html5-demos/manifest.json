@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/html5_demos",
+  "name": "html5_demos",
+  "posterUrl": "https://mist83.github.io/_demo/html5_demos/poster.png",
+  "posterPath": "./demo/poster.png",
+  "videoUrl": "",
+  "videoPath": "",
+  "manifestUrl": "https://mist83.github.io/_demo/html5_demos/manifest.json",
+  "manifestPath": "./demo/manifest.json",
+  "artifactBaseUrl": "https://mist83.github.io/_demo/html5_demos/",
+  "hasVideo": false,
+  "posterKind": "showcase-reel",
+  "posterNote": "Published screenshot for this repo."
+}
