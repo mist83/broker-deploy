@@ -196,14 +196,18 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "asset-catalog",
+      "github-pages",
+      "mullmania-mirror",
+      "static-gallery"
     ],
     "notes": [
       "Root-publishable static gallery of ad assets and browsing smoke path.",
       "Validated canonical repo-local deploy contract."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:28:54.160Z",
+    "lastPublishedAt": "2026-05-17T16:07:18.178Z",
     "publishContext": {
       "github": {
         "actions": false,
@@ -228,8 +232,8 @@
     "testNotes": "Checked live.",
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/ads/poster.svg",
-      "durationSec": 30,
+      "posterUrl": "https://mist83.github.io/_demo/ads/poster.svg",
+      "durationSec": null,
       "mode": "screenshot-first",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -237,8 +241,8 @@
     "showcaseRank": 240,
     "manualRankUpdatedAt": "2026-04-16T01:31:58Z",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:13:26Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -1135,20 +1139,20 @@
       "Root publish shell now has a resilient source badge fallback and a useful zero-query state."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:52:10.584Z",
+    "lastPublishedAt": "2026-05-17T16:07:17.918Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/apple-trie",
         "ref": null,
-        "sha": "f7c6a7fb07a7aa9c7909c3b9b565b440d5da5976",
+        "sha": "3078d18b2fbf91df266d1e7a5752a8897658cd8f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/apple-trie",
         "branch": "master",
-        "commit": "f7c6a7fb07a7aa9c7909c3b9b565b440d5da5976",
+        "commit": "3078d18b2fbf91df266d1e7a5752a8897658cd8f",
         "remote": "https://github.com/mist83/apple-trie.git"
       }
     },
@@ -3869,7 +3873,12 @@
       "github",
       "curated",
       "games",
-      "fun-experiment"
+      "fun-experiment",
+      "caroms",
+      "github-pages",
+      "mullmania-mirror",
+      "prototype",
+      "static-frontend"
     ],
     "notes": [
       "Repo-root static front door for the golf simulator prototype.",
@@ -3878,7 +3887,7 @@
       "Root publish surface is a real landing page for the shipped golf simulator prototype."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:35:54.074Z",
+    "lastPublishedAt": "2026-05-17T16:07:18.165Z",
     "publishContext": {
       "github": {
         "actions": false,
@@ -3903,16 +3912,16 @@
     "testNotes": "Checked live.",
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/caroms/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/caroms/poster.svg",
+      "durationSec": null,
       "mode": "screenshot-first",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:14:03Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -12262,14 +12271,26 @@
     "tags": [],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:00:04.730Z",
+    "lastPublishedAt": "2026-05-17T15:23:09.360Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/deck-duel",
+        "ref": null,
+        "sha": "54ea4ece7f034de639261cf71d1c9b85bea8eebd",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/deck-duel",
+        "branch": "main",
+        "commit": "54ea4ece7f034de639261cf71d1c9b85bea8eebd",
+        "remote": "https://github.com/mist83/deck-duel.git"
+      }
     },
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T15:20:17Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
@@ -12487,26 +12508,28 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Static documentation surface for the demo-for-me recorder. Publish the repository root directly."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:42:08.147Z",
+    "lastPublishedAt": "2026-05-17T15:15:16.406Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/demo-for-me",
         "ref": null,
-        "sha": "3849f10c893470e7de7bc1fa9538ea1c735223f6",
+        "sha": "aa6c994f937c42fdc5859019d021d8de4d5c85e1",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/demo-for-me",
         "branch": "master",
-        "commit": "3849f10c893470e7de7bc1fa9538ea1c735223f6",
+        "commit": "aa6c994f937c42fdc5859019d021d8de4d5c85e1",
         "remote": "https://github.com/mist83/demo-for-me.git"
       }
     },
@@ -12515,7 +12538,7 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/demo-for-me/poster.svg",
+      "posterUrl": "https://mist83.github.io/_demo/demo-for-me/poster.svg",
       "durationSec": null,
       "mode": "video-first",
       "posterKind": "generated-placeholder",
@@ -12524,8 +12547,8 @@
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T15:20:54Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -13097,26 +13120,29 @@
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "games"
+      "games",
+      "game",
+      "minigame",
+      "dia"
     ],
     "notes": [
       "Just the way it is."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-01T17:21:19.492Z",
+    "lastPublishedAt": "2026-05-17T15:15:14.784Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dia",
         "ref": null,
-        "sha": "6af0fc3db55d7030788f5646f847a6d9cbfb8cda",
+        "sha": "d08d57321b3dfec6ee3f96e1dcb452cc69891e9d",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dia",
         "branch": "main",
-        "commit": "6af0fc3db55d7030788f5646f847a6d9cbfb8cda",
+        "commit": "d08d57321b3dfec6ee3f96e1dcb452cc69891e9d",
         "remote": "https://github.com/mist83/dia.git"
       }
     },
@@ -15033,8 +15059,7 @@
       "mullmania-mirror"
     ],
     "notes": [
-      "Repo docs page.",
-      "Deterministic public front door for GitHub Pages plus canonical demo asset links."
+      "Repo docs page."
     ],
     "managedBy": "publish-site",
     "lastPublishedAt": "2026-05-17T14:29:21.075Z",
@@ -15069,7 +15094,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "No repo-specific proof asset was found yet, so this falls back to a deterministic placeholder."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240
   },
@@ -22612,7 +22637,7 @@
       "durationSec": null,
       "mode": "video-first",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "manualRank": 20,
@@ -25587,6 +25612,86 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "nichols-and-dimes",
+    "host": "nichols-and-dimes.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "pwa",
+      "mobile",
+      "lane-runner",
+      "coins",
+      "adam-nichols"
+    ],
+    "notes": [
+      "Lane-runner + bank mobile PWA. Three-lane swipe controls, combo+gate mechanics, bank screen with SUCCESS/PENDING/FAILED status cards."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T16:39:38.667Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "description": "Catch the change. Bank the run. One-thumb mobile coin-runner PWA where Adam Nichols is the coin machine.",
+    "catalogTagsVersion": 2,
+    "isPublic": false,
+    "siteAccessUpdatedAt": null,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "testNotes": ""
+  },
+  {
+    "siteId": "nikitakramar",
+    "host": "nikitakramar.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "interpretation",
+      "source-backed",
+      "field-note",
+      "nikita-kramar"
+    ],
+    "notes": [
+      "Static site for nikitakramar.mullmania.com. Claims and sources are structured in docs/data."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T16:41:25.418Z",
+    "publishContext": {
+      "github": {
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25996660867",
+        "runNumber": "82"
+      },
+      "git": null
+    },
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://nikitakramar.mullmania.com/demo/poster.svg",
+      "durationSec": null,
+      "mode": "poster",
+      "posterKind": null,
+      "posterNote": null
+    },
+    "showcaseRank": 240,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:40:18Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "node-graph-editor",
     "host": "node-graph-editor.mullmania.com",
     "currentHostedSite": false,
@@ -26554,20 +26659,20 @@
       "Site identity was corrected from the stale infinite-scroll host claim."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T14:42:03.838Z",
+    "lastPublishedAt": "2026-05-17T15:15:16.385Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/openai-archive",
         "ref": null,
-        "sha": "e11baedaf33d6972bd053bdc15010d42363417ab",
+        "sha": "63bf105ac659c642400794e4d7db4128dd95c99f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/openai-archive",
         "branch": "main",
-        "commit": "e11baedaf33d6972bd053bdc15010d42363417ab",
+        "commit": "63bf105ac659c642400794e4d7db4128dd95c99f",
         "remote": "https://github.com/mist83/openai-archive.git"
       }
     },
@@ -26579,8 +26684,8 @@
     "description": "Live site for openai-archive-ghclone.",
     "manualRankUpdatedAt": "2026-04-16T01:31:46Z",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T15:19:40Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -31105,15 +31210,15 @@
       "Validated canonical repo-local deploy contract."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:04:26.444Z",
+    "lastPublishedAt": "2026-05-17T16:06:48.953Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "ee453753e646e568ca02fd9d188600316ada145b",
-        "runId": "25978661473",
-        "runNumber": "19"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25995861537",
+        "runNumber": "79"
       },
       "git": null
     },
@@ -33727,8 +33832,8 @@
     "description": "Browser prototype repo for sick grandma, with front-end scripts and styles checked directly into the root.",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:14:40Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -34616,22 +34721,17 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T15:02:00.539Z",
+    "lastPublishedAt": "2026-05-17T15:12:32.968Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/sites",
-        "ref": null,
-        "sha": "5ab9f4cc4f3b8569333ec89b77a2d0566c7a1dc7",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25994543432",
+        "runNumber": "77"
       },
-      "git": {
-        "root": "/Users/mist83/Code/sites",
-        "branch": "main",
-        "commit": "5ab9f4cc4f3b8569333ec89b77a2d0566c7a1dc7",
-        "remote": "https://github.com/mist83/sites.git"
-      },
+      "git": null,
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -38731,17 +38831,22 @@
       "Standalone Tic Tac Toe game with a hosted browser surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T03:20:05.823Z",
+    "lastPublishedAt": "2026-05-17T16:17:31.571Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "6a7da7f34e8055f237f9f131c4cedab068b4d803",
-        "runId": "25980085960",
-        "runNumber": "33"
+        "actions": false,
+        "repository": "mist83/tic-hack-toe",
+        "ref": null,
+        "sha": "27d6939bd0e356280280249cdc748838ebbc689f",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null
+      "git": {
+        "root": "/Users/mist83/Code/tic-hack-toe",
+        "branch": "master",
+        "commit": "27d6939bd0e356280280249cdc748838ebbc689f",
+        "remote": "https://github.com/mist83/tic-hack-toe.git"
+      }
     },
     "description": "A modern web-based implementation of the classic Tic-tac-toe game with automated deployment capabilities.",
     "mainSite": false,
@@ -39106,20 +39211,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T14:35:07.145Z",
+    "lastPublishedAt": "2026-05-17T16:30:33.906Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "b431be0952ce9a56d86aab8abd5c8200f4ea5694",
+        "sha": "f1fd9effa7e0683c5dc9d50feafc2d2e7a0bbee0",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "b431be0952ce9a56d86aab8abd5c8200f4ea5694",
+        "commit": "f1fd9effa7e0683c5dc9d50feafc2d2e7a0bbee0",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -39129,7 +39234,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -41618,26 +41723,30 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "browser-prototype",
+      "github-pages",
+      "mullmania-mirror",
+      "prompt-assets"
     ],
     "notes": [
       "Static browser prototype for query mapping and prompt/config workflows. Root publishable."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T22:05:53.099Z",
+    "lastPublishedAt": "2026-05-17T16:07:17.599Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/work",
         "ref": null,
-        "sha": "e0caa2b5c9656276e395587668f596e6f4a61783",
+        "sha": "95c5bece145abff169fb855814f10496fd80389f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/work",
         "branch": "master",
-        "commit": "e0caa2b5c9656276e395587668f596e6f4a61783",
+        "commit": "95c5bece145abff169fb855814f10496fd80389f",
         "remote": "https://github.com/mist83/work.git"
       }
     },
@@ -41645,8 +41754,8 @@
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/work/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/work/poster.svg",
+      "durationSec": null,
       "mode": "screenshot-first",
       "posterKind": "generated-placeholder",
       "posterNote": "Placeholder image."
@@ -41655,8 +41764,8 @@
     "description": "Ruleset and prompt asset repo for work, centered on Cline or Codex workflow guidance.",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T16:15:17Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -41798,7 +41907,12 @@
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
-    "isPublic": false
+    "isPublic": false,
+    "siteAccessUpdatedAt": null,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "wrapped-table-demo",
@@ -41915,23 +42029,24 @@
       "wwb-reminder"
     ],
     "notes": [
-      "The repo root is the demo surface. GitHub Pages publishes a generated site/ artifact copied from the demo files, while Mullmania mirrors the root minus repo-only docs and deployment scripts."
+      "The repo root is the demo surface. GitHub Pages publishes a generated site/ artifact copied from the demo files, while Mullmania mirrors the root minus repo-only docs and deployment scripts.",
+      "The repo root is the demo surface. GitHub Pages and Mullmania publish the repo root while excluding repo-only docs and deployment scripts where configured."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:53:29.398Z",
+    "lastPublishedAt": "2026-05-17T15:15:16.364Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/wwb-reminder",
         "ref": null,
-        "sha": "ec25180ca32987ead7f4d27e4b013195148a8894",
+        "sha": "ddcf45c62557e6fa7a62e4a5532005ebf41c2348",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/wwb-reminder",
         "branch": "master",
-        "commit": "ec25180ca32987ead7f4d27e4b013195148a8894",
+        "commit": "ddcf45c62557e6fa7a62e4a5532005ebf41c2348",
         "remote": "https://github.com/mist83/wwb-reminder.git"
       }
     },

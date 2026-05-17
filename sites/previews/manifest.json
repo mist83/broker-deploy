@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-17T15:10:26Z",
+  "updatedAt": "2026-05-17T15:36:01Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -2120,6 +2120,24 @@
       "etag": "77983b0d8894ad2a488f848c57e9001c",
       "sourceUrl": "https://basic-web-page.mullmania.com/"
     },
+    "baton": {
+      "siteId": "baton",
+      "status": "ok",
+      "path": "/api/previews/baton.png",
+      "url": "/api/previews/baton.png?v=1779032095370",
+      "objectKey": "sites/previews/baton.png",
+      "capturedAt": "2026-05-17T15:34:55Z",
+      "version": "1779032095370",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 252219,
+      "etag": "d94916e7984b73960be07062d0ec401c",
+      "sourceUrl": "https://baton.mullmania.com/"
+    },
     "battleship": {
       "siteId": "battleship",
       "status": "ok",
@@ -2703,6 +2721,54 @@
       "size": 3419,
       "etag": "ee8e3cb0b0d6700232d643d6903374ec",
       "sourceUrl": "https://broken-text-fragment-st-2-o.mullmania.com/"
+    },
+    "broker-video-proof-20260517t0121": {
+      "siteId": "broker-video-proof-20260517t0121",
+      "status": "ok",
+      "path": "/api/previews/broker-video-proof-20260517t0121.png",
+      "url": "/api/previews/broker-video-proof-20260517t0121.png?v=1779032095987",
+      "objectKey": "sites/previews/broker-video-proof-20260517t0121.png",
+      "capturedAt": "2026-05-17T15:34:55Z",
+      "version": "1779032095987",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "broker-video-proof-20260517t0121",
+          "status": "ok",
+          "id": "1779032095987",
+          "path": "/api/previews/broker-video-proof-20260517t0121/1779032095987.png",
+          "url": "/api/previews/broker-video-proof-20260517t0121/1779032095987.png?v=1779032095987",
+          "objectKey": "sites/previews/broker-video-proof-20260517t0121/1779032095987.png",
+          "capturedAt": "2026-05-17T15:34:55Z",
+          "version": "1779032095987",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 431088,
+          "etag": "3098321b5ffc07e0bd07e4757a54441f",
+          "sourceUrl": "https://broker-video-proof-20260517t0121.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 431088,
+      "etag": "3098321b5ffc07e0bd07e4757a54441f",
+      "sourceUrl": "https://broker-video-proof-20260517t0121.mullmania.com/"
     },
     "browser-scratchpad": {
       "siteId": "browser-scratchpad",
@@ -8838,6 +8904,24 @@
       "etag": "748085543c454654dbef9fca95130243",
       "sourceUrl": "https://demo-for-me.mullmania.com/"
     },
+    "demo-gods": {
+      "siteId": "demo-gods",
+      "status": "ok",
+      "path": "/api/previews/demo-gods.png",
+      "url": "/api/previews/demo-gods.png?v=1779032116534",
+      "objectKey": "sites/previews/demo-gods.png",
+      "capturedAt": "2026-05-17T15:35:16Z",
+      "version": "1779032116534",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 798575,
+      "etag": "6bb7c9fbde354ced9e044fa88c54e519",
+      "sourceUrl": "https://demo-gods.mullmania.com/"
+    },
     "demos": {
       "siteId": "demos",
       "status": "ok",
@@ -11355,6 +11439,24 @@
       "etag": "07c78c017e1add13526ea1e36b647b3c",
       "sourceUrl": "https://front-engine-spring-train.mullmania.com/"
     },
+    "full": {
+      "siteId": "full",
+      "status": "ok",
+      "path": "/api/previews/full.png",
+      "url": "/api/previews/full.png?v=1779032095659",
+      "objectKey": "sites/previews/full.png",
+      "capturedAt": "2026-05-17T15:34:55Z",
+      "version": "1779032095659",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 38721,
+      "etag": "296bc5b4ee1a4cca4a2f53d2d917b87c",
+      "sourceUrl": "https://full.mullmania.com/"
+    },
     "full-note-library": {
       "siteId": "full-note-library",
       "status": "ok",
@@ -12362,6 +12464,24 @@
       "size": 317695,
       "etag": "4533e621174c311ec6399a7e767c01bd",
       "sourceUrl": "https://gumball.mullmania.com/"
+    },
+    "hackathon": {
+      "siteId": "hackathon",
+      "status": "ok",
+      "path": "/api/previews/hackathon.png",
+      "url": "/api/previews/hackathon.png?v=1779032095481",
+      "objectKey": "sites/previews/hackathon.png",
+      "capturedAt": "2026-05-17T15:34:55Z",
+      "version": "1779032095481",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 128202,
+      "etag": "6bd0af404d0010c4f1c6f818388b3e11",
+      "sourceUrl": "https://hackathon.mullmania.com/"
     },
     "hackberry-1918": {
       "siteId": "hackberry-1918",
@@ -13588,6 +13708,24 @@
       "size": 207454,
       "etag": "5ba00a385d7b80516bc51f39b613f6b4",
       "sourceUrl": "https://keepalive.mullmania.com/"
+    },
+    "kerplop": {
+      "siteId": "kerplop",
+      "status": "ok",
+      "path": "/api/previews/kerplop.png",
+      "url": "/api/previews/kerplop.png?v=1779032095523",
+      "objectKey": "sites/previews/kerplop.png",
+      "capturedAt": "2026-05-17T15:34:55Z",
+      "version": "1779032095523",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 9676,
+      "etag": "cdfacbbe4ae58fd6ae9d559c884b57fc",
+      "sourceUrl": "https://kerplop.mullmania.com/"
     },
     "kuramoto": {
       "siteId": "kuramoto",
@@ -16294,6 +16432,54 @@
       "etag": "6bf1fc0d638cedc526fe2d45b96a9877",
       "sourceUrl": "https://phone-input.mullmania.com/"
     },
+    "phone-remote": {
+      "siteId": "phone-remote",
+      "status": "ok",
+      "path": "/api/previews/phone-remote.png",
+      "url": "/api/previews/phone-remote.png?v=1779032110534",
+      "objectKey": "sites/previews/phone-remote.png",
+      "capturedAt": "2026-05-17T15:35:10Z",
+      "version": "1779032110534",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "phone-remote",
+          "status": "ok",
+          "id": "1779032110534",
+          "path": "/api/previews/phone-remote/1779032110534.png",
+          "url": "/api/previews/phone-remote/1779032110534.png?v=1779032110534",
+          "objectKey": "sites/previews/phone-remote/1779032110534.png",
+          "capturedAt": "2026-05-17T15:35:10Z",
+          "version": "1779032110534",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 49145,
+          "etag": "0f8bc9c0ffa0a85b0098a85644a9f939",
+          "sourceUrl": "https://phone-remote.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 49145,
+      "etag": "0f8bc9c0ffa0a85b0098a85644a9f939",
+      "sourceUrl": "https://phone-remote.mullmania.com/"
+    },
     "physarum": {
       "siteId": "physarum",
       "status": "ok",
@@ -18241,6 +18427,24 @@
       "etag": "f2581c55835a70de2800aeda92e41136",
       "sourceUrl": "https://services.mullmania.com/"
     },
+    "settings": {
+      "siteId": "settings",
+      "status": "ok",
+      "path": "/api/previews/settings.png",
+      "url": "/api/previews/settings.png?v=1779032112093",
+      "objectKey": "sites/previews/settings.png",
+      "capturedAt": "2026-05-17T15:35:12Z",
+      "version": "1779032112093",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 47768,
+      "etag": "bdd3ba31625ddf334b5e396982537263",
+      "sourceUrl": "https://settings.mullmania.com/"
+    },
     "settings-status-page": {
       "siteId": "settings-status-page",
       "status": "ok",
@@ -19280,6 +19484,24 @@
       "etag": "b46e3398dc2f70dfbd1c7fbf80064af3",
       "sourceUrl": "https://sparse-rainbow-bar-visualizer.mullmania.com/"
     },
+    "specromancer": {
+      "siteId": "specromancer",
+      "status": "ok",
+      "path": "/api/previews/specromancer.png",
+      "url": "/api/previews/specromancer.png?v=1779032115812",
+      "objectKey": "sites/previews/specromancer.png",
+      "capturedAt": "2026-05-17T15:35:15Z",
+      "version": "1779032115812",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 36562,
+      "etag": "e9aaeea3d114ce134b3cf050321d3b4f",
+      "sourceUrl": "https://specromancer.mullmania.com/"
+    },
     "spinner-refresh-grid": {
       "siteId": "spinner-refresh-grid",
       "status": "ok",
@@ -19644,6 +19866,24 @@
       "size": 103169,
       "etag": "9296e1e7f157378f25a8600710967b17",
       "sourceUrl": "https://surviving-web-experiments.mullmania.com/"
+    },
+    "svg": {
+      "siteId": "svg",
+      "status": "ok",
+      "path": "/api/previews/svg.png",
+      "url": "/api/previews/svg.png?v=1779032115739",
+      "objectKey": "sites/previews/svg.png",
+      "capturedAt": "2026-05-17T15:35:15Z",
+      "version": "1779032115739",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 94303,
+      "etag": "3f89d4efe9a5dbfdf70dd127d4b56534",
+      "sourceUrl": "https://svg.mullmania.com/"
     },
     "swagger": {
       "siteId": "swagger",
@@ -20515,6 +20755,54 @@
       "size": 111987,
       "etag": "bfa529b0787552f275d8a4575f2c290e",
       "sourceUrl": "https://toasts-everywhere.mullmania.com/"
+    },
+    "todo": {
+      "siteId": "todo",
+      "status": "ok",
+      "path": "/api/previews/todo.png",
+      "url": "/api/previews/todo.png?v=1779032119818",
+      "objectKey": "sites/previews/todo.png",
+      "capturedAt": "2026-05-17T15:35:19Z",
+      "version": "1779032119818",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "todo",
+          "status": "ok",
+          "id": "1779032119818",
+          "path": "/api/previews/todo/1779032119818.png",
+          "url": "/api/previews/todo/1779032119818.png?v=1779032119818",
+          "objectKey": "sites/previews/todo/1779032119818.png",
+          "capturedAt": "2026-05-17T15:35:19Z",
+          "version": "1779032119818",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 208681,
+          "etag": "b6be723844ffd5f55ba6dd2c42cf5b27",
+          "sourceUrl": "https://todo.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 208681,
+      "etag": "b6be723844ffd5f55ba6dd2c42cf5b27",
+      "sourceUrl": "https://todo.mullmania.com/"
     },
     "toggle-mode-list": {
       "siteId": "toggle-mode-list",
