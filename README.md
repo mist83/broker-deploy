@@ -2,6 +2,8 @@
 
 Public GitHub Actions broker for allowlisted Mullmania deploys.
 
+See [docs/usage.md](docs/usage.md) for registration and redeploy examples.
+
 The repository is intentionally small. The public workflow accepts a site id,
 asks the protected Sites API for the matching allowlisted target, downloads the
 matching private repository archive, and runs the canonical Mullmania deploy
