@@ -3,8 +3,40 @@
   "subject": "Nikita Kramar",
   "protocolName": "Nikita Context Protocol",
   "protocolShortName": "NCP",
-  "purpose": "Mine Nikita Kramar's public site for useful conversation overlap, likely resonant project ideas, and an obviously fake WWNKD decision toy.",
+  "purpose": "Compile source-backed NCP signals, likely resonant project ideas, and an obviously fake WWNKD decision toy from Nikita Kramar's public site.",
   "liveWire": "Nikita seems most interested in leverage that preserves taste: agents, open web context, proof loops, and human judgment instead of generic automation hype.",
+  "machineLayer": [
+    {
+      "name": "llms.txt",
+      "path": "./llms.txt",
+      "icon": ">_",
+      "description": "Short agent-readable summary of the joke and boundaries."
+    },
+    {
+      "name": "ncp.json",
+      "path": "./ncp.json",
+      "icon": "{}",
+      "description": "NCP manifest: what the bit is and what files exist."
+    },
+    {
+      "name": "context-pack.json",
+      "path": "./data/context-pack.json",
+      "icon": "[]",
+      "description": "Compact summary for retrieval or handoff."
+    },
+    {
+      "name": "claims.json",
+      "path": "./data/claims.json",
+      "icon": "#",
+      "description": "Signals, ideas, receipts, and WWNKD moves."
+    },
+    {
+      "name": "sources.json",
+      "path": "./data/sources.json",
+      "icon": "@",
+      "description": "The public source ledger."
+    }
+  ],
   "signals": [
     {
       "id": "open-web",
@@ -41,6 +73,7 @@
     {
       "id": "ncp",
       "kind": "Best bit",
+      "status": "Prototype",
       "title": "NCP: Nikita Context Protocol",
       "short": "The joke is the product: a tiny agent-readable layer for a personal site.",
       "body": "Not a grand standard and not a personality clone. Just a page plus a few files that tell agents: here is what is public, here is what is inferred, here are the unknowns, here are the source links, and here is what you should ask instead of pretending to know.",
@@ -50,6 +83,7 @@
     {
       "id": "context-autopsy",
       "kind": "Strongest serious idea",
+      "status": "Inference",
       "title": "Context Autopsy / Rule Doctor",
       "short": "When an agent run fails, classify the failure and write the next rule.",
       "body": "This extends the Hidden Third Variable essay into a concrete artifact. Was the failure bad task shape, missing docs, weak rules, wrong tools, bad retrieval, no eval, or a human-approval boundary? The output is a patch to the environment, not another prompt incantation.",
@@ -59,6 +93,7 @@
     {
       "id": "anti-automation-boundary",
       "kind": "Question worth asking",
+      "status": "Inference",
       "title": "What should agents not touch?",
       "short": "The counterweight to leverage is choosing what stays embodied, slow, or human-approved.",
       "body": "This is not 'use agents to run every hobby.' It is the better question: if agents make execution cheap, where does he want friction, ritual, approval, or direct experience to remain?",
@@ -70,21 +105,26 @@
     "examples": [
       {
         "label": "Show him this",
+        "short": "Artifact without pitch energy.",
         "text": "I want to show Nikita an artifact that feels like it came from reading his site, not from pitching him."
       },
       {
         "label": "Agent failed",
+        "short": "Turn failure into a rule.",
         "text": "An agent run failed and I need to decide whether the fix is prompt, context, rules, tools, retrieval, or eval."
       },
       {
         "label": "Avoid pitching",
+        "short": "Bring the question instead.",
         "text": "I have an idea that might resonate, but I do not want to sell him or turn it into a fake framework."
       },
       {
         "label": "Website layer",
+        "short": "Make public context useful.",
         "text": "I am building a personal website layer that agents can read without pretending to be the person."
       }
     ],
+    "boundary": "WWNKD means the ordinary joke version of 'I wonder what he would do here.' It returns candidate moves from public-source patterns, not answers in Nikita's voice.",
     "moves": [
       {
         "id": "working-artifact",
@@ -142,42 +182,48 @@
       "status": "Observed",
       "claim": "Open web and synthetic-reader posture",
       "sourceId": "home",
-      "whyItMatters": "This is the source of the NCP joke: a personal site can be written for humans and future scrapers at the same time."
+      "whyItMatters": "This is the source of the NCP joke: a personal site can be written for humans and future scrapers at the same time.",
+      "ask": "What should a personal site expose to agents, and what should it refuse?"
     },
     {
       "id": "agent-context",
       "status": "Observed",
       "claim": "Agent work depends on context architecture",
       "sourceId": "home",
-      "whyItMatters": "The useful overlap is not generic AI enthusiasm; it is rules, docs, access, orchestration, and reducing needless intervention."
+      "whyItMatters": "The useful overlap is not generic AI enthusiasm; it is rules, docs, access, orchestration, and reducing needless intervention.",
+      "ask": "When an agent fails, which part of the environment do you inspect first?"
     },
     {
       "id": "hidden-third-variable",
       "status": "Observed",
       "claim": "Agent-tool mastery is a separate skill",
       "sourceId": "hidden-third-variable",
-      "whyItMatters": "This grounds the Context Autopsy idea in something he actually wrote, rather than in a consultant maturity model."
+      "whyItMatters": "This grounds the Context Autopsy idea in something he actually wrote, rather than in a consultant maturity model.",
+      "ask": "What should the report after a failed agent run actually say?"
     },
     {
       "id": "one-person-leverage",
       "status": "Observed",
       "claim": "He is testing one-person leverage with current agent stacks",
       "sourceId": "now",
-      "whyItMatters": "This makes small, working leverage demos more resonant than broad speculation."
+      "whyItMatters": "This makes small, working leverage demos more resonant than broad speculation.",
+      "ask": "Is one-person leverage a goal, a benchmark, or a stress test?"
     },
     {
       "id": "embodied-life",
       "status": "Inference",
       "claim": "Automation is paired with embodied anchors",
       "sourceId": "now",
-      "whyItMatters": "This is the tension to ask about carefully: what gets automated, and what stays lived?"
+      "whyItMatters": "This is the tension to ask about carefully: what gets automated, and what stays lived?",
+      "ask": "What parts of life should stay slow or directly experienced?"
     },
     {
       "id": "weird-artifact-feed",
       "status": "Observed",
       "claim": "His logs collect odd, concrete AI/web/security artifacts",
       "sourceId": "log-feed",
-      "whyItMatters": "The right conversational offering is probably a weird useful object, not an abstract thesis."
+      "whyItMatters": "The right conversational offering is probably a weird useful object, not an abstract thesis.",
+      "ask": "Which weird artifact is actually worth turning into a working tool?"
     }
   ]
 }

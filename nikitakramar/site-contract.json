@@ -1,0 +1,45 @@
+{
+  "name": "NCP site contract",
+  "version": "1.0.0",
+  "lockedWithoutExplicitApproval": true,
+  "visualSystem": "original cyan/amber terminal protocol map",
+  "requiredCssTokens": {
+    "--bg": "#050707",
+    "--cyan": "#7df4ff",
+    "--amber": "#d8b46b",
+    "--line-cyan": "rgba(125, 244, 255, 0.38)"
+  },
+  "requiredSelectors": [
+    ".site-header",
+    ".brand",
+    ".protocol-visual",
+    ".cockpit-shell",
+    ".signal-line",
+    ".machine-grid"
+  ],
+  "requiredHero": {
+    "title": "Nikita Context Protocol",
+    "line": "NCP is the joke. The sources are the point."
+  },
+  "requiredPublicSections": [
+    "wwnkd",
+    "machine",
+    "signals",
+    "ideas",
+    "receipts",
+    "sources"
+  ],
+  "forbiddenPublicPhrases": [
+    "What I mined from Nikita's site",
+    "context instrument, not a profile",
+    "guardrails against impersonation",
+    "The protocol refuses the creepy version",
+    "NCP is a working demo of agent-readable context with human boundaries"
+  ],
+  "notes": [
+    "Keep NCP as the public-facing joke.",
+    "Keep sources explicit.",
+    "Change content and behavior before changing the theme.",
+    "If a future agent wants a redesign, update this contract in the same commit and call that out."
+  ]
+}

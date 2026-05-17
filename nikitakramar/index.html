@@ -4,127 +4,225 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="repo-name" content="nikitakramar">
-    <title>NCP: Nikita Context Protocol</title>
-    <meta name="description" content="A compact, sourced read of Nikita Kramar's public site: useful signals, likely resonant ideas, and a joke WWNKD simulator.">
+    <title>Nikita Context Protocol</title>
+    <meta name="description" content="NCP is a source-backed joke interface for finding ideas and WWNKD moves from Nikita Kramar's public site.">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="topbar">
-      <a class="logo" href="#top" aria-label="NCP home">NCP</a>
-      <nav aria-label="Page sections">
-        <a href="#mined">Mined</a>
-        <a href="#ideas">Ideas</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#top" aria-label="Nikita Context Protocol home">
+        <span class="brand-mark" aria-hidden="true">></span>
+        <span>NCP</span>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
         <a href="#wwnkd">WWNKD</a>
+        <a href="#signals">Signals</a>
+        <a href="#ideas">Ideas</a>
+        <a href="#receipts">Receipts</a>
         <a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="main">
-      <section class="hero" id="top">
+      <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="kicker">Nikita Context Protocol</p>
-          <h1>What I mined from Nikita's site.</h1>
-          <p class="lede">
-            A compact read on what he seems to care about, a few ideas that would probably land,
-            and a fake WWNKD machine for choosing the next move.
+          <p class="terminal-label">nikitakramar.mullmania.com / public sources</p>
+          <h1 id="hero-title">Nikita Context Protocol</h1>
+          <p class="hero-line">NCP is the joke. The sources are the point.</p>
+          <p class="hero-summary">
+            Feed it notes from Nikita's public site. It returns the useful overlap:
+            a few source-backed signals, three ideas worth bringing up, and a WWNKD
+            answer for the situation in front of you.
           </p>
-          <p class="joke-note">
-            Obviously not Nikita. It is a joke decision aid built from public pages.
-          </p>
-          <div class="hero-actions">
+          <div class="hero-rule" role="note">
+            <span>WWNKD means "I wonder what he would do here."</span>
+            <span>It is a joke decision aid, not a Nikita bot.</span>
+          </div>
+          <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="#wwnkd">Run WWNKD</a>
-            <a class="button" href="#ideas">Steal an idea</a>
+            <a class="button secondary" href="#ideas">See the ideas</a>
           </div>
-        </div>
-
-        <aside class="console" aria-label="NCP summary">
-          <div class="console-bar">
-            <span></span><span></span><span></span>
-          </div>
-          <pre id="hero-console">loading field notes...</pre>
-        </aside>
-      </section>
-
-      <section class="section mined" id="mined">
-        <div class="section-head">
-          <p class="kicker">The read</p>
-          <h2>The live wire is not "AI guy." It is leverage with taste.</h2>
-        </div>
-        <div class="signals" id="signals"></div>
-      </section>
-
-      <section class="section ideas" id="ideas">
-        <div class="section-head">
-          <p class="kicker">Bring one, maybe two</p>
-          <h2>Undone ideas he could plausibly recognize.</h2>
-          <p>
-            Not a pitch deck. More like: "I saw your primitives, made a small artifact,
-            and now I want you to tell me where I got it wrong."
-          </p>
-        </div>
-        <div class="idea-list" id="idea-list"></div>
-      </section>
-
-      <section class="section simulator" id="wwnkd">
-        <div class="section-head">
-          <p class="kicker">Very fake machine</p>
-          <h2>WWNKD?</h2>
-          <p>
-            What would Nikita Kramar do? Meaning: what would his public-site primitives
-            suggest trying next?
-          </p>
-        </div>
-
-        <div class="sim-grid">
-          <div class="sim-input">
-            <label for="scenario">Situation</label>
-            <textarea id="scenario" rows="5">I want to show Nikita an artifact that feels like it came from reading his site, not from pitching him.</textarea>
-            <div class="chips" id="scenario-buttons" aria-label="Example situations"></div>
-          </div>
-
-          <article class="sim-output" aria-live="polite">
-            <div class="output-top">
-              <p class="kicker">WWNKD output</p>
-              <button class="button small" type="button" id="reroll">Re-roll</button>
+          <dl class="status-strip" aria-label="NCP status">
+            <div>
+              <dt>Bit</dt>
+              <dd>NCP</dd>
             </div>
-            <h3 id="wwnkd-title">Make it a small working thing.</h3>
-            <p id="wwnkd-body"></p>
-            <ol id="wwnkd-steps"></ol>
-            <p class="confidence" id="wwnkd-confidence"></p>
-          </article>
+            <div>
+              <dt>Inputs</dt>
+              <dd id="source-count">loading</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>moves + receipts</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="protocol-visual" aria-label="NCP map">
+          <div class="visual-topline">
+            <span>NCP v0.5</span>
+            <span>joke interface</span>
+          </div>
+          <svg viewBox="0 0 760 520" role="img" aria-labelledby="map-title">
+            <title id="map-title">NCP map showing public sources flowing through signals, ideas, receipts, and WWNKD moves.</title>
+            <defs>
+              <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7df4ff" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#7df4ff" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="signal" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7df4ff" stop-opacity="0.08" />
+                <stop offset="50%" stop-color="#7df4ff" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#d8b46b" stop-opacity="0.65" />
+              </linearGradient>
+            </defs>
+            <path class="signal-line" d="M90 116 H260 C318 116 318 190 376 190 H650" />
+            <path class="signal-line delay-one" d="M90 260 H210 C304 260 304 334 396 334 H650" />
+            <path class="signal-line delay-two" d="M156 418 C260 392 285 286 386 286 C480 286 522 176 650 158" />
+            <circle class="pulse" cx="382" cy="260" r="132" />
+            <g class="node-group">
+              <circle class="node source" cx="90" cy="116" r="13" />
+              <text x="122" y="121">public site</text>
+            </g>
+            <g class="node-group">
+              <circle class="node source" cx="90" cy="260" r="13" />
+              <text x="122" y="265">logs + essays</text>
+            </g>
+            <g class="node-group">
+              <circle class="node source" cx="156" cy="418" r="13" />
+              <text x="188" y="423">side projects</text>
+            </g>
+            <g class="node-group">
+              <circle class="node core" cx="382" cy="260" r="54" />
+              <text class="core-text" x="382" y="255" text-anchor="middle">NCP</text>
+              <text class="core-text small" x="382" y="278" text-anchor="middle">joke + receipts</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="158" r="13" />
+              <text x="604" y="135">signals</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="190" r="13" />
+              <text x="590" y="225">ideas</text>
+            </g>
+            <g class="node-group right">
+              <circle class="node" cx="650" cy="334" r="13" />
+              <text x="600" y="372">WWNKD</text>
+            </g>
+          </svg>
+          <div class="visual-footer">
+            <span>sources in</span>
+            <span>moves out</span>
+          </div>
         </div>
       </section>
 
-      <section class="section receipts">
-        <div class="section-head">
-          <p class="kicker">Receipts</p>
-          <h2>Claims with their source handles.</h2>
+      <section class="section cockpit" id="wwnkd" aria-labelledby="wwnkd-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">WWNKD simulator</p>
+            <h2 id="wwnkd-title">What would Nikita Kramar do?</h2>
+          </div>
+          <p>
+            Pick a situation or type one in. The output is a candidate move from
+            the public-source pattern: make an artifact, add context, attach
+            receipts, then ask the better question.
+          </p>
         </div>
-        <div class="receipt-list" id="receipts"></div>
+
+        <div class="cockpit-shell">
+          <div class="intent-rail" id="scenario-rail" aria-label="WWNKD situations"></div>
+          <article class="intent-panel" id="wwnkd-panel" aria-live="polite"></article>
+          <aside class="prep-panel" aria-labelledby="packet-title">
+            <div class="panel-header">
+              <h3 id="packet-title">Packet</h3>
+              <button class="text-button" type="button" id="copy-prep">Copy</button>
+            </div>
+            <label class="scenario-label" for="scenario-input">Situation</label>
+            <textarea id="scenario-input" class="scenario-input" rows="7"></textarea>
+            <pre id="prep-output"></pre>
+          </aside>
+        </div>
       </section>
 
-      <section class="section sources" id="sources">
-        <div class="section-head">
-          <p class="kicker">Source ledger</p>
-          <h2>Public pages used.</h2>
+      <section class="section machine" id="machine" aria-labelledby="machine-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">machine snacks</p>
+            <h2 id="machine-title">NCP has files agents can read.</h2>
+          </div>
+          <p>
+            The public page stays short. The structured context lives in small
+            files with sources, claims, and the WWNKD moves.
+          </p>
         </div>
-        <div class="source-list" id="source-list"></div>
-        <p class="machine-links">
-          Machine snacks:
-          <a href="./llms.txt">llms.txt</a>,
-          <a href="./ncp.json">ncp.json</a>,
-          <a href="./data/context-pack.json">context-pack.json</a>,
-          <a href="./data/claims.json">claims.json</a>
-        </p>
+        <div class="machine-grid" id="machine-list"></div>
+      </section>
+
+      <section class="section signals" id="signals" aria-labelledby="signals-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">source signals</p>
+            <h2 id="signals-title">The useful overlap.</h2>
+          </div>
+          <p>
+            These are the public patterns that make NCP feel like a plausible
+            joke for him: open web, context architecture, tool mastery, leverage,
+            and practical experiments.
+          </p>
+        </div>
+        <div class="signal-list" id="signal-list"></div>
+      </section>
+
+      <section class="section live-wires" id="ideas" aria-labelledby="ideas-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">things to bring</p>
+            <h2 id="ideas-title">Three ideas, not a deck.</h2>
+          </div>
+          <p>
+            Bring one if the conversation turns that way. The goal is for him to
+            recognize the primitive and improve, reject, or rename it.
+          </p>
+        </div>
+        <div class="wire-list" id="idea-list"></div>
+      </section>
+
+      <section class="section ledger" id="receipts" aria-labelledby="receipts-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">receipts</p>
+            <h2 id="receipts-title">Claims stay source-backed.</h2>
+          </div>
+          <p>
+            The page is allowed to be playful because the claims are still tied
+            to public pages and marked as observed or inferred.
+          </p>
+        </div>
+        <div class="evidence-list" id="receipt-list" aria-live="polite"></div>
+      </section>
+
+      <section class="section sources" id="sources" aria-labelledby="sources-title">
+        <div class="section-heading">
+          <div>
+            <p class="terminal-label">source ledger</p>
+            <h2 id="sources-title">Public pages used.</h2>
+          </div>
+          <p>Home, now page, essay, logs, and public side-project pages.</p>
+        </div>
+        <div class="sources-list" id="sources-list"></div>
       </section>
     </main>
 
-    <footer>
-      <span>NCP is the joke. The sources are the point.</span>
-      <a href="https://github.com/mist83/nikitakramar">repo</a>
+    <footer class="site-footer">
+      <p>NCP is the joke. The sources are the point. WWNKD is a decision toy, not a person simulator.</p>
+      <div class="footer-links">
+        <a href="./llms.txt">llms.txt</a>
+        <a href="./ncp.json">ncp.json</a>
+        <a href="https://github.com/mist83/nikitakramar">repo</a>
+      </div>
     </footer>
 
     <script src="./app.js" type="module"></script>

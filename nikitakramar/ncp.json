@@ -1,14 +1,15 @@
 {
   "name": "Nikita Context Protocol",
   "shortName": "NCP",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "generatedAt": "2026-05-17",
   "canonicalUrl": "https://nikitakramar.mullmania.com/",
-  "joke": "NCP is the bit. The useful part is the sourced field note.",
-  "purpose": "Mine Nikita Kramar's public site for signals, likely resonant project ideas, and an obviously fake WWNKD picker.",
+  "joke": "NCP is the bit. The sources are the point.",
+  "purpose": "Expose a source-backed WWNKD interface and a few likely resonant ideas from Nikita Kramar's public site.",
   "publicFiles": [
     "/llms.txt",
     "/ncp.json",
+    "/site-contract.json",
     "/data/context-pack.json",
     "/data/claims.json",
     "/data/sources.json"

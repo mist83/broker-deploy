@@ -1,27 +1,28 @@
 {
   "generatedAt": "2026-05-17",
-  "name": "NCP field notes",
+  "name": "Nikita Context Protocol",
   "canonicalUrl": "https://nikitakramar.mullmania.com/",
-  "summary": "A compact public-site read of Nikita Kramar: mined signals, likely resonant ideas, and a joke WWNKD decision aid.",
+  "summary": "NCP is a source-backed joke interface for useful overlap with Nikita Kramar's public site: signals, likely resonant ideas, receipts, and WWNKD moves.",
   "bestRead": "Nikita seems most interested in leverage with taste: open web context, agent orchestration, proof loops, and human judgment.",
   "useFor": [
-    "prepare a better conversation",
-    "choose one artifact to show him",
-    "find a question he can actually argue with",
-    "run the joke WWNKD picker without impersonating him"
+    "choose a conversation opener",
+    "show one small artifact instead of a pitch",
+    "connect claims to source pages",
+    "run the joke WWNKD picker"
   ],
   "doNotUseFor": [
     "impersonating Nikita",
     "claiming private knowledge",
-    "turning a friend into a dossier",
-    "shipping a fake framework because the acronym is funny"
+    "turning the joke into a dossier",
+    "changing the visual theme without explicit approval"
   ],
   "likelyResonantIdeas": [
     "NCP: a tiny agent-readable personal-site layer",
     "Context Autopsy / Rule Doctor for failed agent runs",
-    "The anti-automation boundary: what should agents not touch?"
+    "The anti-automation boundary: what agents should not touch"
   ],
   "defaultOpener": "I made a dumb thing called NCP because your site already reads like it wants to be useful to synthetic readers. What should a personal site expose to agents, and what should it absolutely refuse?",
   "sourceLedger": "/data/sources.json",
-  "claims": "/data/claims.json"
+  "claims": "/data/claims.json",
+  "siteContract": "/site-contract.json"
 }

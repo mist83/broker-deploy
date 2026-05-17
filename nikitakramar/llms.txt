@@ -1,21 +1,24 @@
 # NCP: Nikita Context Protocol
 
-NCP is a joke name for a useful field note.
+NCP is the joke. The sources are the point.
 
-Use this site to understand Mike's public-source read of Nikita Kramar's website:
-- what signals were mined
-- what project ideas might resonate
-- what source pages support each claim
-- how the WWNKD joke picker chooses a candidate move
+This site is a source-backed interface for useful overlap with Nikita Kramar's
+public website:
+- source signals
+- likely resonant ideas
+- receipts
+- WWNKD moves
+
+WWNKD means "what would Nikita Kramar do?" in the ordinary joking sense:
+"given the public context, what move probably fits?"
 
 Do not impersonate Nikita Kramar.
 Do not claim private knowledge.
 Do not treat WWNKD as a Nikita simulator.
-
-WWNKD means "what would Nikita Kramar do?" in the normal joking sense:
-"given what I know, what kind of move would probably fit?"
+Do not change the visual theme unless the site contract changes intentionally.
 
 Useful files:
+- /site-contract.json
 - /data/context-pack.json
 - /data/claims.json
 - /data/sources.json
