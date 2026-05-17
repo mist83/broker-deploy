@@ -27,3 +27,7 @@ normal check-in.
 After the AWS publish succeeds, the workflow mirrors the public artifact from
 S3 into this repository's `gh-pages` branch under the site id. The mirror uses
 the already-published files, not the private source checkout.
+
+The `gh-pages` root is a read-only transparency page. It lists public mirror
+URLs, publish times, and broker run links without publishing private source
+repository names, target store contents, secrets, or raw webhook payloads.

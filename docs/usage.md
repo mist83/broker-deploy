@@ -151,6 +151,25 @@ gh workflow run deploy-mullmania-site.yml \
   -f source=operator
 ```
 
+## Public Transparency Page
+
+The broker GitHub Pages root is read-only:
+
+```text
+https://mist83.github.io/broker-deploy/
+```
+
+It is regenerated after successful broker deploys and shows the public mirror
+inventory, latest publish timestamps, and public broker run links. It does not
+include private source repository names, the protected target list, secrets, or
+raw webhook payloads.
+
+The same public data is available as JSON:
+
+```text
+https://mist83.github.io/broker-deploy/_deployments/index.json
+```
+
 ## Auto Redeploy On Push
 
 For auto redeploy, the source repository needs a GitHub push webhook pointing to:
