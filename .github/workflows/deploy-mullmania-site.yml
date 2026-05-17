@@ -137,6 +137,13 @@ jobs:
         if: steps.target.outputs.deploy_type == 'sites-control-plane'
         working-directory: target-site
         shell: bash
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || vars.OPENAI_MODEL }}
+          OPENAI_RESPONSES_MODEL: ${{ secrets.OPENAI_RESPONSES_MODEL || vars.OPENAI_RESPONSES_MODEL }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || vars.OPENAI_API_BASE }}
+          OPENAI_ORGANIZATION: ${{ secrets.OPENAI_ORGANIZATION || vars.OPENAI_ORGANIZATION }}
+          OPENAI_PROJECT: ${{ secrets.OPENAI_PROJECT || vars.OPENAI_PROJECT }}
         run: |
           set -euo pipefail
           npm ci
