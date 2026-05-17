@@ -67,7 +67,7 @@ async function main() {
   console.log(JSON.stringify(result, null, 2));
   console.log('');
   console.log('Manual redeploy:');
-  console.log(`curl -fsS -X POST ${apiBase}/api/redeploy/${encodeURIComponent(siteId)} \\`);
+  console.log(`curl -fsS -X POST ${apiBase}/api/redeploy/target/${encodeURIComponent(siteId)} \\`);
   console.log(`  -H "x-operator-key: $SITES_OPERATOR_KEY" \\`);
   console.log(`  -H "content-type: application/json" \\`);
   console.log(`  -d '{"reason":"manual redeploy","source":"operator"}'`);
