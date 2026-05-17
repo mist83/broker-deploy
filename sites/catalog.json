@@ -347,15 +347,15 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:19:08.409Z",
+    "lastPublishedAt": "2026-05-17T06:49:41.768Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
-        "runId": "25983326442",
-        "runNumber": "46"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25983893948",
+        "runNumber": "57"
       },
       "git": null
     },
@@ -17768,15 +17768,15 @@
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:28:30.731Z",
+    "lastPublishedAt": "2026-05-17T06:49:15.833Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979137625",
-        "runNumber": "20"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25983882957",
+        "runNumber": "56"
       },
       "git": null
     },
@@ -17789,7 +17789,7 @@
       "durationSec": null,
       "mode": "screenshots-minimum",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 320,
     "manualRank": 20,
@@ -34418,15 +34418,15 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:41:24.103Z",
+    "lastPublishedAt": "2026-05-17T06:49:57.375Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
-        "runId": "25983716643",
-        "runNumber": "50"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25983876877",
+        "runNumber": "54"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -37313,15 +37313,15 @@
       "Lambda backend deployer is preserved as deploy-lambda.sh; the canonical deploy wrapper occupies the root deploy.sh slot."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:02:53.373Z",
+    "lastPublishedAt": "2026-05-17T06:48:59.064Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "ee453753e646e568ca02fd9d188600316ada145b",
-        "runId": "25978629075",
-        "runNumber": "18"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25983881839",
+        "runNumber": "55"
       },
       "git": null
     },
