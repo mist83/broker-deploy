@@ -9294,6 +9294,65 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   gap: 4px;
 }
 
+.composer-intent {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--launchpad-accent) 5%, var(--bg-primary));
+}
+
+.composer-intent .composer-builder__section-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.composer-intent h4 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.composer-intent__field {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.composer-intent__field textarea {
+  width: 100%;
+  min-height: 104px;
+  resize: vertical;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font: inherit;
+  line-height: 1.4;
+}
+
+.composer-intent__field textarea:focus {
+  border-color: color-mix(in srgb, var(--launchpad-accent) 70%, var(--border-color));
+  outline: 2px solid color-mix(in srgb, var(--launchpad-accent) 18%, transparent);
+  outline-offset: 1px;
+}
+
+.composer-intent__summary {
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--bg-secondary) 74%, var(--bg-primary));
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
 .composer-modal .choice-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -11637,6 +11696,16 @@ body.has-fullscreen-preview-open .mobile-view-nav {
 
   .composer-blank__copy {
     display: none;
+  }
+
+  .composer-intent .composer-builder__section-head {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .composer-intent .composer-builder__section-head button {
+    justify-content: center;
+    width: 100%;
   }
 
   .composer-builder,

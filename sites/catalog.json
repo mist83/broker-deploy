@@ -347,15 +347,15 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:36:54.431Z",
+    "lastPublishedAt": "2026-05-17T06:19:08.409Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979295286",
-        "runNumber": "28"
+        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
+        "runId": "25983326442",
+        "runNumber": "46"
       },
       "git": null
     },
@@ -3194,15 +3194,15 @@
       "['Static bug beacon demo published from the repository root.', 'GitHub Pages serves the root directly.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:37:10.880Z",
+    "lastPublishedAt": "2026-05-17T05:46:28.135Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979300195",
-        "runNumber": "29"
+        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
+        "runId": "25982718300",
+        "runNumber": "43"
       },
       "git": null
     },
@@ -12010,20 +12010,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T05:15:04.071Z",
+    "lastPublishedAt": "2026-05-17T06:13:55.351Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "93cb9a2cf2f7985a63124d9ac281c5d32edb5aa5",
+        "sha": "bcaedc316adac2aeb5cee3cc8d81b7060d453041",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dag.mullmania.com",
         "branch": "main",
-        "commit": "93cb9a2cf2f7985a63124d9ac281c5d32edb5aa5",
+        "commit": "bcaedc316adac2aeb5cee3cc8d81b7060d453041",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -12045,7 +12045,7 @@
       "durationSec": null,
       "mode": "poster",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -13576,14 +13576,31 @@
       "three-js",
       "edm",
       "marketing",
-      "games"
+      "games",
+      "game",
+      "deck",
+      "carousel",
+      "drop",
+      "decision-flow"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T02:47:03.224Z",
+    "lastPublishedAt": "2026-05-17T05:20:05.244Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/drop",
+        "ref": null,
+        "sha": "b5a3c31d2a357071071e9e262cbb1eefbad4b558",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/drop",
+        "branch": "main",
+        "commit": "b5a3c31d2a357071071e9e262cbb1eefbad4b558",
+        "remote": "https://github.com/mist83/drop.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -26184,51 +26201,64 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror",
+      "pwa",
+      "rhythm-trivia",
+      "phone-controller",
+      "game",
+      "static",
+      "timeline"
     ],
     "notes": [
       "Static timeline app; GitHub Pages can publish docs/ while Mullmania mirrors the root app.",
       "Validated canonical repo-local deploy contract.",
-      "Timeline PWA for the 'We Didn't Start the Fire' lyrics, served from the repo root static tree."
+      "Timeline PWA for the 'We Didn't Start the Fire' lyrics, served from the repo root static tree.",
+      "Static rhythm-trivia game scaffold; GitHub Pages can publish docs/ while Mullmania mirrors the root app. GitHub Actions were failing on 2026-04-19 because account billing blocked job startup, not because the app build failed.",
+      "Converted to Fire Drill rhythm trivia game with phone-controller multiplayer scaffold."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T17:54:36.167Z",
+    "lastPublishedAt": "2026-05-17T06:12:58.666Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/oh-billy",
         "ref": null,
-        "sha": "41d4b1881408e561c884d54b4754f77c80d2dab4",
+        "sha": "308d8e3937d3648de30794b8b036a3287740c7f5",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/private/tmp/codex-mullmania/oh-billy",
+        "root": "/Users/mist83/Code/oh-billy",
         "branch": "master",
-        "commit": "41d4b1881408e561c884d54b4754f77c80d2dab4",
+        "commit": "308d8e3937d3648de30794b8b036a3287740c7f5",
         "remote": "https://github.com/mist83/oh-billy.git"
       }
     },
-    "description": "A web-based timeline visualization application for displaying chronological events.",
+    "description": "A static-hosted rhythm trivia game for rapid Billy Joel cultural-reference recognition.",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "demo": {
       "sources": [],
-      "posterUrl": "./demo/oh-billy/poster.svg",
-      "durationSec": 120,
+      "posterUrl": "https://mist83.github.io/_demo/oh-billy/poster.svg",
+      "durationSec": null,
       "mode": "screenshots-plus-short-video",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "manualRank": 20,
     "testStatus": "smoke",
     "testNotes": "Repo already carried the canonical deploy contract from a prior pass; this sweep re-applied the live deploy and registered the manualRank override.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T06:04:48Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "one-more-turnip",
@@ -34388,15 +34418,15 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T03:37:38.439Z",
+    "lastPublishedAt": "2026-05-17T06:22:28.997Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "2989955619e9d060cb0e63b2d1952bac625250da",
-        "runId": "25980391465",
-        "runNumber": "39"
+        "sha": "085030cb50e382f9bae27b8b55db0555efe4157b",
+        "runId": "25983365240",
+        "runNumber": "47"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -35514,6 +35544,49 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "specromancer",
+    "host": "specromancer.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
+    ],
+    "notes": [
+      "Specromancer redirects to the live generator because the working backend host is a Lambda URL, not a static mirror. The source repo is still mist83/mcp-me until the GitHub repo is explicitly renamed."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-17T06:20:42.322Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/mcp-me",
+        "ref": null,
+        "sha": "8749c63aadee2291e86ad80abce8ad36e6a82c9f",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/mcp-me",
+        "branch": "master",
+        "commit": "8749c63aadee2291e86ad80abce8ad36e6a82c9f",
+        "remote": "https://github.com/mist83/mcp-me.git"
+      }
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T06:05:36Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "spinner-refresh-grid",
@@ -38827,20 +38900,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T03:27:34.098Z",
+    "lastPublishedAt": "2026-05-17T05:33:18.333Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "7bbf83d5a55b0a61183169f4dd3eaeebdf5529e4",
+        "sha": "f8166fbda8b9573e9fef4357c85df71a94af5594",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "7bbf83d5a55b0a61183169f4dd3eaeebdf5529e4",
+        "commit": "f8166fbda8b9573e9fef4357c85df71a94af5594",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -38850,7 +38923,7 @@
       "durationSec": null,
       "mode": null,
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,

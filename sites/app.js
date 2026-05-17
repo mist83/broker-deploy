@@ -174,6 +174,7 @@ const TAG_DRAG_MIME = 'application/x-mullmania-catalog-tag-id';
 const PROTECTED_ACTION_COMPOSER_BLANK = 'composer-blank';
 const PROTECTED_ACTION_COMPOSER_EDITOR = 'composer-editor';
 const PROTECTED_ACTION_COMPOSER_ASSIST = 'composer-assist';
+const PROTECTED_ACTION_COMPOSER_INTENT = 'composer-intent';
 const PROTECTED_ACTION_COMPOSER_DELETE = 'composer-delete';
 const COMPOSER_DRAFT_PRESET_STARTER = 'starter';
 const COMPOSER_DRAFT_PRESET_CUSTOM = 'custom';
@@ -645,9 +646,11 @@ const state = {
     editorPane: 'html',
     busy: false,
     aiBusy: false,
+    intentBusy: false,
     valetBusy: false,
     deleteArmedSiteId: '',
     intent: COMPOSER_INTENT_AUTHORING,
+    intentRecord: null,
     loadRequestId: 0,
     loadedSiteId: '',
     loadingSource: false,
@@ -1053,6 +1056,9 @@ const composerStarterSummaryEl = document.getElementById('composer-starter-summa
 const composerBuilderLockEl = document.getElementById('composer-builder-lock');
 const composerBuilderLockCopyEl = document.getElementById('composer-builder-lock-copy');
 const composerBuilderResetButton = document.getElementById('composer-builder-reset');
+const composerIntentPromptEl = document.getElementById('composer-intent-prompt');
+const composerIntentPlanButton = document.getElementById('composer-intent-plan');
+const composerIntentSummaryEl = document.getElementById('composer-intent-summary');
 const composerThemeFieldEl = document.getElementById('composer-theme-field');
 const composerThemeSelectEl = document.getElementById('composer-theme-select');
 const composerFlatStarterButtons = Array.from(document.querySelectorAll('[data-composer-flat-starter]'));
@@ -2377,6 +2383,13 @@ function bindEvents() {
   composerCopySearchEl?.addEventListener('input', () => {
     state.composer.copyQuery = composerCopySearchEl.value;
     renderComposerCopyResults();
+  });
+  composerIntentPromptEl?.addEventListener('input', () => {
+    clearComposerIntentRecord();
+    syncComposerInteractiveState();
+  });
+  composerIntentPlanButton?.addEventListener('click', async () => {
+    await planComposerIntentDraft();
   });
 
   composerSiteIdEl.addEventListener('input', () => {
@@ -16358,6 +16371,9 @@ async function resumeProtectedAction(action) {
     case PROTECTED_ACTION_COMPOSER_ASSIST:
       await assistComposerDraft();
       return;
+    case PROTECTED_ACTION_COMPOSER_INTENT:
+      await planComposerIntentDraft();
+      return;
     case PROTECTED_ACTION_COMPOSER_DELETE:
       await submitComposerDelete();
       return;
@@ -16516,6 +16532,7 @@ function protectedActionIsBusy(action) {
     case PROTECTED_ACTION_COMPOSER_BLANK:
     case PROTECTED_ACTION_COMPOSER_EDITOR:
     case PROTECTED_ACTION_COMPOSER_ASSIST:
+    case PROTECTED_ACTION_COMPOSER_INTENT:
     case PROTECTED_ACTION_COMPOSER_DELETE:
       return composerBuilderIsBusy();
     case PROTECTED_ACTION_RESTORE_SITE:
@@ -21946,7 +21963,7 @@ function getComposerCopySourceEntry(siteId = state.composer.copySourceSiteId) {
 }
 
 function composerBuilderIsBusy() {
-  return state.composer.busy || state.composer.aiBusy || state.composer.valetBusy || state.composer.loadingSource;
+  return state.composer.busy || state.composer.aiBusy || state.composer.intentBusy || state.composer.valetBusy || state.composer.loadingSource;
 }
 
 function hasComposerSource() {
@@ -21954,6 +21971,10 @@ function hasComposerSource() {
 }
 
 function canUseComposerAiAssist() {
+  return Boolean(state.apiBaseUrl && state.config?.editorAssistEnabled);
+}
+
+function canUseComposerIntentPlan() {
   return Boolean(state.apiBaseUrl && state.config?.editorAssistEnabled);
 }
 
@@ -22193,9 +22214,11 @@ function renderComposerCopyVariants(selectedCopyEntry) {
 function syncComposerInteractiveState() {
   const disabled = composerBuilderIsBusy();
   const aiEnabled = canUseComposerAiAssist();
+  const intentEnabled = canUseComposerIntentPlan();
   const validation = validateComposerSiteId();
   const valetEnabled = canUseComposerValetAssist(validation);
   const aiPrompt = String(composerAiPromptEl?.value || '').trim();
+  const intentPrompt = String(composerIntentPromptEl?.value || '').trim();
 
   if (composerSubmitButton) {
     composerSubmitButton.disabled = disabled;
@@ -22213,6 +22236,16 @@ function syncComposerInteractiveState() {
       input.disabled = disabled;
     }
   });
+
+  if (composerIntentPromptEl) {
+    composerIntentPromptEl.disabled = !intentEnabled || disabled;
+  }
+  if (composerIntentPlanButton) {
+    composerIntentPlanButton.disabled = !intentEnabled || disabled || !intentPrompt;
+    composerIntentPlanButton.title = intentEnabled
+      ? 'Turn this intent into an editable draft.'
+      : 'Intent planning is not configured on this API.';
+  }
 
   if (composerAiPromptEl) {
     composerAiPromptEl.disabled = (!aiEnabled && !valetEnabled) || disabled;
@@ -25251,6 +25284,7 @@ function openComposer(options = {}) {
   setComposerIntent(COMPOSER_INTENT_AUTHORING);
   clearComposerDeleteArm();
   if (typeof options.siteId === 'string') {
+    clearComposerIntentRecord({ clearInput: true });
     composerSiteIdEl.value = sanitizeSiteIdInput(options.siteId);
   } else if (options.reset === true) {
     resetComposerDraft();
@@ -25378,6 +25412,7 @@ function openComposerForDelete(siteId) {
 function resetComposerDraft() {
   cancelComposerSourceLoad();
   clearComposerDeleteArm();
+  clearComposerIntentRecord({ clearInput: true });
   state.composer.loadedSiteId = '';
   state.composer.recipeId = COMPOSER_DEFAULT_RECIPE_ID;
   state.composer.starterId = COMPOSER_DEFAULT_STARTER_ID;
@@ -25626,6 +25661,7 @@ function buildComposerEditorPayload(validation = validateComposerSiteId()) {
     js: composerJsEl.value || '',
     source: location.hostname,
     additionalTags: buildComposerCatalogTagAttribution(),
+    intentRecord: buildComposerIntentRecord(validation),
   };
 }
 
@@ -25636,6 +25672,7 @@ function buildComposerTemplatePayload(validation = validateComposerSiteId()) {
     overwrite: Boolean(validation?.exists),
     source: location.hostname,
     additionalTags: buildComposerCatalogTagAttribution(),
+    intentRecord: buildComposerIntentRecord(validation),
   };
 }
 
@@ -25698,6 +25735,226 @@ async function sendComposerRequest({
   return data;
 }
 
+function normalizeComposerIntentPlan(plan = {}) {
+  const source = plan && typeof plan === 'object' ? plan : {};
+  const flatStarterId = COMPOSER_FLAT_STARTER_IDS.has(String(source.flatStarterId || '').trim().toLowerCase())
+    ? String(source.flatStarterId || '').trim().toLowerCase()
+    : COMPOSER_DEFAULT_FLAT_STARTER_ID;
+  const addonIds = Array.isArray(source.addonIds)
+    ? source.addonIds
+      .map((id) => String(id || '').trim().toLowerCase())
+      .filter((id, index, ids) => COMPOSER_ADDON_IDS.has(id) && ids.indexOf(id) === index)
+    : [];
+  return {
+    summary: String(source.summary || '').trim() || 'Draft planned.',
+    siteIdSuggestion: sanitizeSiteIdInput(source.siteIdSuggestion || ''),
+    title: String(source.title || '').trim() || 'New Site',
+    description: String(source.description || '').trim(),
+    flatStarterId,
+    surfaceId: normalizeComposerSurfaceId(source.surfaceId),
+    addonIds,
+    dataSourceId: normalizeComposerDataSourceId(source.dataSourceId),
+    tvFormFactor: Boolean(source.tvFormFactor) || flatStarterId === 'tv-app',
+    acceptanceChecks: Array.isArray(source.acceptanceChecks)
+      ? source.acceptanceChecks.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 8)
+      : [],
+    openQuestions: Array.isArray(source.openQuestions)
+      ? source.openQuestions.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 6)
+      : [],
+  };
+}
+
+function renderComposerIntentSummary(plan = null, draftAssistSucceeded = false) {
+  if (!composerIntentSummaryEl) {
+    return;
+  }
+  if (!plan) {
+    composerIntentSummaryEl.textContent = '';
+    composerIntentSummaryEl.classList.add('is-hidden');
+    return;
+  }
+  const parts = [
+    `Planned: ${plan.summary}`,
+    `Starter: ${plan.flatStarterId}`,
+    draftAssistSucceeded ? 'Draft tailored by AI.' : 'Starter draft kept for review.',
+  ];
+  composerIntentSummaryEl.textContent = parts.join(' ');
+  composerIntentSummaryEl.classList.remove('is-hidden');
+}
+
+function clearComposerIntentRecord(options = {}) {
+  state.composer.intentRecord = null;
+  if (options.clearInput && composerIntentPromptEl) {
+    composerIntentPromptEl.value = '';
+  }
+  renderComposerIntentSummary(null);
+}
+
+function buildComposerIntentAssistPrompt(intent, plan) {
+  const checks = (plan.acceptanceChecks || []).map((item) => `- ${item}`).join('\n');
+  const questions = (plan.openQuestions || []).map((item) => `- ${item}`).join('\n');
+  return [
+    'Turn this starter into the planned Mullmania site draft.',
+    '',
+    `Original intent:\n${intent}`,
+    '',
+    `Title: ${plan.title}`,
+    `Summary: ${plan.summary}`,
+    plan.description ? `Description: ${plan.description}` : '',
+    `Starter: ${plan.flatStarterId}`,
+    `Surface: ${plan.surfaceId}`,
+    `Add-ons: ${(plan.addonIds || []).join(', ') || 'none'}`,
+    `Data source: ${plan.dataSourceId}`,
+    checks ? `Acceptance checks:\n${checks}` : '',
+    questions ? `Open questions to make visible in the draft:\n${questions}` : '',
+  ].filter(Boolean).join('\n');
+}
+
+async function requestComposerDraftAssist({ siteId = '', prompt = '', invalidKeyAction = null } = {}) {
+  return sendComposerRequest({
+    endpoint: '/api/editor/assist',
+    payload: {
+      siteId,
+      prompt,
+      html: composerHtmlEl.value || '',
+      css: composerCssEl.value || '',
+      js: composerJsEl.value || '',
+    },
+    invalidKeyAction,
+  });
+}
+
+function buildComposerIntentRecord(validation = validateComposerSiteId()) {
+  const record = state.composer.intentRecord;
+  if (!record || typeof record !== 'object') {
+    return null;
+  }
+  const appliedSiteId = validation?.valid
+    ? validation.siteId
+    : sanitizeSiteIdInput(composerSiteIdEl?.value || '');
+  return {
+    ...record,
+    appliedSiteId,
+  };
+}
+
+function applyComposerIntentPlan(plan) {
+  const currentSiteId = sanitizeSiteIdInput(composerSiteIdEl?.value || '');
+  if (!currentSiteId && plan.siteIdSuggestion) {
+    composerSiteIdEl.value = plan.siteIdSuggestion;
+  }
+
+  unlockComposerBuilder();
+  setComposerFlatStarter(plan.flatStarterId);
+  if (normalizeComposerRecipeId(state.composer.recipeId) === COMPOSER_DEFAULT_RECIPE_ID) {
+    state.composer.surfaceId = normalizeComposerSurfaceId(plan.surfaceId);
+    state.composer.addonIds = normalizeComposerAddonIds(plan.addonIds);
+    state.composer.dataSourceId = normalizeComposerDataSourceId(plan.dataSourceId);
+  }
+  state.composer.tvFormFactor = Boolean(plan.tvFormFactor);
+  if (plan.flatStarterId === 'tv-app') {
+    state.composer.tvConfig = normalizeComposerTvConfig({
+      ...state.composer.tvConfig,
+      appTitle: plan.title,
+      tvTailEnabled: true,
+    });
+  }
+
+  clearComposerDeleteArm();
+  seedComposerStarterDraft(sanitizeSiteIdInput(composerSiteIdEl?.value || ''));
+  setComposerMode('editor');
+  updateComposerPreview();
+}
+
+async function planComposerIntentDraft() {
+  if (composerBuilderIsBusy()) {
+    return;
+  }
+
+  const intent = String(composerIntentPromptEl?.value || '').trim();
+  if (!intent) {
+    updateComposerStatus('Write an intent first.', 'error');
+    return;
+  }
+
+  const validation = validateComposerSiteId();
+  const protectedAction = {
+    label: validation.valid ? `Plan draft for ${validation.siteId}` : 'Plan draft from intent',
+    type: PROTECTED_ACTION_COMPOSER_INTENT,
+    siteId: validation.valid ? validation.siteId : '',
+  };
+
+  if (!ensureComposerCredentials({ validation, protectedAction })) {
+    return;
+  }
+
+  state.composer.intentBusy = true;
+  clearComposerIntentRecord();
+  syncComposerChrome(validation);
+  updateComposerStatus('Planning an editable draft from the intent…', 'info');
+
+  try {
+    const plannedAt = new Date().toISOString();
+    const plan = normalizeComposerIntentPlan(await sendComposerRequest({
+      endpoint: '/api/editor/intent-plan',
+      payload: {
+        intent,
+        currentSiteId: validation.valid ? validation.siteId : '',
+      },
+      invalidKeyAction: protectedAction,
+    }));
+
+    applyComposerIntentPlan(plan);
+    const nextValidation = validateComposerSiteId();
+    let draftAssistSummary = '';
+    let draftAssistSucceeded = false;
+
+    try {
+      const assist = await requestComposerDraftAssist({
+        siteId: nextValidation.valid ? nextValidation.siteId : '',
+        prompt: buildComposerIntentAssistPrompt(intent, plan),
+        invalidKeyAction: protectedAction,
+      });
+      setComposerEditorSource(assist);
+      draftAssistSummary = String(assist.summary || '').trim();
+      draftAssistSucceeded = true;
+      lockComposerBuilder('intent-plan');
+    } catch (assistError) {
+      console.error(assistError);
+      draftAssistSummary = assistError?.message || 'Draft assist failed after planning.';
+    }
+
+    state.composer.intentRecord = {
+      version: 1,
+      source: 'sites-composer',
+      originalIntent: intent,
+      plannedAt,
+      appliedSiteId: nextValidation.valid ? nextValidation.siteId : '',
+      plan,
+      draftAssistSummary,
+      draftAssistSucceeded,
+    };
+
+    renderComposerIntentSummary(plan, draftAssistSucceeded);
+    syncComposerChrome(nextValidation);
+    updateComposerStatus(
+      draftAssistSucceeded
+        ? (draftAssistSummary || 'Intent planned and draft tailored. Review before creating.')
+        : 'Intent planned; review the starter draft before creating.',
+      draftAssistSucceeded ? 'success' : 'warning',
+    );
+    focusComposerEditorPane();
+  } catch (error) {
+    console.error(error);
+    if (!error?.composerHandled) {
+      updateComposerStatus(error.message || 'Intent planning failed.', 'error');
+    }
+  } finally {
+    state.composer.intentBusy = false;
+    syncComposerChrome();
+  }
+}
+
 async function assistComposerDraft() {
   if (state.composer.mode !== 'editor' || composerBuilderIsBusy()) {
     return;
@@ -25730,15 +25987,9 @@ async function assistComposerDraft() {
   updateComposerStatus('Rewriting the current draft with AI…', 'info');
 
   try {
-    const data = await sendComposerRequest({
-      endpoint: '/api/editor/assist',
-      payload: {
-        siteId: validation.valid ? validation.siteId : '',
-        prompt,
-        html: composerHtmlEl.value || '',
-        css: composerCssEl.value || '',
-        js: composerJsEl.value || '',
-      },
+    const data = await requestComposerDraftAssist({
+      siteId: validation.valid ? validation.siteId : '',
+      prompt,
       invalidKeyAction: protectedAction,
     });
 

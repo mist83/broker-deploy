@@ -1,7 +1,7 @@
 {
   "status": "ok",
   "siteId": "sites",
-  "generatedAt": "2026-05-17T03:43:16.374Z",
+  "generatedAt": "2026-05-17T06:25:15.664Z",
   "checks": [
     {
       "id": "build",
@@ -11,7 +11,7 @@
     {
       "id": "catalog-summary",
       "status": "pass",
-      "detail": "1077 visible hosted sites in the generated catalog."
+      "detail": "1078 visible hosted sites in the generated catalog."
     },
     {
       "id": "demo-proof",
