@@ -10,6 +10,13 @@ script with AWS OIDC.
 No AWS keys live here. No target repository list is checked into this repo or
 duplicated in broker secrets.
 
+The broker keeps only two repository secrets:
+
+- `MULLMANIA_BROKER_API_KEY`: lets the workflow ask the Sites API for one
+  allowlisted target at runtime.
+- `MULLMANIA_PRIVATE_REPO_TOKEN`: lets the workflow download the private source
+  repository archive for that target.
+
 The protected Sites API can also receive signed GitHub push webhooks from
 allowlisted source repositories. Those hooks dispatch this broker workflow, so
 private repos do not need their own GitHub Actions runners to redeploy after a
