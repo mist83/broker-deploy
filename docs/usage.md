@@ -3,11 +3,10 @@
 This is the deploy path for repo-backed Mullmania sites and for normal
 Sites-created pages.
 
-It does not replace the Sites control-plane deploy itself: publishing
-`sites.mullmania.com` and the protected Sites API is still owned by the
-`sites` repo. User-created blank/editor/template/copy sites now flow through a
-private managed source repo and this public broker workflow when
-`MANAGED_BROKER_DEPLOY_ENABLED=true`.
+It also dogfoods `sites.mullmania.com` through one locked control-plane recipe.
+That is intentionally special-cased: ordinary repos still publish static
+artifacts only, while `sites` publishes the protected Sites API before the
+static app.
 
 ## Current Shape
 
@@ -16,7 +15,8 @@ Sites create/edit/copy API / manual button / operator API / GitHub push webhook
   -> sites.mullmania.com
   -> central target store
   -> broker-deploy workflow
-  -> private source repo archive
+  -> allowlisted source repo archive
+  -> optional approved backend recipe
   -> AWS static artifact
   -> GitHub Pages mirror
 ```
@@ -43,6 +43,28 @@ The broker repo does not store the target list.
 - Remote edit behavior: a push webhook from that repo triggers the broker for
   the registered site
 
+## Target Types
+
+**`static-site`**
+
+This is the default. The broker downloads the allowlisted source repo, runs the
+site build/publish contract, publishes the static artifact to AWS, mirrors the
+same artifact to GitHub Pages, and updates the public transparency page.
+
+**`sites-control-plane`**
+
+This is locked to one target:
+
+- site id: `sites`
+- source repo: `mist83/sites`
+- source ref: `main`
+- config: `mullmania.site.json`
+
+For this target only, the broker first runs the Sites API/control-room backend
+deploy, then builds and publishes `sites.mullmania.com`, mirrors the public
+artifact, and updates transparency. Arbitrary backend commands are not accepted
+from repos.
+
 ## Register A Target
 
 Use the helper from this repo:
@@ -53,6 +75,17 @@ SITES_OPERATOR_KEY=... node scripts/register-target.mjs \
   --source mist83/tic-hack-toe \
   --ref master \
   --config mullmania.site.json
+```
+
+For the Sites control plane, include the locked deploy type:
+
+```bash
+SITES_OPERATOR_KEY=... node scripts/register-target.mjs \
+  --site sites \
+  --source mist83/sites \
+  --ref main \
+  --config mullmania.site.json \
+  --deploy-type sites-control-plane
 ```
 
 That registers:
@@ -129,7 +162,7 @@ API/edit-file path.
 This queues the broker through the Sites API:
 
 ```bash
-curl -fsS -X POST https://sites.mullmania.com/api/redeploy/tic-hack-toe \
+curl -fsS -X POST https://sites.mullmania.com/api/redeploy/target/tic-hack-toe \
   -H "x-operator-key: $SITES_OPERATOR_KEY" \
   -H "content-type: application/json" \
   -d '{"reason":"manual redeploy","source":"operator"}'
@@ -181,7 +214,8 @@ https://sites.mullmania.com/api/redeploy/github-webhook
 The webhook must use the shared GitHub webhook signing secret configured on the
 Sites API. `tic-hack-toe`, `mullmania-managed-sites`, `bug-beacon`,
 `tap-repeater`, `rhythm-engine`, `gitter`, `liskov-file-system`, `agent`, and
-`ui` are wired this way.
+`ui` are wired this way. `sites` is also wired after the control-plane dogfood
+proof.
 
 Push-triggered redeploys are intentionally literal: if an auto-committer pushes
 every few minutes, the broker redeploys every few minutes. That is correct for
@@ -219,8 +253,11 @@ Migrated source-repo proofs:
 - `agent`, run `25979196035`
 - `ui`, run `25979309174`
 
-Control-plane exception:
+Control-plane dogfood proof:
 
-- `sites.mullmania.com` is still deployed by the `sites` repo because that
-  workflow deploys the protected Sites API and then the static app. The current
-  broker is static-artifact-only.
+- `sites`, deploy type `sites-control-plane`, proof runs `25980319064` and
+  `25980391465`
+- AWS: `https://sites.mullmania.com/`
+- GitHub Pages mirror: `https://mist83.github.io/broker-deploy/sites/`
+- Public transparency entry:
+  `https://mist83.github.io/broker-deploy/_deployments/index.json`
