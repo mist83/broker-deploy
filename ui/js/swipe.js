@@ -59,6 +59,10 @@
     let dragging = false;
     let released = false;
     let animationTimer = null;
+    let touchStart = null;
+    let touchMove = null;
+    let touchEnd = null;
+    let touchCancel = null;
 
     function thresholdPx() {
       const width = element.getBoundingClientRect().width || 1;
@@ -212,13 +216,14 @@
         clientY: (touchEvent.changedTouches && touchEvent.changedTouches[0] ? touchEvent.changedTouches[0].clientY : 0),
         timeStamp: touchEvent.timeStamp,
       });
-      const touchStart = (e) => beginDrag(toPointer(e, 'down'));
-      const touchMove = (e) => moveDrag(toPointer(e, 'move'));
-      const touchEnd = (e) => endDrag(toPointer(e, 'up'), false);
+      touchStart = (e) => beginDrag(toPointer(e, 'down'));
+      touchMove = (e) => moveDrag(toPointer(e, 'move'));
+      touchEnd = (e) => endDrag(toPointer(e, 'up'), false);
+      touchCancel = (e) => endDrag(toPointer(e, 'cancel'), true);
       element.addEventListener('touchstart', touchStart, { passive: true });
       element.addEventListener('touchmove', touchMove, { passive: true });
       element.addEventListener('touchend', touchEnd);
-      element.addEventListener('touchcancel', touchEnd);
+      element.addEventListener('touchcancel', touchCancel);
     }
 
     element.addEventListener('keydown', onKeyDown);
@@ -230,6 +235,10 @@
         element.removeEventListener('pointermove', pointerMove);
         element.removeEventListener('pointerup', pointerUp);
         element.removeEventListener('pointercancel', pointerCancel);
+        if (touchStart) element.removeEventListener('touchstart', touchStart);
+        if (touchMove) element.removeEventListener('touchmove', touchMove);
+        if (touchEnd) element.removeEventListener('touchend', touchEnd);
+        if (touchCancel) element.removeEventListener('touchcancel', touchCancel);
         element.removeEventListener('keydown', onKeyDown);
         element.classList.remove('is-dragging');
         element.style.transform = '';
