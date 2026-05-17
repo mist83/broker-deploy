@@ -1,0 +1,29 @@
+# nikitakramar.mullmania.com
+
+This site is a source-backed interpretation of Nikita Kramar's public website for Mike.
+It is not an official biography and does not claim private knowledge.
+
+Primary purpose:
+- Help Mike become a better interlocutor by separating observed evidence, inference, unknowns, and questions to ask.
+
+Canonical page:
+- https://nikitakramar.mullmania.com/
+
+Structured data:
+- /data/claims.json
+- /data/sources.json
+
+Source policy:
+- Claims marked "Observed" are grounded in the source ledger.
+- Claims marked "Inference" are interpretations and should not be repeated as facts.
+- The page intentionally avoids turning short public notes into corrected pitches.
+
+Main thesis:
+- If work gets deprecated, what do we preserve on purpose?
+
+Primary live wires:
+- Proof-loop design
+- Agent-readable personal memory
+
+Last generated:
+- 2026-05-17

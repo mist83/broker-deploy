@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-05-17",
+  "sources": [
+    {
+      "id": "home",
+      "title": "Nikita Kramar - Home",
+      "url": "https://www.nikitakramar.com/",
+      "type": "page",
+      "usedFor": "AI context, orchestration, life strategy, curiosity, embodied interests"
+    },
+    {
+      "id": "now",
+      "title": "Now",
+      "url": "https://www.nikitakramar.com/now.html",
+      "type": "page",
+      "usedFor": "Current AI stack exploration, health, riding, Mandarin, travel, reading break"
+    },
+    {
+      "id": "hidden-third-variable",
+      "title": "The Hidden Third Variable of AI Development",
+      "url": "https://www.nikitakramar.com/thoughts/HiddenThirdVariable.html",
+      "type": "essay",
+      "usedFor": "Tool mastery, agentic fluency, debugging AI workflow"
+    },
+    {
+      "id": "log-feed",
+      "title": "Public Log Feed",
+      "url": "https://www.nikitakramar.com/api/logs",
+      "type": "json-feed",
+      "usedFor": "Prompt injection, orchestration tools, Trafilatura, Proof of Corn, Moltbook, quiet baby monitor"
+    },
+    {
+      "id": "other",
+      "title": "Other",
+      "url": "https://www.nikitakramar.com/other/index.html",
+      "type": "page",
+      "usedFor": "Inventory of experiments and side pages"
+    },
+    {
+      "id": "zoomies",
+      "title": "Zoomies",
+      "url": "https://www.nikitakramar.com/zoomies.html",
+      "type": "page",
+      "usedFor": "Motorcycle resources and live aircraft tracker"
+    },
+    {
+      "id": "chat",
+      "title": "Chat",
+      "url": "https://www.nikitakramar.com/chat/index.html",
+      "type": "page",
+      "usedFor": "Simple public AI chat surface"
+    }
+  ]
+}

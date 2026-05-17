@@ -1,0 +1,25 @@
+{
+  "siteId": "nikitakramar",
+  "latest": {
+    "siteId": "nikitakramar",
+    "status": "success",
+    "deployedAt": "2026-05-17T16:42:18.663Z",
+    "trigger": "operator",
+    "brokerRunId": "25996660867",
+    "brokerRunNumber": "82",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25996660867",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "nikitakramar",
+      "status": "success",
+      "deployedAt": "2026-05-17T16:42:18.663Z",
+      "trigger": "operator",
+      "brokerRunId": "25996660867",
+      "brokerRunNumber": "82",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25996660867",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}

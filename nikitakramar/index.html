@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="repo-name" content="nikitakramar">
+    <title>Nikita Kramar, Read As A Question</title>
+    <meta name="description" content="A source-backed interpretation of Nikita Kramar's public site for becoming a better interlocutor.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#top" aria-label="Nikita Kramar interpretation home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Nikita Kramar</span>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#evidence">Evidence</a>
+        <a href="#live-wires">Live wires</a>
+        <a href="#unknowns">Unknowns</a>
+        <a href="#opener">Opener</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-map" aria-hidden="true">
+          <svg viewBox="0 0 760 620" role="img">
+            <defs>
+              <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#6ff6ff" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#6ff6ff" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8af6ff" stop-opacity="0.1" />
+                <stop offset="50%" stop-color="#8af6ff" stop-opacity="0.75" />
+                <stop offset="100%" stop-color="#f2efe8" stop-opacity="0.18" />
+              </linearGradient>
+            </defs>
+            <path class="map-line line-one" d="M155 380 C255 160, 500 120, 608 254" />
+            <path class="map-line line-two" d="M154 380 C270 500, 495 505, 608 254" />
+            <path class="map-line line-three" d="M379 103 C336 240, 323 360, 392 510" />
+            <path class="map-line line-four" d="M122 254 C312 200, 482 280, 652 408" />
+            <circle class="node-glow" cx="379" cy="306" r="142" />
+            <circle class="node core" cx="379" cy="306" r="56" />
+            <circle class="node" cx="379" cy="103" r="12" />
+            <circle class="node" cx="608" cy="254" r="12" />
+            <circle class="node" cx="652" cy="408" r="12" />
+            <circle class="node" cx="392" cy="510" r="12" />
+            <circle class="node" cx="122" cy="254" r="12" />
+            <text x="379" y="311" text-anchor="middle" class="core-text">human</text>
+            <text x="379" y="74" text-anchor="middle">Automation</text>
+            <text x="628" y="245">Judgment</text>
+            <text x="646" y="414">Memory</text>
+            <text x="392" y="556" text-anchor="middle">Embodiment</text>
+            <text x="74" y="258" text-anchor="end">Proof</text>
+          </svg>
+        </div>
+        <div class="hero-copy">
+          <p class="context-line">A cited read of a friend's public site.</p>
+          <h1 id="hero-title">If work gets deprecated, what do we preserve on purpose?</h1>
+          <p class="hero-summary">
+            This site is built for one job: help Mike see the live wire in Nikita's writing without flattening him into a pitch.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#tension">Start with the tension</a>
+            <a class="button secondary" href="#sources">Open the source ledger</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tension" id="tension" aria-labelledby="tension-title">
+        <div class="section-kicker">The read</div>
+        <div class="two-column">
+          <div>
+            <h2 id="tension-title">Not AI engineer with hobbies. A person testing what survives automation.</h2>
+          </div>
+          <div class="body-copy">
+            <p>
+              The public site directly supports both sides: agents, context, orchestration, and automation on one side; riding, health, travel, Mandarin, cooking, stories, and hobbies on the other.
+            </p>
+            <p>
+              The bridge is an inference: Nikita may be circling how a human remains useful and alive when agents can carry more execution.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ledger" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Evidence spine</div>
+            <h2 id="evidence-title">Claims stay attached to sources.</h2>
+          </div>
+          <p>Each row separates what is public, what is inferred, and what should become a question.</p>
+        </div>
+        <div class="evidence-controls" aria-label="Evidence filters">
+          <button class="filter is-active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="Observed">Observed</button>
+          <button class="filter" type="button" data-filter="Inference">Inference</button>
+        </div>
+        <div class="evidence-list" id="evidence-list" aria-live="polite"></div>
+      </section>
+
+      <section class="section live-wires" id="live-wires" aria-labelledby="live-wires-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Two live wires</div>
+            <h2 id="live-wires-title">Pick one of these. Do not bring six.</h2>
+          </div>
+          <p>The point is not to arrive with a deck. It is to arrive with one question he recognizes.</p>
+        </div>
+        <div class="wire-list" id="wire-list"></div>
+      </section>
+
+      <section class="section cuts" aria-labelledby="cuts-title">
+        <div class="two-column">
+          <div>
+            <div class="section-kicker">What got cut</div>
+            <h2 id="cuts-title">No forced cleverness.</h2>
+          </div>
+          <div class="cut-list" id="cut-list"></div>
+        </div>
+      </section>
+
+      <section class="section unknowns" id="unknowns" aria-labelledby="unknowns-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Honest gaps</div>
+            <h2 id="unknowns-title">What the site cannot tell us.</h2>
+          </div>
+          <p>These are not weaknesses. They are where the real conversation starts.</p>
+        </div>
+        <div class="unknown-grid" id="unknown-list"></div>
+      </section>
+
+      <section class="section opener" id="opener" aria-labelledby="opener-title">
+        <div class="opener-panel">
+          <div class="section-kicker">Conversation opener</div>
+          <h2 id="opener-title">Say this, then stop talking.</h2>
+          <blockquote id="opening-line"></blockquote>
+        </div>
+      </section>
+
+      <section class="section sources" id="sources" aria-labelledby="sources-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Source ledger</div>
+            <h2 id="sources-title">Public pages used.</h2>
+          </div>
+          <p>No private knowledge, no scraped biography, no claim without a pointer.</p>
+        </div>
+        <div class="sources-list" id="sources-list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Built as an interpretive field note. Observed is not the same as inferred. Ask him before turning any read into certainty.</p>
+      <a href="./llms.txt">llms.txt</a>
+    </footer>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

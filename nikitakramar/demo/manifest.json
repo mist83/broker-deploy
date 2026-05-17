@@ -1,0 +1,14 @@
+{
+  "repo": "mist83/nikitakramar",
+  "name": "nikitakramar",
+  "title": "Nikita Kramar, Read As A Question",
+  "description": "A source-backed interpretation site for becoming a better interlocutor.",
+  "liveUrl": "https://nikitakramar.mullmania.com/",
+  "posterPath": "./poster.svg",
+  "createdAt": "2026-05-17",
+  "proof": [
+    "The page separates Observed, Inference, Ask Him, and Unknowns.",
+    "Claims are stored in data/claims.json and point to data/sources.json.",
+    "The site exposes llms.txt for agent-readable context."
+  ]
+}

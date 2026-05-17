@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Nikita Kramar, Read As A Question</title>
+  <desc id="desc">Poster image for a source-backed interpretation site.</desc>
+  <rect width="1200" height="630" fill="#060708"/>
+  <path d="M0 150h1200M0 300h1200M0 450h1200M200 0v630M400 0v630M600 0v630M800 0v630M1000 0v630" stroke="#7df4ff" stroke-opacity=".08"/>
+  <circle cx="784" cy="314" r="128" fill="#7df4ff" opacity=".08"/>
+  <circle cx="784" cy="314" r="42" fill="#f2efe8"/>
+  <g fill="none" stroke="#7df4ff" stroke-opacity=".58">
+    <path d="M784 314 C625 150 410 142 276 238"/>
+    <path d="M784 314 C612 478 408 506 268 394"/>
+    <path d="M784 314 C896 210 982 220 1050 284"/>
+    <path d="M784 314 C910 420 990 434 1090 376"/>
+  </g>
+  <g fill="#7df4ff">
+    <circle cx="276" cy="238" r="9"/>
+    <circle cx="268" cy="394" r="9"/>
+    <circle cx="1050" cy="284" r="9"/>
+    <circle cx="1090" cy="376" r="9"/>
+  </g>
+  <text x="88" y="118" fill="#7df4ff" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="23" letter-spacing="0">nikitakramar.mullmania.com</text>
+  <text x="88" y="242" fill="#f2efe8" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="760" letter-spacing="0">If work gets</text>
+  <text x="88" y="326" fill="#f2efe8" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="760" letter-spacing="0">deprecated, what</text>
+  <text x="88" y="410" fill="#f2efe8" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="760" letter-spacing="0">do we preserve?</text>
+  <text x="92" y="505" fill="#9da6a5" font-family="Inter, system-ui, sans-serif" font-size="28" letter-spacing="0">Observed. Inferred. Asked, not asserted.</text>
+</svg>

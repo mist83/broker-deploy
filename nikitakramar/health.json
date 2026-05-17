@@ -1,0 +1,10 @@
+{
+  "status": "ok",
+  "siteId": "nikitakramar",
+  "generatedAt": "2026-05-17",
+  "checks": {
+    "claimData": "./data/claims.json",
+    "sources": "./data/sources.json",
+    "llms": "./llms.txt"
+  }
+}
