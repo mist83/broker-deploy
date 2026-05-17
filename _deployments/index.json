@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T16:07:58.333Z",
+  "generatedAt": "2026-05-17T16:18:38.378Z",
   "sites": [
     {
       "siteId": "agent",
@@ -188,13 +188,13 @@
       "status": "success",
       "liveUrl": "https://tic-hack-toe.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/tic-hack-toe/",
-      "lastPublishedAt": "2026-05-17T16:05:51.144Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25995811135",
-      "latestBrokerRunNumber": "78",
+      "lastPublishedAt": "2026-05-17T16:18:38.368Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25996103029",
+      "latestBrokerRunNumber": "80",
       "trigger": "github-webhook",
-      "hostingFiles": 22,
-      "hostingBytes": 82843,
-      "recordedDeployments": 3
+      "hostingFiles": 83,
+      "hostingBytes": 174016,
+      "recordedDeployments": 4
     },
     {
       "siteId": "ui",
