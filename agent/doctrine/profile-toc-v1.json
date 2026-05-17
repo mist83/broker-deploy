@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-profile-toc-v1",
   "summary": "Profile table of contents for the shared doctrine core.",
-  "generatedAt": "2026-05-17T05:46:13.823Z",
+  "generatedAt": "2026-05-17T05:48:22.350Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
   "defaultProfileIdsByRuntime": {

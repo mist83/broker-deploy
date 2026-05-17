@@ -49,7 +49,9 @@ This is the condensed Codex-side memory prepared for migration into the remote d
 - `.codex/state/*`, `.codex/.codex-global-state.json`, and prompt-history state are scratch/history, not standing behavior.
 - The live doctrine host should be readable without local secret material. If it is not, the session should stop visibly instead of pretending doctrine was loaded.
 
-## Migration Inventory (input only, not future source of truth)
+## Runtime Inventory Snapshot
+
+This is context for remote-doctrine projection only. It is not an implementation backlog.
 
 - 1 global instructions file: `~/.codex/AGENTS.md`
 - 1 workspace-family instructions file: `/Users/mist83/Code/AGENTS.md`

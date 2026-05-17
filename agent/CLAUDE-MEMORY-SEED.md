@@ -51,9 +51,9 @@ The Claude Code harness has surfaces Codex CLI does not. These exist as projecti
 - MCP servers are persistent processes declared in `~/.claude/.mcp.json`; they are tool routes, not instructions.
 - Anthropic prompt caching has roughly a 5-minute TTL. Mid-session brain swaps invalidate it; per-task swaps should batch their re-prompts to amortize the cache miss.
 
-## Migration Inventory (input only, not future source of truth)
+## Runtime Inventory Snapshot
 
-A snapshot of Claude-side surfaces that exist on the operator machine today and need to land in remote doctrine instead. Counts and categories, not file contents.
+A snapshot of Claude-side surfaces that exist on the operator machine today. This is context for remote-doctrine projection only, not an implementation backlog. Counts and categories, not file contents.
 
 - 1 global instructions file (`~/.claude/CLAUDE.md`): Heimdall announce + Mullmania development canon reference.
 - 1 settings.json with one PostToolUse hook (`mullmania-s3-resync.sh`).
