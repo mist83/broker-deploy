@@ -1,0 +1,12 @@
+{
+  "siteId": "bug-beacon",
+  "host": "bug-beacon.mullmania.com",
+  "publishedAt": "2026-05-17T02:00:41.460Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/docs",
+  "counts": {
+    "hostingFiles": 9,
+    "hostingBytes": 86656,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}

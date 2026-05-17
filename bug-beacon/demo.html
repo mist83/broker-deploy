@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bug Beacon Demo</title>
+    <meta name="description" content="Canonical Bug Beacon demo page for testing the floating error monitor.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://ui.mullmania.com/active/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+      .bug-beacon-demo {
+        display: grid;
+        gap: var(--space-lg);
+        padding-block: var(--space-lg) var(--space-2xl);
+      }
+
+      .bug-beacon-demo-grid {
+        display: grid;
+        gap: var(--space-sm);
+        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      }
+
+      .bug-beacon-demo pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>
+        <i class="ti ti-bug"></i>
+        <span>Bug Beacon Demo</span>
+      </h1>
+      <div class="header-links">
+        <a class="header-link" href="./">
+          <i class="ti ti-home"></i>
+          <span>Frontdoor</span>
+        </a>
+        <a class="header-link" href="https://github.com/mist83/bug-beacon">
+          <i class="ti ti-brand-github"></i>
+          <span>Repo</span>
+        </a>
+      </div>
+    </header>
+
+    <div id="content-container">
+      <main class="page-container bug-beacon-demo">
+        <section class="card">
+          <h2>Live demo</h2>
+          <p>Bug Beacon stays hidden until an error happens. Trigger one of the cases below, then open the floating bug icon in the bottom-right corner.</p>
+        </section>
+
+        <section class="card">
+          <h2>Status</h2>
+          <p>The library is loaded from this deployed site and should appear only after an error or rejected promise is captured.</p>
+        </section>
+
+        <section class="card">
+          <h2>Trigger errors</h2>
+          <div class="bug-beacon-demo-grid">
+            <button id="trigger-window-error" class="btn-danger" type="button">Trigger Window Error</button>
+            <button id="trigger-console-error" class="btn-danger" type="button">Trigger Console Error</button>
+            <button id="trigger-promise-rejection" class="btn-danger" type="button">Trigger Promise Rejection</button>
+            <button id="trigger-reference-error" class="btn-danger" type="button">Trigger Reference Error</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Expected flow</h2>
+          <ol>
+            <li>No errors: no bug icon is visible.</li>
+            <li>Trigger any error from the buttons above.</li>
+            <li>The red bug beacon appears in the bottom-right corner.</li>
+            <li>Open it, copy the report, then clear the captured errors.</li>
+          </ol>
+        </section>
+
+        <section class="card">
+          <h2>Embed snippet</h2>
+          <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"&gt;
+&lt;script src="https://bug-beacon.mullmania.com/bug-beacon.js"&gt;&lt;/script&gt;</code></pre>
+        </section>
+      </main>
+    </div>
+
+    <script src="./bug-beacon.js"></script>
+    <script>
+      document.getElementById('trigger-window-error').addEventListener('click', () => {
+        throw new Error('Test window error triggered from the deployed demo.');
+      });
+
+      document.getElementById('trigger-console-error').addEventListener('click', () => {
+        console.error('Test console error from Bug Beacon demo.', {
+          code: 'BUG_BEACON_DEMO',
+          timestamp: new Date().toISOString(),
+        });
+      });
+
+      document.getElementById('trigger-promise-rejection').addEventListener('click', () => {
+        Promise.reject(new Error('Test promise rejection from Bug Beacon demo.'));
+      });
+
+      document.getElementById('trigger-reference-error').addEventListener('click', () => {
+        missingBugBeaconDemoSymbol();
+      });
+    </script>
+  </body>
+</html>

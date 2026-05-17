@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bug Beacon</title>
+    <meta name="description" content="Error monitoring FAB that lights up when bugs are detected">
+    <link rel="icon" href="favicon.ico">
+    <script src="https://ui.mullmania.com/ui.js"></script>
+  </head>
+  <body>
+    <!-- Managed by UI.frontdoor. Edit frontdoor.json, not this shell. -->
+    <div id="app"></div>
+    <script>
+      window.addEventListener('ui-ready', () => {
+        UI.frontdoor.mount('#app').catch((error) => {
+          console.error('[frontdoor] render failed', error);
+          document.body.textContent = error.message || String(error);
+        });
+      });
+    </script>
+  </body>
+</html>
