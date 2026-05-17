@@ -167,7 +167,7 @@ function readRepoJson(repo, branch, filePath) {
 
 function readRepoText(repo, branch, filePath) {
   try {
-    const payload = JSON.parse(gh(['api', `repos/${repo}/contents/${encodePath(filePath)}`, '-f', `ref=${branch}`]));
+    const payload = JSON.parse(gh(['api', '-X', 'GET', `repos/${repo}/contents/${encodePath(filePath)}`, '-f', `ref=${branch}`]));
     if (!payload || payload.type !== 'file' || !payload.content) {
       return '';
     }
@@ -179,7 +179,7 @@ function readRepoText(repo, branch, filePath) {
 
 function readRepoDirectory(repo, branch, dirPath) {
   try {
-    const payload = JSON.parse(gh(['api', `repos/${repo}/contents/${encodePath(dirPath)}`, '-f', `ref=${branch}`]));
+    const payload = JSON.parse(gh(['api', '-X', 'GET', `repos/${repo}/contents/${encodePath(dirPath)}`, '-f', `ref=${branch}`]));
     return Array.isArray(payload) ? payload : [];
   } catch {
     return [];
@@ -188,7 +188,7 @@ function readRepoDirectory(repo, branch, dirPath) {
 
 function pathExists(repo, branch, repoPath) {
   try {
-    gh(['api', `repos/${repo}/contents/${encodePath(repoPath)}`, '-f', `ref=${branch}`]);
+    gh(['api', '-X', 'GET', `repos/${repo}/contents/${encodePath(repoPath)}`, '-f', `ref=${branch}`]);
     return true;
   } catch {
     return false;
@@ -198,6 +198,7 @@ function pathExists(repo, branch, repoPath) {
 function gh(args) {
   return execFileSync('gh', args, {
     encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
     maxBuffer: 64 * 1024 * 1024,
   });
 }
