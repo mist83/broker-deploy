@@ -347,15 +347,15 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:49:41.768Z",
+    "lastPublishedAt": "2026-05-17T07:18:24.075Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25983893948",
-        "runNumber": "57"
+        "runId": "25984449723",
+        "runNumber": "60"
       },
       "git": null
     },
@@ -12010,20 +12010,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:13:55.351Z",
+    "lastPublishedAt": "2026-05-17T07:31:01.516Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "bcaedc316adac2aeb5cee3cc8d81b7060d453041",
+        "sha": "302f73a34a1c9ab8089906a8f136d9f70b667df4",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dag.mullmania.com",
         "branch": "main",
-        "commit": "bcaedc316adac2aeb5cee3cc8d81b7060d453041",
+        "commit": "302f73a34a1c9ab8089906a8f136d9f70b667df4",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -21828,15 +21828,15 @@
       "Publish the Liskov library demo UI to Mullmania and keep the filesystem API behind the same host /api surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:28:33.684Z",
+    "lastPublishedAt": "2026-05-17T07:25:05.406Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979137933",
-        "runNumber": "21"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25984583809",
+        "runNumber": "61"
       },
       "git": null
     },
@@ -34418,15 +34418,15 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:49:57.375Z",
+    "lastPublishedAt": "2026-05-17T06:56:44.954Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25983876877",
-        "runNumber": "54"
+        "runId": "25984005399",
+        "runNumber": "58"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -38901,20 +38901,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:31:48.866Z",
+    "lastPublishedAt": "2026-05-17T07:37:12.028Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "45576ca1f3eb46cd415fafe9c281517e7762b5bd",
+        "sha": "3b8cea82a2236cf2ac6082ad09b9b16391bc8451",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "45576ca1f3eb46cd415fafe9c281517e7762b5bd",
+        "commit": "3b8cea82a2236cf2ac6082ad09b9b16391bc8451",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
@@ -39826,15 +39826,15 @@
       "Repository root is the static publish surface for GitHub Pages and Mullmania."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:37:43.871Z",
+    "lastPublishedAt": "2026-05-17T07:17:33.639Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979309174",
-        "runNumber": "30"
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25984432992",
+        "runNumber": "59"
       },
       "git": null,
       "source": "launchpad-bootstrap"
