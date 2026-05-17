@@ -19164,26 +19164,28 @@
       "repo-artifacts",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T00:25:37.965Z",
+    "lastPublishedAt": "2026-05-17T11:32:01.712Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/html5_demos",
         "ref": null,
-        "sha": "f95698a961a37c44b9e014fdfaa1f9d2eff07b8d",
+        "sha": "098ea7e2d2539dfed83eca0d0199ca6e6e11d195",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/html5-demos",
+        "root": "/Users/mist83/Code/html5_demos",
         "branch": "master",
-        "commit": "f95698a961a37c44b9e014fdfaa1f9d2eff07b8d",
+        "commit": "098ea7e2d2539dfed83eca0d0199ca6e6e11d195",
         "remote": "https://github.com/mist83/html5_demos.git"
       }
     },
@@ -19193,7 +19195,7 @@
     "demo": {
       "sources": [],
       "posterUrl": "./demo/html5-demos/poster.png",
-      "durationSec": 30,
+      "durationSec": null,
       "mode": "screenshot-first",
       "posterKind": "showcase-reel",
       "posterNote": "Published screenshot for this repo."
@@ -19201,8 +19203,8 @@
     "showcaseRank": 240,
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T11:37:09Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -29336,7 +29338,13 @@
       "dual-static",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror",
+      "project-and",
+      "dashboard-builder",
+      "static-frontend",
+      "widgets"
     ],
     "notes": [
       "Static service directory frontend published from index/; the Lambda-backed data sources remain separate and configurable.",
@@ -29346,20 +29354,20 @@
       "Static frontend for the project-and dashboard builder, viewer, and widget library, published from DashboardBackend/wwwroot/. The runtime backend is the Lambda URL referenced in wwwroot/index.html (override-able via window.API_BASE)."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-27T03:17:02.817Z",
+    "lastPublishedAt": "2026-05-17T10:59:30.430Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/project-and",
         "ref": null,
-        "sha": "8d28c284c95170c66b186cb80a96152fd28dafe0",
+        "sha": "80ba0ee36ce176dff9ce37eabf36ef87929f028f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/project-and",
         "branch": "master",
-        "commit": "8d28c284c95170c66b186cb80a96152fd28dafe0",
+        "commit": "80ba0ee36ce176dff9ce37eabf36ef87929f028f",
         "remote": "https://github.com/mist83/project-and.git"
       }
     },
@@ -30585,20 +30593,20 @@
       "Static public front door for Project Redline. The live review service runs from the Lambda URL configured in project-redline-site-config.js."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T10:24:32.074Z",
+    "lastPublishedAt": "2026-05-17T10:59:30.499Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/redline",
         "ref": null,
-        "sha": "750163e3c7afc9af9fe2366a6c7c7e5b4ad36341",
+        "sha": "286972426590575a503b6db8990e37362d628808",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/redline",
         "branch": "main",
-        "commit": "750163e3c7afc9af9fe2366a6c7c7e5b4ad36341",
+        "commit": "286972426590575a503b6db8990e37362d628808",
         "remote": "https://github.com/mist83/redline.git"
       }
     },
@@ -30607,8 +30615,8 @@
     "description": "",
     "testNotes": "",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-17T10:30:12Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -34420,22 +34428,17 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T10:25:46.335Z",
+    "lastPublishedAt": "2026-05-17T10:27:27.071Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/sites",
-        "ref": null,
-        "sha": "c696e5aa6789d3d899b7c0b905ebaa70e9db3e3d",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "25988277380",
+        "runNumber": "69"
       },
-      "git": {
-        "root": "/Users/mist83/Code/sites",
-        "branch": "main",
-        "commit": "c696e5aa6789d3d899b7c0b905ebaa70e9db3e3d",
-        "remote": "https://github.com/mist83/sites.git"
-      },
+      "git": null,
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -38908,20 +38911,20 @@
       "Central TODO workspace for the mist83 repo sweep."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T10:24:23.992Z",
+    "lastPublishedAt": "2026-05-17T11:48:02.853Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tasks",
         "ref": null,
-        "sha": "bd8ea038738156c1f7defb3a22e691a7920a5788",
+        "sha": "45c45221fe6f47df21072fd717e82e9c09794ecc",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tasks",
         "branch": "master",
-        "commit": "bd8ea038738156c1f7defb3a22e691a7920a5788",
+        "commit": "45c45221fe6f47df21072fd717e82e9c09794ecc",
         "remote": "https://github.com/mist83/tasks.git"
       }
     },
