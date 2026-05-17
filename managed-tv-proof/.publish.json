@@ -1,0 +1,12 @@
+{
+  "siteId": "managed-tv-proof",
+  "host": "managed-tv-proof.mullmania.com",
+  "publishedAt": "2026-05-17T00:59:29.003Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/sites/managed-tv-proof",
+  "counts": {
+    "hostingFiles": 7,
+    "hostingBytes": 10465262,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}

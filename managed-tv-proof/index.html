@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>:root {
+  --tv-accent-start: #3d5af1;
+  --tv-accent-end: #ffb703;
+  --tv-border: rgba(255, 255, 255, 0.14);
+  --tv-panel: rgba(9, 14, 24, 0.82);
+  --tv-panel-soft: rgba(255, 255, 255, 0.08);
+  --tv-text: #f7f5ef;
+  --tv-muted: rgba(247, 245, 239, 0.72);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 183, 3, 0.24), transparent 30%),
+    radial-gradient(circle at top right, rgba(61, 90, 241, 0.28), transparent 32%),
+    linear-gradient(160deg, #04070c 0%, #08111c 44%, #121f2f 100%);
+  color: var(--tv-text);
+}
+.tv-seed-shell {
+  min-height: 100vh;
+  padding: clamp(24px, 4vw, 48px);
+  display: grid;
+  gap: 22px;
+}
+.tv-seed-hero,
+.tv-seed-launcher,
+.tv-stage,
+.tv-tail-panel {
+  border: 1px solid var(--tv-border);
+  border-radius: 28px;
+  background: var(--tv-panel);
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px);
+}
+.tv-seed-hero {
+  padding: clamp(24px, 4vw, 40px);
+  display: grid;
+  gap: 16px;
+}
+.tv-seed-eyebrow,
+.tv-seed-hint,
+.tv-launch-card__index,
+.tv-stage__bundle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tv-muted);
+}
+.tv-seed-hero h1,
+.tv-seed-lede,
+.tv-seed-hint,
+.tv-stage__meta p {
+  margin: 0;
+}
+.tv-seed-hero h1 {
+  font-size: clamp(42px, 8vw, 84px);
+  line-height: 0.92;
+  max-width: 10ch;
+}
+.tv-seed-lede {
+  max-width: 58ch;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--tv-muted);
+}
+.tv-seed-status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tv-seed-status-chip {
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--tv-muted);
+  background: rgba(255, 255, 255, 0.06);
+}
+.tv-tail-panel {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.tv-tail-copy {
+  margin: 4px 0 0;
+  color: var(--tv-muted);
+}
+.tv-tail-copy strong { color: var(--tv-text); }
+.tv-tail-link,
+.tv-tail-status {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+.tv-tail-link {
+  color: #09111c;
+  background: linear-gradient(135deg, var(--tv-accent-start), var(--tv-accent-end));
+  text-decoration: none;
+}
+.tv-tail-status {
+  color: var(--tv-muted);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+}
+.tv-seed-launcher {
+  padding: clamp(20px, 3vw, 28px);
+  display: grid;
+  gap: 18px;
+}
+.tv-seed-launcher__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.tv-seed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.tv-launch-card {
+  min-height: 170px;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  color: var(--tv-text);
+  display: grid;
+  align-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+.tv-launch-card.is-selected,
+.tv-launch-card:focus-visible {
+  outline: none;
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(255, 183, 3, 0.62);
+  box-shadow: 0 0 0 2px rgba(255, 183, 3, 0.28), 0 22px 40px rgba(0, 0, 0, 0.28);
+}
+.tv-launch-card__label {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1.04;
+}
+.tv-stage {
+  min-height: 420px;
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+.tv-stage__media {
+  position: relative;
+  min-height: 320px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(61, 90, 241, 0.22), transparent 30%), #03060c;
+}
+.tv-stage__media video,
+.tv-stage__preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.tv-stage__preview {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(61, 90, 241, 0.22), rgba(255, 183, 3, 0.12));
+}
+.tv-stage__preview-card {
+  width: min(88%, 540px);
+  padding: 26px;
+  border-radius: 22px;
+  background: rgba(4, 7, 12, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  gap: 12px;
+}
+.tv-stage__preview-card h2,
+.tv-stage__preview-card p {
+  margin: 0;
+}
+.tv-stage__preview-card p { color: var(--tv-muted); line-height: 1.55; }
+.tv-stage__play {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--tv-accent-start), var(--tv-accent-end));
+  color: #09111c;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.tv-stage__chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.tv-stage__meta {
+  display: grid;
+  gap: 6px;
+}
+.tv-stage__meta p { font-size: clamp(18px, 2vw, 24px); }
+.tv-stage__ad {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--tv-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.tv-ad-overlay {
+  position: fixed;
+  inset: 0;
+  padding: 28px;
+  display: grid;
+  place-items: center;
+  background: rgba(1, 3, 7, 0.86);
+}
+.tv-ad-overlay__card {
+  position: relative;
+  width: min(100%, 980px);
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(7, 12, 20, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.34);
+}
+.tv-ad-overlay__card img {
+  display: block;
+  width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+  border-radius: 18px;
+}
+.tv-ad-overlay__close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  color: #08111c;
+  font-size: 28px;
+  cursor: pointer;
+}
+.is-hidden { display: none !important; }
+@media (max-width: 860px) {
+  .tv-seed-grid { grid-template-columns: 1fr; }
+  .tv-seed-launcher__head, .tv-stage__chrome { align-items: start; flex-direction: column; }
+  .tv-launch-card { min-height: 132px; }
+  .tv-stage__media { min-height: 240px; }
+}</style>
+</head>
+<body>
+<main class="tv-seed-shell">
+  <section class="tv-seed-hero">
+    <p class="tv-seed-eyebrow">TV app template</p>
+    <h1>Broker TV Proof</h1>
+    <p class="tv-seed-lede">managed-tv-proof.mullmania.com uses a 10-foot launcher shell with the selected media bundle.</p>
+    <div class="tv-seed-status-bar">
+      <span class="tv-seed-status-chip">TV app seed</span>
+      <span class="tv-seed-status-chip">Milkshake</span>
+      <span class="tv-seed-status-chip">10-foot keyboard nav</span>
+      <span class="tv-seed-status-chip">tv-tail remote</span>
+    </div>
+  </section>
+  <section class="tv-seed-launcher" id="tv-launcher">
+    <div class="tv-seed-launcher__head">
+      <p class="tv-seed-eyebrow">Launcher</p>
+      <p class="tv-seed-hint">Arrow keys move focus. Enter launches. Backspace returns.</p>
+    </div>
+    <div class="tv-seed-grid" id="tv-launch-grid">
+      <button type="button" class="tv-launch-card is-selected" data-tv-launch-index="0">
+        <span class="tv-launch-card__index">01</span>
+        <span class="tv-launch-card__label">Play</span>
+      </button>
+      <button type="button" class="tv-launch-card" data-tv-launch-index="1">
+        <span class="tv-launch-card__index">02</span>
+        <span class="tv-launch-card__label">Queue</span>
+      </button>
+      <button type="button" class="tv-launch-card" data-tv-launch-index="2">
+        <span class="tv-launch-card__index">03</span>
+        <span class="tv-launch-card__label">Clips</span>
+      </button>
+      <button type="button" class="tv-launch-card" data-tv-launch-index="3">
+        <span class="tv-launch-card__index">04</span>
+        <span class="tv-launch-card__label">More</span>
+      </button>
+    </div>
+  </section>
+  <section class="tv-stage is-hidden" id="tv-stage">
+    <div class="tv-stage__media">
+      <video id="tv-stage-video" loop playsinline preload="metadata"></video>
+      <div class="tv-stage__preview" id="tv-stage-preview">
+        <div class="tv-stage__preview-card">
+          <p class="tv-seed-eyebrow">Preview mode</p>
+          <h2>Inline composer preview</h2>
+          <p>The live modal preview stays fast and deterministic. Real media loads after deploy.</p>
+        </div>
+      </div>
+      <button type="button" class="tv-stage__play" id="tv-stage-play">Play</button>
+    </div>
+    <div class="tv-stage__chrome">
+      <div class="tv-stage__meta">
+        <p id="tv-now-playing">Proofing: Red Velvet (레드벨벳) - Milkshake</p>
+        <span class="tv-stage__bundle">Milkshake</span>
+      </div>
+      <button type="button" class="tv-stage__ad" id="tv-stage-ad">Broker deployed by GitHub Actions</button>
+    </div>
+    <div class="tv-ad-overlay is-hidden" id="tv-ad-overlay">
+      <div class="tv-ad-overlay__card">
+        <button type="button" class="tv-ad-overlay__close" id="tv-ad-close" aria-label="Close ad">&times;</button>
+        <img id="tv-ad-image" alt="Advertisement preview">
+      </div>
+    </div>
+  </section>
+  <section class="tv-tail-panel" id="tv-tail-panel">
+    <div>
+      <p class="tv-seed-eyebrow">tv-tail</p>
+      <p class="tv-tail-copy">SignalArgh channel <strong>managed-tv-proof-tv-tail</strong></p>
+    </div>
+    <a class="tv-tail-link" id="tv-tail-link" href="https://telestrate.mullmania.com/?channel=managed-tv-proof-tv-tail&amp;brand=tv-tail" target="_blank" rel="noreferrer">Open Telestrate</a>
+    <span class="tv-tail-status" id="tv-tail-status">preview only</span>
+  </section>
+</main>
+<script>const tvTemplateConfig = {"appTitle": "Broker TV Proof", "launcherLabels": ["Play", "Queue", "Clips", "More"], "nowPlayingLabel": "Proofing", "adBadgeText": "Broker deployed by GitHub Actions", "adBadgeEnabled": true, "mediaBundleId": "milkshake", "tvTailEnabled": true, "hostLabel": "managed-tv-proof.mullmania.com", "mediaBundle": {"id": "milkshake", "label": "Milkshake", "displayName": "Red Velvet (레드벨벳) - Milkshake", "videoPath": "assets/videos/Milkshake.mp4", "audioPath": "assets/music/Milkshake.m4a", "adImagePath": "assets/ad-links/milkshake.png", "brandImagePath": "assets/images/walmart.png", "accentStart": "#3d5af1", "accentEnd": "#ffb703"}, "hintLabel": "Arrow keys move focus. Enter launches. Backspace returns.", "tvTail": {"enabled": true, "channelId": "managed-tv-proof-tv-tail", "userId": "screen-managed-tv-proof", "hubUrl": "https://signalargh.mullmania.com/hub", "signalrClientUrl": "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js", "logTapUrl": "https://tv-tail.mullmania.com/log-tap.js", "telestrateUrl": "https://telestrate.mullmania.com/?channel=managed-tv-proof-tv-tail&brand=tv-tail", "stateTopic": "sites.tv-tail.state", "commandTopic": "sites.tv-tail.command"}};
+const tvState = { launchIndex: 0, stageOpen: false, adOpen: false, previewMode: location.protocol === 'about:' || String(location.href || '').startsWith('about:srcdoc') };
+const launchButtons = Array.from(document.querySelectorAll('[data-tv-launch-index]'));
+const launcherEl = document.getElementById('tv-launcher');
+const stageEl = document.getElementById('tv-stage');
+const videoEl = document.getElementById('tv-stage-video');
+const previewEl = document.getElementById('tv-stage-preview');
+const playButtonEl = document.getElementById('tv-stage-play');
+const nowPlayingEl = document.getElementById('tv-now-playing');
+const adButtonEl = document.getElementById('tv-stage-ad');
+const adOverlayEl = document.getElementById('tv-ad-overlay');
+const adCloseEl = document.getElementById('tv-ad-close');
+const adImageEl = document.getElementById('tv-ad-image');
+const mediaBundle = tvTemplateConfig.mediaBundle;
+const tvTailConfig = tvTemplateConfig.tvTail || { enabled: false };
+const tvTailStatusEl = document.getElementById('tv-tail-status');
+let tvTailConnection = null;
+let tvTailConnected = false;
+
+function setTvTailStatus(label) {
+  if (tvTailStatusEl) tvTailStatusEl.textContent = label;
+}
+
+function buildSignalRWebSocketOptions() {
+  const options = { withCredentials: false };
+  if (window.signalR?.HttpTransportType?.WebSockets) {
+    options.transport = window.signalR.HttpTransportType.WebSockets;
+    options.skipNegotiation = true;
+  }
+  return options;
+}
+
+function loadTvTailScript(src, marker) {
+  return new Promise((resolve, reject) => {
+    if (!src) { resolve(); return; }
+    const existing = document.querySelector(`script[data-tv-tail-marker="${marker}"]`);
+    if (existing) {
+      existing.addEventListener('load', resolve, { once: true });
+      existing.addEventListener('error', reject, { once: true });
+      if (window.signalR?.HubConnectionBuilder || marker === 'log-tap') resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.dataset.tvTailMarker = marker;
+    script.addEventListener('load', resolve, { once: true });
+    script.addEventListener('error', reject, { once: true });
+    document.head.appendChild(script);
+  });
+}
+
+function loadTvTailLogTap() {
+  if (!tvTailConfig.enabled || tvState.previewMode || window.__logTap) return;
+  window.LOG_TAP_APP_ID = tvTailConfig.channelId;
+  window.LOG_TAP_CHANNEL = 'tv-logs';
+  window.LOG_TAP_HUB = tvTailConfig.hubUrl.replace(/\/hub$/, '');
+  loadTvTailScript(tvTailConfig.logTapUrl, 'log-tap').catch(() => {});
+}
+
+function tvTailState(extra = {}) {
+  return {
+    type: 'tv-tail.state',
+    siteId: tvTemplateConfig.hostLabel,
+    channelId: tvTailConfig.channelId,
+    appTitle: tvTemplateConfig.appTitle,
+    launchIndex: tvState.launchIndex,
+    launchLabel: tvTemplateConfig.launcherLabels[tvState.launchIndex] || '',
+    stageOpen: tvState.stageOpen,
+    adOpen: tvState.adOpen,
+    nowPlaying: `${tvTemplateConfig.nowPlayingLabel}: ${mediaBundle.displayName}`,
+    url: location.href,
+    at: new Date().toISOString(),
+    ...extra,
+  };
+}
+
+function tvTailDispatchLocal(topic, payload) {
+  try {
+    window.dispatchEvent(new CustomEvent('tv-tail:event', { detail: { topic, payload } }));
+  } catch (_error) {}
+}
+
+async function tvTailBroadcast(topic, extra = {}) {
+  if (!tvTailConfig.enabled) return false;
+  const payload = tvTailState(extra);
+  tvTailDispatchLocal(topic, payload);
+  if (!tvTailConnected || !tvTailConnection) return false;
+  try {
+    await tvTailConnection.invoke('SendCustomMessage', tvTailConfig.channelId, topic || tvTailConfig.stateTopic, JSON.stringify(payload));
+    return true;
+  } catch (_error) {
+    setTvTailStatus('local only');
+    return false;
+  }
+}
+
+function parseTvTailPayload(raw) {
+  if (typeof raw !== 'string') return raw;
+  try { return JSON.parse(raw); } catch (_error) { return raw; }
+}
+
+function handleTvTailCommand(raw) {
+  const payload = parseTvTailPayload(raw);
+  const command = typeof payload === 'string'
+    ? payload
+    : String(payload?.command || payload?.type || '').replace(/^tv-tail\.|^telestrate\./, '');
+  if (!command) return;
+  const normalized = command.toLowerCase();
+  if (normalized === 'left' || normalized === 'arrowleft') moveSelection('left');
+  if (normalized === 'right' || normalized === 'arrowright') moveSelection('right');
+  if (normalized === 'up' || normalized === 'arrowup') moveSelection('up');
+  if (normalized === 'down' || normalized === 'arrowdown') moveSelection('down');
+  if (normalized === 'enter' || normalized === 'select' || normalized === 'launch') {
+    enterStage(Number.isFinite(Number(payload?.index)) ? Number(payload.index) : tvState.launchIndex);
+  }
+  if (normalized === 'back' || normalized === 'escape' || normalized === 'home') exitStage();
+  if (normalized === 'ad') openAdOverlay();
+}
+
+async function connectTvTail() {
+  if (!tvTailConfig.enabled) return;
+  loadTvTailLogTap();
+  if (tvState.previewMode) {
+    setTvTailStatus('preview only');
+    tvTailBroadcast(tvTailConfig.stateTopic, { previewMode: true });
+    return;
+  }
+  try {
+    setTvTailStatus('connecting');
+    await loadTvTailScript(tvTailConfig.signalrClientUrl, 'signalr');
+    if (!window.signalR?.HubConnectionBuilder) throw new Error('SignalR client unavailable');
+    tvTailConnection = new window.signalR.HubConnectionBuilder()
+      .withUrl(`${tvTailConfig.hubUrl}?channelId=${encodeURIComponent(tvTailConfig.channelId)}&userId=${encodeURIComponent(tvTailConfig.userId)}`, buildSignalRWebSocketOptions())
+      .withAutomaticReconnect()
+      .build();
+    tvTailConnection.on('customMessage', (message) => {
+      if (!message || typeof message !== 'object') return;
+      if (message.topic === tvTailConfig.commandTopic || message.topic === 'command') handleTvTailCommand(message.message);
+    });
+    tvTailConnection.on('systemNotification', () => setTvTailStatus('connected'));
+    tvTailConnection.onreconnected(() => {
+      tvTailConnected = true;
+      setTvTailStatus('connected');
+      tvTailBroadcast(tvTailConfig.stateTopic, { event: 'reconnected' });
+    });
+    tvTailConnection.onreconnecting(() => {
+      tvTailConnected = false;
+      setTvTailStatus('reconnecting');
+    });
+    tvTailConnection.onclose(() => {
+      tvTailConnected = false;
+      setTvTailStatus('local only');
+    });
+    await tvTailConnection.start();
+    tvTailConnected = true;
+    setTvTailStatus('connected');
+    await tvTailBroadcast(tvTailConfig.stateTopic, { event: 'ready' });
+  } catch (error) {
+    tvTailConnected = false;
+    setTvTailStatus('local only');
+    console.info('[tv-tail] remote unavailable', error);
+  }
+}
+
+function renderLaunchSelection() {
+  launchButtons.forEach((button, index) => {
+    button.classList.toggle('is-selected', index === tvState.launchIndex);
+  });
+}
+
+function updateNowPlaying() {
+  if (!nowPlayingEl) return;
+  nowPlayingEl.textContent = `${tvTemplateConfig.nowPlayingLabel}: ${mediaBundle.displayName}`;
+}
+
+function openAdOverlay() {
+  if (!tvTemplateConfig.adBadgeEnabled || !adOverlayEl) return;
+  if (adImageEl) {
+    adImageEl.src = tvState.previewMode ? '' : mediaBundle.adImagePath;
+    adImageEl.alt = `${tvTemplateConfig.appTitle} advertisement`;
+  }
+  adOverlayEl.classList.remove('is-hidden');
+  tvState.adOpen = true;
+  void tvTailBroadcast(tvTailConfig.stateTopic, { event: 'ad-opened' });
+}
+
+function closeAdOverlay() {
+  const wasOpen = tvState.adOpen;
+  if (!adOverlayEl) return;
+  adOverlayEl.classList.add('is-hidden');
+  tvState.adOpen = false;
+  if (wasOpen) void tvTailBroadcast(tvTailConfig.stateTopic, { event: 'ad-closed' });
+}
+
+function exitStage() {
+  const wasOpen = tvState.stageOpen;
+  tvState.stageOpen = false;
+  closeAdOverlay();
+  launcherEl?.classList.remove('is-hidden');
+  stageEl?.classList.add('is-hidden');
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.removeAttribute('src');
+    videoEl.load();
+  }
+  previewEl?.classList.remove('is-hidden');
+  renderLaunchSelection();
+  if (wasOpen) void tvTailBroadcast(tvTailConfig.stateTopic, { event: 'stage-closed' });
+}
+
+function enterStage(index) {
+  tvState.launchIndex = Math.max(0, Math.min(index, launchButtons.length - 1));
+  tvState.stageOpen = true;
+  launcherEl?.classList.add('is-hidden');
+  stageEl?.classList.remove('is-hidden');
+  updateNowPlaying();
+  if (adButtonEl) {
+    adButtonEl.classList.toggle('is-hidden', !tvTemplateConfig.adBadgeEnabled);
+  }
+  void tvTailBroadcast(tvTailConfig.stateTopic, { event: 'stage-opened' });
+  if (tvState.previewMode || !videoEl) {
+    previewEl?.classList.remove('is-hidden');
+    return;
+  }
+  previewEl?.classList.add('is-hidden');
+  videoEl.src = mediaBundle.videoPath;
+  videoEl.muted = false;
+  videoEl.load();
+}
+
+function moveSelection(step) {
+  const current = tvState.launchIndex;
+  if (step === 'left' && current % 2 === 1) tvState.launchIndex -= 1;
+  if (step === 'right' && current % 2 === 0 && current + 1 < launchButtons.length) tvState.launchIndex += 1;
+  if (step === 'up' && current >= 2) tvState.launchIndex -= 2;
+  if (step === 'down' && current + 2 < launchButtons.length) tvState.launchIndex += 2;
+  renderLaunchSelection();
+  if (current !== tvState.launchIndex) void tvTailBroadcast(tvTailConfig.stateTopic, { event: 'selection-changed' });
+}
+
+window.addEventListener('message', (event) => {
+  if (tvTailConfig.enabled) handleTvTailCommand(event.data);
+});
+window.addEventListener('hashchange', () => {
+  const command = new URLSearchParams(String(location.hash || '').replace(/^#/, '')).get('tvCommand');
+  if (command) handleTvTailCommand(command);
+});
+
+renderLaunchSelection();
+updateNowPlaying();
+void connectTvTail();
+
+launchButtons.forEach((button, index) => {
+  button.addEventListener('click', () => enterStage(index));
+});
+playButtonEl?.addEventListener('click', async () => {
+  if (!videoEl || tvState.previewMode) return;
+  try {
+    await videoEl.play();
+  } catch (error) {
+    console.error('[tv-template] play failed', error);
+  }
+});
+adButtonEl?.addEventListener('click', openAdOverlay);
+adCloseEl?.addEventListener('click', closeAdOverlay);
+adOverlayEl?.addEventListener('click', (event) => {
+  if (event.target === adOverlayEl) {
+    closeAdOverlay();
+  }
+});
+
+document.addEventListener('keydown', async (event) => {
+  if (tvState.adOpen) {
+    if (event.key === 'Escape' || event.key === 'Backspace' || event.key === 'Enter') {
+      event.preventDefault();
+      closeAdOverlay();
+    }
+    return;
+  }
+  if (!tvState.stageOpen) {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); moveSelection('left'); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); moveSelection('right'); }
+    if (event.key === 'ArrowUp') { event.preventDefault(); moveSelection('up'); }
+    if (event.key === 'ArrowDown') { event.preventDefault(); moveSelection('down'); }
+    if (event.key === 'Enter') { event.preventDefault(); enterStage(tvState.launchIndex); }
+    return;
+  }
+  if (event.key === 'Escape' || event.key === 'Backspace') {
+    event.preventDefault();
+    exitStage();
+    return;
+  }
+  if (event.key === 'Enter' && !tvState.previewMode && videoEl) {
+    event.preventDefault();
+    if (videoEl.paused) {
+      try { await videoEl.play(); } catch (error) { console.error('[tv-template] play failed', error); }
+    } else {
+      videoEl.pause();
+    }
+  }
+});<\/script>
+</body>
+</html>
