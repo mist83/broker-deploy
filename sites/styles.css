@@ -5681,6 +5681,21 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   min-width: 0;
 }
 
+.feature-matrix-facet-label {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: var(--weight-bold);
+}
+
+.feature-matrix-facet-label:hover,
+.feature-matrix-facet-label:focus-visible {
+  color: var(--color-primary);
+}
+
 .feature-matrix-app-label i,
 .feature-matrix-facet-label i {
   flex: 0 0 auto;
@@ -5721,10 +5736,16 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
 
 .feature-matrix-site-card {
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
+  grid-template-columns: auto 54px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   min-width: 0;
+}
+
+.feature-matrix-select-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
 }
 
 .feature-matrix-preview {
@@ -5807,9 +5828,9 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
 }
 
 .feature-matrix-state.is-off {
-  border-color: color-mix(in srgb, var(--color-danger) 46%, var(--border-color));
-  background: color-mix(in srgb, var(--color-danger) 10%, var(--bg-primary));
-  color: var(--color-danger);
+  border-color: color-mix(in srgb, var(--text-secondary) 36%, var(--border-color));
+  background: color-mix(in srgb, var(--bg-secondary) 72%, var(--bg-primary));
+  color: var(--text-secondary);
 }
 
 .feature-matrix-state.is-deferred {

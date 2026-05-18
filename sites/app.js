@@ -223,18 +223,17 @@ const FEATURE_MATRIX_STATE_OFF = 'off';
 const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
 const FEATURE_MATRIX_STATE_MIXED = 'mixed';
 const FEATURE_MATRIX_STATES = Object.freeze({
-  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'No action', shortLabel: 'Decide', icon: 'ti ti-circle-dotted' },
-  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Add / enforce', shortLabel: 'Add', icon: 'ti ti-plus' },
-  [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Copy pattern', shortLabel: 'Copy', icon: 'ti ti-copy' },
-  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Remove / block', shortLabel: 'Remove', icon: 'ti ti-minus' },
-  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Ignore', shortLabel: 'Ignore', icon: 'ti ti-eye-off' },
+  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Not assessed', shortLabel: 'Check', icon: 'ti ti-circle-dotted' },
+  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Current / add', shortLabel: 'Current', icon: 'ti ti-circle-check' },
+  [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Uniform', shortLabel: 'Uniform', icon: 'ti ti-copy-check' },
+  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Not present', shortLabel: 'Missing', icon: 'ti ti-circle-off' },
+  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Out of date / update', shortLabel: 'Update', icon: 'ti ti-clock-up' },
 });
 const FEATURE_MATRIX_STATE_ORDER = Object.freeze([
   FEATURE_MATRIX_STATE_UNKNOWN,
   FEATURE_MATRIX_STATE_ON,
-  FEATURE_MATRIX_STATE_COPY,
-  FEATURE_MATRIX_STATE_OFF,
   FEATURE_MATRIX_STATE_DEFERRED,
+  FEATURE_MATRIX_STATE_COPY,
 ]);
 const SEARCH_FIELD_DEFINITIONS = Object.freeze([
   { id: 'title', label: 'Title', ariaLabel: 'Search titles' },
@@ -639,6 +638,7 @@ const state = {
     saved: null,
     draft: null,
     scope: FEATURE_MATRIX_SCOPE_VISIBLE,
+    selectedRowKeys: new Set(),
     statusMessage: '',
     statusTone: '',
   },
@@ -2429,7 +2429,10 @@ function bindEvents() {
   featureMatrixBulkFeatureEl?.addEventListener('change', updateFeatureMatrixBulkApplyState);
   featureMatrixBulkActionEl?.addEventListener('change', updateFeatureMatrixBulkApplyState);
   featureMatrixBulkApplyButton?.addEventListener('click', applyFeatureMatrixToolbarBulkAction);
+  featureMatrixTableHeadEl?.addEventListener('click', handleFeatureMatrixHeaderClick);
+  featureMatrixTableHeadEl?.addEventListener('change', handleFeatureMatrixSelectionChange);
   featureMatrixTableBodyEl?.addEventListener('click', handleFeatureMatrixClick);
+  featureMatrixTableBodyEl?.addEventListener('change', handleFeatureMatrixSelectionChange);
   featureMatrixSaveButton?.addEventListener('click', saveFeatureMatrixDraft);
   featureMatrixResetButton?.addEventListener('click', resetFeatureMatrixDraft);
   featureMatrixCopyButton?.addEventListener('click', () => {
@@ -8515,6 +8518,7 @@ function restoreFeatureMatrixState() {
   state.featureMatrix.saved = saved;
   state.featureMatrix.draft = cloneFeatureMatrixState(saved);
   state.featureMatrix.scope = FEATURE_MATRIX_SCOPE_VISIBLE;
+  state.featureMatrix.selectedRowKeys = new Set();
   state.featureMatrix.statusMessage = '';
   state.featureMatrix.statusTone = '';
 }
@@ -8831,18 +8835,65 @@ function setFeatureMatrixRowCellState(rowKey, facetId, cellState) {
   renderFeatureMatrixView();
 }
 
+function getFeatureMatrixSelectedRowKeys() {
+  if (!(state.featureMatrix.selectedRowKeys instanceof Set)) {
+    state.featureMatrix.selectedRowKeys = new Set();
+  }
+  return state.featureMatrix.selectedRowKeys;
+}
+
+function pruneFeatureMatrixSelectedRows(rows) {
+  const selected = getFeatureMatrixSelectedRowKeys();
+  if (selected.size === 0) {
+    return;
+  }
+  const visibleKeys = new Set(rows.map((row) => row.key));
+  for (const key of [...selected]) {
+    if (!visibleKeys.has(key)) {
+      selected.delete(key);
+    }
+  }
+}
+
+function getFeatureMatrixSelectedRows(rows = getFeatureMatrixRows()) {
+  const selected = getFeatureMatrixSelectedRowKeys();
+  return selected.size === 0
+    ? []
+    : rows.filter((row) => selected.has(row.key));
+}
+
+function getFeatureMatrixBulkTargetRows(rows = getFeatureMatrixRows()) {
+  const selectedRows = getFeatureMatrixSelectedRows(rows);
+  return selectedRows.length > 0 ? selectedRows : rows;
+}
+
+function isFeatureMatrixForwardAction(cellState) {
+  return [
+    FEATURE_MATRIX_STATE_ON,
+    FEATURE_MATRIX_STATE_DEFERRED,
+    FEATURE_MATRIX_STATE_COPY,
+    FEATURE_MATRIX_STATE_UNKNOWN,
+  ].includes(normalizeFeatureMatrixCellState(cellState));
+}
+
 function setFeatureMatrixFacetForRows(facetId, cellState) {
   const normalizedFacetId = normalizeCatalogToken(facetId);
   const normalizedState = normalizeFeatureMatrixCellState(cellState);
   if (!FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
     return;
   }
+  if (!isFeatureMatrixForwardAction(normalizedState)) {
+    setFeatureMatrixStatus('Feature Matrix is forward-only. Not present is a status, not a bulk action.', 'warning');
+    renderFeatureMatrixView();
+    return;
+  }
   const rows = getFeatureMatrixRows();
+  const targetRows = getFeatureMatrixBulkTargetRows(rows);
   const draft = getFeatureMatrixDraft();
   const updatedAt = new Date().toISOString();
   let changed = 0;
   let siteCount = 0;
-  for (const row of rows) {
+  for (const row of targetRows) {
     for (const member of row.members) {
       siteCount += 1;
       if (assignFeatureMatrixCellState(draft, member.siteId, normalizedFacetId, normalizedState, { updatedAt })) {
@@ -8857,8 +8908,12 @@ function setFeatureMatrixFacetForRows(facetId, cellState) {
   }
   const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizedFacetId);
   draft.updatedAt = updatedAt;
+  const selectedCount = getFeatureMatrixSelectedRowKeys().size;
+  const scopeLabel = selectedCount > 0
+    ? `${targetRows.length.toLocaleString()} selected row${targetRows.length === 1 ? '' : 's'}`
+    : `${targetRows.length.toLocaleString()} visible row${targetRows.length === 1 ? '' : 's'}`;
   setFeatureMatrixStatus(
-    `Set ${facet?.label || normalizedFacetId} to ${formatFeatureMatrixState(normalizedState)} for ${changed.toLocaleString()} of ${siteCount.toLocaleString()} visible site cells.`,
+    `Set ${facet?.label || normalizedFacetId} to ${formatFeatureMatrixState(normalizedState)} for ${changed.toLocaleString()} of ${siteCount.toLocaleString()} site cells across ${scopeLabel}.`,
     'warning'
   );
   renderFeatureMatrixView();
@@ -8881,8 +8936,13 @@ function applyFeatureMatrixToolbarBulkAction() {
 
 function getNextFeatureMatrixCellState(currentState) {
   const normalized = normalizeFeatureMatrixCellState(currentState);
-  const currentIndex = FEATURE_MATRIX_STATE_ORDER.indexOf(normalized);
-  return FEATURE_MATRIX_STATE_ORDER[(Math.max(currentIndex, 0) + 1) % FEATURE_MATRIX_STATE_ORDER.length];
+  if (normalized === FEATURE_MATRIX_STATE_ON) {
+    return FEATURE_MATRIX_STATE_COPY;
+  }
+  if (normalized === FEATURE_MATRIX_STATE_COPY) {
+    return FEATURE_MATRIX_STATE_COPY;
+  }
+  return FEATURE_MATRIX_STATE_ON;
 }
 
 function setFeatureMatrixScope(value) {
@@ -8910,6 +8970,82 @@ function handleFeatureMatrixClick(event) {
   setFeatureMatrixRowCellState(rowKey, facetId, nextState);
 }
 
+function handleFeatureMatrixHeaderClick(event) {
+  const button = event.target instanceof Element
+    ? event.target.closest('[data-feature-select-facet]')
+    : null;
+  if (!(button instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const facetId = normalizeCatalogToken(button.getAttribute('data-feature-select-facet') || '');
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === facetId);
+  if (!facet) {
+    return;
+  }
+
+  const rows = getFeatureMatrixRows();
+  const selected = getFeatureMatrixSelectedRowKeys();
+  selected.clear();
+  for (const row of rows) {
+    const stateId = getFeatureMatrixRowCellState(row, facet.id);
+    if ([FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED].includes(stateId)) {
+      selected.add(row.key);
+    }
+  }
+  setFeatureMatrixStatus(
+    selected.size > 0
+      ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} using ${facet.shortLabel || facet.label}.`
+      : `No visible rows currently show ${facet.shortLabel || facet.label}.`,
+    selected.size > 0 ? 'info' : 'warning'
+  );
+  renderFeatureMatrixView();
+}
+
+function handleFeatureMatrixSelectionChange(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement)) {
+    return;
+  }
+
+  const selected = getFeatureMatrixSelectedRowKeys();
+  if (target.matches('[data-feature-select-all]')) {
+    selected.clear();
+    if (target.checked) {
+      for (const row of getFeatureMatrixRows()) {
+        selected.add(row.key);
+      }
+    }
+    setFeatureMatrixStatus(
+      selected.size > 0
+        ? `Selected ${selected.size.toLocaleString()} visible row${selected.size === 1 ? '' : 's'}.`
+        : 'Cleared feature row selection.',
+      'info'
+    );
+    renderFeatureMatrixView();
+    return;
+  }
+
+  if (target.matches('[data-feature-row-select]')) {
+    const rowKey = target.getAttribute('data-row-key') || '';
+    if (!rowKey) {
+      return;
+    }
+    if (target.checked) {
+      selected.add(rowKey);
+    } else {
+      selected.delete(rowKey);
+    }
+    setFeatureMatrixStatus(
+      selected.size > 0
+        ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} for the next feature action.`
+        : 'Cleared feature row selection.',
+      'info'
+    );
+    renderFeatureMatrixView();
+  }
+}
+
 function renderFeatureMatrixView() {
   if (!featureMatrixViewEl || !featureMatrixTableHeadEl || !featureMatrixTableBodyEl) {
     return;
@@ -8917,6 +9053,7 @@ function renderFeatureMatrixView() {
 
   getFeatureMatrixDraft();
   const rows = getFeatureMatrixRows();
+  pruneFeatureMatrixSelectedRows(rows);
   const changes = getFeatureMatrixChanges(rows);
   const dirty = isFeatureMatrixDirty();
   const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
@@ -8928,7 +9065,12 @@ function renderFeatureMatrixView() {
     : '<tr><td class="feature-matrix-empty" colspan="99">No groups match the current filters.</td></tr>';
 
   if (featureMatrixSummaryEl) {
-    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} visible groups / ${siteCount.toLocaleString()} sites - ${changes.length.toLocaleString()} changed`;
+    const selectedCount = getFeatureMatrixSelectedRowKeys().size;
+    featureMatrixSummaryEl.textContent = [
+      `${rows.length.toLocaleString()} visible groups / ${siteCount.toLocaleString()} sites`,
+      selectedCount > 0 ? `${selectedCount.toLocaleString()} selected` : '',
+      `${changes.length.toLocaleString()} changed`,
+    ].filter(Boolean).join(' - ');
   }
 
   if (featureMatrixStatusEl) {
@@ -8965,21 +9107,33 @@ function updateFeatureMatrixBulkApplyState(rowCount) {
   if (!featureMatrixBulkApplyButton) {
     return;
   }
-  const resolvedRowCount = Number.isFinite(rowCount) ? rowCount : getFeatureMatrixRows().length;
+  const rows = getFeatureMatrixRows();
+  const targetRows = getFeatureMatrixBulkTargetRows(rows);
+  const resolvedRowCount = Number.isFinite(rowCount) && getFeatureMatrixSelectedRowKeys().size === 0
+    ? rowCount
+    : targetRows.length;
   const hasFacet = Boolean(featureMatrixBulkFeatureEl?.value);
   const hasAction = Boolean(featureMatrixBulkActionEl?.value);
   featureMatrixBulkApplyButton.disabled = resolvedRowCount === 0 || !hasFacet || !hasAction;
+  const labelEl = featureMatrixBulkApplyButton.querySelector('span');
+  if (labelEl) {
+    labelEl.textContent = getFeatureMatrixSelectedRowKeys().size > 0
+      ? `Apply to ${resolvedRowCount.toLocaleString()} selected`
+      : 'Apply to visible rows';
+  }
 }
 
 function renderFeatureMatrixHeader(rows) {
   const countsByFacet = getFeatureMatrixCounts(rows);
+  const selected = getFeatureMatrixSelectedRowKeys();
+  const allVisibleSelected = rows.length > 0 && rows.every((row) => selected.has(row.key));
   const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
     const counts = countsByFacet[facet.id] || {};
     const countParts = [
-      `${counts[FEATURE_MATRIX_STATE_ON] || 0} add`,
-      `${counts[FEATURE_MATRIX_STATE_COPY] || 0} copy`,
-      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} remove`,
-      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} ignore`,
+      `${counts[FEATURE_MATRIX_STATE_ON] || 0} current`,
+      `${counts[FEATURE_MATRIX_STATE_COPY] || 0} uniform`,
+      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} update`,
+      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} missing`,
     ];
     if (counts[FEATURE_MATRIX_STATE_MIXED] > 0) {
       countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
@@ -8988,10 +9142,15 @@ function renderFeatureMatrixHeader(rows) {
     const icon = normalizeFeatureMatrixFacetIcon(facet.icon, facet.id);
     return `
       <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
-        <span class="feature-matrix-facet-label">
+        <button
+          type="button"
+          class="feature-matrix-facet-label feature-matrix-facet-select"
+          data-feature-select-facet="${escapeHtml(facet.id)}"
+          title="${escapeHtml(`Select visible rows already using ${facet.label}`)}"
+        >
           <i class="${escapeHtml(icon)}" aria-hidden="true"></i>
           <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
-        </span>
+        </button>
         <small>${escapeHtml(countLabel)}</small>
       </th>
     `;
@@ -9000,6 +9159,13 @@ function renderFeatureMatrixHeader(rows) {
     <tr>
       <th class="feature-matrix-app">
         <span class="feature-matrix-app-label">
+          <input
+            type="checkbox"
+            class="feature-matrix-select-checkbox"
+            data-feature-select-all="true"
+            aria-label="Select all visible feature rows"
+            ${allVisibleSelected ? 'checked' : ''}
+          >
           <i class="ti ti-layout-grid" aria-hidden="true"></i>
           <span>Group</span>
         </span>
@@ -9045,6 +9211,7 @@ function renderFeatureMatrixPreview(row) {
 
 function renderFeatureMatrixRow(row) {
   const title = row.title || row.key;
+  const selected = getFeatureMatrixSelectedRowKeys().has(row.key);
   const memberLabel = row.siteCount === 1
     ? row.host
     : `${row.siteCount.toLocaleString()} sites${row.totalSiteCount > row.siteCount ? ` visible / ${row.totalSiteCount.toLocaleString()} total` : ''}`;
@@ -9078,6 +9245,14 @@ function renderFeatureMatrixRow(row) {
     <tr data-feature-matrix-row="${escapeHtml(row.key)}">
       <th class="feature-matrix-site" scope="row">
         <div class="feature-matrix-site-card">
+          <input
+            type="checkbox"
+            class="feature-matrix-select-checkbox"
+            data-feature-row-select="true"
+            data-row-key="${escapeHtml(row.key)}"
+            aria-label="${escapeHtml(`Select ${title}`)}"
+            ${selected ? 'checked' : ''}
+          >
           ${renderFeatureMatrixPreview(row)}
           <div class="feature-matrix-site-copy">
             <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
@@ -9500,12 +9675,13 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
   lines.push(
     '',
     'Action semantics:',
-    '- ADD / ENFORCE means add the facet if missing, or normalize the existing implementation to the facet rule if present.',
-    '- COPY PATTERN means mirror the canonical/existing implementation style exactly; avoid bespoke variants.',
-    '- REMOVE / BLOCK means remove the facet if present and keep it intentionally absent.',
-    '- IGNORE means make no code change for this facet in this run.',
-    '- SEEN cells come from semantic tags or deterministic catalog fields. Treat them as historical context, not operator intent, until the operator sets a decision.',
-    '- NO ACTION means the operator has not made a decision and no semantic history was found; audit first before proposing work.',
+    '- The matrix is forward-only: never remove a feature because of this runbook.',
+    '- CURRENT / ADD means add the facet if missing, then verify it follows the facet rule.',
+    '- UPDATE means the facet is present but should be brought up to the current canonical pattern.',
+    '- UNIFORM means make the selected rows use the same current implementation pattern.',
+    '- NOT PRESENT is a status only. It is never an instruction to remove anything.',
+    '- Observed cells come from semantic tags or deterministic catalog fields. Treat them as historical context, not operator intent, until the operator sets a forward decision.',
+    '- NOT ASSESSED means audit first before proposing work.',
     '- MIXED means the group contains member sites with different decisions; inspect the listed member states before acting.',
     '',
     'Facet rules:'
@@ -9530,7 +9706,6 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     const byState = {
       [FEATURE_MATRIX_STATE_ON]: [],
       [FEATURE_MATRIX_STATE_COPY]: [],
-      [FEATURE_MATRIX_STATE_OFF]: [],
       [FEATURE_MATRIX_STATE_DEFERRED]: [],
       [FEATURE_MATRIX_STATE_MIXED]: [],
     };
@@ -9544,7 +9719,7 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
       }
     }
     const chunks = [];
-    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED]) {
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_MIXED]) {
       if (byState[stateId].length > 0) {
         explicitDecisionCount += byState[stateId].length;
         chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
@@ -9555,7 +9730,7 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     }
   }
   if (explicitDecisionCount === 0) {
-    lines.push('- No explicit ADD/COPY/REMOVE/IGNORE decisions yet.');
+    lines.push('- No explicit forward decisions yet.');
   }
 
   lines.push('', 'Observed historical baseline by facet:');
@@ -9578,7 +9753,7 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
       }
     }
     const chunks = [];
-    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED]) {
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_MIXED]) {
       if (byState[stateId].length > 0) {
         observedBaselineCount += byState[stateId].length;
         chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
@@ -9595,7 +9770,7 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
   lines.push(
     '',
     'Orchestrated agent request:',
-    'Use explicit operator decision packets as intent and use the observed historical baseline only as context/evidence. Produce a repo-by-repo execution plan before editing. For ADD / ENFORCE packets, make every listed member site follow the facet rule exactly and add matching tests when the repo has a test surface. For COPY PATTERN packets, identify the strongest canonical implementation in the packet or facet rule, copy that pattern into every listed site, and call out any repo where the pattern cannot apply cleanly. For REMOVE / BLOCK packets, remove the feature and add guardrails/tests where practical so it does not reappear accidentally. For IGNORE packets, do not touch the feature. For SEEN-only cells, audit and report current implementation status before proposing changes. For NO ACTION cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
+    'Use explicit forward decision packets as intent and use the observed historical baseline only as context/evidence. Produce a repo-by-repo execution plan before editing. For CURRENT / ADD packets, add the facet where missing and verify every listed member site follows the facet rule exactly. For UPDATE packets, bring the existing implementation up to the current canonical pattern. For UNIFORM packets, identify the strongest canonical implementation in the packet or facet rule, make every listed site match it, and call out any repo where the pattern cannot apply cleanly. Do not remove features from any site because of this runbook. For observed-only cells, audit and report current implementation status before proposing forward changes. For NOT ASSESSED cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
   );
 
   return `${lines.join('\n')}\n`;
