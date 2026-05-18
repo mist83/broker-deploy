@@ -56,8 +56,8 @@ This is context for remote-doctrine projection only. It is not an implementation
 - 1 global instructions file: `~/.codex/AGENTS.md`
 - 1 workspace-family instructions file: `/Users/mist83/Code/AGENTS.md`
 - 1 local permission/fuse rules file: `~/.codex/rules/default.rules`
-- 18 user skill packs in `~/.codex/skills/*`:
-  `canonize`, `coordinate`, `frontend-skill`, `heimdall-announce`, `imagegen`, `itchy-brain`, `marionette-protocol`, `mark-defunct`, `mullmania-frontend-demo-swarm`, `playwright`, `playwright-interactive`, `remote-site-screenshot`, `roomup`, `screenshot`, `shipit`, `sora`, `ui-mullmania-migrator`, `wrap-executable-ui`
+- 17 user skill packs in `~/.codex/skills/*`:
+  `canonize`, `coordinate`, `frontend-skill`, `imagegen`, `itchy-brain`, `marionette-protocol`, `mark-defunct`, `mullmania-frontend-demo-swarm`, `playwright`, `playwright-interactive`, `remote-site-screenshot`, `roomup`, `screenshot`, `shipit`, `sora`, `ui-mullmania-migrator`, `wrap-executable-ui`
 - 2 runtime-provided local skill bundles: `.system`, `codex-primary-runtime`
 - 6 locally cached plugin bundles: `computer-use`, `build-macos-apps`, `build-web-apps`, `game-studio`, `github`, `gmail`
 - 0 user automation definitions today. Only runtime salt exists at `~/.codex/automations/.run-jitter-salt`.

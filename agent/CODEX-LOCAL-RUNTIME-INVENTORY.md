@@ -23,7 +23,6 @@ These are still local runtime inputs today:
 - `canonize`
 - `coordinate`
 - `frontend-skill`
-- `heimdall-announce`
 - `imagegen`
 - `itchy-brain`
 - `marionette-protocol`

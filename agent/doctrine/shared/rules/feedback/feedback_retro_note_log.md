@@ -8,9 +8,9 @@ The retro log at https://retro.mullmania.com is the durable improvement trail fo
 
 ## Rule
 
-- After every completed task — same trigger as `feedback_heimdall_announce` and `feedback_dev_diary_log` — POST one retrospective entry.
+- After every completed task, POST one retrospective entry. This is the sole post-task reflex.
 - Endpoint: `POST https://retro.mullmania.com/api/entries`
-- Auth: `x-retro-token: $DEV_DIARY_TOKEN` or `x-dev-diary-token: $DEV_DIARY_TOKEN`. The token lives in the dev-diary Lambda env (`aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text`).
+- Auth: `x-retro-token: $RETRO_TOKEN`. If `$RETRO_TOKEN` is unset, report the failure plainly and proceed — do not pretend the entry was written.
 - One retro entry per completed task. Not per tool call.
 - Keep it plain and operational. This is not a status update; it is a learning note for later sweep.
 - Always include `tags` containing `retro` and `task-retro`, and `payload.kind` set to `task-retro`.
@@ -39,7 +39,7 @@ The retro log at https://retro.mullmania.com is the durable improvement trail fo
 
 ## Scope
 
-All runtimes, all repos, all completed task kinds. This pairs with Slack and dev-diary logging; it does not replace either one.
+All runtimes, all repos, all completed task kinds.
 
 ## Failure mode
 

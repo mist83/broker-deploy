@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-18T05:02:47.428Z",
+  "generatedAt": "2026-05-18T05:19:29.752Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -133,39 +133,6 @@
       ]
     },
     {
-      "id": "feedback_dev_diary_log",
-      "label": "feedback dev diary log",
-      "kind": "feedback-rule",
-      "summary": "The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, a",
-      "excerpt": "The dev diary at https://dev-diary.mullmania.com is the durable narrative trail for everything you do. After every completed task, append one short JSON entry so the operator has a browsable story of what changed, why, and where the proof lives.\n\nRule\nAfter every completed task — same trigger as feedback_heimdall_announce — POST a short entry to the dev-diary API.\nEndpoint: POST https://dev-diary.mullmania.com/api/entries\nAuth: x-dev-diary-token: $DEV_DIARY_TOKEN. The token lives in the Lambda env (aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text). Cache it in your shell env or fetch on demand.\nOne entry per completed task. Not per tool call.\nBody shape (all fields except title are optional but use them when you have the info):\nIf you produced a screenshot or any durable image, attach it via POST /api/entries/<entry-id>/screenshots with { \"url\": \"/media/<repo>/<file>\", \"label\": \"...\" }. The /media/... path resolves to images.mullmania.com at render time.\nPlain neutral language. No marketing copy. No emoji-spam. The dev diary is read like a logbook, not a pitch.\nIf the POST fails (network, 401, 5xx), report the failure plainly and continue. Do not pretend the entry was written.\n\nWhy\n\nSlack (heimdall) is conversational — it scrolls past. S3 is the artifact pile — unbrowsable narrat",
-      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_dev_diary_log.md",
-      "sitePath": "/doctrine/shared/rules/feedback/feedback_dev_diary_log.md",
-      "sha256": "7bb6699721830723255601c2774549d58f6e4e2d444ba64b01d3b024f8c766e6",
-      "durability": "standing",
-      "tags": [
-        "core",
-        "announce",
-        "narrative"
-      ],
-      "domains": [
-        "operator-core"
-      ],
-      "events": [
-        "session_start",
-        "task_execution",
-        "memory_read"
-      ],
-      "runtimes": [
-        "codex",
-        "claude",
-        "generic",
-        "agent"
-      ],
-      "profileIds": [
-        "shared-operator-core"
-      ]
-    },
-    {
       "id": "feedback_development_canon_source_of_truth",
       "label": "feedback development canon source of truth",
       "kind": "feedback-rule",
@@ -244,39 +211,6 @@
       "tags": [
         "core",
         "simplicity"
-      ],
-      "domains": [
-        "operator-core"
-      ],
-      "events": [
-        "session_start",
-        "task_execution",
-        "memory_read"
-      ],
-      "runtimes": [
-        "codex",
-        "claude",
-        "generic",
-        "agent"
-      ],
-      "profileIds": [
-        "shared-operator-core"
-      ]
-    },
-    {
-      "id": "feedback_heimdall_announce",
-      "label": "feedback heimdall announce",
-      "kind": "feedback-rule",
-      "summary": "Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.",
-      "excerpt": "Slack is canonical conversation state. After every completed task, log a short note so the operator has an out-of-band record without having to read the agent transcript.\n\nRule\nAfter every completed task, run the operator's heimdall-announce script with one short neutral sentence summarizing what was done.\nDefault invocation: python3 /Users/mist83/.codex/skills/heimdall-announce/scripts/announce_to_cline_log.py \"<message>\"\nPlain text only. No Block Kit. No timestamp. No signature. No prefix.\nThe message is a useful operator note, not marketing copy. One sentence.\nIf the user gave exact text, send it verbatim.\nDo not claim success unless the command exits 0 and prints a Slack message id.\nIf the command fails, report the error plainly. Do not pretend the announce happened.\n\nWhy\n\nSlack is where the operator scans daily activity. The Slack note is the durable trace of \"this happened, here is the operator-readable summary.\" S3 is for the artifacts; Slack is for the narrative. Without the Slack note, the operator has to dig through transcripts to know what completed.\n\nScope\n\nThis rule applies to **all** runtimes and **all** repos for this operator. The local heimdall-announce script lives outside any single runtime tree (~/.codex/skills/heimdall-announce/) so both Codex and Claude call the same binary.\n\nFailure mode\n\nIf the heimdall script is missing or fails, the task is not done — ",
-      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_heimdall_announce.md",
-      "sitePath": "/doctrine/shared/rules/feedback/feedback_heimdall_announce.md",
-      "sha256": "1a48ebdff2d44e90023df60edf841eb52635e7ca1ad15a488513ff89bc0b23b6",
-      "durability": "standing",
-      "tags": [
-        "core",
-        "announce",
-        "slack"
       ],
       "domains": [
         "operator-core"
@@ -556,10 +490,10 @@
       "label": "feedback retro note log",
       "kind": "feedback-rule",
       "summary": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task ",
-      "excerpt": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task easier.\n\nRule\nAfter every completed task — same trigger as feedback_heimdall_announce and feedback_dev_diary_log — POST one retrospective entry.\nEndpoint: POST https://retro.mullmania.com/api/entries\nAuth: x-retro-token: $DEV_DIARY_TOKEN or x-dev-diary-token: $DEV_DIARY_TOKEN. The token lives in the dev-diary Lambda env (aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text).\nOne retro entry per completed task. Not per tool call.\nKeep it plain and operational. This is not a status update; it is a learning note for later sweep.\nAlways include tags containing retro and task-retro, and payload.kind set to task-retro.\n\nScope\n\nAll runtimes, all repos, all completed task kinds. This pairs with Slack and dev-diary logging; it does not replace either one.\n\nFailure mode\n\nIf the POST fails, report the failure plainly. Do not pretend the retro note was written. Do not block deployment or leave live user-facing work half-finished solely because the retro API is down.",
+      "excerpt": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task easier.\n\nRule\nAfter every completed task, POST one retrospective entry. This is the sole post-task reflex.\nEndpoint: POST https://retro.mullmania.com/api/entries\nAuth: x-retro-token: $RETRO_TOKEN. If $RETRO_TOKEN is unset, report the failure plainly and proceed — do not pretend the entry was written.\nOne retro entry per completed task. Not per tool call.\nKeep it plain and operational. This is not a status update; it is a learning note for later sweep.\nAlways include tags containing retro and task-retro, and payload.kind set to task-retro.\n\nScope\n\nAll runtimes, all repos, all completed task kinds.\n\nFailure mode\n\nIf the POST fails, report the failure plainly. Do not pretend the retro note was written. Do not block deployment or leave live user-facing work half-finished solely because the retro API is down.",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
-      "sha256": "580cbf5ad414a9c4e9f87fc62f88b5feeb809f4e448bef5dd723a83079e799b1",
+      "sha256": "27e04fb723b988c2e7243fbd541722b437c74a2d6ab10f799380ffe8e9f57992",
       "durability": "standing",
       "tags": [
         "core",

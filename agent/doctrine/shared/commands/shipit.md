@@ -73,13 +73,6 @@ After the deploy command exits 0:
 - Compute the live URL: `https://<siteId>.${DEPLOY_BASE_URL:-mullmania.com}/`.
 - If no `mullmania.site.json`, just report the deploy command's exit status.
 
-### 5. Heimdall
-
-One short line via:
-```
-python3 /Users/mist83/.codex/skills/heimdall-announce/scripts/announce_to_cline_log.py "<repo>: shipped <short-sha> → <live-url-or-pushed-only>"
-```
-
 ## Final report
 
 Three lines max:

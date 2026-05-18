@@ -55,7 +55,7 @@ The Claude Code harness has surfaces Codex CLI does not. These exist as projecti
 
 A snapshot of Claude-side surfaces that exist on the operator machine today. This is context for remote-doctrine projection only, not an implementation backlog. Counts and categories, not file contents.
 
-- 1 global instructions file (`~/.claude/CLAUDE.md`): Heimdall announce + Mullmania development canon reference.
+- 1 global instructions file (`~/.claude/CLAUDE.md`): Mullmania development canon reference.
 - 1 settings.json with one PostToolUse hook (`mullmania-s3-resync.sh`).
 - 1 MCP server (itchy-brain).
 - 3 slash commands (`/roomup`, `/shipit`, `/tombstone`).
@@ -72,7 +72,6 @@ The 12 feedback memories and 10 reference memories are the candidates that shoul
 
 These are durable behaviors the doctrine must encode if we want a fresh Claude session to behave like the configured one. They are listed here as migration intent only; the actual policy artifacts live downstream of doctrine.
 
-- Heimdall announce: post a short plain-text update to Slack channel `cline-log` after every completed task.
 - Follow grugbrain development practices.
 - Do not hallucinate.
 - Apply obvious speech-to-text normalization across repos under `/Users/mist83/Code`.

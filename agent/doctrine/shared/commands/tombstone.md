@@ -50,5 +50,3 @@ After tombstoning, state:
 - Whether the push succeeded
 - Whether the local clone was removed
 - Any leftovers worth salvaging
-
-Then announce to Slack via Heimdall.

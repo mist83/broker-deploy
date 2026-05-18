@@ -1,0 +1,103 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - heading " Agent" [level=1] [ref=e3]:
+      - generic [ref=e4]: 
+      - generic [ref=e5]: Agent
+    - link " GitHub" [ref=e7] [cursor=pointer]:
+      - /url: https://github.com/mist83/agent
+      - generic [ref=e8]: 
+      - generic [ref=e9]: GitHub
+  - tablist [ref=e10]:
+    - tab " Overview" [ref=e11] [cursor=pointer]:
+      - generic [ref=e12]: 
+      - text: Overview
+    - tab " Builder" [ref=e13] [cursor=pointer]:
+      - generic [ref=e14]: 
+      - text: Builder
+    - tab " Rules" [ref=e15] [cursor=pointer]:
+      - generic [ref=e16]: 
+      - text: Rules
+    - tab " Full Guides" [ref=e17] [cursor=pointer]:
+      - generic [ref=e18]: 
+      - text: Full Guides
+    - tab " Docs" [selected] [ref=e19] [cursor=pointer]:
+      - generic [ref=e20]: 
+      - text: Docs
+    - tab " UI Framework" [ref=e21] [cursor=pointer]:
+      - generic [ref=e22]: 
+      - text: UI Framework
+  - generic [ref=e97]:
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - button " README" [ref=e100] [cursor=pointer]:
+          - generic [ref=e101]: 
+          - generic [ref=e102]: README
+        - button " Doctrine bootstrap guide" [ref=e103] [cursor=pointer]:
+          - generic [ref=e104]: 
+          - generic [ref=e105]: Doctrine bootstrap guide
+        - button " Doctrine compose API" [ref=e106] [cursor=pointer]:
+          - generic [ref=e107]: 
+          - generic [ref=e108]: Doctrine compose API
+        - button " Codex bootstrap prompt" [ref=e109] [cursor=pointer]:
+          - generic [ref=e110]: 
+          - generic [ref=e111]: Codex bootstrap prompt
+        - button " Codex memory seed" [ref=e112] [cursor=pointer]:
+          - generic [ref=e113]: 
+          - generic [ref=e114]: Codex memory seed
+        - button " Codex local runtime inventory" [ref=e115] [cursor=pointer]:
+          - generic [ref=e116]: 
+          - generic [ref=e117]: Codex local runtime inventory
+        - button " Safe to wipe Codex" [ref=e118] [cursor=pointer]:
+          - generic [ref=e119]: 
+          - generic [ref=e120]: Safe to wipe Codex
+        - button " Claude memory seed" [ref=e121] [cursor=pointer]:
+          - generic [ref=e122]: 
+          - generic [ref=e123]: Claude memory seed
+        - button " Rule creation guide" [ref=e124] [cursor=pointer]:
+          - generic [ref=e125]: 
+          - generic [ref=e126]: Rule creation guide
+        - button " Custom instructions" [ref=e127] [cursor=pointer]:
+          - generic [ref=e128]: 
+          - generic [ref=e129]: Custom instructions
+        - button " Rules index" [ref=e130] [cursor=pointer]:
+          - generic [ref=e131]: 
+          - generic [ref=e132]: Rules index
+        - button " Custom commands index" [ref=e133] [cursor=pointer]:
+          - generic [ref=e134]: 
+          - generic [ref=e135]: Custom commands index
+        - button " Custom Cline extension" [ref=e136] [cursor=pointer]:
+          - generic [ref=e137]: 
+          - generic [ref=e138]: Custom Cline extension
+        - button " Retired repos" [ref=e139] [cursor=pointer]:
+          - generic [ref=e140]: 
+          - generic [ref=e141]: Retired repos
+        - button " Implementation summary" [ref=e142] [cursor=pointer]:
+          - generic [ref=e143]: 
+          - generic [ref=e144]: Implementation summary
+        - button " Centralized work items" [active] [ref=e145] [cursor=pointer]:
+          - generic [ref=e146]: 
+          - generic [ref=e147]: Centralized work items
+      - button "" [ref=e148]:
+        - generic [ref=e149]: 
+    - generic [ref=e151]:
+      - generic [ref=e234]:
+        - heading "Centralized work items" [level=2] [ref=e235]
+        - generic [ref=e236]: No description available
+      - article [ref=e238]:
+        - paragraph [ref=e239]:
+          - link " CENTRALIZED-WORK-ITEMS.md" [ref=e240] [cursor=pointer]:
+            - /url: ../CENTRALIZED-WORK-ITEMS.md
+            - generic [ref=e241]: 
+            - text: CENTRALIZED-WORK-ITEMS.md
+        - generic [ref=e242]:
+          - heading "Centralized Work Items" [level=1] [ref=e243]
+          - paragraph [ref=e244]: Local task detail was moved to the central backlog.
+          - list [ref=e245]:
+            - listitem [ref=e246]:
+              - text: "Source repo:"
+              - code [ref=e247]: mist83/agent
+            - listitem [ref=e248]:
+              - text: "Central directory:"
+              - code [ref=e249]: mist83/tasks/centralized/
+            - listitem [ref=e250]: Machine data lives in the central directory.
+            - listitem [ref=e251]: "Moved at: 2026-05-17T02:33:49Z"

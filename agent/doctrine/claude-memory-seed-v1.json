@@ -66,7 +66,7 @@
     "instructionPack": [
       "12 feedback memories (standing behavior rules)",
       "10 reference memories (external system pointers)",
-      "1 global CLAUDE.md content (Heimdall announce + canon reference)"
+      "1 global CLAUDE.md content (canon reference)"
     ],
     "skillPack": [
       "canonize",
@@ -86,7 +86,6 @@
     ]
   },
   "mandatoryStandingBehaviors": [
-    "Heimdall announce after every completed task (Slack channel cline-log).",
     "Follow grugbrain development practices.",
     "Do not hallucinate.",
     "Apply obvious speech-to-text normalization across repos under /Users/mist83/Code.",
