@@ -188,7 +188,7 @@ const FEATURE_MATRIX_STATE_OFF = 'off';
 const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
 const FEATURE_MATRIX_STATE_MIXED = 'mixed';
 const FEATURE_MATRIX_STATES = Object.freeze({
-  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'No action', shortLabel: 'Pick', icon: 'ti ti-circle-dotted' },
+  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'No action', shortLabel: 'Decide', icon: 'ti ti-circle-dotted' },
   [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Add / enforce', shortLabel: 'Add', icon: 'ti ti-plus' },
   [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Copy pattern', shortLabel: 'Copy', icon: 'ti ti-copy' },
   [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Remove / block', shortLabel: 'Remove', icon: 'ti ti-minus' },
@@ -830,11 +830,12 @@ const wallViewEl = document.getElementById('wall-view');
 const tvViewEl = document.getElementById('tv-view');
 const featureMatrixViewEl = document.getElementById('features-view');
 const featureMatrixSummaryEl = document.getElementById('feature-matrix-summary');
-const featureMatrixScopeEl = document.getElementById('feature-matrix-scope');
+const featureMatrixBulkFeatureEl = document.getElementById('feature-matrix-bulk-feature');
+const featureMatrixBulkActionEl = document.getElementById('feature-matrix-bulk-action');
+const featureMatrixBulkApplyButton = document.getElementById('feature-matrix-bulk-apply');
 const featureMatrixSaveButton = document.getElementById('feature-matrix-save');
 const featureMatrixResetButton = document.getElementById('feature-matrix-reset');
 const featureMatrixCopyButton = document.getElementById('feature-matrix-copy');
-const featureMatrixSeedButton = document.getElementById('feature-matrix-seed');
 const featureMatrixStatusEl = document.getElementById('feature-matrix-status');
 const featureMatrixTableHeadEl = document.getElementById('feature-matrix-head');
 const featureMatrixTableBodyEl = document.getElementById('feature-matrix-body');
@@ -2344,14 +2345,12 @@ function bindEvents() {
   dependenciesGraphEl?.addEventListener('wheel', handleDependenciesGraphWheel, { passive: false });
   dependenciesGraphStageEl?.addEventListener('dragover', handleDependenciesGraphDragOver);
   dependenciesGraphStageEl?.addEventListener('drop', handleDependenciesGraphDrop);
-  featureMatrixScopeEl?.addEventListener('change', () => {
-    setFeatureMatrixScope(featureMatrixScopeEl.value);
-  });
-  featureMatrixTableHeadEl?.addEventListener('change', handleFeatureMatrixHeaderChange);
+  featureMatrixBulkFeatureEl?.addEventListener('change', updateFeatureMatrixBulkApplyState);
+  featureMatrixBulkActionEl?.addEventListener('change', updateFeatureMatrixBulkApplyState);
+  featureMatrixBulkApplyButton?.addEventListener('click', applyFeatureMatrixToolbarBulkAction);
   featureMatrixTableBodyEl?.addEventListener('click', handleFeatureMatrixClick);
   featureMatrixSaveButton?.addEventListener('click', saveFeatureMatrixDraft);
   featureMatrixResetButton?.addEventListener('click', resetFeatureMatrixDraft);
-  featureMatrixSeedButton?.addEventListener('click', seedFeatureMatrixHeuristics);
   featureMatrixCopyButton?.addEventListener('click', () => {
     void copyFeatureMatrixSynopsis();
   });
@@ -8529,9 +8528,7 @@ function getFeatureMatrixSaved() {
 }
 
 function getFeatureMatrixRows() {
-  const source = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL
-    ? buildDisplayEntries(state.entries)
-    : state.visibleEntries;
+  const source = state.visibleEntries;
   return (Array.isArray(source) ? source : [])
     .map((entry) => buildFeatureMatrixRowModel(entry))
     .filter((row) => row.siteIds.length > 0)
@@ -8567,9 +8564,6 @@ function getFeatureMatrixRowMembers(entry) {
 }
 
 function getFeatureMatrixVisibleMembers(entry, members) {
-  if (state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL) {
-    return members;
-  }
   const visibleIds = new Set(
     (Array.isArray(entry?.visibleFamilyMembers) && entry.visibleFamilyMembers.length > 0
       ? entry.visibleFamilyMembers
@@ -8707,6 +8701,21 @@ function setFeatureMatrixFacetForRows(facetId, cellState) {
   renderFeatureMatrixView();
 }
 
+function applyFeatureMatrixToolbarBulkAction() {
+  const facetId = featureMatrixBulkFeatureEl?.value || '';
+  const nextState = featureMatrixBulkActionEl?.value || '';
+  if (!facetId || !nextState) {
+    setFeatureMatrixStatus('Choose a feature and action first.', 'warning');
+    renderFeatureMatrixView();
+    return;
+  }
+  setFeatureMatrixFacetForRows(facetId, nextState);
+  if (featureMatrixBulkActionEl) {
+    featureMatrixBulkActionEl.value = '';
+  }
+  updateFeatureMatrixBulkApplyState();
+}
+
 function getNextFeatureMatrixCellState(currentState) {
   const normalized = normalizeFeatureMatrixCellState(currentState);
   const currentIndex = FEATURE_MATRIX_STATE_ORDER.indexOf(normalized);
@@ -8738,22 +8747,6 @@ function handleFeatureMatrixClick(event) {
   setFeatureMatrixRowCellState(rowKey, facetId, nextState);
 }
 
-function handleFeatureMatrixHeaderChange(event) {
-  const select = event.target instanceof Element
-    ? event.target.closest('[data-feature-bulk]')
-    : null;
-  if (!(select instanceof HTMLSelectElement)) {
-    return;
-  }
-  const facetId = select.getAttribute('data-feature-bulk') || '';
-  const nextState = select.value;
-  select.value = '';
-  if (!nextState) {
-    return;
-  }
-  setFeatureMatrixFacetForRows(facetId, nextState);
-}
-
 function renderFeatureMatrixView() {
   if (!featureMatrixViewEl || !featureMatrixTableHeadEl || !featureMatrixTableBodyEl) {
     return;
@@ -8763,24 +8756,20 @@ function renderFeatureMatrixView() {
   const rows = getFeatureMatrixRows();
   const changes = getFeatureMatrixChanges(rows);
   const dirty = isFeatureMatrixDirty();
-  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all groups' : 'visible groups';
   const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
 
-  if (featureMatrixScopeEl && featureMatrixScopeEl.value !== state.featureMatrix.scope) {
-    featureMatrixScopeEl.value = state.featureMatrix.scope;
-  }
-
+  syncFeatureMatrixBulkControls(rows);
   featureMatrixTableHeadEl.innerHTML = renderFeatureMatrixHeader(rows);
   featureMatrixTableBodyEl.innerHTML = rows.length
     ? rows.map((entry) => renderFeatureMatrixRow(entry)).join('')
-    : '<tr><td class="feature-matrix-empty" colspan="99">No apps match this scope.</td></tr>';
+    : '<tr><td class="feature-matrix-empty" colspan="99">No groups match the current filters.</td></tr>';
 
   if (featureMatrixSummaryEl) {
-    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} ${scopeLabel} / ${siteCount.toLocaleString()} sites - ${FEATURE_MATRIX_FACETS.length.toLocaleString()} facets - ${changes.length.toLocaleString()} changed`;
+    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} visible groups / ${siteCount.toLocaleString()} sites - ${changes.length.toLocaleString()} changed`;
   }
 
   if (featureMatrixStatusEl) {
-    const fallback = dirty ? 'Unsaved local changes' : (getFeatureMatrixSaved().updatedAt ? 'Saved locally' : 'No saved decisions yet');
+    const fallback = dirty ? 'Unsaved local changes' : (getFeatureMatrixSaved().updatedAt ? 'Saved locally' : 'No actions set yet');
     featureMatrixStatusEl.textContent = state.featureMatrix.statusMessage || fallback;
     featureMatrixStatusEl.dataset.tone = state.featureMatrix.statusTone || (dirty ? 'warning' : 'info');
   }
@@ -8791,12 +8780,32 @@ function renderFeatureMatrixView() {
   if (featureMatrixResetButton) {
     featureMatrixResetButton.disabled = !dirty;
   }
-  if (featureMatrixSeedButton) {
-    featureMatrixSeedButton.disabled = rows.length === 0;
-  }
   if (featureMatrixSynopsisEl) {
     featureMatrixSynopsisEl.value = buildFeatureMatrixSynopsis(rows, changes);
   }
+}
+
+function syncFeatureMatrixBulkControls(rows) {
+  if (featureMatrixBulkFeatureEl) {
+    const currentFacetId = featureMatrixBulkFeatureEl.value;
+    featureMatrixBulkFeatureEl.innerHTML = FEATURE_MATRIX_FACETS.map((facet) => (
+      `<option value="${escapeHtml(facet.id)}">${escapeHtml(facet.label)}</option>`
+    )).join('');
+    if (FEATURE_MATRIX_FACETS.some((facet) => facet.id === currentFacetId)) {
+      featureMatrixBulkFeatureEl.value = currentFacetId;
+    }
+  }
+  updateFeatureMatrixBulkApplyState(rows.length);
+}
+
+function updateFeatureMatrixBulkApplyState(rowCount) {
+  if (!featureMatrixBulkApplyButton) {
+    return;
+  }
+  const resolvedRowCount = Number.isFinite(rowCount) ? rowCount : getFeatureMatrixRows().length;
+  const hasFacet = Boolean(featureMatrixBulkFeatureEl?.value);
+  const hasAction = Boolean(featureMatrixBulkActionEl?.value);
+  featureMatrixBulkApplyButton.disabled = resolvedRowCount === 0 || !hasFacet || !hasAction;
 }
 
 function renderFeatureMatrixHeader(rows) {
@@ -8817,14 +8826,6 @@ function renderFeatureMatrixHeader(rows) {
       <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
         <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
         <small>${escapeHtml(countLabel)}</small>
-        <select class="feature-matrix-bulk" data-feature-bulk="${escapeHtml(facet.id)}" aria-label="${escapeHtml(`Set visible groups for ${facet.label}`)}">
-          <option value="">Bulk</option>
-          <option value="${FEATURE_MATRIX_STATE_ON}">Add / enforce visible</option>
-          <option value="${FEATURE_MATRIX_STATE_COPY}">Copy pattern visible</option>
-          <option value="${FEATURE_MATRIX_STATE_OFF}">Remove visible</option>
-          <option value="${FEATURE_MATRIX_STATE_DEFERRED}">Ignore visible</option>
-          <option value="${FEATURE_MATRIX_STATE_UNKNOWN}">Clear visible</option>
-        </select>
       </th>
     `;
   }).join('');

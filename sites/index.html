@@ -708,15 +708,23 @@
         </div>
         <div class="feature-matrix-actions">
           <label class="feature-matrix-control">
-            <span>Scope</span>
-            <select id="feature-matrix-scope" aria-label="Feature matrix scope">
-              <option value="visible">Visible groups</option>
-              <option value="all">All groups</option>
+            <span>Feature</span>
+            <select id="feature-matrix-bulk-feature" aria-label="Feature to apply"></select>
+          </label>
+          <label class="feature-matrix-control">
+            <span>Action</span>
+            <select id="feature-matrix-bulk-action" aria-label="Action to apply">
+              <option value="">Choose action</option>
+              <option value="on">Add / enforce</option>
+              <option value="copy">Copy pattern</option>
+              <option value="off">Remove / block</option>
+              <option value="deferred">Ignore</option>
+            <option value="unknown">Clear decision</option>
             </select>
           </label>
-          <button id="feature-matrix-seed" type="button" class="secondary">
-            <i class="ti ti-wand"></i>
-            <span>Seed guesses</span>
+          <button id="feature-matrix-bulk-apply" type="button" class="secondary">
+            <i class="ti ti-list-check"></i>
+            <span>Apply to visible rows</span>
           </button>
           <button id="feature-matrix-copy" type="button" class="secondary">
             <i class="ti ti-clipboard-copy"></i>

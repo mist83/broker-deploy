@@ -5676,14 +5676,6 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   font-weight: var(--weight-regular);
 }
 
-.feature-matrix-bulk {
-  display: block;
-  width: 100%;
-  min-height: 28px;
-  margin-top: 6px;
-  font-size: 11px;
-}
-
 .feature-matrix-site {
   text-align: left;
 }
