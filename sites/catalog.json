@@ -35034,17 +35034,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T03:09:20.968Z",
+    "lastPublishedAt": "2026-05-18T03:33:56.690Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26011353167",
-        "runNumber": "99"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "5d5dba8f59257372c329799a992be6fcfc2a5133",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "5d5dba8f59257372c329799a992be6fcfc2a5133",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
