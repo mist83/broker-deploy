@@ -213,28 +213,6 @@ const VSCODE_OPEN_URI_BASE = 'vscode://mist83.mullmania-sites/open';
 const VSCODE_DEPLOY_COMMAND = 'aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - | bash -s -- apply';
 const TABLE_PAGE_SIZE_ALL = 'all';
 const DEFAULT_TABLE_PAGE_SIZE = 50;
-const FEATURE_MATRIX_STORAGE_KEY = 'mullmania-launchpad-feature-matrix';
-const FEATURE_MATRIX_SCOPE_VISIBLE = 'visible';
-const FEATURE_MATRIX_SCOPE_ALL = 'all';
-const FEATURE_MATRIX_STATE_UNKNOWN = 'unknown';
-const FEATURE_MATRIX_STATE_ON = 'on';
-const FEATURE_MATRIX_STATE_COPY = 'copy';
-const FEATURE_MATRIX_STATE_OFF = 'off';
-const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
-const FEATURE_MATRIX_STATE_MIXED = 'mixed';
-const FEATURE_MATRIX_STATES = Object.freeze({
-  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Not assessed', shortLabel: 'Check', icon: 'ti ti-circle-dotted' },
-  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Current / add', shortLabel: 'Current', icon: 'ti ti-circle-check' },
-  [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Uniform', shortLabel: 'Uniform', icon: 'ti ti-copy-check' },
-  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Not present', shortLabel: 'Missing', icon: 'ti ti-circle-off' },
-  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Out of date / update', shortLabel: 'Update', icon: 'ti ti-clock-up' },
-});
-const FEATURE_MATRIX_STATE_ORDER = Object.freeze([
-  FEATURE_MATRIX_STATE_UNKNOWN,
-  FEATURE_MATRIX_STATE_ON,
-  FEATURE_MATRIX_STATE_DEFERRED,
-  FEATURE_MATRIX_STATE_COPY,
-]);
 const SEARCH_FIELD_DEFINITIONS = Object.freeze([
   { id: 'title', label: 'Title', ariaLabel: 'Search titles' },
   { id: 'url', label: 'URL', ariaLabel: 'Search URLs and subdomains' },
@@ -247,7 +225,6 @@ let CATEGORY_TAG_LABEL_BY_ID = new Map(CATEGORY_TAG_DEFINITIONS.map((tag) => [ta
 let CATEGORY_TAG_ALIAS_BY_ID = new Map(CATEGORY_TAG_DEFINITIONS.flatMap((tag) => (
   [tag.id, ...tag.aliases].map((alias) => [alias, tag.id])
 )));
-let FEATURE_MATRIX_FACETS = Object.freeze(DEFAULT_SITE_PLATFORM.featureFacets.map((facet) => ({ ...facet })));
 const COMPOSER_UNAVAILABLE_MESSAGE = 'Protected launchpad actions are not enabled on this build.';
 const OPERATOR_KEY_HELP_MESSAGE = 'Management actions include create, overwrite, delete, notes, tags, rank, preview refresh, and main-site changes.';
 const COMPOSER_INTENT_AUTHORING = 'authoring';
@@ -540,6 +517,52 @@ const ENTRY_MODIFIED_FIELDS = Object.freeze([
   { key: 'manualRankUpdatedAt', label: 'Rank' },
   { key: 'operatorNoteUpdatedAt', label: 'Note' },
 ]);
+const FEATURE_MATRIX_STORAGE_KEY = 'mullmania-launchpad-feature-matrix';
+const FEATURE_MATRIX_SCOPE_VISIBLE = 'visible';
+const FEATURE_MATRIX_SCOPE_ALL = 'all';
+const FEATURE_MATRIX_STATE_UNKNOWN = 'unknown';
+const FEATURE_MATRIX_STATE_ON = 'on';
+const FEATURE_MATRIX_STATE_COPY = 'copy';
+const FEATURE_MATRIX_STATE_OFF = 'off';
+const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
+const FEATURE_MATRIX_STATE_MIXED = 'mixed';
+const FEATURE_MATRIX_STATES = Object.freeze({
+  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Not assessed', shortLabel: 'Check', icon: 'ti ti-circle-dotted' },
+  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Current / add', shortLabel: 'Current', icon: 'ti ti-circle-check' },
+  [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Consistent standard', shortLabel: 'Standard', icon: 'ti ti-copy-check' },
+  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Not present', shortLabel: 'Missing', icon: 'ti ti-circle-off' },
+  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Out of date / update', shortLabel: 'Update', icon: 'ti ti-clock-up' },
+});
+const FEATURE_MATRIX_STATE_ORDER = Object.freeze([
+  FEATURE_MATRIX_STATE_UNKNOWN,
+  FEATURE_MATRIX_STATE_ON,
+  FEATURE_MATRIX_STATE_DEFERRED,
+  FEATURE_MATRIX_STATE_COPY,
+]);
+const FEATURE_MATRIX_FORWARD_ACTIONS = Object.freeze([
+  FEATURE_MATRIX_STATE_ON,
+  FEATURE_MATRIX_STATE_DEFERRED,
+  FEATURE_MATRIX_STATE_COPY,
+  FEATURE_MATRIX_STATE_UNKNOWN,
+]);
+const FEATURE_MATRIX_BULK_ACTIONS = Object.freeze([
+  { id: '', label: 'Choose action' },
+  { id: FEATURE_MATRIX_STATE_ON, label: 'Add or verify' },
+  { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Update to current' },
+  { id: FEATURE_MATRIX_STATE_COPY, label: 'Make consistent' },
+  { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Clear decision' },
+]);
+const FEATURE_MATRIX_RUNBOOK_SEMANTICS = Object.freeze([
+  'The gates are forward-only: never remove a feature because of this runbook.',
+  'CURRENT / ADD means add the facet if missing, then verify it follows the facet rule.',
+  'UPDATE means the facet is present but should be brought up to the current canonical pattern.',
+  'STANDARD means make the selected rows use the same current implementation pattern.',
+  'NOT PRESENT is a status only. It is never an instruction to remove anything.',
+  'Observed cells come from semantic tags or deterministic catalog fields. Treat them as historical context, not operator intent, until the operator sets a forward decision.',
+  'NOT ASSESSED means audit first before proposing work.',
+  'MIXED means the group contains member sites with different decisions; inspect the listed member states before acting.',
+]);
+let FEATURE_MATRIX_FACETS = Object.freeze(DEFAULT_SITE_PLATFORM.featureFacets.map((facet) => ({ ...facet })));
 
 const state = {
   entries: [],
@@ -1292,17 +1315,16 @@ async function init() {
 }
 
 async function loadSitePlatformContract() {
-  let contract = DEFAULT_SITE_PLATFORM;
+  let contract = null;
   try {
     contract = await fetchJson('./site-platform.json');
   } catch (error) {
-    console.warn('[sites] site-platform.json unavailable; using bundled platform defaults.', error);
+    throw new Error(`site-platform.json could not be loaded: ${error.message || String(error)}`);
   }
   try {
     applySitePlatformContract(contract);
   } catch (error) {
-    console.warn('[sites] site-platform.json invalid; using bundled platform defaults.', error);
-    applySitePlatformContract(DEFAULT_SITE_PLATFORM);
+    throw new Error(`site-platform.json could not be applied: ${error.message || String(error)}`);
   }
 }
 
@@ -7957,7 +7979,1290 @@ async function clearVisibleNotes(options = {}) {
   );
   return false;
 }
+// Feature-gate workflow model and rendering for the forward-only capability screen.
 
+function restoreFeatureMatrixState() {
+  const saved = loadStoredFeatureMatrixState();
+  state.featureMatrix.saved = saved;
+  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
+  state.featureMatrix.scope = FEATURE_MATRIX_SCOPE_VISIBLE;
+  state.featureMatrix.selectedRowKeys = new Set();
+  state.featureMatrix.statusMessage = '';
+  state.featureMatrix.statusTone = '';
+}
+
+function loadStoredFeatureMatrixState() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(FEATURE_MATRIX_STORAGE_KEY) || 'null');
+    return normalizeFeatureMatrixState(raw);
+  } catch {
+    return createFeatureMatrixState();
+  }
+}
+
+function createFeatureMatrixState(assignments = {}, updatedAt = '') {
+  return {
+    version: 1,
+    updatedAt: String(updatedAt || '').trim(),
+    assignments,
+  };
+}
+
+function cloneFeatureMatrixState(matrixState) {
+  return normalizeFeatureMatrixState(JSON.parse(JSON.stringify(matrixState || createFeatureMatrixState())));
+}
+
+function normalizeFeatureMatrixState(raw) {
+  const source = raw && typeof raw === 'object' ? raw : {};
+  const facetIds = new Set(FEATURE_MATRIX_FACETS.map((facet) => facet.id));
+  const rawAssignments = source.assignments && typeof source.assignments === 'object'
+    ? source.assignments
+    : {};
+  const assignments = {};
+
+  for (const [rawSiteId, rawFacets] of Object.entries(rawAssignments)) {
+    const siteId = normalizeCatalogToken(rawSiteId);
+    if (!siteId || !rawFacets || typeof rawFacets !== 'object') {
+      continue;
+    }
+
+    const nextFacets = {};
+    for (const [rawFacetId, rawCell] of Object.entries(rawFacets)) {
+      const facetId = normalizeCatalogToken(rawFacetId);
+      if (!facetIds.has(facetId)) {
+        continue;
+      }
+      const cellState = normalizeFeatureMatrixCellState(
+        typeof rawCell === 'string' ? rawCell : rawCell?.state
+      );
+      if (cellState === FEATURE_MATRIX_STATE_UNKNOWN) {
+        continue;
+      }
+      const evidence = Array.isArray(rawCell?.evidence)
+        ? rawCell.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
+        : [];
+      const confidence = Number(rawCell?.confidence);
+      nextFacets[facetId] = {
+        state: cellState,
+        updatedAt: String(rawCell?.updatedAt || source.updatedAt || '').trim(),
+        source: String(rawCell?.source || '').trim(),
+        confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
+        evidence,
+      };
+    }
+
+    if (Object.keys(nextFacets).length > 0) {
+      assignments[siteId] = nextFacets;
+    }
+  }
+
+  return createFeatureMatrixState(assignments, source.updatedAt);
+}
+
+function normalizeFeatureMatrixCellState(value) {
+  const normalized = normalizeCatalogToken(value);
+  return Object.prototype.hasOwnProperty.call(FEATURE_MATRIX_STATES, normalized)
+    ? normalized
+    : FEATURE_MATRIX_STATE_UNKNOWN;
+}
+
+function getFeatureMatrixDraft() {
+  if (!state.featureMatrix.draft) {
+    restoreFeatureMatrixState();
+  }
+  return state.featureMatrix.draft;
+}
+
+function getFeatureMatrixSaved() {
+  if (!state.featureMatrix.saved) {
+    restoreFeatureMatrixState();
+  }
+  return state.featureMatrix.saved;
+}
+
+function getFeatureMatrixRows() {
+  const source = state.visibleEntries;
+  return (Array.isArray(source) ? source : [])
+    .map((entry) => buildFeatureMatrixRowModel(entry))
+    .filter((row) => row.siteIds.length > 0)
+    .sort(compareFeatureMatrixRows);
+}
+
+function buildFeatureMatrixRowModel(entry) {
+  const members = getFeatureMatrixRowMembers(entry);
+  const visibleMembers = getFeatureMatrixVisibleMembers(entry, members);
+  const rowKey = entry?.displayEntryKey || getDisplayGroupKey(entry) || normalizeCatalogToken(entry?.siteId || '');
+  const title = buildDisplayTitle(entry) || entry?.siteId || rowKey;
+  const lead = visibleMembers[0] || members[0] || entry;
+  const siteIds = visibleMembers.map((member) => member.siteId);
+  return {
+    key: rowKey || siteIds[0] || '',
+    title,
+    lead,
+    members: visibleMembers,
+    allMembers: members,
+    siteIds,
+    siteCount: siteIds.length,
+    totalSiteCount: members.length,
+    host: lead?.host || (lead?.siteId ? `${lead.siteId}.${BASE_DOMAIN}` : ''),
+  };
+}
+
+function getFeatureMatrixRowMembers(entry) {
+  const members = Array.isArray(entry?.familyMembers) && entry.familyMembers.length > 0
+    ? entry.familyMembers
+    : [entry];
+  return sortFamilyMembers(members)
+    .filter((member) => member?.siteId && member.siteId !== ROOT_SITE_ID && member.hasHostedSite !== false);
+}
+
+function getFeatureMatrixVisibleMembers(entry, members) {
+  const visibleIds = new Set(
+    (Array.isArray(entry?.visibleFamilyMembers) && entry.visibleFamilyMembers.length > 0
+      ? entry.visibleFamilyMembers
+      : [entry]
+    )
+      .map((member) => member?.siteId)
+      .filter(Boolean)
+  );
+  return members.filter((member) => visibleIds.has(member.siteId));
+}
+
+function compareFeatureMatrixRows(left, right) {
+  const titleDelta = compareNaturalText(left?.title, right?.title);
+  if (titleDelta !== 0) {
+    return titleDelta;
+  }
+  return compareNaturalText(left?.key, right?.key);
+}
+
+function getFeatureMatrixCellState(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  return normalizeFeatureMatrixCellState(matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId]?.state);
+}
+
+function getFeatureMatrixCellMeta(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  return matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId] || null;
+}
+
+function getFeatureMatrixDisplayCellState(entry, facetId, matrixState = getFeatureMatrixDraft()) {
+  return getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState).state;
+}
+
+function getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState = getFeatureMatrixDraft()) {
+  const explicit = getFeatureMatrixCellMeta(entry?.siteId, facetId, matrixState);
+  if (explicit) {
+    return {
+      ...explicit,
+      state: normalizeFeatureMatrixCellState(explicit.state),
+      origin: 'operator',
+      originLabel: 'Set',
+    };
+  }
+  return getFeatureMatrixObservedCellMeta(entry, facetId);
+}
+
+function getFeatureMatrixObservedCellMeta(entry, facetId) {
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizeCatalogToken(facetId));
+  if (!entry?.siteId || !facet) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
+  }
+
+  const tagEvidence = (tags) => getFeatureMatrixMatchedFacetTags(entry, tags);
+  const absentEvidence = tagEvidence(facet.absentTags);
+  if (absentEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_OFF, absentEvidence);
+  }
+
+  const ignoreEvidence = tagEvidence(facet.ignoreTags);
+  if (ignoreEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_DEFERRED, ignoreEvidence);
+  }
+
+  const copyEvidence = tagEvidence(facet.copyTags);
+  if (copyEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_COPY, copyEvidence);
+  }
+
+  const observedEvidence = [
+    ...tagEvidence(facet.observedTags),
+    ...getFeatureMatrixCatalogFieldEvidence(entry, facet.id),
+  ];
+  if (observedEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_ON, observedEvidence);
+  }
+
+  return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
+}
+
+function featureMatrixObservedMeta(stateId = FEATURE_MATRIX_STATE_UNKNOWN, evidence = []) {
+  const normalizedState = normalizeFeatureMatrixCellState(stateId);
+  return {
+    state: normalizedState,
+    updatedAt: '',
+    source: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
+    confidence: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? 0 : 1,
+    evidence: Array.from(new Set(evidence)).slice(0, 4),
+    origin: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
+    originLabel: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'Seen',
+  };
+}
+
+function getFeatureMatrixMatchedFacetTags(entry, tags) {
+  const tagSet = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
+  return (Array.isArray(tags) ? tags : [])
+    .map((tag) => normalizeCatalogToken(tag))
+    .filter((tag) => tag && tagSet.has(tag))
+    .map((tag) => `tag:${tag}`);
+}
+
+function getFeatureMatrixCatalogFieldEvidence(entry, facetId) {
+  switch (facetId) {
+    case 's3-storage':
+      return entry?.hasData === true ? ['catalog:hasData=true'] : [];
+    case 'frontend-canon':
+      return entry?.canonProfile ? [`catalog:canonProfile=${entry.canonProfile}`] : [];
+    default:
+      return [];
+  }
+}
+
+function assignFeatureMatrixCellState(draft, siteId, facetId, cellState, metadata = {}) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  const normalizedState = normalizeFeatureMatrixCellState(cellState);
+  if (!draft || !normalizedSiteId || !FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
+    return false;
+  }
+
+  const previousState = getFeatureMatrixCellState(normalizedSiteId, normalizedFacetId, draft);
+  if (previousState === normalizedState) {
+    return false;
+  }
+
+  if (!draft.assignments[normalizedSiteId]) {
+    draft.assignments[normalizedSiteId] = {};
+  }
+
+  if (normalizedState === FEATURE_MATRIX_STATE_UNKNOWN) {
+    delete draft.assignments[normalizedSiteId][normalizedFacetId];
+    if (Object.keys(draft.assignments[normalizedSiteId]).length === 0) {
+      delete draft.assignments[normalizedSiteId];
+    }
+    return true;
+  }
+
+  const confidence = Number(metadata.confidence);
+  const evidence = Array.isArray(metadata.evidence)
+    ? metadata.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
+    : [];
+  draft.assignments[normalizedSiteId][normalizedFacetId] = {
+    state: normalizedState,
+    updatedAt: String(metadata.updatedAt || new Date().toISOString()),
+    source: String(metadata.source || '').trim(),
+    confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
+    evidence,
+  };
+  return true;
+}
+
+function setFeatureMatrixCellState(siteId, facetId, cellState) {
+  const draft = getFeatureMatrixDraft();
+  const changed = assignFeatureMatrixCellState(draft, siteId, facetId, cellState);
+  if (!changed) {
+    return;
+  }
+
+  draft.updatedAt = new Date().toISOString();
+  setFeatureMatrixStatus('Draft changed.', 'warning');
+  renderFeatureMatrixView();
+}
+
+function setFeatureMatrixRowCellState(rowKey, facetId, cellState) {
+  const row = getFeatureMatrixRows().find((candidate) => candidate.key === rowKey);
+  if (!row) {
+    return;
+  }
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  let changed = 0;
+  for (const member of row.members) {
+    if (assignFeatureMatrixCellState(draft, member.siteId, facetId, cellState, { updatedAt })) {
+      changed += 1;
+    }
+  }
+  if (changed === 0) {
+    return;
+  }
+
+  draft.updatedAt = updatedAt;
+  setFeatureMatrixStatus(row.siteCount === 1 ? 'Draft changed.' : `Draft changed for ${changed} sites in ${row.title}.`, 'warning');
+  renderFeatureMatrixView();
+}
+
+function getFeatureMatrixSelectedRowKeys() {
+  if (!(state.featureMatrix.selectedRowKeys instanceof Set)) {
+    state.featureMatrix.selectedRowKeys = new Set();
+  }
+  return state.featureMatrix.selectedRowKeys;
+}
+
+function pruneFeatureMatrixSelectedRows(rows) {
+  const selected = getFeatureMatrixSelectedRowKeys();
+  if (selected.size === 0) {
+    return;
+  }
+  const visibleKeys = new Set(rows.map((row) => row.key));
+  for (const key of [...selected]) {
+    if (!visibleKeys.has(key)) {
+      selected.delete(key);
+    }
+  }
+}
+
+function getFeatureMatrixSelectedRows(rows = getFeatureMatrixRows()) {
+  const selected = getFeatureMatrixSelectedRowKeys();
+  return selected.size === 0
+    ? []
+    : rows.filter((row) => selected.has(row.key));
+}
+
+function getFeatureMatrixBulkTargetRows(rows = getFeatureMatrixRows()) {
+  const selectedRows = getFeatureMatrixSelectedRows(rows);
+  return selectedRows.length > 0 ? selectedRows : rows;
+}
+
+function isFeatureMatrixForwardAction(cellState) {
+  return FEATURE_MATRIX_FORWARD_ACTIONS.includes(normalizeFeatureMatrixCellState(cellState));
+}
+
+function setFeatureMatrixFacetForRows(facetId, cellState) {
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  const normalizedState = normalizeFeatureMatrixCellState(cellState);
+  if (!FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
+    return;
+  }
+  if (!isFeatureMatrixForwardAction(normalizedState)) {
+    setFeatureMatrixStatus('Feature Gates are forward-only. Not present is a status, not a bulk action.', 'warning');
+    renderFeatureMatrixView();
+    return;
+  }
+  const rows = getFeatureMatrixRows();
+  const targetRows = getFeatureMatrixBulkTargetRows(rows);
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  let changed = 0;
+  let siteCount = 0;
+  for (const row of targetRows) {
+    for (const member of row.members) {
+      siteCount += 1;
+      if (assignFeatureMatrixCellState(draft, member.siteId, normalizedFacetId, normalizedState, { updatedAt })) {
+        changed += 1;
+      }
+    }
+  }
+  if (changed === 0) {
+    setFeatureMatrixStatus('No visible cells changed for that feature.', 'info');
+    renderFeatureMatrixView();
+    return;
+  }
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizedFacetId);
+  draft.updatedAt = updatedAt;
+  const selectedCount = getFeatureMatrixSelectedRowKeys().size;
+  const scopeLabel = selectedCount > 0
+    ? `${targetRows.length.toLocaleString()} selected row${targetRows.length === 1 ? '' : 's'}`
+    : `${targetRows.length.toLocaleString()} visible row${targetRows.length === 1 ? '' : 's'}`;
+  setFeatureMatrixStatus(
+    `Set ${facet?.label || normalizedFacetId} to ${formatFeatureMatrixState(normalizedState)} for ${changed.toLocaleString()} of ${siteCount.toLocaleString()} site cells across ${scopeLabel}.`,
+    'warning'
+  );
+  renderFeatureMatrixView();
+}
+
+function applyFeatureMatrixToolbarBulkAction() {
+  const facetId = featureMatrixBulkFeatureEl?.value || '';
+  const nextState = featureMatrixBulkActionEl?.value || '';
+  if (!facetId || !nextState) {
+    setFeatureMatrixStatus('Choose a feature and action first.', 'warning');
+    renderFeatureMatrixView();
+    return;
+  }
+  setFeatureMatrixFacetForRows(facetId, nextState);
+  if (featureMatrixBulkActionEl) {
+    featureMatrixBulkActionEl.value = '';
+  }
+  updateFeatureMatrixBulkApplyState();
+}
+
+function getNextFeatureMatrixCellState(currentState) {
+  const normalized = normalizeFeatureMatrixCellState(currentState);
+  if (normalized === FEATURE_MATRIX_STATE_ON) {
+    return FEATURE_MATRIX_STATE_COPY;
+  }
+  if (normalized === FEATURE_MATRIX_STATE_COPY) {
+    return FEATURE_MATRIX_STATE_COPY;
+  }
+  return FEATURE_MATRIX_STATE_ON;
+}
+
+function setFeatureMatrixScope(value) {
+  const nextScope = normalizeCatalogToken(value) === FEATURE_MATRIX_SCOPE_ALL
+    ? FEATURE_MATRIX_SCOPE_ALL
+    : FEATURE_MATRIX_SCOPE_VISIBLE;
+  if (state.featureMatrix.scope === nextScope) {
+    renderFeatureMatrixView();
+    return;
+  }
+  state.featureMatrix.scope = nextScope;
+  renderFeatureMatrixView();
+}
+
+function handleFeatureMatrixClick(event) {
+  const button = event.target instanceof Element
+    ? event.target.closest('[data-feature-cell]')
+    : null;
+  if (!(button instanceof HTMLButtonElement)) {
+    return;
+  }
+  const rowKey = button.getAttribute('data-row-key') || '';
+  const facetId = button.getAttribute('data-feature-id') || '';
+  const nextState = getNextFeatureMatrixCellState(button.getAttribute('data-feature-state') || '');
+  setFeatureMatrixRowCellState(rowKey, facetId, nextState);
+}
+
+function handleFeatureMatrixHeaderClick(event) {
+  const button = event.target instanceof Element
+    ? event.target.closest('[data-feature-select-facet]')
+    : null;
+  if (!(button instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const facetId = normalizeCatalogToken(button.getAttribute('data-feature-select-facet') || '');
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === facetId);
+  if (!facet) {
+    return;
+  }
+
+  const rows = getFeatureMatrixRows();
+  const selected = getFeatureMatrixSelectedRowKeys();
+  selected.clear();
+  for (const row of rows) {
+    const stateId = getFeatureMatrixRowCellState(row, facet.id);
+    if ([FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED].includes(stateId)) {
+      selected.add(row.key);
+    }
+  }
+  setFeatureMatrixStatus(
+    selected.size > 0
+      ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} using ${facet.shortLabel || facet.label}.`
+      : `No visible rows currently show ${facet.shortLabel || facet.label}.`,
+    selected.size > 0 ? 'info' : 'warning'
+  );
+  renderFeatureMatrixView();
+}
+
+function handleFeatureMatrixSelectionChange(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement)) {
+    return;
+  }
+
+  const selected = getFeatureMatrixSelectedRowKeys();
+  if (target.matches('[data-feature-select-all]')) {
+    selected.clear();
+    if (target.checked) {
+      for (const row of getFeatureMatrixRows()) {
+        selected.add(row.key);
+      }
+    }
+    setFeatureMatrixStatus(
+      selected.size > 0
+        ? `Selected ${selected.size.toLocaleString()} visible row${selected.size === 1 ? '' : 's'}.`
+        : 'Cleared feature row selection.',
+      'info'
+    );
+    renderFeatureMatrixView();
+    return;
+  }
+
+  if (target.matches('[data-feature-row-select]')) {
+    const rowKey = target.getAttribute('data-row-key') || '';
+    if (!rowKey) {
+      return;
+    }
+    if (target.checked) {
+      selected.add(rowKey);
+    } else {
+      selected.delete(rowKey);
+    }
+    setFeatureMatrixStatus(
+      selected.size > 0
+        ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} for the next feature action.`
+        : 'Cleared feature row selection.',
+      'info'
+    );
+    renderFeatureMatrixView();
+  }
+}
+
+function renderFeatureMatrixView() {
+  if (!featureMatrixViewEl || !featureMatrixTableHeadEl || !featureMatrixTableBodyEl) {
+    return;
+  }
+
+  getFeatureMatrixDraft();
+  const rows = getFeatureMatrixRows();
+  pruneFeatureMatrixSelectedRows(rows);
+  const changes = getFeatureMatrixChanges(rows);
+  const dirty = isFeatureMatrixDirty();
+  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
+
+  syncFeatureMatrixBulkControls(rows);
+  featureMatrixTableHeadEl.innerHTML = renderFeatureMatrixHeader(rows);
+  featureMatrixTableBodyEl.innerHTML = rows.length
+    ? rows.map((entry) => renderFeatureMatrixRow(entry)).join('')
+    : '<tr><td class="feature-matrix-empty" colspan="99">No groups match the current filters.</td></tr>';
+
+  if (featureMatrixSummaryEl) {
+    const selectedCount = getFeatureMatrixSelectedRowKeys().size;
+    featureMatrixSummaryEl.textContent = [
+      `${rows.length.toLocaleString()} visible groups / ${siteCount.toLocaleString()} sites`,
+      selectedCount > 0 ? `${selectedCount.toLocaleString()} selected` : '',
+      `${changes.length.toLocaleString()} changed`,
+    ].filter(Boolean).join(' - ');
+  }
+
+  if (featureMatrixStatusEl) {
+    const fallback = dirty ? 'Unsaved local changes' : (getFeatureMatrixSaved().updatedAt ? 'Saved locally' : 'No actions set yet');
+    featureMatrixStatusEl.textContent = state.featureMatrix.statusMessage || fallback;
+    featureMatrixStatusEl.dataset.tone = state.featureMatrix.statusTone || (dirty ? 'warning' : 'info');
+  }
+
+  if (featureMatrixSaveButton) {
+    featureMatrixSaveButton.disabled = !dirty;
+  }
+  if (featureMatrixResetButton) {
+    featureMatrixResetButton.disabled = !dirty;
+  }
+  if (featureMatrixSynopsisEl) {
+    featureMatrixSynopsisEl.value = buildFeatureMatrixSynopsis(rows, changes);
+  }
+}
+
+function syncFeatureMatrixBulkControls(rows) {
+  if (featureMatrixBulkFeatureEl) {
+    const currentFacetId = featureMatrixBulkFeatureEl.value;
+    featureMatrixBulkFeatureEl.innerHTML = FEATURE_MATRIX_FACETS.map((facet) => (
+      `<option value="${escapeHtml(facet.id)}">${escapeHtml(facet.label)}</option>`
+    )).join('');
+    if (FEATURE_MATRIX_FACETS.some((facet) => facet.id === currentFacetId)) {
+      featureMatrixBulkFeatureEl.value = currentFacetId;
+    }
+  }
+  if (featureMatrixBulkActionEl) {
+    const currentActionId = featureMatrixBulkActionEl.value;
+    featureMatrixBulkActionEl.innerHTML = FEATURE_MATRIX_BULK_ACTIONS.map((action) => (
+      `<option value="${escapeHtml(action.id)}">${escapeHtml(action.label)}</option>`
+    )).join('');
+    if (FEATURE_MATRIX_BULK_ACTIONS.some((action) => action.id === currentActionId)) {
+      featureMatrixBulkActionEl.value = currentActionId;
+    }
+  }
+  updateFeatureMatrixBulkApplyState(rows.length);
+}
+
+function updateFeatureMatrixBulkApplyState(rowCount) {
+  if (!featureMatrixBulkApplyButton) {
+    return;
+  }
+  const rows = getFeatureMatrixRows();
+  const targetRows = getFeatureMatrixBulkTargetRows(rows);
+  const resolvedRowCount = Number.isFinite(rowCount) && getFeatureMatrixSelectedRowKeys().size === 0
+    ? rowCount
+    : targetRows.length;
+  const hasFacet = Boolean(featureMatrixBulkFeatureEl?.value);
+  const hasAction = Boolean(featureMatrixBulkActionEl?.value);
+  featureMatrixBulkApplyButton.disabled = resolvedRowCount === 0 || !hasFacet || !hasAction;
+  const labelEl = featureMatrixBulkApplyButton.querySelector('span');
+  if (labelEl) {
+    labelEl.textContent = getFeatureMatrixSelectedRowKeys().size > 0
+      ? `Apply to ${resolvedRowCount.toLocaleString()} selected`
+      : 'Apply to visible rows';
+  }
+}
+
+function renderFeatureMatrixHeader(rows) {
+  const countsByFacet = getFeatureMatrixCounts(rows);
+  const selected = getFeatureMatrixSelectedRowKeys();
+  const allVisibleSelected = rows.length > 0 && rows.every((row) => selected.has(row.key));
+  const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
+    const counts = countsByFacet[facet.id] || {};
+    const countParts = [
+      `${counts[FEATURE_MATRIX_STATE_ON] || 0} current`,
+      `${counts[FEATURE_MATRIX_STATE_COPY] || 0} standard`,
+      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} update`,
+      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} missing`,
+    ];
+    if (counts[FEATURE_MATRIX_STATE_MIXED] > 0) {
+      countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
+    }
+    const countLabel = countParts.join(' / ');
+    const icon = normalizeFeatureMatrixFacetIcon(facet.icon, facet.id);
+    return `
+      <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
+        <button
+          type="button"
+          class="feature-matrix-facet-label feature-matrix-facet-select"
+          data-feature-select-facet="${escapeHtml(facet.id)}"
+          title="${escapeHtml(`Select visible rows already using ${facet.label}`)}"
+        >
+          <i class="${escapeHtml(icon)}" aria-hidden="true"></i>
+          <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
+        </button>
+        <small>${escapeHtml(countLabel)}</small>
+      </th>
+    `;
+  }).join('');
+  return `
+    <tr>
+      <th class="feature-matrix-app">
+        <span class="feature-matrix-app-label">
+          <input
+            type="checkbox"
+            class="feature-matrix-select-checkbox"
+            data-feature-select-all="true"
+            aria-label="Select all visible feature rows"
+            ${allVisibleSelected ? 'checked' : ''}
+          >
+          <i class="ti ti-layout-grid" aria-hidden="true"></i>
+          <span>Group</span>
+        </span>
+      </th>
+      ${facetHeaders}
+    </tr>
+  `;
+}
+
+function getFeatureMatrixPreviewEntry(row) {
+  const candidates = [
+    row?.lead,
+    ...(Array.isArray(row?.members) ? row.members : []),
+    ...(Array.isArray(row?.allMembers) ? row.allMembers : []),
+  ].filter((entry, index, list) => (
+    entry?.siteId && list.findIndex((candidate) => candidate?.siteId === entry.siteId) === index
+  ));
+  return candidates.find((entry) => getPreviewUrl(entry.siteId)) || candidates[0] || null;
+}
+
+function renderFeatureMatrixPreview(row) {
+  const previewEntry = getFeatureMatrixPreviewEntry(row);
+  const previewUrl = previewEntry ? getPreviewUrl(previewEntry.siteId) : '';
+  const title = row?.title || row?.key || previewEntry?.siteId || 'Site';
+  const siteId = previewEntry?.siteId || '';
+  return `
+    <span class="feature-matrix-preview" aria-hidden="true">
+      <img
+        class="site-preview-img feature-matrix-preview-img is-placeholder${previewUrl ? '' : ' is-failed'}"
+        src="${escapeHtml(PREVIEW_PLACEHOLDER_URL)}"
+        ${previewUrl ? `data-src="${escapeHtml(previewUrl)}"` : ''}
+        ${siteId ? `data-preview-site-id="${escapeHtml(siteId)}" data-preview-source-site-id="${escapeHtml(siteId)}"` : ''}
+        ${previewUrl ? `data-preview-cache-key="${escapeHtml(previewUrl)}"` : ''}
+        data-preview-state="${previewUrl ? 'placeholder' : 'error'}"
+        alt="${escapeHtml(`${title} preview`)}"
+        loading="lazy"
+        decoding="async"
+      >
+    </span>
+  `;
+}
+
+function renderFeatureMatrixRow(row) {
+  const title = row.title || row.key;
+  const selected = getFeatureMatrixSelectedRowKeys().has(row.key);
+  const memberLabel = row.siteCount === 1
+    ? row.host
+    : `${row.siteCount.toLocaleString()} sites${row.totalSiteCount > row.siteCount ? ` visible / ${row.totalSiteCount.toLocaleString()} total` : ''}`;
+  const cells = FEATURE_MATRIX_FACETS.map((facet) => {
+    const cellState = getFeatureMatrixRowCellState(row, facet.id);
+    const stateMeta = getFeatureMatrixStateMeta(cellState);
+    const evidence = getFeatureMatrixRowEvidence(row, facet.id);
+    const originLabel = getFeatureMatrixRowOriginLabel(row, facet.id);
+    const evidenceLabel = evidence.length > 0 ? ` Evidence: ${evidence.join(' | ')}` : '';
+    return `
+      <td class="feature-matrix-cell">
+        <button
+          type="button"
+          class="feature-matrix-state is-${escapeHtml(cellState)}"
+          data-feature-cell="true"
+          data-row-key="${escapeHtml(row.key)}"
+          data-feature-id="${escapeHtml(facet.id)}"
+          data-feature-state="${escapeHtml(cellState)}"
+          title="${escapeHtml(`${title} / ${facet.label}: ${stateMeta.label}. ${facet.rule || ''}${evidenceLabel}`)}"
+          aria-label="${escapeHtml(`${title} ${facet.label} ${stateMeta.label}`)}"
+        >
+          <i class="${escapeHtml(stateMeta.icon)}" aria-hidden="true"></i>
+          <span>${escapeHtml(stateMeta.shortLabel)}</span>
+        </button>
+        ${originLabel ? `<small class="feature-matrix-evidence">${escapeHtml(originLabel)}</small>` : ''}
+      </td>
+    `;
+  }).join('');
+
+  return `
+    <tr data-feature-matrix-row="${escapeHtml(row.key)}">
+      <th class="feature-matrix-site" scope="row">
+        <div class="feature-matrix-site-card">
+          <input
+            type="checkbox"
+            class="feature-matrix-select-checkbox"
+            data-feature-row-select="true"
+            data-row-key="${escapeHtml(row.key)}"
+            aria-label="${escapeHtml(`Select ${title}`)}"
+            ${selected ? 'checked' : ''}
+          >
+          ${renderFeatureMatrixPreview(row)}
+          <div class="feature-matrix-site-copy">
+            <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
+            <span>${escapeHtml(memberLabel || row.key)}</span>
+          </div>
+        </div>
+      </th>
+      ${cells}
+    </tr>
+  `;
+}
+
+function getFeatureMatrixStateMeta(stateId) {
+  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
+    return { id: FEATURE_MATRIX_STATE_MIXED, label: 'Mixed', shortLabel: 'Mix', icon: 'ti ti-adjustments-horizontal' };
+  }
+  return FEATURE_MATRIX_STATES[stateId] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+}
+
+function getFeatureMatrixRowCellState(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const states = new Set(row.members.map((member) => getFeatureMatrixDisplayCellState(member, facetId, matrixState)));
+  if (states.size <= 1) {
+    return states.values().next().value || FEATURE_MATRIX_STATE_UNKNOWN;
+  }
+  return FEATURE_MATRIX_STATE_MIXED;
+}
+
+function getFeatureMatrixRowEvidence(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const evidence = [];
+  for (const member of row.members) {
+    const meta = getFeatureMatrixDisplayCellMeta(member, facetId, matrixState);
+    if (!meta?.source && (!Array.isArray(meta?.evidence) || meta.evidence.length === 0)) {
+      continue;
+    }
+    const stateLabel = formatFeatureMatrixState(meta.state).toLowerCase();
+    const originLabel = meta.origin === 'observed' ? 'observed' : 'set';
+    const prefix = row.siteCount > 1 ? `${member.siteId}: ${stateLabel} ${originLabel}` : `${stateLabel} ${originLabel}`;
+    const detail = Array.isArray(meta.evidence) && meta.evidence.length > 0
+      ? meta.evidence.join(', ')
+      : meta.source;
+    evidence.push(`${prefix} (${detail})`);
+    if (evidence.length >= 3) {
+      break;
+    }
+  }
+  return evidence;
+}
+
+function getFeatureMatrixRowOriginLabel(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const origins = new Set(
+    row.members
+      .map((member) => getFeatureMatrixDisplayCellMeta(member, facetId, matrixState).originLabel)
+      .filter(Boolean)
+  );
+  if (origins.size === 0) {
+    return '';
+  }
+  if (origins.size === 1) {
+    return origins.values().next().value;
+  }
+  return 'Mixed';
+}
+
+function hasFeatureMatrixExplicitRowDecision(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  return row.members.some((member) => Boolean(getFeatureMatrixCellMeta(member.siteId, facetId, matrixState)));
+}
+
+function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
+  const countsByFacet = Object.fromEntries(FEATURE_MATRIX_FACETS.map((facet) => [facet.id, {
+    [FEATURE_MATRIX_STATE_UNKNOWN]: 0,
+    [FEATURE_MATRIX_STATE_ON]: 0,
+    [FEATURE_MATRIX_STATE_COPY]: 0,
+    [FEATURE_MATRIX_STATE_OFF]: 0,
+    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
+    [FEATURE_MATRIX_STATE_MIXED]: 0,
+  }]));
+  for (const row of rows) {
+    for (const facet of FEATURE_MATRIX_FACETS) {
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
+      countsByFacet[facet.id][cellState] += 1;
+    }
+  }
+  return countsByFacet;
+}
+
+function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
+  const saved = getFeatureMatrixSaved();
+  const draft = getFeatureMatrixDraft();
+  const changes = [];
+  for (const row of rows) {
+    for (const facet of FEATURE_MATRIX_FACETS) {
+      const fromState = getFeatureMatrixRowCellState(row, facet.id, saved);
+      const toState = getFeatureMatrixRowCellState(row, facet.id, draft);
+      const fromExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, saved);
+      const toExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, draft);
+      if (fromState === toState && fromExplicit === toExplicit) {
+        continue;
+      }
+      changes.push({
+        rowKey: row.key,
+        siteIds: row.siteIds,
+        title: row.title || row.key,
+        facet,
+        fromState,
+        toState,
+        fromExplicit,
+        toExplicit,
+      });
+    }
+  }
+  return changes;
+}
+
+function getFeatureMatrixAssignmentSignature(matrixState) {
+  return JSON.stringify((matrixState || createFeatureMatrixState()).assignments || {});
+}
+
+function isFeatureMatrixDirty() {
+  return getFeatureMatrixAssignmentSignature(getFeatureMatrixSaved()) !== getFeatureMatrixAssignmentSignature(getFeatureMatrixDraft());
+}
+
+function saveFeatureMatrixDraft() {
+  const saved = cloneFeatureMatrixState(getFeatureMatrixDraft());
+  saved.updatedAt = new Date().toISOString();
+  state.featureMatrix.saved = saved;
+  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
+  try {
+    localStorage.setItem(FEATURE_MATRIX_STORAGE_KEY, JSON.stringify(saved));
+    setFeatureMatrixStatus('Saved locally.', 'success');
+  } catch {
+    setFeatureMatrixStatus('Local save failed. Copy the prompt before leaving.', 'error');
+  }
+  renderFeatureMatrixView();
+}
+
+function resetFeatureMatrixDraft() {
+  state.featureMatrix.draft = cloneFeatureMatrixState(getFeatureMatrixSaved());
+  setFeatureMatrixStatus('Reset to saved matrix.', 'info');
+  renderFeatureMatrixView();
+}
+
+function seedFeatureMatrixHeuristics() {
+  const rows = getFeatureMatrixRows();
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  const seededCounts = {
+    [FEATURE_MATRIX_STATE_ON]: 0,
+    [FEATURE_MATRIX_STATE_COPY]: 0,
+    [FEATURE_MATRIX_STATE_OFF]: 0,
+    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
+  };
+  let skipped = 0;
+
+  for (const row of rows) {
+    for (const member of row.members) {
+      for (const facet of FEATURE_MATRIX_FACETS) {
+        if (getFeatureMatrixCellState(member.siteId, facet.id, draft) !== FEATURE_MATRIX_STATE_UNKNOWN) {
+          skipped += 1;
+          continue;
+        }
+        const guess = inferFeatureMatrixGuess(member, facet);
+        if (guess.state === FEATURE_MATRIX_STATE_UNKNOWN) {
+          skipped += 1;
+          continue;
+        }
+        const changed = assignFeatureMatrixCellState(draft, member.siteId, facet.id, guess.state, {
+          updatedAt,
+          source: 'heuristic',
+          confidence: guess.confidence,
+          evidence: guess.evidence,
+        });
+        if (changed) {
+          seededCounts[guess.state] += 1;
+        }
+      }
+    }
+  }
+
+  const seeded = seededCounts[FEATURE_MATRIX_STATE_ON]
+    + seededCounts[FEATURE_MATRIX_STATE_COPY]
+    + seededCounts[FEATURE_MATRIX_STATE_OFF]
+    + seededCounts[FEATURE_MATRIX_STATE_DEFERRED];
+  if (seeded === 0) {
+    setFeatureMatrixStatus('No unknown cells matched the current heuristics.', 'info');
+    renderFeatureMatrixView();
+    return;
+  }
+
+  draft.updatedAt = updatedAt;
+  setFeatureMatrixStatus(
+    `Seeded ${seeded.toLocaleString()} draft statuses (${seededCounts[FEATURE_MATRIX_STATE_ON].toLocaleString()} current, ${seededCounts[FEATURE_MATRIX_STATE_COPY].toLocaleString()} standard, ${seededCounts[FEATURE_MATRIX_STATE_OFF].toLocaleString()} missing, ${seededCounts[FEATURE_MATRIX_STATE_DEFERRED].toLocaleString()} update). ${skipped.toLocaleString()} cells left untouched.`,
+    'warning'
+  );
+  renderFeatureMatrixView();
+}
+
+function inferFeatureMatrixGuess(entry, facet) {
+  const haystack = buildFeatureMatrixHaystack(entry);
+  const strongStatic = isFeatureMatrixLikelyStaticOnly(entry, haystack);
+  const tagEvidence = (tokens) => getFeatureMatrixMatchedTags(entry, tokens);
+  const textEvidence = (tokens) => getFeatureMatrixMatchedText(haystack, tokens);
+
+  switch (facet.id) {
+    case 'phone-remote': {
+      const evidence = [
+        ...tagEvidence(['phone-remote', 'remote-control', 'tv-tail']),
+        ...textEvidence(['phone remote', 'remote control', 'tv-tail', 'commandtopic', 'channelid', 'remote command']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'signalr': {
+      const evidence = [
+        ...tagEvidence(['signalr', 'signal-argh', 'tv-tail', 'realtime']),
+        ...textEvidence(['signalr', 'signal-argh', 'hubconnectionbuilder', 'realtime', 'websocket', 'tv-tail']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.86, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.44, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 's3-storage': {
+      const evidence = [
+        ...(entry?.hasData ? ['catalog hasData=true'] : []),
+        ...tagEvidence(['data', 'asset-catalog', 's3', 'storage', 'catalog']),
+        ...textEvidence(['s3://', ' s3 ', 'bucket', 'storage', 'data bucket', 'asset catalog']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, entry?.hasData ? 0.9 : 0.68, evidence);
+      if (entry?.hasData === false && strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.48, ['catalog hasData=false', 'static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'lambda-api': {
+      const evidence = [
+        ...tagEvidence(['lambda', 'backend-api', 'api', 'slack', 'triage']),
+        ...textEvidence(['lambda', 'api endpoint', '/api/', 'swagger', 'backend', 'lambda-first', 'api-backed']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.45, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'frontend-canon': {
+      const evidence = [
+        ...(entry?.canonProfile ? [`canonProfile=${entry.canonProfile}`] : []),
+        ...tagEvidence(['canon-deploy-ready', 'public-frontdoor', 'ui-framework', 'framework', 'frontend-ui']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
+      if (entry?.hasHostedSite !== false) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.56, ['hosted browser-facing site']);
+      return featureMatrixGuess();
+    }
+    case 'threejs': {
+      const evidence = [
+        ...tagEvidence(['threejs', 'three-js', 'webgl', '3d']),
+        ...textEvidence(['three.js', 'threejs', 'webgl', '3d ', 'canvas 3d', 'starfield']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'tv-telemetry': {
+      const evidence = [
+        ...tagEvidence(['tv-tail', 'telemetry', 'log-tap']),
+        ...textEvidence(['tv-tail', 'log-tap', 'telemetry', 'console broadcast', 'remote command']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.84, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.43, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    default:
+      return featureMatrixGuess();
+  }
+}
+
+function featureMatrixGuess(stateId = FEATURE_MATRIX_STATE_UNKNOWN, confidence = 0, evidence = []) {
+  return {
+    state: normalizeFeatureMatrixCellState(stateId),
+    confidence,
+    evidence: Array.from(new Set(evidence)).slice(0, 4),
+  };
+}
+
+function buildFeatureMatrixHaystack(entry) {
+  return [
+    entry?.siteId,
+    entry?.host,
+    entry?.displayName,
+    entry?.title,
+    entry?.description,
+    entry?.managedBy,
+    entry?.canonProfile,
+    entry?.publishContext?.source,
+    entry?.publishContext?.github?.repository,
+    entry?.publishContext?.git?.remote,
+    ...(Array.isArray(entry?.tags) ? entry.tags : []),
+    ...(Array.isArray(entry?.notes) ? entry.notes : []),
+  ]
+    .join(' ')
+    .toLocaleLowerCase();
+}
+
+function getFeatureMatrixMatchedTags(entry, tokens) {
+  const tags = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
+  return tokens
+    .map((token) => normalizeCatalogToken(token))
+    .filter((token) => token && tags.has(token))
+    .map((token) => `tag:${token}`);
+}
+
+function getFeatureMatrixMatchedText(haystack, tokens) {
+  return tokens
+    .map((token) => String(token || '').toLocaleLowerCase())
+    .filter((token) => token && haystack.includes(token))
+    .map((token) => `text:${token}`)
+    .slice(0, 4);
+}
+
+function isFeatureMatrixLikelyStaticOnly(entry, haystack = buildFeatureMatrixHaystack(entry)) {
+  if (entry?.hasData === true) {
+    return false;
+  }
+  const staticSignals = [
+    'static-site',
+    'github-pages',
+    'repo-artifacts',
+    'public-frontdoor',
+    'docs',
+    'dual-static',
+    'static gallery',
+    'repo docs page',
+  ];
+  const dynamicSignals = [
+    'lambda',
+    'signalr',
+    'signal-argh',
+    'tv-tail',
+    'websocket',
+    'api-backed',
+    'backend',
+    'slack-first',
+  ];
+  return staticSignals.some((signal) => haystack.includes(signal))
+    && !dynamicSignals.some((signal) => haystack.includes(signal));
+}
+
+async function copyFeatureMatrixSynopsis() {
+  const text = buildFeatureMatrixSynopsis();
+  const result = await copyTextWithFeatureMatrixFallback(text);
+  if (result.copied) {
+    if (featureMatrixCopyButton) {
+      flashButton(featureMatrixCopyButton, 'Copied');
+    }
+    setFeatureMatrixStatus('Prompt copied.', 'success');
+  } else {
+    setFeatureMatrixStatus('Prompt selected. Use your copy shortcut.', 'warning');
+  }
+  renderFeatureMatrixView();
+  if (!result.copied && featureMatrixSynopsisEl) {
+    featureMatrixSynopsisEl.focus({ preventScroll: true });
+    featureMatrixSynopsisEl.select();
+  }
+}
+
+async function copyTextWithFeatureMatrixFallback(text) {
+  const clipboardText = String(text || '');
+  if (navigator.clipboard?.writeText) {
+    let timeoutId = 0;
+    try {
+      await Promise.race([
+        navigator.clipboard.writeText(clipboardText),
+        new Promise((_, reject) => {
+          timeoutId = window.setTimeout(() => reject(new Error('Clipboard write timed out.')), 900);
+        }),
+      ]);
+      window.clearTimeout(timeoutId);
+      return { copied: true };
+    } catch {
+      window.clearTimeout(timeoutId);
+    }
+  }
+
+  if (!featureMatrixSynopsisEl) {
+    return { copied: false };
+  }
+
+  featureMatrixSynopsisEl.value = clipboardText;
+  featureMatrixSynopsisEl.focus({ preventScroll: true });
+  featureMatrixSynopsisEl.select();
+  try {
+    return { copied: document.execCommand('copy') === true };
+  } catch {
+    return { copied: false };
+  }
+}
+
+function setFeatureMatrixStatus(message, tone = '') {
+  state.featureMatrix.statusMessage = message || '';
+  state.featureMatrix.statusTone = tone || '';
+}
+
+function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = getFeatureMatrixChanges(rows)) {
+  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all groups' : 'currently visible groups';
+  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
+  const searchText = String(searchEl?.value || '').trim();
+  const activeTags = getActiveCatalogTagIds().map((tagId) => getCatalogTagLabel(tagId)).filter(Boolean);
+  const lines = [
+    'Feature Gates runbook for sites.mullmania.com',
+    '',
+    `Scope: ${scopeLabel}`,
+    `Groups in scope: ${rows.length}`,
+    `Sites in scope: ${siteCount}`,
+    `Generated: ${new Date().toISOString()}`,
+  ];
+
+  if (searchText) {
+    lines.push(`Search filter: ${searchText}`);
+  }
+  if (activeTags.length) {
+    lines.push(`Tag filters: ${activeTags.join(', ')}`);
+  }
+
+  lines.push('', 'Action semantics:');
+  for (const semantic of FEATURE_MATRIX_RUNBOOK_SEMANTICS) {
+    lines.push(`- ${semantic}`);
+  }
+  lines.push('', 'Facet rules:');
+
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    lines.push(`- ${facet.label}: ${facet.rule || 'Use the operator-provided rule for this facet.'}`);
+  }
+
+  lines.push('', 'Changes since last saved matrix:');
+  if (changes.length === 0) {
+    lines.push('- No changed cells in this scope.');
+  } else {
+    for (const change of changes) {
+      lines.push(`- ${change.rowKey} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixChangeState(change.fromState, change.fromExplicit)} -> ${formatFeatureMatrixChangeState(change.toState, change.toExplicit)} [${change.siteIds.join(', ')}]`);
+    }
+  }
+
+  lines.push('', 'Explicit operator decision packets by facet:');
+  let explicitDecisionCount = 0;
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    const byState = {
+      [FEATURE_MATRIX_STATE_ON]: [],
+      [FEATURE_MATRIX_STATE_COPY]: [],
+      [FEATURE_MATRIX_STATE_DEFERRED]: [],
+      [FEATURE_MATRIX_STATE_MIXED]: [],
+    };
+    for (const row of rows) {
+      if (!hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
+        continue;
+      }
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
+      if (byState[cellState]) {
+        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
+      }
+    }
+    const chunks = [];
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_MIXED]) {
+      if (byState[stateId].length > 0) {
+        explicitDecisionCount += byState[stateId].length;
+        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
+      }
+    }
+    if (chunks.length > 0) {
+      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
+    }
+  }
+  if (explicitDecisionCount === 0) {
+    lines.push('- No explicit forward decisions yet.');
+  }
+
+  lines.push('', 'Observed historical baseline by facet:');
+  let observedBaselineCount = 0;
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    const byState = {
+      [FEATURE_MATRIX_STATE_ON]: [],
+      [FEATURE_MATRIX_STATE_COPY]: [],
+      [FEATURE_MATRIX_STATE_OFF]: [],
+      [FEATURE_MATRIX_STATE_DEFERRED]: [],
+      [FEATURE_MATRIX_STATE_MIXED]: [],
+    };
+    for (const row of rows) {
+      if (hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
+        continue;
+      }
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
+      if (byState[cellState]) {
+        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
+      }
+    }
+    const chunks = [];
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_MIXED]) {
+      if (byState[stateId].length > 0) {
+        observedBaselineCount += byState[stateId].length;
+        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
+      }
+    }
+    if (chunks.length > 0) {
+      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
+    }
+  }
+  if (observedBaselineCount === 0) {
+    lines.push('- No semantic tag/catalog baseline found in this scope.');
+  }
+
+  lines.push(
+    '',
+    'Orchestrated agent request:',
+    'Use explicit forward decision packets as intent and use the observed historical baseline only as context/evidence. Produce a repo-by-repo execution plan before editing. For CURRENT / ADD packets, add the facet where missing and verify every listed member site follows the facet rule exactly. For UPDATE packets, bring the existing implementation up to the current canonical pattern. For STANDARD packets, identify the strongest canonical implementation in the packet or facet rule, make every listed site match it, and call out any repo where the pattern cannot apply cleanly. Do not remove features from any site because of this runbook. For observed-only cells, audit and report current implementation status before proposing forward changes. For NOT ASSESSED cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to align them.'
+  );
+
+  return `${lines.join('\n')}\n`;
+}
+
+function formatFeatureMatrixRowDecision(row, facetId, cellState) {
+  if (cellState !== FEATURE_MATRIX_STATE_MIXED) {
+    return `${row.key} [${row.siteIds.join(', ')}]`;
+  }
+  const memberStates = row.members
+    .map((member) => `${member.siteId}=${formatFeatureMatrixState(getFeatureMatrixDisplayCellState(member, facetId))}`)
+    .join(', ');
+  return `${row.key} [${memberStates}]`;
+}
+
+function formatFeatureMatrixChangeState(stateId, explicit) {
+  const label = formatFeatureMatrixState(stateId);
+  if (stateId === FEATURE_MATRIX_STATE_UNKNOWN) {
+    return label;
+  }
+  return `${label}${explicit ? ' (set)' : ' (seen)'}`;
+}
+
+function formatFeatureMatrixState(stateId) {
+  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
+    return 'MIXED';
+  }
+  const stateMeta = FEATURE_MATRIX_STATES[normalizeFeatureMatrixCellState(stateId)] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+  return stateMeta.label.toUpperCase();
+}
 function getAvailableViewConfigs() {
   const configured = Array.isArray(state.shell?.toolbar?.views) ? state.shell.toolbar.views : [];
   const normalized = configured
@@ -8511,1294 +9816,6 @@ async function copyJsonView() {
   } catch {
     window.prompt('Copy the JSON below:', text);
   }
-}
-
-function restoreFeatureMatrixState() {
-  const saved = loadStoredFeatureMatrixState();
-  state.featureMatrix.saved = saved;
-  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
-  state.featureMatrix.scope = FEATURE_MATRIX_SCOPE_VISIBLE;
-  state.featureMatrix.selectedRowKeys = new Set();
-  state.featureMatrix.statusMessage = '';
-  state.featureMatrix.statusTone = '';
-}
-
-function loadStoredFeatureMatrixState() {
-  try {
-    const raw = JSON.parse(localStorage.getItem(FEATURE_MATRIX_STORAGE_KEY) || 'null');
-    return normalizeFeatureMatrixState(raw);
-  } catch {
-    return createFeatureMatrixState();
-  }
-}
-
-function createFeatureMatrixState(assignments = {}, updatedAt = '') {
-  return {
-    version: 1,
-    updatedAt: String(updatedAt || '').trim(),
-    assignments,
-  };
-}
-
-function cloneFeatureMatrixState(matrixState) {
-  return normalizeFeatureMatrixState(JSON.parse(JSON.stringify(matrixState || createFeatureMatrixState())));
-}
-
-function normalizeFeatureMatrixState(raw) {
-  const source = raw && typeof raw === 'object' ? raw : {};
-  const facetIds = new Set(FEATURE_MATRIX_FACETS.map((facet) => facet.id));
-  const rawAssignments = source.assignments && typeof source.assignments === 'object'
-    ? source.assignments
-    : {};
-  const assignments = {};
-
-  for (const [rawSiteId, rawFacets] of Object.entries(rawAssignments)) {
-    const siteId = normalizeCatalogToken(rawSiteId);
-    if (!siteId || !rawFacets || typeof rawFacets !== 'object') {
-      continue;
-    }
-
-    const nextFacets = {};
-    for (const [rawFacetId, rawCell] of Object.entries(rawFacets)) {
-      const facetId = normalizeCatalogToken(rawFacetId);
-      if (!facetIds.has(facetId)) {
-        continue;
-      }
-      const cellState = normalizeFeatureMatrixCellState(
-        typeof rawCell === 'string' ? rawCell : rawCell?.state
-      );
-      if (cellState === FEATURE_MATRIX_STATE_UNKNOWN) {
-        continue;
-      }
-      const evidence = Array.isArray(rawCell?.evidence)
-        ? rawCell.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
-        : [];
-      const confidence = Number(rawCell?.confidence);
-      nextFacets[facetId] = {
-        state: cellState,
-        updatedAt: String(rawCell?.updatedAt || source.updatedAt || '').trim(),
-        source: String(rawCell?.source || '').trim(),
-        confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
-        evidence,
-      };
-    }
-
-    if (Object.keys(nextFacets).length > 0) {
-      assignments[siteId] = nextFacets;
-    }
-  }
-
-  return createFeatureMatrixState(assignments, source.updatedAt);
-}
-
-function normalizeFeatureMatrixCellState(value) {
-  const normalized = normalizeCatalogToken(value);
-  return Object.prototype.hasOwnProperty.call(FEATURE_MATRIX_STATES, normalized)
-    ? normalized
-    : FEATURE_MATRIX_STATE_UNKNOWN;
-}
-
-function getFeatureMatrixDraft() {
-  if (!state.featureMatrix.draft) {
-    restoreFeatureMatrixState();
-  }
-  return state.featureMatrix.draft;
-}
-
-function getFeatureMatrixSaved() {
-  if (!state.featureMatrix.saved) {
-    restoreFeatureMatrixState();
-  }
-  return state.featureMatrix.saved;
-}
-
-function getFeatureMatrixRows() {
-  const source = state.visibleEntries;
-  return (Array.isArray(source) ? source : [])
-    .map((entry) => buildFeatureMatrixRowModel(entry))
-    .filter((row) => row.siteIds.length > 0)
-    .sort(compareFeatureMatrixRows);
-}
-
-function buildFeatureMatrixRowModel(entry) {
-  const members = getFeatureMatrixRowMembers(entry);
-  const visibleMembers = getFeatureMatrixVisibleMembers(entry, members);
-  const rowKey = entry?.displayEntryKey || getDisplayGroupKey(entry) || normalizeCatalogToken(entry?.siteId || '');
-  const title = buildDisplayTitle(entry) || entry?.siteId || rowKey;
-  const lead = visibleMembers[0] || members[0] || entry;
-  const siteIds = visibleMembers.map((member) => member.siteId);
-  return {
-    key: rowKey || siteIds[0] || '',
-    title,
-    lead,
-    members: visibleMembers,
-    allMembers: members,
-    siteIds,
-    siteCount: siteIds.length,
-    totalSiteCount: members.length,
-    host: lead?.host || (lead?.siteId ? `${lead.siteId}.${BASE_DOMAIN}` : ''),
-  };
-}
-
-function getFeatureMatrixRowMembers(entry) {
-  const members = Array.isArray(entry?.familyMembers) && entry.familyMembers.length > 0
-    ? entry.familyMembers
-    : [entry];
-  return sortFamilyMembers(members)
-    .filter((member) => member?.siteId && member.siteId !== ROOT_SITE_ID && member.hasHostedSite !== false);
-}
-
-function getFeatureMatrixVisibleMembers(entry, members) {
-  const visibleIds = new Set(
-    (Array.isArray(entry?.visibleFamilyMembers) && entry.visibleFamilyMembers.length > 0
-      ? entry.visibleFamilyMembers
-      : [entry]
-    )
-      .map((member) => member?.siteId)
-      .filter(Boolean)
-  );
-  return members.filter((member) => visibleIds.has(member.siteId));
-}
-
-function compareFeatureMatrixRows(left, right) {
-  const titleDelta = compareNaturalText(left?.title, right?.title);
-  if (titleDelta !== 0) {
-    return titleDelta;
-  }
-  return compareNaturalText(left?.key, right?.key);
-}
-
-function getFeatureMatrixCellState(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
-  const normalizedSiteId = normalizeCatalogToken(siteId);
-  const normalizedFacetId = normalizeCatalogToken(facetId);
-  return normalizeFeatureMatrixCellState(matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId]?.state);
-}
-
-function getFeatureMatrixCellMeta(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
-  const normalizedSiteId = normalizeCatalogToken(siteId);
-  const normalizedFacetId = normalizeCatalogToken(facetId);
-  return matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId] || null;
-}
-
-function getFeatureMatrixDisplayCellState(entry, facetId, matrixState = getFeatureMatrixDraft()) {
-  return getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState).state;
-}
-
-function getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState = getFeatureMatrixDraft()) {
-  const explicit = getFeatureMatrixCellMeta(entry?.siteId, facetId, matrixState);
-  if (explicit) {
-    return {
-      ...explicit,
-      state: normalizeFeatureMatrixCellState(explicit.state),
-      origin: 'operator',
-      originLabel: 'Set',
-    };
-  }
-  return getFeatureMatrixObservedCellMeta(entry, facetId);
-}
-
-function getFeatureMatrixObservedCellMeta(entry, facetId) {
-  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizeCatalogToken(facetId));
-  if (!entry?.siteId || !facet) {
-    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
-  }
-
-  const tagEvidence = (tags) => getFeatureMatrixMatchedFacetTags(entry, tags);
-  const absentEvidence = tagEvidence(facet.absentTags);
-  if (absentEvidence.length > 0) {
-    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_OFF, absentEvidence);
-  }
-
-  const ignoreEvidence = tagEvidence(facet.ignoreTags);
-  if (ignoreEvidence.length > 0) {
-    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_DEFERRED, ignoreEvidence);
-  }
-
-  const copyEvidence = tagEvidence(facet.copyTags);
-  if (copyEvidence.length > 0) {
-    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_COPY, copyEvidence);
-  }
-
-  const observedEvidence = [
-    ...tagEvidence(facet.observedTags),
-    ...getFeatureMatrixCatalogFieldEvidence(entry, facet.id),
-  ];
-  if (observedEvidence.length > 0) {
-    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_ON, observedEvidence);
-  }
-
-  return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
-}
-
-function featureMatrixObservedMeta(stateId = FEATURE_MATRIX_STATE_UNKNOWN, evidence = []) {
-  const normalizedState = normalizeFeatureMatrixCellState(stateId);
-  return {
-    state: normalizedState,
-    updatedAt: '',
-    source: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
-    confidence: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? 0 : 1,
-    evidence: Array.from(new Set(evidence)).slice(0, 4),
-    origin: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
-    originLabel: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'Seen',
-  };
-}
-
-function getFeatureMatrixMatchedFacetTags(entry, tags) {
-  const tagSet = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
-  return (Array.isArray(tags) ? tags : [])
-    .map((tag) => normalizeCatalogToken(tag))
-    .filter((tag) => tag && tagSet.has(tag))
-    .map((tag) => `tag:${tag}`);
-}
-
-function getFeatureMatrixCatalogFieldEvidence(entry, facetId) {
-  switch (facetId) {
-    case 's3-storage':
-      return entry?.hasData === true ? ['catalog:hasData=true'] : [];
-    case 'frontend-canon':
-      return entry?.canonProfile ? [`catalog:canonProfile=${entry.canonProfile}`] : [];
-    default:
-      return [];
-  }
-}
-
-function assignFeatureMatrixCellState(draft, siteId, facetId, cellState, metadata = {}) {
-  const normalizedSiteId = normalizeCatalogToken(siteId);
-  const normalizedFacetId = normalizeCatalogToken(facetId);
-  const normalizedState = normalizeFeatureMatrixCellState(cellState);
-  if (!draft || !normalizedSiteId || !FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
-    return false;
-  }
-
-  const previousState = getFeatureMatrixCellState(normalizedSiteId, normalizedFacetId, draft);
-  if (previousState === normalizedState) {
-    return false;
-  }
-
-  if (!draft.assignments[normalizedSiteId]) {
-    draft.assignments[normalizedSiteId] = {};
-  }
-
-  if (normalizedState === FEATURE_MATRIX_STATE_UNKNOWN) {
-    delete draft.assignments[normalizedSiteId][normalizedFacetId];
-    if (Object.keys(draft.assignments[normalizedSiteId]).length === 0) {
-      delete draft.assignments[normalizedSiteId];
-    }
-    return true;
-  }
-
-  const confidence = Number(metadata.confidence);
-  const evidence = Array.isArray(metadata.evidence)
-    ? metadata.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
-    : [];
-  draft.assignments[normalizedSiteId][normalizedFacetId] = {
-    state: normalizedState,
-    updatedAt: String(metadata.updatedAt || new Date().toISOString()),
-    source: String(metadata.source || '').trim(),
-    confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
-    evidence,
-  };
-  return true;
-}
-
-function setFeatureMatrixCellState(siteId, facetId, cellState) {
-  const draft = getFeatureMatrixDraft();
-  const changed = assignFeatureMatrixCellState(draft, siteId, facetId, cellState);
-  if (!changed) {
-    return;
-  }
-
-  draft.updatedAt = new Date().toISOString();
-  setFeatureMatrixStatus('Draft changed.', 'warning');
-  renderFeatureMatrixView();
-}
-
-function setFeatureMatrixRowCellState(rowKey, facetId, cellState) {
-  const row = getFeatureMatrixRows().find((candidate) => candidate.key === rowKey);
-  if (!row) {
-    return;
-  }
-  const draft = getFeatureMatrixDraft();
-  const updatedAt = new Date().toISOString();
-  let changed = 0;
-  for (const member of row.members) {
-    if (assignFeatureMatrixCellState(draft, member.siteId, facetId, cellState, { updatedAt })) {
-      changed += 1;
-    }
-  }
-  if (changed === 0) {
-    return;
-  }
-
-  draft.updatedAt = updatedAt;
-  setFeatureMatrixStatus(row.siteCount === 1 ? 'Draft changed.' : `Draft changed for ${changed} sites in ${row.title}.`, 'warning');
-  renderFeatureMatrixView();
-}
-
-function getFeatureMatrixSelectedRowKeys() {
-  if (!(state.featureMatrix.selectedRowKeys instanceof Set)) {
-    state.featureMatrix.selectedRowKeys = new Set();
-  }
-  return state.featureMatrix.selectedRowKeys;
-}
-
-function pruneFeatureMatrixSelectedRows(rows) {
-  const selected = getFeatureMatrixSelectedRowKeys();
-  if (selected.size === 0) {
-    return;
-  }
-  const visibleKeys = new Set(rows.map((row) => row.key));
-  for (const key of [...selected]) {
-    if (!visibleKeys.has(key)) {
-      selected.delete(key);
-    }
-  }
-}
-
-function getFeatureMatrixSelectedRows(rows = getFeatureMatrixRows()) {
-  const selected = getFeatureMatrixSelectedRowKeys();
-  return selected.size === 0
-    ? []
-    : rows.filter((row) => selected.has(row.key));
-}
-
-function getFeatureMatrixBulkTargetRows(rows = getFeatureMatrixRows()) {
-  const selectedRows = getFeatureMatrixSelectedRows(rows);
-  return selectedRows.length > 0 ? selectedRows : rows;
-}
-
-function isFeatureMatrixForwardAction(cellState) {
-  return [
-    FEATURE_MATRIX_STATE_ON,
-    FEATURE_MATRIX_STATE_DEFERRED,
-    FEATURE_MATRIX_STATE_COPY,
-    FEATURE_MATRIX_STATE_UNKNOWN,
-  ].includes(normalizeFeatureMatrixCellState(cellState));
-}
-
-function setFeatureMatrixFacetForRows(facetId, cellState) {
-  const normalizedFacetId = normalizeCatalogToken(facetId);
-  const normalizedState = normalizeFeatureMatrixCellState(cellState);
-  if (!FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
-    return;
-  }
-  if (!isFeatureMatrixForwardAction(normalizedState)) {
-    setFeatureMatrixStatus('Feature Matrix is forward-only. Not present is a status, not a bulk action.', 'warning');
-    renderFeatureMatrixView();
-    return;
-  }
-  const rows = getFeatureMatrixRows();
-  const targetRows = getFeatureMatrixBulkTargetRows(rows);
-  const draft = getFeatureMatrixDraft();
-  const updatedAt = new Date().toISOString();
-  let changed = 0;
-  let siteCount = 0;
-  for (const row of targetRows) {
-    for (const member of row.members) {
-      siteCount += 1;
-      if (assignFeatureMatrixCellState(draft, member.siteId, normalizedFacetId, normalizedState, { updatedAt })) {
-        changed += 1;
-      }
-    }
-  }
-  if (changed === 0) {
-    setFeatureMatrixStatus('No visible cells changed for that feature.', 'info');
-    renderFeatureMatrixView();
-    return;
-  }
-  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizedFacetId);
-  draft.updatedAt = updatedAt;
-  const selectedCount = getFeatureMatrixSelectedRowKeys().size;
-  const scopeLabel = selectedCount > 0
-    ? `${targetRows.length.toLocaleString()} selected row${targetRows.length === 1 ? '' : 's'}`
-    : `${targetRows.length.toLocaleString()} visible row${targetRows.length === 1 ? '' : 's'}`;
-  setFeatureMatrixStatus(
-    `Set ${facet?.label || normalizedFacetId} to ${formatFeatureMatrixState(normalizedState)} for ${changed.toLocaleString()} of ${siteCount.toLocaleString()} site cells across ${scopeLabel}.`,
-    'warning'
-  );
-  renderFeatureMatrixView();
-}
-
-function applyFeatureMatrixToolbarBulkAction() {
-  const facetId = featureMatrixBulkFeatureEl?.value || '';
-  const nextState = featureMatrixBulkActionEl?.value || '';
-  if (!facetId || !nextState) {
-    setFeatureMatrixStatus('Choose a feature and action first.', 'warning');
-    renderFeatureMatrixView();
-    return;
-  }
-  setFeatureMatrixFacetForRows(facetId, nextState);
-  if (featureMatrixBulkActionEl) {
-    featureMatrixBulkActionEl.value = '';
-  }
-  updateFeatureMatrixBulkApplyState();
-}
-
-function getNextFeatureMatrixCellState(currentState) {
-  const normalized = normalizeFeatureMatrixCellState(currentState);
-  if (normalized === FEATURE_MATRIX_STATE_ON) {
-    return FEATURE_MATRIX_STATE_COPY;
-  }
-  if (normalized === FEATURE_MATRIX_STATE_COPY) {
-    return FEATURE_MATRIX_STATE_COPY;
-  }
-  return FEATURE_MATRIX_STATE_ON;
-}
-
-function setFeatureMatrixScope(value) {
-  const nextScope = normalizeCatalogToken(value) === FEATURE_MATRIX_SCOPE_ALL
-    ? FEATURE_MATRIX_SCOPE_ALL
-    : FEATURE_MATRIX_SCOPE_VISIBLE;
-  if (state.featureMatrix.scope === nextScope) {
-    renderFeatureMatrixView();
-    return;
-  }
-  state.featureMatrix.scope = nextScope;
-  renderFeatureMatrixView();
-}
-
-function handleFeatureMatrixClick(event) {
-  const button = event.target instanceof Element
-    ? event.target.closest('[data-feature-cell]')
-    : null;
-  if (!(button instanceof HTMLButtonElement)) {
-    return;
-  }
-  const rowKey = button.getAttribute('data-row-key') || '';
-  const facetId = button.getAttribute('data-feature-id') || '';
-  const nextState = getNextFeatureMatrixCellState(button.getAttribute('data-feature-state') || '');
-  setFeatureMatrixRowCellState(rowKey, facetId, nextState);
-}
-
-function handleFeatureMatrixHeaderClick(event) {
-  const button = event.target instanceof Element
-    ? event.target.closest('[data-feature-select-facet]')
-    : null;
-  if (!(button instanceof HTMLButtonElement)) {
-    return;
-  }
-
-  const facetId = normalizeCatalogToken(button.getAttribute('data-feature-select-facet') || '');
-  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === facetId);
-  if (!facet) {
-    return;
-  }
-
-  const rows = getFeatureMatrixRows();
-  const selected = getFeatureMatrixSelectedRowKeys();
-  selected.clear();
-  for (const row of rows) {
-    const stateId = getFeatureMatrixRowCellState(row, facet.id);
-    if ([FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED].includes(stateId)) {
-      selected.add(row.key);
-    }
-  }
-  setFeatureMatrixStatus(
-    selected.size > 0
-      ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} using ${facet.shortLabel || facet.label}.`
-      : `No visible rows currently show ${facet.shortLabel || facet.label}.`,
-    selected.size > 0 ? 'info' : 'warning'
-  );
-  renderFeatureMatrixView();
-}
-
-function handleFeatureMatrixSelectionChange(event) {
-  const target = event.target;
-  if (!(target instanceof HTMLInputElement)) {
-    return;
-  }
-
-  const selected = getFeatureMatrixSelectedRowKeys();
-  if (target.matches('[data-feature-select-all]')) {
-    selected.clear();
-    if (target.checked) {
-      for (const row of getFeatureMatrixRows()) {
-        selected.add(row.key);
-      }
-    }
-    setFeatureMatrixStatus(
-      selected.size > 0
-        ? `Selected ${selected.size.toLocaleString()} visible row${selected.size === 1 ? '' : 's'}.`
-        : 'Cleared feature row selection.',
-      'info'
-    );
-    renderFeatureMatrixView();
-    return;
-  }
-
-  if (target.matches('[data-feature-row-select]')) {
-    const rowKey = target.getAttribute('data-row-key') || '';
-    if (!rowKey) {
-      return;
-    }
-    if (target.checked) {
-      selected.add(rowKey);
-    } else {
-      selected.delete(rowKey);
-    }
-    setFeatureMatrixStatus(
-      selected.size > 0
-        ? `Selected ${selected.size.toLocaleString()} row${selected.size === 1 ? '' : 's'} for the next feature action.`
-        : 'Cleared feature row selection.',
-      'info'
-    );
-    renderFeatureMatrixView();
-  }
-}
-
-function renderFeatureMatrixView() {
-  if (!featureMatrixViewEl || !featureMatrixTableHeadEl || !featureMatrixTableBodyEl) {
-    return;
-  }
-
-  getFeatureMatrixDraft();
-  const rows = getFeatureMatrixRows();
-  pruneFeatureMatrixSelectedRows(rows);
-  const changes = getFeatureMatrixChanges(rows);
-  const dirty = isFeatureMatrixDirty();
-  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
-
-  syncFeatureMatrixBulkControls(rows);
-  featureMatrixTableHeadEl.innerHTML = renderFeatureMatrixHeader(rows);
-  featureMatrixTableBodyEl.innerHTML = rows.length
-    ? rows.map((entry) => renderFeatureMatrixRow(entry)).join('')
-    : '<tr><td class="feature-matrix-empty" colspan="99">No groups match the current filters.</td></tr>';
-
-  if (featureMatrixSummaryEl) {
-    const selectedCount = getFeatureMatrixSelectedRowKeys().size;
-    featureMatrixSummaryEl.textContent = [
-      `${rows.length.toLocaleString()} visible groups / ${siteCount.toLocaleString()} sites`,
-      selectedCount > 0 ? `${selectedCount.toLocaleString()} selected` : '',
-      `${changes.length.toLocaleString()} changed`,
-    ].filter(Boolean).join(' - ');
-  }
-
-  if (featureMatrixStatusEl) {
-    const fallback = dirty ? 'Unsaved local changes' : (getFeatureMatrixSaved().updatedAt ? 'Saved locally' : 'No actions set yet');
-    featureMatrixStatusEl.textContent = state.featureMatrix.statusMessage || fallback;
-    featureMatrixStatusEl.dataset.tone = state.featureMatrix.statusTone || (dirty ? 'warning' : 'info');
-  }
-
-  if (featureMatrixSaveButton) {
-    featureMatrixSaveButton.disabled = !dirty;
-  }
-  if (featureMatrixResetButton) {
-    featureMatrixResetButton.disabled = !dirty;
-  }
-  if (featureMatrixSynopsisEl) {
-    featureMatrixSynopsisEl.value = buildFeatureMatrixSynopsis(rows, changes);
-  }
-}
-
-function syncFeatureMatrixBulkControls(rows) {
-  if (featureMatrixBulkFeatureEl) {
-    const currentFacetId = featureMatrixBulkFeatureEl.value;
-    featureMatrixBulkFeatureEl.innerHTML = FEATURE_MATRIX_FACETS.map((facet) => (
-      `<option value="${escapeHtml(facet.id)}">${escapeHtml(facet.label)}</option>`
-    )).join('');
-    if (FEATURE_MATRIX_FACETS.some((facet) => facet.id === currentFacetId)) {
-      featureMatrixBulkFeatureEl.value = currentFacetId;
-    }
-  }
-  updateFeatureMatrixBulkApplyState(rows.length);
-}
-
-function updateFeatureMatrixBulkApplyState(rowCount) {
-  if (!featureMatrixBulkApplyButton) {
-    return;
-  }
-  const rows = getFeatureMatrixRows();
-  const targetRows = getFeatureMatrixBulkTargetRows(rows);
-  const resolvedRowCount = Number.isFinite(rowCount) && getFeatureMatrixSelectedRowKeys().size === 0
-    ? rowCount
-    : targetRows.length;
-  const hasFacet = Boolean(featureMatrixBulkFeatureEl?.value);
-  const hasAction = Boolean(featureMatrixBulkActionEl?.value);
-  featureMatrixBulkApplyButton.disabled = resolvedRowCount === 0 || !hasFacet || !hasAction;
-  const labelEl = featureMatrixBulkApplyButton.querySelector('span');
-  if (labelEl) {
-    labelEl.textContent = getFeatureMatrixSelectedRowKeys().size > 0
-      ? `Apply to ${resolvedRowCount.toLocaleString()} selected`
-      : 'Apply to visible rows';
-  }
-}
-
-function renderFeatureMatrixHeader(rows) {
-  const countsByFacet = getFeatureMatrixCounts(rows);
-  const selected = getFeatureMatrixSelectedRowKeys();
-  const allVisibleSelected = rows.length > 0 && rows.every((row) => selected.has(row.key));
-  const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
-    const counts = countsByFacet[facet.id] || {};
-    const countParts = [
-      `${counts[FEATURE_MATRIX_STATE_ON] || 0} current`,
-      `${counts[FEATURE_MATRIX_STATE_COPY] || 0} uniform`,
-      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} update`,
-      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} missing`,
-    ];
-    if (counts[FEATURE_MATRIX_STATE_MIXED] > 0) {
-      countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
-    }
-    const countLabel = countParts.join(' / ');
-    const icon = normalizeFeatureMatrixFacetIcon(facet.icon, facet.id);
-    return `
-      <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
-        <button
-          type="button"
-          class="feature-matrix-facet-label feature-matrix-facet-select"
-          data-feature-select-facet="${escapeHtml(facet.id)}"
-          title="${escapeHtml(`Select visible rows already using ${facet.label}`)}"
-        >
-          <i class="${escapeHtml(icon)}" aria-hidden="true"></i>
-          <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
-        </button>
-        <small>${escapeHtml(countLabel)}</small>
-      </th>
-    `;
-  }).join('');
-  return `
-    <tr>
-      <th class="feature-matrix-app">
-        <span class="feature-matrix-app-label">
-          <input
-            type="checkbox"
-            class="feature-matrix-select-checkbox"
-            data-feature-select-all="true"
-            aria-label="Select all visible feature rows"
-            ${allVisibleSelected ? 'checked' : ''}
-          >
-          <i class="ti ti-layout-grid" aria-hidden="true"></i>
-          <span>Group</span>
-        </span>
-      </th>
-      ${facetHeaders}
-    </tr>
-  `;
-}
-
-function getFeatureMatrixPreviewEntry(row) {
-  const candidates = [
-    row?.lead,
-    ...(Array.isArray(row?.members) ? row.members : []),
-    ...(Array.isArray(row?.allMembers) ? row.allMembers : []),
-  ].filter((entry, index, list) => (
-    entry?.siteId && list.findIndex((candidate) => candidate?.siteId === entry.siteId) === index
-  ));
-  return candidates.find((entry) => getPreviewUrl(entry.siteId)) || candidates[0] || null;
-}
-
-function renderFeatureMatrixPreview(row) {
-  const previewEntry = getFeatureMatrixPreviewEntry(row);
-  const previewUrl = previewEntry ? getPreviewUrl(previewEntry.siteId) : '';
-  const title = row?.title || row?.key || previewEntry?.siteId || 'Site';
-  const siteId = previewEntry?.siteId || '';
-  return `
-    <span class="feature-matrix-preview" aria-hidden="true">
-      <img
-        class="site-preview-img feature-matrix-preview-img is-placeholder${previewUrl ? '' : ' is-failed'}"
-        src="${escapeHtml(PREVIEW_PLACEHOLDER_URL)}"
-        ${previewUrl ? `data-src="${escapeHtml(previewUrl)}"` : ''}
-        ${siteId ? `data-preview-site-id="${escapeHtml(siteId)}" data-preview-source-site-id="${escapeHtml(siteId)}"` : ''}
-        ${previewUrl ? `data-preview-cache-key="${escapeHtml(previewUrl)}"` : ''}
-        data-preview-state="${previewUrl ? 'placeholder' : 'error'}"
-        alt="${escapeHtml(`${title} preview`)}"
-        loading="lazy"
-        decoding="async"
-      >
-    </span>
-  `;
-}
-
-function renderFeatureMatrixRow(row) {
-  const title = row.title || row.key;
-  const selected = getFeatureMatrixSelectedRowKeys().has(row.key);
-  const memberLabel = row.siteCount === 1
-    ? row.host
-    : `${row.siteCount.toLocaleString()} sites${row.totalSiteCount > row.siteCount ? ` visible / ${row.totalSiteCount.toLocaleString()} total` : ''}`;
-  const cells = FEATURE_MATRIX_FACETS.map((facet) => {
-    const cellState = getFeatureMatrixRowCellState(row, facet.id);
-    const stateMeta = getFeatureMatrixStateMeta(cellState);
-    const evidence = getFeatureMatrixRowEvidence(row, facet.id);
-    const originLabel = getFeatureMatrixRowOriginLabel(row, facet.id);
-    const evidenceLabel = evidence.length > 0 ? ` Evidence: ${evidence.join(' | ')}` : '';
-    return `
-      <td class="feature-matrix-cell">
-        <button
-          type="button"
-          class="feature-matrix-state is-${escapeHtml(cellState)}"
-          data-feature-cell="true"
-          data-row-key="${escapeHtml(row.key)}"
-          data-feature-id="${escapeHtml(facet.id)}"
-          data-feature-state="${escapeHtml(cellState)}"
-          title="${escapeHtml(`${title} / ${facet.label}: ${stateMeta.label}. ${facet.rule || ''}${evidenceLabel}`)}"
-          aria-label="${escapeHtml(`${title} ${facet.label} ${stateMeta.label}`)}"
-        >
-          <i class="${escapeHtml(stateMeta.icon)}" aria-hidden="true"></i>
-          <span>${escapeHtml(stateMeta.shortLabel)}</span>
-        </button>
-        ${originLabel ? `<small class="feature-matrix-evidence">${escapeHtml(originLabel)}</small>` : ''}
-      </td>
-    `;
-  }).join('');
-
-  return `
-    <tr data-feature-matrix-row="${escapeHtml(row.key)}">
-      <th class="feature-matrix-site" scope="row">
-        <div class="feature-matrix-site-card">
-          <input
-            type="checkbox"
-            class="feature-matrix-select-checkbox"
-            data-feature-row-select="true"
-            data-row-key="${escapeHtml(row.key)}"
-            aria-label="${escapeHtml(`Select ${title}`)}"
-            ${selected ? 'checked' : ''}
-          >
-          ${renderFeatureMatrixPreview(row)}
-          <div class="feature-matrix-site-copy">
-            <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
-            <span>${escapeHtml(memberLabel || row.key)}</span>
-          </div>
-        </div>
-      </th>
-      ${cells}
-    </tr>
-  `;
-}
-
-function getFeatureMatrixStateMeta(stateId) {
-  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
-    return { id: FEATURE_MATRIX_STATE_MIXED, label: 'Mixed', shortLabel: 'Mix', icon: 'ti ti-adjustments-horizontal' };
-  }
-  return FEATURE_MATRIX_STATES[stateId] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
-}
-
-function getFeatureMatrixRowCellState(row, facetId, matrixState = getFeatureMatrixDraft()) {
-  const states = new Set(row.members.map((member) => getFeatureMatrixDisplayCellState(member, facetId, matrixState)));
-  if (states.size <= 1) {
-    return states.values().next().value || FEATURE_MATRIX_STATE_UNKNOWN;
-  }
-  return FEATURE_MATRIX_STATE_MIXED;
-}
-
-function getFeatureMatrixRowEvidence(row, facetId, matrixState = getFeatureMatrixDraft()) {
-  const evidence = [];
-  for (const member of row.members) {
-    const meta = getFeatureMatrixDisplayCellMeta(member, facetId, matrixState);
-    if (!meta?.source && (!Array.isArray(meta?.evidence) || meta.evidence.length === 0)) {
-      continue;
-    }
-    const stateLabel = formatFeatureMatrixState(meta.state).toLowerCase();
-    const originLabel = meta.origin === 'observed' ? 'observed' : 'set';
-    const prefix = row.siteCount > 1 ? `${member.siteId}: ${stateLabel} ${originLabel}` : `${stateLabel} ${originLabel}`;
-    const detail = Array.isArray(meta.evidence) && meta.evidence.length > 0
-      ? meta.evidence.join(', ')
-      : meta.source;
-    evidence.push(`${prefix} (${detail})`);
-    if (evidence.length >= 3) {
-      break;
-    }
-  }
-  return evidence;
-}
-
-function getFeatureMatrixRowOriginLabel(row, facetId, matrixState = getFeatureMatrixDraft()) {
-  const origins = new Set(
-    row.members
-      .map((member) => getFeatureMatrixDisplayCellMeta(member, facetId, matrixState).originLabel)
-      .filter(Boolean)
-  );
-  if (origins.size === 0) {
-    return '';
-  }
-  if (origins.size === 1) {
-    return origins.values().next().value;
-  }
-  return 'Mixed';
-}
-
-function hasFeatureMatrixExplicitRowDecision(row, facetId, matrixState = getFeatureMatrixDraft()) {
-  return row.members.some((member) => Boolean(getFeatureMatrixCellMeta(member.siteId, facetId, matrixState)));
-}
-
-function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
-  const countsByFacet = Object.fromEntries(FEATURE_MATRIX_FACETS.map((facet) => [facet.id, {
-    [FEATURE_MATRIX_STATE_UNKNOWN]: 0,
-    [FEATURE_MATRIX_STATE_ON]: 0,
-    [FEATURE_MATRIX_STATE_COPY]: 0,
-    [FEATURE_MATRIX_STATE_OFF]: 0,
-    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
-    [FEATURE_MATRIX_STATE_MIXED]: 0,
-  }]));
-  for (const row of rows) {
-    for (const facet of FEATURE_MATRIX_FACETS) {
-      const cellState = getFeatureMatrixRowCellState(row, facet.id);
-      countsByFacet[facet.id][cellState] += 1;
-    }
-  }
-  return countsByFacet;
-}
-
-function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
-  const saved = getFeatureMatrixSaved();
-  const draft = getFeatureMatrixDraft();
-  const changes = [];
-  for (const row of rows) {
-    for (const facet of FEATURE_MATRIX_FACETS) {
-      const fromState = getFeatureMatrixRowCellState(row, facet.id, saved);
-      const toState = getFeatureMatrixRowCellState(row, facet.id, draft);
-      const fromExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, saved);
-      const toExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, draft);
-      if (fromState === toState && fromExplicit === toExplicit) {
-        continue;
-      }
-      changes.push({
-        rowKey: row.key,
-        siteIds: row.siteIds,
-        title: row.title || row.key,
-        facet,
-        fromState,
-        toState,
-        fromExplicit,
-        toExplicit,
-      });
-    }
-  }
-  return changes;
-}
-
-function getFeatureMatrixAssignmentSignature(matrixState) {
-  return JSON.stringify((matrixState || createFeatureMatrixState()).assignments || {});
-}
-
-function isFeatureMatrixDirty() {
-  return getFeatureMatrixAssignmentSignature(getFeatureMatrixSaved()) !== getFeatureMatrixAssignmentSignature(getFeatureMatrixDraft());
-}
-
-function saveFeatureMatrixDraft() {
-  const saved = cloneFeatureMatrixState(getFeatureMatrixDraft());
-  saved.updatedAt = new Date().toISOString();
-  state.featureMatrix.saved = saved;
-  state.featureMatrix.draft = cloneFeatureMatrixState(saved);
-  try {
-    localStorage.setItem(FEATURE_MATRIX_STORAGE_KEY, JSON.stringify(saved));
-    setFeatureMatrixStatus('Saved locally.', 'success');
-  } catch {
-    setFeatureMatrixStatus('Local save failed. Copy the prompt before leaving.', 'error');
-  }
-  renderFeatureMatrixView();
-}
-
-function resetFeatureMatrixDraft() {
-  state.featureMatrix.draft = cloneFeatureMatrixState(getFeatureMatrixSaved());
-  setFeatureMatrixStatus('Reset to saved matrix.', 'info');
-  renderFeatureMatrixView();
-}
-
-function seedFeatureMatrixHeuristics() {
-  const rows = getFeatureMatrixRows();
-  const draft = getFeatureMatrixDraft();
-  const updatedAt = new Date().toISOString();
-  const seededCounts = {
-    [FEATURE_MATRIX_STATE_ON]: 0,
-    [FEATURE_MATRIX_STATE_COPY]: 0,
-    [FEATURE_MATRIX_STATE_OFF]: 0,
-    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
-  };
-  let skipped = 0;
-
-  for (const row of rows) {
-    for (const member of row.members) {
-      for (const facet of FEATURE_MATRIX_FACETS) {
-        if (getFeatureMatrixCellState(member.siteId, facet.id, draft) !== FEATURE_MATRIX_STATE_UNKNOWN) {
-          skipped += 1;
-          continue;
-        }
-        const guess = inferFeatureMatrixGuess(member, facet);
-        if (guess.state === FEATURE_MATRIX_STATE_UNKNOWN) {
-          skipped += 1;
-          continue;
-        }
-        const changed = assignFeatureMatrixCellState(draft, member.siteId, facet.id, guess.state, {
-          updatedAt,
-          source: 'heuristic',
-          confidence: guess.confidence,
-          evidence: guess.evidence,
-        });
-        if (changed) {
-          seededCounts[guess.state] += 1;
-        }
-      }
-    }
-  }
-
-  const seeded = seededCounts[FEATURE_MATRIX_STATE_ON]
-    + seededCounts[FEATURE_MATRIX_STATE_COPY]
-    + seededCounts[FEATURE_MATRIX_STATE_OFF]
-    + seededCounts[FEATURE_MATRIX_STATE_DEFERRED];
-  if (seeded === 0) {
-    setFeatureMatrixStatus('No unknown cells matched the current heuristics.', 'info');
-    renderFeatureMatrixView();
-    return;
-  }
-
-  draft.updatedAt = updatedAt;
-  setFeatureMatrixStatus(
-    `Seeded ${seeded.toLocaleString()} draft actions (${seededCounts[FEATURE_MATRIX_STATE_ON].toLocaleString()} add, ${seededCounts[FEATURE_MATRIX_STATE_COPY].toLocaleString()} copy, ${seededCounts[FEATURE_MATRIX_STATE_OFF].toLocaleString()} remove, ${seededCounts[FEATURE_MATRIX_STATE_DEFERRED].toLocaleString()} ignore). ${skipped.toLocaleString()} cells left untouched.`,
-    'warning'
-  );
-  renderFeatureMatrixView();
-}
-
-function inferFeatureMatrixGuess(entry, facet) {
-  const haystack = buildFeatureMatrixHaystack(entry);
-  const strongStatic = isFeatureMatrixLikelyStaticOnly(entry, haystack);
-  const tagEvidence = (tokens) => getFeatureMatrixMatchedTags(entry, tokens);
-  const textEvidence = (tokens) => getFeatureMatrixMatchedText(haystack, tokens);
-
-  switch (facet.id) {
-    case 'phone-remote': {
-      const evidence = [
-        ...tagEvidence(['phone-remote', 'remote-control', 'tv-tail']),
-        ...textEvidence(['phone remote', 'remote control', 'tv-tail', 'commandtopic', 'channelid', 'remote command']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
-      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    case 'signalr': {
-      const evidence = [
-        ...tagEvidence(['signalr', 'signal-argh', 'tv-tail', 'realtime']),
-        ...textEvidence(['signalr', 'signal-argh', 'hubconnectionbuilder', 'realtime', 'websocket', 'tv-tail']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.86, evidence);
-      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.44, ['static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    case 's3-storage': {
-      const evidence = [
-        ...(entry?.hasData ? ['catalog hasData=true'] : []),
-        ...tagEvidence(['data', 'asset-catalog', 's3', 'storage', 'catalog']),
-        ...textEvidence(['s3://', ' s3 ', 'bucket', 'storage', 'data bucket', 'asset catalog']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, entry?.hasData ? 0.9 : 0.68, evidence);
-      if (entry?.hasData === false && strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.48, ['catalog hasData=false', 'static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    case 'lambda-api': {
-      const evidence = [
-        ...tagEvidence(['lambda', 'backend-api', 'api', 'slack', 'triage']),
-        ...textEvidence(['lambda', 'api endpoint', '/api/', 'swagger', 'backend', 'lambda-first', 'api-backed']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
-      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.45, ['static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    case 'frontend-canon': {
-      const evidence = [
-        ...(entry?.canonProfile ? [`canonProfile=${entry.canonProfile}`] : []),
-        ...tagEvidence(['canon-deploy-ready', 'public-frontdoor', 'ui-framework', 'framework', 'frontend-ui']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
-      if (entry?.hasHostedSite !== false) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.56, ['hosted browser-facing site']);
-      return featureMatrixGuess();
-    }
-    case 'threejs': {
-      const evidence = [
-        ...tagEvidence(['threejs', 'three-js', 'webgl', '3d']),
-        ...textEvidence(['three.js', 'threejs', 'webgl', '3d ', 'canvas 3d', 'starfield']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
-      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    case 'tv-telemetry': {
-      const evidence = [
-        ...tagEvidence(['tv-tail', 'telemetry', 'log-tap']),
-        ...textEvidence(['tv-tail', 'log-tap', 'telemetry', 'console broadcast', 'remote command']),
-      ];
-      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.84, evidence);
-      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.43, ['static/frontdoor catalog signals']);
-      return featureMatrixGuess();
-    }
-    default:
-      return featureMatrixGuess();
-  }
-}
-
-function featureMatrixGuess(stateId = FEATURE_MATRIX_STATE_UNKNOWN, confidence = 0, evidence = []) {
-  return {
-    state: normalizeFeatureMatrixCellState(stateId),
-    confidence,
-    evidence: Array.from(new Set(evidence)).slice(0, 4),
-  };
-}
-
-function buildFeatureMatrixHaystack(entry) {
-  return [
-    entry?.siteId,
-    entry?.host,
-    entry?.displayName,
-    entry?.title,
-    entry?.description,
-    entry?.managedBy,
-    entry?.canonProfile,
-    entry?.publishContext?.source,
-    entry?.publishContext?.github?.repository,
-    entry?.publishContext?.git?.remote,
-    ...(Array.isArray(entry?.tags) ? entry.tags : []),
-    ...(Array.isArray(entry?.notes) ? entry.notes : []),
-  ]
-    .join(' ')
-    .toLocaleLowerCase();
-}
-
-function getFeatureMatrixMatchedTags(entry, tokens) {
-  const tags = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
-  return tokens
-    .map((token) => normalizeCatalogToken(token))
-    .filter((token) => token && tags.has(token))
-    .map((token) => `tag:${token}`);
-}
-
-function getFeatureMatrixMatchedText(haystack, tokens) {
-  return tokens
-    .map((token) => String(token || '').toLocaleLowerCase())
-    .filter((token) => token && haystack.includes(token))
-    .map((token) => `text:${token}`)
-    .slice(0, 4);
-}
-
-function isFeatureMatrixLikelyStaticOnly(entry, haystack = buildFeatureMatrixHaystack(entry)) {
-  if (entry?.hasData === true) {
-    return false;
-  }
-  const staticSignals = [
-    'static-site',
-    'github-pages',
-    'repo-artifacts',
-    'public-frontdoor',
-    'docs',
-    'dual-static',
-    'static gallery',
-    'repo docs page',
-  ];
-  const dynamicSignals = [
-    'lambda',
-    'signalr',
-    'signal-argh',
-    'tv-tail',
-    'websocket',
-    'api-backed',
-    'backend',
-    'slack-first',
-  ];
-  return staticSignals.some((signal) => haystack.includes(signal))
-    && !dynamicSignals.some((signal) => haystack.includes(signal));
-}
-
-async function copyFeatureMatrixSynopsis() {
-  const text = buildFeatureMatrixSynopsis();
-  const result = await copyTextWithFeatureMatrixFallback(text);
-  if (result.copied) {
-    if (featureMatrixCopyButton) {
-      flashButton(featureMatrixCopyButton, 'Copied');
-    }
-    setFeatureMatrixStatus('Prompt copied.', 'success');
-  } else {
-    setFeatureMatrixStatus('Prompt selected. Use your copy shortcut.', 'warning');
-  }
-  renderFeatureMatrixView();
-  if (!result.copied && featureMatrixSynopsisEl) {
-    featureMatrixSynopsisEl.focus({ preventScroll: true });
-    featureMatrixSynopsisEl.select();
-  }
-}
-
-async function copyTextWithFeatureMatrixFallback(text) {
-  const clipboardText = String(text || '');
-  if (navigator.clipboard?.writeText) {
-    let timeoutId = 0;
-    try {
-      await Promise.race([
-        navigator.clipboard.writeText(clipboardText),
-        new Promise((_, reject) => {
-          timeoutId = window.setTimeout(() => reject(new Error('Clipboard write timed out.')), 900);
-        }),
-      ]);
-      window.clearTimeout(timeoutId);
-      return { copied: true };
-    } catch {
-      window.clearTimeout(timeoutId);
-    }
-  }
-
-  if (!featureMatrixSynopsisEl) {
-    return { copied: false };
-  }
-
-  featureMatrixSynopsisEl.value = clipboardText;
-  featureMatrixSynopsisEl.focus({ preventScroll: true });
-  featureMatrixSynopsisEl.select();
-  try {
-    return { copied: document.execCommand('copy') === true };
-  } catch {
-    return { copied: false };
-  }
-}
-
-function setFeatureMatrixStatus(message, tone = '') {
-  state.featureMatrix.statusMessage = message || '';
-  state.featureMatrix.statusTone = tone || '';
-}
-
-function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = getFeatureMatrixChanges(rows)) {
-  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all groups' : 'currently visible groups';
-  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
-  const searchText = String(searchEl?.value || '').trim();
-  const activeTags = getActiveCatalogTagIds().map((tagId) => getCatalogTagLabel(tagId)).filter(Boolean);
-  const lines = [
-    'Feature Matrix runbook for sites.mullmania.com',
-    '',
-    `Scope: ${scopeLabel}`,
-    `Groups in scope: ${rows.length}`,
-    `Sites in scope: ${siteCount}`,
-    `Generated: ${new Date().toISOString()}`,
-  ];
-
-  if (searchText) {
-    lines.push(`Search filter: ${searchText}`);
-  }
-  if (activeTags.length) {
-    lines.push(`Tag filters: ${activeTags.join(', ')}`);
-  }
-
-  lines.push(
-    '',
-    'Action semantics:',
-    '- The matrix is forward-only: never remove a feature because of this runbook.',
-    '- CURRENT / ADD means add the facet if missing, then verify it follows the facet rule.',
-    '- UPDATE means the facet is present but should be brought up to the current canonical pattern.',
-    '- UNIFORM means make the selected rows use the same current implementation pattern.',
-    '- NOT PRESENT is a status only. It is never an instruction to remove anything.',
-    '- Observed cells come from semantic tags or deterministic catalog fields. Treat them as historical context, not operator intent, until the operator sets a forward decision.',
-    '- NOT ASSESSED means audit first before proposing work.',
-    '- MIXED means the group contains member sites with different decisions; inspect the listed member states before acting.',
-    '',
-    'Facet rules:'
-  );
-
-  for (const facet of FEATURE_MATRIX_FACETS) {
-    lines.push(`- ${facet.label}: ${facet.rule || 'Use the operator-provided rule for this facet.'}`);
-  }
-
-  lines.push('', 'Changes since last saved matrix:');
-  if (changes.length === 0) {
-    lines.push('- No changed cells in this scope.');
-  } else {
-    for (const change of changes) {
-      lines.push(`- ${change.rowKey} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixChangeState(change.fromState, change.fromExplicit)} -> ${formatFeatureMatrixChangeState(change.toState, change.toExplicit)} [${change.siteIds.join(', ')}]`);
-    }
-  }
-
-  lines.push('', 'Explicit operator decision packets by facet:');
-  let explicitDecisionCount = 0;
-  for (const facet of FEATURE_MATRIX_FACETS) {
-    const byState = {
-      [FEATURE_MATRIX_STATE_ON]: [],
-      [FEATURE_MATRIX_STATE_COPY]: [],
-      [FEATURE_MATRIX_STATE_DEFERRED]: [],
-      [FEATURE_MATRIX_STATE_MIXED]: [],
-    };
-    for (const row of rows) {
-      if (!hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
-        continue;
-      }
-      const cellState = getFeatureMatrixRowCellState(row, facet.id);
-      if (byState[cellState]) {
-        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
-      }
-    }
-    const chunks = [];
-    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_MIXED]) {
-      if (byState[stateId].length > 0) {
-        explicitDecisionCount += byState[stateId].length;
-        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
-      }
-    }
-    if (chunks.length > 0) {
-      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
-    }
-  }
-  if (explicitDecisionCount === 0) {
-    lines.push('- No explicit forward decisions yet.');
-  }
-
-  lines.push('', 'Observed historical baseline by facet:');
-  let observedBaselineCount = 0;
-  for (const facet of FEATURE_MATRIX_FACETS) {
-    const byState = {
-      [FEATURE_MATRIX_STATE_ON]: [],
-      [FEATURE_MATRIX_STATE_COPY]: [],
-      [FEATURE_MATRIX_STATE_OFF]: [],
-      [FEATURE_MATRIX_STATE_DEFERRED]: [],
-      [FEATURE_MATRIX_STATE_MIXED]: [],
-    };
-    for (const row of rows) {
-      if (hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
-        continue;
-      }
-      const cellState = getFeatureMatrixRowCellState(row, facet.id);
-      if (byState[cellState]) {
-        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
-      }
-    }
-    const chunks = [];
-    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_MIXED]) {
-      if (byState[stateId].length > 0) {
-        observedBaselineCount += byState[stateId].length;
-        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
-      }
-    }
-    if (chunks.length > 0) {
-      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
-    }
-  }
-  if (observedBaselineCount === 0) {
-    lines.push('- No semantic tag/catalog baseline found in this scope.');
-  }
-
-  lines.push(
-    '',
-    'Orchestrated agent request:',
-    'Use explicit forward decision packets as intent and use the observed historical baseline only as context/evidence. Produce a repo-by-repo execution plan before editing. For CURRENT / ADD packets, add the facet where missing and verify every listed member site follows the facet rule exactly. For UPDATE packets, bring the existing implementation up to the current canonical pattern. For UNIFORM packets, identify the strongest canonical implementation in the packet or facet rule, make every listed site match it, and call out any repo where the pattern cannot apply cleanly. Do not remove features from any site because of this runbook. For observed-only cells, audit and report current implementation status before proposing forward changes. For NOT ASSESSED cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
-  );
-
-  return `${lines.join('\n')}\n`;
-}
-
-function formatFeatureMatrixRowDecision(row, facetId, cellState) {
-  if (cellState !== FEATURE_MATRIX_STATE_MIXED) {
-    return `${row.key} [${row.siteIds.join(', ')}]`;
-  }
-  const memberStates = row.members
-    .map((member) => `${member.siteId}=${formatFeatureMatrixState(getFeatureMatrixDisplayCellState(member, facetId))}`)
-    .join(', ');
-  return `${row.key} [${memberStates}]`;
-}
-
-function formatFeatureMatrixChangeState(stateId, explicit) {
-  const label = formatFeatureMatrixState(stateId);
-  if (stateId === FEATURE_MATRIX_STATE_UNKNOWN) {
-    return label;
-  }
-  return `${label}${explicit ? ' (set)' : ' (seen)'}`;
-}
-
-function formatFeatureMatrixState(stateId) {
-  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
-    return 'MIXED';
-  }
-  const stateMeta = FEATURE_MATRIX_STATES[normalizeFeatureMatrixCellState(stateId)] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
-  return stateMeta.label.toUpperCase();
 }
 
 function renderFlightDeckView() {

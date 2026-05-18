@@ -697,12 +697,12 @@
       </div>
     </section>
 
-    <section id="features-view" class="surface feature-matrix-shell is-hidden" aria-label="Feature matrix">
+    <section id="features-view" class="surface feature-matrix-shell is-hidden" aria-label="Feature gates">
       <div class="feature-matrix-toolbar">
         <div class="feature-matrix-heading">
           <div class="feature-matrix-title">
             <i class="ti ti-checklist"></i>
-            <span>Feature Matrix</span>
+            <span>Feature Gates</span>
           </div>
           <span id="feature-matrix-summary" class="feature-matrix-summary">No rows</span>
         </div>
@@ -713,13 +713,7 @@
           </label>
           <label class="feature-matrix-control">
             <span>Action</span>
-            <select id="feature-matrix-bulk-action" aria-label="Action to apply">
-              <option value="">Choose action</option>
-              <option value="on">Add / verify current</option>
-              <option value="deferred">Update to current</option>
-              <option value="copy">Make uniform</option>
-              <option value="unknown">Clear decision</option>
-            </select>
+            <select id="feature-matrix-bulk-action" aria-label="Action to apply"></select>
           </label>
           <button id="feature-matrix-bulk-apply" type="button" class="secondary">
             <i class="ti ti-list-check"></i>
@@ -1867,7 +1861,7 @@
                 <div class="composer-flat-starter__cards choice-grid" role="list" aria-label="Pick a starter">
                   <button type="button" class="composer-flat-starter-card choice-card is-active" data-composer-flat-starter="plain-page" aria-pressed="true">
                     <span class="choice-card__eyebrow">Static</span>
-                    <strong>Plain page</strong>
+                    <strong>Plain Page</strong>
                     <span class="choice-card__body">Bare HTML, CSS, and JS. No framework.</span>
                   </button>
                   <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="ui-shell" aria-pressed="false">
@@ -1882,7 +1876,7 @@
                   </button>
                   <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="slack-bot" aria-pressed="false">
                     <span class="choice-card__eyebrow">Slack</span>
-                    <strong>Slack bot</strong>
+                    <strong>Slack Bot</strong>
                     <span class="choice-card__body">Bot page plus example manifest + Bolt server stub.</span>
                   </button>
                   <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="game" aria-pressed="false">
@@ -1920,10 +1914,10 @@
                   <!-- "Base files" picker removed — the flat starter picker above subsumes it.
                        Hidden legacy starter buttons retained so existing setComposerStarter state-sync continues to work. -->
                   <div class="composer-theme__cards choice-grid is-hidden" aria-hidden="true">
-                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="ui-site" aria-pressed="false"></button>
-                    <button type="button" class="composer-starter-card choice-card is-active" data-composer-starter="basic-example" aria-pressed="true"></button>
-                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="slack-bot" aria-pressed="false"></button>
-                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="game" aria-pressed="false"></button>
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="ui-site" aria-pressed="false"><strong>UI Site</strong></button>
+                    <button type="button" class="composer-starter-card choice-card is-active" data-composer-starter="basic-example" aria-pressed="true"><strong>Plain Page</strong></button>
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="slack-bot" aria-pressed="false"><strong>Slack Bot</strong></button>
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="game" aria-pressed="false"><strong>Game</strong></button>
                   </div>
 
                   <label class="field composer-app-kind__field">
