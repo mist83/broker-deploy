@@ -5783,6 +5783,24 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   text-align: center;
 }
 
+@media (max-width: 480px) {
+  .feature-matrix-shell {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .feature-matrix-footer {
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .feature-matrix-synopsis {
+    min-height: 58px;
+    max-height: 58px;
+    padding-right: 76px;
+    resize: none;
+  }
+}
+
 .category-editor-modal__panel {
   width: min(760px, calc(100vw - 32px));
   max-height: min(720px, calc(100vh - 32px));

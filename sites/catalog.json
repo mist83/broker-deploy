@@ -4213,10 +4213,22 @@
       "Feed branches in; chips erupt out. Drag the tube to aim."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:20:04.047Z",
+    "lastPublishedAt": "2026-05-18T01:31:03.545Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/chipper",
+        "ref": null,
+        "sha": "1dcd25127bf29ac5e4dda08f5ce084501845a3db",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/chipper",
+        "branch": "main",
+        "commit": "1dcd25127bf29ac5e4dda08f5ce084501845a3db",
+        "remote": "https://github.com/mist83/chipper.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -12123,20 +12135,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:16:25.214Z",
+    "lastPublishedAt": "2026-05-18T01:28:55.047Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "77fd71696fc6736755a64f7ea7a124f406f9a960",
+        "sha": "55dd1533f0d0b40967e92487a2a277cc15b0d4f0",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/dag.mullmania.com",
+        "root": "/Users/mist83/Code/dag",
         "branch": "main",
-        "commit": "77fd71696fc6736755a64f7ea7a124f406f9a960",
+        "commit": "55dd1533f0d0b40967e92487a2a277cc15b0d4f0",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -13715,20 +13727,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T05:20:05.244Z",
+    "lastPublishedAt": "2026-05-18T01:09:25.834Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/drop",
         "ref": null,
-        "sha": "b5a3c31d2a357071071e9e262cbb1eefbad4b558",
+        "sha": "fc33d0d85211dd4d0246669f8ba6f5253efc4911",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/drop",
         "branch": "main",
-        "commit": "b5a3c31d2a357071071e9e262cbb1eefbad4b558",
+        "commit": "fc33d0d85211dd4d0246669f8ba6f5253efc4911",
         "remote": "https://github.com/mist83/drop.git"
       }
     },
@@ -19268,7 +19280,7 @@
       "Hot wire cuts styrofoam. Pick a shape, set the wire, watch the foam vanish."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:08:49.488Z",
+    "lastPublishedAt": "2026-05-18T01:10:22.367Z",
     "publishContext": {
       "github": null,
       "git": null
@@ -19499,10 +19511,22 @@
       "A hydraulic press squashes 3D objects flat. Tap to fire."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:18:09.380Z",
+    "lastPublishedAt": "2026-05-18T01:28:02.904Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/hydropress",
+        "ref": null,
+        "sha": "7a57dfca023aced61a980e2c3f93b0d1ba9234a7",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/hydropress",
+        "branch": "main",
+        "commit": "7a57dfca023aced61a980e2c3f93b0d1ba9234a7",
+        "remote": "https://github.com/mist83/hydropress.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -22401,10 +22425,22 @@
       "Tap to swing the maul. One round, two halves."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:21:00.567Z",
+    "lastPublishedAt": "2026-05-18T01:33:02.207Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/logsplit",
+        "ref": null,
+        "sha": "916bcd6fed40f5714f5b90e441ce49ed77131e0c",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/logsplit",
+        "branch": "main",
+        "commit": "916bcd6fed40f5714f5b90e441ce49ed77131e0c",
+        "remote": "https://github.com/mist83/logsplit.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -24871,20 +24907,20 @@
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T18:36:08.280Z",
+    "lastPublishedAt": "2026-05-18T01:09:50.009Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "711ca157358470864fcb6bc682ff3e456a542166",
+        "sha": "db8e348a2da2426e900f550ad819951a29161b13",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/models",
         "branch": "master",
-        "commit": "711ca157358470864fcb6bc682ff3e456a542166",
+        "commit": "db8e348a2da2426e900f550ad819951a29161b13",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -25259,20 +25295,20 @@
       "Mullformed is a browser-native 3D sketchpad for quickly shaping rough ideas into usable 3D assets."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:06:35.135Z",
+    "lastPublishedAt": "2026-05-18T01:12:22.216Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mullformed",
         "ref": null,
-        "sha": "1eb287ab6f2e236598e38e8c6196f31d2b4de2a2",
+        "sha": "b8407f528fcb9a1a0ed4b120fe6be2899c71c09f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mullformed",
         "branch": "main",
-        "commit": "1eb287ab6f2e236598e38e8c6196f31d2b4de2a2",
+        "commit": "b8407f528fcb9a1a0ed4b120fe6be2899c71c09f",
         "remote": "https://github.com/mist83/mullformed.git"
       }
     },
@@ -29585,10 +29621,22 @@
       "Drag the nozzle, grime peels off in clean stripes."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:17:13.367Z",
+    "lastPublishedAt": "2026-05-18T01:26:13.347Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/powerwasher",
+        "ref": null,
+        "sha": "193b7407ac33104f3f9ee6dc8cf7eb0b2a0740ae",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/powerwasher",
+        "branch": "main",
+        "commit": "193b7407ac33104f3f9ee6dc8cf7eb0b2a0740ae",
+        "remote": "https://github.com/mist83/powerwasher.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -34986,20 +35034,20 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:01:22.809Z",
+    "lastPublishedAt": "2026-05-18T01:55:24.634Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/sites",
         "ref": null,
-        "sha": "32e8924dd37efe5d89701891454053df694b08ad",
+        "sha": "690bb20372510a1b45ebe09861f0317d4de5018f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/sites",
         "branch": "main",
-        "commit": "32e8924dd37efe5d89701891454053df694b08ad",
+        "commit": "690bb20372510a1b45ebe09861f0317d4de5018f",
         "remote": "https://github.com/mist83/sites.git"
       },
       "source": "launchpad-bootstrap"
@@ -35627,10 +35675,22 @@
       "A blade peels rainbow curls off a soap loaf."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T23:19:06.983Z",
+    "lastPublishedAt": "2026-05-18T01:29:20.775Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/soapcut",
+        "ref": null,
+        "sha": "c7abfaeb421184b2aa260ab38adac4168b355aeb",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/soapcut",
+        "branch": "main",
+        "commit": "c7abfaeb421184b2aa260ab38adac4168b355aeb",
+        "remote": "https://github.com/mist83/soapcut.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
