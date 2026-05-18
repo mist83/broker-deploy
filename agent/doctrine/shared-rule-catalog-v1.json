@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-17T12:54:24.607Z",
+  "generatedAt": "2026-05-18T04:42:17.272Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
@@ -520,6 +520,38 @@
       "domains": [
         "operator-core",
         "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude"
+      ],
+      "profileIds": [
+        "shared-operator-core"
+      ]
+    },
+    {
+      "id": "feedback_retro_note_log",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_retro_note_log.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
+      "sha256": "580cbf5ad414a9c4e9f87fc62f88b5feeb809f4e448bef5dd723a83079e799b1",
+      "sizeBytes": 2345,
+      "summary": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task ",
+      "excerpt": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task easier.\n\nRule\nAfter every completed task — same trigger as feedback_heimdall_announce and feedback_dev_diary_log — POST one retrospective entry.\nEndpoint: POST https://retro.mullmania.com/api/entries\nAuth: x-retro-token: $DEV_DIARY_TOKEN or x-dev-diary-token: $DEV_DIARY_TOKEN. The token lives in the dev-diary Lambda env (aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text).\nOne retro entry per completed task. Not per tool call.\nKeep it plain and operational. This is not a status update; it is a learning note for later sweep.\nAlways include tags containing retro and task-retro, and payload.kind set to task-retro.\n\nScope\n\nAll runtimes, all repos, all completed task kinds. This pairs with Slack and dev-diary logging; it does not replace either one.\n\nFailure mode\n\nIf the POST fails, report the failure plainly. Do not pretend the retro note was written. Do not block deployment or leave live user-facing work half-finished solely because the retro API is down.",
+      "durability": "standing",
+      "tags": [
+        "core",
+        "announce",
+        "retro"
+      ],
+      "domains": [
+        "operator-core"
       ],
       "events": [
         "session_start",

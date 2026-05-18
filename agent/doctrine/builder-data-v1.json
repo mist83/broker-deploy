@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-17T12:54:24.607Z",
+  "generatedAt": "2026-05-18T04:42:17.273Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -39,7 +39,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-17T12:54:24.607Z",
+    "generatedAt": "2026-05-18T04:42:17.272Z",
     "runtimes": [
       {
         "id": "codex",
@@ -94,7 +94,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-17T12:54:24.607Z",
+    "generatedAt": "2026-05-18T04:42:17.272Z",
     "events": [
       {
         "id": "session_start",
@@ -158,7 +158,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-17T12:54:24.607Z",
+    "generatedAt": "2026-05-18T04:42:17.272Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -252,7 +252,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-17T12:54:24.607Z",
+    "generatedAt": "2026-05-18T04:42:17.272Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -292,6 +292,7 @@
           "feedback_deployment_completion",
           "feedback_heimdall_announce",
           "feedback_dev_diary_log",
+          "feedback_retro_note_log",
           "feedback_stop_when_unproductive",
           "feedback_communication_style",
           "feedback_bootstrap_quiet_by_default",
@@ -421,7 +422,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-17T12:54:24.607Z",
+    "generatedAt": "2026-05-18T04:42:17.272Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -923,6 +924,37 @@
         "domains": [
           "operator-core",
           "operator-style"
+        ],
+        "events": [
+          "session_start",
+          "task_execution",
+          "memory_read"
+        ],
+        "runtimes": [
+          "codex",
+          "claude"
+        ],
+        "profileIds": [
+          "shared-operator-core"
+        ]
+      },
+      {
+        "id": "feedback_retro_note_log",
+        "label": "feedback retro note log",
+        "kind": "feedback-rule",
+        "summary": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task ",
+        "excerpt": "The retro log at https://retro.mullmania.com is the durable improvement trail for completed work. After every task, add one short note about what went well, what dragged, what was ugly, and what would have made the task easier.\n\nRule\nAfter every completed task — same trigger as feedback_heimdall_announce and feedback_dev_diary_log — POST one retrospective entry.\nEndpoint: POST https://retro.mullmania.com/api/entries\nAuth: x-retro-token: $DEV_DIARY_TOKEN or x-dev-diary-token: $DEV_DIARY_TOKEN. The token lives in the dev-diary Lambda env (aws lambda get-function-configuration --function-name dev-diary-api --region us-west-2 --query 'Environment.Variables.DEV_DIARY_TOKEN' --output text).\nOne retro entry per completed task. Not per tool call.\nKeep it plain and operational. This is not a status update; it is a learning note for later sweep.\nAlways include tags containing retro and task-retro, and payload.kind set to task-retro.\n\nScope\n\nAll runtimes, all repos, all completed task kinds. This pairs with Slack and dev-diary logging; it does not replace either one.\n\nFailure mode\n\nIf the POST fails, report the failure plainly. Do not pretend the retro note was written. Do not block deployment or leave live user-facing work half-finished solely because the retro API is down.",
+        "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
+        "sitePath": "/doctrine/shared/rules/feedback/feedback_retro_note_log.md",
+        "sha256": "580cbf5ad414a9c4e9f87fc62f88b5feeb809f4e448bef5dd723a83079e799b1",
+        "durability": "standing",
+        "tags": [
+          "core",
+          "announce",
+          "retro"
+        ],
+        "domains": [
+          "operator-core"
         ],
         "events": [
           "session_start",
