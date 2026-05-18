@@ -37,42 +37,70 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'phone-remote',
       label: 'Phone Remote',
       shortLabel: 'Remote',
+      observedTags: ['feature:phone-remote', 'phone-remote', 'remote-control', 'tv-tail'],
+      copyTags: ['feature:phone-remote:copy', 'copy:phone-remote'],
+      absentTags: ['feature:phone-remote:off', 'feature:phone-remote:absent', 'no-phone-remote'],
+      ignoreTags: ['feature:phone-remote:ignore', 'ignore:phone-remote'],
       rule: 'Use the canonical phone pairing primitive from ui/js/pair.js when a phone controls the app, TV, or dashboard surface.',
     },
     {
       id: 'signalr',
       label: 'SignalR',
       shortLabel: 'SignalR',
+      observedTags: ['feature:signalr', 'signalr', 'signal-argh', 'realtime'],
+      copyTags: ['feature:signalr:copy', 'copy:signalr'],
+      absentTags: ['feature:signalr:off', 'feature:signalr:absent', 'no-signalr'],
+      ignoreTags: ['feature:signalr:ignore', 'ignore:signalr'],
       rule: 'Use signal-argh through the SignalR client for real-time messaging; do not hand-roll raw WebSocket protocol code.',
     },
     {
       id: 's3-storage',
       label: 'S3 Storage',
       shortLabel: 'S3',
+      observedTags: ['feature:s3-storage', 's3-storage', 's3', 'storage', 'asset-catalog', 'mullmania-data', 'generated-assets'],
+      copyTags: ['feature:s3-storage:copy', 'copy:s3-storage'],
+      absentTags: ['feature:s3-storage:off', 'feature:s3-storage:absent', 'no-s3-storage'],
+      ignoreTags: ['feature:s3-storage:ignore', 'ignore:s3-storage'],
       rule: 'Use the Mullmania hosting/data bucket conventions for static artifacts, persisted metadata, and deploy-safe storage.',
     },
     {
       id: 'lambda-api',
       label: 'Lambda API',
       shortLabel: 'Lambda',
+      observedTags: ['feature:lambda-api', 'lambda-api', 'lambda', 'lambda-backed', 'backend-api'],
+      copyTags: ['feature:lambda-api:copy', 'copy:lambda-api'],
+      absentTags: ['feature:lambda-api:off', 'feature:lambda-api:absent', 'no-lambda-api'],
+      ignoreTags: ['feature:lambda-api:ignore', 'ignore:lambda-api'],
       rule: 'Use a Lambda/API-backed route when the feature needs trusted mutation, shared state, or server-owned integration.',
     },
     {
       id: 'frontend-canon',
       label: 'Frontend Canon',
       shortLabel: 'Canon',
+      observedTags: ['feature:frontend-canon', 'frontend-canon', 'canon-deploy-ready', 'ui-framework', 'shared-ui-runtime', 'shared-ui-ready', 'shared-ui-strict', 'shared-ui-entry'],
+      copyTags: ['feature:frontend-canon:copy', 'copy:frontend-canon'],
+      absentTags: ['feature:frontend-canon:off', 'feature:frontend-canon:absent', 'no-frontend-canon'],
+      ignoreTags: ['feature:frontend-canon:ignore', 'ignore:frontend-canon'],
       rule: 'Follow the development canon and ui.mullmania.com shell rules for browser-facing UI.',
     },
     {
       id: 'threejs',
       label: 'Three.js',
       shortLabel: '3D',
+      observedTags: ['feature:threejs', 'threejs', 'three-js', 'three.js', 'webgl', '3d'],
+      copyTags: ['feature:threejs:copy', 'copy:threejs'],
+      absentTags: ['feature:threejs:off', 'feature:threejs:absent', 'no-threejs'],
+      ignoreTags: ['feature:threejs:ignore', 'ignore:threejs'],
       rule: 'Use Three.js for 3D surfaces, keep the primary scene visible and interactive, and verify the canvas is not blank.',
     },
     {
       id: 'tv-telemetry',
       label: 'TV Telemetry',
       shortLabel: 'Logs',
+      observedTags: ['feature:tv-telemetry', 'tv-telemetry', 'tv-tail', 'telemetry', 'log-tap'],
+      copyTags: ['feature:tv-telemetry:copy', 'copy:tv-telemetry'],
+      absentTags: ['feature:tv-telemetry:off', 'feature:tv-telemetry:absent', 'no-tv-telemetry'],
+      ignoreTags: ['feature:tv-telemetry:ignore', 'ignore:tv-telemetry'],
       rule: 'Wire tv-tail/log-tap for browser surfaces where target-device debugging is difficult.',
     },
   ],
@@ -1379,12 +1407,40 @@ function normalizeFeatureMatrixFacets(value, fallback = []) {
       label,
       shortLabel: String(item?.shortLabel || label).trim() || label,
       rule: String(item?.rule || '').trim(),
+      observedTags: normalizeFeatureMatrixSemanticTags(item?.observedTags || item?.tags, id, 'observed'),
+      copyTags: normalizeFeatureMatrixSemanticTags(item?.copyTags, id, 'copy'),
+      absentTags: normalizeFeatureMatrixSemanticTags(item?.absentTags || item?.offTags, id, 'absent'),
+      ignoreTags: normalizeFeatureMatrixSemanticTags(item?.ignoreTags || item?.deferredTags, id, 'ignore'),
     });
   }
   if (normalized.length > 0 || source === fallback) {
     return normalized;
   }
   return normalizeFeatureMatrixFacets(fallback, []);
+}
+
+function normalizeFeatureMatrixSemanticTags(value, facetId, kind) {
+  const defaults = getDefaultFeatureMatrixSemanticTags(facetId, kind);
+  const source = normalizePlatformStringList(value, []);
+  return Array.from(new Set([...source, ...defaults].map((tag) => normalizeCatalogToken(tag)).filter(Boolean)));
+}
+
+function getDefaultFeatureMatrixSemanticTags(facetId, kind) {
+  const id = normalizeCatalogToken(facetId);
+  if (!id) {
+    return [];
+  }
+  switch (kind) {
+    case 'copy':
+      return [`feature:${id}:copy`, `copy:${id}`, `copy-${id}`];
+    case 'absent':
+      return [`feature:${id}:off`, `feature:${id}:absent`, `feature:${id}:blocked`, `no:${id}`, `no-${id}`];
+    case 'ignore':
+      return [`feature:${id}:ignore`, `feature:${id}:defer`, `ignore:${id}`, `ignore-${id}`];
+    case 'observed':
+    default:
+      return [id, `feature:${id}`, `feature:${id}:on`, `supports:${id}`, `has:${id}`];
+  }
 }
 
 function renderStartupError(title, message) {
@@ -8595,6 +8651,88 @@ function getFeatureMatrixCellMeta(siteId, facetId, matrixState = getFeatureMatri
   return matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId] || null;
 }
 
+function getFeatureMatrixDisplayCellState(entry, facetId, matrixState = getFeatureMatrixDraft()) {
+  return getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState).state;
+}
+
+function getFeatureMatrixDisplayCellMeta(entry, facetId, matrixState = getFeatureMatrixDraft()) {
+  const explicit = getFeatureMatrixCellMeta(entry?.siteId, facetId, matrixState);
+  if (explicit) {
+    return {
+      ...explicit,
+      state: normalizeFeatureMatrixCellState(explicit.state),
+      origin: 'operator',
+      originLabel: 'Set',
+    };
+  }
+  return getFeatureMatrixObservedCellMeta(entry, facetId);
+}
+
+function getFeatureMatrixObservedCellMeta(entry, facetId) {
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizeCatalogToken(facetId));
+  if (!entry?.siteId || !facet) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
+  }
+
+  const tagEvidence = (tags) => getFeatureMatrixMatchedFacetTags(entry, tags);
+  const absentEvidence = tagEvidence(facet.absentTags);
+  if (absentEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_OFF, absentEvidence);
+  }
+
+  const ignoreEvidence = tagEvidence(facet.ignoreTags);
+  if (ignoreEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_DEFERRED, ignoreEvidence);
+  }
+
+  const copyEvidence = tagEvidence(facet.copyTags);
+  if (copyEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_COPY, copyEvidence);
+  }
+
+  const observedEvidence = [
+    ...tagEvidence(facet.observedTags),
+    ...getFeatureMatrixCatalogFieldEvidence(entry, facet.id),
+  ];
+  if (observedEvidence.length > 0) {
+    return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_ON, observedEvidence);
+  }
+
+  return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_UNKNOWN);
+}
+
+function featureMatrixObservedMeta(stateId = FEATURE_MATRIX_STATE_UNKNOWN, evidence = []) {
+  const normalizedState = normalizeFeatureMatrixCellState(stateId);
+  return {
+    state: normalizedState,
+    updatedAt: '',
+    source: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
+    confidence: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? 0 : 1,
+    evidence: Array.from(new Set(evidence)).slice(0, 4),
+    origin: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'observed',
+    originLabel: normalizedState === FEATURE_MATRIX_STATE_UNKNOWN ? '' : 'Seen',
+  };
+}
+
+function getFeatureMatrixMatchedFacetTags(entry, tags) {
+  const tagSet = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
+  return (Array.isArray(tags) ? tags : [])
+    .map((tag) => normalizeCatalogToken(tag))
+    .filter((tag) => tag && tagSet.has(tag))
+    .map((tag) => `tag:${tag}`);
+}
+
+function getFeatureMatrixCatalogFieldEvidence(entry, facetId) {
+  switch (facetId) {
+    case 's3-storage':
+      return entry?.hasData === true ? ['catalog:hasData=true'] : [];
+    case 'frontend-canon':
+      return entry?.canonProfile ? [`catalog:canonProfile=${entry.canonProfile}`] : [];
+    default:
+      return [];
+  }
+}
+
 function assignFeatureMatrixCellState(draft, siteId, facetId, cellState, metadata = {}) {
   const normalizedSiteId = normalizeCatalogToken(siteId);
   const normalizedFacetId = normalizeCatalogToken(facetId);
@@ -8846,6 +8984,7 @@ function renderFeatureMatrixRow(row) {
     const cellState = getFeatureMatrixRowCellState(row, facet.id);
     const stateMeta = getFeatureMatrixStateMeta(cellState);
     const evidence = getFeatureMatrixRowEvidence(row, facet.id);
+    const originLabel = getFeatureMatrixRowOriginLabel(row, facet.id);
     const evidenceLabel = evidence.length > 0 ? ` Evidence: ${evidence.join(' | ')}` : '';
     return `
       <td class="feature-matrix-cell">
@@ -8862,6 +9001,7 @@ function renderFeatureMatrixRow(row) {
           <i class="${escapeHtml(stateMeta.icon)}" aria-hidden="true"></i>
           <span>${escapeHtml(stateMeta.shortLabel)}</span>
         </button>
+        ${originLabel ? `<small class="feature-matrix-evidence">${escapeHtml(originLabel)}</small>` : ''}
       </td>
     `;
   }).join('');
@@ -8885,7 +9025,7 @@ function getFeatureMatrixStateMeta(stateId) {
 }
 
 function getFeatureMatrixRowCellState(row, facetId, matrixState = getFeatureMatrixDraft()) {
-  const states = new Set(row.members.map((member) => getFeatureMatrixCellState(member.siteId, facetId, matrixState)));
+  const states = new Set(row.members.map((member) => getFeatureMatrixDisplayCellState(member, facetId, matrixState)));
   if (states.size <= 1) {
     return states.values().next().value || FEATURE_MATRIX_STATE_UNKNOWN;
   }
@@ -8895,12 +9035,13 @@ function getFeatureMatrixRowCellState(row, facetId, matrixState = getFeatureMatr
 function getFeatureMatrixRowEvidence(row, facetId, matrixState = getFeatureMatrixDraft()) {
   const evidence = [];
   for (const member of row.members) {
-    const meta = getFeatureMatrixCellMeta(member.siteId, facetId, matrixState);
+    const meta = getFeatureMatrixDisplayCellMeta(member, facetId, matrixState);
     if (!meta?.source && (!Array.isArray(meta?.evidence) || meta.evidence.length === 0)) {
       continue;
     }
     const stateLabel = formatFeatureMatrixState(meta.state).toLowerCase();
-    const prefix = row.siteCount > 1 ? `${member.siteId}: ${stateLabel}` : stateLabel;
+    const originLabel = meta.origin === 'observed' ? 'observed' : 'set';
+    const prefix = row.siteCount > 1 ? `${member.siteId}: ${stateLabel} ${originLabel}` : `${stateLabel} ${originLabel}`;
     const detail = Array.isArray(meta.evidence) && meta.evidence.length > 0
       ? meta.evidence.join(', ')
       : meta.source;
@@ -8910,6 +9051,25 @@ function getFeatureMatrixRowEvidence(row, facetId, matrixState = getFeatureMatri
     }
   }
   return evidence;
+}
+
+function getFeatureMatrixRowOriginLabel(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const origins = new Set(
+    row.members
+      .map((member) => getFeatureMatrixDisplayCellMeta(member, facetId, matrixState).originLabel)
+      .filter(Boolean)
+  );
+  if (origins.size === 0) {
+    return '';
+  }
+  if (origins.size === 1) {
+    return origins.values().next().value;
+  }
+  return 'Mixed';
+}
+
+function hasFeatureMatrixExplicitRowDecision(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  return row.members.some((member) => Boolean(getFeatureMatrixCellMeta(member.siteId, facetId, matrixState)));
 }
 
 function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
@@ -8938,7 +9098,9 @@ function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
     for (const facet of FEATURE_MATRIX_FACETS) {
       const fromState = getFeatureMatrixRowCellState(row, facet.id, saved);
       const toState = getFeatureMatrixRowCellState(row, facet.id, draft);
-      if (fromState === toState) {
+      const fromExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, saved);
+      const toExplicit = hasFeatureMatrixExplicitRowDecision(row, facet.id, draft);
+      if (fromState === toState && fromExplicit === toExplicit) {
         continue;
       }
       changes.push({
@@ -8948,6 +9110,8 @@ function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
         facet,
         fromState,
         toState,
+        fromExplicit,
+        toExplicit,
       });
     }
   }
@@ -9267,9 +9431,9 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     '- COPY PATTERN means mirror the canonical/existing implementation style exactly; avoid bespoke variants.',
     '- REMOVE / BLOCK means remove the facet if present and keep it intentionally absent.',
     '- IGNORE means make no code change for this facet in this run.',
-    '- NO ACTION means the operator has not made a decision; audit first before proposing work.',
+    '- SEEN cells come from semantic tags or deterministic catalog fields. Treat them as historical context, not operator intent, until the operator sets a decision.',
+    '- NO ACTION means the operator has not made a decision and no semantic history was found; audit first before proposing work.',
     '- MIXED means the group contains member sites with different decisions; inspect the listed member states before acting.',
-    '- Heuristic-seeded cells are draft guesses, not saved operator confirmation until Save local is clicked.',
     '',
     'Facet rules:'
   );
@@ -9283,11 +9447,11 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     lines.push('- No changed cells in this scope.');
   } else {
     for (const change of changes) {
-      lines.push(`- ${change.rowKey} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixState(change.fromState)} -> ${formatFeatureMatrixState(change.toState)} [${change.siteIds.join(', ')}]`);
+      lines.push(`- ${change.rowKey} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixChangeState(change.fromState, change.fromExplicit)} -> ${formatFeatureMatrixChangeState(change.toState, change.toExplicit)} [${change.siteIds.join(', ')}]`);
     }
   }
 
-  lines.push('', 'Execution packets by facet:');
+  lines.push('', 'Explicit operator decision packets by facet:');
   let explicitDecisionCount = 0;
   for (const facet of FEATURE_MATRIX_FACETS) {
     const byState = {
@@ -9298,6 +9462,9 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
       [FEATURE_MATRIX_STATE_MIXED]: [],
     };
     for (const row of rows) {
+      if (!hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
+        continue;
+      }
       const cellState = getFeatureMatrixRowCellState(row, facet.id);
       if (byState[cellState]) {
         byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
@@ -9318,10 +9485,44 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     lines.push('- No explicit ADD/COPY/REMOVE/IGNORE decisions yet.');
   }
 
+  lines.push('', 'Observed historical baseline by facet:');
+  let observedBaselineCount = 0;
+  for (const facet of FEATURE_MATRIX_FACETS) {
+    const byState = {
+      [FEATURE_MATRIX_STATE_ON]: [],
+      [FEATURE_MATRIX_STATE_COPY]: [],
+      [FEATURE_MATRIX_STATE_OFF]: [],
+      [FEATURE_MATRIX_STATE_DEFERRED]: [],
+      [FEATURE_MATRIX_STATE_MIXED]: [],
+    };
+    for (const row of rows) {
+      if (hasFeatureMatrixExplicitRowDecision(row, facet.id)) {
+        continue;
+      }
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
+      if (byState[cellState]) {
+        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
+      }
+    }
+    const chunks = [];
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED]) {
+      if (byState[stateId].length > 0) {
+        observedBaselineCount += byState[stateId].length;
+        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
+      }
+    }
+    if (chunks.length > 0) {
+      lines.push(`- ${facet.label} - ${chunks.join(' | ')}`);
+    }
+  }
+  if (observedBaselineCount === 0) {
+    lines.push('- No semantic tag/catalog baseline found in this scope.');
+  }
+
   lines.push(
     '',
     'Orchestrated agent request:',
-    'Use this matrix as operator intent and produce a repo-by-repo execution plan before editing. For ADD / ENFORCE packets, make every listed member site follow the facet rule exactly and add matching tests when the repo has a test surface. For COPY PATTERN packets, identify the strongest canonical implementation in the packet or facet rule, copy that pattern into every listed site, and call out any repo where the pattern cannot apply cleanly. For REMOVE / BLOCK packets, remove the feature and add guardrails/tests where practical so it does not reappear accidentally. For IGNORE packets, do not touch the feature. For NO ACTION cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
+    'Use explicit operator decision packets as intent and use the observed historical baseline only as context/evidence. Produce a repo-by-repo execution plan before editing. For ADD / ENFORCE packets, make every listed member site follow the facet rule exactly and add matching tests when the repo has a test surface. For COPY PATTERN packets, identify the strongest canonical implementation in the packet or facet rule, copy that pattern into every listed site, and call out any repo where the pattern cannot apply cleanly. For REMOVE / BLOCK packets, remove the feature and add guardrails/tests where practical so it does not reappear accidentally. For IGNORE packets, do not touch the feature. For SEEN-only cells, audit and report current implementation status before proposing changes. For NO ACTION cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
   );
 
   return `${lines.join('\n')}\n`;
@@ -9332,9 +9533,17 @@ function formatFeatureMatrixRowDecision(row, facetId, cellState) {
     return `${row.key} [${row.siteIds.join(', ')}]`;
   }
   const memberStates = row.members
-    .map((member) => `${member.siteId}=${formatFeatureMatrixState(getFeatureMatrixCellState(member.siteId, facetId))}`)
+    .map((member) => `${member.siteId}=${formatFeatureMatrixState(getFeatureMatrixDisplayCellState(member, facetId))}`)
     .join(', ');
   return `${row.key} [${memberStates}]`;
+}
+
+function formatFeatureMatrixChangeState(stateId, explicit) {
+  const label = formatFeatureMatrixState(stateId);
+  if (stateId === FEATURE_MATRIX_STATE_UNKNOWN) {
+    return label;
+  }
+  return `${label}${explicit ? ' (set)' : ' (seen)'}`;
 }
 
 function formatFeatureMatrixState(stateId) {

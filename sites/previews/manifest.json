@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-18T01:53:37Z",
+  "updatedAt": "2026-05-18T02:11:54Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -15992,6 +15992,102 @@
       "etag": "a63de291d32509588cbde5474d090edf",
       "sourceUrl": "https://next-step.mullmania.com/"
     },
+    "nichols-and-dimes": {
+      "siteId": "nichols-and-dimes",
+      "status": "ok",
+      "path": "/api/previews/nichols-and-dimes.png",
+      "url": "/api/previews/nichols-and-dimes.png?v=1779070279546",
+      "objectKey": "sites/previews/nichols-and-dimes.png",
+      "capturedAt": "2026-05-18T02:11:19Z",
+      "version": "1779070279546",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "nichols-and-dimes",
+          "status": "ok",
+          "id": "1779070279546",
+          "path": "/api/previews/nichols-and-dimes/1779070279546.png",
+          "url": "/api/previews/nichols-and-dimes/1779070279546.png?v=1779070279546",
+          "objectKey": "sites/previews/nichols-and-dimes/1779070279546.png",
+          "capturedAt": "2026-05-18T02:11:19Z",
+          "version": "1779070279546",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 65523,
+          "etag": "c684edfb1af0badb121375c886e3748e",
+          "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 65523,
+      "etag": "c684edfb1af0badb121375c886e3748e",
+      "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+    },
+    "nikitakramar": {
+      "siteId": "nikitakramar",
+      "status": "ok",
+      "path": "/api/previews/nikitakramar.png",
+      "url": "/api/previews/nikitakramar.png?v=1779070294534",
+      "objectKey": "sites/previews/nikitakramar.png",
+      "capturedAt": "2026-05-18T02:11:34Z",
+      "version": "1779070294534",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "nikitakramar",
+          "status": "ok",
+          "id": "1779070294534",
+          "path": "/api/previews/nikitakramar/1779070294534.png",
+          "url": "/api/previews/nikitakramar/1779070294534.png?v=1779070294534",
+          "objectKey": "sites/previews/nikitakramar/1779070294534.png",
+          "capturedAt": "2026-05-18T02:11:34Z",
+          "version": "1779070294534",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 387999,
+          "etag": "18a93e5a3af4dd1211553085c1d4c957",
+          "sourceUrl": "https://nikitakramar.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 387999,
+      "etag": "18a93e5a3af4dd1211553085c1d4c957",
+      "sourceUrl": "https://nikitakramar.mullmania.com/"
+    },
     "node-graph-editor": {
       "siteId": "node-graph-editor",
       "status": "ok",
@@ -17471,6 +17567,54 @@
       "size": 89775,
       "etag": "bb6d306ed3bc3ebb7a9284e0163eb673",
       "sourceUrl": "https://potato-parade.mullmania.com/"
+    },
+    "powerwasher": {
+      "siteId": "powerwasher",
+      "status": "ok",
+      "path": "/api/previews/powerwasher.png",
+      "url": "/api/previews/powerwasher.png?v=1779070308194",
+      "objectKey": "sites/previews/powerwasher.png",
+      "capturedAt": "2026-05-18T02:11:48Z",
+      "version": "1779070308194",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "powerwasher",
+          "status": "ok",
+          "id": "1779070308194",
+          "path": "/api/previews/powerwasher/1779070308194.png",
+          "url": "/api/previews/powerwasher/1779070308194.png?v=1779070308194",
+          "objectKey": "sites/previews/powerwasher/1779070308194.png",
+          "capturedAt": "2026-05-18T02:11:48Z",
+          "version": "1779070308194",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 54369,
+          "etag": "71b851154f55caa069b83590e57d14f2",
+          "sourceUrl": "https://powerwasher.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 54369,
+      "etag": "71b851154f55caa069b83590e57d14f2",
+      "sourceUrl": "https://powerwasher.mullmania.com/"
     },
     "prism": {
       "siteId": "prism",

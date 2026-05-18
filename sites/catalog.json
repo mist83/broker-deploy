@@ -35034,20 +35034,20 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:55:24.634Z",
+    "lastPublishedAt": "2026-05-18T02:08:39.391Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/sites",
         "ref": null,
-        "sha": "690bb20372510a1b45ebe09861f0317d4de5018f",
+        "sha": "2b784f62fca7a604786d2ca2991cb22d403a2279",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/sites",
         "branch": "main",
-        "commit": "690bb20372510a1b45ebe09861f0317d4de5018f",
+        "commit": "2b784f62fca7a604786d2ca2991cb22d403a2279",
         "remote": "https://github.com/mist83/sites.git"
       },
       "source": "launchpad-bootstrap"

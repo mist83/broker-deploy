@@ -5708,6 +5708,20 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   text-align: center;
 }
 
+.feature-matrix-evidence {
+  display: block;
+  max-width: 88px;
+  margin: 4px auto 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .feature-matrix-state {
   display: inline-flex;
   align-items: center;
