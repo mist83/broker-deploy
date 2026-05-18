@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-17T22:45:19.329Z",
-  "updatedAt": "2026-05-17T22:45:19.329Z",
+  "generatedAt": "2026-05-17T23:21:00.567Z",
+  "updatedAt": "2026-05-17T23:21:00.567Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
@@ -9,11 +9,11 @@
     "hostedSiteCount": 1094,
     "dataNamespaceCount": 89,
     "syntheticSiteCount": 29,
-    "demoPosterCount": 144,
-    "demoVideoCount": 7,
     "publicHostedSiteCount": 196,
     "privateHostedSiteCount": 897,
-    "operatorNoteCount": 1
+    "operatorNoteCount": 1,
+    "demoPosterCount": 144,
+    "demoVideoCount": 7
   },
   "frameworkSiteCount": 21,
   "frameworkBuckets": {
@@ -39,9 +39,9 @@
     "ok": 20,
     "unknown": 1
   },
-  "lastPublishedSite": "sites",
+  "lastPublishedSite": "logsplit",
   "visibleHostedSites": 1093,
-  "launchpadBuiltAt": "2026-05-17T22:55:43.379Z",
+  "launchpadBuiltAt": "2026-05-18T00:21:27.183Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"

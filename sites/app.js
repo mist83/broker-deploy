@@ -185,6 +185,7 @@ const FEATURE_MATRIX_STATE_UNKNOWN = 'unknown';
 const FEATURE_MATRIX_STATE_ON = 'on';
 const FEATURE_MATRIX_STATE_OFF = 'off';
 const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
+const FEATURE_MATRIX_STATE_MIXED = 'mixed';
 const FEATURE_MATRIX_STATES = Object.freeze({
   [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Unknown', shortLabel: '?', icon: 'ti ti-circle-dotted' },
   [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'On', shortLabel: 'Yes', icon: 'ti ti-check' },
@@ -830,6 +831,7 @@ const featureMatrixScopeEl = document.getElementById('feature-matrix-scope');
 const featureMatrixSaveButton = document.getElementById('feature-matrix-save');
 const featureMatrixResetButton = document.getElementById('feature-matrix-reset');
 const featureMatrixCopyButton = document.getElementById('feature-matrix-copy');
+const featureMatrixSeedButton = document.getElementById('feature-matrix-seed');
 const featureMatrixStatusEl = document.getElementById('feature-matrix-status');
 const featureMatrixTableHeadEl = document.getElementById('feature-matrix-head');
 const featureMatrixTableBodyEl = document.getElementById('feature-matrix-body');
@@ -2344,6 +2346,7 @@ function bindEvents() {
   featureMatrixTableBodyEl?.addEventListener('click', handleFeatureMatrixClick);
   featureMatrixSaveButton?.addEventListener('click', saveFeatureMatrixDraft);
   featureMatrixResetButton?.addEventListener('click', resetFeatureMatrixDraft);
+  featureMatrixSeedButton?.addEventListener('click', seedFeatureMatrixHeuristics);
   featureMatrixCopyButton?.addEventListener('click', () => {
     void copyFeatureMatrixSynopsis();
   });
@@ -5726,6 +5729,7 @@ function buildDisplayEntry(group) {
     displayEntryKey: group.key,
     displayTitle,
     familyMembers: members,
+    visibleFamilyMembers: visibleMembers,
     family: members.length > 1 ? {
       id: group.key,
       label: groupLabel,
@@ -8477,9 +8481,16 @@ function normalizeFeatureMatrixState(raw) {
       if (cellState === FEATURE_MATRIX_STATE_UNKNOWN) {
         continue;
       }
+      const evidence = Array.isArray(rawCell?.evidence)
+        ? rawCell.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
+        : [];
+      const confidence = Number(rawCell?.confidence);
       nextFacets[facetId] = {
         state: cellState,
         updatedAt: String(rawCell?.updatedAt || source.updatedAt || '').trim(),
+        source: String(rawCell?.source || '').trim(),
+        confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
+        evidence,
       };
     }
 
@@ -8514,11 +8525,63 @@ function getFeatureMatrixSaved() {
 
 function getFeatureMatrixRows() {
   const source = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL
-    ? state.entries
-    : state.visibleSiteEntries;
+    ? buildDisplayEntries(state.entries)
+    : state.visibleEntries;
   return (Array.isArray(source) ? source : [])
-    .filter((entry) => entry?.siteId && entry.siteId !== ROOT_SITE_ID && entry.hasHostedSite !== false)
-    .sort(compareEntriesByTitle);
+    .map((entry) => buildFeatureMatrixRowModel(entry))
+    .filter((row) => row.siteIds.length > 0)
+    .sort(compareFeatureMatrixRows);
+}
+
+function buildFeatureMatrixRowModel(entry) {
+  const members = getFeatureMatrixRowMembers(entry);
+  const visibleMembers = getFeatureMatrixVisibleMembers(entry, members);
+  const rowKey = entry?.displayEntryKey || getDisplayGroupKey(entry) || normalizeCatalogToken(entry?.siteId || '');
+  const title = buildDisplayTitle(entry) || entry?.siteId || rowKey;
+  const lead = visibleMembers[0] || members[0] || entry;
+  const siteIds = visibleMembers.map((member) => member.siteId);
+  return {
+    key: rowKey || siteIds[0] || '',
+    title,
+    lead,
+    members: visibleMembers,
+    allMembers: members,
+    siteIds,
+    siteCount: siteIds.length,
+    totalSiteCount: members.length,
+    host: lead?.host || (lead?.siteId ? `${lead.siteId}.${BASE_DOMAIN}` : ''),
+  };
+}
+
+function getFeatureMatrixRowMembers(entry) {
+  const members = Array.isArray(entry?.familyMembers) && entry.familyMembers.length > 0
+    ? entry.familyMembers
+    : [entry];
+  return sortFamilyMembers(members)
+    .filter((member) => member?.siteId && member.siteId !== ROOT_SITE_ID && member.hasHostedSite !== false);
+}
+
+function getFeatureMatrixVisibleMembers(entry, members) {
+  if (state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL) {
+    return members;
+  }
+  const visibleIds = new Set(
+    (Array.isArray(entry?.visibleFamilyMembers) && entry.visibleFamilyMembers.length > 0
+      ? entry.visibleFamilyMembers
+      : [entry]
+    )
+      .map((member) => member?.siteId)
+      .filter(Boolean)
+  );
+  return members.filter((member) => visibleIds.has(member.siteId));
+}
+
+function compareFeatureMatrixRows(left, right) {
+  const titleDelta = compareNaturalText(left?.title, right?.title);
+  if (titleDelta !== 0) {
+    return titleDelta;
+  }
+  return compareNaturalText(left?.key, right?.key);
 }
 
 function getFeatureMatrixCellState(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
@@ -8527,15 +8590,25 @@ function getFeatureMatrixCellState(siteId, facetId, matrixState = getFeatureMatr
   return normalizeFeatureMatrixCellState(matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId]?.state);
 }
 
-function setFeatureMatrixCellState(siteId, facetId, cellState) {
+function getFeatureMatrixCellMeta(siteId, facetId, matrixState = getFeatureMatrixDraft()) {
+  const normalizedSiteId = normalizeCatalogToken(siteId);
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  return matrixState?.assignments?.[normalizedSiteId]?.[normalizedFacetId] || null;
+}
+
+function assignFeatureMatrixCellState(draft, siteId, facetId, cellState, metadata = {}) {
   const normalizedSiteId = normalizeCatalogToken(siteId);
   const normalizedFacetId = normalizeCatalogToken(facetId);
   const normalizedState = normalizeFeatureMatrixCellState(cellState);
-  if (!normalizedSiteId || !FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
-    return;
+  if (!draft || !normalizedSiteId || !FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
+    return false;
   }
 
-  const draft = getFeatureMatrixDraft();
+  const previousState = getFeatureMatrixCellState(normalizedSiteId, normalizedFacetId, draft);
+  if (previousState === normalizedState) {
+    return false;
+  }
+
   if (!draft.assignments[normalizedSiteId]) {
     draft.assignments[normalizedSiteId] = {};
   }
@@ -8545,15 +8618,54 @@ function setFeatureMatrixCellState(siteId, facetId, cellState) {
     if (Object.keys(draft.assignments[normalizedSiteId]).length === 0) {
       delete draft.assignments[normalizedSiteId];
     }
-  } else {
-    draft.assignments[normalizedSiteId][normalizedFacetId] = {
-      state: normalizedState,
-      updatedAt: new Date().toISOString(),
-    };
+    return true;
+  }
+
+  const confidence = Number(metadata.confidence);
+  const evidence = Array.isArray(metadata.evidence)
+    ? metadata.evidence.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 4)
+    : [];
+  draft.assignments[normalizedSiteId][normalizedFacetId] = {
+    state: normalizedState,
+    updatedAt: String(metadata.updatedAt || new Date().toISOString()),
+    source: String(metadata.source || '').trim(),
+    confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : 0,
+    evidence,
+  };
+  return true;
+}
+
+function setFeatureMatrixCellState(siteId, facetId, cellState) {
+  const draft = getFeatureMatrixDraft();
+  const changed = assignFeatureMatrixCellState(draft, siteId, facetId, cellState);
+  if (!changed) {
+    return;
   }
 
   draft.updatedAt = new Date().toISOString();
   setFeatureMatrixStatus('Draft changed.', 'warning');
+  renderFeatureMatrixView();
+}
+
+function setFeatureMatrixRowCellState(rowKey, facetId, cellState) {
+  const row = getFeatureMatrixRows().find((candidate) => candidate.key === rowKey);
+  if (!row) {
+    return;
+  }
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  let changed = 0;
+  for (const member of row.members) {
+    if (assignFeatureMatrixCellState(draft, member.siteId, facetId, cellState, { updatedAt })) {
+      changed += 1;
+    }
+  }
+  if (changed === 0) {
+    return;
+  }
+
+  draft.updatedAt = updatedAt;
+  setFeatureMatrixStatus(row.siteCount === 1 ? 'Draft changed.' : `Draft changed for ${changed} sites in ${row.title}.`, 'warning');
   renderFeatureMatrixView();
 }
 
@@ -8582,10 +8694,10 @@ function handleFeatureMatrixClick(event) {
   if (!(button instanceof HTMLButtonElement)) {
     return;
   }
-  const siteId = button.getAttribute('data-site-id') || '';
+  const rowKey = button.getAttribute('data-row-key') || '';
   const facetId = button.getAttribute('data-feature-id') || '';
   const nextState = getNextFeatureMatrixCellState(button.getAttribute('data-feature-state') || '');
-  setFeatureMatrixCellState(siteId, facetId, nextState);
+  setFeatureMatrixRowCellState(rowKey, facetId, nextState);
 }
 
 function renderFeatureMatrixView() {
@@ -8597,7 +8709,8 @@ function renderFeatureMatrixView() {
   const rows = getFeatureMatrixRows();
   const changes = getFeatureMatrixChanges(rows);
   const dirty = isFeatureMatrixDirty();
-  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all apps' : 'visible apps';
+  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all groups' : 'visible groups';
+  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
 
   if (featureMatrixScopeEl && featureMatrixScopeEl.value !== state.featureMatrix.scope) {
     featureMatrixScopeEl.value = state.featureMatrix.scope;
@@ -8609,7 +8722,7 @@ function renderFeatureMatrixView() {
     : '<tr><td class="feature-matrix-empty" colspan="99">No apps match this scope.</td></tr>';
 
   if (featureMatrixSummaryEl) {
-    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} ${scopeLabel} - ${FEATURE_MATRIX_FACETS.length.toLocaleString()} facets - ${changes.length.toLocaleString()} changed`;
+    featureMatrixSummaryEl.textContent = `${rows.length.toLocaleString()} ${scopeLabel} / ${siteCount.toLocaleString()} sites - ${FEATURE_MATRIX_FACETS.length.toLocaleString()} facets - ${changes.length.toLocaleString()} changed`;
   }
 
   if (featureMatrixStatusEl) {
@@ -8624,6 +8737,9 @@ function renderFeatureMatrixView() {
   if (featureMatrixResetButton) {
     featureMatrixResetButton.disabled = !dirty;
   }
+  if (featureMatrixSeedButton) {
+    featureMatrixSeedButton.disabled = rows.length === 0;
+  }
   if (featureMatrixSynopsisEl) {
     featureMatrixSynopsisEl.value = buildFeatureMatrixSynopsis(rows, changes);
   }
@@ -8633,11 +8749,15 @@ function renderFeatureMatrixHeader(rows) {
   const countsByFacet = getFeatureMatrixCounts(rows);
   const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
     const counts = countsByFacet[facet.id] || {};
-    const countLabel = [
+    const countParts = [
       `${counts[FEATURE_MATRIX_STATE_ON] || 0} on`,
       `${counts[FEATURE_MATRIX_STATE_OFF] || 0} off`,
       `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} later`,
-    ].join(' / ');
+    ];
+    if (counts[FEATURE_MATRIX_STATE_MIXED] > 0) {
+      countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
+    }
+    const countLabel = countParts.join(' / ');
     return `
       <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
         <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
@@ -8647,28 +8767,32 @@ function renderFeatureMatrixHeader(rows) {
   }).join('');
   return `
     <tr>
-      <th class="feature-matrix-app">App</th>
+      <th class="feature-matrix-app">Group</th>
       ${facetHeaders}
     </tr>
   `;
 }
 
-function renderFeatureMatrixRow(entry) {
-  const title = buildDisplayTitle(entry) || entry.siteId;
-  const host = entry.host || `${entry.siteId}.${BASE_DOMAIN}`;
+function renderFeatureMatrixRow(row) {
+  const title = row.title || row.key;
+  const memberLabel = row.siteCount === 1
+    ? row.host
+    : `${row.siteCount.toLocaleString()} sites${row.totalSiteCount > row.siteCount ? ` visible / ${row.totalSiteCount.toLocaleString()} total` : ''}`;
   const cells = FEATURE_MATRIX_FACETS.map((facet) => {
-    const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
-    const stateMeta = FEATURE_MATRIX_STATES[cellState] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+    const cellState = getFeatureMatrixRowCellState(row, facet.id);
+    const stateMeta = getFeatureMatrixStateMeta(cellState);
+    const evidence = getFeatureMatrixRowEvidence(row, facet.id);
+    const evidenceLabel = evidence.length > 0 ? ` Evidence: ${evidence.join(' | ')}` : '';
     return `
       <td class="feature-matrix-cell">
         <button
           type="button"
           class="feature-matrix-state is-${escapeHtml(cellState)}"
           data-feature-cell="true"
-          data-site-id="${escapeHtml(entry.siteId)}"
+          data-row-key="${escapeHtml(row.key)}"
           data-feature-id="${escapeHtml(facet.id)}"
           data-feature-state="${escapeHtml(cellState)}"
-          title="${escapeHtml(`${title} / ${facet.label}: ${stateMeta.label}. ${facet.rule || ''}`)}"
+          title="${escapeHtml(`${title} / ${facet.label}: ${stateMeta.label}. ${facet.rule || ''}${evidenceLabel}`)}"
           aria-label="${escapeHtml(`${title} ${facet.label} ${stateMeta.label}`)}"
         >
           <i class="${escapeHtml(stateMeta.icon)}" aria-hidden="true"></i>
@@ -8679,14 +8803,49 @@ function renderFeatureMatrixRow(entry) {
   }).join('');
 
   return `
-    <tr data-feature-matrix-row="${escapeHtml(entry.siteId)}">
+    <tr data-feature-matrix-row="${escapeHtml(row.key)}">
       <th class="feature-matrix-site" scope="row">
-        <a href="${escapeHtml(entry.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
-        <span>${escapeHtml(host)}</span>
+        <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
+        <span>${escapeHtml(memberLabel || row.key)}</span>
       </th>
       ${cells}
     </tr>
   `;
+}
+
+function getFeatureMatrixStateMeta(stateId) {
+  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
+    return { id: FEATURE_MATRIX_STATE_MIXED, label: 'Mixed', shortLabel: 'Mix', icon: 'ti ti-adjustments-horizontal' };
+  }
+  return FEATURE_MATRIX_STATES[stateId] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
+}
+
+function getFeatureMatrixRowCellState(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const states = new Set(row.members.map((member) => getFeatureMatrixCellState(member.siteId, facetId, matrixState)));
+  if (states.size <= 1) {
+    return states.values().next().value || FEATURE_MATRIX_STATE_UNKNOWN;
+  }
+  return FEATURE_MATRIX_STATE_MIXED;
+}
+
+function getFeatureMatrixRowEvidence(row, facetId, matrixState = getFeatureMatrixDraft()) {
+  const evidence = [];
+  for (const member of row.members) {
+    const meta = getFeatureMatrixCellMeta(member.siteId, facetId, matrixState);
+    if (!meta?.source && (!Array.isArray(meta?.evidence) || meta.evidence.length === 0)) {
+      continue;
+    }
+    const stateLabel = formatFeatureMatrixState(meta.state).toLowerCase();
+    const prefix = row.siteCount > 1 ? `${member.siteId}: ${stateLabel}` : stateLabel;
+    const detail = Array.isArray(meta.evidence) && meta.evidence.length > 0
+      ? meta.evidence.join(', ')
+      : meta.source;
+    evidence.push(`${prefix} (${detail})`);
+    if (evidence.length >= 3) {
+      break;
+    }
+  }
+  return evidence;
 }
 
 function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
@@ -8695,10 +8854,11 @@ function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
     [FEATURE_MATRIX_STATE_ON]: 0,
     [FEATURE_MATRIX_STATE_OFF]: 0,
     [FEATURE_MATRIX_STATE_DEFERRED]: 0,
+    [FEATURE_MATRIX_STATE_MIXED]: 0,
   }]));
-  for (const entry of rows) {
+  for (const row of rows) {
     for (const facet of FEATURE_MATRIX_FACETS) {
-      const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
       countsByFacet[facet.id][cellState] += 1;
     }
   }
@@ -8709,16 +8869,17 @@ function getFeatureMatrixChanges(rows = getFeatureMatrixRows()) {
   const saved = getFeatureMatrixSaved();
   const draft = getFeatureMatrixDraft();
   const changes = [];
-  for (const entry of rows) {
+  for (const row of rows) {
     for (const facet of FEATURE_MATRIX_FACETS) {
-      const fromState = getFeatureMatrixCellState(entry.siteId, facet.id, saved);
-      const toState = getFeatureMatrixCellState(entry.siteId, facet.id, draft);
+      const fromState = getFeatureMatrixRowCellState(row, facet.id, saved);
+      const toState = getFeatureMatrixRowCellState(row, facet.id, draft);
       if (fromState === toState) {
         continue;
       }
       changes.push({
-        siteId: entry.siteId,
-        title: buildDisplayTitle(entry) || entry.siteId,
+        rowKey: row.key,
+        siteIds: row.siteIds,
+        title: row.title || row.key,
         facet,
         fromState,
         toState,

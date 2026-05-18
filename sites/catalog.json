@@ -4213,7 +4213,7 @@
       "Feed branches in; chips erupt out. Drag the tube to aim."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:40:50.111Z",
+    "lastPublishedAt": "2026-05-17T23:20:04.047Z",
     "publishContext": {
       "github": null,
       "git": null
@@ -12123,20 +12123,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:38:05.353Z",
+    "lastPublishedAt": "2026-05-17T23:16:25.214Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "1c8590897b5bb5aa50d1e169bd03c573795ba2ab",
+        "sha": "77fd71696fc6736755a64f7ea7a124f406f9a960",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dag.mullmania.com",
         "branch": "main",
-        "commit": "1c8590897b5bb5aa50d1e169bd03c573795ba2ab",
+        "commit": "77fd71696fc6736755a64f7ea7a124f406f9a960",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -12158,7 +12158,7 @@
       "durationSec": null,
       "mode": "poster",
       "posterKind": "generated-placeholder",
-      "posterNote": "Placeholder image."
+      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -19499,7 +19499,7 @@
       "A hydraulic press squashes 3D objects flat. Tap to fire."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:43:39.897Z",
+    "lastPublishedAt": "2026-05-17T23:18:09.380Z",
     "publishContext": {
       "github": null,
       "git": null
@@ -22401,7 +22401,7 @@
       "Tap to swing the maul. One round, two halves."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:20:19.301Z",
+    "lastPublishedAt": "2026-05-17T23:21:00.567Z",
     "publishContext": {
       "github": null,
       "git": null
@@ -29585,7 +29585,7 @@
       "Drag the nozzle, grime peels off in clean stripes."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:29:47.581Z",
+    "lastPublishedAt": "2026-05-17T23:17:13.367Z",
     "publishContext": {
       "github": null,
       "git": null
@@ -34986,22 +34986,17 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:45:19.329Z",
+    "lastPublishedAt": "2026-05-17T22:55:48.231Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/sites",
-        "ref": null,
-        "sha": "a2c506ea5d70fc9200b9e322a8f2173a4058be1c",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26005108084",
+        "runNumber": "87"
       },
-      "git": {
-        "root": "/Users/mist83/Code/sites",
-        "branch": "main",
-        "commit": "a2c506ea5d70fc9200b9e322a8f2173a4058be1c",
-        "remote": "https://github.com/mist83/sites.git"
-      },
+      "git": null,
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -35627,7 +35622,7 @@
       "A blade peels rainbow curls off a soap loaf."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:28:19.354Z",
+    "lastPublishedAt": "2026-05-17T23:19:06.983Z",
     "publishContext": {
       "github": null,
       "git": null
