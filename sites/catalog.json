@@ -24907,20 +24907,20 @@
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:09:50.009Z",
+    "lastPublishedAt": "2026-05-18T04:03:07.206Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "db8e348a2da2426e900f550ad819951a29161b13",
+        "sha": "5a87539b5451eb17dafa2577397c968d2daf1a71",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/models",
         "branch": "master",
-        "commit": "db8e348a2da2426e900f550ad819951a29161b13",
+        "commit": "5a87539b5451eb17dafa2577397c968d2daf1a71",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -35034,20 +35034,20 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T03:43:49.853Z",
+    "lastPublishedAt": "2026-05-18T04:01:00.563Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/sites",
         "ref": null,
-        "sha": "5deac4599bb3fd4f60000797f0c63a2140ae0f42",
+        "sha": "6efbcaaf56f6b66bf912accbdb8c63053e2e1a73",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/sites",
         "branch": "main",
-        "commit": "5deac4599bb3fd4f60000797f0c63a2140ae0f42",
+        "commit": "6efbcaaf56f6b66bf912accbdb8c63053e2e1a73",
         "remote": "https://github.com/mist83/sites.git"
       },
       "source": "launchpad-bootstrap"

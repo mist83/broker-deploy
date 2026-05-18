@@ -5215,6 +5215,12 @@ function enrichEntry(entry) {
   const notes = normalizeCatalogEntryNotes(entry.notes);
   const externalCatalog = entry.externalCatalog === true || entry.catalogSource === 'csv';
   const sharedUiRuntime = tagSet.has('shared-ui');
+  const githubActionsDeploy = entry.githubActionsDeploy === true
+    || entry.deployBrokerBacked === true
+    || entry.publishContext?.github?.actions === true;
+  const githubActionsKnown = typeof entry.githubActionsDeploy === 'boolean'
+    || typeof entry.publishContext?.github?.actions === 'boolean';
+  const gitBacked = entry.gitBacked === true || !!entry.publishContext?.git;
 
   return {
     ...entry,
@@ -5235,6 +5241,9 @@ function enrichEntry(entry) {
     healthStatus,
     githubBacked,
     githubRepo,
+    githubActionsDeploy,
+    githubActionsKnown,
+    gitBacked,
     family,
     demo,
     categories: {
@@ -8258,16 +8267,22 @@ function getFeatureMatrixCatalogFacetMeta(entry, facetId) {
 function getFeatureMatrixDeployBrokerMeta(entry) {
   const github = entry?.publishContext?.github;
   const git = entry?.publishContext?.git;
-  const hasGitHubRepo = Boolean(String(github?.repository || '').trim());
-  const hasGitRemote = Boolean(String(git?.remote || '').trim());
+  const githubRepository = String(entry?.githubRepo || github?.repository || github?.repo || '').trim();
+  const githubActionsDeploy = entry?.githubActionsDeploy === true
+    || entry?.deployBrokerBacked === true
+    || github?.actions === true;
+  const githubActionsKnownFalse = (entry?.githubActionsKnown === true && entry?.githubActionsDeploy === false)
+    || github?.actions === false;
+  const hasGitHubRepo = entry?.githubBacked === true || Boolean(githubRepository);
+  const hasGitRemote = entry?.gitBacked === true || Boolean(String(git?.remote || '').trim());
   const hasGitRoot = Boolean(String(git?.root || '').trim());
 
-  if (github?.actions === true) {
+  if (githubActionsDeploy) {
     const evidence = ['catalog:github.actions=true'];
-    if (github.repository) {
-      evidence.push(`catalog:github.repository=${github.repository}`);
+    if (githubRepository) {
+      evidence.push(`catalog:github.repository=${githubRepository}`);
     }
-    if (github.runId) {
+    if (github?.runId) {
       evidence.push(`catalog:github.runId=${github.runId}`);
     }
     return {
@@ -8279,12 +8294,12 @@ function getFeatureMatrixDeployBrokerMeta(entry) {
   if (hasGitHubRepo || hasGitRemote || hasGitRoot) {
     const evidence = [];
     if (hasGitHubRepo) {
-      evidence.push(`catalog:github.repository=${github.repository}`);
+      evidence.push(githubRepository ? `catalog:github.repository=${githubRepository}` : 'catalog:githubBacked=true');
     }
     if (hasGitRemote) {
-      evidence.push('catalog:git.remote');
+      evidence.push(entry?.gitBacked === true ? 'catalog:gitBacked=true' : 'catalog:git.remote');
     }
-    if (github && github.actions === false) {
+    if (githubActionsKnownFalse) {
       evidence.push('catalog:github.actions=false');
     }
     return {
@@ -9092,9 +9107,13 @@ function buildFeatureMatrixHaystack(entry) {
     entry?.managedBy,
     entry?.canonProfile,
     entry?.publishContext?.source,
+    entry?.githubRepo,
     entry?.publishContext?.github?.repository,
+    entry?.githubActionsDeploy === true ? 'github actions deploy broker' : '',
+    entry?.githubActionsKnown === true && entry?.githubActionsDeploy === false ? 'github actions false git repo deploy update' : '',
     entry?.publishContext?.github?.actions === true ? 'github actions deploy broker' : '',
     entry?.publishContext?.github?.actions === false ? 'github actions false git repo deploy update' : '',
+    entry?.gitBacked === true ? 'git repo' : '',
     entry?.publishContext?.git?.remote,
     ...(Array.isArray(entry?.tags) ? entry.tags : []),
     ...(Array.isArray(entry?.notes) ? entry.notes : []),
