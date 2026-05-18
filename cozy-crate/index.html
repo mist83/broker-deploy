@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style></style>
+</head>
+<body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cozy Crate — design a livable shipping container</title>
+<meta name="description" content="A drag-and-drop room planner for shipping container conversions. Pick a container, drop in furniture, appliances, windows, and electrical, see the bill of materials.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='20' width='52' height='24' fill='%23d97706' stroke='%23111' stroke-width='2'/%3E%3Cpath d='M10 22v20M14 22v20M18 22v20M22 22v20M26 22v20M30 22v20M34 22v20M38 22v20M42 22v20M46 22v20M50 22v20M54 22v20' stroke='%23a05a06' stroke-width='1'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a22; --panel-2:#1f2530; --line:#2a3140;
+    --ink:#e8ebf2; --ink-dim:#8a92a3; --accent:#f59e0b; --accent-2:#34d399;
+    --danger:#ef4444; --warn:#fbbf24;
+    --cat-furn:#60a5fa; --cat-app:#f472b6; --cat-elec:#fbbf24; --cat-pan:#a78bfa; --cat-struc:#34d399; --cat-fix:#fb923c;
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+    --r:10px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,sans-serif;overflow:hidden}
+  a{color:var(--accent)}
+  button{font:inherit;color:inherit;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer;transition:.12s}
+  button:hover{border-color:var(--accent);color:var(--accent)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#1a1303;font-weight:600}
+  button.primary:hover{background:#fbbf24;color:#1a1303}
+  button.ghost{background:transparent}
+  button.danger{color:var(--danger);border-color:#3a1d1d}
+  button.danger:hover{background:#2a1414}
+  select,input[type=number],input[type=text]{font:inherit;color:inherit;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;outline:none}
+  select:focus,input:focus{border-color:var(--accent)}
+  .kbd{font:11px ui-monospace,Menlo,monospace;background:#0c0e13;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;color:var(--ink-dim)}
+
+  #app{display:grid;grid-template-columns:300px 1fr 320px;grid-template-rows:48px 1fr;height:100%}
+  header{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:0 14px;border-bottom:1px solid var(--line);background:var(--panel);z-index:5}
+  header .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+  header .logo svg{display:block}
+  header .crumbs{color:var(--ink-dim);font-size:12px}
+  header .spacer{flex:1}
+  header .pill{font-size:11px;color:var(--ink-dim);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+
+  aside.left,aside.right{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+  aside.right{border-right:none;border-left:1px solid var(--line)}
+  aside h2{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-dim);margin:0;padding:12px 14px 6px}
+  aside .scroll{overflow:auto;padding:0 8px 12px;flex:1}
+
+  /* Catalog */
+  .tabs{display:flex;flex-wrap:wrap;gap:4px;padding:8px 8px 4px}
+  .tab{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink-dim);cursor:pointer}
+  .tab[aria-selected=true]{background:var(--panel-2);color:var(--ink);border-color:var(--accent)}
+  .item{display:flex;align-items:center;gap:10px;padding:8px 10px;margin:4px 6px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel-2);cursor:grab;user-select:none;transition:.12s}
+  .item:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .item:active{cursor:grabbing}
+  .item .swatch{width:18px;height:18px;border-radius:5px;flex-shrink:0;border:1px solid rgba(0,0,0,.3)}
+  .item .meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+  .item .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item .dim{font-size:11px;color:var(--ink-dim)}
+  .item .cost{font-size:11px;color:var(--accent-2);font-variant-numeric:tabular-nums}
+
+  /* Center stage */
+  main{position:relative;background:radial-gradient(circle at 50% 30%,#1a1f2b 0,#0a0d12 70%);min-height:0}
+  #canvas{display:block;width:100%;height:100%}
+  .stage-tools{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .stage-tools .group{display:flex;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .stage-tools .group button{border:none;border-radius:0;border-right:1px solid var(--line);background:transparent}
+  .stage-tools .group button:last-child{border-right:none}
+  .stage-tools .group button.active{background:var(--accent);color:#1a1303}
+  .stage-help{position:absolute;left:12px;bottom:12px;color:var(--ink-dim);font-size:11px;background:rgba(15,17,21,.7);border:1px solid var(--line);padding:6px 10px;border-radius:8px;backdrop-filter:blur(4px);max-width:520px}
+  .empty-coach{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);color:var(--ink-dim);text-align:center;pointer-events:none;font-size:13px;background:rgba(15,17,21,.55);padding:14px 18px;border:1px dashed var(--line);border-radius:12px;backdrop-filter:blur(4px)}
+  .empty-coach h3{margin:0 0 6px;color:var(--ink);font-size:14px;letter-spacing:.4px}
+
+  /* Right panel */
+  .container-pick{padding:8px 12px 0;display:flex;flex-direction:column;gap:6px}
+  .container-card{border:1px solid var(--line);border-radius:var(--r);padding:9px 11px;background:var(--panel-2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:.12s}
+  .container-card:hover{border-color:var(--accent)}
+  .container-card[aria-selected=true]{border-color:var(--accent);background:#231a09}
+  .container-card .cn{font-weight:600}
+  .container-card .cd{font-size:11px;color:var(--ink-dim)}
+  .container-card .cp{font-size:11px;color:var(--accent-2);font-variant-numeric:tabular-nums}
+
+  .stats{padding:6px 14px}
+  .stats .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+  .stats .row:last-child{border-bottom:none}
+  .stats .row .k{color:var(--ink-dim)}
+  .stats .row .v{font-weight:600}
+  .stats .bar{height:6px;background:#0b0d11;border-radius:3px;overflow:hidden;margin-top:6px}
+  .stats .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent),var(--danger));transition:width .2s}
+
+  .placed-list{padding:0 8px 12px;overflow:auto;max-height:34vh}
+  .placed{display:flex;align-items:center;gap:8px;padding:6px 8px;margin:3px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel-2);font-size:12px}
+  .placed:hover{border-color:var(--accent)}
+  .placed.sel{border-color:var(--accent);background:#231a09}
+  .placed .pn{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .placed button{padding:2px 6px;font-size:11px}
+  .placed .ix{color:var(--ink-dim);font:11px ui-monospace,Menlo,monospace}
+
+  .actions{padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line);background:var(--panel)}
+  .actions button{flex:1;min-width:0}
+
+  .sel-card{margin:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel-2);padding:10px}
+  .sel-card .sh{display:flex;justify-content:space-between;align-items:baseline}
+  .sel-card .sh .nm{font-weight:600}
+  .sel-card .sh .cat{font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.5px}
+  .sel-card .controls{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+  .sel-card .controls label{display:flex;flex-direction:column;font-size:11px;color:var(--ink-dim);gap:3px}
+
+  /* Print */
+  @media print {
+    aside,header,.stage-tools,.stage-help,.empty-coach{display:none !important}
+    #app{display:block;height:auto}
+    main{position:static;height:auto}
+    #print-sheet{display:block !important}
+  }
+  #print-sheet{display:none;padding:20px;color:#000;background:#fff;font-family:Georgia,serif}
+  #print-sheet h1{font-size:24px;margin:0 0 4px}
+  #print-sheet h2{font-size:13px;color:#555;margin:0 0 18px;font-weight:400}
+  #print-sheet table{width:100%;border-collapse:collapse;margin-top:14px}
+  #print-sheet th,#print-sheet td{border-bottom:1px solid #ccc;text-align:left;padding:5px 8px;font-size:12px}
+  #print-sheet th{background:#eee}
+
+  /* Tiny screens */
+  @media (max-width:1100px){
+    #app{grid-template-columns:240px 1fr 260px}
+  }
+  @media (max-width:820px){
+    #app{grid-template-columns:1fr;grid-template-rows:48px auto 50vh auto}
+    aside.left,aside.right{max-height:30vh}
+  }
+
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-thumb{background:#2a3140;border-radius:8px}
+  ::-webkit-scrollbar-thumb:hover{background:#3a4150}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="logo" title="Cozy Crate">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="6" y="20" width="52" height="24" fill="#f59e0b" stroke="#0f1115" stroke-width="2"/>
+        <path d="M10 22v20M14 22v20M18 22v20M22 22v20M26 22v20M30 22v20M34 22v20M38 22v20M42 22v20M46 22v20M50 22v20M54 22v20" stroke="#a05a06" stroke-width="1"/>
+      </svg>
+      Cozy Crate
+    </div>
+    <span class="crumbs" id="crumbs">a planner for turning a steel box into a place</span>
+    <span class="spacer"></span>
+    <span class="pill" id="auto-save">saved</span>
+    <button class="ghost" id="help-btn" title="Help">?</button>
+  </header>
+
+  <aside class="left">
+    <h2>Catalog</h2>
+    <div class="tabs" id="cat-tabs"></div>
+    <div class="scroll" id="cat-list"></div>
+  </aside>
+
+  <main>
+    <canvas id="canvas"></canvas>
+
+    <div class="stage-tools">
+      <div class="group" role="group" aria-label="View">
+        <button data-view="3d" class="active" title="3D perspective">3D</button>
+        <button data-view="top" title="Top-down floorplan">Plan</button>
+        <button data-view="side" title="Side elevation">Side</button>
+      </div>
+      <div class="group" role="group" aria-label="Render">
+        <button data-toggle="walls" class="active" title="Toggle walls">Walls</button>
+        <button data-toggle="grid" class="active" title="Toggle grid">Grid</button>
+        <button data-toggle="labels" title="Toggle item labels">Labels</button>
+      </div>
+      <button id="reset-cam" title="Reset camera (Home)">Recenter</button>
+    </div>
+
+    <div class="empty-coach" id="empty-coach">
+      <h3>Start building</h3>
+      Pick a container on the right, then drag items in from the catalog on the left.<br>
+      <span class="kbd">R</span> rotate · <span class="kbd">Del</span> remove · <span class="kbd">drag</span> to reposition
+    </div>
+
+    <div class="stage-help">
+      Left-drag to orbit · right-drag or two-finger to pan · scroll to zoom · click an item to select · <span class="kbd">R</span> rotates · <span class="kbd">Del</span> removes
+    </div>
+  </main>
+
+  <aside class="right">
+    <h2>Container</h2>
+    <div class="container-pick" id="container-pick"></div>
+
+    <h2 style="margin-top:8px">Stats</h2>
+    <div class="stats" id="stats"></div>
+
+    <h2>Selected</h2>
+    <div id="sel-pane"></div>
+
+    <h2>Placed items <span id="placed-count" style="color:var(--ink-dim);font-weight:400"></span></h2>
+    <div class="placed-list" id="placed-list"></div>
+
+    <div class="actions">
+      <button id="export-json" title="Download the current design as JSON">Export</button>
+      <button id="import-json" title="Load a design from JSON">Import</button>
+      <button id="print-bom" title="Print bill of materials">Print BOM</button>
+      <button class="danger" id="clear-all" title="Remove everything">Clear</button>
+    </div>
+  </aside>
+
+  <section id="print-sheet"></section>
+</div>
+
+<input type="file" id="file-input" accept="application/json" style="display:none">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { DragControls } from 'three/addons/controls/DragControls.js';
+
+// =====================================================================
+// Container specs — real ISO dimensions in meters (external / internal).
+// Sources are the ISO 668 standard and major carrier spec sheets.
+// =====================================================================
+const CONTAINERS = [
+  { id:'10ft',     name:"10' Standard",    ext:[2.991,2.438,2.591], int:[2.831,2.352,2.393], tare:1300,  payload:9700,  basePrice:3200 },
+  { id:'20ft',     name:"20' Standard",    ext:[6.058,2.438,2.591], int:[5.898,2.352,2.393], tare:2200,  payload:28100, basePrice:2800 },
+  { id:'20hc',     name:"20' High Cube",   ext:[6.058,2.438,2.896], int:[5.898,2.352,2.698], tare:2370,  payload:27930, basePrice:3600 },
+  { id:'40ft',     name:"40' Standard",    ext:[12.192,2.438,2.591],int:[12.032,2.352,2.393],tare:3750,  payload:26730, basePrice:3400 },
+  { id:'40hc',     name:"40' High Cube",   ext:[12.192,2.438,2.896],int:[12.032,2.352,2.698],tare:3900,  payload:26580, basePrice:4200 },
+  { id:'45hc',     name:"45' High Cube",   ext:[13.716,2.438,2.896],int:[13.556,2.352,2.698],tare:4800,  payload:27800, basePrice:5400 },
+];
+
+// =====================================================================
+// Catalog — six categories, real-world dimensions (W,D,H in meters) and
+// rough U.S. retail price brackets. Not exhaustive but enough to plan a
+// real conversion: bed/bath/kitchen/electrical/structural openings.
+// =====================================================================
+const CATEGORIES = [
+  { id:'furniture', name:'Furniture',  color:'var(--cat-furn)',  hex:0x60a5fa },
+  { id:'appliance', name:'Appliances', color:'var(--cat-app)',   hex:0xf472b6 },
+  { id:'fixture',   name:'Fixtures',   color:'var(--cat-fix)',   hex:0xfb923c },
+  { id:'electric',  name:'Electrical', color:'var(--cat-elec)',  hex:0xfbbf24 },
+  { id:'paneling',  name:'Paneling',   color:'var(--cat-pan)',   hex:0xa78bfa },
+  { id:'structural',name:'Structural', color:'var(--cat-struc)', hex:0x34d399 },
+];
+
+// dims: [width(x), depth(z), height(y)] meters
+// floor: anchor — 'floor' sits on floor, 'wall' sticks to a wall at mid-height, 'ceiling' hangs
+const CATALOG = [
+  // ---- Furniture ----
+  ['twin-bed','Twin bed',          'furniture',[0.99,1.91,0.50], 'floor', 280, 35],
+  ['full-bed','Full bed',          'furniture',[1.37,1.91,0.50], 'floor', 380, 50],
+  ['queen-bed','Queen bed',        'furniture',[1.52,2.03,0.55], 'floor', 520, 65],
+  ['murphy-bed','Murphy bed (fold)','furniture',[1.60,0.40,2.10],'floor',1200,140],
+  ['sofa-2','Loveseat',            'furniture',[1.50,0.85,0.85], 'floor', 620, 55],
+  ['sofa-3','Sofa, 3-seat',        'furniture',[2.10,0.85,0.85], 'floor', 880, 80],
+  ['armchair','Armchair',          'furniture',[0.90,0.85,0.85], 'floor', 340, 30],
+  ['dining-tbl','Dining table (4)','furniture',[1.20,0.75,0.75], 'floor', 240, 25],
+  ['dining-chair','Dining chair',  'furniture',[0.45,0.45,0.90], 'floor',  70, 6],
+  ['desk','Writing desk',          'furniture',[1.40,0.60,0.75], 'floor', 260, 30],
+  ['office-chair','Office chair',  'furniture',[0.60,0.60,1.10], 'floor', 220, 10],
+  ['wardrobe','Wardrobe',          'furniture',[1.00,0.60,2.00], 'floor', 460, 80],
+  ['bookshelf','Bookshelf',        'furniture',[0.80,0.30,1.80], 'floor', 180, 35],
+  ['nightstand','Nightstand',      'furniture',[0.50,0.40,0.60], 'floor',  90, 12],
+  ['coffee-tbl','Coffee table',    'furniture',[1.20,0.60,0.40], 'floor', 160, 18],
+  ['kitchen-counter','Kitchen counter','furniture',[1.80,0.65,0.90],'floor',680,90],
+  ['bar-stool','Bar stool',        'furniture',[0.40,0.40,0.75], 'floor',  80, 6],
+
+  // ---- Appliances ----
+  ['mini-fridge','Mini fridge',    'appliance',[0.50,0.50,0.85], 'floor', 240, 28],
+  ['fridge','Full fridge',         'appliance',[0.70,0.70,1.80], 'floor', 950,110],
+  ['stove','Stove + oven',         'appliance',[0.76,0.70,0.90], 'floor', 780, 95],
+  ['cooktop','Induction cooktop',  'appliance',[0.60,0.52,0.06], 'floor', 620, 14],
+  ['hood','Range hood',            'appliance',[0.76,0.50,0.15], 'ceiling',320, 12],
+  ['microwave','Microwave',        'appliance',[0.55,0.40,0.35], 'floor', 140, 14],
+  ['dishwasher','Dishwasher',      'appliance',[0.60,0.60,0.85], 'floor', 540, 45],
+  ['washer-dryer','Washer/dryer combo','appliance',[0.60,0.65,0.85],'floor',1100,75],
+  ['mini-split','HVAC mini-split (head)','appliance',[0.90,0.25,0.32],'wall',1800,11],
+  ['heat-pump','Heat pump (outdoor)','appliance',[0.85,0.35,0.55],'floor',1400,42],
+  ['water-heater','Tankless water heater','appliance',[0.45,0.20,0.70],'wall',900,18],
+  ['wood-stove','Wood stove',      'appliance',[0.60,0.50,0.80], 'floor', 1400,110],
+  ['range-vent','Vent fan',        'appliance',[0.30,0.30,0.15], 'wall',  120, 5],
+
+  // ---- Fixtures (plumbing & furnishings tied to a spot) ----
+  ['toilet','Toilet',              'fixture', [0.45,0.70,0.80], 'floor', 280, 35],
+  ['compost-toilet','Composting toilet','fixture',[0.50,0.55,0.65],'floor',900,30],
+  ['sink-bath','Bathroom sink',    'fixture', [0.50,0.40,0.85], 'wall',  180, 20],
+  ['sink-kitch','Kitchen sink',    'fixture', [0.80,0.55,0.20], 'floor', 240, 16],
+  ['shower','Shower stall',        'fixture', [0.90,0.90,2.00], 'floor', 680, 55],
+  ['bathtub','Bathtub',            'fixture', [1.70,0.70,0.55], 'floor', 720, 90],
+  ['mirror','Mirror',              'fixture', [0.60,0.05,0.90], 'wall',   80, 8],
+  ['towel-bar','Towel bar',        'fixture', [0.60,0.10,0.05], 'wall',   18, 1],
+
+  // ---- Electrical ----
+  ['panel','Breaker panel (100A)', 'electric',[0.40,0.15,0.60], 'wall',  340, 11],
+  ['sub-panel','Sub-panel',        'electric',[0.30,0.12,0.45], 'wall',  220, 7],
+  ['solar-inv','Solar inverter',   'electric',[0.45,0.20,0.60], 'wall',  1400,28],
+  ['battery','LiFePO4 battery bank','electric',[0.60,0.40,1.00],'floor',3200,120],
+  ['outlet','Outlet',              'electric',[0.10,0.05,0.10], 'wall',    4, 0.2],
+  ['gfci','GFCI outlet',           'electric',[0.10,0.05,0.10], 'wall',   22, 0.2],
+  ['light-rec','Recessed light',   'electric',[0.15,0.15,0.10], 'ceiling',24, 0.4],
+  ['pendant','Pendant light',      'electric',[0.30,0.30,0.50], 'ceiling',95, 1.5],
+  ['fan','Ceiling fan',            'electric',[1.30,1.30,0.35], 'ceiling',180,9],
+  ['smoke','Smoke detector',       'electric',[0.15,0.15,0.05], 'ceiling',25, 0.2],
+  ['switch','Light switch',        'electric',[0.07,0.05,0.10], 'wall',    3, 0.1],
+  ['ethernet','Ethernet jack',     'electric',[0.07,0.05,0.10], 'wall',    8, 0.1],
+
+  // ---- Paneling / Insulation ----
+  ['spray-foam','Spray foam (R-30 wall)','paneling',[1.20,0.10,2.40],'wall',180,12],
+  ['rigid-foam','Rigid foam panel','paneling',[1.20,0.05,2.40], 'wall',   55, 6],
+  ['drywall','Drywall sheet',      'paneling',[1.22,0.013,2.44],'wall',   18,14],
+  ['plywood','Plywood subfloor',   'paneling',[1.22,0.018,2.44],'floor',  42,18],
+  ['vinyl-floor','Vinyl plank floor','paneling',[1.22,0.005,0.20],'floor', 28, 3],
+  ['shiplap','Shiplap accent wall','paneling',[1.22,0.018,2.44],'wall',   65,16],
+  ['ceiling-panel','Ceiling panel','paneling',[1.22,0.013,1.22],'ceiling',22, 7],
+
+  // ---- Structural / Openings ----
+  ['window-sm','Window, small',    'structural',[0.60,0.10,0.60],'wall', 180, 14],
+  ['window-md','Window, picture',  'structural',[1.20,0.10,1.20],'wall', 480, 32],
+  ['window-lg','Window, full-light','structural',[1.80,0.10,1.50],'wall',780, 55],
+  ['door-std','Door, standard',    'structural',[0.91,0.10,2.03],'wall', 260, 28],
+  ['door-french','French doors',   'structural',[1.50,0.10,2.10],'wall', 920, 75],
+  ['door-slide','Sliding glass',   'structural',[1.83,0.10,2.10],'wall',1100, 95],
+  ['skylight','Skylight',          'structural',[0.60,1.20,0.10],'ceiling',520,28],
+  ['stairs-loft','Loft stairs',    'structural',[0.90,2.10,2.40],'floor', 680,65],
+  ['loft-deck','Loft deck',        'structural',[2.40,2.40,0.20],'floor',1200,90],
+  ['interior-wall','Interior wall (stud)','structural',[2.40,0.10,2.40],'floor',180,30],
+  ['steel-beam','Steel reinforcement beam','structural',[2.40,0.10,0.10],'wall',220,30],
+];
+
+// =====================================================================
+// State
+// =====================================================================
+const ITEM_BY_ID = Object.fromEntries(CATALOG.map(r=>[r[0],{id:r[0],name:r[1],category:r[2],dims:r[3],anchor:r[4],price:r[5],weight:r[6]}]));
+const CAT_BY_ID = Object.fromEntries(CATEGORIES.map(c=>[c.id,c]));
+
+const state = {
+  containerId: '40hc',
+  placed: [],          // {uid, itemId, pos:[x,y,z], rotY}
+  view: '3d',
+  show: { walls:true, grid:true, labels:false },
+  activeCategory: 'furniture',
+  selectedUid: null,
+};
+
+// =====================================================================
+// Persistence
+// =====================================================================
+const SAVE_KEY = 'cozy-crate:v1';
+function save(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({containerId:state.containerId,placed:state.placed}));
+    flashSaved();
+  } catch(_){}
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(SAVE_KEY);
+    if(!raw) return;
+    const obj = JSON.parse(raw);
+    if(obj.containerId) state.containerId = obj.containerId;
+    if(Array.isArray(obj.placed)) state.placed = obj.placed.filter(p=>ITEM_BY_ID[p.itemId]);
+  } catch(_){}
+}
+let savedFlashT;
+function flashSaved(){
+  const el = document.getElementById('auto-save');
+  el.textContent = 'saved';
+  el.style.color = 'var(--accent-2)';
+  clearTimeout(savedFlashT);
+  savedFlashT = setTimeout(()=>{ el.style.color=''; }, 700);
+}
+
+// =====================================================================
+// Three.js setup
+// =====================================================================
+const canvas = document.getElementById('canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = null;
+
+const cameraPersp = new THREE.PerspectiveCamera(45, 1, 0.05, 200);
+cameraPersp.position.set(8, 6, 10);
+const cameraTop = new THREE.OrthographicCamera(-1,1,1,-1,0.1,200);
+cameraTop.position.set(0, 20, 0); cameraTop.up.set(0,0,-1); cameraTop.lookAt(0,0,0);
+const cameraSide = new THREE.OrthographicCamera(-1,1,1,-1,0.1,200);
+cameraSide.position.set(0, 1.2, 25); cameraSide.lookAt(0,1.2,0);
+let camera = cameraPersp;
+
+const controls = new OrbitControls(cameraPersp, canvas);
+controls.target.set(0,1.2,0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI*0.49;
+
+// Lights
+const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xfff0d8, 0.9);
+sun.position.set(10, 18, 8);
+sun.castShadow = true;
+sun.shadow.mapSize.set(1024,1024);
+sun.shadow.camera.left=-15; sun.shadow.camera.right=15;
+sun.shadow.camera.top=15; sun.shadow.camera.bottom=-15;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xa0c0ff, 0.25);
+fill.position.set(-8,5,-6); scene.add(fill);
+
+// Ground
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(80,80),
+  new THREE.MeshStandardMaterial({color:0x0a0d12, roughness:1, metalness:0})
+);
+ground.rotation.x = -Math.PI/2;
+ground.position.y = -0.001;
+ground.receiveShadow = true;
+scene.add(ground);
+
+const gridHelper = new THREE.GridHelper(60, 60, 0x2a3140, 0x1a2030);
+gridHelper.position.y = 0.001;
+scene.add(gridHelper);
+
+// Container group
+const containerGroup = new THREE.Group();
+scene.add(containerGroup);
+
+// Placed-items group
+const placedGroup = new THREE.Group();
+scene.add(placedGroup);
+
+// Outline for selected
+const outlineMat = new THREE.LineBasicMaterial({ color:0xf59e0b, linewidth:2 });
+
+// =====================================================================
+// Container rendering
+// =====================================================================
+function spec(){ return CONTAINERS.find(c=>c.id===state.containerId); }
+
+function buildContainer(){
+  while(containerGroup.children.length) containerGroup.remove(containerGroup.children[0]);
+  const c = spec();
+  const [W,_extH,L] = [c.ext[0], c.ext[2], c.ext[1]]; // external W (length along x), depth=height? we swap below
+  // We treat container length along X, depth (width across) along Z, height along Y.
+  // ISO: ext = [length, width, height]. So map:
+  const lenX = c.ext[0], widZ = c.ext[1], hY = c.ext[2];
+  const iLenX = c.int[0], iWidZ = c.int[1], iHY = c.int[2];
+  const wallTh = (widZ - iWidZ)/2;
+  const floorTh = 0.05;
+  const ceilTh = (hY - iHY) - floorTh;
+
+  // Floor
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(iLenX, floorTh, iWidZ),
+    new THREE.MeshStandardMaterial({color:0x8a5a2c, roughness:.85})
+  );
+  floor.position.set(0, floorTh/2, 0);
+  floor.receiveShadow = true;
+  containerGroup.add(floor);
+
+  // Walls (corrugated look — striped material via canvas texture)
+  const wallMat = new THREE.MeshStandardMaterial({
+    color: 0xc26a09, roughness: .55, metalness: .15,
+    transparent: true, opacity: state.show.walls ? .88 : .04, side: THREE.DoubleSide
+  });
+  const corrugationTex = makeCorrugation();
+  wallMat.map = corrugationTex;
+  wallMat.needsUpdate = true;
+
+  const wallGeoLong = new THREE.BoxGeometry(lenX, hY, wallTh);
+  const wallGeoShort = new THREE.BoxGeometry(wallTh, hY, widZ);
+
+  const wallBack = new THREE.Mesh(wallGeoLong, wallMat); wallBack.position.set(0, hY/2, -widZ/2 + wallTh/2);
+  const wallFront = new THREE.Mesh(wallGeoLong, wallMat); wallFront.position.set(0, hY/2,  widZ/2 - wallTh/2);
+  const wallLeft  = new THREE.Mesh(wallGeoShort, wallMat); wallLeft.position.set(-lenX/2 + wallTh/2, hY/2, 0);
+  const wallRight = new THREE.Mesh(wallGeoShort, wallMat); wallRight.position.set( lenX/2 - wallTh/2, hY/2, 0);
+  for(const w of [wallBack,wallFront,wallLeft,wallRight]){ w.castShadow=true; w.receiveShadow=true; containerGroup.add(w); }
+
+  // Ceiling
+  const ceiling = new THREE.Mesh(
+    new THREE.BoxGeometry(lenX, ceilTh, widZ),
+    new THREE.MeshStandardMaterial({color:0xb45c08, roughness:.7, transparent:true, opacity: state.show.walls ? .7 : .04})
+  );
+  ceiling.position.set(0, hY - ceilTh/2, 0);
+  containerGroup.add(ceiling);
+
+  // Corner castings (small black blocks)
+  const ccGeo = new THREE.BoxGeometry(0.18,0.16,0.16);
+  const ccMat = new THREE.MeshStandardMaterial({color:0x111418, metalness:.6, roughness:.4});
+  const hx = lenX/2, hz = widZ/2, hy = hY;
+  const corners = [
+    [-hx,0,-hz],[hx,0,-hz],[-hx,0,hz],[hx,0,hz],
+    [-hx,hy-0.08,-hz],[hx,hy-0.08,-hz],[-hx,hy-0.08,hz],[hx,hy-0.08,hz]
+  ];
+  for(const [x,y,z] of corners){
+    const m = new THREE.Mesh(ccGeo, ccMat); m.position.set(x,y+0.08,z); containerGroup.add(m);
+  }
+
+  // Floor grid inside container
+  const innerGrid = new THREE.GridHelper(
+    Math.max(iLenX, iWidZ), Math.round(Math.max(iLenX, iWidZ)*2),
+    0x444a55, 0x2a3140
+  );
+  innerGrid.scale.x = iLenX / Math.max(iLenX, iWidZ);
+  innerGrid.scale.z = iWidZ / Math.max(iLenX, iWidZ);
+  innerGrid.position.y = floorTh + 0.001;
+  innerGrid.visible = state.show.grid;
+  innerGrid.name = 'innerGrid';
+  containerGroup.add(innerGrid);
+
+  // Cache interior bounds for clamping
+  containerGroup.userData.bounds = {
+    minX: -iLenX/2 + 0.05, maxX: iLenX/2 - 0.05,
+    minZ: -iWidZ/2 + 0.05, maxZ: iWidZ/2 - 0.05,
+    floorY: floorTh, ceilY: hY - ceilTh,
+    iLenX, iWidZ, iHY
+  };
+
+  // Camera framing
+  fitCameraToContainer();
+  rebuildPlaced();
+  updateStats();
+}
+
+function makeCorrugation(){
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 64;
+  const g = c.getContext('2d');
+  for(let i=0;i<32;i++){
+    const t = (Math.sin(i/32 * Math.PI*2)+1)*.5;
+    const v = Math.floor(180 + t*30);
+    g.fillStyle = `rgb(${v},${Math.floor(v*.55)},${Math.floor(v*.18)})`;
+    g.fillRect(i*(c.width/32),0,Math.ceil(c.width/32)+1,c.height);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(20,1);
+  tex.anisotropy = 4;
+  return tex;
+}
+
+function fitCameraToContainer(){
+  const b = containerGroup.userData.bounds;
+  const cx = 0, cz = 0;
+  const dist = Math.max(b.iLenX, b.iWidZ) * 1.4 + 4;
+  cameraPersp.position.set(cx + dist*0.7, b.iHY*1.6, cz + dist*0.7);
+  controls.target.set(cx, b.iHY*0.4, cz);
+
+  // top orth
+  const padTop = 1.5;
+  const aspect = canvas.clientWidth / canvas.clientHeight;
+  const halfW = b.iLenX/2 + padTop;
+  const halfH = b.iWidZ/2 + padTop;
+  let w, h;
+  if(halfW/aspect > halfH){ w = halfW; h = halfW/aspect; } else { h = halfH; w = halfH*aspect; }
+  cameraTop.left = -w; cameraTop.right = w; cameraTop.top = h; cameraTop.bottom = -h;
+  cameraTop.position.set(0, 30, 0); cameraTop.lookAt(0,0,0); cameraTop.up.set(0,0,-1);
+  cameraTop.updateProjectionMatrix();
+
+  // side orth
+  const halfL = b.iLenX/2 + 1;
+  const halfHy = b.iHY/2 + 1;
+  let sW,sH;
+  if(halfL/aspect > halfHy){ sW = halfL; sH = halfL/aspect; } else { sH = halfHy; sW = halfHy*aspect; }
+  cameraSide.left=-sW;cameraSide.right=sW;cameraSide.top=sH;cameraSide.bottom=-sH;
+  cameraSide.position.set(0, b.iHY/2, 25); cameraSide.lookAt(0, b.iHY/2, 0);
+  cameraSide.updateProjectionMatrix();
+}
+
+// =====================================================================
+// Placed items
+// =====================================================================
+function makeMeshFor(item){
+  const [w,d,h] = item.dims;
+  const cat = CAT_BY_ID[item.category];
+  const mat = new THREE.MeshStandardMaterial({color:cat.hex, roughness:.6, metalness:.05});
+  const geo = new THREE.BoxGeometry(w,h,d);
+  const m = new THREE.Mesh(geo, mat);
+  m.castShadow = true; m.receiveShadow = true;
+  // edges
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(geo),
+    new THREE.LineBasicMaterial({color:0x000000, transparent:true, opacity:.35})
+  );
+  m.add(edges);
+  return m;
+}
+
+function defaultYFor(item){
+  const b = containerGroup.userData.bounds;
+  const h = item.dims[2];
+  if(item.anchor === 'ceiling') return b.ceilY - h/2;
+  if(item.anchor === 'wall') return Math.min(b.ceilY - h/2 - 0.05, Math.max(b.floorY + h/2 + 0.6, 1.2));
+  return b.floorY + h/2;
+}
+
+function rebuildPlaced(){
+  while(placedGroup.children.length) placedGroup.remove(placedGroup.children[0]);
+  for(const p of state.placed){
+    const item = ITEM_BY_ID[p.itemId]; if(!item) continue;
+    const m = makeMeshFor(item);
+    m.position.set(p.pos[0], p.pos[1], p.pos[2]);
+    m.rotation.y = p.rotY || 0;
+    m.userData.uid = p.uid;
+    m.userData.itemId = p.itemId;
+    placedGroup.add(m);
+    if(state.show.labels) attachLabel(m, item.name);
+  }
+  updateSelectionOutline();
+  refreshPlacedList();
+  document.getElementById('empty-coach').style.display = state.placed.length ? 'none' : 'block';
+}
+
+function attachLabel(mesh, text){
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 64;
+  const g = c.getContext('2d');
+  g.fillStyle = 'rgba(15,17,21,.85)';
+  g.fillRect(0,0,c.width,c.height);
+  g.fillStyle = '#e8ebf2';
+  g.font = '600 28px ui-sans-serif,Inter,system-ui';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText(text, c.width/2, c.height/2);
+  const tex = new THREE.CanvasTexture(c);
+  const mat = new THREE.SpriteMaterial({map:tex, depthTest:false, transparent:true});
+  const s = new THREE.Sprite(mat);
+  s.scale.set(0.9, 0.22, 1);
+  const h = mesh.geometry.parameters.height;
+  s.position.set(0, h/2 + 0.25, 0);
+  s.userData.isLabel = true;
+  mesh.add(s);
+}
+
+let outlineHelper = null;
+function updateSelectionOutline(){
+  if(outlineHelper){ outlineHelper.parent && outlineHelper.parent.remove(outlineHelper); outlineHelper = null; }
+  if(!state.selectedUid) return;
+  const m = placedGroup.children.find(o=>o.userData.uid===state.selectedUid);
+  if(!m) return;
+  outlineHelper = new THREE.BoxHelper(m, 0xf59e0b);
+  outlineHelper.material.linewidth = 2;
+  scene.add(outlineHelper);
+}
+
+// =====================================================================
+// Placing / dragging / interaction
+// =====================================================================
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let dragTarget = null;
+let dragOffset = new THREE.Vector3();
+let dragPlaneY = 0;
+
+function setPointer(e){
+  const r = canvas.getBoundingClientRect();
+  pointer.x = ((e.clientX - r.left)/r.width)*2 - 1;
+  pointer.y = -((e.clientY - r.top)/r.height)*2 + 1;
+}
+
+function pickPlacedAt(e){
+  setPointer(e);
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(placedGroup.children, true);
+  for(const h of hits){
+    let o = h.object;
+    while(o && !o.userData.uid) o = o.parent;
+    if(o && o.userData.uid) return o;
+  }
+  return null;
+}
+
+canvas.addEventListener('pointerdown', (e)=>{
+  if(e.button !== 0) return;
+  const obj = pickPlacedAt(e);
+  if(obj){
+    state.selectedUid = obj.userData.uid;
+    updateSelectionOutline(); renderSelectedPane(); refreshPlacedList();
+    // start drag
+    dragTarget = obj;
+    dragPlaneY = obj.position.y;
+    const plane = new THREE.Plane(new THREE.Vector3(0,1,0), -dragPlaneY);
+    const hitPoint = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, hitPoint);
+    dragOffset.copy(obj.position).sub(hitPoint);
+    controls.enabled = false;
+  } else {
+    state.selectedUid = null;
+    updateSelectionOutline(); renderSelectedPane(); refreshPlacedList();
+  }
+});
+canvas.addEventListener('pointermove',(e)=>{
+  if(!dragTarget) return;
+  setPointer(e);
+  raycaster.setFromCamera(pointer, camera);
+  const plane = new THREE.Plane(new THREE.Vector3(0,1,0), -dragPlaneY);
+  const hitPoint = new THREE.Vector3();
+  raycaster.ray.intersectPlane(plane, hitPoint);
+  if(!hitPoint) return;
+  hitPoint.add(dragOffset);
+  clampInside(dragTarget, hitPoint);
+  dragTarget.position.x = hitPoint.x;
+  dragTarget.position.z = hitPoint.z;
+  syncFromMesh(dragTarget);
+  if(outlineHelper) outlineHelper.update();
+});
+canvas.addEventListener('pointerup',()=>{
+  if(dragTarget){ dragTarget = null; controls.enabled = true; save(); updateStats(); }
+});
+
+function clampInside(mesh, target){
+  const b = containerGroup.userData.bounds;
+  const item = ITEM_BY_ID[mesh.userData.itemId];
+  // Use rotated extents
+  const cosY = Math.abs(Math.cos(mesh.rotation.y));
+  const sinY = Math.abs(Math.sin(mesh.rotation.y));
+  const w = item.dims[0], d = item.dims[1];
+  const halfX = (w*cosY + d*sinY)/2;
+  const halfZ = (w*sinY + d*cosY)/2;
+  target.x = Math.min(b.maxX - halfX, Math.max(b.minX + halfX, target.x));
+  target.z = Math.min(b.maxZ - halfZ, Math.max(b.minZ + halfZ, target.z));
+}
+
+function syncFromMesh(mesh){
+  const p = state.placed.find(x=>x.uid===mesh.userData.uid);
+  if(!p) return;
+  p.pos = [mesh.position.x, mesh.position.y, mesh.position.z];
+  p.rotY = mesh.rotation.y;
+}
+
+// Drag-from-catalog: HTML5 drag/drop
+let dragItemId = null;
+canvas.addEventListener('dragover', (e)=>{ if(dragItemId){ e.preventDefault(); }});
+canvas.addEventListener('drop', (e)=>{
+  if(!dragItemId) return;
+  e.preventDefault();
+  const r = canvas.getBoundingClientRect();
+  pointer.x = ((e.clientX - r.left)/r.width)*2 - 1;
+  pointer.y = -((e.clientY - r.top)/r.height)*2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const item = ITEM_BY_ID[dragItemId];
+  const y = defaultYFor(item);
+  const plane = new THREE.Plane(new THREE.Vector3(0,1,0), -y);
+  const hit = new THREE.Vector3();
+  raycaster.ray.intersectPlane(plane, hit);
+  const pos = hit ? [hit.x, y, hit.z] : [0, y, 0];
+  addItem(dragItemId, pos);
+  dragItemId = null;
+});
+
+function addItem(itemId, pos){
+  const item = ITEM_BY_ID[itemId];
+  if(!item) return;
+  const y = (pos && pos[1] != null) ? pos[1] : defaultYFor(item);
+  const px = pos ? pos[0] : 0, pz = pos ? pos[2] : 0;
+  const uid = 'p_'+Math.random().toString(36).slice(2,10);
+  const placedItem = { uid, itemId, pos:[px,y,pz], rotY:0 };
+  // clamp
+  const fakeMesh = { userData:{itemId}, rotation:{y:0} };
+  const t = new THREE.Vector3(px,y,pz);
+  clampInside(fakeMesh, t);
+  placedItem.pos = [t.x, y, t.z];
+  state.placed.push(placedItem);
+  state.selectedUid = uid;
+  rebuildPlaced();
+  updateStats();
+  save();
+}
+
+// =====================================================================
+// Catalog UI
+// =====================================================================
+function renderTabs(){
+  const root = document.getElementById('cat-tabs');
+  root.innerHTML = '';
+  for(const c of CATEGORIES){
+    const b = document.createElement('button');
+    b.className = 'tab'; b.textContent = c.name; b.setAttribute('aria-selected', c.id===state.activeCategory);
+    b.style.borderColor = c.id===state.activeCategory ? c.color : '';
+    b.onclick = ()=>{ state.activeCategory = c.id; renderTabs(); renderCatalog(); };
+    root.appendChild(b);
+  }
+}
+function renderCatalog(){
+  const root = document.getElementById('cat-list');
+  root.innerHTML = '';
+  const items = CATALOG.filter(r=>r[2]===state.activeCategory);
+  for(const r of items){
+    const id=r[0], name=r[1], cat=r[2], dims=r[3], anchor=r[4], price=r[5];
+    const el = document.createElement('div');
+    el.className = 'item'; el.draggable = true;
+    el.title = `${name}\n${(dims[0]).toFixed(2)}m W × ${(dims[1]).toFixed(2)}m D × ${(dims[2]).toFixed(2)}m H\n$${price}`;
+    const c = CAT_BY_ID[cat];
+    el.innerHTML = `
+      <div class="swatch" style="background:${c.color}"></div>
+      <div class="meta">
+        <div class="name">${name}</div>
+        <div class="dim">${dims[0].toFixed(2)} × ${dims[1].toFixed(2)} × ${dims[2].toFixed(2)} m · ${anchor}</div>
+      </div>
+      <div class="cost">$${price.toLocaleString()}</div>
+    `;
+    el.addEventListener('dragstart',(e)=>{
+      dragItemId = id;
+      e.dataTransfer.effectAllowed='copy';
+      e.dataTransfer.setData('text/plain', id);
+    });
+    el.addEventListener('dragend',()=>{ /* dragItemId cleared on drop */ });
+    el.addEventListener('dblclick',()=>{ addItem(id); });
+    root.appendChild(el);
+  }
+}
+
+// =====================================================================
+// Container picker UI
+// =====================================================================
+function renderContainerPick(){
+  const root = document.getElementById('container-pick');
+  root.innerHTML = '';
+  for(const c of CONTAINERS){
+    const a = document.createElement('div');
+    a.className = 'container-card'; a.setAttribute('aria-selected', c.id===state.containerId);
+    const intArea = (c.int[0]*c.int[1]).toFixed(1);
+    a.innerHTML = `<div>
+        <div class="cn">${c.name}</div>
+        <div class="cd">${c.ext[0].toFixed(2)} × ${c.ext[1].toFixed(2)} × ${c.ext[2].toFixed(2)} m · ${intArea} m² floor</div>
+      </div>
+      <div class="cp">$${c.basePrice.toLocaleString()}</div>`;
+    a.onclick = ()=>{
+      state.containerId = c.id;
+      renderContainerPick();
+      buildContainer();
+      save();
+    };
+    root.appendChild(a);
+  }
+}
+
+// =====================================================================
+// Stats / right pane
+// =====================================================================
+function updateStats(){
+  const c = spec();
+  const intFloorArea = c.int[0]*c.int[1];
+  const intVolume = c.int[0]*c.int[1]*c.int[2];
+  let usedFloor = 0, usedVol = 0, weightItems = 0, costItems = 0;
+  const byCat = Object.fromEntries(CATEGORIES.map(x=>[x.id,0]));
+  for(const p of state.placed){
+    const it = ITEM_BY_ID[p.itemId]; if(!it) continue;
+    if(it.anchor === 'floor') usedFloor += it.dims[0]*it.dims[1];
+    usedVol += it.dims[0]*it.dims[1]*it.dims[2];
+    weightItems += it.weight;
+    costItems += it.price;
+    byCat[it.category] = (byCat[it.category]||0)+1;
+  }
+  const totalCost = c.basePrice + costItems;
+  const totalWeight = c.tare + weightItems;
+  const payloadPct = Math.min(100, (weightItems / c.payload)*100);
+  const floorPct = Math.min(100, (usedFloor / intFloorArea)*100);
+
+  const root = document.getElementById('stats');
+  root.innerHTML = `
+    <div class="row"><span class="k">Container</span><span class="v">${c.name}</span></div>
+    <div class="row"><span class="k">Interior</span><span class="v">${c.int[0].toFixed(2)} × ${c.int[1].toFixed(2)} × ${c.int[2].toFixed(2)} m</span></div>
+    <div class="row"><span class="k">Floor area</span><span class="v">${intFloorArea.toFixed(2)} m² <span style="color:var(--ink-dim)">(${(intFloorArea*10.7639).toFixed(0)} ft²)</span></span></div>
+    <div class="row"><span class="k">Volume</span><span class="v">${intVolume.toFixed(1)} m³</span></div>
+    <div class="row"><span class="k">Floor used</span><span class="v">${usedFloor.toFixed(2)} m² · ${floorPct.toFixed(0)}%</span></div>
+    <div class="bar"><span style="width:${floorPct}%"></span></div>
+    <div class="row"><span class="k">Payload used</span><span class="v">${weightItems.toFixed(0)} / ${c.payload.toLocaleString()} kg · ${payloadPct.toFixed(1)}%</span></div>
+    <div class="bar"><span style="width:${payloadPct}%"></span></div>
+    <div class="row"><span class="k">Items</span><span class="v">${state.placed.length}</span></div>
+    <div class="row"><span class="k">Est. materials</span><span class="v">$${totalCost.toLocaleString()}</span></div>
+    <div class="row"><span class="k">Est. shipped weight</span><span class="v">${totalWeight.toLocaleString()} kg</span></div>
+  `;
+}
+
+function refreshPlacedList(){
+  const root = document.getElementById('placed-list');
+  const count = document.getElementById('placed-count');
+  count.textContent = state.placed.length ? `· ${state.placed.length}` : '';
+  root.innerHTML = '';
+  for(let i=state.placed.length-1;i>=0;i--){
+    const p = state.placed[i];
+    const it = ITEM_BY_ID[p.itemId]; if(!it) continue;
+    const c = CAT_BY_ID[it.category];
+    const row = document.createElement('div');
+    row.className = 'placed' + (p.uid===state.selectedUid ? ' sel' : '');
+    row.innerHTML = `
+      <div class="swatch" style="width:10px;height:10px;border-radius:3px;background:${c.color}"></div>
+      <div class="pn">${it.name}</div>
+      <button class="ghost" data-act="rotate" title="Rotate 90°">⟳</button>
+      <button class="ghost danger" data-act="remove" title="Remove">✕</button>
+    `;
+    row.onclick = (e)=>{
+      if(e.target.dataset.act==='remove'){ removeUid(p.uid); return; }
+      if(e.target.dataset.act==='rotate'){ rotateUid(p.uid); return; }
+      state.selectedUid = p.uid; updateSelectionOutline(); renderSelectedPane(); refreshPlacedList();
+    };
+    root.appendChild(row);
+  }
+}
+
+function renderSelectedPane(){
+  const root = document.getElementById('sel-pane');
+  const p = state.placed.find(x=>x.uid===state.selectedUid);
+  if(!p){ root.innerHTML = `<div style="color:var(--ink-dim);padding:0 14px 12px;font-size:12px">Click any item in the scene or the list below.</div>`; return; }
+  const it = ITEM_BY_ID[p.itemId];
+  const c = CAT_BY_ID[it.category];
+  root.innerHTML = `
+    <div class="sel-card">
+      <div class="sh"><span class="nm">${it.name}</span><span class="cat" style="color:${c.color}">${c.name}</span></div>
+      <div style="color:var(--ink-dim);font-size:11px;margin-top:3px">${it.dims[0].toFixed(2)} × ${it.dims[1].toFixed(2)} × ${it.dims[2].toFixed(2)} m · ${it.weight} kg · $${it.price}</div>
+      <div class="controls">
+        <label>X (m)<input type="number" step="0.05" id="sel-x" value="${p.pos[0].toFixed(2)}"></label>
+        <label>Z (m)<input type="number" step="0.05" id="sel-z" value="${p.pos[2].toFixed(2)}"></label>
+        <label>Y (m)<input type="number" step="0.05" id="sel-y" value="${p.pos[1].toFixed(2)}"></label>
+        <label>Rotation (deg)<input type="number" step="15" id="sel-r" value="${Math.round((p.rotY||0)*180/Math.PI)}"></label>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button id="sel-rotate" style="flex:1">Rotate 90°</button>
+        <button id="sel-remove" class="danger" style="flex:1">Remove</button>
+      </div>
+    </div>
+  `;
+  const wire = (id, fn)=>{ const el=document.getElementById(id); el.addEventListener('change',()=>{ fn(parseFloat(el.value||'0')); }); };
+  wire('sel-x',(v)=>{ p.pos[0]=v; applyPlaceTransform(p); });
+  wire('sel-z',(v)=>{ p.pos[2]=v; applyPlaceTransform(p); });
+  wire('sel-y',(v)=>{ p.pos[1]=v; applyPlaceTransform(p); });
+  wire('sel-r',(v)=>{ p.rotY = v*Math.PI/180; applyPlaceTransform(p); });
+  document.getElementById('sel-rotate').onclick = ()=>rotateUid(p.uid);
+  document.getElementById('sel-remove').onclick = ()=>removeUid(p.uid);
+}
+
+function applyPlaceTransform(p){
+  const mesh = placedGroup.children.find(o=>o.userData.uid===p.uid);
+  if(!mesh) return;
+  const t = new THREE.Vector3(p.pos[0],p.pos[1],p.pos[2]);
+  mesh.rotation.y = p.rotY || 0;
+  clampInside(mesh, t);
+  mesh.position.copy(t);
+  p.pos = [t.x,t.y,t.z];
+  if(outlineHelper) outlineHelper.update();
+  save(); updateStats();
+}
+
+function rotateUid(uid){
+  const p = state.placed.find(x=>x.uid===uid); if(!p) return;
+  p.rotY = ((p.rotY||0) + Math.PI/2) % (Math.PI*2);
+  applyPlaceTransform(p);
+  renderSelectedPane();
+}
+function removeUid(uid){
+  state.placed = state.placed.filter(x=>x.uid!==uid);
+  if(state.selectedUid===uid) state.selectedUid = null;
+  rebuildPlaced(); updateStats(); save();
+  renderSelectedPane();
+}
+
+// =====================================================================
+// View toggles & toolbar
+// =====================================================================
+document.querySelectorAll('.stage-tools [data-view]').forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll('.stage-tools [data-view]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.view = btn.dataset.view;
+    if(state.view==='3d') camera = cameraPersp;
+    else if(state.view==='top') camera = cameraTop;
+    else camera = cameraSide;
+    controls.object = cameraPersp; // orbit only on perspective
+    controls.enabled = (state.view==='3d');
+    fitCameraToContainer();
+  };
+});
+document.querySelectorAll('.stage-tools [data-toggle]').forEach(btn=>{
+  btn.onclick = ()=>{
+    const key = btn.dataset.toggle;
+    state.show[key] = !state.show[key];
+    btn.classList.toggle('active', state.show[key]);
+    buildContainer();
+  };
+});
+document.getElementById('reset-cam').onclick = fitCameraToContainer;
+document.getElementById('help-btn').onclick = ()=>{
+  alert('Cozy Crate\n\n• Drag items from the left catalog into the scene.\n• Click an item to select it. R rotates 90°, Del removes.\n• Switch between 3D / top-down plan / side elevation in the top toolbar.\n• Print BOM gives you a clean cut-sheet for ordering.\n• Everything autosaves to this browser. Export to keep a copy.');
+};
+
+window.addEventListener('keydown',(e)=>{
+  if(e.target.matches('input,textarea,select')) return;
+  if(e.key==='r' || e.key==='R'){ if(state.selectedUid){ rotateUid(state.selectedUid); }}
+  else if(e.key==='Delete' || e.key==='Backspace'){ if(state.selectedUid){ removeUid(state.selectedUid); e.preventDefault(); }}
+  else if(e.key==='Home'){ fitCameraToContainer(); }
+});
+
+// =====================================================================
+// Export / Import / BOM
+// =====================================================================
+document.getElementById('export-json').onclick = ()=>{
+  const blob = new Blob([JSON.stringify({version:1,containerId:state.containerId,placed:state.placed}, null, 2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `cozy-crate-${state.containerId}-${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+document.getElementById('import-json').onclick = ()=>{ document.getElementById('file-input').click(); };
+document.getElementById('file-input').onchange = (e)=>{
+  const f = e.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const obj = JSON.parse(reader.result);
+      if(obj.containerId) state.containerId = obj.containerId;
+      if(Array.isArray(obj.placed)) state.placed = obj.placed.filter(p=>ITEM_BY_ID[p.itemId]);
+      renderContainerPick(); buildContainer(); save();
+    } catch(err){ alert('That file did not parse as a Cozy Crate JSON design.'); }
+  };
+  reader.readAsText(f);
+  e.target.value = '';
+};
+document.getElementById('clear-all').onclick = ()=>{
+  if(state.placed.length===0) return;
+  if(!confirm(`Remove all ${state.placed.length} items?`)) return;
+  state.placed = []; state.selectedUid = null; rebuildPlaced(); updateStats(); save();
+};
+document.getElementById('print-bom').onclick = ()=>{
+  const c = spec();
+  const counts = {};
+  for(const p of state.placed){ counts[p.itemId] = (counts[p.itemId]||0)+1; }
+  const rows = Object.entries(counts).sort((a,b)=>{
+    const ca = ITEM_BY_ID[a[0]].category, cb = ITEM_BY_ID[b[0]].category;
+    if(ca!==cb) return ca.localeCompare(cb);
+    return ITEM_BY_ID[a[0]].name.localeCompare(ITEM_BY_ID[b[0]].name);
+  });
+  let total = c.basePrice;
+  const itemsHtml = rows.map(([id,n])=>{
+    const it = ITEM_BY_ID[id]; const sub = n*it.price; total += sub;
+    return `<tr><td>${CAT_BY_ID[it.category].name}</td><td>${it.name}</td><td>${n}</td><td>${it.dims[0].toFixed(2)} × ${it.dims[1].toFixed(2)} × ${it.dims[2].toFixed(2)} m</td><td>$${it.price.toLocaleString()}</td><td>$${sub.toLocaleString()}</td></tr>`;
+  }).join('');
+  document.getElementById('print-sheet').innerHTML = `
+    <h1>Cozy Crate — bill of materials</h1>
+    <h2>${c.name} · interior ${c.int[0].toFixed(2)} × ${c.int[1].toFixed(2)} × ${c.int[2].toFixed(2)} m · ${(c.int[0]*c.int[1]).toFixed(1)} m² floor</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Item</th><th>Qty</th><th>Each (W×D×H)</th><th>Unit</th><th>Subtotal</th></tr></thead>
+      <tbody>
+        <tr><td>Shell</td><td>${c.name} container</td><td>1</td><td>${c.ext[0].toFixed(2)} × ${c.ext[1].toFixed(2)} × ${c.ext[2].toFixed(2)} m</td><td>$${c.basePrice.toLocaleString()}</td><td>$${c.basePrice.toLocaleString()}</td></tr>
+        ${itemsHtml}
+      </tbody>
+      <tfoot><tr><th colspan="5" style="text-align:right">Estimated total</th><th>$${total.toLocaleString()}</th></tr></tfoot>
+    </table>
+    <p style="margin-top:20px;font-size:11px;color:#666">Prices are rough U.S. retail brackets for planning purposes — confirm with your supplier before ordering.</p>
+  `;
+  window.print();
+};
+
+// =====================================================================
+// Render loop & resize
+// =====================================================================
+function resize(){
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if(canvas.width !== w || canvas.height !== h){
+    renderer.setSize(w, h, false);
+    cameraPersp.aspect = w/h; cameraPersp.updateProjectionMatrix();
+    fitCameraToContainer();
+  }
+}
+function tick(){
+  resize();
+  if(state.view==='3d') controls.update();
+  if(outlineHelper) outlineHelper.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+
+// =====================================================================
+// Boot
+// =====================================================================
+load();
+renderTabs();
+renderCatalog();
+renderContainerPick();
+buildContainer();
+renderSelectedPane();
+refreshPlacedList();
+tick();
+
+// Auto-save on unload + interval
+setInterval(save, 4000);
+window.addEventListener('beforeunload', save);
+</script>
+</body>
+</html>
+<script><\/script>
+</body>
+</html>

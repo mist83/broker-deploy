@@ -1,0 +1,25 @@
+{
+  "siteId": "cozy-crate",
+  "latest": {
+    "siteId": "cozy-crate",
+    "status": "success",
+    "deployedAt": "2026-05-18T21:40:12.598Z",
+    "trigger": "github-webhook",
+    "brokerRunId": "26062002434",
+    "brokerRunNumber": "111",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26062002434",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "cozy-crate",
+      "status": "success",
+      "deployedAt": "2026-05-18T21:40:12.598Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26062002434",
+      "brokerRunNumber": "111",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26062002434",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-18T05:34:49.302Z",
+  "generatedAt": "2026-05-18T21:40:12.608Z",
   "sites": [
     {
       "siteId": "agent",
@@ -39,6 +39,19 @@
       "hostingFiles": 10,
       "hostingBytes": 116733,
       "recordedDeployments": 2
+    },
+    {
+      "siteId": "cozy-crate",
+      "status": "success",
+      "liveUrl": "https://cozy-crate.mullmania.com/",
+      "mirrorUrl": "https://mist83.github.io/broker-deploy/cozy-crate/",
+      "lastPublishedAt": "2026-05-18T21:40:12.598Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26062002434",
+      "latestBrokerRunNumber": "111",
+      "trigger": "github-webhook",
+      "hostingFiles": 3,
+      "hostingBytes": 107958,
+      "recordedDeployments": 1
     },
     {
       "siteId": "gitter",

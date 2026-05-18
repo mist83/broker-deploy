@@ -1,0 +1,12 @@
+{
+  "siteId": "cozy-crate",
+  "host": "cozy-crate.mullmania.com",
+  "publishedAt": "2026-05-18T21:39:09.038Z",
+  "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/sites/cozy-crate",
+  "counts": {
+    "hostingFiles": 3,
+    "hostingBytes": 107958,
+    "dataFiles": 0,
+    "dataBytes": 0
+  }
+}
