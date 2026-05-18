@@ -37,10 +37,28 @@
         "shared-multi-agent",
         "shared-retirement",
         "shared-platform-systems"
+      ],
+      "generic": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "agent": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
       ]
     },
     "preamblePromptUrls": {
-      "codex": "https://agent.mullmania.com/CODEX-BOOTSTRAP-PROMPT.md"
+      "codex": "https://agent.mullmania.com/CODEX-BOOTSTRAP-PROMPT.md",
+      "generic": "https://agent.mullmania.com/AGENT-BOOTSTRAP-PROMPT.md",
+      "agent": "https://agent.mullmania.com/AGENT-BOOTSTRAP-PROMPT.md"
     },
     "runtimeInventoryUrls": {
       "codex": "https://agent.mullmania.com/doctrine/codex-local-runtime-inventory-v1.json"

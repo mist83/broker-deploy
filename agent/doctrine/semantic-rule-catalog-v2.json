@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-18T04:52:17.012Z",
+  "generatedAt": "2026-05-18T04:57:55.236Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -28,7 +28,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -57,7 +59,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -87,7 +91,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -118,7 +124,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -149,7 +157,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -180,7 +190,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -211,7 +223,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -241,7 +255,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -272,7 +288,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -301,7 +319,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -331,7 +351,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -362,7 +384,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -391,7 +415,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -421,7 +447,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -450,7 +478,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-multi-agent"
@@ -480,7 +510,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -511,7 +543,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -542,7 +576,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -571,7 +607,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -601,7 +639,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -633,7 +673,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-core"
@@ -662,7 +704,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-retirement"
@@ -691,7 +735,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-ui-stack"
@@ -722,7 +768,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-ui-stack"
@@ -752,7 +800,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-ui-stack"
@@ -782,7 +832,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-ui-stack"
@@ -809,7 +861,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-scratch"
@@ -836,7 +890,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-scratch"
@@ -863,7 +919,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-scratch"
@@ -890,7 +948,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-operator-scratch"
@@ -919,7 +979,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -976,7 +1038,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-platform-systems"
@@ -1005,7 +1069,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-multi-agent"
@@ -1036,7 +1102,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -1066,7 +1134,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -1096,7 +1166,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-niche-reference"
@@ -1127,7 +1199,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-live-ship"
@@ -1154,7 +1228,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": []
     },
@@ -1181,7 +1257,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-platform-systems"
@@ -1211,7 +1289,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-platform-systems"
@@ -1240,7 +1320,9 @@
       ],
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "profileIds": [
         "shared-ui-stack"

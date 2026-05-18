@@ -151,13 +151,14 @@ Do not treat them as the future source of truth.
 - Shared profile TOC: [doctrine/profile-toc-v1.json](./doctrine/profile-toc-v1.json)
 - Compose API contract: [doctrine/compose-api-v1.json](./doctrine/compose-api-v1.json)
 - Human compose guide: [DOCTRINE-COMPOSE-API.md](./DOCTRINE-COMPOSE-API.md)
+- Generic agent bootstrap prompt: [AGENT-BOOTSTRAP-PROMPT.md](./AGENT-BOOTSTRAP-PROMPT.md)
 - Codex bootstrap prompt: [CODEX-BOOTSTRAP-PROMPT.md](./CODEX-BOOTSTRAP-PROMPT.md)
 - Codex memory seed: [doctrine/codex-memory-seed-v1.json](./doctrine/codex-memory-seed-v1.json)
 - Claude memory seed: [doctrine/claude-memory-seed-v1.json](./doctrine/claude-memory-seed-v1.json)
 - Codex local runtime inventory: [doctrine/codex-local-runtime-inventory-v1.json](./doctrine/codex-local-runtime-inventory-v1.json)
 - Codex wipe status: [SAFE-TO-WIPE-CODEX.md](./SAFE-TO-WIPE-CODEX.md)
 
-The bootstrap artifact resolves the active seed via `sourceOfTruth.memorySeedUrls[<flavor>]` keyed by runtime (`codex`, `claude`). It also points at the shared rule catalog and profile TOC so most standing behavior can be shared instead of duplicated per runtime. The legacy `memorySeedUrl` field is retained for clients that have not learned the per-flavor map yet and points at the Codex seed.
+The bootstrap artifact resolves the active seed via `sourceOfTruth.memorySeedUrls[<flavor>]` keyed by runtime (`codex`, `claude`) when a runtime-specific seed exists. Generic agents should use `runtime: "agent"` or `runtime: "generic"` in the compose API and consume the same shared profile defaults. The legacy `memorySeedUrl` field is retained for clients that have not learned the per-flavor map yet and points at the Codex seed.
 
 ## Test Case
 

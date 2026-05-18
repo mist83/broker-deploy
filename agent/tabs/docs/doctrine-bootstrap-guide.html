@@ -127,13 +127,14 @@
 <li>Shared profile TOC: <a href="./doctrine/profile-toc-v1.json">doctrine/profile-toc-v1.json</a></li>
 <li>Compose API contract: <a href="./doctrine/compose-api-v1.json">doctrine/compose-api-v1.json</a></li>
 <li>Human compose guide: <a href="./DOCTRINE-COMPOSE-API.md">DOCTRINE-COMPOSE-API.md</a></li>
+<li>Generic agent bootstrap prompt: <a href="./AGENT-BOOTSTRAP-PROMPT.md">AGENT-BOOTSTRAP-PROMPT.md</a></li>
 <li>Codex bootstrap prompt: <a href="./CODEX-BOOTSTRAP-PROMPT.md">CODEX-BOOTSTRAP-PROMPT.md</a></li>
 <li>Codex memory seed: <a href="./doctrine/codex-memory-seed-v1.json">doctrine/codex-memory-seed-v1.json</a></li>
 <li>Claude memory seed: <a href="./doctrine/claude-memory-seed-v1.json">doctrine/claude-memory-seed-v1.json</a></li>
 <li>Codex local runtime inventory: <a href="./doctrine/codex-local-runtime-inventory-v1.json">doctrine/codex-local-runtime-inventory-v1.json</a></li>
 <li>Codex wipe status: <a href="./SAFE-TO-WIPE-CODEX.md">SAFE-TO-WIPE-CODEX.md</a></li>
 </ul>
-<p>The bootstrap artifact resolves the active seed via <code>sourceOfTruth.memorySeedUrls[&lt;flavor&gt;]</code> keyed by runtime (<code>codex</code>, <code>claude</code>). It also points at the shared rule catalog and profile TOC so most standing behavior can be shared instead of duplicated per runtime. The legacy <code>memorySeedUrl</code> field is retained for clients that have not learned the per-flavor map yet and points at the Codex seed.</p>
+<p>The bootstrap artifact resolves the active seed via <code>sourceOfTruth.memorySeedUrls[&lt;flavor&gt;]</code> keyed by runtime (<code>codex</code>, <code>claude</code>) when a runtime-specific seed exists. Generic agents should use <code>runtime: &quot;agent&quot;</code> or <code>runtime: &quot;generic&quot;</code> in the compose API and consume the same shared profile defaults. The legacy <code>memorySeedUrl</code> field is retained for clients that have not learned the per-flavor map yet and points at the Codex seed.</p>
 <h2>Test Case</h2>
 <p>The operator should be able to change global doctrine behavior centrally and observe the effect immediately.</p>
 <p>Example test:</p>

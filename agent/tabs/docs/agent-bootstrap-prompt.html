@@ -1,0 +1,32 @@
+<article class="content-card">
+  <p class="source-links type-label text-muted"><a class="link-muted" href="../AGENT-BOOTSTRAP-PROMPT.md" target="_blank" rel="noopener"><i class="ti ti-file"></i> AGENT-BOOTSTRAP-PROMPT.md</a></p>
+  <div class="markdown-body">
+<h1>Generic Agent Bootstrap Prompt</h1>
+<p>This is the runtime-neutral bootstrap prompt for any agent that can read HTTP and post JSON. It is a pointer only. The remote doctrine on <code>agent.mullmania.com</code> is the source of truth.</p>
+<h2>Standing Instruction</h2>
+<p>At the beginning of every task, load and apply the cloud doctrine before doing work. If doctrine cannot be loaded and verified, stop visibly and require explicit operator approval before continuing.</p>
+<h2>Preferred Compose Call</h2>
+<p>Use the generic shared runtime unless a more specific runtime is known:</p>
+<pre><code class="language-bash">curl -sSf -X POST https://agent.mullmania.com/api/doctrine/compose \
+  -H &#39;content-type: application/json&#39; \
+  -d &#39;{
+    &quot;runtime&quot;: &quot;agent&quot;,
+    &quot;event&quot;: &quot;task_execution&quot;,
+    &quot;taskIntent&quot;: &quot;&lt;one-line task description&gt;&quot;
+  }&#39;
+</code></pre>
+<p>Treat the returned <code>craftedPreamble</code>, <code>orderedRuleIds</code>, and <code>citations</code> as authoritative for the task.</p>
+<h2>Static Fallback</h2>
+<p>If the compose endpoint is unavailable but static doctrine is readable, fetch:</p>
+<ul>
+<li><code>https://agent.mullmania.com/doctrine/bootstrap-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/profile-toc-v1.json</code></li>
+<li><code>https://agent.mullmania.com/doctrine/runtime-catalog-v1.json</code></li>
+</ul>
+<p>Expand the default profile list for <code>agent</code> or <code>generic</code>. If neither exists, use <code>shared-operator-core</code> and stop visibly after the minimum safe response so the operator can repair doctrine.</p>
+<h2>Local Rule</h2>
+<p>Do not write durable behavior into local prompt files. Local files are bootstraps, generated projections, auth boundaries, caches, or safety fuses only. Durable standing behavior belongs in the remote shared doctrine rule set.</p>
+
+  </div>
+</article>

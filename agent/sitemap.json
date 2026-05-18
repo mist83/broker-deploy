@@ -597,6 +597,13 @@
               "allowHtmlSource": true
             },
             {
+              "id": "agent-bootstrap-prompt",
+              "name": "Generic agent bootstrap prompt",
+              "icon": "ti ti-robot",
+              "htmlSource": "./tabs/docs/agent-bootstrap-prompt.html",
+              "allowHtmlSource": true
+            },
+            {
               "id": "codex-bootstrap-prompt",
               "name": "Codex bootstrap prompt",
               "icon": "ti ti-bolt",

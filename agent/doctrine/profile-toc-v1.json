@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-profile-toc-v1",
   "summary": "Profile table of contents for the shared doctrine core.",
-  "generatedAt": "2026-05-18T04:52:17.012Z",
+  "generatedAt": "2026-05-18T04:57:55.236Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
   "defaultProfileIdsByRuntime": {
@@ -20,6 +20,22 @@
       "shared-multi-agent",
       "shared-retirement",
       "shared-platform-systems"
+    ],
+    "generic": [
+      "shared-operator-core",
+      "shared-ui-stack",
+      "shared-live-ship",
+      "shared-multi-agent",
+      "shared-retirement",
+      "shared-platform-systems"
+    ],
+    "agent": [
+      "shared-operator-core",
+      "shared-ui-stack",
+      "shared-live-ship",
+      "shared-multi-agent",
+      "shared-retirement",
+      "shared-platform-systems"
     ]
   },
   "profiles": [
@@ -31,7 +47,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "feedback_grugbrain",
@@ -61,7 +79,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "feedback_ui_canon_first",
@@ -79,7 +99,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "feedback_ship_to_deployed",
@@ -99,7 +121,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "feedback_pm_a2a_default_workflow",
@@ -114,7 +138,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "feedback_tombstone_safety"
@@ -128,7 +154,9 @@
       "selection": "default",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "itemIds": [
         "reference_signal_argh",

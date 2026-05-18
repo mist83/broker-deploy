@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-recipe-catalog-v1",
   "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-  "generatedAt": "2026-05-18T04:52:17.012Z",
+  "generatedAt": "2026-05-18T04:57:55.236Z",
   "recipes": [
     {
       "id": "repo-task-default",
@@ -10,7 +10,9 @@
       "event": "task_execution",
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "recommendedProfileIds": [
         "shared-operator-core",
@@ -31,7 +33,9 @@
       "event": "task_execution",
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "recommendedProfileIds": [
         "shared-operator-core",
@@ -52,7 +56,9 @@
       "event": "task_execution",
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "recommendedProfileIds": [
         "shared-operator-core",
@@ -73,7 +79,9 @@
       "event": "task_execution",
       "runtimes": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ],
       "recommendedProfileIds": [
         "shared-operator-core",

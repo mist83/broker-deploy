@@ -59,6 +59,7 @@ See machine-readable contract:
 High-level request fields:
 
 - `runtime`
+  - known runtime ids include `codex`, `claude`, `generic`, and `agent`
 - `profileIds`
 - `includeRuleIds`
 - `excludeRuleIds`

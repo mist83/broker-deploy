@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-event-catalog-v1",
   "summary": "Lifecycle events that doctrine can tailor against.",
-  "generatedAt": "2026-05-18T04:52:17.012Z",
+  "generatedAt": "2026-05-18T04:57:55.236Z",
   "events": [
     {
       "id": "session_start",
@@ -9,7 +9,9 @@
       "description": "Initial runtime bootstrap for a new chat or a fresh agent session.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     },
     {
@@ -18,7 +20,9 @@
       "description": "Unattended remote task launch, such as a Valet-started Codex or Claude job.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     },
     {
@@ -27,7 +31,9 @@
       "description": "Scoped doctrine and memory fetch before a worker or runtime loads contextual memory.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     },
     {
@@ -36,7 +42,9 @@
       "description": "Resolve a shared skill body or skill package for the active runtime.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     },
     {
@@ -45,7 +53,9 @@
       "description": "Resolve a named command or slash-command body for the active runtime.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     },
     {
@@ -54,7 +64,9 @@
       "description": "Handle lifecycle hook trampolines such as post-tool-use dispatch.",
       "defaultFor": [
         "codex",
-        "claude"
+        "claude",
+        "generic",
+        "agent"
       ]
     }
   ],

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-runtime-catalog-v1",
   "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-  "generatedAt": "2026-05-18T04:52:17.012Z",
+  "generatedAt": "2026-05-18T04:57:55.236Z",
   "runtimes": [
     {
       "id": "codex",
@@ -30,6 +30,50 @@
       "label": "Claude",
       "launchKind": "claude-task",
       "composeRuntime": "claude",
+      "defaultProfileIds": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "supportedEvents": [
+        "session_start",
+        "task_execution",
+        "memory_read",
+        "skill_load",
+        "command_resolve",
+        "hook_dispatch"
+      ]
+    },
+    {
+      "id": "generic",
+      "label": "Generic Agent",
+      "launchKind": "generic-agent-task",
+      "composeRuntime": "generic",
+      "defaultProfileIds": [
+        "shared-operator-core",
+        "shared-ui-stack",
+        "shared-live-ship",
+        "shared-multi-agent",
+        "shared-retirement",
+        "shared-platform-systems"
+      ],
+      "supportedEvents": [
+        "session_start",
+        "task_execution",
+        "memory_read",
+        "skill_load",
+        "command_resolve",
+        "hook_dispatch"
+      ]
+    },
+    {
+      "id": "agent",
+      "label": "Agent",
+      "launchKind": "agent-task",
+      "composeRuntime": "agent",
       "defaultProfileIds": [
         "shared-operator-core",
         "shared-ui-stack",
