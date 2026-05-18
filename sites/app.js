@@ -9191,7 +9191,6 @@ function renderFeatureMatrixPreview(row) {
   const previewUrl = previewEntry ? getPreviewUrl(previewEntry.siteId) : '';
   const title = row?.title || row?.key || previewEntry?.siteId || 'Site';
   const siteId = previewEntry?.siteId || '';
-  const cacheKey = previewUrl ? `resize:160:::webp:68:${previewUrl}` : '';
   return `
     <span class="feature-matrix-preview" aria-hidden="true">
       <img
@@ -9199,7 +9198,7 @@ function renderFeatureMatrixPreview(row) {
         src="${escapeHtml(PREVIEW_PLACEHOLDER_URL)}"
         ${previewUrl ? `data-src="${escapeHtml(previewUrl)}"` : ''}
         ${siteId ? `data-preview-site-id="${escapeHtml(siteId)}" data-preview-source-site-id="${escapeHtml(siteId)}"` : ''}
-        ${cacheKey ? `data-preview-cache-key="${escapeHtml(cacheKey)}" data-preview-resize-width="160" data-preview-resize-format="webp" data-preview-resize-quality="68"` : ''}
+        ${previewUrl ? `data-preview-cache-key="${escapeHtml(previewUrl)}"` : ''}
         data-preview-state="${previewUrl ? 'placeholder' : 'error'}"
         alt="${escapeHtml(`${title} preview`)}"
         loading="lazy"
