@@ -89,6 +89,17 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       rule: 'Follow the development canon and ui.mullmania.com shell rules for browser-facing UI.',
     },
     {
+      id: 'github-deploy-broker',
+      label: 'GitHub Deploy Broker',
+      shortLabel: 'Deploy',
+      icon: 'ti ti-brand-github',
+      observedTags: ['feature:github-deploy-broker', 'github-deploy-broker', 'deploy-broker', 'broker-deploy', 'github-actions', 'gha-deploy'],
+      copyTags: ['feature:github-deploy-broker:copy', 'copy:github-deploy-broker'],
+      absentTags: ['feature:github-deploy-broker:off', 'feature:github-deploy-broker:absent', 'no-github-deploy-broker'],
+      ignoreTags: ['feature:github-deploy-broker:ignore', 'ignore:github-deploy-broker', 'custom-deploy-script', 'bespoke-deploy-script'],
+      rule: 'If a site has a Git repo, delete bespoke deploy scripts and deploy through the canonical GitHub Actions deploy broker instead of per-repo custom publishing logic.',
+    },
+    {
       id: 'threejs',
       label: 'Three.js',
       shortLabel: '3D',
@@ -8187,6 +8198,11 @@ function getFeatureMatrixObservedCellMeta(entry, facetId) {
     return featureMatrixObservedMeta(FEATURE_MATRIX_STATE_COPY, copyEvidence);
   }
 
+  const catalogMeta = getFeatureMatrixCatalogFacetMeta(entry, facet.id);
+  if (catalogMeta) {
+    return featureMatrixObservedMeta(catalogMeta.state, catalogMeta.evidence);
+  }
+
   const observedEvidence = [
     ...tagEvidence(facet.observedTags),
     ...getFeatureMatrixCatalogFieldEvidence(entry, facet.id),
@@ -8228,6 +8244,56 @@ function getFeatureMatrixCatalogFieldEvidence(entry, facetId) {
     default:
       return [];
   }
+}
+
+function getFeatureMatrixCatalogFacetMeta(entry, facetId) {
+  switch (facetId) {
+    case 'github-deploy-broker':
+      return getFeatureMatrixDeployBrokerMeta(entry);
+    default:
+      return null;
+  }
+}
+
+function getFeatureMatrixDeployBrokerMeta(entry) {
+  const github = entry?.publishContext?.github;
+  const git = entry?.publishContext?.git;
+  const hasGitHubRepo = Boolean(String(github?.repository || '').trim());
+  const hasGitRemote = Boolean(String(git?.remote || '').trim());
+  const hasGitRoot = Boolean(String(git?.root || '').trim());
+
+  if (github?.actions === true) {
+    const evidence = ['catalog:github.actions=true'];
+    if (github.repository) {
+      evidence.push(`catalog:github.repository=${github.repository}`);
+    }
+    if (github.runId) {
+      evidence.push(`catalog:github.runId=${github.runId}`);
+    }
+    return {
+      state: FEATURE_MATRIX_STATE_ON,
+      evidence,
+    };
+  }
+
+  if (hasGitHubRepo || hasGitRemote || hasGitRoot) {
+    const evidence = [];
+    if (hasGitHubRepo) {
+      evidence.push(`catalog:github.repository=${github.repository}`);
+    }
+    if (hasGitRemote) {
+      evidence.push('catalog:git.remote');
+    }
+    if (github && github.actions === false) {
+      evidence.push('catalog:github.actions=false');
+    }
+    return {
+      state: FEATURE_MATRIX_STATE_DEFERRED,
+      evidence,
+    };
+  }
+
+  return null;
 }
 
 function assignFeatureMatrixCellState(draft, siteId, facetId, cellState, metadata = {}) {
@@ -8973,6 +9039,18 @@ function inferFeatureMatrixGuess(entry, facet) {
       if (entry?.hasHostedSite !== false) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.56, ['hosted browser-facing site']);
       return featureMatrixGuess();
     }
+    case 'github-deploy-broker': {
+      const catalogMeta = getFeatureMatrixDeployBrokerMeta(entry);
+      if (catalogMeta) {
+        return featureMatrixGuess(catalogMeta.state, catalogMeta.state === FEATURE_MATRIX_STATE_ON ? 0.94 : 0.82, catalogMeta.evidence);
+      }
+      const evidence = [
+        ...tagEvidence(['deploy-broker', 'broker-deploy', 'github-actions', 'gha-deploy']),
+        ...textEvidence(['github actions', 'broker-deploy', 'deploy broker', 'workflow_dispatch']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.76, evidence);
+      return featureMatrixGuess();
+    }
     case 'threejs': {
       const evidence = [
         ...tagEvidence(['threejs', 'three-js', 'webgl', '3d']),
@@ -9015,6 +9093,8 @@ function buildFeatureMatrixHaystack(entry) {
     entry?.canonProfile,
     entry?.publishContext?.source,
     entry?.publishContext?.github?.repository,
+    entry?.publishContext?.github?.actions === true ? 'github actions deploy broker' : '',
+    entry?.publishContext?.github?.actions === false ? 'github actions false git repo deploy update' : '',
     entry?.publishContext?.git?.remote,
     ...(Array.isArray(entry?.tags) ? entry.tags : []),
     ...(Array.isArray(entry?.notes) ? entry.notes : []),

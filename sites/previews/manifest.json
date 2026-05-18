@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-18T02:40:05Z",
+  "updatedAt": "2026-05-18T03:43:10Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -15606,15 +15606,48 @@
       "siteId": "models",
       "status": "ok",
       "path": "/api/previews/models.png",
-      "url": "/api/previews/models.png?v=1776304537838",
+      "url": "/api/previews/models.png?v=1779075776809",
       "objectKey": "sites/previews/models.png",
-      "capturedAt": "2026-04-16T01:55:37Z",
-      "version": "1776304537838",
-      "width": 960,
-      "height": 540,
+      "capturedAt": "2026-05-18T03:42:56Z",
+      "version": "1779075776809",
+      "width": 1024,
+      "height": 768,
+      "style": "default",
+      "params": {
+        "width": 1024,
+        "height": 768,
+        "settleDelayMs": 5000,
+        "randomizeStyle": false
+      },
+      "screenshots": [
+        {
+          "siteId": "models",
+          "status": "ok",
+          "id": "1779075776809",
+          "path": "/api/previews/models/1779075776809.png",
+          "url": "/api/previews/models/1779075776809.png?v=1779075776809",
+          "objectKey": "sites/previews/models/1779075776809.png",
+          "capturedAt": "2026-05-18T03:42:56Z",
+          "version": "1779075776809",
+          "label": "default / 1024x768",
+          "style": "default",
+          "params": {
+            "width": 1024,
+            "height": 768,
+            "settleDelayMs": 5000,
+            "randomizeStyle": false
+          },
+          "width": 1024,
+          "height": 768,
+          "contentType": "image/png",
+          "size": 86180,
+          "etag": "e3d3b35022f5e3335e300266b8e3469f",
+          "sourceUrl": "https://models.mullmania.com/"
+        }
+      ],
       "contentType": "image/png",
-      "size": 83480,
-      "etag": "becea8b925b3ca27efc9f223e615af97",
+      "size": 86180,
+      "etag": "e3d3b35022f5e3335e300266b8e3469f",
       "sourceUrl": "https://models.mullmania.com/"
     },
     "mom": {
