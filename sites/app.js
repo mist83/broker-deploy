@@ -183,18 +183,21 @@ const FEATURE_MATRIX_SCOPE_VISIBLE = 'visible';
 const FEATURE_MATRIX_SCOPE_ALL = 'all';
 const FEATURE_MATRIX_STATE_UNKNOWN = 'unknown';
 const FEATURE_MATRIX_STATE_ON = 'on';
+const FEATURE_MATRIX_STATE_COPY = 'copy';
 const FEATURE_MATRIX_STATE_OFF = 'off';
 const FEATURE_MATRIX_STATE_DEFERRED = 'deferred';
 const FEATURE_MATRIX_STATE_MIXED = 'mixed';
 const FEATURE_MATRIX_STATES = Object.freeze({
-  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'Unknown', shortLabel: '?', icon: 'ti ti-circle-dotted' },
-  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'On', shortLabel: 'Yes', icon: 'ti ti-check' },
-  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Off', shortLabel: 'No', icon: 'ti ti-x' },
-  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Deferred', shortLabel: 'Later', icon: 'ti ti-clock' },
+  [FEATURE_MATRIX_STATE_UNKNOWN]: { id: FEATURE_MATRIX_STATE_UNKNOWN, label: 'No action', shortLabel: 'Pick', icon: 'ti ti-circle-dotted' },
+  [FEATURE_MATRIX_STATE_ON]: { id: FEATURE_MATRIX_STATE_ON, label: 'Add / enforce', shortLabel: 'Add', icon: 'ti ti-plus' },
+  [FEATURE_MATRIX_STATE_COPY]: { id: FEATURE_MATRIX_STATE_COPY, label: 'Copy pattern', shortLabel: 'Copy', icon: 'ti ti-copy' },
+  [FEATURE_MATRIX_STATE_OFF]: { id: FEATURE_MATRIX_STATE_OFF, label: 'Remove / block', shortLabel: 'Remove', icon: 'ti ti-minus' },
+  [FEATURE_MATRIX_STATE_DEFERRED]: { id: FEATURE_MATRIX_STATE_DEFERRED, label: 'Ignore', shortLabel: 'Ignore', icon: 'ti ti-eye-off' },
 });
 const FEATURE_MATRIX_STATE_ORDER = Object.freeze([
   FEATURE_MATRIX_STATE_UNKNOWN,
   FEATURE_MATRIX_STATE_ON,
+  FEATURE_MATRIX_STATE_COPY,
   FEATURE_MATRIX_STATE_OFF,
   FEATURE_MATRIX_STATE_DEFERRED,
 ]);
@@ -1775,6 +1778,7 @@ function renderHeaderShell(header = {}) {
           id="${escapeHtml(search.id || 'search')}"
           type="search"
           class="surface-masthead__search launchpad-search-shell__input"
+          autocomplete="off"
           placeholder="${escapeHtml(searchPlaceholder)}"
           aria-label="${escapeHtml(search.ariaLabel || 'Search sites')}"
         >
@@ -2343,6 +2347,7 @@ function bindEvents() {
   featureMatrixScopeEl?.addEventListener('change', () => {
     setFeatureMatrixScope(featureMatrixScopeEl.value);
   });
+  featureMatrixTableHeadEl?.addEventListener('change', handleFeatureMatrixHeaderChange);
   featureMatrixTableBodyEl?.addEventListener('click', handleFeatureMatrixClick);
   featureMatrixSaveButton?.addEventListener('click', saveFeatureMatrixDraft);
   featureMatrixResetButton?.addEventListener('click', resetFeatureMatrixDraft);
@@ -8669,6 +8674,39 @@ function setFeatureMatrixRowCellState(rowKey, facetId, cellState) {
   renderFeatureMatrixView();
 }
 
+function setFeatureMatrixFacetForRows(facetId, cellState) {
+  const normalizedFacetId = normalizeCatalogToken(facetId);
+  const normalizedState = normalizeFeatureMatrixCellState(cellState);
+  if (!FEATURE_MATRIX_FACETS.some((facet) => facet.id === normalizedFacetId)) {
+    return;
+  }
+  const rows = getFeatureMatrixRows();
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  let changed = 0;
+  let siteCount = 0;
+  for (const row of rows) {
+    for (const member of row.members) {
+      siteCount += 1;
+      if (assignFeatureMatrixCellState(draft, member.siteId, normalizedFacetId, normalizedState, { updatedAt })) {
+        changed += 1;
+      }
+    }
+  }
+  if (changed === 0) {
+    setFeatureMatrixStatus('No visible cells changed for that feature.', 'info');
+    renderFeatureMatrixView();
+    return;
+  }
+  const facet = FEATURE_MATRIX_FACETS.find((candidate) => candidate.id === normalizedFacetId);
+  draft.updatedAt = updatedAt;
+  setFeatureMatrixStatus(
+    `Set ${facet?.label || normalizedFacetId} to ${formatFeatureMatrixState(normalizedState)} for ${changed.toLocaleString()} of ${siteCount.toLocaleString()} visible site cells.`,
+    'warning'
+  );
+  renderFeatureMatrixView();
+}
+
 function getNextFeatureMatrixCellState(currentState) {
   const normalized = normalizeFeatureMatrixCellState(currentState);
   const currentIndex = FEATURE_MATRIX_STATE_ORDER.indexOf(normalized);
@@ -8698,6 +8736,22 @@ function handleFeatureMatrixClick(event) {
   const facetId = button.getAttribute('data-feature-id') || '';
   const nextState = getNextFeatureMatrixCellState(button.getAttribute('data-feature-state') || '');
   setFeatureMatrixRowCellState(rowKey, facetId, nextState);
+}
+
+function handleFeatureMatrixHeaderChange(event) {
+  const select = event.target instanceof Element
+    ? event.target.closest('[data-feature-bulk]')
+    : null;
+  if (!(select instanceof HTMLSelectElement)) {
+    return;
+  }
+  const facetId = select.getAttribute('data-feature-bulk') || '';
+  const nextState = select.value;
+  select.value = '';
+  if (!nextState) {
+    return;
+  }
+  setFeatureMatrixFacetForRows(facetId, nextState);
 }
 
 function renderFeatureMatrixView() {
@@ -8750,9 +8804,10 @@ function renderFeatureMatrixHeader(rows) {
   const facetHeaders = FEATURE_MATRIX_FACETS.map((facet) => {
     const counts = countsByFacet[facet.id] || {};
     const countParts = [
-      `${counts[FEATURE_MATRIX_STATE_ON] || 0} on`,
-      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} off`,
-      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} later`,
+      `${counts[FEATURE_MATRIX_STATE_ON] || 0} add`,
+      `${counts[FEATURE_MATRIX_STATE_COPY] || 0} copy`,
+      `${counts[FEATURE_MATRIX_STATE_OFF] || 0} remove`,
+      `${counts[FEATURE_MATRIX_STATE_DEFERRED] || 0} ignore`,
     ];
     if (counts[FEATURE_MATRIX_STATE_MIXED] > 0) {
       countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
@@ -8762,6 +8817,14 @@ function renderFeatureMatrixHeader(rows) {
       <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
         <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
         <small>${escapeHtml(countLabel)}</small>
+        <select class="feature-matrix-bulk" data-feature-bulk="${escapeHtml(facet.id)}" aria-label="${escapeHtml(`Set visible groups for ${facet.label}`)}">
+          <option value="">Bulk</option>
+          <option value="${FEATURE_MATRIX_STATE_ON}">Add / enforce visible</option>
+          <option value="${FEATURE_MATRIX_STATE_COPY}">Copy pattern visible</option>
+          <option value="${FEATURE_MATRIX_STATE_OFF}">Remove visible</option>
+          <option value="${FEATURE_MATRIX_STATE_DEFERRED}">Ignore visible</option>
+          <option value="${FEATURE_MATRIX_STATE_UNKNOWN}">Clear visible</option>
+        </select>
       </th>
     `;
   }).join('');
@@ -8852,6 +8915,7 @@ function getFeatureMatrixCounts(rows = getFeatureMatrixRows()) {
   const countsByFacet = Object.fromEntries(FEATURE_MATRIX_FACETS.map((facet) => [facet.id, {
     [FEATURE_MATRIX_STATE_UNKNOWN]: 0,
     [FEATURE_MATRIX_STATE_ON]: 0,
+    [FEATURE_MATRIX_STATE_COPY]: 0,
     [FEATURE_MATRIX_STATE_OFF]: 0,
     [FEATURE_MATRIX_STATE_DEFERRED]: 0,
     [FEATURE_MATRIX_STATE_MIXED]: 0,
@@ -8917,6 +8981,208 @@ function resetFeatureMatrixDraft() {
   renderFeatureMatrixView();
 }
 
+function seedFeatureMatrixHeuristics() {
+  const rows = getFeatureMatrixRows();
+  const draft = getFeatureMatrixDraft();
+  const updatedAt = new Date().toISOString();
+  const seededCounts = {
+    [FEATURE_MATRIX_STATE_ON]: 0,
+    [FEATURE_MATRIX_STATE_COPY]: 0,
+    [FEATURE_MATRIX_STATE_OFF]: 0,
+    [FEATURE_MATRIX_STATE_DEFERRED]: 0,
+  };
+  let skipped = 0;
+
+  for (const row of rows) {
+    for (const member of row.members) {
+      for (const facet of FEATURE_MATRIX_FACETS) {
+        if (getFeatureMatrixCellState(member.siteId, facet.id, draft) !== FEATURE_MATRIX_STATE_UNKNOWN) {
+          skipped += 1;
+          continue;
+        }
+        const guess = inferFeatureMatrixGuess(member, facet);
+        if (guess.state === FEATURE_MATRIX_STATE_UNKNOWN) {
+          skipped += 1;
+          continue;
+        }
+        const changed = assignFeatureMatrixCellState(draft, member.siteId, facet.id, guess.state, {
+          updatedAt,
+          source: 'heuristic',
+          confidence: guess.confidence,
+          evidence: guess.evidence,
+        });
+        if (changed) {
+          seededCounts[guess.state] += 1;
+        }
+      }
+    }
+  }
+
+  const seeded = seededCounts[FEATURE_MATRIX_STATE_ON]
+    + seededCounts[FEATURE_MATRIX_STATE_COPY]
+    + seededCounts[FEATURE_MATRIX_STATE_OFF]
+    + seededCounts[FEATURE_MATRIX_STATE_DEFERRED];
+  if (seeded === 0) {
+    setFeatureMatrixStatus('No unknown cells matched the current heuristics.', 'info');
+    renderFeatureMatrixView();
+    return;
+  }
+
+  draft.updatedAt = updatedAt;
+  setFeatureMatrixStatus(
+    `Seeded ${seeded.toLocaleString()} draft actions (${seededCounts[FEATURE_MATRIX_STATE_ON].toLocaleString()} add, ${seededCounts[FEATURE_MATRIX_STATE_COPY].toLocaleString()} copy, ${seededCounts[FEATURE_MATRIX_STATE_OFF].toLocaleString()} remove, ${seededCounts[FEATURE_MATRIX_STATE_DEFERRED].toLocaleString()} ignore). ${skipped.toLocaleString()} cells left untouched.`,
+    'warning'
+  );
+  renderFeatureMatrixView();
+}
+
+function inferFeatureMatrixGuess(entry, facet) {
+  const haystack = buildFeatureMatrixHaystack(entry);
+  const strongStatic = isFeatureMatrixLikelyStaticOnly(entry, haystack);
+  const tagEvidence = (tokens) => getFeatureMatrixMatchedTags(entry, tokens);
+  const textEvidence = (tokens) => getFeatureMatrixMatchedText(haystack, tokens);
+
+  switch (facet.id) {
+    case 'phone-remote': {
+      const evidence = [
+        ...tagEvidence(['phone-remote', 'remote-control', 'tv-tail']),
+        ...textEvidence(['phone remote', 'remote control', 'tv-tail', 'commandtopic', 'channelid', 'remote command']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'signalr': {
+      const evidence = [
+        ...tagEvidence(['signalr', 'signal-argh', 'tv-tail', 'realtime']),
+        ...textEvidence(['signalr', 'signal-argh', 'hubconnectionbuilder', 'realtime', 'websocket', 'tv-tail']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.86, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.44, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 's3-storage': {
+      const evidence = [
+        ...(entry?.hasData ? ['catalog hasData=true'] : []),
+        ...tagEvidence(['data', 'asset-catalog', 's3', 'storage', 'catalog']),
+        ...textEvidence(['s3://', ' s3 ', 'bucket', 'storage', 'data bucket', 'asset catalog']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, entry?.hasData ? 0.9 : 0.68, evidence);
+      if (entry?.hasData === false && strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.48, ['catalog hasData=false', 'static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'lambda-api': {
+      const evidence = [
+        ...tagEvidence(['lambda', 'backend-api', 'api', 'slack', 'triage']),
+        ...textEvidence(['lambda', 'api endpoint', '/api/', 'swagger', 'backend', 'lambda-first', 'api-backed']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.45, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'frontend-canon': {
+      const evidence = [
+        ...(entry?.canonProfile ? [`canonProfile=${entry.canonProfile}`] : []),
+        ...tagEvidence(['canon-deploy-ready', 'public-frontdoor', 'ui-framework', 'framework', 'frontend-ui']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.82, evidence);
+      if (entry?.hasHostedSite !== false) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.56, ['hosted browser-facing site']);
+      return featureMatrixGuess();
+    }
+    case 'threejs': {
+      const evidence = [
+        ...tagEvidence(['threejs', 'three-js', 'webgl', '3d']),
+        ...textEvidence(['three.js', 'threejs', 'webgl', '3d ', 'canvas 3d', 'starfield']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.78, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.42, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    case 'tv-telemetry': {
+      const evidence = [
+        ...tagEvidence(['tv-tail', 'telemetry', 'log-tap']),
+        ...textEvidence(['tv-tail', 'log-tap', 'telemetry', 'console broadcast', 'remote command']),
+      ];
+      if (evidence.length > 0) return featureMatrixGuess(FEATURE_MATRIX_STATE_ON, 0.84, evidence);
+      if (strongStatic) return featureMatrixGuess(FEATURE_MATRIX_STATE_OFF, 0.43, ['static/frontdoor catalog signals']);
+      return featureMatrixGuess();
+    }
+    default:
+      return featureMatrixGuess();
+  }
+}
+
+function featureMatrixGuess(stateId = FEATURE_MATRIX_STATE_UNKNOWN, confidence = 0, evidence = []) {
+  return {
+    state: normalizeFeatureMatrixCellState(stateId),
+    confidence,
+    evidence: Array.from(new Set(evidence)).slice(0, 4),
+  };
+}
+
+function buildFeatureMatrixHaystack(entry) {
+  return [
+    entry?.siteId,
+    entry?.host,
+    entry?.displayName,
+    entry?.title,
+    entry?.description,
+    entry?.managedBy,
+    entry?.canonProfile,
+    entry?.publishContext?.source,
+    entry?.publishContext?.github?.repository,
+    entry?.publishContext?.git?.remote,
+    ...(Array.isArray(entry?.tags) ? entry.tags : []),
+    ...(Array.isArray(entry?.notes) ? entry.notes : []),
+  ]
+    .join(' ')
+    .toLocaleLowerCase();
+}
+
+function getFeatureMatrixMatchedTags(entry, tokens) {
+  const tags = new Set((Array.isArray(entry?.tags) ? entry.tags : []).map((tag) => normalizeCatalogToken(tag)));
+  return tokens
+    .map((token) => normalizeCatalogToken(token))
+    .filter((token) => token && tags.has(token))
+    .map((token) => `tag:${token}`);
+}
+
+function getFeatureMatrixMatchedText(haystack, tokens) {
+  return tokens
+    .map((token) => String(token || '').toLocaleLowerCase())
+    .filter((token) => token && haystack.includes(token))
+    .map((token) => `text:${token}`)
+    .slice(0, 4);
+}
+
+function isFeatureMatrixLikelyStaticOnly(entry, haystack = buildFeatureMatrixHaystack(entry)) {
+  if (entry?.hasData === true) {
+    return false;
+  }
+  const staticSignals = [
+    'static-site',
+    'github-pages',
+    'repo-artifacts',
+    'public-frontdoor',
+    'docs',
+    'dual-static',
+    'static gallery',
+    'repo docs page',
+  ];
+  const dynamicSignals = [
+    'lambda',
+    'signalr',
+    'signal-argh',
+    'tv-tail',
+    'websocket',
+    'api-backed',
+    'backend',
+    'slack-first',
+  ];
+  return staticSignals.some((signal) => haystack.includes(signal))
+    && !dynamicSignals.some((signal) => haystack.includes(signal));
+}
+
 async function copyFeatureMatrixSynopsis() {
   const text = buildFeatureMatrixSynopsis();
   const result = await copyTextWithFeatureMatrixFallback(text);
@@ -8973,14 +9239,16 @@ function setFeatureMatrixStatus(message, tone = '') {
 }
 
 function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = getFeatureMatrixChanges(rows)) {
-  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all apps' : 'currently visible apps';
+  const scopeLabel = state.featureMatrix.scope === FEATURE_MATRIX_SCOPE_ALL ? 'all groups' : 'currently visible groups';
+  const siteCount = rows.reduce((total, row) => total + row.siteCount, 0);
   const searchText = String(searchEl?.value || '').trim();
   const activeTags = getActiveCatalogTagIds().map((tagId) => getCatalogTagLabel(tagId)).filter(Boolean);
   const lines = [
-    'Feature Matrix handoff for sites.mullmania.com',
+    'Feature Matrix runbook for sites.mullmania.com',
     '',
     `Scope: ${scopeLabel}`,
-    `Apps in scope: ${rows.length}`,
+    `Groups in scope: ${rows.length}`,
+    `Sites in scope: ${siteCount}`,
     `Generated: ${new Date().toISOString()}`,
   ];
 
@@ -8993,11 +9261,14 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
 
   lines.push(
     '',
-    'Interpretation:',
-    '- ON means implement or preserve the facet according to its rule.',
-    '- OFF means the absence is intentional. Do not add that facet unless the matrix changes.',
-    '- DEFERRED means leave it alone for this pass and call out the follow-up.',
-    '- UNKNOWN means audit first; do not assume support either way.',
+    'Action semantics:',
+    '- ADD / ENFORCE means add the facet if missing, or normalize the existing implementation to the facet rule if present.',
+    '- COPY PATTERN means mirror the canonical/existing implementation style exactly; avoid bespoke variants.',
+    '- REMOVE / BLOCK means remove the facet if present and keep it intentionally absent.',
+    '- IGNORE means make no code change for this facet in this run.',
+    '- NO ACTION means the operator has not made a decision; audit first before proposing work.',
+    '- MIXED means the group contains member sites with different decisions; inspect the listed member states before acting.',
+    '- Heuristic-seeded cells are draft guesses, not saved operator confirmation until Save local is clicked.',
     '',
     'Facet rules:'
   );
@@ -9011,29 +9282,31 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     lines.push('- No changed cells in this scope.');
   } else {
     for (const change of changes) {
-      lines.push(`- ${change.siteId} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixState(change.fromState)} -> ${formatFeatureMatrixState(change.toState)}`);
+      lines.push(`- ${change.rowKey} (${change.title}) / ${change.facet.label}: ${formatFeatureMatrixState(change.fromState)} -> ${formatFeatureMatrixState(change.toState)} [${change.siteIds.join(', ')}]`);
     }
   }
 
-  lines.push('', 'Current explicit decisions in scope:');
+  lines.push('', 'Execution packets by facet:');
   let explicitDecisionCount = 0;
   for (const facet of FEATURE_MATRIX_FACETS) {
     const byState = {
       [FEATURE_MATRIX_STATE_ON]: [],
+      [FEATURE_MATRIX_STATE_COPY]: [],
       [FEATURE_MATRIX_STATE_OFF]: [],
       [FEATURE_MATRIX_STATE_DEFERRED]: [],
+      [FEATURE_MATRIX_STATE_MIXED]: [],
     };
-    for (const entry of rows) {
-      const cellState = getFeatureMatrixCellState(entry.siteId, facet.id);
+    for (const row of rows) {
+      const cellState = getFeatureMatrixRowCellState(row, facet.id);
       if (byState[cellState]) {
-        byState[cellState].push(entry.siteId);
+        byState[cellState].push(formatFeatureMatrixRowDecision(row, facet.id, cellState));
       }
     }
     const chunks = [];
-    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED]) {
+    for (const stateId of [FEATURE_MATRIX_STATE_ON, FEATURE_MATRIX_STATE_COPY, FEATURE_MATRIX_STATE_OFF, FEATURE_MATRIX_STATE_DEFERRED, FEATURE_MATRIX_STATE_MIXED]) {
       if (byState[stateId].length > 0) {
         explicitDecisionCount += byState[stateId].length;
-        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join(', ')}`);
+        chunks.push(`${formatFeatureMatrixState(stateId)}: ${byState[stateId].join('; ')}`);
       }
     }
     if (chunks.length > 0) {
@@ -9041,19 +9314,32 @@ function buildFeatureMatrixSynopsis(rows = getFeatureMatrixRows(), changes = get
     }
   }
   if (explicitDecisionCount === 0) {
-    lines.push('- No explicit ON/OFF/DEFERRED decisions yet.');
+    lines.push('- No explicit ADD/COPY/REMOVE/IGNORE decisions yet.');
   }
 
   lines.push(
     '',
-    'Agent request:',
-    'Use the matrix as operator intent. For ON cells, make the matching app follow the facet rule exactly. For OFF cells, keep the facet absent and document that the absence is intentional. For DEFERRED cells, do not implement now. For UNKNOWN cells, inspect before proposing changes.'
+    'Orchestrated agent request:',
+    'Use this matrix as operator intent and produce a repo-by-repo execution plan before editing. For ADD / ENFORCE packets, make every listed member site follow the facet rule exactly and add matching tests when the repo has a test surface. For COPY PATTERN packets, identify the strongest canonical implementation in the packet or facet rule, copy that pattern into every listed site, and call out any repo where the pattern cannot apply cleanly. For REMOVE / BLOCK packets, remove the feature and add guardrails/tests where practical so it does not reappear accidentally. For IGNORE packets, do not touch the feature. For NO ACTION cells, audit only. For MIXED groups, preserve member-level differences unless the packet explicitly asks you to normalize them.'
   );
 
   return `${lines.join('\n')}\n`;
 }
 
+function formatFeatureMatrixRowDecision(row, facetId, cellState) {
+  if (cellState !== FEATURE_MATRIX_STATE_MIXED) {
+    return `${row.key} [${row.siteIds.join(', ')}]`;
+  }
+  const memberStates = row.members
+    .map((member) => `${member.siteId}=${formatFeatureMatrixState(getFeatureMatrixCellState(member.siteId, facetId))}`)
+    .join(', ');
+  return `${row.key} [${memberStates}]`;
+}
+
 function formatFeatureMatrixState(stateId) {
+  if (stateId === FEATURE_MATRIX_STATE_MIXED) {
+    return 'MIXED';
+  }
   const stateMeta = FEATURE_MATRIX_STATES[normalizeFeatureMatrixCellState(stateId)] || FEATURE_MATRIX_STATES[FEATURE_MATRIX_STATE_UNKNOWN];
   return stateMeta.label.toUpperCase();
 }
