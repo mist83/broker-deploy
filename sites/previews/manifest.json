@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-18T02:11:54Z",
+  "updatedAt": "2026-05-18T02:40:05Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -15947,6 +15947,54 @@
       "etag": "a4daac4b2b15399578d6c9076fce0c87",
       "sourceUrl": "https://multiplayer-pong.mullmania.com/"
     },
+    "nelsonville": {
+      "siteId": "nelsonville",
+      "status": "ok",
+      "path": "/api/previews/nelsonville.png",
+      "url": "/api/previews/nelsonville.png?v=1779071932849",
+      "objectKey": "sites/previews/nelsonville.png",
+      "capturedAt": "2026-05-18T02:38:52Z",
+      "version": "1779071932849",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "nelsonville",
+          "status": "ok",
+          "id": "1779071932849",
+          "path": "/api/previews/nelsonville/1779071932849.png",
+          "url": "/api/previews/nelsonville/1779071932849.png?v=1779071932849",
+          "objectKey": "sites/previews/nelsonville/1779071932849.png",
+          "capturedAt": "2026-05-18T02:38:52Z",
+          "version": "1779071932849",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 25787,
+          "etag": "4beb8f0955a88ef14ad16776b77bb39c",
+          "sourceUrl": "https://nelsonville.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 25787,
+      "etag": "4beb8f0955a88ef14ad16776b77bb39c",
+      "sourceUrl": "https://nelsonville.mullmania.com/"
+    },
     "neon-animals": {
       "siteId": "neon-animals",
       "status": "ok",
@@ -15996,10 +16044,10 @@
       "siteId": "nichols-and-dimes",
       "status": "ok",
       "path": "/api/previews/nichols-and-dimes.png",
-      "url": "/api/previews/nichols-and-dimes.png?v=1779070279546",
+      "url": "/api/previews/nichols-and-dimes.png?v=1779071952131",
       "objectKey": "sites/previews/nichols-and-dimes.png",
-      "capturedAt": "2026-05-18T02:11:19Z",
-      "version": "1779070279546",
+      "capturedAt": "2026-05-18T02:39:12Z",
+      "version": "1779071952131",
       "width": 1280,
       "height": 720,
       "style": "random",
@@ -16010,6 +16058,102 @@
         "randomizeStyle": true
       },
       "screenshots": [
+        {
+          "siteId": "nichols-and-dimes",
+          "status": "ok",
+          "id": "1779071952131",
+          "path": "/api/previews/nichols-and-dimes/1779071952131.png",
+          "url": "/api/previews/nichols-and-dimes/1779071952131.png?v=1779071952131",
+          "objectKey": "sites/previews/nichols-and-dimes/1779071952131.png",
+          "capturedAt": "2026-05-18T02:39:12Z",
+          "version": "1779071952131",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 65523,
+          "etag": "c684edfb1af0badb121375c886e3748e",
+          "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+        },
+        {
+          "siteId": "nichols-and-dimes",
+          "status": "ok",
+          "id": "1779071270230",
+          "path": "/api/previews/nichols-and-dimes/1779071270230.png",
+          "url": "/api/previews/nichols-and-dimes/1779071270230.png?v=1779071270230",
+          "objectKey": "sites/previews/nichols-and-dimes/1779071270230.png",
+          "capturedAt": "2026-05-18T02:27:50Z",
+          "version": "1779071270230",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 65523,
+          "etag": "c684edfb1af0badb121375c886e3748e",
+          "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+        },
+        {
+          "siteId": "nichols-and-dimes",
+          "status": "ok",
+          "id": "1779070829647",
+          "path": "/api/previews/nichols-and-dimes/1779070829647.png",
+          "url": "/api/previews/nichols-and-dimes/1779070829647.png?v=1779070829647",
+          "objectKey": "sites/previews/nichols-and-dimes/1779070829647.png",
+          "capturedAt": "2026-05-18T02:20:29Z",
+          "version": "1779070829647",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 65523,
+          "etag": "c684edfb1af0badb121375c886e3748e",
+          "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+        },
+        {
+          "siteId": "nichols-and-dimes",
+          "status": "ok",
+          "id": "1779070557906",
+          "path": "/api/previews/nichols-and-dimes/1779070557906.png",
+          "url": "/api/previews/nichols-and-dimes/1779070557906.png?v=1779070557906",
+          "objectKey": "sites/previews/nichols-and-dimes/1779070557906.png",
+          "capturedAt": "2026-05-18T02:15:57Z",
+          "version": "1779070557906",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 65523,
+          "etag": "c684edfb1af0badb121375c886e3748e",
+          "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+        },
         {
           "siteId": "nichols-and-dimes",
           "status": "ok",
@@ -16044,10 +16188,10 @@
       "siteId": "nikitakramar",
       "status": "ok",
       "path": "/api/previews/nikitakramar.png",
-      "url": "/api/previews/nikitakramar.png?v=1779070294534",
+      "url": "/api/previews/nikitakramar.png?v=1779071970171",
       "objectKey": "sites/previews/nikitakramar.png",
-      "capturedAt": "2026-05-18T02:11:34Z",
-      "version": "1779070294534",
+      "capturedAt": "2026-05-18T02:39:30Z",
+      "version": "1779071970171",
       "width": 1280,
       "height": 720,
       "style": "random",
@@ -16058,6 +16202,102 @@
         "randomizeStyle": true
       },
       "screenshots": [
+        {
+          "siteId": "nikitakramar",
+          "status": "ok",
+          "id": "1779071970171",
+          "path": "/api/previews/nikitakramar/1779071970171.png",
+          "url": "/api/previews/nikitakramar/1779071970171.png?v=1779071970171",
+          "objectKey": "sites/previews/nikitakramar/1779071970171.png",
+          "capturedAt": "2026-05-18T02:39:30Z",
+          "version": "1779071970171",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 387915,
+          "etag": "46b649bdf35204a2801cd01b4e9d2634",
+          "sourceUrl": "https://nikitakramar.mullmania.com/"
+        },
+        {
+          "siteId": "nikitakramar",
+          "status": "ok",
+          "id": "1779071289169",
+          "path": "/api/previews/nikitakramar/1779071289169.png",
+          "url": "/api/previews/nikitakramar/1779071289169.png?v=1779071289169",
+          "objectKey": "sites/previews/nikitakramar/1779071289169.png",
+          "capturedAt": "2026-05-18T02:28:09Z",
+          "version": "1779071289169",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 387884,
+          "etag": "11a74e214831bd48cff51fc33314faf4",
+          "sourceUrl": "https://nikitakramar.mullmania.com/"
+        },
+        {
+          "siteId": "nikitakramar",
+          "status": "ok",
+          "id": "1779070846427",
+          "path": "/api/previews/nikitakramar/1779070846427.png",
+          "url": "/api/previews/nikitakramar/1779070846427.png?v=1779070846427",
+          "objectKey": "sites/previews/nikitakramar/1779070846427.png",
+          "capturedAt": "2026-05-18T02:20:46Z",
+          "version": "1779070846427",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 387966,
+          "etag": "63a09468be996e99f1b59d76373178af",
+          "sourceUrl": "https://nikitakramar.mullmania.com/"
+        },
+        {
+          "siteId": "nikitakramar",
+          "status": "ok",
+          "id": "1779070567367",
+          "path": "/api/previews/nikitakramar/1779070567367.png",
+          "url": "/api/previews/nikitakramar/1779070567367.png?v=1779070567367",
+          "objectKey": "sites/previews/nikitakramar/1779070567367.png",
+          "capturedAt": "2026-05-18T02:16:07Z",
+          "version": "1779070567367",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 387950,
+          "etag": "ff606b8df835c7ba8f8c5e8a93cfd093",
+          "sourceUrl": "https://nikitakramar.mullmania.com/"
+        },
         {
           "siteId": "nikitakramar",
           "status": "ok",
@@ -16084,8 +16324,8 @@
         }
       ],
       "contentType": "image/png",
-      "size": 387999,
-      "etag": "18a93e5a3af4dd1211553085c1d4c957",
+      "size": 387915,
+      "etag": "46b649bdf35204a2801cd01b4e9d2634",
       "sourceUrl": "https://nikitakramar.mullmania.com/"
     },
     "node-graph-editor": {
@@ -17572,10 +17812,10 @@
       "siteId": "powerwasher",
       "status": "ok",
       "path": "/api/previews/powerwasher.png",
-      "url": "/api/previews/powerwasher.png?v=1779070308194",
+      "url": "/api/previews/powerwasher.png?v=1779071985191",
       "objectKey": "sites/previews/powerwasher.png",
-      "capturedAt": "2026-05-18T02:11:48Z",
-      "version": "1779070308194",
+      "capturedAt": "2026-05-18T02:39:45Z",
+      "version": "1779071985191",
       "width": 1280,
       "height": 720,
       "style": "random",
@@ -17586,6 +17826,102 @@
         "randomizeStyle": true
       },
       "screenshots": [
+        {
+          "siteId": "powerwasher",
+          "status": "ok",
+          "id": "1779071985191",
+          "path": "/api/previews/powerwasher/1779071985191.png",
+          "url": "/api/previews/powerwasher/1779071985191.png?v=1779071985191",
+          "objectKey": "sites/previews/powerwasher/1779071985191.png",
+          "capturedAt": "2026-05-18T02:39:45Z",
+          "version": "1779071985191",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47658,
+          "etag": "54ca02006b4fe1ea9296db2c67dc8346",
+          "sourceUrl": "https://powerwasher.mullmania.com/"
+        },
+        {
+          "siteId": "powerwasher",
+          "status": "ok",
+          "id": "1779071305049",
+          "path": "/api/previews/powerwasher/1779071305049.png",
+          "url": "/api/previews/powerwasher/1779071305049.png?v=1779071305049",
+          "objectKey": "sites/previews/powerwasher/1779071305049.png",
+          "capturedAt": "2026-05-18T02:28:25Z",
+          "version": "1779071305049",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47694,
+          "etag": "2a97a0dfcea92db8c24b10da1f4351de",
+          "sourceUrl": "https://powerwasher.mullmania.com/"
+        },
+        {
+          "siteId": "powerwasher",
+          "status": "ok",
+          "id": "1779070860060",
+          "path": "/api/previews/powerwasher/1779070860060.png",
+          "url": "/api/previews/powerwasher/1779070860060.png?v=1779070860060",
+          "objectKey": "sites/previews/powerwasher/1779070860060.png",
+          "capturedAt": "2026-05-18T02:21:00Z",
+          "version": "1779070860060",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 48246,
+          "etag": "e093332725598e9f3e631c0e5f38db06",
+          "sourceUrl": "https://powerwasher.mullmania.com/"
+        },
+        {
+          "siteId": "powerwasher",
+          "status": "ok",
+          "id": "1779070577262",
+          "path": "/api/previews/powerwasher/1779070577262.png",
+          "url": "/api/previews/powerwasher/1779070577262.png?v=1779070577262",
+          "objectKey": "sites/previews/powerwasher/1779070577262.png",
+          "capturedAt": "2026-05-18T02:16:17Z",
+          "version": "1779070577262",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47995,
+          "etag": "9f5ed6adf5850083770817c4a4e96fc6",
+          "sourceUrl": "https://powerwasher.mullmania.com/"
+        },
         {
           "siteId": "powerwasher",
           "status": "ok",
@@ -17612,8 +17948,8 @@
         }
       ],
       "contentType": "image/png",
-      "size": 54369,
-      "etag": "71b851154f55caa069b83590e57d14f2",
+      "size": 47658,
+      "etag": "54ca02006b4fe1ea9296db2c67dc8346",
       "sourceUrl": "https://powerwasher.mullmania.com/"
     },
     "prism": {
@@ -19979,6 +20315,150 @@
       "size": 185158,
       "etag": "7b25086ac96fbe34411374f75e616c24",
       "sourceUrl": "https://snake.mullmania.com/"
+    },
+    "soapcut": {
+      "siteId": "soapcut",
+      "status": "ok",
+      "path": "/api/previews/soapcut.png",
+      "url": "/api/previews/soapcut.png?v=1779071999343",
+      "objectKey": "sites/previews/soapcut.png",
+      "capturedAt": "2026-05-18T02:39:59Z",
+      "version": "1779071999343",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "soapcut",
+          "status": "ok",
+          "id": "1779071999343",
+          "path": "/api/previews/soapcut/1779071999343.png",
+          "url": "/api/previews/soapcut/1779071999343.png?v=1779071999343",
+          "objectKey": "sites/previews/soapcut/1779071999343.png",
+          "capturedAt": "2026-05-18T02:39:59Z",
+          "version": "1779071999343",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47058,
+          "etag": "83bad28414883747f4d81a57f99969f7",
+          "sourceUrl": "https://soapcut.mullmania.com/"
+        },
+        {
+          "siteId": "soapcut",
+          "status": "ok",
+          "id": "1779071319265",
+          "path": "/api/previews/soapcut/1779071319265.png",
+          "url": "/api/previews/soapcut/1779071319265.png?v=1779071319265",
+          "objectKey": "sites/previews/soapcut/1779071319265.png",
+          "capturedAt": "2026-05-18T02:28:39Z",
+          "version": "1779071319265",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47777,
+          "etag": "4e41977f8b6627f5710e9d144875c005",
+          "sourceUrl": "https://soapcut.mullmania.com/"
+        },
+        {
+          "siteId": "soapcut",
+          "status": "ok",
+          "id": "1779070872847",
+          "path": "/api/previews/soapcut/1779070872847.png",
+          "url": "/api/previews/soapcut/1779070872847.png?v=1779070872847",
+          "objectKey": "sites/previews/soapcut/1779070872847.png",
+          "capturedAt": "2026-05-18T02:21:12Z",
+          "version": "1779070872847",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47777,
+          "etag": "4e41977f8b6627f5710e9d144875c005",
+          "sourceUrl": "https://soapcut.mullmania.com/"
+        },
+        {
+          "siteId": "soapcut",
+          "status": "ok",
+          "id": "1779070587170",
+          "path": "/api/previews/soapcut/1779070587170.png",
+          "url": "/api/previews/soapcut/1779070587170.png?v=1779070587170",
+          "objectKey": "sites/previews/soapcut/1779070587170.png",
+          "capturedAt": "2026-05-18T02:16:27Z",
+          "version": "1779070587170",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47777,
+          "etag": "4e41977f8b6627f5710e9d144875c005",
+          "sourceUrl": "https://soapcut.mullmania.com/"
+        },
+        {
+          "siteId": "soapcut",
+          "status": "ok",
+          "id": "1779070321374",
+          "path": "/api/previews/soapcut/1779070321374.png",
+          "url": "/api/previews/soapcut/1779070321374.png?v=1779070321374",
+          "objectKey": "sites/previews/soapcut/1779070321374.png",
+          "capturedAt": "2026-05-18T02:12:01Z",
+          "version": "1779070321374",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 47777,
+          "etag": "4e41977f8b6627f5710e9d144875c005",
+          "sourceUrl": "https://soapcut.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 47058,
+      "etag": "83bad28414883747f4d81a57f99969f7",
+      "sourceUrl": "https://soapcut.mullmania.com/"
     },
     "soft-alarm": {
       "siteId": "soft-alarm",

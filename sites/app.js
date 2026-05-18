@@ -37,6 +37,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'phone-remote',
       label: 'Phone Remote',
       shortLabel: 'Remote',
+      icon: 'ti ti-device-mobile',
       observedTags: ['feature:phone-remote', 'phone-remote', 'remote-control', 'tv-tail'],
       copyTags: ['feature:phone-remote:copy', 'copy:phone-remote'],
       absentTags: ['feature:phone-remote:off', 'feature:phone-remote:absent', 'no-phone-remote'],
@@ -47,6 +48,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'signalr',
       label: 'SignalR',
       shortLabel: 'SignalR',
+      icon: 'ti ti-broadcast',
       observedTags: ['feature:signalr', 'signalr', 'signal-argh', 'realtime'],
       copyTags: ['feature:signalr:copy', 'copy:signalr'],
       absentTags: ['feature:signalr:off', 'feature:signalr:absent', 'no-signalr'],
@@ -57,6 +59,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 's3-storage',
       label: 'S3 Storage',
       shortLabel: 'S3',
+      icon: 'ti ti-bucket',
       observedTags: ['feature:s3-storage', 's3-storage', 's3', 'storage', 'asset-catalog', 'mullmania-data', 'generated-assets'],
       copyTags: ['feature:s3-storage:copy', 'copy:s3-storage'],
       absentTags: ['feature:s3-storage:off', 'feature:s3-storage:absent', 'no-s3-storage'],
@@ -67,6 +70,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'lambda-api',
       label: 'Lambda API',
       shortLabel: 'Lambda',
+      icon: 'ti ti-lambda',
       observedTags: ['feature:lambda-api', 'lambda-api', 'lambda', 'lambda-backed', 'backend-api'],
       copyTags: ['feature:lambda-api:copy', 'copy:lambda-api'],
       absentTags: ['feature:lambda-api:off', 'feature:lambda-api:absent', 'no-lambda-api'],
@@ -77,6 +81,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'frontend-canon',
       label: 'Frontend Canon',
       shortLabel: 'Canon',
+      icon: 'ti ti-layout-dashboard',
       observedTags: ['feature:frontend-canon', 'frontend-canon', 'canon-deploy-ready', 'ui-framework', 'shared-ui-runtime', 'shared-ui-ready', 'shared-ui-strict', 'shared-ui-entry'],
       copyTags: ['feature:frontend-canon:copy', 'copy:frontend-canon'],
       absentTags: ['feature:frontend-canon:off', 'feature:frontend-canon:absent', 'no-frontend-canon'],
@@ -87,6 +92,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'threejs',
       label: 'Three.js',
       shortLabel: '3D',
+      icon: 'ti ti-cube-3d-sphere',
       observedTags: ['feature:threejs', 'threejs', 'three-js', 'three.js', 'webgl', '3d'],
       copyTags: ['feature:threejs:copy', 'copy:threejs'],
       absentTags: ['feature:threejs:off', 'feature:threejs:absent', 'no-threejs'],
@@ -97,6 +103,7 @@ const DEFAULT_SITE_PLATFORM = Object.freeze({
       id: 'tv-telemetry',
       label: 'TV Telemetry',
       shortLabel: 'Logs',
+      icon: 'ti ti-device-tv',
       observedTags: ['feature:tv-telemetry', 'tv-telemetry', 'tv-tail', 'telemetry', 'log-tap'],
       copyTags: ['feature:tv-telemetry:copy', 'copy:tv-telemetry'],
       absentTags: ['feature:tv-telemetry:off', 'feature:tv-telemetry:absent', 'no-tv-telemetry'],
@@ -1406,6 +1413,7 @@ function normalizeFeatureMatrixFacets(value, fallback = []) {
       id,
       label,
       shortLabel: String(item?.shortLabel || label).trim() || label,
+      icon: normalizeFeatureMatrixFacetIcon(item?.icon, id),
       rule: String(item?.rule || '').trim(),
       observedTags: normalizeFeatureMatrixSemanticTags(item?.observedTags || item?.tags, id, 'observed'),
       copyTags: normalizeFeatureMatrixSemanticTags(item?.copyTags, id, 'copy'),
@@ -1417,6 +1425,23 @@ function normalizeFeatureMatrixFacets(value, fallback = []) {
     return normalized;
   }
   return normalizeFeatureMatrixFacets(fallback, []);
+}
+
+function normalizeFeatureMatrixFacetIcon(value, facetId) {
+  const configured = String(value || '').trim();
+  if (/^ti ti-[a-z0-9-]+$/.test(configured)) {
+    return configured;
+  }
+  const defaults = {
+    'phone-remote': 'ti ti-device-mobile',
+    signalr: 'ti ti-broadcast',
+    's3-storage': 'ti ti-bucket',
+    'lambda-api': 'ti ti-lambda',
+    'frontend-canon': 'ti ti-layout-dashboard',
+    threejs: 'ti ti-cube-3d-sphere',
+    'tv-telemetry': 'ti ti-device-tv',
+  };
+  return defaults[normalizeCatalogToken(facetId)] || 'ti ti-checklist';
 }
 
 function normalizeFeatureMatrixSemanticTags(value, facetId, kind) {
@@ -8960,18 +8985,61 @@ function renderFeatureMatrixHeader(rows) {
       countParts.push(`${counts[FEATURE_MATRIX_STATE_MIXED]} mixed`);
     }
     const countLabel = countParts.join(' / ');
+    const icon = normalizeFeatureMatrixFacetIcon(facet.icon, facet.id);
     return `
       <th class="feature-matrix-facet" title="${escapeHtml(facet.rule || facet.label)}">
-        <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
+        <span class="feature-matrix-facet-label">
+          <i class="${escapeHtml(icon)}" aria-hidden="true"></i>
+          <span>${escapeHtml(facet.shortLabel || facet.label)}</span>
+        </span>
         <small>${escapeHtml(countLabel)}</small>
       </th>
     `;
   }).join('');
   return `
     <tr>
-      <th class="feature-matrix-app">Group</th>
+      <th class="feature-matrix-app">
+        <span class="feature-matrix-app-label">
+          <i class="ti ti-layout-grid" aria-hidden="true"></i>
+          <span>Group</span>
+        </span>
+      </th>
       ${facetHeaders}
     </tr>
+  `;
+}
+
+function getFeatureMatrixPreviewEntry(row) {
+  const candidates = [
+    row?.lead,
+    ...(Array.isArray(row?.members) ? row.members : []),
+    ...(Array.isArray(row?.allMembers) ? row.allMembers : []),
+  ].filter((entry, index, list) => (
+    entry?.siteId && list.findIndex((candidate) => candidate?.siteId === entry.siteId) === index
+  ));
+  return candidates.find((entry) => getPreviewUrl(entry.siteId)) || candidates[0] || null;
+}
+
+function renderFeatureMatrixPreview(row) {
+  const previewEntry = getFeatureMatrixPreviewEntry(row);
+  const previewUrl = previewEntry ? getPreviewUrl(previewEntry.siteId) : '';
+  const title = row?.title || row?.key || previewEntry?.siteId || 'Site';
+  const siteId = previewEntry?.siteId || '';
+  const cacheKey = previewUrl ? `resize:160:::webp:68:${previewUrl}` : '';
+  return `
+    <span class="feature-matrix-preview" aria-hidden="true">
+      <img
+        class="site-preview-img feature-matrix-preview-img is-placeholder${previewUrl ? '' : ' is-failed'}"
+        src="${escapeHtml(PREVIEW_PLACEHOLDER_URL)}"
+        ${previewUrl ? `data-src="${escapeHtml(previewUrl)}"` : ''}
+        ${siteId ? `data-preview-site-id="${escapeHtml(siteId)}" data-preview-source-site-id="${escapeHtml(siteId)}"` : ''}
+        ${cacheKey ? `data-preview-cache-key="${escapeHtml(cacheKey)}" data-preview-resize-width="160" data-preview-resize-format="webp" data-preview-resize-quality="68"` : ''}
+        data-preview-state="${previewUrl ? 'placeholder' : 'error'}"
+        alt="${escapeHtml(`${title} preview`)}"
+        loading="lazy"
+        decoding="async"
+      >
+    </span>
   `;
 }
 
@@ -9009,8 +9077,13 @@ function renderFeatureMatrixRow(row) {
   return `
     <tr data-feature-matrix-row="${escapeHtml(row.key)}">
       <th class="feature-matrix-site" scope="row">
-        <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
-        <span>${escapeHtml(memberLabel || row.key)}</span>
+        <div class="feature-matrix-site-card">
+          ${renderFeatureMatrixPreview(row)}
+          <div class="feature-matrix-site-copy">
+            <a href="${escapeHtml(row.lead?.url || '#')}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>
+            <span>${escapeHtml(memberLabel || row.key)}</span>
+          </div>
+        </div>
       </th>
       ${cells}
     </tr>

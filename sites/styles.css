@@ -5645,9 +5645,9 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   position: sticky;
   left: 0;
   z-index: 3;
-  width: 260px;
-  min-width: 260px;
-  max-width: 260px;
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
   background: var(--bg-primary);
   box-shadow: 1px 0 0 var(--border-color);
 }
@@ -5665,16 +5665,43 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
 }
 
 .feature-matrix-facet {
-  width: 112px;
-  min-width: 112px;
-  max-width: 112px;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
   text-align: center;
 }
 
-.feature-matrix-facet span,
+.feature-matrix-app-label,
+.feature-matrix-facet-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.feature-matrix-app-label i,
+.feature-matrix-facet-label i {
+  flex: 0 0 auto;
+  color: var(--color-primary);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.feature-matrix-app-label span,
+.feature-matrix-facet-label span {
+  min-width: 0;
+}
+
+.feature-matrix-facet-label {
+  width: 100%;
+}
+
+.feature-matrix-facet-label span,
 .feature-matrix-facet small,
 .feature-matrix-site a,
-.feature-matrix-site span {
+.feature-matrix-site-copy span {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5692,12 +5719,41 @@ body.is-slideshow-mode.is-screensaver-chrome-hidden * {
   text-align: left;
 }
 
+.feature-matrix-site-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.feature-matrix-preview {
+  display: block;
+  width: 54px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--border-color) 82%, transparent);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+}
+
+.feature-matrix-preview-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-matrix-site-copy {
+  min-width: 0;
+}
+
 .feature-matrix-site a {
   color: var(--text-primary);
   text-decoration: none;
 }
 
-.feature-matrix-site span {
+.feature-matrix-site-copy span {
   margin-top: 3px;
   color: var(--text-secondary);
   font-size: 11px;
