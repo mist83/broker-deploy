@@ -351,15 +351,15 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:54:27.609Z",
+    "lastPublishedAt": "2026-05-18T05:33:25.016Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25991428494",
-        "runNumber": "74"
+        "runId": "26015460327",
+        "runNumber": "109"
       },
       "git": null
     },
@@ -2581,6 +2581,29 @@
       "posterNote": "Published screenshot for this repo."
     },
     "showcaseRank": 240
+  },
+  {
+    "siteId": "brain-farts",
+    "host": "brain-farts.mullmania.com",
+    "url": "https://brain-farts.mullmania.com/",
+    "hasHostedSite": true,
+    "managedBy": "brain-farts",
+    "lastPublishedAt": "2026-05-19T00:40:26.694Z",
+    "publishContext": {
+      "github": null,
+      "source": "brain-farts",
+      "steward": {
+        "repository": "mist83/brain-farts",
+        "path": "sites/brain-farts/public",
+        "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
+        "branch": "main",
+        "commit": "049cb74bfe87eb1fe3699708edaf841c33240c65"
+      }
+    },
+    "tags": [],
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-19T00:20:14.314Z"
   },
   {
     "siteId": "branch-signal",
@@ -11767,6 +11790,49 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "cozy-crate",
+    "host": "cozy-crate.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "launchpad-created",
+      "editor",
+      "mullmania",
+      "public-frontdoor",
+      "static-site",
+      "designer",
+      "3d",
+      "github",
+      "curated"
+    ],
+    "notes": [
+      "Created from the launchpad editor flow."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-18T21:39:09.038Z",
+    "publishContext": {
+      "github": {
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26062002434",
+        "runNumber": "111"
+      },
+      "git": null
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-18T21:41:56Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "cruddite",
     "host": "cruddite.mullmania.com",
     "currentHostedSite": false,
@@ -12170,7 +12236,7 @@
       "durationSec": null,
       "mode": "poster",
       "posterKind": "generated-placeholder",
-      "posterNote": "No screenshot is published yet, so this page uses a placeholder image."
+      "posterNote": "Placeholder image."
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
@@ -12254,6 +12320,49 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "dance-monkey",
+    "host": "dance-monkey.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "browser-game",
+      "rhythm",
+      "static-site",
+      "repo-artifacts"
+    ],
+    "notes": [
+      "Original dancing-monkey rhythm toy with generated Web Audio techno/funk beat."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-18T04:32:03.249Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/dance-monkey",
+        "ref": null,
+        "sha": "dae8b66cd0843a3aeac136a91215a6203976fd44",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/dance-monkey",
+        "branch": "main",
+        "commit": "dae8b66cd0843a3aeac136a91215a6203976fd44",
+        "remote": "https://github.com/mist83/dance-monkey.git"
+      }
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-18T04:26:05Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "dark-flip-source-grid",
@@ -13089,54 +13198,6 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "dev-diary",
-    "host": "dev-diary.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": true,
-    "dataNamespace": "dev-diary",
-    "syntheticIndex": false,
-    "tags": [
-      "ui-framework",
-      "dev-diary",
-      "cya",
-      "lambda-backed",
-      "image-story",
-      "mullmania-tooling"
-    ],
-    "notes": [
-      "Narrative development diary site. Static viewer is hosted on the dev-diary subdomain, /api proxies to the dev-diary Lambda Function URL, screenshots are durable media on the shared images subdomain.",
-      "Project-scoped development diary site. Static viewer is hosted on the dev-diary subdomain, /api proxies to the dev-diary Lambda Function URL, screenshots are durable media on the shared images subdomain."
-    ],
-    "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:38:31.935Z",
-    "publishContext": {
-      "github": {
-        "actions": false,
-        "repository": "mist83/dev-diary",
-        "ref": null,
-        "sha": "fb0afa8d39121ef346568d246082bc365339aac7",
-        "runId": null,
-        "runNumber": null
-      },
-      "git": {
-        "root": "/Users/mist83/Code/dev-diary",
-        "branch": "main",
-        "commit": "fb0afa8d39121ef346568d246082bc365339aac7",
-        "remote": "https://github.com/mist83/dev-diary.git"
-      }
-    },
-    "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-04-30T19:03:22Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null,
-    "description": "",
-    "testNotes": "",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null
   },
   {
     "siteId": "development-canon",
@@ -22673,77 +22734,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "lorem-ipzom",
-    "host": "lorem-ipzom.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": true,
-    "dataNamespace": "lorem-ipzom",
-    "syntheticIndex": false,
-    "notes": [
-      "Zombie placeholder platform with seeded random routes, stable asset JSON, and chat-ingestable corpus growth.",
-      "Validated canonical repo-local deploy contract.",
-      "Static lorem-ipzom generator with a build step (scripts/build_lorem_ipzom_api.js) that must run in CI before publish; buildCommand + nodeVersion preserved in mullmania.site.json."
-    ],
-    "tags": [
-      "mullmania",
-      "public-frontdoor",
-      "repo-artifacts",
-      "canon-deploy-ready",
-      "dual-static",
-      "data",
-      "github",
-      "curated",
-      "ui-framework",
-      "api",
-      "chatgpt-export",
-      "gallery",
-      "github-pages",
-      "mullmania-mirror",
-      "placeholder-assets",
-      "zombie"
-    ],
-    "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:58:16.770Z",
-    "publishContext": {
-      "github": {
-        "actions": false,
-        "repository": "mist83/ipzom",
-        "ref": null,
-        "sha": "3cdaa3381c9e525488323e31706f2f185c7433aa",
-        "runId": null,
-        "runNumber": null
-      },
-      "git": {
-        "root": "/Users/mist83/Code/ipzom",
-        "branch": "main",
-        "commit": "3cdaa3381c9e525488323e31706f2f185c7433aa",
-        "remote": "https://github.com/mist83/ipzom.git"
-      }
-    },
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "demo": {
-      "sources": [],
-      "posterUrl": "./demo/lorem-ipzom/poster.png",
-      "durationSec": 30,
-      "mode": "screenshots-plus-short-video",
-      "posterKind": "showcase-reel",
-      "posterNote": "Published screenshot for this repo."
-    },
-    "showcaseRank": 240,
-    "manualRank": 40,
-    "testStatus": "smoke",
-    "testNotes": "mullmania.site.json preserves buildCommand npm run build:api and nodeVersion 20 for CI so the lorem ipzom generator API bundle rebuilds before each deploy.",
-    "description": "lorem-ipzom is the zombie-heavy seed site built from the ChatGPT export media corpus.",
-    "manualRankUpdatedAt": "2026-04-14T23:20:36Z",
-    "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-04-30T01:38:48Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "lucas-slop",
     "host": "lucas-slop.mullmania.com",
     "currentHostedSite": false,
@@ -24907,20 +24897,20 @@
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T04:03:07.206Z",
+    "lastPublishedAt": "2026-05-19T00:35:45.403Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "5a87539b5451eb17dafa2577397c968d2daf1a71",
+        "sha": "1da73b9d31456aabf8f363cb1cefde18f8c6fd8f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/models",
         "branch": "master",
-        "commit": "5a87539b5451eb17dafa2577397c968d2daf1a71",
+        "commit": "1da73b9d31456aabf8f363cb1cefde18f8c6fd8f",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -25295,20 +25285,20 @@
       "Mullformed is a browser-native 3D sketchpad for quickly shaping rough ideas into usable 3D assets."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:12:22.216Z",
+    "lastPublishedAt": "2026-05-18T22:20:28.665Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mullformed",
         "ref": null,
-        "sha": "b8407f528fcb9a1a0ed4b120fe6be2899c71c09f",
+        "sha": "8730a83febb0b45798be81937cd6f207b5213399",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mullformed",
         "branch": "main",
-        "commit": "b8407f528fcb9a1a0ed4b120fe6be2899c71c09f",
+        "commit": "8730a83febb0b45798be81937cd6f207b5213399",
         "remote": "https://github.com/mist83/mullformed.git"
       }
     },
@@ -31465,6 +31455,50 @@
     "siteAliasesUpdatedAt": "2026-04-25T18:33:26Z"
   },
   {
+    "siteId": "retro",
+    "host": "retro.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "retro",
+      "agent-doctrine",
+      "lambda-backed",
+      "mullmania-tooling"
+    ],
+    "notes": [
+      "Per-task retrospective viewer. Static shared-UI frontend at retro.mullmania.com; /api proxies to the dev-diary Lambda and filters entries tagged retro with payload.kind task-retro.",
+      "Per-task retrospective viewer. Static shared-UI frontend at retro.mullmania.com; /api proxies to the dedicated retro-api Lambda. Entries are tagged retro with payload.kind task-retro."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-18T14:39:30.810Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/retro",
+        "ref": null,
+        "sha": "d31ad3ed47b1fb4fc9c91d07c2de0c4c88f9cf7a",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/retro",
+        "branch": "main",
+        "commit": "d31ad3ed47b1fb4fc9c91d07c2de0c4c88f9cf7a",
+        "remote": "https://github.com/mist83/retro.git"
+      }
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-18T04:49:49Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "rhythm-engine",
     "host": "rhythm-engine.mullmania.com",
     "currentHostedSite": false,
@@ -32242,18 +32276,33 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:27:28.268Z",
+    "lastPublishedAt": "2026-05-18T04:41:44.201Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/mashup-arcade",
+        "ref": null,
+        "sha": "5959b71993e79266fe4bd855a80ea338f66166dd",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/mashup-arcade",
+        "branch": "main",
+        "commit": "5959b71993e79266fe4bd855a80ea338f66166dd",
+        "remote": "https://github.com/mist83/mashup-arcade.git"
+      }
     },
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-18T04:30:04Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "displayName": "rotoscope",
+    "manualRank": 0,
+    "manualRankUpdatedAt": null
   },
   {
     "siteId": "rsvp",
@@ -35034,22 +35083,17 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T04:01:00.563Z",
+    "lastPublishedAt": "2026-05-18T04:05:54.600Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/sites",
-        "ref": null,
-        "sha": "6efbcaaf56f6b66bf912accbdb8c63053e2e1a73",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26012869647",
+        "runNumber": "103"
       },
-      "git": {
-        "root": "/Users/mist83/Code/sites",
-        "branch": "main",
-        "commit": "6efbcaaf56f6b66bf912accbdb8c63053e2e1a73",
-        "remote": "https://github.com/mist83/sites.git"
-      },
+      "git": null,
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,

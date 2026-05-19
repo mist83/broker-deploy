@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-18T03:43:10Z",
+  "updatedAt": "2026-05-18T04:57:39Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -14570,21 +14570,6 @@
       "size": 33664,
       "etag": "f6844fc7596eb4438764a9d0589adb73",
       "sourceUrl": "https://loose-rope-train.mullmania.com/"
-    },
-    "lorem-ipzom": {
-      "siteId": "lorem-ipzom",
-      "status": "ok",
-      "path": "/api/previews/lorem-ipzom.png",
-      "url": "/api/previews/lorem-ipzom.png?v=1777166617400",
-      "objectKey": "sites/previews/lorem-ipzom.png",
-      "capturedAt": "2026-04-26T01:23:37Z",
-      "version": "1777166617400",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 94733,
-      "etag": "348ba3200a98360c42a440465b7491ce",
-      "sourceUrl": "https://lorem-ipzom.mullmania.com/"
     },
     "lucas-slop": {
       "siteId": "lucas-slop",

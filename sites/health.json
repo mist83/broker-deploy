@@ -1,7 +1,7 @@
 {
   "status": "ok",
   "siteId": "sites",
-  "generatedAt": "2026-05-18T04:05:51.686Z",
+  "generatedAt": "2026-05-19T00:40:44.328Z",
   "checks": [
     {
       "id": "build",
@@ -11,12 +11,12 @@
     {
       "id": "catalog-summary",
       "status": "pass",
-      "detail": "1093 visible hosted sites in the generated catalog."
+      "detail": "1095 visible hosted sites in the generated catalog."
     },
     {
       "id": "demo-proof",
       "status": "pass",
-      "detail": "144 poster-backed demos and 7 video-backed demos indexed."
+      "detail": "143 poster-backed demos and 7 video-backed demos indexed."
     }
   ]
 }
