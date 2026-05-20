@@ -1464,19 +1464,57 @@ class UIShell {
             this.syncTabNavigationState();
 
             const contentContainer = document.getElementById(this.config.contentContainerId || 'content-container');
-            
+
             // Check if tab has static section with htmlSource (treat like direct htmlSource)
             const staticSection = tab.sections?.find(s => s.type === 'static' && this.hasRenderableContent(s));
+
+            // Tab content is persistent across tab switches. Each tab gets its own
+            // wrapper div inside contentContainer; switching tabs hides others and
+            // shows this one without re-rendering. This preserves workspace state
+            // (filter rail, selected item, app-owned heavy DOM like canvases) so
+            // consumers do not have to re-mount on every visit.
+            const existingTabDiv = contentContainer.querySelector(`:scope > [data-tab-id="${tabId}"]`);
+            const showOnly = (target) => {
+                contentContainer.querySelectorAll(':scope > [data-tab-id]').forEach((el) => {
+                    if (el === target) {
+                        el.style.display = '';
+                        el.classList.remove('display-none');
+                        el.classList.add('display-block');
+                    } else {
+                        el.style.display = 'none';
+                        el.classList.remove('display-block');
+                        el.classList.add('display-none');
+                    }
+                });
+            };
+
+            if (existingTabDiv) {
+                console.log('[UI Shell] ♻️ Re-activating mounted tab:', tabId);
+                showOnly(existingTabDiv);
+
+                // Update selection if a specific item was requested
+                if (itemId && this.controllers[tabId]?.setActiveItem) {
+                    this.controllers[tabId].setActiveItem(itemId);
+                }
+
+                dispatchShellViewChanged({ tabId: tabId, tab: tab, itemId: itemId });
+
+                if (!isInit && this.isLatestTabLoad(loadToken)) {
+                    this.updateHistory(tabId, itemId);
+                }
+                return;
+            }
+
+            // First-time mount of this tab — create persistent wrapper div
+            const tabContentDiv = document.createElement('div');
+            tabContentDiv.dataset.tabId = tabId;
+            contentContainer.appendChild(tabContentDiv);
+            showOnly(tabContentDiv);
 
             // If tab has direct renderable content OR static section, load it (supports "single" layout tabs)
             if (this.hasRenderableContent(tab) || staticSection) {
                 console.log('[UI Shell] 📄 Loading HTML content tab');
-                
-                // Static/document tabs should replace the prior shell surface entirely.
-                // Otherwise a workspace layout can remain mounted underneath the new page.
-                contentContainer.innerHTML = '';
 
-                let tabContentDiv;
                 try {
                     const contentConfig = staticSection || tab;
                     const resolvedContent = await this.resolveRenderableContent(contentConfig);
@@ -1485,20 +1523,17 @@ class UIShell {
                         return;
                     }
                     console.log('[UI Shell] ✅ Content resolved from:', this.describeRenderableContent(contentConfig));
-                    
-                    tabContentDiv = document.createElement('div');
-                    tabContentDiv.dataset.tabId = tabId;
-                    
+
                     if (tab.headerHtml) {
                         const headerDiv = document.createElement('div');
                         headerDiv.className = 'tab-custom-header';
                         headerDiv.innerHTML = tab.headerHtml;
                         tabContentDiv.appendChild(headerDiv);
                     }
-                    
+
                     const contentDiv = document.createElement('div');
                     contentDiv.className = 'tab-scrollable-content';
-                    
+
                     // If this is a static section, wrap with page header FIRST
                     if (staticSection) {
                         const headerControls = staticSection.headerControls || '';
@@ -1519,22 +1554,16 @@ class UIShell {
                     } else {
                         this.renderResolvedContent(contentDiv, resolvedContent);
                     }
-                    
+
                     tabContentDiv.appendChild(contentDiv);
-                    contentContainer.appendChild(tabContentDiv);
                     console.log('[UI Shell] ✅ Content appended to DOM');
-                    
+
                     setTimeout(() => {
                         if (this.isLatestTabLoad(loadToken)) {
                             this.populateSidebarsFromSections(tab);
                         }
                     }, 50);
-                    
-                    // Show the new content
-                    tabContentDiv.classList.remove('display-none');
-                    tabContentDiv.classList.add('display-block');
-                    console.log('[UI Shell] ✅ Tab content visible');
-                    
+
                     setTimeout(() => {
                         if (!this.isLatestTabLoad(loadToken)) {
                             return;
@@ -1548,19 +1577,14 @@ class UIShell {
                         return;
                     }
                     console.error('[UI Shell] Error loading tab HTML:', error);
-                    tabContentDiv = document.createElement('div');
-                    tabContentDiv.dataset.tabId = tabId;
                     tabContentDiv.innerHTML = `<div class="layout single"><div class="content"><p>Error loading content from ${this.describeRenderableContent(staticSection || tab)}</p></div></div>`;
-                    contentContainer.appendChild(tabContentDiv);
-                    tabContentDiv.classList.add('display-block');
                 }
             } else {
                 console.log('[UI Shell] 📋 Loading workspace tab:', tabId);
-                
-                // ALWAYS render fresh HTML and create a new controller (no caching)
-                console.log('[UI Shell] 🔨 Rendering fresh layout HTML');
-                contentContainer.innerHTML = this.renderLayout(tab);
-                console.log('[UI Shell] ✅ HTML rendered, creating new WorkspaceController');
+
+                console.log('[UI Shell] 🔨 Rendering layout HTML');
+                tabContentDiv.innerHTML = this.renderLayout(tab);
+                console.log('[UI Shell] ✅ HTML rendered, creating WorkspaceController');
                 this.controllers[tabId] = new WorkspaceController(tab, this.config, this);
                 console.log('[UI Shell] ✅ WorkspaceController created');
 
@@ -1576,17 +1600,17 @@ class UIShell {
                     console.error('[UI Shell] ❌ controller.init failed:', error);
                     throw error;
                 }
-                
+
                 // Check for static section
-                const staticSection = tab.sections?.find(s => s.type === 'static');
-                if (staticSection) {
-                    await this.loadStaticSection(tab, staticSection);
+                const innerStaticSection = tab.sections?.find(s => s.type === 'static');
+                if (innerStaticSection) {
+                    await this.loadStaticSection(tab, innerStaticSection);
                     if (!this.isLatestTabLoad(loadToken)) {
                         console.log('[UI Shell] 🛑 Stale workspace tab load ignored after static section:', tabId, 'token:', loadToken);
                         return;
                     }
                 }
-                
+
                 // Dispatch tab change event after content is ready
                 dispatchShellViewChanged({ tabId: tabId, tab: tab, itemId: itemId });
             }
@@ -1810,12 +1834,35 @@ class WorkspaceController {
                 console.log('[WorkspaceController] Data loaded:', this.data.length, 'items');
             }
 
+            if (listSection.itemMap && Array.isArray(this.data)) {
+                this.data = this.data.map((item) => this.applyItemMap(item, listSection.itemMap));
+            }
+
+            this.isDelegatedDetail = Boolean(this.tabConfig.detailHtmlSource || listSection.delegateDetail);
+
+            if (this.isDelegatedDetail) {
+                const detailSection = this.getElement('detail');
+                if (detailSection) {
+                    detailSection.classList.add('active');
+                    if (this.tabConfig.detailHtmlSource && !detailSection.dataset.detailMounted) {
+                        try {
+                            const response = await fetch(this.tabConfig.detailHtmlSource + '?v=' + Date.now());
+                            detailSection.innerHTML = await response.text();
+                            detailSection.dataset.detailMounted = '1';
+                        } catch (error) {
+                            console.error('[WorkspaceController] detailHtmlSource fetch failed:', error);
+                            detailSection.innerHTML = `<p class="tabs-error-message">Error loading ${this.tabConfig.detailHtmlSource}</p>`;
+                        }
+                    }
+                }
+            }
+
             // Always render sidebar (no caching)
             const sidebarScroll = this.getElement('sidebar-scroll');
             console.log('[WorkspaceController] Sidebar scroll element:', !!sidebarScroll, 'children:', sidebarScroll?.children.length);
             console.log('[WorkspaceController] ALWAYS rendering sidebar for:', this.tabConfig.id);
             this.renderSidebar();
-            
+
             // Update selection
             if (itemId) {
                 console.log('[WorkspaceController] Setting active item:', itemId);
@@ -1849,7 +1896,7 @@ class WorkspaceController {
                 this.data = json;
             } else if (json && typeof json === 'object') {
                 // If it's an object, try to extract array from common wrapper patterns
-                const extracted = json.data || json.items || json.results || [];
+                const extracted = json.data || json.items || json.records || json.results || [];
                 
                 // Ensure extracted value is an array
                 if (Array.isArray(extracted)) {
@@ -1898,14 +1945,10 @@ class WorkspaceController {
 
     renderSidebar() {
         const sidebar = this.getElement('sidebar');
-        const sidebarScroll = this.getElement('sidebar-scroll');
-        if (!sidebarScroll) return;
+        if (!sidebar) return;
 
-        // Clear only if rendering for first time
-        sidebarScroll.innerHTML = '';
-        
         // Add collapse toggle button at bottom if not already added
-        if (sidebar && !sidebar.querySelector('.sidebar-collapse-toggle')) {
+        if (!sidebar.querySelector('.sidebar-collapse-toggle')) {
             const toggleBtn = document.createElement('div');
             toggleBtn.className = 'sidebar-collapse-toggle';
             toggleBtn.innerHTML = '<i class="ti ti-chevron-left"></i>';
@@ -1921,9 +1964,142 @@ class WorkspaceController {
             sidebar.appendChild(toggleBtn);
         }
 
+        // Render filter rail (once)
+        this.renderSidebarFilters();
+
+        // Re-render items with current filter state
+        this.renderSidebarItems();
+    }
+
+    getListSection() {
+        return this.tabConfig.sections?.find(s => s.type === 'list');
+    }
+
+    applyItemMap(item, itemMap) {
+        if (!item || typeof item !== 'object' || !itemMap) return item;
+        const out = { ...item };
+        for (const [target, sourceField] of Object.entries(itemMap)) {
+            if (out[target] !== undefined) continue;
+            const value = item[sourceField];
+            if (value === undefined || value === null) continue;
+            if (target === 'badges' && Array.isArray(value)) {
+                out.badges = value.map((label) => ({ label: String(label) }));
+            } else {
+                out[target] = value;
+            }
+        }
+        return out;
+    }
+
+    renderSidebarFilters() {
+        const sidebar = this.getElement('sidebar');
+        const filters = this.getListSection()?.filters;
+        if (!sidebar || !filters) return;
+        if (sidebar.querySelector('.sidebar-filter-rail')) return;
+
+        if (!this.filterState) {
+            this.filterState = { query: '', chip: 'all', selects: {} };
+            if (filters.chips?.options?.length) {
+                const first = filters.chips.options[0];
+                this.filterState.chip = first.id;
+            }
+            for (const select of filters.selects || []) {
+                this.filterState.selects[select.id] = select.options?.[0]?.id || 'all';
+            }
+        }
+
+        const escapeHtml = (v) => this.parent?.escapeHtml(v) ?? String(v ?? '');
+        const rail = document.createElement('div');
+        rail.className = 'sidebar-filter-rail';
+
+        let railHtml = '';
+        if (filters.search) {
+            const placeholder = filters.search.placeholder || 'Filter';
+            railHtml += `
+                <label class="sidebar-filter-search">
+                    <i class="ti ti-search" aria-hidden="true"></i>
+                    <input type="search" autocomplete="off" placeholder="${escapeHtml(placeholder)}" aria-label="${escapeHtml(placeholder)}">
+                </label>
+            `;
+        }
+        if (filters.chips?.options?.length) {
+            const chipsHtml = filters.chips.options.map((opt) => {
+                const active = opt.id === this.filterState.chip ? ' active' : '';
+                return `<button type="button" class="sidebar-filter-chip${active}" data-chip-id="${escapeHtml(opt.id)}">${escapeHtml(opt.label || opt.id)}</button>`;
+            }).join('');
+            railHtml += `<div class="sidebar-filter-chips" role="tablist">${chipsHtml}</div>`;
+        }
+        for (const select of filters.selects || []) {
+            const optionsHtml = (select.options || []).map((opt) => {
+                const selected = opt.id === this.filterState.selects[select.id] ? ' selected' : '';
+                return `<option value="${escapeHtml(opt.id)}"${selected}>${escapeHtml(opt.label || opt.id)}</option>`;
+            }).join('');
+            railHtml += `<select class="sidebar-filter-select" data-select-id="${escapeHtml(select.id)}" aria-label="${escapeHtml(select.label || select.id)}">${optionsHtml}</select>`;
+        }
+        rail.innerHTML = railHtml;
+        sidebar.insertBefore(rail, sidebar.firstChild);
+
+        const searchInput = rail.querySelector('input[type="search"]');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                this.filterState.query = searchInput.value.trim().toLowerCase();
+                this.renderSidebarItems();
+            });
+        }
+        rail.querySelectorAll('.sidebar-filter-chip').forEach((chipEl) => {
+            chipEl.addEventListener('click', () => {
+                this.filterState.chip = chipEl.dataset.chipId;
+                rail.querySelectorAll('.sidebar-filter-chip').forEach((el) => el.classList.toggle('active', el === chipEl));
+                this.renderSidebarItems();
+            });
+        });
+        rail.querySelectorAll('.sidebar-filter-select').forEach((selectEl) => {
+            selectEl.addEventListener('change', () => {
+                this.filterState.selects[selectEl.dataset.selectId] = selectEl.value;
+                this.renderSidebarItems();
+            });
+        });
+    }
+
+    getFilteredData() {
+        const filters = this.getListSection()?.filters;
+        if (!filters || !this.filterState) return this.data;
+        const state = this.filterState;
+        const searchFields = filters.search?.fields || ['name', 'title', 'description'];
+        return this.data.filter((item) => {
+            if (state.query) {
+                const haystack = searchFields.map((field) => {
+                    const value = item[field];
+                    return Array.isArray(value) ? value.join(' ') : (value ?? '');
+                }).join(' ').toLowerCase();
+                if (!haystack.includes(state.query)) return false;
+            }
+            if (filters.chips && state.chip && state.chip !== 'all') {
+                const field = filters.chips.field || 'category';
+                const value = item[field];
+                const matches = Array.isArray(value) ? value.includes(state.chip) : value === state.chip;
+                if (!matches) return false;
+            }
+            for (const select of filters.selects || []) {
+                const selected = state.selects[select.id];
+                if (!selected || selected === 'all') continue;
+                const field = select.field || select.id;
+                const value = item[field];
+                const matches = Array.isArray(value) ? value.includes(selected) : value === selected;
+                if (!matches) return false;
+            }
+            return true;
+        });
+    }
+
+    renderSidebarItems() {
+        const sidebarScroll = this.getElement('sidebar-scroll');
+        if (!sidebarScroll) return;
+        sidebarScroll.innerHTML = '';
+
         // Render actions as regular items at the top
         if (this.actions && this.actions.length > 0) {
-            this.actions.forEach((action, index) => {
+            this.actions.forEach((action) => {
                 const actionDiv = document.createElement('div');
                 actionDiv.className = 'sidebar-item';
                 actionDiv.id = `sidebar-${action.id}`;
@@ -1938,25 +2114,54 @@ class WorkspaceController {
             });
         }
 
-        if (this.data.length === 0 && (!this.actions || this.actions.length === 0)) {
+        const data = this.getFilteredData();
+        const escapeHtml = (v) => this.parent?.escapeHtml(v) ?? String(v ?? '');
+
+        if (data.length === 0 && (!this.actions || this.actions.length === 0)) {
             const empty = document.createElement('p');
-            empty.textContent = 'No items yet';
+            empty.textContent = this.filterState?.query ? 'No matches' : 'No items yet';
             empty.className = 'empty-sidebar-message';
             sidebarScroll.appendChild(empty);
             return;
         }
 
         const currentThemeItemId = this.getCurrentThemeItemId();
-        this.data.forEach((item, index) => {
+        data.forEach((item, index) => {
             const itemDiv = document.createElement('div');
             const isCurrentTheme = currentThemeItemId !== null && item.id === currentThemeItemId;
-            itemDiv.className = `sidebar-item${isCurrentTheme ? ' is-theme-current' : ''}`;
+            const isActive = this.selectedId === item.id;
+            const isRich = Boolean(item.thumbnail || item.subtitle || item.badges?.length);
+            itemDiv.className = `sidebar-item${isCurrentTheme ? ' is-theme-current' : ''}${isActive ? ' active' : ''}${isRich ? ' sidebar-item--rich' : ''}`;
+            if (isActive) itemDiv.setAttribute('aria-selected', 'true');
             itemDiv.id = `sidebar-${item.id}`;
-            
+
             const icon = this.resolveIcon(item.icon, index);
             const label = item.name || item.title || 'Unnamed';
             const statusMarkup = isCurrentTheme ? '<span class="sidebar-item-status">Live</span>' : '';
-            itemDiv.innerHTML = `<i class="${icon}"></i><span class="sidebar-item-label">${label}</span>${statusMarkup}`;
+
+            if (isRich) {
+                const thumbInner = item.thumbnail
+                    ? `<img src="${escapeHtml(item.thumbnail)}" alt="" loading="lazy">`
+                    : `<i class="${icon}"></i>`;
+                const thumbHtml = `<span class="sidebar-item-thumb${item.thumbnail ? '' : ' sidebar-item-thumb--icon'}">${thumbInner}</span>`;
+                const subtitle = item.subtitle || (item.description ? String(item.description).split('\n')[0].trim() : '');
+                const subtitleHtml = subtitle ? `<span class="sidebar-item-subtitle">${escapeHtml(subtitle)}</span>` : '';
+                const badgesHtml = (item.badges?.length)
+                    ? `<span class="sidebar-item-badges">${item.badges.map((b) => `<span class="sidebar-item-badge${b.tone ? ' sidebar-item-badge--' + escapeHtml(b.tone) : ''}">${escapeHtml(b.label)}</span>`).join('')}</span>`
+                    : '';
+                itemDiv.innerHTML = `
+                    ${thumbHtml}
+                    <span class="sidebar-item-stack">
+                        <span class="sidebar-item-label">${escapeHtml(label)}</span>
+                        ${subtitleHtml}
+                        ${badgesHtml}
+                    </span>
+                    ${statusMarkup}
+                `;
+            } else {
+                itemDiv.innerHTML = `<i class="${icon}"></i><span class="sidebar-item-label">${escapeHtml(label)}</span>${statusMarkup}`;
+            }
+
             itemDiv.dataset.itemId = item.id;
             itemDiv.setAttribute('role', 'button');
             itemDiv.onclick = () => {
@@ -2295,9 +2500,9 @@ class WorkspaceController {
         this.loadId++;
         const thisLoadId = this.loadId;
         this.selectedId = itemId;
-        
+
         const item = this.data.find(i => i.id === itemId);
-        
+
         // If item not found, check if it's an action
         if (!item && this.actions) {
             const action = this.actions.find(a => a.id === itemId);
@@ -2306,13 +2511,13 @@ class WorkspaceController {
                 return;
             }
         }
-        
+
         // If still no item found, exit gracefully
         if (!item) {
             console.warn(`Item not found: ${itemId}`);
             return;
         }
-        
+
         // Update active class and aria-selected if not already set
         if (!skipHistory) {
             const sidebar = this.getElement('sidebar-scroll');
@@ -2327,12 +2532,20 @@ class WorkspaceController {
                 element.classList.add('active');
                 element.setAttribute('aria-selected', 'true');
             }
-            
+
             // Update URL
             if (this.parent) {
                 const isFirstItem = this.data.length > 0 && this.data[0].id === itemId;
                 this.parent.updateHistory(this.tabConfig.id, itemId, isFirstItem);
             }
+        }
+
+        // Delegated-detail mode: framework keeps detail pane mounted; app listens for the event.
+        if (this.isDelegatedDetail) {
+            document.dispatchEvent(new CustomEvent('ui:item-selected', {
+                detail: { tabId: this.tabConfig.id, itemId, item }
+            }));
+            return;
         }
 
         const contentArea = this.getElement('content');

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T00:41:56.396Z",
+  "generatedAt": "2026-05-20T01:18:49.168Z",
   "sites": [
     {
       "siteId": "agent",
@@ -227,13 +227,13 @@
       "status": "success",
       "liveUrl": "https://ui.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/ui/",
-      "lastPublishedAt": "2026-05-17T07:19:24.954Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25984432992",
-      "latestBrokerRunNumber": "59",
+      "lastPublishedAt": "2026-05-20T01:18:49.159Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26135305970",
+      "latestBrokerRunNumber": "113",
       "trigger": "github-webhook",
-      "hostingFiles": 7680,
-      "hostingBytes": 70252340,
-      "recordedDeployments": 1
+      "hostingFiles": 343,
+      "hostingBytes": 11153521,
+      "recordedDeployments": 2
     }
   ]
 }

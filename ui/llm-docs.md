@@ -282,6 +282,97 @@ node scripts/validate-tour.mjs --sitemap sitemap.json --manifest ui-tour-manifes
 
 Narration may fall back to `description` only when `automation.tour.narrationFallback` allows it. AI can help write descriptions or narration, but a passing tour must replay from the manifest without AI.
 
+## Rich List Items and Sidebar Filters
+
+Workspace `type: "list"` sections support a richer item schema for catalogs that need thumbnails, badges, or subtitles, and an optional `filters` block that mounts a search/chip/select rail above the sidebar items.
+
+Item fields (all optional, all backward-compatible):
+
+- `thumbnail` — image URL rendered in a 44×44 square at the left of the row
+- `subtitle` — small line of text below the label; falls back to the first line of `description`
+- `badges` — array of `{ "label": "stl", "tone": "neutral" }` rendered as small pills
+
+When any of these is present, the framework adds `.sidebar-item--rich` and renders a two-line stack.
+
+Section `filters` block:
+
+```json
+{
+  "type": "list",
+  "dataSource": "./data/models.json",
+  "filters": {
+    "search": { "placeholder": "Filter models", "fields": ["name", "description", "tags"] },
+    "chips": {
+      "field": "source",
+      "options": [
+        { "id": "all", "label": "All" },
+        { "id": "mullformed", "label": "Mullformed" },
+        { "id": "cozy-crate", "label": "Cozy Crate" }
+      ]
+    },
+    "selects": [
+      {
+        "id": "format",
+        "label": "Format",
+        "field": "formats",
+        "options": [
+          { "id": "all", "label": "All formats" },
+          { "id": "stl", "label": "STL" },
+          { "id": "obj", "label": "OBJ" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+`search.fields` defaults to `["name", "title", "description"]`. Array properties (like `tags` or `formats`) are joined and substring-matched. The `chips.field` is matched directly; an `"all"` option means no filter. Each entry in `selects` filters by membership (array property) or equality (scalar property), and selecting the first option means no filter.
+
+The framework also accepts `records` as a wrapper key in `dataSource` JSON (alongside `data`, `items`, `results`).
+
+If the source data uses different field names from the canon (e.g. `title` instead of `name`, an array of strings instead of `badges`), add an `itemMap` on the list section to alias them — no need to rewrite the data:
+
+```json
+{
+  "type": "list",
+  "dataSource": "./data/models.json",
+  "itemMap": {
+    "name": "title",
+    "description": "summary",
+    "badges": "formats"
+  }
+}
+```
+
+The mapper only fills targets that are currently undefined on the item, so canonical fields always win. When the target is `badges` and the source is an array of strings, each string is wrapped in `{ label: ... }` automatically.
+
+## Delegated Detail Mode
+
+For workspace tabs where the detail pane is a long-lived custom surface (a three.js canvas, a chart, a paint tool) rather than per-item HTML, set `tab.detailHtmlSource` to mount the detail pane once and let app code drive updates via the `ui:item-selected` event.
+
+```json
+{
+  "id": "library",
+  "label": "Library",
+  "layout": "workspace",
+  "detailHtmlSource": "./panels/library-detail.html",
+  "sections": [
+    { "type": "list", "dataSource": "./data/models.json", "filters": { "search": {} } }
+  ]
+}
+```
+
+Listen for the event:
+
+```js
+document.addEventListener('ui:item-selected', (event) => {
+  const { tabId, itemId, item } = event.detail;
+  // app renders inside #<tabId>-detail however it wants
+});
+```
+
+In delegated mode the framework still owns sidebar rendering, selection state, and URL history, but it does NOT wipe or repaint the detail pane on selection. Equivalently, set `listSection.delegateDetail: true` if the detail HTML is already in the document.
+
 ## Automatic Framework Tab
 
 Every sitemap-backed shell gets a final `UI Framework` tab from the shared runtime.
