@@ -5,7 +5,9 @@
 //   - each row is either "live" (green dot, recent on-disk write) or
 //     "idle" (gray dot, paused but still tracked)
 //   - red ONLY appears for "snapshot pipeline broken" — never per-row
-//   - the ☕ button is an unconditional keep-awake toggle (no agent-watching)
+//   - keep-awake has no UI: while the host (lecter floating HUD) sees agent
+//     activity in the last N minutes, it holds caffeinate. After N minutes
+//     of total inactivity, the host quits itself.
 //
 // Data source: /hud/snapshot.json — published every ~5s by Valet's worker.
 
@@ -36,7 +38,10 @@ const footStamp = document.getElementById("foot-stamp");
 const footThresholds = document.getElementById("foot-thresholds");
 const footAge = document.getElementById("foot-age");
 const btnClose = document.getElementById("btn-close");
-const btnKeepAwake = document.getElementById("btn-keep-awake");
+const btnScreen = document.getElementById("btn-screen");
+const screenSection = document.getElementById("hud-screen");
+const screenImg = document.getElementById("hud-screen-img");
+const screenCaption = document.getElementById("hud-screen-caption");
 
 let consecutiveFailures = 0;
 
@@ -108,6 +113,27 @@ let alertsEnabled = (() => {
 const lastAlertAtBySid = new Map();              // sessionId → unix sec
 const previousStateBySid = new Map();            // sessionId → "live" | "idle"
 const ALERT_COOLDOWN_SEC = 60;
+
+// Overflow: when the operator has more than this many sessions, collapse
+// the list to the top few and offer a "show all" link. Sort order is
+// already operator-controlled (sort chip), so "top N" honors that.
+const ROW_COLLAPSE_THRESHOLD = 4;
+let showAllRows = false; // session-scoped, not persisted — defaults to collapsed
+
+// Screen-cast: opt-in remote view of the desk Mac's actual screen. Requires
+// the worker to be publishing screen-<token>.jpg AND the page bookmark to
+// carry ?token=<same token>. The token gates the discovery of the image
+// URL — it's obscurity, not auth, but it keeps the image off easily-
+// guessable URLs.
+const SCREEN_STORAGE_KEY = "valet-hud-screen-visible";
+let screenVisible = (() => {
+  try { return localStorage.getItem(SCREEN_STORAGE_KEY) === "1"; } catch { return false; }
+})();
+const SCREEN_TOKEN = (() => {
+  try { return new URLSearchParams(window.location.search).get("token") || ""; } catch { return ""; }
+})();
+const SCREEN_REFRESH_MS = 10_000;
+let screenRefreshTimer = null;
 
 // Dismissed sessions: snoozed until the session writes again. We store
 // {sessionId → dismissedAtUnixSec}; a row is hidden only while its
@@ -340,7 +366,20 @@ function render(snapshot) {
       `</span>`;
     emptySection.hidden = true;
     listSection.hidden = false;
-    listEl.innerHTML = rows.map(({ s, state }) => rowHtml(s, state)).join("");
+    // Collapse rows beyond the threshold unless the operator explicitly
+    // asked to see them all. Sort already determines what "top N" means.
+    const overflow = rows.length > ROW_COLLAPSE_THRESHOLD;
+    const visibleRows = overflow && !showAllRows
+      ? rows.slice(0, ROW_COLLAPSE_THRESHOLD)
+      : rows;
+    const collapseHint = overflow
+      ? `<li class="row-collapse" data-collapse-toggle="1">${
+          showAllRows
+            ? `show top ${ROW_COLLAPSE_THRESHOLD} (collapse)`
+            : `+ ${rows.length - ROW_COLLAPSE_THRESHOLD} more · show all`
+        }</li>`
+      : "";
+    listEl.innerHTML = visibleRows.map(({ s, state }) => rowHtml(s, state)).join("") + collapseHint;
     // If the previously-expanded row dropped off the list, collapse.
     if (expandedSessionId && !rows.some((r) => r.s.sessionId === expandedSessionId)) {
       expandedSessionId = null;
@@ -355,6 +394,13 @@ function render(snapshot) {
         expandedSessionId = expandedSessionId === sid ? null : sid;
         render(snapshot);
       });
+    });
+    const collapseEl = listEl.querySelector(".row-collapse");
+    if (collapseEl) collapseEl.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      showAllRows = !showAllRows;
+      render(snapshot);
     });
     listEl.querySelectorAll(".row-dismiss").forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -401,10 +447,16 @@ function render(snapshot) {
   footThresholds.textContent = `live <${thresholds.liveSeconds || 300}s`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
 
-  // ☕ reflects the menu bar applet's persisted state, read out of the
-  // snapshot endpoint. Click handler does optimistic visual update so the
-  // user doesn't wait for the next poll to see feedback.
-  if (snapshot.keepAwake) applyKeepAwakeVisual(snapshot.keepAwake);
+  // Heartbeat: tell the host (lecter floating HUD) how recently any tracked
+  // session wrote. Host decides whether to hold caffeinate and whether to
+  // quit on inactivity. No-op when not hosted in WKWebView.
+  const allSecs = [
+    ...live.map((s) => Number(s.secondsSinceActivity)),
+    ...idle.map((s) => Number(s.secondsSinceActivity)),
+  ].filter((v) => Number.isFinite(v) && v >= 0);
+  if (allSecs.length > 0) {
+    postToHost({ action: "activityHeartbeat", secondsSinceActivity: Math.min(...allSecs) });
+  }
 
   reportSizeToHost();
 }
@@ -447,29 +499,6 @@ function reportSizeToHost() {
   } catch (_) { /* not hosted, ignore */ }
 }
 
-// --- keep-awake button ------------------------------------------------
-
-// Local override so a click can flip the icon immediately, before the
-// next snapshot tick. Cleared once the snapshot confirms a matching state.
-let keepAwakeOptimistic = null;
-
-function applyKeepAwakeVisual(state) {
-  if (!btnKeepAwake) return;
-  // If we have an optimistic override and it matches what the snapshot
-  // reports, clear it — server caught up.
-  if (keepAwakeOptimistic !== null && state.enabled === keepAwakeOptimistic) {
-    keepAwakeOptimistic = null;
-  }
-  const enabled = keepAwakeOptimistic !== null ? keepAwakeOptimistic : !!state.enabled;
-  const held = enabled && !!state.held;
-  btnKeepAwake.classList.toggle("is-active", enabled && !held);
-  btnKeepAwake.classList.toggle("is-held", held);
-  btnKeepAwake.title = enabled
-    ? (held ? "Keep-awake on — Mac is being held awake. Click to turn off."
-            : "Keep-awake on — will hold sleep when plugged in. Click to turn off.")
-    : "Keep-awake off — Mac sleeps normally. Click to keep awake.";
-}
-
 function postToHost(payload) {
   try {
     if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud) {
@@ -487,23 +516,63 @@ if (btnClose) {
   });
 }
 
-if (btnKeepAwake) {
-  btnKeepAwake.addEventListener("click", (e) => {
+// Screen image src is composed from the token in the page URL. Without a
+// token nothing fetches — the worker writes screen-<token>.jpg and the
+// bookmark for this page has ?token=<same>, so the same operator who set
+// it up is the only one who can render the image.
+function screenImageUrl() {
+  if (!SCREEN_TOKEN) return "";
+  return `/hud/screen-${encodeURIComponent(SCREEN_TOKEN)}.jpg?t=${Date.now()}`;
+}
+
+function startScreenAutoRefresh() {
+  stopScreenAutoRefresh();
+  refreshScreenImage();
+  screenRefreshTimer = setInterval(refreshScreenImage, SCREEN_REFRESH_MS);
+}
+function stopScreenAutoRefresh() {
+  if (screenRefreshTimer) clearInterval(screenRefreshTimer);
+  screenRefreshTimer = null;
+}
+function refreshScreenImage() {
+  const url = screenImageUrl();
+  if (!url || !screenImg) return;
+  screenImg.src = url;
+}
+
+function applyScreenVisibility() {
+  if (!screenSection) return;
+  if (!SCREEN_TOKEN) {
+    // No token in the URL — the feature is dormant. Toggle still works
+    // visually, but we explain why nothing's loading.
+    screenSection.hidden = !screenVisible;
+    if (screenVisible) {
+      screenImg.removeAttribute("src");
+      screenCaption.textContent = "screen-cast token missing — add ?token=<your-token> to the bookmark";
+    }
+    return;
+  }
+  screenSection.hidden = !screenVisible;
+  if (screenVisible) {
+    screenCaption.textContent = "live screen · refreshes every 10s";
+    startScreenAutoRefresh();
+  } else {
+    stopScreenAutoRefresh();
+    screenImg.removeAttribute("src");
+  }
+}
+
+if (btnScreen) {
+  btnScreen.addEventListener("click", (e) => {
     e.preventDefault();
-    // Optimistic flip. We deliberately do NOT route through
-    // applyKeepAwakeVisual here — that function clears the optimistic
-    // override whenever the passed-in state matches, which would cause
-    // the next stale snapshot poll to flicker the button back off.
-    // Instead, set the override and update the classes directly. The next
-    // genuine snapshot (within ~2s) that REPORTS the new server state will
-    // be the one that clears the override.
-    const currentlyEnabled = btnKeepAwake.classList.contains("is-active")
-      || btnKeepAwake.classList.contains("is-held");
-    keepAwakeOptimistic = !currentlyEnabled;
-    btnKeepAwake.classList.toggle("is-active", keepAwakeOptimistic);
-    btnKeepAwake.classList.toggle("is-held", false);
-    postToHost({ action: "toggleKeepAwake" });
+    screenVisible = !screenVisible;
+    try { localStorage.setItem(SCREEN_STORAGE_KEY, screenVisible ? "1" : "0"); } catch {}
+    btnScreen.classList.toggle("is-active", screenVisible);
+    applyScreenVisibility();
   });
+  // Initial sync — class + visibility match persisted state.
+  btnScreen.classList.toggle("is-active", screenVisible);
+  applyScreenVisibility();
 }
 
 // --- poll loop --------------------------------------------------------

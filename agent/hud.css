@@ -101,22 +101,53 @@ body { padding: 12px; }
 .hud-btn:active {
   background: rgba(255,255,255,0.14);
 }
-/* Keep-awake button states. All green — no amber.
- *   off     (no class): gray outline, just an icon
- *   is-active: enabled, will hold when conditions allow (on AC)
- *   is-held:   actively pinning sleep right now (caffeinate alive)
- * The is-held variant is just brighter/filled green to signal "yes, working".
- */
-#btn-keep-awake.is-active {
-  color: var(--ok);
-  border-color: rgba(111, 210, 138, 0.4);
-}
-#btn-keep-awake.is-held {
-  color: var(--ok);
-  border-color: rgba(111, 210, 138, 0.7);
-  background: rgba(111, 210, 138, 0.14);
+#btn-screen.is-active {
+  color: var(--codex);
+  border-color: rgba(122, 168, 255, 0.5);
+  background: rgba(122, 168, 255, 0.10);
 }
 #btn-close { font-size: 16px; }
+
+/* Screen-cast panel: framed JPEG that auto-refreshes while shown. */
+.hud-screen {
+  margin-bottom: 8px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--bg-edge);
+}
+.hud-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+.hud-screen-caption {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+  padding: 5px 8px 6px;
+  text-align: center;
+}
+
+/* Overflow-collapse hint at the bottom of the row list. */
+.row-collapse {
+  list-style: none;
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer !important;
+  transition: color 90ms ease, background 90ms ease;
+}
+.row-collapse:hover {
+  color: var(--fg-dim);
+  background: rgba(255, 255, 255, 0.04);
+}
 /* Header mode chip color contract:
  *   ok     — fg-dim (neutral); "N live" uses the live count color via inline
  *   stale  — red (publish pipeline broken)
