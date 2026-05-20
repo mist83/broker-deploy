@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-05-20T23:31:01.096Z",
+  "sourceInventory": "inventory/mullmania-deployment-backlog.json",
+  "totalEntries": 0,
+  "lanes": [
+    {
+      "id": "skip",
+      "label": "Skip",
+      "icon": "ti ti-x",
+      "count": 0
+    },
+    {
+      "id": "help",
+      "label": "Needs Help",
+      "icon": "ti ti-tool",
+      "count": 0
+    },
+    {
+      "id": "ready",
+      "label": "Ready to Deploy",
+      "icon": "ti ti-rocket",
+      "count": 0
+    },
+    {
+      "id": "deployed",
+      "label": "Deployed",
+      "icon": "ti ti-check",
+      "count": 0
+    }
+  ],
+  "entries": []
+}

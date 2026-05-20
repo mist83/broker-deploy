@@ -1,0 +1,354 @@
+/**
+ * Shared surface shell primitives for framework-owned mastheads, toolbars,
+ * chips, and context rails.
+ */
+
+.surface-masthead {
+    z-index: 20;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: var(--space-sm);
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-on-primary);
+    background: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.surface-masthead__brand,
+.surface-masthead__search-slot,
+.surface-masthead__actions {
+    min-width: 0;
+}
+
+.surface-masthead__title {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0;
+    color: var(--text-on-primary);
+    font-size: 20px;
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.surface-masthead__title i {
+    color: var(--color-shell-accent, var(--color-secondary));
+    font-size: 0.8em;
+}
+
+.surface-masthead__search {
+    width: 100%;
+    min-width: 0;
+    min-height: 32px;
+    padding: 5px var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+}
+
+.surface-masthead__search::placeholder {
+    color: var(--text-muted);
+}
+
+.surface-masthead__search:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 1px;
+}
+
+.surface-masthead__actions {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 4px;
+    align-items: center;
+    justify-content: end;
+}
+
+.surface-shell-action,
+button.surface-shell-action {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: var(--space-xs);
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 0;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transform: none;
+}
+
+.surface-shell-action:hover,
+button.surface-shell-action:hover,
+.surface-shell-action:focus-visible,
+button.surface-shell-action:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    transform: none;
+}
+
+.surface-shell-action--icon,
+button.surface-shell-action--icon {
+    inline-size: 32px;
+    min-inline-size: 32px;
+    padding: 0;
+}
+
+.surface-shell-action--icon span {
+    display: none;
+}
+
+.surface-shell-action--select-shell {
+    position: relative;
+    min-width: 128px;
+    padding-right: 28px;
+}
+
+.surface-shell-action--select-shell:focus-within {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.surface-shell-action__select-input {
+    min-width: 0;
+    padding: 0 18px 0 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.surface-shell-action__select-input option {
+    color: var(--text-primary);
+}
+
+.surface-shell-action__select-caret {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    opacity: 0.84;
+}
+
+.surface-toolbar {
+    display: grid;
+    gap: 4px;
+    padding: 6px 10px;
+}
+
+.surface-toolbar__row {
+    display: grid;
+    gap: 4px;
+    align-items: center;
+}
+
+.surface-toolbar__row--split {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-sm);
+    min-height: 26px;
+    overflow: hidden;
+}
+
+.surface-chip-bar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 4px;
+    align-items: center;
+    min-height: 26px;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.surface-chip-bar::-webkit-scrollbar {
+    height: 6px;
+}
+
+.surface-chip-bar::-webkit-scrollbar-thumb {
+    background: var(--color-shell-accent, var(--color-secondary));
+    border: 0;
+    border-radius: 999px;
+}
+
+.surface-context-actions {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: end;
+    gap: 6px;
+    align-items: center;
+    min-height: 26px;
+    min-width: 0;
+}
+
+.surface-context-slot {
+    display: grid;
+    justify-items: end;
+    align-items: center;
+    min-height: 26px;
+    min-inline-size: 142px;
+}
+
+.surface-context-slot[data-selection-active="false"] .surface-chip--selection {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-1px);
+}
+
+.surface-toggle-group,
+.surface-status-list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 4px;
+    align-items: center;
+}
+
+.surface-chip,
+button.surface-chip,
+.surface-toggle,
+button.surface-toggle {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 6px;
+    align-items: center;
+    width: auto;
+    min-width: 0;
+    min-height: 26px;
+    padding: 0 9px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    box-shadow: none;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+    transform: none;
+}
+
+.surface-chip:hover,
+button.surface-chip:hover,
+.surface-chip:focus-visible,
+button.surface-chip:focus-visible,
+.surface-toggle:hover,
+button.surface-toggle:hover,
+.surface-toggle:focus-visible,
+button.surface-toggle:focus-visible {
+    border-color: var(--color-primary);
+    color: var(--text-primary);
+    transform: none;
+}
+
+.surface-chip.is-active,
+.surface-toggle.is-active {
+    border-color: var(--color-primary);
+    background: var(--color-info-bg);
+    color: var(--color-primary);
+}
+
+.surface-chip--manager,
+button.surface-chip--manager {
+    padding: 0 11px;
+    font-weight: var(--weight-semibold);
+}
+
+.surface-chip--quiet,
+button.surface-chip--quiet {
+    padding: 0 10px;
+    border-color: color-mix(in srgb, var(--border-color) 88%, white);
+    background: color-mix(in srgb, var(--bg-primary) 88%, white);
+    color: var(--text-secondary);
+}
+
+.surface-chip--quiet:hover:not(:disabled),
+button.surface-chip--quiet:hover:not(:disabled),
+.surface-chip--quiet:focus-visible,
+button.surface-chip--quiet:focus-visible {
+    border-color: color-mix(in srgb, var(--color-primary) 38%, var(--border-color));
+    color: var(--text-primary);
+}
+
+.surface-chip__glyph {
+    display: inline-block;
+    letter-spacing: 0.12em;
+    transform: translateY(-1px);
+}
+
+.surface-chip__count {
+    display: grid;
+    place-items: center;
+    min-width: 18px;
+    min-height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--bg-primary));
+    color: inherit;
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+}
+
+.surface-status-pill {
+    display: grid;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .surface-masthead {
+        grid-template-columns: 1fr;
+        padding: var(--space-sm);
+    }
+
+    .surface-masthead__actions {
+        justify-content: start;
+    }
+
+    .surface-toolbar__row--split {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .surface-chip-bar {
+        order: 2;
+    }
+
+    .surface-context-actions {
+        order: 1;
+        justify-content: start;
+    }
+
+    .surface-context-slot {
+        justify-items: start;
+    }
+}
