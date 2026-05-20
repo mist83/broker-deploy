@@ -89,9 +89,39 @@ function formatStamp(epoch) {
 // Only one at a time — keeps the card compact and matches "click to peek".
 let expandedSessionId = null;
 
+// Compact mode: collapse the 3-line synopsis into a single line of "agent
+// preview · doing tool". Persisted in localStorage. Toggle button lives in
+// the same row as the sort chip.
+const COMPACT_STORAGE_KEY = "valet-hud-compact";
+let compactMode = (() => {
+  try { return localStorage.getItem(COMPACT_STORAGE_KEY) === "1"; } catch { return false; }
+})();
+
+// Dismissed sessions: hidden permanently from the row list. Useful for
+// long-lived sessions you've closed but the system still thinks are alive
+// (e.g. a codex CLI you never quit weeks ago).
+const DISMISS_STORAGE_KEY = "valet-hud-dismissed";
+let dismissedSet = (() => {
+  try {
+    const raw = localStorage.getItem(DISMISS_STORAGE_KEY) || "[]";
+    return new Set(JSON.parse(raw));
+  } catch { return new Set(); }
+})();
+function saveDismissed() {
+  try { localStorage.setItem(DISMISS_STORAGE_KEY, JSON.stringify([...dismissedSet])); } catch {}
+}
+
 function synopsisHtml(syn) {
   if (!syn || (!syn.lastUser && !syn.lastAssistant && !syn.currentTool)) {
     return `<div class="syn-empty">No activity in the recent tail of the session file yet.</div>`;
+  }
+  if (compactMode) {
+    // Single-line: agent text (truncated harder) then tool inline.
+    const asst = (syn.lastAssistant || syn.lastUser || "").slice(0, 110);
+    const tool = syn.currentTool
+      ? `<span class="syn-inline-tool">⏵ ${escapeHtml(syn.currentTool.name)}${syn.currentTool.description ? " · " + escapeHtml(syn.currentTool.description) : ""}</span>`
+      : "";
+    return `<div class="syn-compact">${escapeHtml(asst)}${asst ? " " : ""}${tool}</div>`;
   }
   const parts = [];
   if (syn.lastUser) {
@@ -132,13 +162,18 @@ function rowHtml(session, state) {
   const expandedSection = isExpanded
     ? `<div class="row-synopsis">${synopsisHtml(session.synopsis)}</div>`
     : "";
+  const labelClass = "label" + (session.titleSynthetic ? " label-synthetic" : "");
+  const dismissBtn =
+    `<button class="row-dismiss" type="button" data-dismiss="${escapeHtml(session.sessionId)}"` +
+    ` title="hide this session from the HUD (won't quit the agent)">×</button>`;
   return `
     <li class="row row-${session.kind} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}">
       <span class="dot"></span>
       <span class="kind">${session.kind}</span>
-      <span class="label" title="${escapeHtml(tooltip)}">${escapeHtml(label)}</span>
+      <span class="${labelClass}" title="${escapeHtml(tooltip)}">${escapeHtml(label)}</span>
       ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
+      ${dismissBtn}
       ${expandedSection}
     </li>
   `;
@@ -151,7 +186,7 @@ function rowHtml(session, state) {
 // startedAt never changes, so the list doesn't reshuffle as sessions
 // pause and resume. The operator can cycle to a different sort via the
 // header chip; choice persists in localStorage.
-const SORT_MODES = ["started", "recent", "kind"];
+const SORT_MODES = ["started", "recent", "kind", "name"];
 const SORT_STORAGE_KEY = "valet-hud-sort";
 let sortMode = (() => {
   try { return SORT_MODES.includes(localStorage.getItem(SORT_STORAGE_KEY))
@@ -162,8 +197,13 @@ function sortLabel(mode) {
   switch (mode) {
     case "recent": return "recent";
     case "kind":   return "kind";
+    case "name":   return "name";
     default:       return "started";
   }
+}
+
+function rowNameForSort(s) {
+  return (s.title || s.project || s.sessionId || "").toLowerCase();
 }
 
 function applySort(rows, mode) {
@@ -178,6 +218,9 @@ function applySort(rows, mode) {
       const k = a.s.kind.localeCompare(b.s.kind);
       if (k !== 0) return k;
       return b.s.secondsSinceStart - a.s.secondsSinceStart;
+    }
+    if (mode === "name") {
+      return rowNameForSort(a.s).localeCompare(rowNameForSort(b.s));
     }
     // "started" — oldest at top. secondsSinceStart desc.
     return b.s.secondsSinceStart - a.s.secondsSinceStart;
@@ -197,7 +240,7 @@ function render(snapshot) {
     [
       ...live.map((s) => ({ s, state: "live" })),
       ...idle.map((s) => ({ s, state: "idle" })),
-    ],
+    ].filter(({ s }) => !dismissedSet.has(s.sessionId)),
     sortMode,
   );
 
@@ -227,10 +270,16 @@ function render(snapshot) {
     } else {
       modeEl.textContent = `${rows.length} tracked`;
     }
-    // Compose the label with the sort selector so it's always visible.
+    // List label hosts the sort + compact toggles. Both stop event bubbling
+    // so clicks on these chips don't also toggle a row beneath.
     listLabel.innerHTML =
-      `sessions <button class="sort-cycle" type="button" id="sort-cycle"` +
-      ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>`;
+      `<span>sessions</span>` +
+      `<span class="list-tools">` +
+        `<button class="sort-cycle" type="button" id="sort-cycle"` +
+        ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>` +
+        `<button class="sort-cycle" type="button" id="compact-toggle"` +
+        ` title="toggle compact synopsis (1 line vs 3)">${compactMode ? "expand" : "compact"}</button>` +
+      `</span>`;
     emptySection.hidden = true;
     listSection.hidden = false;
     listEl.innerHTML = rows.map(({ s, state }) => rowHtml(s, state)).join("");
@@ -238,15 +287,26 @@ function render(snapshot) {
     if (expandedSessionId && !rows.some((r) => r.s.sessionId === expandedSessionId)) {
       expandedSessionId = null;
     }
-    // Click any row to expand/collapse its synopsis. Listener attaches once
-    // per render so we don't accumulate handlers; clicks on the sort chip
-    // are stopped from bubbling so they don't toggle a row.
+    // Row click → expand/collapse. Dismiss button gets its own handler that
+    // stops propagation so the row's click handler doesn't also fire.
     listEl.querySelectorAll(".row").forEach((row) => {
       row.addEventListener("click", (e) => {
         e.preventDefault();
         const sid = row.getAttribute("data-session-id");
         if (!sid) return;
         expandedSessionId = expandedSessionId === sid ? null : sid;
+        render(snapshot);
+      });
+    });
+    listEl.querySelectorAll(".row-dismiss").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const sid = btn.getAttribute("data-dismiss");
+        if (!sid) return;
+        dismissedSet.add(sid);
+        if (expandedSessionId === sid) expandedSessionId = null;
+        saveDismissed();
         render(snapshot);
       });
     });
@@ -257,6 +317,14 @@ function render(snapshot) {
       const i = SORT_MODES.indexOf(sortMode);
       sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
       try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}
+      render(snapshot);
+    });
+    const compactBtn = document.getElementById("compact-toggle");
+    if (compactBtn) compactBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      compactMode = !compactMode;
+      try { localStorage.setItem(COMPACT_STORAGE_KEY, compactMode ? "1" : "0"); } catch {}
       render(snapshot);
     });
   }

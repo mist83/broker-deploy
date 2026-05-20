@@ -152,6 +152,11 @@ body { padding: 12px; }
   justify-content: space-between;
   gap: 8px;
 }
+.list-tools {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
 .sort-cycle {
   background: transparent;
   border: none;
@@ -165,6 +170,44 @@ body { padding: 12px; }
 }
 .sort-cycle:hover { color: var(--fg-dim); }
 .sort-cycle * { cursor: pointer !important; pointer-events: none; }
+
+/* Synthetic title (codex first-prompt derivation) — italic to signal
+ * "not authored, derived". Still readable. */
+.row .label.label-synthetic {
+  font-style: italic;
+  color: var(--fg-dim);
+}
+
+/* Dismiss × on each row — hidden until row hover/expanded. */
+.row-dismiss {
+  background: transparent;
+  border: none;
+  color: var(--fg-faint);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 4px;
+  margin-left: 4px;
+  cursor: pointer !important;
+  opacity: 0;
+  transition: opacity 90ms ease, color 90ms ease;
+}
+.row:hover .row-dismiss,
+.row.is-expanded .row-dismiss { opacity: 1; }
+.row-dismiss:hover { color: var(--err); }
+
+/* Compact synopsis — single line, smaller, no per-line columns. */
+.syn-compact {
+  font-size: 11px;
+  color: var(--fg-dim);
+  line-height: 1.4;
+  word-break: break-word;
+}
+.syn-compact .syn-inline-tool {
+  color: var(--ok);
+  margin-left: 6px;
+  font-variant-numeric: tabular-nums;
+}
 .hud-list ul {
   list-style: none;
   margin: 0;
@@ -175,9 +218,10 @@ body { padding: 12px; }
 }
 .row {
   display: grid;
-  /* Last two columns are right-aligned, fixed minimum width via ch units so
-   * the right edges line up across rows regardless of value length. */
-  grid-template-columns: 10px 50px 1fr 5.5ch 5.5ch;
+  /* dot, kind, label, started, elapsed, dismiss. Right two columns are
+   * right-aligned with fixed ch widths so durations line up across rows.
+   * The dismiss column reserves a tiny slot that's invisible until hover. */
+  grid-template-columns: 10px 50px 1fr 5.5ch 5.5ch 14px;
   align-items: baseline;
   gap: 8px;
   padding: 6px 10px;
