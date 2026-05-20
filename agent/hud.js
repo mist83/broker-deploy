@@ -160,6 +160,17 @@ function render(snapshot) {
     `live <${thresholds.workingSeconds}s · stale >${thresholds.idleSeconds}s`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
 
+  // Reflect keep-awake state from the snapshot (server reads the on-disk
+  // state from the menu bar applet — see lecter/server.js). The host used
+  // to push state via evaluateJavaScript, but WebKit's reply path crashed
+  // the JXA applet; reading from the snapshot is the safe channel.
+  if (snapshot.keepAwake && window.__valetHudSetKeepAwake) {
+    let label = "off";
+    if (snapshot.keepAwake.held) label = "held";
+    else if (snapshot.keepAwake.enabled) label = "active";
+    window.__valetHudSetKeepAwake(label);
+  }
+
   reportSizeToHost();
 }
 
