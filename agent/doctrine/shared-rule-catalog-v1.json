@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-18T05:19:25.966Z",
+  "generatedAt": "2026-05-20T22:46:02.923Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
@@ -303,6 +303,34 @@
       ]
     },
     {
+      "id": "feedback_mullmania_api_path_reserved",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_mullmania_api_path_reserved.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_mullmania_api_path_reserved.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_api_path_reserved.md",
+      "sha256": "312ae62f7333757ecea8980d913f3bb71a80650e0242c325e4eaa3379e5b2e3e",
+      "sizeBytes": 1905,
+      "summary": "CloudFront distribution ENGWDAVJ3FK6 (*.mullmania.com) has two ordered cache behaviors above the default S3 origin:",
+      "excerpt": "CloudFront distribution ENGWDAVJ3FK6 (*.mullmania.com) has two ordered cache behaviors above the default S3 origin:\n/api       → Lambda-mullmania-launchpad-api\n/api/*     → Lambda-mullmania-launchpad-api\n\nAnything beneath /api/... is routed to the shared launchpad API regardless of the hosted site. Static files committed to wwwroot/api/whatever.json in a *.mullmania.com site **are never served from S3** — the request stops at the Lambda. The Lambda returns 405 (or 404 with its own envelope) for routes it doesn't know about, which looks like a deploy failure but isn't.\n\n**How to apply:**\nFor a static site that needs to ship JSON fixtures, put them under a non-/api/ prefix — _api/, data/, fixtures/, state/, anything that doesn't collide. Update the client to fetch from that prefix.\nFor dynamic backend behavior, add the routes to mullmania-launchpad-api itself (don't try to override the CloudFront behavior with a more-specific pattern unless you genuinely need a per-site backend).\nIf you see 405 Method Not Allowed from <site>.mullmania.com/api/* after a static deploy, this is the cause. The fix is renaming the on-disk prefix and bumping the cache-buster — not chasing CORS, IAM, or bucket policy.\n\nReference: cobalt-wealthops static snapshot deploy hit this on first try, 2026-05-20. Renamed wwwroot/api/ → wwwroot/_api/ and updated app.js to read fixtures from ./_api/*.json. Second d",
+      "durability": "standing",
+      "tags": [],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude",
+        "generic",
+        "agent"
+      ],
+      "profileIds": []
+    },
+    {
       "id": "feedback_mullmania_bucket_safety",
       "kind": "feedback-rule",
       "relPath": "feedback/feedback_mullmania_bucket_safety.md",
@@ -335,6 +363,34 @@
       "profileIds": [
         "shared-live-ship"
       ]
+    },
+    {
+      "id": "feedback_mullmania_infra_s3_lambda_only",
+      "kind": "feedback-rule",
+      "relPath": "feedback/feedback_mullmania_infra_s3_lambda_only.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_mullmania_infra_s3_lambda_only.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_mullmania_infra_s3_lambda_only.md",
+      "sha256": "bc4c4541c77a174e9c054eba90ceb55c8778eaca32ffc2c89c338bf24f57e5d7",
+      "sizeBytes": 2805,
+      "summary": "Mullmania has one deploy fabric and Mike is tired of agents reinventing it.",
+      "excerpt": "Mullmania has one deploy fabric and Mike is tired of agents reinventing it.\n\n**Why:** The full pipeline already works end-to-end: mullmania.site.json + deploy.sh + scripts/deploy.sh → s3://mullmania.com-data/_tools/deploy-site.mjs publishes static bundles into s3://mullmania.com/<siteId>/. CloudFront ENGWDAVJ3FK6 (the *.mullmania.com wildcard distribution) serves them via the mullmania-subdomain-router Viewer-Request function. The shared mullmania-launchpad-api Lambda (Function URL btuarc3jsqogre3oi3spieaoqm0ceqvu.lambda-url.us-west-2.on.aws) handles all /api/* traffic via an ordered CloudFront behavior. Any suggestion outside this stack is noise — the costs are paid, the wiring exists, and proposing Fly/Render/etc. forces Mike to spell out \"S3 and Lambda, that's it\" again.\n\n**How to apply:**\nFor a new static demo or UI: add mullmania.site.json (see existing repos like url-previewer, caroms, gitter) plus deploy.sh + scripts/deploy.sh (canonical 4-liner that pulls deploy-site.mjs from S3). bash deploy.sh apply publishes.\nFor a new *.mullmania.com hostname: after the first publish, flip the catalog public via POST /api/catalog/access/site/<siteId> with {\"isPublic\": true} and the operator key (~/Code/sites/out/sites-api.json). The subdomain router PS allowlist refreshes automatically.\nFor dynamic backend behavior: add routes to the existing mullmania-launchpad-api Lambda. Do NOT s",
+      "durability": "standing",
+      "tags": [],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude",
+        "generic",
+        "agent"
+      ],
+      "profileIds": []
     },
     {
       "id": "feedback_no_ai_stink",
