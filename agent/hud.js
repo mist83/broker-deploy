@@ -101,18 +101,27 @@ function render(snapshot) {
   const thresholds = snapshot.thresholds || {};
   const needsYou = Array.isArray(snapshot.needsYou) ? snapshot.needsYou : [];
   const working = Array.isArray(snapshot.working) ? snapshot.working : [];
+  const idle = Array.isArray(snapshot.idle) ? snapshot.idle : [];
   const now = Math.floor(Date.now() / 1000);
   const ageSec = Math.max(0, now - Number(snapshot.generatedAt || now));
   const isStale = ageSec > STALE_SECONDS;
 
-  // Always list every live session (working + needs-you). Sorting by
-  // least-recently-active surfaces the "this one's been quiet a while"
-  // rows at the top without making working sessions disappear when their
-  // mtime briefly drops under workingSeconds.
+  // Always list every session the scanner saw: working + needs-you + idle.
+  // A long-paused-but-still-open CLI session belongs on the HUD; hiding it
+  // after 5 minutes of silence was the "where did my session go?" bug.
+  // Sort with urgency tiers: needs-you (asking) first, then working, then
+  // idle. Within "needs you", oldest pause floats up so the most-stuck one
+  // is at the very top.
+  const STATE_RANK = { "needs-you": 0, "working": 1, "idle": 2 };
   const liveRows = [
     ...needsYou.map((s) => ({ s, state: "needs-you" })),
     ...working.map((s) => ({ s, state: "working" })),
-  ].sort((a, b) => b.s.secondsSinceActivity - a.s.secondsSinceActivity);
+    ...idle.map((s) => ({ s, state: "idle" })),
+  ].sort((a, b) => {
+    const rankDiff = STATE_RANK[a.state] - STATE_RANK[b.state];
+    if (rankDiff !== 0) return rankDiff;
+    return b.s.secondsSinceActivity - a.s.secondsSinceActivity;
+  });
 
   if (isStale) {
     hud.setAttribute("data-state", "stale");

@@ -122,10 +122,20 @@ body { padding: 12px; }
   background: var(--warn);
   box-shadow: 0 0 6px rgba(232, 169, 59, 0.45);
 }
+.row.row-idle .dot {
+  background: var(--fg-faint);
+  box-shadow: none;
+}
 .row.row-working .label,
 .row.row-working .elapsed {
   /* working rows are quieter than asking rows — same row, calmer styling */
   opacity: 0.78;
+}
+.row.row-idle .label,
+.row.row-idle .elapsed,
+.row.row-idle .kind {
+  /* idle (paused longer than the threshold but still tracked) — quieter still */
+  opacity: 0.55;
 }
 .row .kind {
   font-size: 10px;
