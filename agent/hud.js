@@ -97,6 +97,18 @@ let compactMode = (() => {
   try { return localStorage.getItem(COMPACT_STORAGE_KEY) === "1"; } catch { return false; }
 })();
 
+// Alerts: when a session transitions live → idle (or just-finished an
+// assistant turn and went quiet), surface that immediately — bring the
+// HUD window forward, play a soft sound, show a notification. Mute via the
+// 🔔 toggle. Per-session cooldown prevents spam.
+const ALERT_STORAGE_KEY = "valet-hud-alerts";
+let alertsEnabled = (() => {
+  try { return localStorage.getItem(ALERT_STORAGE_KEY) !== "0"; } catch { return true; }
+})();
+const lastAlertAtBySid = new Map();              // sessionId → unix sec
+const previousStateBySid = new Map();            // sessionId → "live" | "idle"
+const ALERT_COOLDOWN_SEC = 60;
+
 // Dismissed sessions: snoozed until the session writes again. We store
 // {sessionId → dismissedAtUnixSec}; a row is hidden only while its
 // lastActivityAt <= dismissedAt. If the session has any new write after
@@ -257,6 +269,37 @@ function render(snapshot) {
     sortMode,
   );
 
+  // Alert detection: compare each row's state to what we recorded last
+  // render. A live→idle transition (or first-seen-idle for a session that
+  // looks like it just finished an assistant turn) triggers a single
+  // attention ping per cooldown window. Snoozed sessions never alert.
+  const sessionsToAlert = [];
+  const seenSidsThisRender = new Set();
+  for (const { s, state } of rows) {
+    seenSidsThisRender.add(s.sessionId);
+    const prev = previousStateBySid.get(s.sessionId);
+    previousStateBySid.set(s.sessionId, state);
+    if (!alertsEnabled) continue;
+    if (isDismissedFor(s)) continue;
+    if (state !== "idle") continue;
+    // Only alert when we WATCHED a live→idle transition. If we boot up
+    // and the row's already idle, that's not an event — skip.
+    if (prev !== "live") continue;
+    const nowSec = Math.floor(Date.now() / 1000);
+    const last = lastAlertAtBySid.get(s.sessionId) || 0;
+    if (nowSec - last < ALERT_COOLDOWN_SEC) continue;
+    lastAlertAtBySid.set(s.sessionId, nowSec);
+    sessionsToAlert.push(s);
+  }
+  // Garbage-collect map entries for sessions that have disappeared.
+  for (const sid of [...previousStateBySid.keys()]) {
+    if (!seenSidsThisRender.has(sid)) previousStateBySid.delete(sid);
+  }
+  for (const s of sessionsToAlert) {
+    const label = (s.title && s.title.trim()) || shortProject(s.project) || shortSessionId(s.sessionId);
+    postToHost({ action: "alert", sessionId: s.sessionId, kind: s.kind, label });
+  }
+
   if (isStale) {
     // Red surfaces ONLY for "the dashboard itself isn't being fed" —
     // never to describe an agent. Honest separation of concerns.
@@ -283,11 +326,13 @@ function render(snapshot) {
     } else {
       modeEl.textContent = `${rows.length} tracked`;
     }
-    // List label hosts the sort + compact toggles. Both stop event bubbling
-    // so clicks on these chips don't also toggle a row beneath.
+    // List label hosts the sort + compact + alert toggles. All stop event
+    // bubbling so clicks on these chips don't also toggle a row beneath.
     listLabel.innerHTML =
       `<span>sessions</span>` +
       `<span class="list-tools">` +
+        `<button class="sort-cycle" type="button" id="alert-toggle"` +
+        ` title="${alertsEnabled ? "alerts on (click to mute attention pings)" : "alerts muted (click to enable)"}">${alertsEnabled ? "🔔" : "🔕"}</button>` +
         `<button class="sort-cycle" type="button" id="sort-cycle"` +
         ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>` +
         `<button class="sort-cycle" type="button" id="compact-toggle"` +
@@ -340,6 +385,14 @@ function render(snapshot) {
       e.stopPropagation();
       compactMode = !compactMode;
       try { localStorage.setItem(COMPACT_STORAGE_KEY, compactMode ? "1" : "0"); } catch {}
+      render(snapshot);
+    });
+    const alertBtn = document.getElementById("alert-toggle");
+    if (alertBtn) alertBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      alertsEnabled = !alertsEnabled;
+      try { localStorage.setItem(ALERT_STORAGE_KEY, alertsEnabled ? "1" : "0"); } catch {}
       render(snapshot);
     });
   }
