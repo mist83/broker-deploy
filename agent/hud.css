@@ -24,7 +24,11 @@ html, body {
   font: 13px/1.35 -apple-system, "SF Pro Text", system-ui, sans-serif;
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
 }
+*, *::before, *::after { cursor: default !important; }
 
 body { padding: 12px; }
 
