@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>agent · HUD</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Glanceable view of Claude Code + Codex sessions that need attention." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="/hud.css" />
+</head>
+<body>
+  <main id="hud" class="hud" data-state="loading">
+    <header class="hud-head">
+      <span class="hud-title">agent</span>
+      <span class="hud-mode" id="hud-mode">…</span>
+    </header>
+
+    <section class="hud-empty" hidden>
+      <div class="empty-mark" id="empty-mark">✓</div>
+      <div class="empty-text" id="empty-text">all good</div>
+      <div class="empty-counts" id="empty-counts">—</div>
+    </section>
+
+    <section class="hud-list" hidden>
+      <div class="list-label">needs you</div>
+      <ul id="needs-you-list"></ul>
+    </section>
+
+    <footer class="hud-foot">
+      <span id="foot-stamp">—</span>
+      <span class="foot-sep">·</span>
+      <span id="foot-thresholds">—</span>
+      <span class="foot-sep">·</span>
+      <span id="foot-age" title="how recently the desk Mac published this snapshot">—</span>
+    </footer>
+  </main>
+
+  <script type="module" src="/hud.js"></script>
+</body>
+</html>
