@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "sites",
     "status": "success",
-    "deployedAt": "2026-05-19T00:41:56.386Z",
+    "deployedAt": "2026-05-20T22:07:03.658Z",
     "trigger": "github-webhook",
-    "brokerRunId": "26068942167",
-    "brokerRunNumber": "112",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26068942167",
+    "brokerRunId": "26192678930",
+    "brokerRunNumber": "134",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26192678930",
     "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "sites",
+      "status": "success",
+      "deployedAt": "2026-05-20T22:07:03.658Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26192678930",
+      "brokerRunNumber": "134",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26192678930",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "sites",
       "status": "success",
@@ -199,16 +209,6 @@
       "brokerRunId": "25990349639",
       "brokerRunNumber": "70",
       "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25990349639",
-      "brokerSha": "4f112cbb78e9"
-    },
-    {
-      "siteId": "sites",
-      "status": "success",
-      "deployedAt": "2026-05-17T10:28:26.378Z",
-      "trigger": "github-webhook",
-      "brokerRunId": "25988277380",
-      "brokerRunNumber": "69",
-      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25988277380",
       "brokerSha": "4f112cbb78e9"
     }
   ]
