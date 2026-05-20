@@ -94,20 +94,32 @@ body { padding: 12px; }
 .hud-btn:active {
   background: rgba(255,255,255,0.14);
 }
+/* Keep-awake button states. All green — no amber.
+ *   off     (no class): gray outline, just an icon
+ *   is-active: enabled, will hold when conditions allow (on AC)
+ *   is-held:   actively pinning sleep right now (caffeinate alive)
+ * The is-held variant is just brighter/filled green to signal "yes, working".
+ */
 #btn-keep-awake.is-active {
   color: var(--ok);
   border-color: rgba(111, 210, 138, 0.4);
 }
 #btn-keep-awake.is-held {
-  color: var(--warn);
-  border-color: rgba(232, 169, 59, 0.5);
-  background: rgba(232, 169, 59, 0.08);
+  color: var(--ok);
+  border-color: rgba(111, 210, 138, 0.7);
+  background: rgba(111, 210, 138, 0.14);
 }
 #btn-close { font-size: 16px; }
-.hud[data-state="needs-you"] .hud-mode { color: var(--warn); }
-.hud[data-state="ok"]        .hud-mode { color: var(--ok); }
-.hud[data-state="stale"]     .hud-mode { color: var(--err); }
-.hud[data-state="error"]     .hud-mode { color: var(--err); }
+/* Header mode chip color contract:
+ *   ok     — fg-dim (neutral); "N live" uses the live count color via inline
+ *   stale  — red (publish pipeline broken)
+ *   error  — red (snapshot fetch failed)
+ * Amber is NOT used anywhere anymore. Red is reserved exclusively for
+ * "the dashboard itself isn't being fed", never for a row's state.
+ */
+.hud[data-state="ok"]    .hud-mode { color: var(--ok); }
+.hud[data-state="stale"] .hud-mode { color: var(--err); }
+.hud[data-state="error"] .hud-mode { color: var(--err); }
 .hud[data-state="stale"] .hud-empty .empty-mark { color: var(--err); }
 
 .hud-empty {
@@ -155,33 +167,27 @@ body { padding: 12px; }
   margin-right: -3px;
 }
 .row:hover { background: var(--row-bg-hover); }
+
+/* Two dot colors. That's it.
+ *   live  — green (something happened recently)
+ *   idle  — gray (paused but still tracked)
+ */
 .row .dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--warn);
-  box-shadow: 0 0 6px rgba(232, 169, 59, 0.45);
 }
-.row.row-working .dot {
+.row.row-live .dot {
   background: var(--ok);
   box-shadow: 0 0 6px rgba(111, 210, 138, 0.45);
-}
-.row.row-needs-you .dot {
-  background: var(--warn);
-  box-shadow: 0 0 6px rgba(232, 169, 59, 0.45);
 }
 .row.row-idle .dot {
   background: var(--fg-faint);
   box-shadow: none;
 }
-.row.row-working .label,
-.row.row-working .elapsed {
-  /* working rows are quieter than asking rows — same row, calmer styling */
-  opacity: 0.78;
-}
 .row.row-idle .label,
 .row.row-idle .elapsed,
 .row.row-idle .kind {
-  /* idle (paused longer than the threshold but still tracked) — quieter still */
+  /* idle rows fade into the background; the eye lands on live rows first */
   opacity: 0.55;
 }
 .row .kind {

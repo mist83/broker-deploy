@@ -1,18 +1,19 @@
 // agent.mullmania.com /hud — glanceable view of Claude Code + Codex sessions
-// that need attention on the operator's desk Mac.
+// on the operator's desk Mac.
 //
-// Data source: /hud/snapshot.json — written every ~5s by Valet's worker on the
-// desk Mac. If the file is missing or stale, the HUD says so honestly rather
-// than pretending everything is fine.
+// State model is intentionally minimal:
+//   - each row is either "live" (green dot, recent on-disk write) or
+//     "idle" (gray dot, paused but still tracked)
+//   - red ONLY appears for "snapshot pipeline broken" — never per-row
+//   - the ☕ button is an unconditional keep-awake toggle (no agent-watching)
+//
+// Data source: /hud/snapshot.json — published every ~5s by Valet's worker.
 
 const SNAPSHOT_URL = "/hud/snapshot.json";
 const POLL_INTERVAL_MS = 2000;
-const STALE_SECONDS = 60;  // surface "stale" only after a full minute of silence
+const STALE_SECONDS = 60;     // snapshot file older than this → "stale" red
 const TIMEOUT_MS = 4000;
-// Tolerate transient blips (single S3/CloudFront miss, network jitter) before
-// flashing red. 5 * 2s ≈ 10s of sustained failure before the user sees an
-// error state — long enough that a normal hiccup doesn't twitch the UI.
-const ERROR_THRESHOLD = 5;
+const ERROR_THRESHOLD = 5;    // 5 * 2s = ~10s sustained fail before red
 
 const hud = document.getElementById("hud");
 const modeEl = document.getElementById("hud-mode");
@@ -26,8 +27,12 @@ const listEl = document.getElementById("needs-you-list");
 const footStamp = document.getElementById("foot-stamp");
 const footThresholds = document.getElementById("foot-thresholds");
 const footAge = document.getElementById("foot-age");
+const btnClose = document.getElementById("btn-close");
+const btnKeepAwake = document.getElementById("btn-keep-awake");
 
 let consecutiveFailures = 0;
+
+// --- formatting helpers -----------------------------------------------
 
 function formatDuration(secondsIn) {
   const s = Math.max(0, Math.floor(Number(secondsIn) || 0));
@@ -61,46 +66,6 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
-function rowHtml(session, state) {
-  // state ∈ {"working","needs-you","idle"} — drives the dot color so a
-  // session that flips between "wrote a chunk 3s ago" and "tool paused 11s
-  // ago" stays in the row list and just changes color, instead of
-  // disappearing and reappearing.
-  //
-  // Two clocks per row, because they answer different questions:
-  //   started — how old is this conversation? (birthtime of the jsonl)
-  //   elapsed — how long since the last on-disk write? (mtime)
-  // A 6-minute typing pause should not make an 8-hour conversation look
-  // brand new — and a brand new conversation should not show as 8 hours
-  // old just because someone left their terminal open.
-  const label = shortProject(session.project) || shortSessionId(session.sessionId) || "—";
-  const elapsed = formatDuration(session.secondsSinceActivity);
-  const started = formatDuration(session.secondsSinceStart || 0);
-  const showStarted = (session.secondsSinceStart || 0) >= 60;
-  const startedSpan = showStarted
-    ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
-    : "";
-  const title = (session.project || session.sessionId || "") +
-    `\nstarted ${started} ago, last write ${elapsed} ago`;
-  return `
-    <li class="row row-${session.kind} row-${state}">
-      <span class="dot"></span>
-      <span class="kind">${session.kind}</span>
-      <span class="label" title="${escapeHtml(title)}">${escapeHtml(label)}</span>
-      ${startedSpan}
-      <span class="elapsed" title="time since last write to the session file">${escapeHtml(elapsed)}</span>
-    </li>
-  `;
-}
-
-function summarizeLiveCounts(counts) {
-  const parts = [];
-  if (counts.claude > 0) parts.push(`${counts.claude} claude`);
-  if (counts.codex > 0) parts.push(`${counts.codex} codex`);
-  if (parts.length === 0) return "no live sessions";
-  return parts.join(" · ");
-}
-
 function plural(n, one, many) { return n === 1 ? one : many; }
 
 function formatStamp(epoch) {
@@ -110,34 +75,53 @@ function formatStamp(epoch) {
   return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
+// --- row rendering ----------------------------------------------------
+
+function rowHtml(session, state) {
+  // state ∈ {"live","idle"}. Two clocks per row:
+  //   started — birthtime of the jsonl (how old is this conversation?)
+  //   elapsed — mtime of the jsonl (how long since the last write?)
+  const label = shortProject(session.project) || shortSessionId(session.sessionId) || "—";
+  const elapsed = formatDuration(session.secondsSinceActivity);
+  const started = formatDuration(session.secondsSinceStart || 0);
+  const showStarted = (session.secondsSinceStart || 0) >= 60;
+  const startedSpan = showStarted
+    ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
+    : "";
+  const title = (session.project || session.sessionId || "") +
+    `\nstarted ${started} ago · last write ${elapsed} ago`;
+  return `
+    <li class="row row-${session.kind} row-${state}">
+      <span class="dot"></span>
+      <span class="kind">${session.kind}</span>
+      <span class="label" title="${escapeHtml(title)}">${escapeHtml(label)}</span>
+      ${startedSpan}
+      <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
+    </li>
+  `;
+}
+
+// --- main render ------------------------------------------------------
+
 function render(snapshot) {
   const counts = snapshot.counts || {};
   const thresholds = snapshot.thresholds || {};
-  const needsYou = Array.isArray(snapshot.needsYou) ? snapshot.needsYou : [];
-  const working = Array.isArray(snapshot.working) ? snapshot.working : [];
+  const live = Array.isArray(snapshot.live) ? snapshot.live : [];
   const idle = Array.isArray(snapshot.idle) ? snapshot.idle : [];
   const now = Math.floor(Date.now() / 1000);
   const ageSec = Math.max(0, now - Number(snapshot.generatedAt || now));
   const isStale = ageSec > STALE_SECONDS;
 
-  // Always list every session the scanner saw: working + needs-you + idle.
-  // A long-paused-but-still-open CLI session belongs on the HUD; hiding it
-  // after 5 minutes of silence was the "where did my session go?" bug.
-  // Sort with urgency tiers: needs-you (asking) first, then working, then
-  // idle. Within "needs you", oldest pause floats up so the most-stuck one
-  // is at the very top.
-  const STATE_RANK = { "needs-you": 0, "working": 1, "idle": 2 };
-  const liveRows = [
-    ...needsYou.map((s) => ({ s, state: "needs-you" })),
-    ...working.map((s) => ({ s, state: "working" })),
+  // One unified list: live first (green dots), then idle (gray). The eye
+  // lands on live rows naturally; idle rows are quieter.
+  const rows = [
+    ...live.map((s) => ({ s, state: "live" })),
     ...idle.map((s) => ({ s, state: "idle" })),
-  ].sort((a, b) => {
-    const rankDiff = STATE_RANK[a.state] - STATE_RANK[b.state];
-    if (rankDiff !== 0) return rankDiff;
-    return b.s.secondsSinceActivity - a.s.secondsSinceActivity;
-  });
+  ];
 
   if (isStale) {
+    // Red surfaces ONLY for "the dashboard itself isn't being fed" —
+    // never to describe an agent. Honest separation of concerns.
     hud.setAttribute("data-state", "stale");
     modeEl.textContent = `${formatDuration(ageSec)} stale`;
     emptySection.hidden = false;
@@ -145,73 +129,38 @@ function render(snapshot) {
     emptyMark.textContent = "!";
     emptyText.textContent = "desk Mac quiet";
     emptyCounts.textContent = "no recent publish";
-  } else if (liveRows.length === 0) {
+  } else if (rows.length === 0) {
     hud.setAttribute("data-state", "ok");
-    modeEl.textContent = "idle watch";
+    modeEl.textContent = "no sessions";
     emptySection.hidden = false;
     listSection.hidden = true;
-    emptyMark.textContent = "✓";
-    emptyText.textContent = "all good";
-    emptyCounts.textContent = summarizeLiveCounts(counts);
+    emptyMark.textContent = "·";
+    emptyText.textContent = "nothing tracked";
+    emptyCounts.textContent = "no agent sessions found";
   } else {
-    const askingCount = needsYou.length;
-    if (askingCount > 0) {
-      hud.setAttribute("data-state", "needs-you");
-      modeEl.textContent = `${askingCount} ${plural(askingCount, "asking", "asking")}`;
-      listLabel.textContent = `needs you · ${askingCount} of ${liveRows.length}`;
+    hud.setAttribute("data-state", "ok");
+    const liveCount = live.length;
+    if (liveCount > 0) {
+      modeEl.textContent = `${liveCount} live`;
     } else {
-      hud.setAttribute("data-state", "ok");
-      modeEl.textContent = `${liveRows.length} live`;
-      listLabel.textContent = "live sessions";
+      modeEl.textContent = `${rows.length} tracked`;
     }
+    listLabel.textContent = "sessions";
     emptySection.hidden = true;
     listSection.hidden = false;
-    listEl.innerHTML = liveRows.map(({ s, state }) => rowHtml(s, state)).join("");
+    listEl.innerHTML = rows.map(({ s, state }) => rowHtml(s, state)).join("");
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);
-  footThresholds.textContent =
-    `live <${thresholds.workingSeconds}s · stale >${thresholds.idleSeconds}s`;
+  footThresholds.textContent = `live <${thresholds.liveSeconds || 300}s`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
 
-  // Reflect keep-awake state from the snapshot (server reads the on-disk
-  // state from the menu bar applet — see lecter/server.js). The host used
-  // to push state via evaluateJavaScript, but WebKit's reply path crashed
-  // the JXA applet; reading from the snapshot is the safe channel.
-  if (snapshot.keepAwake && window.__valetHudSetKeepAwake) {
-    let label = "off";
-    if (snapshot.keepAwake.held) label = "held";
-    else if (snapshot.keepAwake.enabled) label = "active";
-    window.__valetHudSetKeepAwake(label);
-  }
+  // ☕ reflects the menu bar applet's persisted state, read out of the
+  // snapshot endpoint. Click handler does optimistic visual update so the
+  // user doesn't wait for the next poll to see feedback.
+  if (snapshot.keepAwake) applyKeepAwakeVisual(snapshot.keepAwake);
 
   reportSizeToHost();
-}
-
-// When this page is hosted inside the lecter floating window's WKWebView,
-// the JXA shell registers a WKScriptMessageHandler named "lecterHud" that
-// resizes the NSWindow to match the card's actual height. Posting after
-// every render keeps the window snug as the HUD state changes (idle ↔
-// "needs you" lists of different lengths). In a regular browser the
-// handler is absent and this is a no-op.
-let lastReportedHeight = 0;
-function reportSizeToHost() {
-  try {
-    if (!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud)) {
-      return;
-    }
-    // Read after layout settles so we don't ping with a stale height.
-    requestAnimationFrame(() => {
-      const card = document.getElementById("hud");
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      // Card height + body padding (12px top + 12px bottom).
-      const height = Math.ceil(rect.height) + 24;
-      if (height === lastReportedHeight) return;
-      lastReportedHeight = height;
-      window.webkit.messageHandlers.lecterHud.postMessage({ height });
-    });
-  } catch (_) { /* not hosted, ignore */ }
 }
 
 function renderError(message) {
@@ -227,6 +176,82 @@ function renderError(message) {
   footAge.textContent = "—";
   reportSizeToHost();
 }
+
+// --- size reporting (host auto-resize) --------------------------------
+
+let lastReportedHeight = 0;
+function reportSizeToHost() {
+  try {
+    if (!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud)) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      const card = document.getElementById("hud");
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const height = Math.ceil(rect.height) + 24;
+      if (height === lastReportedHeight) return;
+      lastReportedHeight = height;
+      window.webkit.messageHandlers.lecterHud.postMessage({ height });
+    });
+  } catch (_) { /* not hosted, ignore */ }
+}
+
+// --- keep-awake button ------------------------------------------------
+
+// Local override so a click can flip the icon immediately, before the
+// next snapshot tick. Cleared once the snapshot confirms a matching state.
+let keepAwakeOptimistic = null;
+
+function applyKeepAwakeVisual(state) {
+  if (!btnKeepAwake) return;
+  // If we have an optimistic override and it matches what the snapshot
+  // reports, clear it — server caught up.
+  if (keepAwakeOptimistic !== null && state.enabled === keepAwakeOptimistic) {
+    keepAwakeOptimistic = null;
+  }
+  const enabled = keepAwakeOptimistic !== null ? keepAwakeOptimistic : !!state.enabled;
+  const held = enabled && !!state.held;
+  btnKeepAwake.classList.toggle("is-active", enabled && !held);
+  btnKeepAwake.classList.toggle("is-held", held);
+  btnKeepAwake.title = enabled
+    ? (held ? "Keep-awake on — Mac is being held awake. Click to turn off."
+            : "Keep-awake on — will hold sleep when plugged in. Click to turn off.")
+    : "Keep-awake off — Mac sleeps normally. Click to keep awake.";
+}
+
+function postToHost(payload) {
+  try {
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud) {
+      window.webkit.messageHandlers.lecterHud.postMessage(payload);
+      return true;
+    }
+  } catch (_) {}
+  return false;
+}
+
+if (btnClose) {
+  btnClose.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!postToHost({ action: "close" })) window.close();
+  });
+}
+
+if (btnKeepAwake) {
+  btnKeepAwake.addEventListener("click", (e) => {
+    e.preventDefault();
+    // Optimistic flip: visually toggle right away. Snapshot will reconcile
+    // within ~2s, and applyKeepAwakeVisual clears the override once they
+    // agree.
+    const currentlyEnabled = btnKeepAwake.classList.contains("is-active")
+      || btnKeepAwake.classList.contains("is-held");
+    keepAwakeOptimistic = !currentlyEnabled;
+    applyKeepAwakeVisual({ enabled: keepAwakeOptimistic, held: false });
+    postToHost({ action: "toggleKeepAwake" });
+  });
+}
+
+// --- poll loop --------------------------------------------------------
 
 async function poll() {
   const ctl = new AbortController();
@@ -244,60 +269,6 @@ async function poll() {
     clearTimeout(timeoutId);
   }
 }
-
-// --- inline buttons -------------------------------------------------------
-// The lecter menu bar item is the canonical control surface, but finding a
-// status-bar icon in a busy menu bar is genuinely hard. So the two most
-// useful actions get inline buttons on the card itself, and post to the
-// host's WKScriptMessageHandler — the same channel that already reports
-// size, just with action messages.
-
-const btnClose = document.getElementById("btn-close");
-const btnKeepAwake = document.getElementById("btn-keep-awake");
-
-function postToHost(payload) {
-  try {
-    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud) {
-      window.webkit.messageHandlers.lecterHud.postMessage(payload);
-      return true;
-    }
-  } catch (_) {}
-  return false;
-}
-
-if (btnClose) {
-  btnClose.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (!postToHost({ action: "close" })) {
-      // Outside the JXA host (regular browser tab) — best-effort fallback.
-      window.close();
-    }
-  });
-}
-
-if (btnKeepAwake) {
-  btnKeepAwake.addEventListener("click", (e) => {
-    e.preventDefault();
-    postToHost({ action: "toggleKeepAwake" });
-  });
-}
-
-// The host pushes keep-awake state changes into the page so the ☕ icon
-// reflects reality (off / enabled-but-idle / actively holding). Exposed as
-// a global the JXA shell can evaluateJavaScript into.
-window.__valetHudSetKeepAwake = function (state) {
-  if (!btnKeepAwake) return;
-  btnKeepAwake.classList.remove("is-active", "is-held");
-  if (state === "held") {
-    btnKeepAwake.classList.add("is-held");
-    btnKeepAwake.title = "Sleep held — click to allow sleep again";
-  } else if (state === "active") {
-    btnKeepAwake.classList.add("is-active");
-    btnKeepAwake.title = "Keep-awake on (ready, waiting for active agents)";
-  } else {
-    btnKeepAwake.title = "Keep-awake off — click to enable";
-  }
-};
 
 poll();
 setInterval(poll, POLL_INTERVAL_MS);
