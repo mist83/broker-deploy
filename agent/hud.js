@@ -85,6 +85,28 @@ function formatStamp(epoch) {
 
 // --- row rendering ----------------------------------------------------
 
+// Tracks which row (by sessionId) is currently expanded to show its synopsis.
+// Only one at a time — keeps the card compact and matches "click to peek".
+let expandedSessionId = null;
+
+function synopsisHtml(syn) {
+  if (!syn || (!syn.lastUser && !syn.lastAssistant && !syn.currentTool)) {
+    return `<div class="syn-empty">No activity in the recent tail of the session file yet.</div>`;
+  }
+  const parts = [];
+  if (syn.lastUser) {
+    parts.push(`<div class="syn-line syn-user"><span class="syn-label">you</span><span class="syn-text">${escapeHtml(syn.lastUser)}</span></div>`);
+  }
+  if (syn.lastAssistant) {
+    parts.push(`<div class="syn-line syn-asst"><span class="syn-label">agent</span><span class="syn-text">${escapeHtml(syn.lastAssistant)}</span></div>`);
+  }
+  if (syn.currentTool) {
+    const desc = syn.currentTool.description ? ` · ${syn.currentTool.description}` : "";
+    parts.push(`<div class="syn-line syn-tool"><span class="syn-label">doing</span><span class="syn-text">${escapeHtml(syn.currentTool.name)}${escapeHtml(desc)}</span></div>`);
+  }
+  return parts.join("");
+}
+
 function rowHtml(session, state) {
   // state ∈ {"live","idle"}. Two clocks per row:
   //   started — birthtime of the jsonl (how old is this conversation?)
@@ -105,14 +127,19 @@ function rowHtml(session, state) {
     ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
     : `<span class="started"></span>`;
   const tooltip = (session.title || session.project || session.sessionId || "") +
-    `\nstarted ${started} ago · last write ${elapsed} ago`;
+    `\nstarted ${started} ago · last write ${elapsed} ago · click for live synopsis`;
+  const isExpanded = expandedSessionId === session.sessionId;
+  const expandedSection = isExpanded
+    ? `<div class="row-synopsis">${synopsisHtml(session.synopsis)}</div>`
+    : "";
   return `
-    <li class="row row-${session.kind} row-${state}">
+    <li class="row row-${session.kind} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}">
       <span class="dot"></span>
       <span class="kind">${session.kind}</span>
       <span class="label" title="${escapeHtml(tooltip)}">${escapeHtml(label)}</span>
       ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
+      ${expandedSection}
     </li>
   `;
 }
@@ -207,9 +234,26 @@ function render(snapshot) {
     emptySection.hidden = true;
     listSection.hidden = false;
     listEl.innerHTML = rows.map(({ s, state }) => rowHtml(s, state)).join("");
+    // If the previously-expanded row dropped off the list, collapse.
+    if (expandedSessionId && !rows.some((r) => r.s.sessionId === expandedSessionId)) {
+      expandedSessionId = null;
+    }
+    // Click any row to expand/collapse its synopsis. Listener attaches once
+    // per render so we don't accumulate handlers; clicks on the sort chip
+    // are stopped from bubbling so they don't toggle a row.
+    listEl.querySelectorAll(".row").forEach((row) => {
+      row.addEventListener("click", (e) => {
+        e.preventDefault();
+        const sid = row.getAttribute("data-session-id");
+        if (!sid) return;
+        expandedSessionId = expandedSessionId === sid ? null : sid;
+        render(snapshot);
+      });
+    });
     const cycle = document.getElementById("sort-cycle");
     if (cycle) cycle.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const i = SORT_MODES.indexOf(sortMode);
       sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
       try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}

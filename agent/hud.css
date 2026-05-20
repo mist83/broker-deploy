@@ -222,6 +222,48 @@ body { padding: 12px; }
   /* idle rows fade into the background; the eye lands on live rows first */
   opacity: 0.55;
 }
+
+/* Click-to-peek expansion */
+.row { cursor: pointer !important; }
+.row:hover { background: var(--row-bg-hover); }
+.row.is-expanded { background: var(--row-bg-hover); }
+
+.row-synopsis {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 2px solid var(--bg-edge);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+.syn-line {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+.syn-label {
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  color: var(--fg-faint);
+}
+.syn-text {
+  color: var(--fg-dim);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.syn-user .syn-label { color: var(--fg-dim); }
+.syn-asst .syn-label { color: var(--claude); }
+.syn-asst .syn-text { color: var(--fg); }
+.syn-tool .syn-label { color: var(--ok); }
+.syn-tool .syn-text { color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+.syn-empty { color: var(--fg-faint); font-style: italic; font-size: 10px; }
 .row .kind {
   font-size: 10px;
   text-transform: uppercase;
