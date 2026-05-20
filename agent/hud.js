@@ -89,20 +89,28 @@ function rowHtml(session, state) {
   // state ∈ {"live","idle"}. Two clocks per row:
   //   started — birthtime of the jsonl (how old is this conversation?)
   //   elapsed — mtime of the jsonl (how long since the last write?)
-  const label = shortProject(session.project) || shortSessionId(session.sessionId) || "—";
+  //
+  // Label preference (most-meaningful first):
+  //   1. session.title    — Claude's aiTitle ("Build the foo widget")
+  //   2. session.project  — Codex's cwd ("/Users/mist83/Code/agent")
+  //   3. short session id — last resort
+  const label =
+    (session.title && session.title.trim()) ||
+    shortProject(session.project) ||
+    shortSessionId(session.sessionId) || "—";
   const elapsed = formatDuration(session.secondsSinceActivity);
   const started = formatDuration(session.secondsSinceStart || 0);
   const showStarted = (session.secondsSinceStart || 0) >= 60;
   const startedSpan = showStarted
     ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
-    : "";
-  const title = (session.project || session.sessionId || "") +
+    : `<span class="started"></span>`;
+  const tooltip = (session.title || session.project || session.sessionId || "") +
     `\nstarted ${started} ago · last write ${elapsed} ago`;
   return `
     <li class="row row-${session.kind} row-${state}">
       <span class="dot"></span>
       <span class="kind">${session.kind}</span>
-      <span class="label" title="${escapeHtml(title)}">${escapeHtml(label)}</span>
+      <span class="label" title="${escapeHtml(tooltip)}">${escapeHtml(label)}</span>
       ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
     </li>
@@ -110,6 +118,44 @@ function rowHtml(session, state) {
 }
 
 // --- main render ------------------------------------------------------
+
+// User-pickable sort. Default is `started` (oldest at top, brand new
+// sessions append at the bottom) — that's the stable order: a session's
+// startedAt never changes, so the list doesn't reshuffle as sessions
+// pause and resume. The operator can cycle to a different sort via the
+// header chip; choice persists in localStorage.
+const SORT_MODES = ["started", "recent", "kind"];
+const SORT_STORAGE_KEY = "valet-hud-sort";
+let sortMode = (() => {
+  try { return SORT_MODES.includes(localStorage.getItem(SORT_STORAGE_KEY))
+    ? localStorage.getItem(SORT_STORAGE_KEY) : "started"; } catch { return "started"; }
+})();
+
+function sortLabel(mode) {
+  switch (mode) {
+    case "recent": return "recent";
+    case "kind":   return "kind";
+    default:       return "started";
+  }
+}
+
+function applySort(rows, mode) {
+  const STATE_RANK = { live: 0, idle: 1 };
+  // Live always above idle within any sort — the dot color is the strongest
+  // signal and we don't want active sessions sinking under idle ones.
+  return rows.slice().sort((a, b) => {
+    const rankDiff = STATE_RANK[a.state] - STATE_RANK[b.state];
+    if (rankDiff !== 0) return rankDiff;
+    if (mode === "recent") return a.s.secondsSinceActivity - b.s.secondsSinceActivity;
+    if (mode === "kind") {
+      const k = a.s.kind.localeCompare(b.s.kind);
+      if (k !== 0) return k;
+      return b.s.secondsSinceStart - a.s.secondsSinceStart;
+    }
+    // "started" — oldest at top. secondsSinceStart desc.
+    return b.s.secondsSinceStart - a.s.secondsSinceStart;
+  });
+}
 
 function render(snapshot) {
   const counts = snapshot.counts || {};
@@ -120,12 +166,13 @@ function render(snapshot) {
   const ageSec = Math.max(0, now - Number(snapshot.generatedAt || now));
   const isStale = ageSec > STALE_SECONDS;
 
-  // One unified list: live first (green dots), then idle (gray). The eye
-  // lands on live rows naturally; idle rows are quieter.
-  const rows = [
-    ...live.map((s) => ({ s, state: "live" })),
-    ...idle.map((s) => ({ s, state: "idle" })),
-  ];
+  const rows = applySort(
+    [
+      ...live.map((s) => ({ s, state: "live" })),
+      ...idle.map((s) => ({ s, state: "idle" })),
+    ],
+    sortMode,
+  );
 
   if (isStale) {
     // Red surfaces ONLY for "the dashboard itself isn't being fed" —
@@ -153,10 +200,21 @@ function render(snapshot) {
     } else {
       modeEl.textContent = `${rows.length} tracked`;
     }
-    listLabel.textContent = "sessions";
+    // Compose the label with the sort selector so it's always visible.
+    listLabel.innerHTML =
+      `sessions <button class="sort-cycle" type="button" id="sort-cycle"` +
+      ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>`;
     emptySection.hidden = true;
     listSection.hidden = false;
     listEl.innerHTML = rows.map(({ s, state }) => rowHtml(s, state)).join("");
+    const cycle = document.getElementById("sort-cycle");
+    if (cycle) cycle.addEventListener("click", (e) => {
+      e.preventDefault();
+      const i = SORT_MODES.indexOf(sortMode);
+      sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
+      try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}
+      render(snapshot);
+    });
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);
