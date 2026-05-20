@@ -248,13 +248,18 @@ if (btnClose) {
 if (btnKeepAwake) {
   btnKeepAwake.addEventListener("click", (e) => {
     e.preventDefault();
-    // Optimistic flip: visually toggle right away. Snapshot will reconcile
-    // within ~2s, and applyKeepAwakeVisual clears the override once they
-    // agree.
+    // Optimistic flip. We deliberately do NOT route through
+    // applyKeepAwakeVisual here — that function clears the optimistic
+    // override whenever the passed-in state matches, which would cause
+    // the next stale snapshot poll to flicker the button back off.
+    // Instead, set the override and update the classes directly. The next
+    // genuine snapshot (within ~2s) that REPORTS the new server state will
+    // be the one that clears the override.
     const currentlyEnabled = btnKeepAwake.classList.contains("is-active")
       || btnKeepAwake.classList.contains("is-held");
     keepAwakeOptimistic = !currentlyEnabled;
-    applyKeepAwakeVisual({ enabled: keepAwakeOptimistic, held: false });
+    btnKeepAwake.classList.toggle("is-active", keepAwakeOptimistic);
+    btnKeepAwake.classList.toggle("is-held", false);
     postToHost({ action: "toggleKeepAwake" });
   });
 }

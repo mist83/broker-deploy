@@ -75,17 +75,24 @@ body { padding: 12px; }
   background: transparent;
   border: 1px solid transparent;
   color: var(--fg-dim);
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 26px;
   line-height: 1;
   padding: 0;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: background 90ms ease, color 90ms ease, border-color 90ms ease;
+}
+.hud-btn * {
+  /* Inner emoji span otherwise inherits the global `cursor: default` rule
+   * and the operator sees a default cursor on the most-clickable pixels.
+   * Force pointer cursor inside the button so the whole button feels hot. */
+  cursor: pointer !important;
+  pointer-events: none;  /* clicks bubble to the button, not the span */
 }
 .hud-btn:hover {
   background: rgba(255,255,255,0.08);
