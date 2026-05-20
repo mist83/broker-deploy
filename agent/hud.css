@@ -139,14 +139,20 @@ body { padding: 12px; }
 }
 .row {
   display: grid;
-  grid-template-columns: 10px 50px 1fr auto;
-  align-items: center;
+  grid-template-columns: 10px 50px 1fr auto auto;
+  align-items: baseline;
   gap: 8px;
   padding: 6px 10px;
   background: var(--row-bg);
   border-radius: 7px;
   font-size: 12px;
   transition: background 80ms ease;
+}
+.row .started {
+  color: var(--fg-faint);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  margin-right: -3px;
 }
 .row:hover { background: var(--row-bg-hover); }
 .row .dot {

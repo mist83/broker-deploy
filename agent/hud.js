@@ -62,19 +62,33 @@ function escapeHtml(text) {
 }
 
 function rowHtml(session, state) {
-  // state ∈ {"working","needs-you"} — drives the dot color so a session
-  // that flips between "wrote a chunk 3s ago" and "tool paused 11s ago"
-  // stays in the row list and just changes color, instead of disappearing
-  // and reappearing.
+  // state ∈ {"working","needs-you","idle"} — drives the dot color so a
+  // session that flips between "wrote a chunk 3s ago" and "tool paused 11s
+  // ago" stays in the row list and just changes color, instead of
+  // disappearing and reappearing.
+  //
+  // Two clocks per row, because they answer different questions:
+  //   started — how old is this conversation? (birthtime of the jsonl)
+  //   elapsed — how long since the last on-disk write? (mtime)
+  // A 6-minute typing pause should not make an 8-hour conversation look
+  // brand new — and a brand new conversation should not show as 8 hours
+  // old just because someone left their terminal open.
   const label = shortProject(session.project) || shortSessionId(session.sessionId) || "—";
   const elapsed = formatDuration(session.secondsSinceActivity);
-  const title = session.project || session.sessionId || "";
+  const started = formatDuration(session.secondsSinceStart || 0);
+  const showStarted = (session.secondsSinceStart || 0) >= 60;
+  const startedSpan = showStarted
+    ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
+    : "";
+  const title = (session.project || session.sessionId || "") +
+    `\nstarted ${started} ago, last write ${elapsed} ago`;
   return `
     <li class="row row-${session.kind} row-${state}">
       <span class="dot"></span>
       <span class="kind">${session.kind}</span>
       <span class="label" title="${escapeHtml(title)}">${escapeHtml(label)}</span>
-      <span class="elapsed">${escapeHtml(elapsed)}</span>
+      ${startedSpan}
+      <span class="elapsed" title="time since last write to the session file">${escapeHtml(elapsed)}</span>
     </li>
   `;
 }
