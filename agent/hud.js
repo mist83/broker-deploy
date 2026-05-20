@@ -21,6 +21,7 @@ const emptyMark = document.getElementById("empty-mark");
 const emptyText = document.getElementById("empty-text");
 const emptyCounts = document.getElementById("empty-counts");
 const listSection = hud.querySelector(".hud-list");
+const listLabel = document.getElementById("list-label");
 const listEl = document.getElementById("needs-you-list");
 const footStamp = document.getElementById("foot-stamp");
 const footThresholds = document.getElementById("foot-thresholds");
@@ -60,12 +61,16 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
-function rowHtml(session) {
+function rowHtml(session, state) {
+  // state ∈ {"working","needs-you"} — drives the dot color so a session
+  // that flips between "wrote a chunk 3s ago" and "tool paused 11s ago"
+  // stays in the row list and just changes color, instead of disappearing
+  // and reappearing.
   const label = shortProject(session.project) || shortSessionId(session.sessionId) || "—";
   const elapsed = formatDuration(session.secondsSinceActivity);
   const title = session.project || session.sessionId || "";
   return `
-    <li class="row row-${session.kind}">
+    <li class="row row-${session.kind} row-${state}">
       <span class="dot"></span>
       <span class="kind">${session.kind}</span>
       <span class="label" title="${escapeHtml(title)}">${escapeHtml(label)}</span>
@@ -74,12 +79,11 @@ function rowHtml(session) {
   `;
 }
 
-function renderCounts(counts) {
+function summarizeLiveCounts(counts) {
   const parts = [];
   if (counts.claude > 0) parts.push(`${counts.claude} claude`);
   if (counts.codex > 0) parts.push(`${counts.codex} codex`);
   if (parts.length === 0) return "no live sessions";
-  parts.push(`${counts.working} working`);
   return parts.join(" · ");
 }
 
@@ -96,9 +100,19 @@ function render(snapshot) {
   const counts = snapshot.counts || {};
   const thresholds = snapshot.thresholds || {};
   const needsYou = Array.isArray(snapshot.needsYou) ? snapshot.needsYou : [];
+  const working = Array.isArray(snapshot.working) ? snapshot.working : [];
   const now = Math.floor(Date.now() / 1000);
   const ageSec = Math.max(0, now - Number(snapshot.generatedAt || now));
   const isStale = ageSec > STALE_SECONDS;
+
+  // Always list every live session (working + needs-you). Sorting by
+  // least-recently-active surfaces the "this one's been quiet a while"
+  // rows at the top without making working sessions disappear when their
+  // mtime briefly drops under workingSeconds.
+  const liveRows = [
+    ...needsYou.map((s) => ({ s, state: "needs-you" })),
+    ...working.map((s) => ({ s, state: "working" })),
+  ].sort((a, b) => b.s.secondsSinceActivity - a.s.secondsSinceActivity);
 
   if (isStale) {
     hud.setAttribute("data-state", "stale");
@@ -108,20 +122,28 @@ function render(snapshot) {
     emptyMark.textContent = "!";
     emptyText.textContent = "desk Mac quiet";
     emptyCounts.textContent = "no recent publish";
-  } else if (needsYou.length === 0) {
+  } else if (liveRows.length === 0) {
     hud.setAttribute("data-state", "ok");
     modeEl.textContent = "idle watch";
     emptySection.hidden = false;
     listSection.hidden = true;
     emptyMark.textContent = "✓";
     emptyText.textContent = "all good";
-    emptyCounts.textContent = renderCounts(counts);
+    emptyCounts.textContent = summarizeLiveCounts(counts);
   } else {
-    hud.setAttribute("data-state", "needs-you");
-    modeEl.textContent = `${needsYou.length} ${plural(needsYou.length, "asking", "asking")}`;
+    const askingCount = needsYou.length;
+    if (askingCount > 0) {
+      hud.setAttribute("data-state", "needs-you");
+      modeEl.textContent = `${askingCount} ${plural(askingCount, "asking", "asking")}`;
+      listLabel.textContent = `needs you · ${askingCount} of ${liveRows.length}`;
+    } else {
+      hud.setAttribute("data-state", "ok");
+      modeEl.textContent = `${liveRows.length} live`;
+      listLabel.textContent = "live sessions";
+    }
     emptySection.hidden = true;
     listSection.hidden = false;
-    listEl.innerHTML = needsYou.map(rowHtml).join("");
+    listEl.innerHTML = liveRows.map(({ s, state }) => rowHtml(s, state)).join("");
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);

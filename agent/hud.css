@@ -114,6 +114,19 @@ body { padding: 12px; }
   background: var(--warn);
   box-shadow: 0 0 6px rgba(232, 169, 59, 0.45);
 }
+.row.row-working .dot {
+  background: var(--ok);
+  box-shadow: 0 0 6px rgba(111, 210, 138, 0.45);
+}
+.row.row-needs-you .dot {
+  background: var(--warn);
+  box-shadow: 0 0 6px rgba(232, 169, 59, 0.45);
+}
+.row.row-working .label,
+.row.row-working .elapsed {
+  /* working rows are quieter than asking rows — same row, calmer styling */
+  opacity: 0.78;
+}
 .row .kind {
   font-size: 10px;
   text-transform: uppercase;
