@@ -15,6 +15,14 @@ const STALE_SECONDS = 60;     // snapshot file older than this → "stale" red
 const TIMEOUT_MS = 4000;
 const ERROR_THRESHOLD = 5;    // 5 * 2s = ~10s sustained fail before red
 
+// Once an hour, force a hard reload so a deployed page change propagates
+// even into already-open floating HUD windows. Without this, the WKWebView
+// keeps running whatever JS it loaded when the window was first shown, and
+// a deploy is only picked up by a manual "Reload (cloud)" or applet
+// restart. The reload is cheap and the HUD has no state worth preserving.
+const SELF_RELOAD_INTERVAL_MS = 60 * 60 * 1000;
+setTimeout(() => { window.location.reload(); }, SELF_RELOAD_INTERVAL_MS);
+
 const hud = document.getElementById("hud");
 const modeEl = document.getElementById("hud-mode");
 const emptySection = hud.querySelector(".hud-empty");
