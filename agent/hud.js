@@ -9,6 +9,10 @@ const SNAPSHOT_URL = "/hud/snapshot.json";
 const POLL_INTERVAL_MS = 2000;
 const STALE_SECONDS = 30;  // if snapshot is older than this, surface it
 const TIMEOUT_MS = 4000;
+// Tolerate transient blips (single S3/CloudFront miss, network jitter) before
+// flashing red. 5 * 2s ≈ 10s of sustained failure before the user sees an
+// error state — long enough that a normal hiccup doesn't twitch the UI.
+const ERROR_THRESHOLD = 5;
 
 const hud = document.getElementById("hud");
 const modeEl = document.getElementById("hud-mode");
@@ -150,7 +154,7 @@ async function poll() {
     render(snapshot);
   } catch (err) {
     consecutiveFailures += 1;
-    if (consecutiveFailures >= 2) renderError(String(err.message || err));
+    if (consecutiveFailures >= ERROR_THRESHOLD) renderError(String(err.message || err));
   } finally {
     clearTimeout(timeoutId);
   }

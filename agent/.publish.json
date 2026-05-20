@@ -1,21 +1,21 @@
 {
   "siteId": "agent",
   "host": "agent.mullmania.com",
-  "publishedAt": "2026-05-20T03:27:17.045Z",
+  "publishedAt": "2026-05-20T03:42:36.598Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site",
   "assetVersion": {
-    "semver": "1.0.21",
-    "previousSemver": "1.0.20",
+    "semver": "1.0.23",
+    "previousSemver": "1.0.22",
     "bump": "patch",
     "initialVersion": "1.0.0",
     "token": "__MULLMANIA_ASSET_VERSION__",
     "manifestPath": "./asset-version.json",
     "manifestUrl": "https://agent.mullmania.com/asset-version.json",
-    "publishedAt": "2026-05-20T03:27:17.045Z"
+    "publishedAt": "2026-05-20T03:42:36.598Z"
   },
   "counts": {
     "hostingFiles": 270,
-    "hostingBytes": 1476567,
+    "hostingBytes": 1476839,
     "dataFiles": 0,
     "dataBytes": 0
   }
