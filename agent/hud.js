@@ -128,6 +128,34 @@ function render(snapshot) {
   footThresholds.textContent =
     `live <${thresholds.workingSeconds}s · stale >${thresholds.idleSeconds}s`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
+
+  reportSizeToHost();
+}
+
+// When this page is hosted inside the lecter floating window's WKWebView,
+// the JXA shell registers a WKScriptMessageHandler named "lecterHud" that
+// resizes the NSWindow to match the card's actual height. Posting after
+// every render keeps the window snug as the HUD state changes (idle ↔
+// "needs you" lists of different lengths). In a regular browser the
+// handler is absent and this is a no-op.
+let lastReportedHeight = 0;
+function reportSizeToHost() {
+  try {
+    if (!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud)) {
+      return;
+    }
+    // Read after layout settles so we don't ping with a stale height.
+    requestAnimationFrame(() => {
+      const card = document.getElementById("hud");
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      // Card height + body padding (12px top + 12px bottom).
+      const height = Math.ceil(rect.height) + 24;
+      if (height === lastReportedHeight) return;
+      lastReportedHeight = height;
+      window.webkit.messageHandlers.lecterHud.postMessage({ height });
+    });
+  } catch (_) { /* not hosted, ignore */ }
 }
 
 function renderError(message) {
@@ -141,6 +169,7 @@ function renderError(message) {
   footStamp.textContent = "—";
   footThresholds.textContent = "—";
   footAge.textContent = "—";
+  reportSizeToHost();
 }
 
 async function poll() {
