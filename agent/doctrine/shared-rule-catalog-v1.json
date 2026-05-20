@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-20T22:46:02.923Z",
+  "generatedAt": "2026-05-20T23:10:34.301Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
@@ -1034,6 +1034,34 @@
       "profileIds": [
         "shared-niche-reference"
       ]
+    },
+    {
+      "id": "reference_creative_tag_surface",
+      "kind": "reference-rule",
+      "relPath": "reference/reference_creative_tag_surface.md",
+      "sitePath": "/doctrine/shared/rules/reference/reference_creative_tag_surface.md",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_creative_tag_surface.md",
+      "sha256": "067637927f0e0895e688ee9611a9721a0ee07d21d9f49829d03b37af201fc660",
+      "sizeBytes": 3542,
+      "summary": "The launchpad's **Creative** view mode (toolbar icon ti ti-chart-bubble) is a paged iframe stage. Every catalog entry tagged with creative automatically appears in the pager — no registration, no manifest, no separate re",
+      "excerpt": "The launchpad's **Creative** view mode (toolbar icon ti ti-chart-bubble) is a paged iframe stage. Every catalog entry tagged with creative automatically appears in the pager — no registration, no manifest, no separate registry file. Adding a viz to Creative is one operator action: edit the entry's tags to include \"creative\".\n\n**The contract is the tag.** A site is a \"creative\" entry iff:\nIt exists in s3://mullmania.com-data/_catalog/sites.json.\nIt has hasHostedSite: true (it's actually live somewhere).\nIts tags array contains the literal token creative (case-insensitive; normalized via normalizeCatalogToken).\n\nThat's the entire onboarding requirement. No postMessage protocol, no schema beyond what every catalog entry already carries. The viz is just a website living at its own subdomain.\n\n**What the host gives you, and what it doesn't.** The Creative view does NOT push launchpad state (selection, search, filter, theme) into the viz. The iframe is mounted with its resolved entry URL and otherwise treated as an opaque page. If a future viz needs launchpad data, extend the contract narrowly (one postMessage event, one method) — don't preemptively bake in a protocol.\n\n**The pager UX.**\nOne iframe at a time fills the stage.\nTop chrome: <title> · <host> on the left, N / total · Prev · Next · Open on the right.\nOpen pops the viz into a new tab (the entry's resolved URL).\nThe list wrap",
+      "durability": "standing",
+      "tags": [],
+      "domains": [
+        "operator-core"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude",
+        "generic",
+        "agent"
+      ],
+      "profileIds": []
     },
     {
       "id": "reference_gha_runner",
