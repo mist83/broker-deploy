@@ -220,5 +220,59 @@ async function poll() {
   }
 }
 
+// --- inline buttons -------------------------------------------------------
+// The lecter menu bar item is the canonical control surface, but finding a
+// status-bar icon in a busy menu bar is genuinely hard. So the two most
+// useful actions get inline buttons on the card itself, and post to the
+// host's WKScriptMessageHandler — the same channel that already reports
+// size, just with action messages.
+
+const btnClose = document.getElementById("btn-close");
+const btnKeepAwake = document.getElementById("btn-keep-awake");
+
+function postToHost(payload) {
+  try {
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.lecterHud) {
+      window.webkit.messageHandlers.lecterHud.postMessage(payload);
+      return true;
+    }
+  } catch (_) {}
+  return false;
+}
+
+if (btnClose) {
+  btnClose.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!postToHost({ action: "close" })) {
+      // Outside the JXA host (regular browser tab) — best-effort fallback.
+      window.close();
+    }
+  });
+}
+
+if (btnKeepAwake) {
+  btnKeepAwake.addEventListener("click", (e) => {
+    e.preventDefault();
+    postToHost({ action: "toggleKeepAwake" });
+  });
+}
+
+// The host pushes keep-awake state changes into the page so the ☕ icon
+// reflects reality (off / enabled-but-idle / actively holding). Exposed as
+// a global the JXA shell can evaluateJavaScript into.
+window.__valetHudSetKeepAwake = function (state) {
+  if (!btnKeepAwake) return;
+  btnKeepAwake.classList.remove("is-active", "is-held");
+  if (state === "held") {
+    btnKeepAwake.classList.add("is-held");
+    btnKeepAwake.title = "Sleep held — click to allow sleep again";
+  } else if (state === "active") {
+    btnKeepAwake.classList.add("is-active");
+    btnKeepAwake.title = "Keep-awake on (ready, waiting for active agents)";
+  } else {
+    btnKeepAwake.title = "Keep-awake off — click to enable";
+  }
+};
+
 poll();
 setInterval(poll, POLL_INTERVAL_MS);

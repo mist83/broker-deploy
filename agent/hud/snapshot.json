@@ -1,1 +1,39 @@
-{"generatedAt":1779252652,"thresholds":{"workingSeconds":8,"idleSeconds":300},"counts":{"claude":5,"codex":2,"working":2,"needsYou":1,"idle":4,"total":7},"needsYou":[{"kind":"codex","sessionId":"019e439d-3d5c-7a71-8a71-c998ffbc96cd","project":"","path":"/Users/mist83/.codex/sessions/2026/05/19/rollout-2026-05-19T22-20-38-019e439d-3d5c-7a71-8a71-c998ffbc96cd.jsonl","startedAt":1779229238,"lastActivityAt":1779252643,"lastEventKind":"tool","isAlive":true,"secondsSinceActivity":9,"secondsSinceStart":23414}],"working":[{"kind":"codex","sessionId":"019e42e5-07ac-7da1-8ea5-6901781223ed","project":"","path":"/Users/mist83/.codex/sessions/2026/05/19/rollout-2026-05-19T18-59-26-019e42e5-07ac-7da1-8ea5-6901781223ed.jsonl","startedAt":1779217166,"lastActivityAt":1779252652,"lastEventKind":"tool","isAlive":true,"secondsSinceActivity":0,"secondsSinceStart":35486},{"kind":"claude","sessionId":"047f4055-b6ca-40c8-b04a-f1142ecf3f78","project":"/Users/mist83/Code","path":"/Users/mist83/.claude/projects/-Users-mist83-Code/047f4055-b6ca-40c8-b04a-f1142ecf3f78.jsonl","startedAt":1779242689,"lastActivityAt":1779252644,"lastEventKind":"attachment","isAlive":false,"secondsSinceActivity":8,"secondsSinceStart":9963}],"idle":[{"kind":"claude","sessionId":"8cb7537a-3b75-4d25-ae44-cc37efc21ba7","project":"/Users/mist83/Code","path":"/Users/mist83/.claude/projects/-Users-mist83-Code/8cb7537a-3b75-4d25-ae44-cc37efc21ba7.jsonl","startedAt":1779236206,"lastActivityAt":1779240339,"lastEventKind":"meta","isAlive":false,"secondsSinceActivity":12313,"secondsSinceStart":16446},{"kind":"claude","sessionId":"db92cd2b-d189-4bd6-a5b2-1e4538e4ab2b","project":"/Users/mist83/Code","path":"/Users/mist83/.claude/projects/-Users-mist83-Code/db92cd2b-d189-4bd6-a5b2-1e4538e4ab2b.jsonl","startedAt":1779236271,"lastActivityAt":1779239233,"lastEventKind":"meta","isAlive":false,"secondsSinceActivity":13419,"secondsSinceStart":16381},{"kind":"claude","sessionId":"9179f4b7-4000-46f9-8bba-daaee9feaf70","project":"/Users/mist83/Code","path":"/Users/mist83/.claude/projects/-Users-mist83-Code/9179f4b7-4000-46f9-8bba-daaee9feaf70.jsonl","startedAt":1779139738,"lastActivityAt":1779238382,"lastEventKind":"meta","isAlive":false,"secondsSinceActivity":14270,"secondsSinceStart":112914},{"kind":"claude","sessionId":"05c683a1-75b0-4011-8b41-ab947c57d208","project":"/Users/mist83/Code","path":"/Users/mist83/.claude/projects/-Users-mist83-Code/05c683a1-75b0-4011-8b41-ab947c57d208.jsonl","startedAt":1779234624,"lastActivityAt":1779238322,"lastEventKind":"meta","isAlive":false,"secondsSinceActivity":14330,"secondsSinceStart":18028}]}
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="repo-name" content="grantops-cleanroom" />
+    <meta
+      name="description"
+      content="GrantOps demo workspace using synthetic grant data for application review, payment checks, and audit notes."
+    />
+    <title>GrantOps Demo Workspace</title>
+    <script>
+      (() => {
+        const host = window.location.hostname;
+        if (!host || host === 'localhost' || host.startsWith('127.')) return;
+        const parts = host.split('.');
+        if (parts.length < 2) return;
+        const base = parts.slice(-2).join('.');
+        const script = document.createElement('script');
+        script.src = `https://tv-tail.${base}/log-tap.js`;
+        script.defer = true;
+        script.dataset.app = 'grantops-cleanroom';
+        document.head.appendChild(script);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
