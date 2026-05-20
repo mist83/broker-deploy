@@ -7,7 +7,7 @@
 
 const SNAPSHOT_URL = "/hud/snapshot.json";
 const POLL_INTERVAL_MS = 2000;
-const STALE_SECONDS = 30;  // if snapshot is older than this, surface it
+const STALE_SECONDS = 60;  // surface "stale" only after a full minute of silence
 const TIMEOUT_MS = 4000;
 // Tolerate transient blips (single S3/CloudFront miss, network jitter) before
 // flashing red. 5 * 2s ≈ 10s of sustained failure before the user sees an

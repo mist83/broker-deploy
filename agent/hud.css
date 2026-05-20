@@ -63,6 +63,47 @@ body { padding: 12px; }
   color: var(--fg-dim);
   letter-spacing: 0.02em;
 }
+
+.hud-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+.hud-btn {
+  -webkit-app-region: no-drag;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--fg-dim);
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  padding: 0;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 90ms ease, color 90ms ease, border-color 90ms ease;
+}
+.hud-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--fg);
+}
+.hud-btn:active {
+  background: rgba(255,255,255,0.14);
+}
+#btn-keep-awake.is-active {
+  color: var(--ok);
+  border-color: rgba(111, 210, 138, 0.4);
+}
+#btn-keep-awake.is-held {
+  color: var(--warn);
+  border-color: rgba(232, 169, 59, 0.5);
+  background: rgba(232, 169, 59, 0.08);
+}
+#btn-close { font-size: 16px; }
 .hud[data-state="needs-you"] .hud-mode { color: var(--warn); }
 .hud[data-state="ok"]        .hud-mode { color: var(--ok); }
 .hud[data-state="stale"]     .hud-mode { color: var(--err); }
