@@ -178,7 +178,10 @@ body { padding: 12px; }
   color: var(--fg-dim);
 }
 
-/* Dismiss × on each row — hidden until row hover/expanded. */
+/* Dismiss × on each row — always visible at low opacity for
+ * discoverability; full opacity on row hover or when the button itself
+ * is hovered. Tooltip reads "snooze this session — reappears the next
+ * time it writes" so the operator knows it's not a destructive kill. */
 .row-dismiss {
   background: transparent;
   border: none;
@@ -189,12 +192,12 @@ body { padding: 12px; }
   padding: 0 4px;
   margin-left: 4px;
   cursor: pointer !important;
-  opacity: 0;
+  opacity: 0.35;
   transition: opacity 90ms ease, color 90ms ease;
 }
 .row:hover .row-dismiss,
 .row.is-expanded .row-dismiss { opacity: 1; }
-.row-dismiss:hover { color: var(--err); }
+.row-dismiss:hover { color: var(--err); opacity: 1; }
 
 /* Compact synopsis — single line, smaller, no per-line columns. */
 .syn-compact {

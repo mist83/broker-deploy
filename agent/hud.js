@@ -97,18 +97,31 @@ let compactMode = (() => {
   try { return localStorage.getItem(COMPACT_STORAGE_KEY) === "1"; } catch { return false; }
 })();
 
-// Dismissed sessions: hidden permanently from the row list. Useful for
-// long-lived sessions you've closed but the system still thinks are alive
-// (e.g. a codex CLI you never quit weeks ago).
-const DISMISS_STORAGE_KEY = "valet-hud-dismissed";
-let dismissedSet = (() => {
+// Dismissed sessions: snoozed until the session writes again. We store
+// {sessionId → dismissedAtUnixSec}; a row is hidden only while its
+// lastActivityAt <= dismissedAt. If the session has any new write after
+// dismissal, the snooze auto-expires and the row reappears — which is
+// what the operator wants: "if I kill an in-flight one, just remove it,
+// but bring it back when it's alive again."
+const DISMISS_STORAGE_KEY = "valet-hud-dismissed-v2";
+let dismissedMap = (() => {
   try {
-    const raw = localStorage.getItem(DISMISS_STORAGE_KEY) || "[]";
-    return new Set(JSON.parse(raw));
-  } catch { return new Set(); }
+    const raw = localStorage.getItem(DISMISS_STORAGE_KEY) || "{}";
+    const obj = JSON.parse(raw);
+    return obj && typeof obj === "object" ? new Map(Object.entries(obj)) : new Map();
+  } catch { return new Map(); }
 })();
 function saveDismissed() {
-  try { localStorage.setItem(DISMISS_STORAGE_KEY, JSON.stringify([...dismissedSet])); } catch {}
+  try {
+    const obj = Object.fromEntries(dismissedMap);
+    localStorage.setItem(DISMISS_STORAGE_KEY, JSON.stringify(obj));
+  } catch {}
+}
+function isDismissedFor(session) {
+  const at = dismissedMap.get(session.sessionId);
+  if (typeof at !== "number") return false;
+  // Snooze expires the moment the session writes again.
+  return Number(session.lastActivityAt || 0) <= at;
 }
 
 function synopsisHtml(syn) {
@@ -165,7 +178,7 @@ function rowHtml(session, state) {
   const labelClass = "label" + (session.titleSynthetic ? " label-synthetic" : "");
   const dismissBtn =
     `<button class="row-dismiss" type="button" data-dismiss="${escapeHtml(session.sessionId)}"` +
-    ` title="hide this session from the HUD (won't quit the agent)">×</button>`;
+    ` title="snooze this session — reappears the next time it writes">×</button>`;
   return `
     <li class="row row-${session.kind} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}">
       <span class="dot"></span>
@@ -240,7 +253,7 @@ function render(snapshot) {
     [
       ...live.map((s) => ({ s, state: "live" })),
       ...idle.map((s) => ({ s, state: "idle" })),
-    ].filter(({ s }) => !dismissedSet.has(s.sessionId)),
+    ].filter(({ s }) => !isDismissedFor(s)),
     sortMode,
   );
 
@@ -304,7 +317,9 @@ function render(snapshot) {
         e.stopPropagation();
         const sid = btn.getAttribute("data-dismiss");
         if (!sid) return;
-        dismissedSet.add(sid);
+        // Snooze: stamp with NOW. The row reappears the moment the
+        // session writes anything after this timestamp.
+        dismissedMap.set(sid, Math.floor(Date.now() / 1000));
         if (expandedSessionId === sid) expandedSessionId = null;
         saveDismissed();
         render(snapshot);
