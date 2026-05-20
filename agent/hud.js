@@ -256,8 +256,12 @@ function reportSizeToHost() {
       if (!card) return;
       const rect = card.getBoundingClientRect();
       const height = Math.ceil(rect.height) + 24;
-      if (height === lastReportedHeight) return;
-      lastReportedHeight = height;
+      // Tolerate sub-pixel jitter: only report when the delta is enough to
+       // visibly move the window. Otherwise every 2s render triggers a window
+       // resize which can shift the buttons 1-2px right exactly when the
+       // operator is trying to click them.
+       if (Math.abs(height - lastReportedHeight) < 4) return;
+       lastReportedHeight = height;
       window.webkit.messageHandlers.lecterHud.postMessage({ height });
     });
   } catch (_) { /* not hosted, ignore */ }

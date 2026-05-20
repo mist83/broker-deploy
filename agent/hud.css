@@ -75,12 +75,12 @@ body { padding: 12px; }
   background: transparent;
   border: 1px solid transparent;
   color: var(--fg-dim);
-  width: 30px;
-  height: 26px;
+  width: 40px;
+  height: 30px;
   line-height: 1;
   padding: 0;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 7px;
+  font-size: 17px;
   cursor: pointer !important;
   display: inline-flex;
   align-items: center;
