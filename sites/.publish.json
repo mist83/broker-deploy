@@ -1,7 +1,7 @@
 {
   "siteId": "sites",
   "host": "sites.mullmania.com",
-  "publishedAt": "2026-05-20T22:06:31.312Z",
+  "publishedAt": "2026-05-20T22:50:07.002Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/dist",
   "assetVersion": {
     "semver": "1.0.0",
@@ -11,7 +11,7 @@
     "token": "__MULLMANIA_ASSET_VERSION__",
     "manifestPath": "./asset-version.json",
     "manifestUrl": "https://sites.mullmania.com/asset-version.json",
-    "publishedAt": "2026-05-20T22:06:31.312Z"
+    "publishedAt": "2026-05-20T22:50:07.002Z"
   },
   "counts": {
     "hostingFiles": 311,
