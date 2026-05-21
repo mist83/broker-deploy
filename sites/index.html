@@ -1,0 +1,2592 @@
+<!doctype html>
+<html lang="en" class="launchpad-preboot">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mullmania Site Index</title>
+  <meta name="repo-name" content="sites">
+  <meta name="description" content="Mullmania app catalog, review deck, and operator surface.">
+  <meta name="theme-color" content="#0a6ecb">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sites">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a6ecb'/%3E%3Cpath d='M18 18h28v8H18zm4 14h20v8H22zm4 14h12v8H26z' fill='%23ffc220'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    html.launchpad-preboot,
+    html.launchpad-preboot body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--launchpad-surface-gutter, var(--bg-tertiary, #f3f4f6));
+      color: var(--text-primary, #162235);
+      overflow: hidden;
+    }
+
+    html.launchpad-preboot body > :not(#launchpad-boot) {
+      visibility: hidden !important;
+    }
+
+    #launchpad-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      display: grid;
+      grid-template-rows: 68px minmax(0, 1fr) 70px;
+      --launchpad-boot-primary: var(--color-primary, #0071CE);
+      --launchpad-boot-accent: var(--color-shell-accent, var(--color-secondary, #FFC220));
+      --launchpad-boot-bg: var(--launchpad-surface-gutter, var(--bg-tertiary, #f3f4f6));
+      --launchpad-boot-surface: var(--bg-primary, #ffffff);
+      --launchpad-boot-border: var(--border-color, #dddddd);
+      --launchpad-boot-muted: var(--text-muted, #9ca3af);
+      --launchpad-boot-text: var(--text-primary, #162235);
+      --launchpad-boot-radius: var(--radius-sm, 4px);
+      background: var(--launchpad-boot-bg);
+      color: var(--launchpad-boot-text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 180ms ease, visibility 0s linear 180ms;
+    }
+
+    #launchpad-boot-masthead {
+      display: grid;
+      grid-template-columns: auto minmax(260px, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--launchpad-boot-primary);
+      box-shadow: var(--shadow-md, 0 4px 8px rgba(0, 0, 0, 0.15));
+    }
+
+    #launchpad-boot-brand {
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0;
+      min-width: 0;
+    }
+
+    #launchpad-boot-brand-icon {
+      display: grid;
+      place-items: center;
+      color: var(--launchpad-boot-accent);
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    #launchpad-boot-brand-icon i {
+      display: block;
+      font-size: inherit;
+      line-height: 1;
+    }
+
+    #launchpad-boot-brand span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #launchpad-boot-search {
+      position: relative;
+      height: 44px;
+      min-width: 0;
+      border-radius: var(--launchpad-boot-radius);
+      background: var(--launchpad-boot-surface);
+      box-shadow: inset 0 0 0 1px rgba(12, 30, 55, 0.18);
+    }
+
+    #launchpad-boot-search::before {
+      content: "Search sites";
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      color: color-mix(in srgb, var(--launchpad-boot-muted) 46%, transparent);
+      font-size: 16px;
+      line-height: 1;
+      transform: translateY(-50%);
+    }
+
+    #launchpad-boot-search::after {
+      content: "...";
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid color-mix(in srgb, var(--launchpad-boot-border) 72%, transparent);
+      border-radius: 999px;
+      color: color-mix(in srgb, var(--launchpad-boot-text) 60%, transparent);
+      font-size: 18px;
+      line-height: 1;
+      transform: translateY(-50%);
+    }
+
+    #launchpad-boot-create {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: var(--launchpad-boot-radius);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    #launchpad-boot-create::before,
+    #launchpad-boot-create::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    #launchpad-boot-create::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    #launchpad-boot-wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+      align-content: start;
+      gap: 8px;
+      min-width: 0;
+      overflow: hidden;
+      padding: 10px;
+      background: var(--launchpad-boot-bg);
+    }
+
+    .launchpad-boot-card {
+      display: grid;
+      grid-template-rows: auto 34px;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--launchpad-boot-border);
+      border-radius: var(--launchpad-boot-radius);
+      background: var(--launchpad-boot-surface);
+    }
+
+    .launchpad-boot-card-title {
+      display: block;
+      min-width: 0;
+      padding: 10px 8px;
+      overflow: hidden;
+    }
+
+    .launchpad-boot-card-title::before {
+      content: "";
+      display: block;
+      width: 70%;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--launchpad-boot-primary) 12%, transparent),
+        color-mix(in srgb, var(--launchpad-boot-primary) 24%, transparent),
+        color-mix(in srgb, var(--launchpad-boot-primary) 12%, transparent)
+      );
+      background-size: 240% 100%;
+      animation: launchpadBootShimmer 1.4s ease-in-out infinite;
+    }
+
+    .launchpad-boot-card:nth-child(3n + 2) .launchpad-boot-card-title::before {
+      width: 48%;
+    }
+
+    .launchpad-boot-card:nth-child(3n) .launchpad-boot-card-title::before {
+      width: 82%;
+    }
+
+    .launchpad-boot-preview {
+      position: relative;
+      display: block;
+      aspect-ratio: 1 / 1;
+      min-width: 0;
+      overflow: hidden;
+      border-bottom: 1px solid color-mix(in srgb, var(--launchpad-boot-border) 72%, transparent);
+      background:
+        linear-gradient(135deg, transparent 58%, rgba(180, 193, 209, 0.45) 58% 72%, transparent 72%),
+        linear-gradient(225deg, transparent 54%, rgba(180, 193, 209, 0.54) 54% 72%, transparent 72%),
+        color-mix(in srgb, var(--launchpad-boot-bg) 74%, var(--launchpad-boot-surface));
+    }
+
+    .launchpad-boot-preview::before,
+    .launchpad-boot-preview::after {
+      content: "";
+      position: absolute;
+      display: block;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(203, 213, 225, 0.42), rgba(226, 232, 240, 0.86), rgba(203, 213, 225, 0.42));
+      background-size: 240% 100%;
+      animation: launchpadBootShimmer 1.4s ease-in-out infinite;
+    }
+
+    .launchpad-boot-preview::before {
+      top: 14%;
+      left: 12%;
+      width: 18%;
+      height: 18%;
+    }
+
+    .launchpad-boot-preview::after {
+      right: 12%;
+      bottom: 14%;
+      width: 54%;
+      height: 7px;
+    }
+
+    #launchpad-boot-nav {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: center;
+      gap: 4px;
+      padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+      border-top: 1px solid color-mix(in srgb, var(--launchpad-boot-border) 82%, transparent);
+      background: var(--launchpad-boot-surface);
+      box-shadow: 0 -8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .launchpad-boot-nav-item {
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 5px;
+      min-width: 0;
+      min-height: 54px;
+      border-radius: 8px;
+      color: color-mix(in srgb, var(--launchpad-boot-text) 58%, transparent);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .launchpad-boot-nav-item.is-active {
+      border: 1px solid color-mix(in srgb, var(--launchpad-boot-primary) 30%, var(--launchpad-boot-border));
+      background: color-mix(in srgb, var(--launchpad-boot-primary) 10%, var(--launchpad-boot-surface));
+      color: var(--launchpad-boot-primary);
+    }
+
+    .launchpad-boot-nav-icon {
+      display: grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    .launchpad-boot-nav-icon i {
+      display: block;
+      font-size: inherit;
+      line-height: 1;
+    }
+
+    .launchpad-boot-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    @keyframes launchpadBootShimmer {
+      0% { background-position: 180% 0; }
+      100% { background-position: -80% 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .launchpad-boot-preview::before,
+      .launchpad-boot-preview::after,
+      .launchpad-boot-card-title::before {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      #launchpad-boot {
+        grid-template-rows: 62px minmax(0, 1fr) 66px;
+      }
+
+      #launchpad-boot-masthead {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 8px;
+        padding: 8px 10px;
+      }
+
+      #launchpad-boot-brand {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+      }
+
+      #launchpad-boot-brand span:last-child {
+        display: none;
+      }
+
+      #launchpad-boot-brand-icon {
+        font-size: 30px;
+      }
+
+      #launchpad-boot-wall {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        padding: 8px;
+      }
+
+      .launchpad-boot-card-title {
+        padding: 10px 7px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 359px) {
+      #launchpad-boot-wall {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    html.launchpad-booted #launchpad-boot {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    html:not(.launchpad-preboot):not(.launchpad-booted) #launchpad-boot {
+      display: none;
+    }
+  </style>
+  <link
+    id="ui-css"
+    rel="stylesheet"
+    href="./active/style.css"
+  >
+  <!-- Pulls UI.Screensaver (and its sibling primitives) from the canon. Sites
+       has its own components for everything else; this script is here for
+       the slideshow controller. The data-ui-theme attribute is intentionally
+       omitted so sites' existing /active/style.css link stays the source of
+       truth for theming. -->
+  <script>
+  (function() {
+      var APP_STYLE_STORAGE_KEY = 'mullmania-launchpad-app-style';
+      function safeStyleId(value) {
+        var normalized = String(value || '').trim().toLowerCase();
+        return /^[a-z0-9-]+$/.test(normalized) ? normalized : 'active';
+      }
+      var host = location.hostname;
+      var isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0';
+      var parts = host.split('.');
+      var base = parts.length >= 3 ? parts.slice(-2).join('.') : host;
+      if (isLocalHost) {
+        base = 'mullmania.com';
+      }
+      window.__baseDomain = base;
+      var link = document.getElementById('ui-css');
+      var storedStyle = 'active';
+      try {
+        storedStyle = safeStyleId(localStorage.getItem(APP_STYLE_STORAGE_KEY));
+      } catch (error) {
+        storedStyle = 'active';
+      }
+      document.documentElement.dataset.appStyle = storedStyle;
+      var stylePath = storedStyle === 'active'
+        ? '/active/style.css'
+        : '/' + encodeURIComponent(storedStyle) + '/style.css';
+      var remoteHref = 'https://ui.' + base + stylePath;
+      var localHref = './active/style.css';
+      link.onerror = function() {
+        if (link.dataset.fallbackApplied === '1') {
+          return;
+        }
+        link.dataset.fallbackApplied = '1';
+        link.href = localHref;
+      };
+      link.href = isLocalHost && storedStyle === 'active' ? localHref : remoteHref;
+      var script = document.createElement('script');
+      script.async = false;
+      script.src = 'https://ui.' + base + '/ui.js';
+      document.head.appendChild(script);
+      setTimeout(function() { document.documentElement.classList.remove('launchpad-preboot'); }, 8000);
+  })();
+  </script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Preboot skeleton: keeps first paint stable while the shared UI and catalog load. -->
+  <div id="launchpad-boot" role="status" aria-live="polite">
+    <span class="launchpad-boot-status">Loading site catalog</span>
+    <div id="launchpad-boot-masthead">
+      <div id="launchpad-boot-brand">
+        <span id="launchpad-boot-brand-icon" aria-hidden="true">
+          <i class="ti ti-stack-3"></i>
+        </span>
+        <span>Mullmania</span>
+      </div>
+      <div id="launchpad-boot-search" aria-hidden="true"></div>
+      <span id="launchpad-boot-create" aria-hidden="true"></span>
+    </div>
+    <div id="launchpad-boot-wall" aria-hidden="true">
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+      <span class="launchpad-boot-card"><span class="launchpad-boot-preview"></span><span class="launchpad-boot-card-title"></span></span>
+    </div>
+    <div id="launchpad-boot-nav" aria-hidden="true">
+      <span class="launchpad-boot-nav-item is-active"><span class="launchpad-boot-nav-icon"><i class="ti ti-table"></i></span><span>List</span></span>
+      <span class="launchpad-boot-nav-item"><span class="launchpad-boot-nav-icon"><i class="ti ti-layout-grid"></i></span><span>Wall</span></span>
+      <span class="launchpad-boot-nav-item"><span class="launchpad-boot-nav-icon"><i class="ti ti-hand-finger"></i></span><span>Focus</span></span>
+    </div>
+  </div>
+
+  <!-- App chrome: masthead, status toast, toolbar, and the primary view surfaces. -->
+  <div id="pwa-status-toast" class="pwa-status-toast" role="status" aria-live="polite" aria-hidden="true">
+    <span id="pwa-status-message" class="pwa-status-toast__message"></span>
+    <button id="pwa-status-action" type="button" class="pwa-status-toast__action is-hidden"></button>
+    <button id="pwa-status-close" type="button" class="pwa-status-toast__close" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <header id="header-container" class="surface-masthead launchpad-masthead">
+    <div id="masthead-brand" class="surface-masthead__brand"></div>
+    <div id="masthead-search-slot" class="surface-masthead__search-slot"></div>
+    <div id="masthead-actions" class="surface-masthead__actions"></div>
+  </header>
+
+  <main id="content-container" class="page-shell">
+    <section id="tabs-container" class="surface toolbar surface-toolbar">
+      <div id="toolbar-views" class="surface-toolbar__views" aria-label="Views"></div>
+      <div id="toolbar-filters-row" class="surface-toolbar__row surface-toolbar__row--split is-hidden" aria-label="Catalog tags">
+        <div id="toolbar-filters" class="surface-chip-bar"></div>
+        <div id="toolbar-context-actions" class="surface-context-actions is-hidden" aria-label="Selection actions">
+          <div id="toolbar-context-slot" class="surface-context-slot" data-selection-active="false">
+            <button id="open-bulk-rename" type="button" class="surface-chip surface-chip--quiet surface-chip--selection" aria-label="Rename selected sites">
+              <i class="ti ti-pencil"></i>
+              <span>Rename</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Primary catalog views. Keep IDs stable; app.js uses them as the public DOM contract. -->
+    <section id="flightdeck-view" class="surface flightdeck-shell is-hidden" aria-label="Flight Deck">
+      <div id="flightdeck-sections" class="flightdeck-sections surface-scroll-viewport"></div>
+    </section>
+
+    <section id="dependencies-view" class="surface dependencies-shell is-hidden" aria-label="Dependencies">
+      <aside class="dependencies-source-panel">
+        <div class="dependencies-panel__header">
+          <div class="dependencies-panel__title">
+            <i class="ti ti-list-search"></i>
+            <span>Catalog</span>
+          </div>
+          <span id="dependencies-source-count" class="dependencies-count">0</span>
+        </div>
+        <div id="dependencies-source-list" class="dependencies-source-list surface-scroll-viewport"></div>
+      </aside>
+
+      <div class="dependencies-graph-panel">
+        <div class="dependencies-toolbar">
+          <div class="dependencies-toolbar__summary">
+            <strong id="dependencies-summary">0 apps · 0 links</strong>
+            <span id="dependencies-status" aria-live="polite"></span>
+          </div>
+          <div class="dependencies-toolbar__actions">
+            <button id="dependencies-layout" type="button" class="secondary">
+              <i class="ti ti-sparkles"></i>
+              <span>Layout</span>
+            </button>
+            <button id="dependencies-fit" type="button" class="secondary">
+              <i class="ti ti-focus-centered"></i>
+              <span>Fit</span>
+            </button>
+            <button id="dependencies-reset" type="button" class="secondary" disabled>
+              <i class="ti ti-restore"></i>
+              <span>Reset</span>
+            </button>
+            <button id="dependencies-save" type="button" disabled>
+              <i class="ti ti-device-floppy"></i>
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+        <div id="dependencies-graph-stage" class="dependencies-graph-stage">
+          <svg id="dependencies-graph" class="dependencies-graph" role="img" aria-label="Site dependency graph"></svg>
+          <div id="dependencies-empty" class="surface-empty-state dependencies-empty is-hidden">
+            <i class="ti ti-graph-off"></i>
+            <p>Add apps from the catalog.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="dependencies-detail-panel">
+        <div class="dependencies-panel__header">
+          <div class="dependencies-panel__title">
+            <i class="ti ti-route"></i>
+            <span>Links</span>
+          </div>
+        </div>
+        <div id="dependencies-detail" class="dependencies-detail"></div>
+      </aside>
+    </section>
+
+    <section id="creative-view" class="surface creative-shell is-hidden" aria-label="Creative">
+      <div class="creative-toolbar">
+        <div class="creative-toolbar__meta">
+          <strong id="creative-title">No creative entries</strong>
+          <span id="creative-status" class="creative-status" aria-live="polite"></span>
+        </div>
+        <div class="creative-toolbar__controls">
+          <span id="creative-position" class="pager__status">0 / 0</span>
+          <button id="creative-prev" type="button" class="secondary" aria-label="Previous creative entry" disabled>
+            <i class="ti ti-chevron-left"></i>
+            <span>Prev</span>
+          </button>
+          <button id="creative-next" type="button" class="secondary" aria-label="Next creative entry" disabled>
+            <span>Next</span>
+            <i class="ti ti-chevron-right"></i>
+          </button>
+          <a id="creative-popout" class="secondary creative-popout" target="_blank" rel="noopener noreferrer" aria-label="Open creative entry in a new tab" hidden>
+            <i class="ti ti-external-link"></i>
+            <span>Open</span>
+          </a>
+        </div>
+      </div>
+      <div class="creative-stage" id="creative-stage">
+        <iframe id="creative-frame" class="creative-frame is-hidden" referrerpolicy="no-referrer" allow="fullscreen *; clipboard-read; clipboard-write" loading="lazy"></iframe>
+        <div id="creative-empty" class="creative-empty">
+          <i class="ti ti-chart-bubble" aria-hidden="true"></i>
+          <h2>Nothing tagged <code>creative</code> yet</h2>
+          <p>Tag any catalog entry with <code>creative</code> and it appears here — paged through, full-stage, live. The universe sim, a force graph where each node is its own site, anything: this is the galaxy view.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="table-view" class="surface table-shell workspace-table-shell">
+      <div class="workspace-table-scroll surface-scroll-viewport" data-bug-beacon-ignore-layout="hidden-scroll-content">
+        <table class="workspace-table">
+          <thead>
+            <tr>
+              <th class="workspace-table__col--type-icon workspace-table__sortable" data-sort="type" aria-label="Sort by type"><i class="ti ti-arrows-sort workspace-table__sort-icon"></i></th>
+              <th class="workspace-table__col--preview">Preview</th>
+              <th class="workspace-table__col--site workspace-table__sortable" data-sort="alpha">Site <i class="ti ti-arrows-sort workspace-table__sort-icon"></i></th>
+              <th class="workspace-table__col--public workspace-table__sortable" data-sort="public" aria-label="Sort by public access" title="Sort by public access">
+                <span class="workspace-table__icon-sort">
+                  <i class="ti ti-lock" aria-hidden="true"></i>
+                  <i class="ti ti-arrows-sort workspace-table__sort-icon" aria-hidden="true"></i>
+                </span>
+              </th>
+              <th class="workspace-table__col--modified workspace-table__sortable" data-sort="recent" aria-label="Sort by date modified" title="Sort by date modified">Modified <i class="ti ti-arrows-sort workspace-table__sort-icon"></i></th>
+              <th class="workspace-table__col--tags">Tags</th>
+              <th class="workspace-table__col--maturity workspace-table__sortable" data-sort="maturity" aria-label="Sort by maturity rating" title="Sort by maturity rating">
+                <span class="workspace-table__maturity-head">
+                  <span>Maturity</span>
+                  <button id="maturity-sweep-run" type="button" class="maturity-sweep-button" aria-label="Run maturity sweep with Valet" title="Run maturity sweep with Valet">
+                    <i class="ti ti-layers-intersect"></i>
+                    <span class="maturity-sweep-button__label">Run</span>
+                  </button>
+                  <i class="ti ti-arrows-sort workspace-table__sort-icon"></i>
+                </span>
+              </th>
+              <th class="workspace-table__col--ai-health workspace-table__sortable" data-sort="aiHealth" aria-label="Sort by AI health grade" title="Sort by AI health grade">
+                <span class="workspace-table__ai-health-head">
+                  <span>AI</span>
+                  <button id="ai-health-grade-page" type="button" class="ai-health-grade-button" aria-label="Grade current page with Valet" title="Grade current page with Valet">
+                    <i class="ti ti-sparkles"></i>
+                    <span class="ai-health-grade-button__label">Grade</span>
+                  </button>
+                  <i class="ti ti-arrows-sort workspace-table__sort-icon"></i>
+                </span>
+              </th>
+              <th class="workspace-table__col--summary workspace-table__sortable" data-sort="rank" aria-label="Sort by manual rank" title="Sort by manual rank"><span id="view-summary" class="workspace-table__count">Summary</span> <i class="ti ti-arrows-sort workspace-table__sort-icon"></i></th>
+              <!-- actions column removed -->
+            </tr>
+          </thead>
+          <tbody id="site-table-body"></tbody>
+        </table>
+      </div>
+      <div class="table-footer surface-rail surface-rail--footer">
+        <div class="pager pager--rail">
+          <div id="table-page-summary" class="pager__summary">No rows</div>
+          <div class="pager__controls">
+            <label class="pager__size">
+              <span class="pager__size-label">Rows</span>
+              <select id="table-page-size" class="pager__select" aria-label="Rows per page"></select>
+            </label>
+            <button id="table-prev" type="button" class="secondary pager__button">
+              <i class="ti ti-chevron-left"></i>
+              <span>Prev</span>
+            </button>
+            <span id="table-page" class="pager__status">Page 1 of 1</span>
+            <button id="table-next" type="button" class="secondary pager__button">
+              <span>Next</span>
+              <i class="ti ti-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery-view" class="surface gallery-shell is-hidden">
+      <div id="gallery-grid" class="showcase-grid surface-scroll-viewport"></div>
+      <div id="gallery-empty" class="surface-empty-state surface-empty-state--scroll surface-scroll-viewport is-hidden">
+        <i class="ti ti-search-off"></i>
+        <p>Nothing matches the current search and filters.</p>
+      </div>
+      <div class="gallery-footer surface-rail surface-rail--footer">
+        <div class="pager pager--rail">
+          <div id="gallery-page-summary" class="pager__summary">No cards</div>
+          <div class="pager__controls">
+            <button id="gallery-prev" type="button" class="secondary pager__button">
+              <i class="ti ti-chevron-left"></i>
+              <span>Prev</span>
+            </button>
+            <span id="gallery-page" class="pager__status">Page 1 of 1</span>
+            <button id="gallery-next" type="button" class="secondary pager__button">
+              <span>Next</span>
+              <i class="ti ti-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tv-view" class="surface tv-shell is-hidden">
+      <div id="tv-empty" class="surface-empty-state surface-empty-state--scroll is-hidden">
+        <i class="ti ti-device-tv-off"></i>
+        <p>No sites with a playable demo or live preview match the current search and filters.</p>
+      </div>
+      <div id="tv-layout" class="tv-layout">
+        <div class="tv-stage-panel">
+          <div class="tv-stage-panel__top">
+            <div class="audit-site-copy tv-site-copy">
+              <div id="tv-title" class="audit-title">Showcase</div>
+              <a id="tv-host" class="audit-meta" href="#" target="_blank" rel="noreferrer"></a>
+              <p id="tv-description" class="audit-description"></p>
+              <div class="tv-stage-panel__meta">
+                <span id="tv-position" class="tv-chip">0 / 0</span>
+                <span id="tv-mode" class="tv-chip">Live</span>
+              </div>
+            </div>
+            <div class="tv-stage-panel__actions audit-actions">
+              <button id="tv-item-prev" type="button" class="secondary" aria-label="Previous showcase item">
+                <i class="ti ti-chevron-left"></i>
+                <span>Prev</span>
+              </button>
+              <button id="tv-item-next" type="button" class="secondary" aria-label="Next showcase item">
+                <span>Next</span>
+                <i class="ti ti-chevron-right"></i>
+              </button>
+              <button id="tv-details" type="button" class="secondary audit-icon-action" aria-label="Open site details" title="Details">
+                <i class="ti ti-settings"></i>
+              </button>
+              <button id="tv-feedback" type="button" class="secondary audit-icon-action" aria-label="Add site feedback" title="Feedback">
+                <i class="ti ti-message-dots"></i>
+              </button>
+              <button id="tv-scale-toggle" type="button" class="secondary audit-scale-toggle" aria-pressed="false" aria-label="Scale preview to fit" title="Scale preview to fit">
+                <i class="ti ti-arrows-maximize"></i>
+                <span>Scale</span>
+              </button>
+              <button id="tv-slideshow" type="button" class="secondary" aria-label="Start slideshow">
+                <i class="ti ti-photo"></i>
+                <span>Slideshow</span>
+              </button>
+              <button id="tv-export" type="button" class="secondary">
+                <i class="ti ti-device-floppy"></i>
+                <span>Export reel</span>
+              </button>
+            </div>
+          </div>
+          <div id="tv-stage" class="tv-stage">
+            <video id="tv-video" class="tv-stage__media tv-stage__video is-hidden" controls playsinline preload="metadata"></video>
+            <img id="tv-image" class="tv-stage__media tv-stage__image is-hidden" alt="">
+            <iframe id="tv-frame" class="tv-stage__media tv-stage__frame is-hidden" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+          </div>
+          <canvas id="tv-export-canvas" class="tv-export-canvas" width="1600" height="900" aria-hidden="true"></canvas>
+        </div>
+        <aside class="tv-sidebar">
+          <div id="tv-queue-summary" class="tv-sidebar__queue-summary">No entries</div>
+          <div id="tv-queue" class="tv-queue"></div>
+          <div class="tv-sidebar__footer">
+            <div class="pager pager--rail tv-sidebar__pager">
+              <div id="tv-page-summary" class="pager__summary">No sites</div>
+              <div class="pager__controls">
+                <button id="tv-prev" type="button" class="secondary pager__button" aria-label="Previous showcase page">
+                  <i class="ti ti-chevron-left"></i>
+                  <span>Prev</span>
+                </button>
+                <span id="tv-page" class="pager__status">Page 1 of 1</span>
+                <button id="tv-next" type="button" class="secondary pager__button" aria-label="Next showcase page">
+                  <span>Next</span>
+                  <i class="ti ti-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features-view" class="surface feature-matrix-shell is-hidden" aria-label="Feature gates">
+      <div class="feature-matrix-toolbar">
+        <div class="feature-matrix-heading">
+          <div class="feature-matrix-title">
+            <i class="ti ti-checklist"></i>
+            <span>Feature Gates</span>
+          </div>
+          <span id="feature-matrix-summary" class="feature-matrix-summary">No rows</span>
+        </div>
+        <div class="feature-matrix-actions">
+          <label class="feature-matrix-control">
+            <span>Feature</span>
+            <select id="feature-matrix-bulk-feature" aria-label="Feature to apply"></select>
+          </label>
+          <label class="feature-matrix-control">
+            <span>Action</span>
+            <select id="feature-matrix-bulk-action" aria-label="Action to apply"></select>
+          </label>
+          <button id="feature-matrix-bulk-apply" type="button" class="secondary">
+            <i class="ti ti-list-check"></i>
+            <span>Apply to visible rows</span>
+          </button>
+          <button id="feature-matrix-copy" type="button" class="secondary">
+            <i class="ti ti-clipboard-copy"></i>
+            <span>Copy runbook</span>
+          </button>
+          <button id="feature-matrix-reset" type="button" class="secondary">
+            <i class="ti ti-restore"></i>
+            <span>Reset</span>
+          </button>
+          <button id="feature-matrix-save" type="button">
+            <i class="ti ti-device-floppy"></i>
+            <span>Save local</span>
+          </button>
+        </div>
+      </div>
+      <div class="feature-matrix-table-wrap surface-scroll-viewport">
+        <table class="feature-matrix-table">
+          <thead id="feature-matrix-head"></thead>
+          <tbody id="feature-matrix-body"></tbody>
+        </table>
+      </div>
+      <div class="feature-matrix-footer surface-rail surface-rail--footer">
+        <div id="feature-matrix-status" class="feature-matrix-status" aria-live="polite"></div>
+        <textarea id="feature-matrix-synopsis" class="feature-matrix-synopsis" readonly aria-label="Feature matrix AI handoff prompt"></textarea>
+      </div>
+    </section>
+
+    <section id="audit-view" class="surface audit-shell is-hidden">
+      <div class="audit-layout">
+        <aside class="audit-queue-panel">
+          <div id="audit-filter-tabs" class="audit-filter-tabs" role="group" aria-label="Feedback filters">
+            <button type="button" data-audit-filter="has-feedback" aria-pressed="false" aria-label="Has feedback" title="Has feedback">
+              <i class="ti ti-message-dots"></i>
+              <span>Has feedback</span>
+            </button>
+          </div>
+          <div id="audit-queue" class="audit-queue"></div>
+          <div class="pager pager--rail audit-pager" aria-label="Review pages">
+            <div id="audit-page-summary" class="pager__summary">No sites</div>
+            <div class="pager__controls">
+              <button id="audit-page-prev" type="button" class="secondary pager__button" aria-label="Previous 12 review sites">
+                <i class="ti ti-chevron-left"></i>
+                <span>Back</span>
+              </button>
+              <span id="audit-page" class="pager__status">Page 1 of 1</span>
+              <button id="audit-page-next" type="button" class="secondary pager__button" aria-label="Next 12 review sites">
+                <span>Next</span>
+                <i class="ti ti-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="audit-stage">
+          <div class="audit-stage__top">
+            <div class="audit-site-copy">
+              <div id="audit-title" class="audit-title">Review</div>
+              <a id="audit-meta" class="audit-meta" href="#" target="_blank" rel="noreferrer"></a>
+              <p id="audit-description" class="audit-description"></p>
+            </div>
+            <div class="audit-actions">
+              <button id="audit-prev" type="button" class="secondary" aria-label="Previous review site">
+                <i class="ti ti-chevron-left"></i>
+                <span>Prev</span>
+              </button>
+              <button id="audit-next" type="button" class="secondary" aria-label="Next review site">
+                <span>Next</span>
+                <i class="ti ti-chevron-right"></i>
+              </button>
+              <button id="audit-fullscreen" type="button" class="secondary audit-icon-action" aria-label="Open review tools" title="Review tools">
+                <i class="ti ti-settings"></i>
+              </button>
+              <button id="audit-scale-toggle" type="button" class="secondary audit-scale-toggle" aria-pressed="false" aria-label="Scale preview to fit" title="Scale preview to fit">
+                <i class="ti ti-arrows-maximize"></i>
+                <span>Scale</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="audit-browser">
+            <iframe id="audit-frame" class="audit-frame" title="Review site" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+            <img id="audit-preview-image" class="audit-preview-image is-hidden" alt="">
+            <div id="audit-frame-status" class="audit-frame-status is-hidden" role="status" aria-live="polite">
+              <i class="ti ti-world-search"></i>
+              <strong>Preview unavailable</strong>
+              <span>Open the site directly to inspect it.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="audit-note-panel">
+          <div class="audit-panel-top">
+            <div class="audit-panel-header">
+              <div>
+                <h2>Feedback</h2>
+              </div>
+              <button id="audit-reset-feedback" type="button" class="secondary audit-clear-feedback" aria-label="Clear feedback changes" title="Clear feedback changes">
+                <i class="ti ti-eraser"></i>
+              </button>
+            </div>
+            <div class="audit-presets">
+              <div class="audit-section-header">
+                <span>Common critiques</span>
+                <button id="audit-presets-edit" type="button" class="secondary audit-presets__edit">
+                  <i class="ti ti-adjustments"></i>
+                  <span>Edit</span>
+                </button>
+              </div>
+              <div id="audit-presets-list" class="audit-presets__list"></div>
+            </div>
+            <div class="audit-attachments">
+              <div class="audit-section-header audit-attachments__head">
+                <span>Images</span>
+                <label class="secondary audit-attachment-button">
+                  <i class="ti ti-photo-plus"></i>
+                  <span>Attach</span>
+                  <input id="audit-attachment-input" type="file" accept="image/*" multiple>
+                </label>
+              </div>
+              <div id="audit-attachment-list" class="audit-attachment-list" aria-live="polite"></div>
+              <p class="field-note">Paste images into Notes, drop them here, or attach files.</p>
+            </div>
+            <div class="audit-controls-row">
+              <label id="audit-rank-field" class="field audit-field audit-rank-field is-hidden">
+                <span>Action rank</span>
+                <input id="audit-rank" type="number" inputmode="numeric" value="0">
+              </label>
+            </div>
+          </div>
+          <label class="field audit-field audit-note-section">
+            <span>Notes</span>
+            <textarea id="audit-note" class="note-modal__textarea audit-note" placeholder="What should future-you or an agent know about this site?"></textarea>
+          </label>
+          <div class="audit-panel-bottom">
+            <div class="audit-form-actions">
+              <button id="audit-save" type="button">
+                <i class="ti ti-device-floppy"></i>
+                <span>Save feedback</span>
+              </button>
+            </div>
+            <p id="audit-status-message" class="field-note"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  <!-- Modal stack: operator workflows share the same surface-modal contract. -->
+  <div id="audit-presets-modal" class="surface-modal audit-presets-modal is-hidden" role="dialog" aria-modal="true" aria-label="Edit critique presets">
+    <div class="surface-modal__backdrop" data-close-audit-presets="true"></div>
+    <div class="surface-modal__panel audit-presets-modal__panel">
+      <div class="surface-modal__header modal-header">
+        <div class="surface-modal__title-row">
+          <i class="ti ti-adjustments"></i>
+          <h2 class="modal-title">Critique presets</h2>
+        </div>
+        <button type="button" class="modal-close surface-modal__close" data-close-audit-presets="true" aria-label="Close critique presets">&times;</button>
+      </div>
+      <div class="audit-presets-modal__body">
+        <div id="audit-presets-editor" class="audit-presets-editor" aria-label="Critique preset editor"></div>
+        <p id="audit-presets-status" class="field-note">Each preset needs label and text.</p>
+      </div>
+      <div class="settings-modal__footer">
+        <button id="audit-presets-add" type="button" class="secondary">
+          <i class="ti ti-plus"></i>
+          <span>Add preset</span>
+        </button>
+        <div class="settings-modal__actions">
+          <button id="audit-presets-reset" type="button" class="secondary">
+            <i class="ti ti-restore"></i>
+            <span>Defaults</span>
+          </button>
+          <button id="audit-presets-save" type="button">
+            <i class="ti ti-device-floppy"></i>
+            <span>Save presets</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Slideshow stage. The canon UI.Screensaver controller fills this
+         container with its own markup (two-layer crossfade + copy area + chip
+         metadata). The wrapper section just owns view-mode visibility — and
+         we still inject a sites-specific rank-badge chip into the canon's
+         meta row from app.js once the controller is attached. -->
+    <section id="slideshow-view" class="surface is-hidden"></section>
+
+    <section id="json-view" class="surface json-shell is-hidden">
+      <div class="json-shell__toolbar">
+        <div id="json-summary" class="pager__summary">No JSON</div>
+        <div class="json-shell__actions">
+          <div class="json-shell__mode" role="group" aria-label="JSON display mode">
+            <button type="button" class="secondary json-shell__mode-button" data-json-mode="tree" aria-pressed="true">
+              <span>TREE</span>
+            </button>
+            <button type="button" class="secondary json-shell__mode-button" data-json-mode="raw" aria-pressed="false">
+              <span>RAW</span>
+            </button>
+          </div>
+          <button id="json-wrap-toggle" type="button" class="secondary">
+            <i class="ti ti-wrap-text"></i>
+            <span>Wrap off</span>
+          </button>
+          <button id="json-copy" type="button" class="secondary">
+            <i class="ti ti-clipboard-copy"></i>
+            <span>Copy</span>
+          </button>
+        </div>
+      </div>
+      <div id="json-content" class="json-content" tabindex="0" aria-label="Raw JSON with line numbers"></div>
+    </section>
+
+    <section id="swipe-view" class="swipe-view is-hidden">
+      <div class="swipe-view__header">
+        <button id="swipe-menu" type="button" class="swipe-view__menu-btn" aria-label="Menu">
+          <i class="ti ti-menu-2"></i>
+        </button>
+        <span id="swipe-position" class="swipe-view__position">1 / 0</span>
+        <button id="swipe-search-btn" type="button" class="swipe-view__search-btn" aria-label="Search">
+          <i class="ti ti-search"></i>
+        </button>
+      </div>
+      <div id="swipe-toolbar" class="swipe-toolbar is-hidden">
+        <div class="swipe-toolbar__panel">
+          <label class="field">
+            <span>Search</span>
+            <input id="swipe-search" type="search" placeholder="Search sites by title, subdomain, or description..." aria-label="Search sites">
+          </label>
+          <label class="field swipe-toolbar__view-field">
+            <span>View</span>
+            <select id="swipe-view-select" aria-label="Choose view"></select>
+          </label>
+          <div id="swipe-summary" class="swipe-toolbar__summary">0 sites</div>
+          <div class="rank-control swipe-rank-control">
+            <button id="swipe-rank-down" class="rank-control__button" type="button" aria-label="Lower manual rank">
+              <i class="ti ti-chevron-down"></i>
+            </button>
+            <span id="swipe-rank-value" class="rank-control__value note-trigger note-trigger--swipe" aria-label="Site note status">0</span>
+            <button id="swipe-rank-up" class="rank-control__button" type="button" aria-label="Raise manual rank">
+              <i class="ti ti-chevron-up"></i>
+            </button>
+          </div>
+          <button id="swipe-main-site" class="main-site-button" type="button" aria-label="Set as main site">
+            <i class="ti ti-home-star"></i>
+            <span>Main</span>
+          </button>
+          <button id="swipe-refresh-preview" class="preview-refresh-button" type="button" aria-label="Refresh cached preview">
+            <i class="ti ti-refresh"></i>
+            <span>Preview</span>
+          </button>
+          <div class="swipe-toolbar__actions">
+            <button id="swipe-edit-current" type="button" class="site-edit-button">
+              <i class="ti ti-edit"></i>
+              <span>Edit site</span>
+            </button>
+            <button id="swipe-delete-current" type="button" class="site-delete-button">
+              <i class="ti ti-trash"></i>
+              <span>Delete site</span>
+            </button>
+            <button id="swipe-clear-search" type="button" class="secondary">
+              <i class="ti ti-eraser"></i>
+              <span>Clear</span>
+            </button>
+            <button id="swipe-open-composer" type="button">
+              <i class="ti ti-plus"></i>
+              <span>Create site</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="swipe-view__stage">
+        <div class="swipe-view__preview-card">
+          <img id="swipe-preview-image" class="site-preview-img swipe-view__preview-img is-placeholder" alt="" loading="eager" decoding="async">
+          <div id="swipe-preview-empty" class="swipe-view__preview-empty is-hidden">
+            <i class="ti ti-photo-off" aria-hidden="true"></i>
+            <span>Preview unavailable</span>
+          </div>
+        </div>
+        <iframe id="swipe-frame" class="swipe-view__frame" sandbox="allow-scripts" referrerpolicy="no-referrer" aria-hidden="true"></iframe>
+        <div id="swipe-touch" class="swipe-view__touch-layer"></div>
+      </div>
+      <div class="swipe-view__footer">
+        <button id="swipe-prev" type="button" class="swipe-view__nav-btn" aria-label="Previous site">
+          <i class="ti ti-chevron-left"></i>
+        </button>
+        <div class="swipe-view__info">
+          <a id="swipe-title" class="swipe-view__title" target="_blank" rel="noreferrer"></a>
+          <span id="swipe-host" class="swipe-view__host"></span>
+        </div>
+        <button id="swipe-next" type="button" class="swipe-view__nav-btn" aria-label="Next site">
+          <i class="ti ti-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <section id="categorize-view" class="surface categorize-shell sweep-modal is-hidden" aria-label="Category board">
+      <div class="sweep-modal__body">
+        <div class="sweep-modal__meta">
+          <div class="category-board-controls" aria-label="Category board controls">
+            <label class="category-board-control">
+              <span>Set</span>
+              <select id="category-set-select"></select>
+            </label>
+            <label class="category-board-control">
+              <span>Behavior</span>
+              <select id="category-behavior-select">
+                <option value="any">OR</option>
+                <option value="single">OR, max 1</option>
+                <option value="max2">OR, max 2</option>
+                <option value="all">AND</option>
+              </select>
+            </label>
+            <button id="category-add-bucket" type="button" class="secondary">
+              <i class="ti ti-adjustments-horizontal"></i>
+              <span>Edit</span>
+            </button>
+          </div>
+          <div id="sweep-generated" class="sweep-modal__generated"></div>
+          <div id="sweep-status" class="sweep-modal__status" aria-live="polite"></div>
+        </div>
+        <div class="sweep-modal__workspace">
+          <div id="sweep-lanes" class="sweep-lanes"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="category-editor-modal" class="surface-modal category-editor-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="category-editor-title">
+    <div class="surface-modal__backdrop" data-close-category-editor="true"></div>
+    <div class="surface-modal__panel category-editor-modal__panel">
+      <header class="surface-modal__header category-editor-modal__header">
+        <div class="surface-modal__title-block">
+          <div class="surface-modal__title-row">
+            <i class="ti ti-adjustments-horizontal"></i>
+            <h2 id="category-editor-title">Categories</h2>
+          </div>
+        </div>
+        <button type="button" class="modal-close-button" data-close-category-editor="true" aria-label="Close">
+          <i class="ti ti-x"></i>
+        </button>
+      </header>
+      <div class="category-editor-modal__body">
+        <div class="category-editor-modal__grid">
+          <label class="field-stack">
+            <span>Set</span>
+            <select id="category-editor-set"></select>
+          </label>
+          <label class="field-stack">
+            <span>Behavior</span>
+            <select id="category-editor-behavior">
+              <option value="any">OR</option>
+              <option value="single">OR, max 1</option>
+              <option value="max2">OR, max 2</option>
+              <option value="all">AND</option>
+            </select>
+          </label>
+        </div>
+        <div id="category-editor-list" class="category-editor-list"></div>
+        <div class="category-editor-add">
+          <input id="category-editor-new-label" type="text" placeholder="New category">
+          <button id="category-editor-add" type="button" class="secondary">
+            <i class="ti ti-plus"></i>
+            <span>Add</span>
+          </button>
+        </div>
+        <p id="category-editor-status" class="category-editor-status" aria-live="polite"></p>
+      </div>
+      <footer class="surface-modal__footer category-editor-modal__footer">
+        <button type="button" class="secondary" data-close-category-editor="true">Cancel</button>
+        <button id="category-editor-save" type="button" class="primary">
+          <i class="ti ti-device-floppy"></i>
+          <span>Save</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="fullscreen-modal" class="fullscreen-modal surface-modal surface-stage-modal is-hidden" role="dialog" aria-modal="true" aria-label="Preview site">
+    <div class="fullscreen-modal__backdrop surface-modal__backdrop" data-close-preview="true"></div>
+    <div class="fullscreen-modal__panel surface-modal__panel surface-stage-modal__panel" tabindex="-1">
+      <div class="fullscreen-modal__header surface-modal__header modal-header">
+        <div class="fullscreen-modal__title-block surface-modal__title-block">
+          <div class="fullscreen-modal__title-row surface-modal__title-row">
+            <i class="ti ti-browser"></i>
+            <h2 class="modal-title">
+              <span id="fullscreen-title" class="fullscreen-modal__title-text">Preview</span>
+            </h2>
+          </div>
+          <p id="fullscreen-host" class="fullscreen-modal__host is-hidden"></p>
+        </div>
+        <div class="fullscreen-modal__aside surface-stage-modal__aside">
+          <div class="fullscreen-modal__actions surface-modal__actions fullscreen-modal__actions--manage">
+            <button id="fullscreen-edit" type="button" class="secondary fullscreen-modal__icon-button surface-stage-modal__icon-button" aria-label="Edit site">
+              <i class="ti ti-edit"></i>
+              <span>Edit site</span>
+            </button>
+            <button id="fullscreen-vscode" type="button" class="secondary fullscreen-modal__icon-button surface-stage-modal__icon-button" aria-label="Edit in VS Code">
+              <i class="ti ti-brand-visual-studio"></i>
+              <span>VS Code</span>
+            </button>
+            <button id="fullscreen-use-app" type="button" class="secondary fullscreen-modal__icon-button surface-stage-modal__icon-button" aria-label="Use as app">
+              <i class="ti ti-device-mobile"></i>
+              <span>Use as app</span>
+            </button>
+          </div>
+          <span class="fullscreen-modal__action-divider surface-stage-modal__action-divider" aria-hidden="true">|</span>
+          <div class="fullscreen-modal__actions surface-modal__actions fullscreen-modal__actions--nav surface-stage-modal__actions--nav">
+            <button id="fullscreen-prev" type="button" class="secondary fullscreen-modal__icon-button surface-stage-modal__icon-button" aria-label="Previous site">
+              <i class="ti ti-chevron-left"></i>
+            </button>
+            <button id="fullscreen-next" type="button" class="secondary fullscreen-modal__icon-button surface-stage-modal__icon-button" aria-label="Next site">
+              <i class="ti ti-chevron-right"></i>
+            </button>
+          </div>
+          <button id="close-preview" type="button" class="modal-close fullscreen-modal__close surface-modal__close" aria-label="Close preview">&times;</button>
+        </div>
+      </div>
+      <div class="fullscreen-modal__workspace">
+        <aside class="fullscreen-modal__inspector" aria-label="Site properties">
+          <div id="fullscreen-properties-dock" class="fullscreen-modal__properties-dock">
+            <div class="fullscreen-modal__properties-top">
+              <div class="fullscreen-modal__properties-heading">
+                <span>Properties</span>
+              </div>
+              <button id="fullscreen-site-state-save" type="button" disabled>
+                <i class="ti ti-device-floppy"></i>
+                <span>Save</span>
+              </button>
+            </div>
+            <div id="fullscreen-unsaved-notice" class="fullscreen-modal__unsaved-notice is-hidden" role="status">
+              <span>There are changes.</span>
+              <button id="fullscreen-unsaved-dismiss" type="button" class="fullscreen-modal__unsaved-dismiss" aria-label="Dismiss changes notice">
+                <i class="ti ti-x"></i>
+              </button>
+            </div>
+            <div class="fullscreen-modal__site-state-row">
+              <label class="fullscreen-modal__site-state-field fullscreen-modal__site-state-field--title">
+                <span>Title</span>
+                <input
+                  id="fullscreen-friendly-name"
+                  class="fullscreen-modal__aliases-input"
+                  type="text"
+                  spellcheck="false"
+                  maxlength="120"
+                  placeholder="Wally Clip"
+                  aria-label="Site title"
+                >
+              </label>
+              <div id="fullscreen-rename-shell" class="fullscreen-modal__rename-shell">
+                <label class="fullscreen-modal__site-state-field fullscreen-modal__site-state-field--subdomain">
+                  <span>Subdomain</span>
+                  <div class="fullscreen-modal__subdomain-row">
+                    <a
+                      id="fullscreen-site-link"
+                      class="fullscreen-modal__site-link"
+                      href="#"
+                      target="_blank"
+                      rel="noopener"
+                    ></a>
+                    <select
+                      id="fullscreen-site-select"
+                      class="fullscreen-modal__site-select is-hidden"
+                      aria-label="Select grouped site"
+                    ></select>
+                    <div class="site-id-field fullscreen-modal__rename-field is-hidden">
+                      <input
+                        id="fullscreen-site-id"
+                        type="text"
+                        inputmode="text"
+                        spellcheck="false"
+                        autocomplete="off"
+                        placeholder="subdomain-slug"
+                        aria-label="Site subdomain slug"
+                        title="Lowercase letters, numbers, and hyphens only."
+                        aria-describedby="fullscreen-rename-status"
+                      >
+                      <span id="fullscreen-domain-suffix" class="site-id-field__suffix">.mullmania.com</span>
+                    </div>
+                    <button id="fullscreen-rename-save" type="button" class="secondary fullscreen-modal__rename-button" aria-pressed="false">
+                      <i class="ti ti-pencil"></i>
+                      <span>Edit</span>
+                    </button>
+                  </div>
+                </label>
+                <p id="fullscreen-rename-status" class="field-note fullscreen-modal__rename-status is-hidden"></p>
+              </div>
+              <label class="fullscreen-modal__site-state-field fullscreen-modal__site-state-field--aliases">
+                <span>Aliases</span>
+                <input
+                  id="fullscreen-aliases"
+                  class="fullscreen-modal__aliases-input"
+                  type="text"
+                  spellcheck="false"
+                  placeholder="e.g. &lt;subdomain&gt;-temp-&lt;random&gt;"
+                  aria-label="Site aliases"
+                >
+              </label>
+              <label class="fullscreen-modal__site-state-field fullscreen-modal__site-state-field--rank">
+                <span>Rank</span>
+                <input
+                  id="fullscreen-rank-input"
+                  class="fullscreen-modal__rank-input"
+                  type="number"
+                  inputmode="numeric"
+                  step="1"
+                  placeholder="0"
+                  aria-label="Site rank"
+                >
+              </label>
+              <div class="fullscreen-modal__site-buttons">
+                <button id="fullscreen-whitelist" type="button" class="fullscreen-modal__access-toggle">
+                  <i class="ti ti-lock"></i>
+                  <span>Private</span>
+                </button>
+                <button id="fullscreen-main" type="button" class="secondary">
+                  <i class="ti ti-star"></i>
+                  <span>Main</span>
+                </button>
+                <button id="fullscreen-tv-cast" type="button" class="secondary">
+                  <i class="ti ti-device-tv"></i>
+                  <span>TV</span>
+                </button>
+                <button id="fullscreen-redeploy" type="button" class="secondary">
+                  <i class="ti ti-rocket"></i>
+                  <span>Redeploy</span>
+                </button>
+                <button id="fullscreen-note" type="button" class="secondary">
+                  <i class="ti ti-message-dots"></i>
+                  <span>Notes</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="fullscreen-timeline-dock" class="fullscreen-modal__timeline-dock is-hidden" aria-label="Site timeline">
+            <div class="fullscreen-modal__timeline-head">
+              <div>
+                <span class="fullscreen-modal__timeline-eyebrow">Timeline</span>
+                <strong id="fullscreen-timeline-label">No history</strong>
+              </div>
+              <span id="fullscreen-timeline-count" class="fullscreen-modal__timeline-count"></span>
+            </div>
+            <div class="fullscreen-modal__timeline-scrubber">
+              <input
+                id="fullscreen-timeline-slider"
+                class="fullscreen-modal__timeline-slider"
+                type="range"
+                min="0"
+                max="0"
+                value="0"
+                aria-label="Preview site history"
+              >
+              <div id="fullscreen-timeline-picker" class="fullscreen-modal__timeline-picker is-hidden">
+                <i class="ti ti-history" aria-hidden="true"></i>
+                <span>Snapshot</span>
+                <select
+                  id="fullscreen-timeline-select"
+                  class="fullscreen-modal__timeline-select"
+                  aria-label="Choose snapshot"
+                ></select>
+              </div>
+            </div>
+            <div class="fullscreen-modal__timeline-actions">
+              <p id="fullscreen-timeline-status" class="fullscreen-modal__timeline-status" aria-live="polite"></p>
+              <button id="fullscreen-timeline-restore" type="button" class="secondary fullscreen-modal__timeline-restore" disabled>
+                <i class="ti ti-restore"></i>
+                <span>Restore version</span>
+              </button>
+            </div>
+          </div>
+          <div id="fullscreen-tags-dock" class="fullscreen-modal__tags-dock">
+            <div class="fullscreen-modal__tags-controls">
+              <div class="fullscreen-modal__tags-heading">
+                <i class="ti ti-tag"></i>
+                <span>Tags</span>
+              </div>
+              <div id="fullscreen-tags-list" class="fullscreen-modal__tags-list"></div>
+              <div class="fullscreen-modal__tags-picker-shell">
+                <button id="fullscreen-tag-toggle" type="button" class="secondary">
+                  <i class="ti ti-plus"></i>
+                  <span>Add tag</span>
+                </button>
+                <div id="fullscreen-tag-picker" class="fullscreen-modal__tags-picker is-hidden" role="dialog" aria-label="Add a tag">
+                  <div class="fullscreen-modal__tags-picker-search">
+                    <input
+                      id="fullscreen-tag-search"
+                      class="fullscreen-modal__tags-search-input"
+                      type="text"
+                      spellcheck="false"
+                      autocomplete="off"
+                      placeholder="Search tags or create one"
+                    >
+                  </div>
+                  <div id="fullscreen-tag-picker-list" class="fullscreen-modal__tags-picker-list"></div>
+                </div>
+              </div>
+            </div>
+            <div id="fullscreen-tag-status" class="fullscreen-modal__footer-status" aria-live="polite"></div>
+          </div>
+          <div class="fullscreen-modal__footer">
+            <div id="fullscreen-footer-status" class="fullscreen-modal__footer-status" aria-live="polite"></div>
+          </div>
+          <div class="fullscreen-modal__danger-zone" aria-label="Danger zone">
+            <button id="fullscreen-delete" type="button" class="secondary fullscreen-modal__danger-button fullscreen-modal__icon-button--danger">
+              <i class="ti ti-trash"></i>
+              <span class="fullscreen-modal__delete-label">Delete site</span>
+            </button>
+          </div>
+        </aside>
+        <div class="fullscreen-modal__stage surface-stage-modal__stage">
+          <button id="fullscreen-refresh" type="button" class="secondary fullscreen-modal__refresh-button surface-stage-modal__icon-button">
+            <i class="ti ti-refresh"></i>
+            <span>Refresh snapshot</span>
+          </button>
+          <div id="fullscreen-preview-loading" class="fullscreen-modal__preview-loading surface-stage-modal__preview-loading is-hidden" aria-hidden="true">
+            <div class="fullscreen-modal__preview-loading-card surface-stage-modal__preview-loading-card">
+              <i class="ti ti-loader-2 fullscreen-modal__spinner surface-stage-modal__spinner" aria-hidden="true"></i>
+              <span>Refreshing snapshot…</span>
+            </div>
+          </div>
+          <video id="fullscreen-video" class="fullscreen-modal__media fullscreen-modal__video surface-stage-modal__media surface-stage-modal__video is-hidden" controls playsinline preload="metadata"></video>
+          <div id="fullscreen-image-shell" class="fullscreen-modal__image-shell surface-stage-modal__image-shell is-hidden" aria-label="Saved snapshot image">
+            <div class="fullscreen-modal__image-stack surface-stage-modal__image-stack">
+              <button
+                id="fullscreen-image-left-card"
+                class="fullscreen-modal__image-card fullscreen-modal__image-card--left surface-stage-modal__image-card surface-stage-modal__image-card--left"
+                type="button"
+                aria-label="Show previous preview image"
+              >
+                <img id="fullscreen-image-left" class="fullscreen-modal__image-card-image surface-stage-modal__image-card-image" alt="">
+              </button>
+              <div class="fullscreen-modal__image-card fullscreen-modal__image-card--center surface-stage-modal__image-card surface-stage-modal__image-card--center">
+                <img id="fullscreen-image" class="fullscreen-modal__media fullscreen-modal__image fullscreen-modal__image-card-image surface-stage-modal__media surface-stage-modal__image surface-stage-modal__image-card-image is-hidden" alt="">
+              </div>
+              <button
+                id="fullscreen-image-right-card"
+                class="fullscreen-modal__image-card fullscreen-modal__image-card--right surface-stage-modal__image-card surface-stage-modal__image-card--right"
+                type="button"
+                aria-label="Show next preview image"
+              >
+                <img id="fullscreen-image-right" class="fullscreen-modal__image-card-image surface-stage-modal__image-card-image" alt="">
+              </button>
+            </div>
+          </div>
+          <div id="fullscreen-live-shell" class="fullscreen-modal__live-shell surface-stage-modal__live-shell is-hidden" aria-label="Timeline preview">
+            <div class="surface-stage-modal__live-scale">
+              <div class="surface-stage-modal__live-viewport">
+                <iframe id="fullscreen-frame" class="fullscreen-modal__frame surface-stage-modal__media surface-stage-modal__frame is-hidden" title="Timeline preview" sandbox="allow-forms allow-modals allow-popups allow-same-origin allow-scripts"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tv-cast-modal" class="tv-cast-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="tv-cast-title">
+    <div class="surface-modal__backdrop" data-close-tv-cast-modal="true"></div>
+    <div class="surface-modal__panel tv-cast-modal__panel" tabindex="-1">
+      <div class="surface-modal__header modal-header">
+        <div class="surface-modal__title-block">
+          <div class="surface-modal__title-row">
+            <i class="ti ti-device-tv"></i>
+            <h2 id="tv-cast-title" class="modal-title">Put On TV</h2>
+          </div>
+          <p id="tv-cast-site" class="tv-cast-modal__site"></p>
+        </div>
+        <button type="button" class="modal-close surface-modal__close" data-close-tv-cast-modal="true" aria-label="Close TV dialog">&times;</button>
+      </div>
+      <div class="tv-cast-modal__body">
+        <div id="tv-cast-empty" class="surface-empty-state tv-cast-modal__empty">
+          <i class="ti ti-device-tv-off"></i>
+          <p>No TVs to connect to.</p>
+        </div>
+        <div id="tv-cast-list" class="tv-cast-modal__list"></div>
+        <p id="tv-cast-status" class="tv-cast-modal__status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="access-modal" class="access-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
+    <div class="access-modal__backdrop surface-modal__backdrop" data-close-access-modal="true"></div>
+    <div class="access-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="access-modal__header surface-modal__header modal-header">
+        <div class="surface-modal__title-block">
+          <div class="surface-modal__title-row">
+            <i id="access-modal-icon" class="ti ti-lock"></i>
+            <h2 id="access-modal-title" class="modal-title">Change access?</h2>
+          </div>
+          <p id="access-modal-host" class="access-modal__host"></p>
+        </div>
+        <button id="close-access-modal" type="button" class="modal-close surface-modal__close" aria-label="Close access dialog">&times;</button>
+      </div>
+      <div class="access-modal__body">
+        <div class="access-modal__preview-card">
+          <img id="access-modal-preview" class="access-modal__preview" alt="" loading="lazy">
+        </div>
+        <div class="access-modal__copy">
+          <p id="access-modal-summary" class="access-modal__summary"></p>
+          <dl class="access-modal__definitions">
+            <div>
+              <dt>Public</dt>
+              <dd>Anyone with the URL can open the site.</dd>
+            </div>
+            <div>
+              <dt>Private</dt>
+              <dd>The direct host requires the Mullmania site key.</dd>
+            </div>
+          </dl>
+          <p id="access-modal-status" class="access-modal__status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="access-modal__footer surface-modal__footer">
+        <button id="access-modal-cancel" type="button" class="secondary">Cancel</button>
+        <button id="access-modal-confirm" type="button">
+          <i class="ti ti-lock-open"></i>
+          <span>Make public</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="rank-modal" class="rank-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="rank-modal-title">
+    <div class="rank-modal__backdrop surface-modal__backdrop" data-close-rank-modal="true"></div>
+    <div class="rank-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="rank-modal__header surface-modal__header modal-header">
+        <div class="surface-modal__title-block">
+          <div class="surface-modal__title-row">
+            <i id="rank-modal-icon" class="ti ti-adjustments"></i>
+            <h2 id="rank-modal-title" class="modal-title">Rank site</h2>
+          </div>
+          <p id="rank-modal-host" class="rank-modal__host"></p>
+        </div>
+        <button id="close-rank-modal" type="button" class="modal-close surface-modal__close" aria-label="Close rank dialog">&times;</button>
+      </div>
+      <div class="rank-modal__body">
+        <div class="rank-modal__summary">
+          <span>Current</span>
+          <strong id="rank-modal-current">0</strong>
+          <span id="rank-modal-position">Projected rank position</span>
+        </div>
+        <label class="rank-modal__field">
+          <span>New rank</span>
+          <input
+            id="rank-modal-input"
+            type="number"
+            inputmode="numeric"
+            step="1"
+            placeholder="0"
+            aria-label="New site rank"
+          >
+        </label>
+        <div class="rank-modal__steppers" aria-label="Rank adjustments">
+          <button type="button" class="secondary" data-rank-delta="-10">-10</button>
+          <button type="button" class="secondary" data-rank-delta="-1">-1</button>
+          <button type="button" class="secondary" data-rank-reset="true">0</button>
+          <button type="button" class="secondary" data-rank-delta="1">+1</button>
+          <button type="button" class="secondary" data-rank-delta="10">+10</button>
+        </div>
+        <section class="rank-modal__neighbors" aria-label="Projected rank neighbors">
+          <div class="rank-modal__section-title">After save</div>
+          <div id="rank-modal-neighbors" class="rank-modal__neighbor-list"></div>
+        </section>
+        <p id="rank-modal-status" class="rank-modal__status" aria-live="polite"></p>
+      </div>
+      <div class="rank-modal__footer surface-modal__footer">
+        <button type="button" class="secondary" data-close-rank-modal="true">Cancel</button>
+        <button id="rank-modal-save" type="button">
+          <i class="ti ti-device-floppy"></i>
+          <span>Save rank</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="notes-modal" class="notes-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-label="Saved notes">
+    <div class="notes-modal__backdrop surface-modal__backdrop" data-close-notes="true"></div>
+    <div class="notes-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="notes-modal__header surface-modal__header modal-header">
+        <div class="notes-modal__title-block surface-modal__title-block">
+          <div class="notes-modal__title-row surface-modal__title-row">
+            <i class="ti ti-notes"></i>
+            <h2 class="modal-title">Notes</h2>
+          </div>
+          <p id="notes-summary">0 saved notes</p>
+        </div>
+        <div class="notes-modal__actions surface-modal__actions">
+          <button id="notes-clear-visible" type="button" class="secondary notes-modal__clear">
+            <i class="ti ti-eraser"></i>
+            <span>Clear visible</span>
+          </button>
+          <button id="close-notes" type="button" class="modal-close notes-modal__close surface-modal__close" aria-label="Close notes">&times;</button>
+        </div>
+      </div>
+      <div class="notes-modal__body">
+        <div class="notes-modal__meta">
+          <p id="notes-context" class="field-note">Shows saved notes for the current result set.</p>
+        </div>
+        <div id="notes-list" class="notes-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tag-manager-modal" class="tag-manager-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="tag-manager-title">
+    <div class="tag-manager-modal__backdrop surface-modal__backdrop" data-close-tag-manager="true"></div>
+    <div class="tag-manager-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="tag-manager-modal__header surface-modal__header modal-header">
+        <div class="tag-manager-modal__title-block surface-modal__title-block">
+          <div class="tag-manager-modal__title-row surface-modal__title-row">
+            <i class="ti ti-tags"></i>
+            <h2 id="tag-manager-title" class="modal-title">Tags</h2>
+          </div>
+          <p id="tag-manager-summary">0 tags</p>
+        </div>
+        <div class="tag-manager-modal__actions surface-modal__actions">
+          <button id="close-tag-manager" type="button" class="modal-close tag-manager-modal__close surface-modal__close" aria-label="Close tags">&times;</button>
+        </div>
+      </div>
+      <div class="tag-manager-modal__body">
+        <div id="tag-manager-status" class="tag-manager-modal__status" aria-live="polite"></div>
+        <div id="tag-manager-list" class="tag-manager-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bulk-rename-modal" class="bulk-rename-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="bulk-rename-title">
+    <div class="bulk-rename-modal__backdrop surface-modal__backdrop" data-close-bulk-rename="true"></div>
+    <div class="bulk-rename-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="bulk-rename-modal__header surface-modal__header modal-header">
+        <div class="bulk-rename-modal__title-block surface-modal__title-block">
+          <div class="bulk-rename-modal__title-row surface-modal__title-row">
+            <i class="ti ti-pencil"></i>
+            <h2 id="bulk-rename-title" class="modal-title">Rename Sites</h2>
+          </div>
+          <p id="bulk-rename-summary">No selected sites</p>
+        </div>
+        <div class="bulk-rename-modal__actions surface-modal__actions">
+          <button id="close-bulk-rename" type="button" class="modal-close bulk-rename-modal__close surface-modal__close" aria-label="Close rename">&times;</button>
+        </div>
+      </div>
+      <div class="bulk-rename-modal__body">
+        <div id="bulk-rename-progress" class="bulk-rename-modal__progress is-hidden" aria-live="polite"></div>
+        <div class="bulk-rename-modal__table-shell">
+          <table class="bulk-rename-table">
+            <thead>
+              <tr>
+                <th id="bulk-rename-original-header" class="bulk-rename-table__original-col" scope="col">
+                  <button id="bulk-rename-sort-original" type="button" class="bulk-rename-table__sort" data-bulk-sort="original">
+                    <span>Original</span>
+                    <i class="ti ti-arrows-sort" aria-hidden="true"></i>
+                  </button>
+                </th>
+                <th id="bulk-rename-friendly-header" class="bulk-rename-table__friendly-col" scope="col">
+                  <button id="bulk-rename-sort-friendly" type="button" class="bulk-rename-table__sort" data-bulk-sort="friendly">
+                    <span>Title</span>
+                    <i class="ti ti-arrows-sort" aria-hidden="true"></i>
+                  </button>
+                </th>
+                <th id="bulk-rename-new-header" class="bulk-rename-table__site-col" scope="col">
+                  <button id="bulk-rename-sort-new" type="button" class="bulk-rename-table__sort" data-bulk-sort="new">
+                    <span>New slug</span>
+                    <i class="ti ti-arrows-sort" aria-hidden="true"></i>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="bulk-rename-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="bulk-rename-modal__footer">
+        <div id="bulk-rename-status" class="bulk-rename-modal__status" aria-live="polite"></div>
+        <div class="bulk-rename-modal__footer-actions surface-modal__actions">
+          <button id="bulk-rename-cancel" type="button" class="secondary">
+            <span>Cancel</span>
+          </button>
+          <button id="bulk-rename-back" type="button" class="secondary is-hidden">
+            <span>Back to edit</span>
+          </button>
+          <button id="bulk-rename-next" type="button">
+            <span>Continue to confirm</span>
+          </button>
+          <button id="bulk-rename-start" type="button" class="is-hidden">
+            <span>Start updates</span>
+          </button>
+          <button id="bulk-rename-close-action" type="button" class="is-hidden">
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="note-modal" class="note-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-label="Edit site feedback">
+    <div class="note-modal__backdrop surface-modal__backdrop" data-close-note="true"></div>
+    <div class="note-modal__panel surface-modal__panel">
+      <div class="note-modal__header surface-modal__header modal-header">
+        <div class="note-modal__title-row surface-modal__title-row">
+          <i class="ti ti-message-dots"></i>
+          <h2 class="modal-title">Feedback: <span id="note-site-label"></span></h2>
+        </div>
+        <button id="close-note" type="button" class="modal-close note-modal__close surface-modal__close" aria-label="Close site note">&times;</button>
+      </div>
+      <div class="note-modal__body">
+        <div class="note-modal__site-context">
+          <button id="note-preview-button" type="button" class="note-modal__preview" aria-label="Preview site">
+            <img id="note-preview-image" class="note-modal__preview-image" alt="" loading="lazy">
+            <span class="note-modal__preview-badge">
+              <i class="ti ti-browser"></i>
+              <span>Preview</span>
+            </span>
+          </button>
+          <div class="note-modal__site-copy">
+            <a id="note-site-link" class="note-modal__site-link" target="_blank" rel="noreferrer"></a>
+            <div id="note-site-meta" class="note-modal__site-meta"></div>
+            <p id="note-site-summary" class="note-modal__site-summary"></p>
+          </div>
+        </div>
+        <div class="note-modal__presets">
+          <div class="audit-section-header">
+            <span>Common feedback</span>
+            <button id="note-presets-edit" type="button" class="secondary audit-presets__edit">
+              <i class="ti ti-adjustments"></i>
+              <span>Edit</span>
+            </button>
+          </div>
+          <div id="note-presets-list" class="audit-presets__list"></div>
+        </div>
+        <textarea
+          id="note-text"
+          class="note-modal__textarea"
+          spellcheck="true"
+          maxlength="4000"
+          placeholder="Say what should change here."
+        ></textarea>
+      </div>
+      <div class="note-modal__footer">
+        <div id="note-status" class="fullscreen-modal__footer-status" aria-live="polite"></div>
+        <div class="note-modal__actions surface-modal__actions">
+          <button id="note-clear" type="button" class="secondary" disabled>
+            <i class="ti ti-eraser"></i>
+            <span>Clear</span>
+          </button>
+          <button id="note-save" type="button" disabled>
+            <i class="ti ti-device-floppy"></i>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="settings-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="settings-modal__backdrop surface-modal__backdrop" data-close-settings="true"></div>
+    <div class="settings-modal__panel surface-modal__panel" tabindex="-1">
+      <div class="settings-modal__header surface-modal__header modal-header">
+        <div class="settings-modal__heading surface-modal__title-block">
+          <div class="settings-modal__title-row surface-modal__title-row">
+            <i class="ti ti-settings"></i>
+            <h2 id="settings-title" class="modal-title">Settings</h2>
+          </div>
+          <p class="settings-modal__description">Manage the private operator key used for write actions across the launchpad.</p>
+        </div>
+        <button id="close-settings" type="button" class="modal-close settings-modal__close surface-modal__close" aria-label="Close settings">&times;</button>
+      </div>
+      <div class="settings-modal__body">
+        <label class="field settings-modal__operator-field">
+          <span class="field__label-row">
+            <span>Operator Key</span>
+            <button
+              id="settings-operator-key-help"
+              class="field-help"
+              type="button"
+              aria-label="What is the operator key?"
+              title="Admin key for create, overwrite, notes, tags, rank, preview refresh, and main-site changes."
+            >
+              <i class="ti ti-info-circle"></i>
+            </button>
+          </span>
+          <input
+            id="settings-operator-key"
+            type="password"
+            placeholder="Paste private operator key once"
+            aria-describedby="settings-operator-key-note settings-operator-key-help-text"
+          >
+          <small id="settings-operator-key-note" class="field-note">Required for management actions.</small>
+        </label>
+
+        <div id="settings-operator-key-help-text" class="alert alert-info settings-modal__operator-help" role="note">
+          <i class="ti ti-info-circle"></i>
+          <div class="settings-modal__operator-help-copy">
+            <strong>Admin key</strong>
+            <p>Use this key for management actions: create, overwrite, delete, notes, tags, rank, preview refresh, and main-site changes. Turn on Remember if you do not want to paste it each session.</p>
+          </div>
+        </div>
+
+        <section class="settings-modal__style-field" aria-labelledby="settings-header-plugin-heading">
+          <div class="settings-modal__style-heading">
+            <div>
+              <h3 id="settings-header-plugin-heading">Chrome Plugin</h3>
+              <p>Add request headers for private Mullmania sites or any other header-gated site.</p>
+            </div>
+            <i class="ti ti-plug"></i>
+          </div>
+          <a class="button secondary" href="downloads/header-to-site.zip" download>
+            <i class="ti ti-download"></i>
+            <span>Download Plugin</span>
+          </a>
+          <small class="field-note">Prefilled for <code>mullmania.com</code> and <code>ipzom.com</code>; edit the header and sites in the extension popup.</small>
+        </section>
+
+        <section class="settings-modal__style-field" aria-labelledby="settings-style-heading">
+          <div class="settings-modal__style-heading">
+            <div>
+              <h3 id="settings-style-heading">App Style</h3>
+              <p>Changes this launchpad only. Hosted sites keep their own styles.</p>
+            </div>
+            <i class="ti ti-palette"></i>
+          </div>
+          <div id="settings-style-combobox" class="settings-style-combobox" data-open="false">
+            <button
+              id="settings-style-button"
+              class="settings-style-combobox__button"
+              type="button"
+              role="combobox"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="settings-style-options"
+            >
+              <span id="settings-style-label">Published default</span>
+              <i class="ti ti-chevron-down"></i>
+            </button>
+            <div
+              id="settings-style-options"
+              class="settings-style-combobox__list is-hidden"
+              role="listbox"
+              aria-label="App style"
+            ></div>
+          </div>
+        </section>
+
+        <label class="remember-toggle settings-modal__remember-toggle">
+          <input id="settings-remember-key" type="checkbox">
+          <span>Remember for next time</span>
+        </label>
+      </div>
+      <div class="settings-modal__footer">
+        <div id="settings-status" class="settings-modal__status" aria-live="polite"></div>
+        <div class="settings-modal__actions surface-modal__actions">
+          <button id="settings-clear-key" type="button" class="secondary">
+            <i class="ti ti-trash"></i>
+            <span>Forget key</span>
+          </button>
+          <button id="settings-submit" type="button">
+            <i class="ti ti-device-floppy"></i>
+            <span>Save Settings</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="composer-modal" class="composer-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-label="Create or update a site">
+    <div class="composer-modal__backdrop surface-modal__backdrop" data-close-composer="true"></div>
+    <div class="composer-modal__panel surface-modal__panel">
+      <div class="composer-modal__header surface-modal__header modal-header">
+        <div class="composer-modal__heading surface-modal__title-block">
+          <div class="composer-modal__title-row surface-modal__title-row">
+            <i class="ti ti-pencil-code"></i>
+            <h2 id="composer-title" class="modal-title">Create Site</h2>
+          </div>
+          <p id="composer-description" class="composer-modal__description">Pick a subdomain, pick a starter, hit Create. Theme and tweaks come after the site is live.</p>
+        </div>
+        <div class="composer-modal__header-actions surface-modal__actions">
+          <button id="composer-vscode" type="button" class="secondary composer-modal__vscode" aria-label="Edit in VS Code">
+            <i class="ti ti-brand-visual-studio"></i>
+            <span>VS Code</span>
+          </button>
+          <button id="close-composer" type="button" class="modal-close composer-modal__close surface-modal__close" aria-label="Close editor">&times;</button>
+        </div>
+      </div>
+
+      <div class="composer-modal__body">
+        <div class="composer-modal__meta">
+          <label class="field composer-modal__subdomain-field">
+            <span>Subdomain</span>
+            <div class="site-id-field">
+              <input id="composer-site-id" type="text" placeholder="my-site">
+              <span class="site-id-field__suffix" id="composer-domain-suffix">.mullmania.com</span>
+            </div>
+            <small id="composer-site-id-status" class="field-note">Lowercase letters, numbers, and hyphens only.</small>
+          </label>
+        </div>
+
+        <div class="composer-tabs" role="tablist" aria-label="Site creation mode">
+          <button id="composer-tab-blank" type="button" class="composer-tabs__button is-active" data-composer-tab="blank">
+            <i class="ti ti-file-plus"></i>
+            <span>Starter</span>
+          </button>
+          <button id="composer-tab-editor" type="button" class="composer-tabs__button" data-composer-tab="editor">
+            <i class="ti ti-code"></i>
+            <span>Editor</span>
+          </button>
+        </div>
+
+        <div class="composer-workspace">
+          <div class="composer-workspace__content">
+            <div id="composer-blank-panel" class="composer-panel">
+              <div class="composer-builder">
+                <div class="composer-blank__copy">
+                  <div class="composer-blank__eyebrow">Create from</div>
+                  <h3>Pick what to create</h3>
+                  <p id="composer-starter-summary">Choose a starting point. The preview updates as you change it.</p>
+                </div>
+
+                <section class="composer-intent">
+                  <div class="composer-builder__section-head">
+                    <div>
+                      <div class="composer-builder__section-eyebrow">Intent</div>
+                      <h4>Rough idea</h4>
+                    </div>
+                    <button id="composer-intent-plan" type="button" class="secondary">
+                      <i class="ti ti-sparkles"></i>
+                      <span>Plan Draft</span>
+                    </button>
+                  </div>
+                  <label class="field composer-intent__field">
+                    <span>Intent</span>
+                    <textarea id="composer-intent-prompt" rows="4" placeholder="A tiny control room for tracking the weird half-finished apps I keep forgetting..."></textarea>
+                  </label>
+                  <div id="composer-intent-summary" class="composer-intent__summary is-hidden" aria-live="polite"></div>
+                </section>
+
+                <div id="composer-builder-lock" class="composer-builder__lock is-hidden">
+                  <div>
+                    <strong>Starter choices locked</strong>
+                    <p id="composer-builder-lock-copy">The editor has custom changes. Rebuild from the choices here only if you want to replace those edits.</p>
+                  </div>
+                  <button id="composer-builder-reset" type="button" class="secondary">Rebuild Draft</button>
+                </div>
+
+                <div class="composer-flat-starter__cards choice-grid" role="list" aria-label="Pick a starter">
+                  <button type="button" class="composer-flat-starter-card choice-card is-active" data-composer-flat-starter="plain-page" aria-pressed="true">
+                    <span class="choice-card__eyebrow">Static</span>
+                    <strong>Plain Page</strong>
+                    <span class="choice-card__body">Bare HTML, CSS, and JS. No framework.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="ui-shell" aria-pressed="false">
+                    <span class="choice-card__eyebrow">Shared UI</span>
+                    <strong>UI shell</strong>
+                    <span class="choice-card__body">Header, tabs, sidebar, themeable.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="tv-app" aria-pressed="false">
+                    <span class="choice-card__eyebrow">10-foot</span>
+                    <strong>TV App</strong>
+                    <span class="choice-card__body">Launcher cards + media bundle. TV flag auto-on.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="slack-bot" aria-pressed="false">
+                    <span class="choice-card__eyebrow">Slack</span>
+                    <strong>Slack Bot</strong>
+                    <span class="choice-card__body">Bot page plus example manifest + Bolt server stub.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="game" aria-pressed="false">
+                    <span class="choice-card__eyebrow">Playfield</span>
+                    <strong>Game</strong>
+                    <span class="choice-card__body">Canvas + RAF loop + score/state + input stub.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="copy-existing" aria-pressed="false">
+                    <span class="choice-card__eyebrow">Clone</span>
+                    <strong>Copy existing</strong>
+                    <span class="choice-card__body">Duplicate a hosted site from the catalog.</span>
+                  </button>
+                  <button type="button" class="composer-flat-starter-card choice-card" data-composer-flat-starter="from-editor" aria-pressed="false">
+                    <span class="choice-card__eyebrow">Paste</span>
+                    <strong>From editor</strong>
+                    <span class="choice-card__body">Paste your own HTML/CSS/JS. Optional AI rewrite.</span>
+                  </button>
+                </div>
+
+                <label class="composer-tv-form-factor-toggle">
+                  <input id="composer-tv-form-factor" type="checkbox">
+                  <span><strong>TV form factor</strong> — fullscreen, dpad/remote-friendly. Auto-on for TV App. Editable post-create.</span>
+                </label>
+
+                <!-- Legacy recipe buttons retained hidden so existing setComposerRecipe state-sync continues to work.
+                     The flat-starter cards above are the operator-facing picker; they call setComposerRecipe()
+                     and setComposerStarter() programmatically via setComposerFlatStarter(). -->
+                <div class="composer-recipe__cards choice-grid is-hidden" aria-hidden="true">
+                  <button type="button" class="composer-recipe-card choice-card is-active" data-composer-recipe="theme" aria-pressed="true"></button>
+                  <button type="button" class="composer-recipe-card choice-card" data-composer-recipe="tv-app" aria-pressed="false"></button>
+                  <button type="button" class="composer-recipe-card choice-card" data-composer-recipe="copy-site" aria-pressed="false"></button>
+                </div>
+
+                <section class="composer-builder__section" data-composer-recipe-panel="theme">
+                  <!-- "Base files" picker removed — the flat starter picker above subsumes it.
+                       Hidden legacy starter buttons retained so existing setComposerStarter state-sync continues to work. -->
+                  <div class="composer-theme__cards choice-grid is-hidden" aria-hidden="true">
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="ui-site" aria-pressed="false"><strong>UI Site</strong></button>
+                    <button type="button" class="composer-starter-card choice-card is-active" data-composer-starter="basic-example" aria-pressed="true"><strong>Plain Page</strong></button>
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="slack-bot" aria-pressed="false"><strong>Slack Bot</strong></button>
+                    <button type="button" class="composer-starter-card choice-card" data-composer-starter="game" aria-pressed="false"><strong>Game</strong></button>
+                  </div>
+
+                  <label class="field composer-app-kind__field">
+                    <span>Page type</span>
+                    <small class="field-note">Each option now produces a distinct single-file starter shell. Non-default picks are tagged with their real surface id in the catalog.</small>
+                    <div class="composer-app-kind__cards choice-grid choice-grid--compact" role="list" aria-label="Page type choices">
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline is-active" data-composer-surface="site-page" aria-pressed="true">
+                        <i class="ti ti-layout"></i>
+                        <span>Site / Page</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-surface="tool-app" aria-pressed="false">
+                        <i class="ti ti-app-window"></i>
+                        <span>Tool / App</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-surface="api-frontdoor" aria-pressed="false">
+                        <i class="ti ti-api"></i>
+                        <span>API Front Door</span>
+                      </button>
+                    </div>
+                  </label>
+
+                  <label class="field composer-app-kind__field">
+                    <span>Add-ons <small class="composer-placeholder-badge">[PARTIAL]</small></span>
+                    <small class="field-note">Mobile/touch and tv-tail wire into the generated page. PWA still needs manifest, service worker, and icon files, so it remains tracked as architectural.</small>
+                    <div class="composer-app-kind__cards choice-grid choice-grid--compact" role="group" aria-label="Add-on choices">
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-addon="pwa" aria-pressed="false">
+                        <i class="ti ti-device-mobile-code"></i>
+                        <span>PWA</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-addon="mobile" aria-pressed="false">
+                        <i class="ti ti-device-mobile"></i>
+                        <span>Mobile/touch</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-addon="tv-tail" aria-pressed="false">
+                        <i class="ti ti-broadcast"></i>
+                        <span>tv-tail</span>
+                      </button>
+                    </div>
+                  </label>
+
+                  <label class="field composer-app-kind__field">
+                    <span>Data source <small class="composer-placeholder-badge">[PARTIAL]</small></span>
+                    <small class="field-note">Ipzom sample data fetches a deterministic live JSON sample. Bring-own still needs deploy-time data.json support.</small>
+                    <div class="composer-app-kind__cards choice-grid choice-grid--compact" role="list" aria-label="Data source choices">
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline is-active" data-composer-data-source="none" aria-pressed="true">
+                        <i class="ti ti-circle-off"></i>
+                        <span>None</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-data-source="ipzom" aria-pressed="false">
+                        <i class="ti ti-database"></i>
+                        <span>Ipzom data</span>
+                      </button>
+                      <button type="button" class="composer-app-kind-card choice-card choice-card--inline" data-composer-data-source="bring-own" aria-pressed="false">
+                        <i class="ti ti-plug"></i>
+                        <span>Bring own</span>
+                      </button>
+                    </div>
+                  </label>
+
+                  <!-- Theme picker moved out of Create: themes switch on the live page via ui.mullmania.com active-theme.
+                       Hidden select retained so existing setComposerTheme state-sync keeps the preview consistent. -->
+                  <label id="composer-theme-field" class="field composer-theme__field is-hidden" aria-hidden="true">
+                    <select id="composer-theme-select">
+                      <option value="cyberpink">Cyberpink</option>
+                      <option value="editorial">Editorial</option>
+                      <option value="mockup">Mockup</option>
+                      <option value="ocean">Ocean</option>
+                      <option value="pumpkin">Pumpkin</option>
+                      <option value="sunset">Sunset</option>
+                      <option value="walmart">Walmart</option>
+                    </select>
+                  </label>
+
+                  <article class="composer-plan-card">
+                    <span class="choice-card__eyebrow">Plan</span>
+                    <strong id="composer-plan-summary">Shared UI Site / Page</strong>
+                    <span id="composer-plan-list" class="choice-card__body">Creates the subdomain, writes index.html, and saves the source for later editing.</span>
+                  </article>
+                </section>
+
+                <section class="composer-builder__section is-hidden" data-composer-recipe-panel="tv-app">
+                  <div class="composer-builder__section-head">
+                    <div>
+                      <div class="composer-builder__section-eyebrow">TV app</div>
+                      <h4>TV app seed</h4>
+                    </div>
+                    <p>Configure the launcher and media bundle.</p>
+                  </div>
+
+                  <div class="composer-tv-grid">
+                    <label class="field">
+                      <span>App title</span>
+                      <input id="composer-tv-app-title" type="text" placeholder="TV App">
+                    </label>
+                    <label class="field">
+                      <span>Media bundle</span>
+                      <select id="composer-tv-media-bundle">
+                        <option value="milkshake">Milkshake</option>
+                      </select>
+                    </label>
+                    <label class="field">
+                      <span>Launcher 1</span>
+                      <input id="composer-tv-launch-1" type="text" placeholder="Launch">
+                    </label>
+                    <label class="field">
+                      <span>Launcher 2</span>
+                      <input id="composer-tv-launch-2" type="text" placeholder="Browse">
+                    </label>
+                    <label class="field">
+                      <span>Launcher 3</span>
+                      <input id="composer-tv-launch-3" type="text" placeholder="Featured">
+                    </label>
+                    <label class="field">
+                      <span>Launcher 4</span>
+                      <input id="composer-tv-launch-4" type="text" placeholder="More">
+                    </label>
+                    <label class="field">
+                      <span>Now playing label</span>
+                      <input id="composer-tv-now-playing-label" type="text" placeholder="Now Playing">
+                    </label>
+                    <label class="field">
+                      <span>Ad badge text</span>
+                      <input id="composer-tv-ad-badge-text" type="text" placeholder="Delivery in under 60 minutes with Walmart">
+                    </label>
+                    <label class="field field--inline composer-tv-toggle">
+                      <span>Ad badge</span>
+                      <input id="composer-tv-ad-badge-enabled" type="checkbox" checked>
+                      <small class="field-note">Hide this when you want a cleaner stage with no sponsor prompt.</small>
+                    </label>
+                    <label class="field field--inline composer-tv-toggle">
+                      <span>tv-tail remote</span>
+                      <input id="composer-tv-tail-enabled" type="checkbox" checked>
+                      <small class="field-note">Adds the SignalArgh channel and Telestrate pairing link.</small>
+                    </label>
+                  </div>
+                </section>
+
+                <section class="composer-builder__section is-hidden" data-composer-recipe-panel="copy-site">
+                  <div class="composer-builder__section-head">
+                    <div>
+                      <div class="composer-builder__section-eyebrow">Copy site</div>
+                      <h4>Clone an existing site</h4>
+                    </div>
+                    <p>Search the catalog, pick a source, and copy its hosted files and saved data into the target subdomain.</p>
+                  </div>
+
+                  <label class="field composer-copy__search">
+                    <span>Search sites</span>
+                    <input id="composer-copy-search" type="search" placeholder="Search title, host, or description">
+                  </label>
+
+                  <div id="composer-copy-results" class="composer-copy__results" role="list" aria-label="Copy source matches"></div>
+
+                  <article id="composer-copy-selected" class="composer-copy__selected">
+                    <div class="composer-copy__selected-preview">
+                      <img id="composer-copy-preview-image" alt="Selected site preview">
+                    </div>
+                    <div class="composer-copy__selected-copy">
+                      <div class="composer-builder__section-eyebrow">Selected source</div>
+                      <h4 id="composer-copy-preview-title">Choose a site</h4>
+                      <p id="composer-copy-preview-host">Search the catalog and pick a source site to clone.</p>
+                      <p id="composer-copy-preview-description">The source site's hosted files and saved data will be copied into the target subdomain.</p>
+                      <div id="composer-copy-variants" class="composer-copy__variants is-hidden" aria-label="Copy source revisions"></div>
+                      <small id="composer-copy-preview-note" class="field-note">Copy Site is exact clone mode. Pick a target subdomain and source site, then deploy the copy.</small>
+                    </div>
+                  </article>
+              </div>
+            </div>
+
+            <div id="composer-editor-panel" class="composer-panel is-hidden">
+              <div class="composer-editor">
+                <div class="composer-editor__column composer-editor__code-shell">
+                  <div class="composer-editor__toolbar">
+                    <div class="composer-editor-tabs" role="tablist" aria-label="Editor source panes">
+                      <button
+                        id="composer-editor-pane-tab-html"
+                        type="button"
+                        class="composer-editor-tabs__button is-active"
+                        data-composer-editor-pane="html"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="composer-editor-pane-panel-html"
+                      >
+                        HTML
+                      </button>
+                      <button
+                        id="composer-editor-pane-tab-css"
+                        type="button"
+                        class="composer-editor-tabs__button"
+                        data-composer-editor-pane="css"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="composer-editor-pane-panel-css"
+                        tabindex="-1"
+                      >
+                        CSS
+                      </button>
+                      <button
+                        id="composer-editor-pane-tab-js"
+                        type="button"
+                        class="composer-editor-tabs__button"
+                        data-composer-editor-pane="js"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="composer-editor-pane-panel-js"
+                        tabindex="-1"
+                      >
+                        JS
+                      </button>
+                    </div>
+
+                    <div class="composer-editor__assist-shell">
+                      <label class="field composer-editor__assist-field">
+                        <span>Get AI help</span>
+                        <input id="composer-ai-prompt" type="text" placeholder="Tighten the copy, rebalance the layout, add one clear CTA...">
+                      </label>
+                      <button id="composer-ai-assist" type="button" class="secondary">
+                        <i class="ti ti-sparkles"></i>
+                        <span>Rewrite Draft</span>
+                      </button>
+                      <button id="composer-valet-assist" type="button" class="secondary is-hidden">
+                        <i class="ti ti-robot"></i>
+                        <span>Ask Valet</span>
+                      </button>
+                    </div>
+                    <div id="composer-history" class="composer-history is-hidden" aria-label="Site history">
+                      <div class="composer-history__head">
+                        <div>
+                          <span class="composer-history__eyebrow">Time machine</span>
+                          <strong id="composer-history-label">No history</strong>
+                        </div>
+                        <span id="composer-history-count" class="composer-history__count"></span>
+                      </div>
+                      <input id="composer-history-slider" type="range" min="0" max="0" value="0" step="1">
+                    </div>
+                  </div>
+
+                  <div class="composer-editor__workspace">
+                    <aside class="composer-editor__sidebar" aria-label="Logical files">
+                      <button type="button" class="composer-editor__file is-active" data-composer-editor-file="html">index.html</button>
+                      <button type="button" class="composer-editor__file is-hidden" data-composer-editor-file="css">styles.css</button>
+                      <button type="button" class="composer-editor__file is-hidden" data-composer-editor-file="js">script.js</button>
+                    </aside>
+
+                    <div class="composer-editor__panes">
+                      <label
+                        id="composer-editor-pane-panel-html"
+                        class="field composer-editor__pane"
+                        data-composer-editor-pane-panel="html"
+                        role="tabpanel"
+                        aria-labelledby="composer-editor-pane-tab-html"
+                      >
+                        <span>HTML</span>
+                        <textarea id="composer-html" spellcheck="false" placeholder="<main><h1>Hello Mullmania</h1></main>"></textarea>
+                      </label>
+                      <label
+                        id="composer-editor-pane-panel-css"
+                        class="field composer-editor__pane is-hidden"
+                        data-composer-editor-pane-panel="css"
+                        role="tabpanel"
+                        aria-labelledby="composer-editor-pane-tab-css"
+                      >
+                        <span>CSS</span>
+                        <textarea id="composer-css" spellcheck="false" placeholder="body { font-family: system-ui; }"></textarea>
+                      </label>
+                      <label
+                        id="composer-editor-pane-panel-js"
+                        class="field composer-editor__pane is-hidden"
+                        data-composer-editor-pane-panel="js"
+                        role="tabpanel"
+                        aria-labelledby="composer-editor-pane-tab-js"
+                      >
+                        <span>JS</span>
+                        <textarea id="composer-js" spellcheck="false" placeholder="console.log('hello');"></textarea>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="composer-workspace__preview composer-editor__column composer-editor__preview-column">
+            <div class="composer-editor__preview-head">
+              <div class="composer-editor__preview-label">Preview</div>
+            </div>
+            <iframe id="composer-preview" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="composer-modal__footer">
+        <div id="composer-status" class="composer-status" aria-live="polite"></div>
+        <div class="composer-modal__footer-actions surface-modal__actions">
+          <button id="composer-delete-toggle" type="button" class="secondary is-hidden" aria-pressed="false">
+            <i class="ti ti-trash"></i>
+            <span>Delete site</span>
+          </button>
+          <button id="composer-submit" type="button">
+            <i class="ti ti-rocket"></i>
+            <span>Create Starter Site</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="vscode-modal" class="vscode-modal surface-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="vscode-modal-title">
+    <div class="surface-modal__backdrop" data-close-vscode-modal="true"></div>
+    <div class="surface-modal__panel vscode-modal__panel" tabindex="-1">
+      <div class="surface-modal__header modal-header">
+        <div class="surface-modal__title-block">
+          <div class="surface-modal__title-row">
+            <i class="ti ti-brand-visual-studio"></i>
+            <h2 id="vscode-modal-title" class="modal-title">Edit in VS Code</h2>
+          </div>
+          <p class="vscode-modal__host">
+            <a id="vscode-modal-host-link" class="vscode-modal__host-link" target="_blank" rel="noreferrer"></a>
+          </p>
+        </div>
+        <button type="button" class="modal-close surface-modal__close" data-close-vscode-modal="true" aria-label="Close VS Code dialog">&times;</button>
+      </div>
+      <div class="vscode-modal__body">
+        <img id="vscode-modal-preview" class="vscode-modal__preview" alt="" loading="lazy">
+        <div class="vscode-modal__copy">
+          <p>Install the small VS Code bridge, then open or deploy this site from your local workspace.</p>
+          <div class="vscode-modal__actions surface-modal__actions">
+            <a id="vscode-modal-download" class="button" href="./downloads/mullmania-sites.vsix" download>
+              <i class="ti ti-download"></i>
+              <span>Download VSIX</span>
+            </a>
+            <a id="vscode-modal-open-link" class="secondary" target="_blank" rel="noreferrer">
+              <i class="ti ti-external-link"></i>
+              <span>Open VS Code</span>
+            </a>
+          </div>
+          <div class="vscode-modal__command-row">
+            <pre id="vscode-modal-command" class="vscode-modal__command"><code></code></pre>
+            <button id="vscode-modal-copy-command" type="button" class="secondary vscode-modal__copy-command">
+              <i class="ti ti-copy"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+          <p id="vscode-modal-status" class="vscode-modal__status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Render templates: app.js clones these nodes, so template IDs are stable API. -->
+  <template id="site-row-template">
+    <tr class="site-row">
+      <td class="cell-type">
+        <div class="vote-rail">
+          <button class="vote-rail__button site-cell__rank-up" type="button" aria-label="Raise manual rank">
+            <i class="ti ti-chevron-up"></i>
+          </button>
+          <div class="vote-rail__icon-shell rank-trigger site-cell__status-shell" role="button" tabindex="0" aria-label="Open rank editor">
+            <i class="site-type-icon"></i>
+            <span class="vote-rail__score site-cell__rank-value" aria-label="Manual rank">0</span>
+          </div>
+          <button class="vote-rail__button site-cell__rank-down" type="button" aria-label="Lower manual rank">
+            <i class="ti ti-chevron-down"></i>
+          </button>
+        </div>
+      </td>
+      <td class="cell-preview">
+        <button class="preview-shell" type="button">
+          <div class="preview-stack" aria-hidden="true">
+            <div class="preview-stack__card preview-stack__card--left">
+              <img class="site-preview-img" alt="" loading="lazy">
+            </div>
+            <div class="preview-stack__card preview-stack__card--center">
+              <img class="site-preview-img" alt="" loading="lazy">
+            </div>
+            <div class="preview-stack__card preview-stack__card--right">
+              <img class="site-preview-img" alt="" loading="lazy">
+            </div>
+          </div>
+        </button>
+      </td>
+      <td class="cell-site">
+        <div class="site-cell">
+          <div class="site-cell__title-row">
+            <a class="site-cell__title" target="_blank" rel="noreferrer"></a>
+            <div class="version-switcher site-cell__version-switcher is-hidden">
+              <button class="version-switcher__button site-cell__version-prev" type="button" aria-label="Previous site">
+                <i class="ti ti-chevron-left"></i>
+              </button>
+              <span class="version-switcher__label site-cell__version-label" aria-live="polite"></span>
+              <button class="version-switcher__button site-cell__version-next" type="button" aria-label="Next site">
+                <i class="ti ti-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="site-cell__host"></div>
+          <div class="site-cell__family"></div>
+          <div class="site-cell__maturity-detail"></div>
+        </div>
+      </td>
+      <td class="cell-public">
+        <div class="site-cell__public" aria-label="Site visibility"></div>
+      </td>
+      <td class="cell-modified">
+        <div class="site-cell__modified" aria-label="Date modified"></div>
+      </td>
+      <td class="cell-tags">
+        <div class="badge-list site-cell__tags" aria-label="Assigned tags"></div>
+      </td>
+      <td class="cell-maturity">
+        <div class="site-cell__maturity" aria-label="Maturity rating"></div>
+      </td>
+      <td class="cell-ai-health">
+        <div class="site-cell__ai-health" aria-label="AI health grade"></div>
+      </td>
+      <td class="cell-summary">
+        <div class="summary-text"></div>
+      </td>
+      <!-- actions column removed -->
+    </tr>
+  </template>
+
+  <template id="gallery-card-template">
+    <article class="gallery-card">
+      <div class="gallery-card__frame">
+        <button class="gallery-card__preview" type="button">
+          <img class="gallery-card__img" alt="" loading="lazy">
+          <div class="gallery-card__overlay-badge"></div>
+        </button>
+        <div class="gallery-card__index note-trigger note-trigger--badge" aria-label="Site note status"></div>
+      </div>
+      <div class="gallery-card__body">
+        <div class="gallery-card__title-row">
+          <a class="gallery-card__title" target="_blank" rel="noreferrer"></a>
+        </div>
+        <div class="badge-list site-cell__tags gallery-card__tags" aria-label="Assigned tags"></div>
+        <div class="gallery-card__summary"></div>
+      </div>
+    </article>
+  </template>
+
+  <template id="tv-queue-card-template">
+    <button class="tv-queue-card" type="button">
+      <div class="tv-queue-card__frame">
+        <img class="tv-queue-card__img" alt="" loading="lazy">
+        <span class="tv-queue-card__badge"></span>
+      </div>
+      <div class="tv-queue-card__body">
+        <div class="tv-queue-card__title"></div>
+        <div class="tv-queue-card__host"></div>
+        <div class="tv-queue-card__meta"></div>
+      </div>
+    </button>
+  </template>
+
+  <script>
+  (function() {
+      var base = window.__baseDomain || 'mullmania.com';
+      var suffix = document.getElementById('composer-domain-suffix');
+      if (suffix) suffix.textContent = '.' + base;
+  })();
+  </script>
+  <script src="./vendor/qrious.min.js"></script>
+  <script src="./vendor/json-formatter.umd.js"></script>
+  <!-- Bug Beacon: hidden FAB that lights up when JS errors or layout issues are detected on this flagship surface.
+       Served from bug-beacon.mullmania.com (same fleet) instead of the legacy vizio S3 origin, which gets blocked
+       by Chrome ORB. -->
+  <script src="https://bug-beacon.mullmania.com/bug-beacon.js"></script>
+  <script type="module" src="./app.js"></script>
+  <script type="module" src="./vendor/bulk-refresh.js"></script>
+  <script type="module" src="./vendor/deployment-sweep.js"></script>
+  <script>
+  (function() {
+    var host = location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0') {
+      return;
+    }
+    var script = document.createElement('script');
+    script.src = 'https://cant-wait-update.mullmania.com/cant-wait-update.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  })();
+  </script>
+  <script>
+  (function() {
+    var PWA_UPDATE_STATE_KEY = 'mullmania-sites-pwa-update-state';
+    var UPDATE_CHECK_INTERVAL_MS = 5 * 60 * 1000;
+    var toastEl = document.getElementById('pwa-status-toast');
+    var messageEl = document.getElementById('pwa-status-message');
+    var actionEl = document.getElementById('pwa-status-action');
+    var closeEl = document.getElementById('pwa-status-close');
+    var waitingWorker = null;
+    var updateApplied = false;
+    var reloadAfterControllerChange = false;
+    var toastTimer = 0;
+
+    function setToast(message, options) {
+      if (!toastEl || !messageEl || !actionEl) return;
+      clearTimeout(toastTimer);
+      var opts = options || {};
+      messageEl.textContent = message || '';
+      toastEl.classList.toggle('is-warning', opts.tone === 'warning');
+      toastEl.classList.toggle('is-success', opts.tone === 'success');
+      toastEl.classList.toggle('is-info', !opts.tone || opts.tone === 'info');
+      toastEl.classList.toggle('is-visible', Boolean(message));
+      toastEl.setAttribute('aria-hidden', message ? 'false' : 'true');
+      actionEl.textContent = opts.actionLabel || '';
+      actionEl.classList.toggle('is-hidden', !opts.actionLabel);
+      actionEl.onclick = typeof opts.action === 'function' ? opts.action : null;
+      if (message && opts.duration !== 0) {
+        toastTimer = window.setTimeout(clearToast, opts.duration || 6000);
+      }
+    }
+
+    function clearToast() {
+      if (!toastEl) return;
+      clearTimeout(toastTimer);
+      toastEl.classList.remove('is-visible', 'is-warning', 'is-success', 'is-info');
+      toastEl.setAttribute('aria-hidden', 'true');
+    }
+
+    function activeEditSurfaceOpen() {
+      var activeTag = document.activeElement && document.activeElement.tagName;
+      if (activeTag && /^(INPUT|TEXTAREA|SELECT)$/.test(activeTag)) {
+        return true;
+      }
+      return Boolean(document.querySelector('[role="dialog"]:not(.is-hidden), .composer-modal:not(.is-hidden), .fullscreen-modal:not(.is-hidden)'));
+    }
+
+    function applyWaitingWorker(force) {
+      if (!waitingWorker) return;
+      if (!force && activeEditSurfaceOpen()) {
+        setToast('Update ready.', {
+          actionLabel: 'Refresh',
+          action: function() { applyWaitingWorker(true); },
+          duration: 0,
+        });
+        return;
+      }
+      try {
+        localStorage.setItem(PWA_UPDATE_STATE_KEY, JSON.stringify({ status: 'applying', at: Date.now() }));
+      } catch {}
+      setToast('Updating...', { duration: 0 });
+      reloadAfterControllerChange = true;
+      waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+    }
+
+    function handleWaitingWorker(worker) {
+      waitingWorker = worker;
+      if (document.visibilityState === 'hidden' || !activeEditSurfaceOpen()) {
+        window.setTimeout(function() { applyWaitingWorker(false); }, 400);
+      } else {
+        setToast('Update ready.', {
+          actionLabel: 'Refresh',
+          action: function() { applyWaitingWorker(true); },
+          duration: 0,
+        });
+      }
+    }
+
+    closeEl?.addEventListener('click', function() {
+      clearToast();
+    });
+
+    window.addEventListener('appinstalled', function() {
+      setToast('Installed.', { tone: 'success' });
+    });
+
+    window.addEventListener('load', function() {
+      if (!('serviceWorker' in navigator)) {
+        return;
+      }
+
+      navigator.serviceWorker.addEventListener('controllerchange', function() {
+        if (!reloadAfterControllerChange || updateApplied) return;
+        updateApplied = true;
+        try {
+          localStorage.setItem(PWA_UPDATE_STATE_KEY, JSON.stringify({ status: 'reloading', at: Date.now() }));
+        } catch {}
+        window.location.reload();
+      });
+
+      var hadControllerAtRegistration = Boolean(navigator.serviceWorker.controller);
+      navigator.serviceWorker.register('./sw.js').then(function(reg) {
+        reg.update().catch(function() {});
+        if (reg.waiting && hadControllerAtRegistration) {
+          handleWaitingWorker(reg.waiting);
+        }
+        reg.addEventListener('updatefound', function() {
+          var worker = reg.installing;
+          if (!worker) return;
+          worker.addEventListener('statechange', function() {
+            if (worker.state === 'installed' && hadControllerAtRegistration) {
+              handleWaitingWorker(worker);
+            }
+          });
+        });
+        window.setInterval(function() { reg.update().catch(function() {}); }, UPDATE_CHECK_INTERVAL_MS);
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'visible') {
+            reg.update().catch(function() {});
+          }
+        });
+        window.addEventListener('focus', function() { reg.update().catch(function() {}); });
+        window.addEventListener('pageshow', function() { reg.update().catch(function() {}); });
+      }).catch(function(error) {
+        console.warn('[sites-pwa] service worker registration failed', error);
+      });
+    });
+
+    window.addEventListener('offline', function() {
+      setToast('Offline.', { tone: 'warning', duration: 0 });
+    });
+    window.addEventListener('online', function() {
+      setToast('Back online.', { tone: 'success' });
+    });
+  })();
+  </script>
+</body>
+</html>

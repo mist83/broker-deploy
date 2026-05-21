@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "sites-platform-contract-v1",
+  "baseDomain": "mullmania.com",
+  "canon": {
+    "version": "2026.04.26",
+    "source": "https://development-canon.mullmania.com/canon.json",
+    "profile": "frontdoor-v1",
+    "docs": {
+      "canonJson": "https://development-canon.mullmania.com/canon.json",
+      "quickstart": "https://development-canon.mullmania.com/QUICKSTART.md",
+      "syncGuide": "https://development-canon.mullmania.com/sync-site-with-canon.md",
+      "uiSection": "https://development-canon.mullmania.com/#canon/ui",
+      "exampleFrontdoor": "https://development-canon.mullmania.com/examples/host-a-site/site/frontdoor.json"
+    }
+  },
+  "siteIds": {
+    "root": "_root",
+    "current": "sites",
+    "ui": "ui",
+    "reserved": ["_root", "sites", "ui", "index"],
+    "alwaysPublic": ["_root", "sites", "ui"],
+    "reservedAliases": ["www", "sites", "ui", "index"]
+  },
+  "categoryTags": [
+    { "id": "frontend-ui", "label": "Frontend / UI", "aliases": ["shared-ui", "frontend", "css", "design", "editor"] },
+    { "id": "ui-framework", "label": "UI / Framework", "aliases": ["uses-ui-mullmania", "ui-consumer", "shared-ui-runtime"] },
+    { "id": "tooling", "label": "Tooling", "aliases": ["developer-tooling", "automation", "library", "framework-support"] },
+    { "id": "data", "label": "Data", "aliases": ["mullmania-data", "generated-assets"] },
+    { "id": "games", "label": "Games", "aliases": ["game", "arcade", "card-game", "minigame", "multiplayer"] },
+    { "id": "fun-experiment", "label": "Fun / Experiment", "aliases": ["fun", "experiment", "experiments", "playground", "prototype"] },
+    { "id": "simulation", "label": "Simulation", "aliases": ["physics", "science-art"] },
+    { "id": "docs", "label": "Docs", "aliases": ["documentation", "demo-docs"] },
+    { "id": "audio-visual", "label": "Audio / Visual", "aliases": ["audio", "music"] },
+    { "id": "backend-api", "label": "Backend / API", "aliases": ["api", "backend", "lambda-api", "lambda-backed"] },
+    { "id": "creative", "label": "Creative", "aliases": ["creative-viz", "data-viz", "visualization-canvas", "galaxy-view"] }
+  ],
+  "featureFacets": [
+    {
+      "id": "phone-remote",
+      "label": "Phone Remote",
+      "shortLabel": "Remote",
+      "icon": "ti ti-device-mobile",
+      "observedTags": ["feature:phone-remote", "phone-remote", "remote-control", "tv-tail"],
+      "copyTags": ["feature:phone-remote:copy", "copy:phone-remote"],
+      "absentTags": ["feature:phone-remote:off", "feature:phone-remote:absent", "no-phone-remote"],
+      "ignoreTags": ["feature:phone-remote:ignore", "ignore:phone-remote"],
+      "rule": "Use the canonical phone pairing primitive from ui/js/pair.js when a phone controls the app, TV, or dashboard surface."
+    },
+    {
+      "id": "signalr",
+      "label": "SignalR",
+      "shortLabel": "SignalR",
+      "icon": "ti ti-broadcast",
+      "observedTags": ["feature:signalr", "signalr", "signal-argh", "realtime"],
+      "copyTags": ["feature:signalr:copy", "copy:signalr"],
+      "absentTags": ["feature:signalr:off", "feature:signalr:absent", "no-signalr"],
+      "ignoreTags": ["feature:signalr:ignore", "ignore:signalr"],
+      "rule": "Use signal-argh through the SignalR client for real-time messaging; do not hand-roll raw WebSocket protocol code."
+    },
+    {
+      "id": "s3-storage",
+      "label": "S3 Storage",
+      "shortLabel": "S3",
+      "icon": "ti ti-bucket",
+      "observedTags": ["feature:s3-storage", "s3-storage", "s3", "storage", "asset-catalog", "mullmania-data", "generated-assets"],
+      "copyTags": ["feature:s3-storage:copy", "copy:s3-storage"],
+      "absentTags": ["feature:s3-storage:off", "feature:s3-storage:absent", "no-s3-storage"],
+      "ignoreTags": ["feature:s3-storage:ignore", "ignore:s3-storage"],
+      "rule": "Use the Mullmania hosting/data bucket conventions for static artifacts, persisted metadata, and deploy-safe storage."
+    },
+    {
+      "id": "lambda-api",
+      "label": "Lambda API",
+      "shortLabel": "Lambda",
+      "icon": "ti ti-lambda",
+      "observedTags": ["feature:lambda-api", "lambda-api", "lambda", "lambda-backed", "backend-api"],
+      "copyTags": ["feature:lambda-api:copy", "copy:lambda-api"],
+      "absentTags": ["feature:lambda-api:off", "feature:lambda-api:absent", "no-lambda-api"],
+      "ignoreTags": ["feature:lambda-api:ignore", "ignore:lambda-api"],
+      "rule": "Use a Lambda/API-backed route when the feature needs trusted mutation, shared state, or server-owned integration."
+    },
+    {
+      "id": "frontend-canon",
+      "label": "Frontend Canon",
+      "shortLabel": "Canon",
+      "icon": "ti ti-layout-dashboard",
+      "observedTags": ["feature:frontend-canon", "frontend-canon", "canon-deploy-ready", "ui-framework", "shared-ui-runtime", "shared-ui-ready", "shared-ui-strict", "shared-ui-entry"],
+      "copyTags": ["feature:frontend-canon:copy", "copy:frontend-canon"],
+      "absentTags": ["feature:frontend-canon:off", "feature:frontend-canon:absent", "no-frontend-canon"],
+      "ignoreTags": ["feature:frontend-canon:ignore", "ignore:frontend-canon"],
+      "rule": "Follow the development canon and ui.mullmania.com shell rules for browser-facing UI."
+    },
+    {
+      "id": "github-deploy-broker",
+      "label": "GitHub Deploy Broker",
+      "shortLabel": "Deploy",
+      "icon": "ti ti-brand-github",
+      "observedTags": ["feature:github-deploy-broker", "github-deploy-broker", "deploy-broker", "broker-deploy", "github-actions", "gha-deploy"],
+      "copyTags": ["feature:github-deploy-broker:copy", "copy:github-deploy-broker"],
+      "absentTags": ["feature:github-deploy-broker:off", "feature:github-deploy-broker:absent", "no-github-deploy-broker"],
+      "ignoreTags": ["feature:github-deploy-broker:ignore", "ignore:github-deploy-broker", "custom-deploy-script", "bespoke-deploy-script"],
+      "rule": "If a site has a Git repo, delete bespoke deploy scripts and deploy through the canonical GitHub Actions deploy broker instead of per-repo custom publishing logic."
+    },
+    {
+      "id": "threejs",
+      "label": "Three.js",
+      "shortLabel": "3D",
+      "icon": "ti ti-cube-3d-sphere",
+      "observedTags": ["feature:threejs", "threejs", "three-js", "three.js", "webgl", "3d"],
+      "copyTags": ["feature:threejs:copy", "copy:threejs"],
+      "absentTags": ["feature:threejs:off", "feature:threejs:absent", "no-threejs"],
+      "ignoreTags": ["feature:threejs:ignore", "ignore:threejs"],
+      "rule": "Use Three.js for 3D surfaces, keep the primary scene visible and interactive, and verify the canvas is not blank."
+    },
+    {
+      "id": "tv-telemetry",
+      "label": "TV Telemetry",
+      "shortLabel": "Logs",
+      "icon": "ti ti-device-tv",
+      "observedTags": ["feature:tv-telemetry", "tv-telemetry", "tv-tail", "telemetry", "log-tap"],
+      "copyTags": ["feature:tv-telemetry:copy", "copy:tv-telemetry"],
+      "absentTags": ["feature:tv-telemetry:off", "feature:tv-telemetry:absent", "no-tv-telemetry"],
+      "ignoreTags": ["feature:tv-telemetry:ignore", "ignore:tv-telemetry"],
+      "rule": "Wire tv-tail/log-tap for browser surfaces where target-device debugging is difficult."
+    }
+  ],
+  "ui": {
+    "defaultThemeId": "walmart",
+    "activeThemeId": "active",
+    "themeIds": [
+      "active",
+      "blackwhite",
+      "cyberblue",
+      "cyberpink",
+      "editorial",
+      "ghoul",
+      "mockup",
+      "monochrome",
+      "ocean",
+      "pastelzom",
+      "precog",
+      "pumpkin",
+      "sunset",
+      "terminal",
+      "walmart",
+      "windows31"
+    ],
+    "themeLabels": {
+      "blackwhite": "Black and White",
+      "cyberblue": "Cyber Blue",
+      "cyberpink": "Cyber Pink",
+      "pastelzom": "Pastel Zombie",
+      "windows31": "Windows 3.1"
+    }
+  },
+  "coreSites": [
+    {
+      "siteId": "_root",
+      "hostLabel": "",
+      "isPublic": true,
+      "currentHostedSite": true,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "surface",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Main site.",
+      "tags": ["main", "entrypoint", "framework", "framework-core"],
+      "notes": ["Main site."]
+    },
+    {
+      "siteId": "sites",
+      "hostLabel": "sites",
+      "isPublic": true,
+      "currentHostedSite": false,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "surface",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Site index.",
+      "tags": ["launchpad", "catalog", "framework", "framework-core"],
+      "notes": ["Site index."]
+    },
+    {
+      "siteId": "ui",
+      "hostLabel": "ui",
+      "isPublic": true,
+      "currentHostedSite": false,
+      "hasHostedSite": true,
+      "hasData": false,
+      "dataNamespace": null,
+      "syntheticIndex": false,
+      "frameworkSite": true,
+      "frameworkBucket": "design-system",
+      "criticality": "framework-core",
+      "managedBy": "launchpad-bootstrap",
+      "description": "Shared UI host.",
+      "tags": ["ui", "shared-styles", "framework", "framework-core"],
+      "notes": ["Shared UI host."]
+    }
+  ]
+}
