@@ -88,11 +88,18 @@ body { padding: 12px; }
   transition: background 90ms ease, color 90ms ease, border-color 90ms ease;
 }
 .hud-btn * {
-  /* Inner emoji span otherwise inherits the global `cursor: default` rule
-   * and the operator sees a default cursor on the most-clickable pixels.
-   * Force pointer cursor inside the button so the whole button feels hot. */
   cursor: pointer !important;
-  pointer-events: none;  /* clicks bubble to the button, not the span */
+  pointer-events: none;
+}
+.ti {
+  width: 1em;
+  height: 1em;
+  display: block;
+  flex: 0 0 auto;
+}
+.hud-btn .ti {
+  width: 18px;
+  height: 18px;
 }
 .hud-btn:hover {
   background: rgba(255,255,255,0.08);
@@ -108,7 +115,7 @@ body { padding: 12px; }
 }
 #btn-close { font-size: 16px; }
 
-/* Screen-cast panel: framed JPEG that auto-refreshes while shown. */
+/* Screen preview panel: framed JPEG when available, explicit status when not. */
 .hud-screen {
   margin-bottom: 8px;
   border-radius: 7px;
@@ -122,31 +129,123 @@ body { padding: 12px; }
   height: auto;
   background: transparent;
 }
+.hud-screen-placeholder {
+  min-height: 74px;
+  padding: 14px 16px;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.hud-screen-placeholder-title {
+  font-size: 12px;
+  color: var(--fg);
+}
+.hud-screen-placeholder-text {
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--fg-dim);
+}
 .hud-screen-caption {
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   color: var(--fg-faint);
   padding: 5px 8px 6px;
   text-align: center;
 }
+.hud-screen.is-live .hud-screen-caption { color: var(--ok); }
+.hud-screen.is-error .hud-screen-caption { color: var(--err); }
 
-/* Overflow-collapse hint at the bottom of the row list. */
+.hud-keepawake {
+  margin: 0 0 8px;
+}
+.hud-switch {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 9px;
+  border: 1px solid var(--bg-edge);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer !important;
+}
+.hud-switch * {
+  cursor: pointer !important;
+  pointer-events: none;
+}
+.hud-switch:hover { background: rgba(255, 255, 255, 0.065); }
+.switch-knob {
+  width: 28px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  position: relative;
+}
+.switch-knob::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--fg-dim);
+  transition: transform 100ms ease, background 100ms ease;
+}
+.hud-switch[aria-checked="true"] .switch-knob {
+  border-color: rgba(111, 210, 138, 0.38);
+  background: rgba(111, 210, 138, 0.16);
+}
+.hud-switch[aria-checked="true"] .switch-knob::after {
+  transform: translateX(12px);
+  background: var(--ok);
+}
+.switch-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.switch-title {
+  font-size: 11px;
+  color: var(--fg);
+}
+.switch-note {
+  font-size: 10px;
+  color: var(--fg-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Stable overflow-collapse control below the constantly refreshed row list. */
 .row-collapse {
-  list-style: none;
+  width: 100%;
+  border: 0;
   text-align: center;
+  font: inherit;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--fg-faint);
-  padding: 6px;
+  background: var(--row-bg);
+  padding: 8px 6px;
+  margin-top: 4px;
   border-radius: 6px;
   cursor: pointer !important;
   transition: color 90ms ease, background 90ms ease;
 }
 .row-collapse:hover {
   color: var(--fg-dim);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--row-bg-hover);
+}
+.row-collapse:active {
+  color: var(--fg);
 }
 /* Header mode chip color contract:
  *   ok     — fg-dim (neutral); "N live" uses the live count color via inline
@@ -185,7 +284,7 @@ body { padding: 12px; }
 }
 .list-tools {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 }
 .sort-cycle {
@@ -197,10 +296,31 @@ body { padding: 12px; }
   letter-spacing: 0.06em;
   padding: 0;
   cursor: pointer !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: color 90ms ease;
 }
 .sort-cycle:hover { color: var(--fg-dim); }
 .sort-cycle * { cursor: pointer !important; pointer-events: none; }
+.icon-cycle {
+  width: 16px;
+  height: 16px;
+}
+.icon-cycle .ti {
+  width: 14px;
+  height: 14px;
+}
+.hidden-toggle {
+  gap: 4px;
+}
+.hidden-toggle .ti {
+  width: 13px;
+  height: 13px;
+}
+.hidden-toggle.is-active {
+  color: var(--fg-dim);
+}
 
 /* Synthetic title (codex first-prompt derivation) — italic to signal
  * "not authored, derived". Still readable. */
@@ -209,26 +329,36 @@ body { padding: 12px; }
   color: var(--fg-dim);
 }
 
-/* Dismiss × on each row — always visible at low opacity for
- * discoverability; full opacity on row hover or when the button itself
- * is hovered. Tooltip reads "snooze this session — reappears the next
- * time it writes" so the operator knows it's not a destructive kill. */
-.row-dismiss {
+/* Local row visibility control. This is not a stop/delete affordance; it only
+ * hides clutter in this HUD and the row auto-returns when the session writes. */
+.row-visibility {
   background: transparent;
   border: none;
   color: var(--fg-faint);
   font: inherit;
-  font-size: 14px;
   line-height: 1;
-  padding: 0 4px;
+  padding: 0;
   margin-left: 4px;
   cursor: pointer !important;
   opacity: 0.35;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity 90ms ease, color 90ms ease;
 }
-.row:hover .row-dismiss,
-.row.is-expanded .row-dismiss { opacity: 1; }
-.row-dismiss:hover { color: var(--err); opacity: 1; }
+.row-visibility .ti {
+  width: 14px;
+  height: 14px;
+}
+.row-visibility * {
+  cursor: pointer !important;
+  pointer-events: none;
+}
+.row:hover .row-visibility,
+.row.is-expanded .row-visibility,
+.row-visibility.is-hidden-row { opacity: 1; }
+.row-visibility:hover { color: var(--fg); opacity: 1; }
+.row-visibility.is-hidden-row { color: var(--fg-faint); }
 
 /* Compact synopsis — single line, smaller, no per-line columns. */
 .syn-compact {
@@ -250,13 +380,42 @@ body { padding: 12px; }
   flex-direction: column;
   gap: 4px;
 }
+.hud-list.is-showing-all ul {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 3px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.22) rgba(255,255,255,0.04);
+}
+.hud-list.is-showing-all ul::-webkit-scrollbar {
+  width: 8px;
+}
+.hud-list.is-showing-all ul::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.035);
+  border-radius: 999px;
+}
+.hud-list.is-showing-all ul::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.20);
+  border-radius: 999px;
+}
+.hud-list.is-showing-all ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.30);
+}
+.row-placeholder {
+  color: var(--fg-faint);
+  background: var(--row-bg);
+  border-radius: 7px;
+  padding: 8px 10px;
+  font-size: 11px;
+  text-align: center;
+}
 .row {
   display: grid;
-  /* dot, kind, label, started, elapsed, dismiss. Right two columns are
-   * right-aligned with fixed ch widths so durations line up across rows.
-   * The dismiss column reserves a tiny slot that's invisible until hover. */
-  grid-template-columns: 10px 50px 1fr 5.5ch 5.5ch 14px;
-  align-items: baseline;
+  /* agent icon, label, started, elapsed, visibility. Right two columns are
+   * right-aligned with fixed ch widths so durations line up across rows. */
+  grid-template-columns: 20px minmax(0, 1fr) 5.5ch 5.5ch 16px;
+  align-items: center;
   gap: 8px;
   padding: 6px 10px;
   background: var(--row-bg);
@@ -278,33 +437,57 @@ body { padding: 12px; }
 }
 .row:hover { background: var(--row-bg-hover); }
 
-/* Two dot colors. That's it.
- *   live  — green (something happened recently)
- *   idle  — gray (paused but still tracked)
- */
-.row .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
+.row .agent-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-faint);
+  align-self: center;
 }
-.row.row-live .dot {
-  background: var(--ok);
-  box-shadow: 0 0 6px rgba(111, 210, 138, 0.45);
+.row .agent-icon .ti {
+  width: 17px;
+  height: 17px;
+  stroke-width: 2.1;
 }
-.row.row-idle .dot {
-  background: var(--fg-faint);
-  box-shadow: none;
+.row.row-live.row-codex .agent-icon {
+  color: var(--fg);
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.16));
+}
+.row.row-live.row-claude .agent-icon {
+  color: var(--claude);
+  filter: drop-shadow(0 0 5px rgba(201,162,109,0.22));
+}
+.row.row-idle .agent-icon {
+  color: var(--fg-faint);
+  filter: none;
+  opacity: 0.82;
 }
 .row.row-idle .label,
-.row.row-idle .elapsed,
-.row.row-idle .kind {
+.row.row-idle .elapsed {
   /* idle rows fade into the background; the eye lands on live rows first */
   opacity: 0.55;
+}
+.row.row-hidden {
+  opacity: 0.5;
+}
+.row.row-hidden .agent-icon {
+  filter: none;
+  color: var(--fg-faint);
 }
 
 /* Click-to-peek expansion */
 .row { cursor: pointer !important; }
 .row:hover { background: var(--row-bg-hover); }
 .row.is-expanded { background: var(--row-bg-hover); }
+.row:focus-visible,
+.row-visibility:focus-visible,
+.row-collapse:focus-visible,
+.sort-cycle:focus-visible {
+  outline: 1px solid rgba(122, 168, 255, 0.7);
+  outline-offset: 2px;
+}
 
 .row-synopsis {
   grid-column: 1 / -1;
@@ -342,19 +525,23 @@ body { padding: 12px; }
 .syn-tool .syn-label { color: var(--ok); }
 .syn-tool .syn-text { color: var(--fg-dim); font-variant-numeric: tabular-nums; }
 .syn-empty { color: var(--fg-faint); font-style: italic; font-size: 10px; }
-.row .kind {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--fg-dim);
-}
-.row.row-claude .kind { color: var(--claude); }
-.row.row-codex  .kind { color: var(--codex); }
 .row .label {
   color: var(--fg);
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.row .label-title,
+.row .label-preview {
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.row .label-preview {
+  color: var(--fg-dim);
+  font-size: 10px;
+  line-height: 1.25;
 }
 
 .hud-foot {

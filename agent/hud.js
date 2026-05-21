@@ -2,12 +2,11 @@
 // on the operator's desk Mac.
 //
 // State model is intentionally minimal:
-//   - each row is either "live" (green dot, recent on-disk write) or
-//     "idle" (gray dot, paused but still tracked)
+//   - each row is either "live" (bright agent icon, recent on-disk write) or
+//     "idle" (gray agent icon, paused but still tracked)
 //   - red ONLY appears for "snapshot pipeline broken" — never per-row
-//   - keep-awake has no UI: while the host (lecter floating HUD) sees agent
-//     activity in the last N minutes, it holds caffeinate. After N minutes
-//     of total inactivity, the host quits itself.
+//   - keep-awake is explicit: the floating host can keep the desk Mac awake
+//     while agents are active, then release after the configured idle window.
 //
 // Data source: /hud/snapshot.json — published every ~5s by Valet's worker.
 
@@ -34,6 +33,7 @@ const emptyCounts = document.getElementById("empty-counts");
 const listSection = hud.querySelector(".hud-list");
 const listLabel = document.getElementById("list-label");
 const listEl = document.getElementById("needs-you-list");
+const collapseToggleBtn = document.getElementById("row-collapse-toggle");
 const footStamp = document.getElementById("foot-stamp");
 const footThresholds = document.getElementById("foot-thresholds");
 const footAge = document.getElementById("foot-age");
@@ -42,8 +42,18 @@ const btnScreen = document.getElementById("btn-screen");
 const screenSection = document.getElementById("hud-screen");
 const screenImg = document.getElementById("hud-screen-img");
 const screenCaption = document.getElementById("hud-screen-caption");
+const screenPlaceholder = document.getElementById("hud-screen-placeholder");
+const screenPlaceholderTitle = screenPlaceholder && screenPlaceholder.querySelector(".hud-screen-placeholder-title");
+const screenPlaceholderText = screenPlaceholder && screenPlaceholder.querySelector(".hud-screen-placeholder-text");
+const keepAwakeToggle = document.getElementById("keep-awake-toggle");
+const keepAwakeStatus = document.getElementById("keep-awake-status");
 
 let consecutiveFailures = 0;
+let lastSnapshot = null;
+let keepAwakeEnabled = false;
+let keepAwakeWindowSeconds = 10 * 60;
+let currentScreenCast = null;
+let screenImageState = "waiting";
 
 // --- formatting helpers -----------------------------------------------
 
@@ -81,11 +91,51 @@ function escapeHtml(text) {
 
 function plural(n, one, many) { return n === 1 ? one : many; }
 
+function tablerIcon(name, className = "") {
+  const cls = `ti${className ? " " + className : ""}`;
+  const attrs = `class="${cls}" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
+  switch (name) {
+    case "bell":
+      return `<svg ${attrs}><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>`;
+    case "bell-off":
+      return `<svg ${attrs}><path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /><path d="M3 3l18 18" /></svg>`;
+    case "brain":
+      return `<svg ${attrs}><path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8" /><path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8" /><path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5" /><path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0" /><path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5" /><path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10" /></svg>`;
+    case "eye":
+      return `<svg ${attrs}><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>`;
+    case "eye-off":
+      return `<svg ${attrs}><path d="M10.585 10.587a2 2 0 0 0 2.829 2.826" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6a13.55 13.55 0 0 1 3.394 -3.62" /><path d="M9.88 5.914a8.77 8.77 0 0 1 2.12 -.264c3.6 0 6.6 2 9 6a13.566 13.566 0 0 1 -1.512 2.062" /><path d="M3 3l18 18" /></svg>`;
+    case "x":
+      return `<svg ${attrs}><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>`;
+    case "brand-openai":
+    default:
+      return `<svg ${attrs}><path d="M11.217 19.384a3.501 3.501 0 0 0 6.783 -1.217v-5.167l-6 -3.35" /><path d="M5.214 15.014a3.501 3.501 0 0 0 4.446 5.266l4.34 -2.534v-6.946" /><path d="M6 7.63c-1.391 -.236 -2.787 .395 -3.534 1.689a3.474 3.474 0 0 0 1.271 4.745l4.263 2.514l6 -3.348" /><path d="M12.783 4.616a3.501 3.501 0 0 0 -6.783 1.217v5.067l6 3.45" /><path d="M18.786 8.986a3.501 3.501 0 0 0 -4.446 -5.266l-4.34 2.534v6.946" /><path d="M18 16.302c1.391 .236 2.787 -.395 3.534 -1.689a3.474 3.474 0 0 0 -1.271 -4.745l-4.308 -2.514l-5.955 3.42" /></svg>`;
+  }
+}
+
+function agentIconFor(kind) {
+  return String(kind || "").toLowerCase() === "claude"
+    ? tablerIcon("brain", "agent-svg")
+    : tablerIcon("brand-openai", "agent-svg");
+}
+
+function agentName(kind) {
+  const normalized = String(kind || "").toLowerCase();
+  if (normalized === "claude") return "Claude";
+  if (normalized === "codex") return "Codex / ChatGPT";
+  return normalized || "agent";
+}
+
 function formatStamp(epoch) {
   if (!epoch) return "—";
   const d = new Date(epoch * 1000);
   const pad = (n) => (n < 10 ? "0" + n : "" + n);
   return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function describeWindow(secondsIn) {
+  const seconds = Math.max(60, Math.floor(Number(secondsIn) || 10 * 60));
+  return formatDuration(seconds);
 }
 
 // --- row rendering ----------------------------------------------------
@@ -105,7 +155,7 @@ let compactMode = (() => {
 // Alerts: when a session transitions live → idle (or just-finished an
 // assistant turn and went quiet), surface that immediately — bring the
 // HUD window forward, play a soft sound, show a notification. Mute via the
-// 🔔 toggle. Per-session cooldown prevents spam.
+// alert toggle. Per-session cooldown prevents spam.
 const ALERT_STORAGE_KEY = "valet-hud-alerts";
 let alertsEnabled = (() => {
   try { return localStorage.getItem(ALERT_STORAGE_KEY) !== "0"; } catch { return true; }
@@ -119,6 +169,8 @@ const ALERT_COOLDOWN_SEC = 60;
 // already operator-controlled (sort chip), so "top N" honors that.
 const ROW_COLLAPSE_THRESHOLD = 4;
 let showAllRows = false; // session-scoped, not persisted — defaults to collapsed
+let pendingListScroll = null;
+let collapsePointerHandledAt = 0;
 
 // Screen-cast: opt-in remote view of the desk Mac's actual screen. Requires
 // the worker to be publishing screen-<token>.jpg AND the page bookmark to
@@ -135,31 +187,54 @@ const SCREEN_TOKEN = (() => {
 const SCREEN_REFRESH_MS = 10_000;
 let screenRefreshTimer = null;
 
-// Dismissed sessions: snoozed until the session writes again. We store
-// {sessionId → dismissedAtUnixSec}; a row is hidden only while its
-// lastActivityAt <= dismissedAt. If the session has any new write after
-// dismissal, the snooze auto-expires and the row reappears — which is
-// what the operator wants: "if I kill an in-flight one, just remove it,
-// but bring it back when it's alive again."
-const DISMISS_STORAGE_KEY = "valet-hud-dismissed-v2";
-let dismissedMap = (() => {
+// Hidden sessions: local HUD visibility only, never a task kill. Hidden
+// rows reappear automatically the next time that session writes, so stale
+// clutter can be cleared without losing a live agent.
+const HIDDEN_STORAGE_KEY = "valet-hud-hidden-v1";
+const LEGACY_DISMISS_STORAGE_KEY = "valet-hud-dismissed-v2";
+const SHOW_HIDDEN_STORAGE_KEY = "valet-hud-show-hidden";
+let hiddenMap = (() => {
   try {
-    const raw = localStorage.getItem(DISMISS_STORAGE_KEY) || "{}";
+    const raw = localStorage.getItem(HIDDEN_STORAGE_KEY) ||
+      localStorage.getItem(LEGACY_DISMISS_STORAGE_KEY) || "{}";
     const obj = JSON.parse(raw);
-    return obj && typeof obj === "object" ? new Map(Object.entries(obj)) : new Map();
+    if (!obj || typeof obj !== "object") return new Map();
+    const clean = new Map();
+    for (const [sid, value] of Object.entries(obj)) {
+      const stamp = Number(value);
+      if (sid && Number.isFinite(stamp)) clean.set(sid, stamp);
+    }
+    return clean;
   } catch { return new Map(); }
 })();
-function saveDismissed() {
+let showHiddenRows = (() => {
+  try { return localStorage.getItem(SHOW_HIDDEN_STORAGE_KEY) === "1"; } catch { return false; }
+})();
+function saveHidden() {
   try {
-    const obj = Object.fromEntries(dismissedMap);
-    localStorage.setItem(DISMISS_STORAGE_KEY, JSON.stringify(obj));
+    const obj = Object.fromEntries(hiddenMap);
+    localStorage.setItem(HIDDEN_STORAGE_KEY, JSON.stringify(obj));
   } catch {}
 }
-function isDismissedFor(session) {
-  const at = dismissedMap.get(session.sessionId);
+function isHiddenFor(session) {
+  const at = hiddenMap.get(session.sessionId);
   if (typeof at !== "number") return false;
-  // Snooze expires the moment the session writes again.
+  // Hide expires the moment the session writes again.
   return Number(session.lastActivityAt || 0) <= at;
+}
+function persistShowHidden() {
+  try { localStorage.setItem(SHOW_HIDDEN_STORAGE_KEY, showHiddenRows ? "1" : "0"); } catch {}
+}
+
+function synopsisPreview(syn) {
+  if (!syn) return "";
+  const toolText = syn.currentTool
+    ? `${syn.currentTool.name || ""}${syn.currentTool.description ? " · " + syn.currentTool.description : ""}`
+    : "";
+  const raw = syn.lastAssistant || syn.lastUser || toolText || "";
+  const normalized = String(raw).replace(/\s+/g, " ").trim();
+  if (!normalized) return "";
+  return normalized.length > 140 ? `${normalized.slice(0, 137)}...` : normalized;
 }
 
 function synopsisHtml(syn) {
@@ -188,7 +263,7 @@ function synopsisHtml(syn) {
   return parts.join("");
 }
 
-function rowHtml(session, state) {
+function rowHtml(session, state, index, hidden) {
   // state ∈ {"live","idle"}. Two clocks per row:
   //   started — birthtime of the jsonl (how old is this conversation?)
   //   elapsed — mtime of the jsonl (how long since the last write?)
@@ -208,26 +283,53 @@ function rowHtml(session, state) {
     ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
     : `<span class="started"></span>`;
   const tooltip = (session.title || session.project || session.sessionId || "") +
-    `\nstarted ${started} ago · last write ${elapsed} ago · click for live synopsis`;
+    `\nstarted ${started} ago · last write ${elapsed} ago · click to peek at the recent session tail`;
   const isExpanded = expandedSessionId === session.sessionId;
+  const preview = synopsisPreview(session.synopsis);
+  const previewInline = isExpanded && preview
+    ? `<span class="label-preview">${escapeHtml(preview)}</span>`
+    : "";
   const expandedSection = isExpanded
     ? `<div class="row-synopsis">${synopsisHtml(session.synopsis)}</div>`
     : "";
   const labelClass = "label" + (session.titleSynthetic ? " label-synthetic" : "");
-  const dismissBtn =
-    `<button class="row-dismiss" type="button" data-dismiss="${escapeHtml(session.sessionId)}"` +
-    ` title="snooze this session — reappears the next time it writes">×</button>`;
+  const visibilityBtn =
+    `<button class="row-visibility${hidden ? " is-hidden-row" : ""}" type="button"` +
+    ` data-session-id="${escapeHtml(session.sessionId)}" data-visibility="${hidden ? "show" : "hide"}"` +
+    ` aria-label="${hidden ? "Show this row in the HUD again" : "Hide this row in this HUD"}"` +
+    ` title="${hidden ? "hidden locally — click to show again" : "hide locally — reappears when this session writes"}">` +
+    `${tablerIcon(hidden ? "eye-off" : "eye")}</button>`;
+  const kind = String(session.kind || "agent").toLowerCase();
   return `
-    <li class="row row-${session.kind} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}">
-      <span class="dot"></span>
-      <span class="kind">${session.kind}</span>
-      <span class="${labelClass}" title="${escapeHtml(tooltip)}">${escapeHtml(label)}</span>
+    <li class="row row-${escapeHtml(kind)} row-${state}${hidden ? ' row-hidden' : ''}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}" data-row-index="${index}" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}">
+      <span class="agent-icon" title="${escapeHtml(agentName(kind))} · ${escapeHtml(state)}" aria-label="${escapeHtml(agentName(kind))} ${escapeHtml(state)}">${agentIconFor(kind)}</span>
+      <span class="${labelClass}" title="${escapeHtml(tooltip)}"><span class="label-title">${escapeHtml(label)}</span>${previewInline}</span>
       ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
-      ${dismissBtn}
+      ${visibilityBtn}
       ${expandedSection}
     </li>
   `;
+}
+
+function scrollListAfterRender() {
+  if (!pendingListScroll) return;
+  const mode = pendingListScroll;
+  pendingListScroll = null;
+  requestAnimationFrame(() => {
+    if (!listEl) return;
+    if (mode === "top") {
+      listEl.scrollTop = 0;
+      return;
+    }
+    listEl.scrollTop = listEl.scrollHeight;
+  });
+}
+
+function toggleRowCollapse() {
+  showAllRows = !showAllRows;
+  pendingListScroll = showAllRows ? "bottom" : "top";
+  if (lastSnapshot) render(lastSnapshot);
 }
 
 // --- main render ------------------------------------------------------
@@ -259,7 +361,7 @@ function rowNameForSort(s) {
 
 function applySort(rows, mode) {
   const STATE_RANK = { live: 0, idle: 1 };
-  // Live always above idle within any sort — the dot color is the strongest
+  // Live always above idle within any sort — the icon color is the strongest
   // signal and we don't want active sessions sinking under idle ones.
   return rows.slice().sort((a, b) => {
     const rankDiff = STATE_RANK[a.state] - STATE_RANK[b.state];
@@ -278,7 +380,57 @@ function applySort(rows, mode) {
   });
 }
 
+function renderKeepAwake(snapshot) {
+  if (!keepAwakeToggle || !keepAwakeStatus) return;
+  const ka = snapshot && snapshot.keepAwake && typeof snapshot.keepAwake === "object"
+    ? snapshot.keepAwake
+    : {};
+  const thresholds = snapshot && snapshot.thresholds || {};
+  keepAwakeWindowSeconds = Number(ka.inactivityTimeoutSec || thresholds.liveSeconds || keepAwakeWindowSeconds || 600);
+  keepAwakeEnabled = !!ka.enabled;
+  const held = !!ka.held;
+  const windowLabel = describeWindow(keepAwakeWindowSeconds);
+
+  keepAwakeToggle.setAttribute("aria-checked", keepAwakeEnabled ? "true" : "false");
+  keepAwakeToggle.title = keepAwakeEnabled
+    ? `Keep Mac awake while agents work, then release after ${windowLabel} without activity`
+    : "Mac wake hold is off";
+
+  if (keepAwakeEnabled && held) {
+    keepAwakeStatus.textContent = `on now · releases after ${windowLabel} without activity`;
+  } else if (keepAwakeEnabled) {
+    keepAwakeStatus.textContent = `on · keeps awake while agents work and for ${windowLabel} after`;
+  } else {
+    keepAwakeStatus.textContent = "off · Mac can sleep normally";
+  }
+}
+
+function renderScreenMeta(snapshot) {
+  currentScreenCast = snapshot && snapshot.screenCast && typeof snapshot.screenCast === "object"
+    ? snapshot.screenCast
+    : currentScreenCast;
+  if (!screenVisible || !screenSection) return;
+  if (screenPublisherOff()) {
+    stopScreenAutoRefresh();
+    setScreenPlaceholder(
+      "Screen publisher is off",
+      SCREEN_TOKEN
+        ? "The HUD has a screen token. Enable the desk Mac screen publisher to start sending frames."
+        : "Enable the desk Mac screen publisher; the desktop HUD will attach the local token automatically.",
+    );
+    updateScreenCaption("error");
+    return;
+  }
+  if (SCREEN_TOKEN && !screenRefreshTimer) {
+    setScreenPlaceholder("Loading screen preview", "Checking the latest published frame from the desk Mac.");
+    startScreenAutoRefresh();
+    return;
+  }
+  updateScreenCaption(screenImageState);
+}
+
 function render(snapshot) {
+  lastSnapshot = snapshot;
   const counts = snapshot.counts || {};
   const thresholds = snapshot.thresholds || {};
   const live = Array.isArray(snapshot.live) ? snapshot.live : [];
@@ -287,26 +439,32 @@ function render(snapshot) {
   const ageSec = Math.max(0, now - Number(snapshot.generatedAt || now));
   const isStale = ageSec > STALE_SECONDS;
 
-  const rows = applySort(
+  const allRows = applySort(
     [
-      ...live.map((s) => ({ s, state: "live" })),
-      ...idle.map((s) => ({ s, state: "idle" })),
-    ].filter(({ s }) => !isDismissedFor(s)),
+      ...live.map((s) => ({ s, state: "live", hidden: isHiddenFor(s) })),
+      ...idle.map((s) => ({ s, state: "idle", hidden: isHiddenFor(s) })),
+    ],
     sortMode,
   );
+  const hiddenCount = allRows.filter((r) => r.hidden).length;
+  if (showHiddenRows && hiddenCount === 0) {
+    showHiddenRows = false;
+    persistShowHidden();
+  }
+  const rows = showHiddenRows ? allRows : allRows.filter((r) => !r.hidden);
 
   // Alert detection: compare each row's state to what we recorded last
   // render. A live→idle transition (or first-seen-idle for a session that
   // looks like it just finished an assistant turn) triggers a single
-  // attention ping per cooldown window. Snoozed sessions never alert.
+  // attention ping per cooldown window. Hidden sessions never alert.
   const sessionsToAlert = [];
   const seenSidsThisRender = new Set();
-  for (const { s, state } of rows) {
+  for (const { s, state, hidden } of allRows) {
     seenSidsThisRender.add(s.sessionId);
     const prev = previousStateBySid.get(s.sessionId);
     previousStateBySid.set(s.sessionId, state);
     if (!alertsEnabled) continue;
-    if (isDismissedFor(s)) continue;
+    if (hidden) continue;
     if (state !== "idle") continue;
     // Only alert when we WATCHED a live→idle transition. If we boot up
     // and the row's already idle, that's not an event — skip.
@@ -333,14 +491,18 @@ function render(snapshot) {
     modeEl.textContent = `${formatDuration(ageSec)} stale`;
     emptySection.hidden = false;
     listSection.hidden = true;
+    listSection.classList.remove("is-showing-all", "is-collapsed");
+    if (collapseToggleBtn) collapseToggleBtn.hidden = true;
     emptyMark.textContent = "!";
-    emptyText.textContent = "desk Mac quiet";
+    emptyText.textContent = "snapshot stale";
     emptyCounts.textContent = "no recent publish";
-  } else if (rows.length === 0) {
+  } else if (allRows.length === 0) {
     hud.setAttribute("data-state", "ok");
     modeEl.textContent = "no sessions";
     emptySection.hidden = false;
     listSection.hidden = true;
+    listSection.classList.remove("is-showing-all", "is-collapsed");
+    if (collapseToggleBtn) collapseToggleBtn.hidden = true;
     emptyMark.textContent = "·";
     emptyText.textContent = "nothing tracked";
     emptyCounts.textContent = "no agent sessions found";
@@ -350,15 +512,23 @@ function render(snapshot) {
     if (liveCount > 0) {
       modeEl.textContent = `${liveCount} live`;
     } else {
-      modeEl.textContent = `${rows.length} tracked`;
+      modeEl.textContent = `${allRows.length} tracked`;
     }
     // List label hosts the sort + compact + alert toggles. All stop event
     // bubbling so clicks on these chips don't also toggle a row beneath.
+    const hiddenToggle = (hiddenCount > 0 || showHiddenRows)
+      ? `<button class="sort-cycle hidden-toggle${showHiddenRows ? " is-active" : ""}" type="button" id="hidden-toggle"` +
+        ` aria-pressed="${showHiddenRows ? "true" : "false"}"` +
+        ` title="${showHiddenRows ? "hide hidden rows" : `show ${hiddenCount} hidden ${plural(hiddenCount, "row", "rows")}`}">` +
+        `${tablerIcon(showHiddenRows ? "eye" : "eye-off")}<span>${showHiddenRows ? "hide hidden" : `hidden ${hiddenCount}`}</span></button>`
+      : "";
     listLabel.innerHTML =
       `<span>sessions</span>` +
       `<span class="list-tools">` +
-        `<button class="sort-cycle" type="button" id="alert-toggle"` +
-        ` title="${alertsEnabled ? "alerts on (click to mute attention pings)" : "alerts muted (click to enable)"}">${alertsEnabled ? "🔔" : "🔕"}</button>` +
+        `<button class="sort-cycle icon-cycle" type="button" id="alert-toggle"` +
+        ` aria-label="${alertsEnabled ? "Mute attention alerts" : "Enable attention alerts"}"` +
+        ` title="${alertsEnabled ? "alerts on (click to mute attention pings)" : "alerts muted (click to enable)"}">${tablerIcon(alertsEnabled ? "bell" : "bell-off")}</button>` +
+        hiddenToggle +
         `<button class="sort-cycle" type="button" id="sort-cycle"` +
         ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>` +
         `<button class="sort-cycle" type="button" id="compact-toggle"` +
@@ -372,50 +542,23 @@ function render(snapshot) {
     const visibleRows = overflow && !showAllRows
       ? rows.slice(0, ROW_COLLAPSE_THRESHOLD)
       : rows;
-    const collapseHint = overflow
-      ? `<li class="row-collapse" data-collapse-toggle="1">${
-          showAllRows
-            ? `show top ${ROW_COLLAPSE_THRESHOLD} (collapse)`
-            : `+ ${rows.length - ROW_COLLAPSE_THRESHOLD} more · show all`
-        }</li>`
-      : "";
-    listEl.innerHTML = visibleRows.map(({ s, state }) => rowHtml(s, state)).join("") + collapseHint;
+    listSection.classList.toggle("is-showing-all", overflow && showAllRows);
+    listSection.classList.toggle("is-collapsed", overflow && !showAllRows);
+    listEl.innerHTML = visibleRows.length > 0
+      ? visibleRows.map(({ s, state, hidden }, index) => rowHtml(s, state, index, hidden)).join("")
+      : `<li class="row-placeholder">all tracked sessions hidden</li>`;
+    if (collapseToggleBtn) {
+      collapseToggleBtn.hidden = !overflow;
+      collapseToggleBtn.setAttribute("aria-expanded", showAllRows ? "true" : "false");
+      collapseToggleBtn.textContent = showAllRows
+        ? `show top ${ROW_COLLAPSE_THRESHOLD} (collapse)`
+        : `+ ${rows.length - ROW_COLLAPSE_THRESHOLD} more · show all`;
+    }
     // If the previously-expanded row dropped off the list, collapse.
     if (expandedSessionId && !rows.some((r) => r.s.sessionId === expandedSessionId)) {
       expandedSessionId = null;
     }
-    // Row click → expand/collapse. Dismiss button gets its own handler that
-    // stops propagation so the row's click handler doesn't also fire.
-    listEl.querySelectorAll(".row").forEach((row) => {
-      row.addEventListener("click", (e) => {
-        e.preventDefault();
-        const sid = row.getAttribute("data-session-id");
-        if (!sid) return;
-        expandedSessionId = expandedSessionId === sid ? null : sid;
-        render(snapshot);
-      });
-    });
-    const collapseEl = listEl.querySelector(".row-collapse");
-    if (collapseEl) collapseEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showAllRows = !showAllRows;
-      render(snapshot);
-    });
-    listEl.querySelectorAll(".row-dismiss").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const sid = btn.getAttribute("data-dismiss");
-        if (!sid) return;
-        // Snooze: stamp with NOW. The row reappears the moment the
-        // session writes anything after this timestamp.
-        dismissedMap.set(sid, Math.floor(Date.now() / 1000));
-        if (expandedSessionId === sid) expandedSessionId = null;
-        saveDismissed();
-        render(snapshot);
-      });
-    });
+    scrollListAfterRender();
     const cycle = document.getElementById("sort-cycle");
     if (cycle) cycle.addEventListener("click", (e) => {
       e.preventDefault();
@@ -441,11 +584,24 @@ function render(snapshot) {
       try { localStorage.setItem(ALERT_STORAGE_KEY, alertsEnabled ? "1" : "0"); } catch {}
       render(snapshot);
     });
+    const hiddenBtn = document.getElementById("hidden-toggle");
+    if (hiddenBtn) hiddenBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      showHiddenRows = !showHiddenRows;
+      persistShowHidden();
+      if (!showHiddenRows && expandedSessionId && hiddenMap.has(expandedSessionId)) {
+        expandedSessionId = null;
+      }
+      render(snapshot);
+    });
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);
-  footThresholds.textContent = `live <${thresholds.liveSeconds || 300}s`;
+  footThresholds.textContent = `live window ${describeWindow(thresholds.liveSeconds || 600)}`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
+  renderKeepAwake(snapshot);
+  renderScreenMeta(snapshot);
 
   // Heartbeat: tell the host (lecter floating HUD) how recently any tracked
   // session wrote. Host decides whether to hold caffeinate and whether to
@@ -466,6 +622,8 @@ function renderError(message) {
   modeEl.textContent = "no snapshot";
   emptySection.hidden = false;
   listSection.hidden = true;
+  listSection.classList.remove("is-showing-all", "is-collapsed");
+  if (collapseToggleBtn) collapseToggleBtn.hidden = true;
   emptyMark.textContent = "!";
   emptyText.textContent = "no snapshot";
   emptyCounts.textContent = message || "snapshot file unreachable";
@@ -516,6 +674,75 @@ if (btnClose) {
   });
 }
 
+if (listEl) {
+  listEl.addEventListener("click", (e) => {
+    const rawTarget = e.target;
+    const target = rawTarget && rawTarget.nodeType === Node.ELEMENT_NODE
+      ? rawTarget
+      : rawTarget && rawTarget.parentElement;
+    if (!target) return;
+
+    const visibility = target.closest(".row-visibility");
+    if (visibility && listEl.contains(visibility)) {
+      e.preventDefault();
+      e.stopPropagation();
+      const sid = visibility.getAttribute("data-session-id");
+      if (!sid) return;
+      const action = visibility.getAttribute("data-visibility");
+      if (action === "show") {
+        hiddenMap.delete(sid);
+      } else {
+        // Local hide only: the row reappears the moment the session writes
+        // anything after this timestamp.
+        hiddenMap.set(sid, Math.floor(Date.now() / 1000));
+        if (expandedSessionId === sid) expandedSessionId = null;
+      }
+      saveHidden();
+      if (lastSnapshot) render(lastSnapshot);
+      return;
+    }
+
+    const row = target.closest(".row");
+    if (row && listEl.contains(row)) {
+      e.preventDefault();
+      const sid = row.getAttribute("data-session-id");
+      if (!sid) return;
+      expandedSessionId = expandedSessionId === sid ? null : sid;
+      if (lastSnapshot) render(lastSnapshot);
+    }
+  });
+
+  listEl.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const target = e.target && e.target.nodeType === Node.ELEMENT_NODE
+      ? e.target
+      : e.target && e.target.parentElement;
+    if (!target || target.closest("button")) return;
+    const row = target.closest(".row");
+    if (!row || !listEl.contains(row)) return;
+    e.preventDefault();
+    const sid = row.getAttribute("data-session-id");
+    if (!sid) return;
+    expandedSessionId = expandedSessionId === sid ? null : sid;
+    if (lastSnapshot) render(lastSnapshot);
+  });
+}
+
+if (collapseToggleBtn) {
+  collapseToggleBtn.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    collapsePointerHandledAt = Date.now();
+    toggleRowCollapse();
+  });
+  collapseToggleBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (Date.now() - collapsePointerHandledAt < 700) return;
+    toggleRowCollapse();
+  });
+}
+
 // Screen image src is composed from the token in the page URL. Without a
 // token nothing fetches — the worker writes screen-<token>.jpg and the
 // bookmark for this page has ?token=<same>, so the same operator who set
@@ -523,6 +750,61 @@ if (btnClose) {
 function screenImageUrl() {
   if (!SCREEN_TOKEN) return "";
   return `/hud/screen-${encodeURIComponent(SCREEN_TOKEN)}.jpg?t=${Date.now()}`;
+}
+
+function screenCastStatusText() {
+  const sc = currentScreenCast;
+  if (!sc || typeof sc !== "object") return "";
+  const last = Number(sc.lastUploadAt || 0);
+  const age = last > 0 ? Math.max(0, Math.floor(Date.now() / 1000) - last) : null;
+  if (sc.enabled === false) return "publisher off";
+  if (sc.pausedReason) return `publisher paused · ${sc.pausedReason}`;
+  if (sc.broadcasting && age != null) return `publisher on · last frame ${formatDuration(age)} ago`;
+  if (sc.lastError) return `publisher error · ${sc.lastError}`;
+  if (age != null) return `last frame ${formatDuration(age)} ago`;
+  return "";
+}
+
+function screenPublisherOff() {
+  const sc = currentScreenCast;
+  return !!(sc && typeof sc === "object" && sc.enabled === false);
+}
+
+function setScreenPlaceholder(title, text) {
+  if (screenPlaceholderTitle) screenPlaceholderTitle.textContent = title;
+  if (screenPlaceholderText) screenPlaceholderText.textContent = text || "";
+  if (screenPlaceholder) screenPlaceholder.hidden = false;
+  if (screenImg) {
+    screenImg.hidden = true;
+    screenImg.removeAttribute("src");
+  }
+}
+
+function setScreenImageVisible() {
+  if (screenPlaceholder) screenPlaceholder.hidden = true;
+  if (screenImg) screenImg.hidden = false;
+}
+
+function updateScreenCaption(state) {
+  screenImageState = state || "waiting";
+  if (!screenCaption || !screenSection) return;
+  const meta = screenCastStatusText();
+  screenSection.classList.toggle("is-live", state === "live");
+  screenSection.classList.toggle("is-error", state === "error");
+
+  if (!SCREEN_TOKEN) {
+    screenCaption.textContent = meta ? `${meta} · this HUD has no screen token` : "screen token missing";
+    return;
+  }
+  if (state === "live") {
+    screenCaption.textContent = `screen preview loaded · ${formatStamp(Date.now() / 1000)}${meta ? " · " + meta : ""}`;
+    return;
+  }
+  if (state === "error") {
+    screenCaption.textContent = meta ? `screen preview failed · ${meta}` : "screen preview failed · check publisher/token";
+    return;
+  }
+  screenCaption.textContent = meta || "screen preview loading";
 }
 
 function startScreenAutoRefresh() {
@@ -537,28 +819,60 @@ function stopScreenAutoRefresh() {
 function refreshScreenImage() {
   const url = screenImageUrl();
   if (!url || !screenImg) return;
+  updateScreenCaption("waiting");
   screenImg.src = url;
 }
 
 function applyScreenVisibility() {
   if (!screenSection) return;
+  if (btnScreen) {
+    btnScreen.classList.toggle("is-active", screenVisible);
+    btnScreen.setAttribute("aria-pressed", screenVisible ? "true" : "false");
+    btnScreen.title = screenVisible
+      ? "Hide the desk Mac screen preview"
+      : "Show the desk Mac screen preview";
+  }
   if (!SCREEN_TOKEN) {
-    // No token in the URL — the feature is dormant. Toggle still works
-    // visually, but we explain why nothing's loading.
     screenSection.hidden = !screenVisible;
     if (screenVisible) {
-      screenImg.removeAttribute("src");
-      screenCaption.textContent = "screen-cast token missing — add ?token=<your-token> to the bookmark";
+      stopScreenAutoRefresh();
+      screenImageState = "error";
+      if (screenPublisherOff()) {
+        setScreenPlaceholder(
+          "Screen publisher is off",
+          "Enable the desk Mac screen publisher; the desktop HUD will attach the local token automatically.",
+        );
+      } else {
+        setScreenPlaceholder(
+          "Screen preview needs a token",
+          "Open the desktop HUD so it can attach the local screen token, or add ?token=<screen-token> to this URL.",
+        );
+      }
+      updateScreenCaption("error");
+    } else {
+      stopScreenAutoRefresh();
     }
     return;
   }
   screenSection.hidden = !screenVisible;
   if (screenVisible) {
-    screenCaption.textContent = "live screen · refreshes every 10s";
+    if (screenPublisherOff()) {
+      stopScreenAutoRefresh();
+      setScreenPlaceholder(
+        "Screen publisher is off",
+        "The HUD has a screen token. Enable the desk Mac screen publisher to start sending frames.",
+      );
+      screenImageState = "error";
+      updateScreenCaption("error");
+      return;
+    }
+    setScreenPlaceholder("Loading screen preview", "Checking the latest published frame from the desk Mac.");
+    screenImageState = "waiting";
+    updateScreenCaption("waiting");
     startScreenAutoRefresh();
   } else {
     stopScreenAutoRefresh();
-    screenImg.removeAttribute("src");
+    setScreenPlaceholder("Screen preview is off", "Click the eye button to show the live desk Mac frame.");
   }
 }
 
@@ -567,12 +881,51 @@ if (btnScreen) {
     e.preventDefault();
     screenVisible = !screenVisible;
     try { localStorage.setItem(SCREEN_STORAGE_KEY, screenVisible ? "1" : "0"); } catch {}
-    btnScreen.classList.toggle("is-active", screenVisible);
     applyScreenVisibility();
+    reportSizeToHost();
   });
-  // Initial sync — class + visibility match persisted state.
-  btnScreen.classList.toggle("is-active", screenVisible);
   applyScreenVisibility();
+}
+
+if (screenImg) {
+  screenImg.addEventListener("load", () => {
+    setScreenImageVisible();
+    updateScreenCaption("live");
+    reportSizeToHost();
+  });
+  screenImg.addEventListener("error", () => {
+    setScreenPlaceholder(
+      "No screen frame loaded",
+      "Either the publisher is off, the token is wrong, or the last uploaded frame is unavailable.",
+    );
+    updateScreenCaption("error");
+    reportSizeToHost();
+  });
+}
+
+if (keepAwakeToggle) {
+  keepAwakeToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    const next = !keepAwakeEnabled;
+    keepAwakeEnabled = next;
+    renderKeepAwake({
+      ...(lastSnapshot || {}),
+      keepAwake: {
+        ...((lastSnapshot && lastSnapshot.keepAwake) || {}),
+        enabled: next,
+        held: next && !!(lastSnapshot && lastSnapshot.keepAwake && lastSnapshot.keepAwake.held),
+        inactivityTimeoutSec: keepAwakeWindowSeconds,
+      },
+    });
+    const delivered = postToHost({
+      action: "setKeepAwake",
+      enabled: next,
+      inactivityTimeoutSec: keepAwakeWindowSeconds || 600,
+    });
+    if (!delivered && keepAwakeStatus) {
+      keepAwakeStatus.textContent = "open as floating HUD to change Mac sleep";
+    }
+  });
 }
 
 // --- poll loop --------------------------------------------------------
