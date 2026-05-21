@@ -593,19 +593,19 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T23:39:28.344Z",
+    "lastPublishedAt": "2026-05-21T06:25:17.980Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26196324771",
-        "runNumber": "140"
+        "runId": "26209325444",
+        "runNumber": "149"
       },
       "git": null
     },
-    "assetVersion": "1.0.64",
+    "assetVersion": "1.0.66",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1",
     "catalogTagsVersion": 2,
@@ -3281,8 +3281,8 @@
     "showcaseRank": 240,
     "description": "Interactive visualizations that teach how language models work through hands-on exploration.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-21T08:40:41Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "maturityScore": 74,
@@ -4513,7 +4513,12 @@
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
-    "isPublic": false
+    "isPublic": false,
+    "siteAccessUpdatedAt": null,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "bouquet",
@@ -14234,20 +14239,20 @@
       "Created from the launchpad editor flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T23:49:28.327Z",
+    "lastPublishedAt": "2026-05-21T08:33:31.664Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/cozy-crate",
         "ref": null,
-        "sha": "debaf4a52a16140be04149a69ca6f85e9dcae188",
+        "sha": "18440a0bc9efb615359af19ed65c842b46b46f85",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/cozy-crate",
         "branch": "main",
-        "commit": "debaf4a52a16140be04149a69ca6f85e9dcae188",
+        "commit": "18440a0bc9efb615359af19ed65c842b46b46f85",
         "remote": "https://github.com/mist83/cozy-crate.git"
       }
     },
@@ -14258,7 +14263,7 @@
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.5",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -18333,6 +18338,51 @@
     "mainSiteUpdatedAt": null
   },
   {
+    "siteId": "fighters",
+    "host": "fighters.mullmania.com",
+    "currentHostedSite": true,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "fighters",
+      "phone-first",
+      "browser",
+      "mullmania-models",
+      "thumb-zone-ui"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-21T09:13:50.000Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/fighters",
+        "ref": null,
+        "sha": "7e575cd99aafc83a779cb2e6bf50bd8fa2ffd7e3",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/fighters",
+        "branch": "main",
+        "commit": "7e575cd99aafc83a779cb2e6bf50bd8fa2ffd7e3",
+        "remote": "https://github.com/mist83/fighters.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-21T08:30:00.000Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "file-browser-src-fragment",
     "host": "file-browser-src-fragment.mullmania.com",
     "currentHostedSite": false,
@@ -20825,17 +20875,22 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:36:24.375Z",
+    "lastPublishedAt": "2026-05-21T04:47:30.182Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979286872",
-        "runNumber": "27"
+        "actions": false,
+        "repository": "mist83/golden-apple",
+        "ref": null,
+        "sha": "04c46a1f27d9ac2e87cd3d2c6edb26727ddd83f9",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null
+      "git": {
+        "root": "/Users/mist83/Code/golden-apple",
+        "branch": "main",
+        "commit": "04c46a1f27d9ac2e87cd3d2c6edb26727ddd83f9",
+        "remote": "https://github.com/mist83/golden-apple.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -20845,7 +20900,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "grammar-garden",
@@ -22367,7 +22425,57 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "displayName": "image-fiber",
-    "manualRankUpdatedAt": null
+    "manualRankUpdatedAt": null,
+    "maturityScore": 72,
+    "maturityLevel": "product",
+    "maturitySummary": "Product-level image editor/gallery pipeline with a real .NET/Lambda backend, tests, and live API proof; the public editor shell is polished, but its upload path still points at a non-proxied /resource route.",
+    "maturityEvidence": [
+      "Live editor shell returns 200",
+      "Live /api/gallery lists 624 images",
+      ".NET 8 Lambda backend plus EF/gallery services",
+      "Playwright and smoke tests cover upload/crop/mobile",
+      "GitHub private repo updated 2026-05-17",
+      "Editor /resource upload route 404s on public host"
+    ],
+    "maturityConfidence": 82,
+    "maturityDimensions": {
+      "product": 73,
+      "reuse": 72,
+      "novelty": 68,
+      "proof": 69,
+      "implementation": 78
+    },
+    "maturityUpdatedAt": "2026-05-21T05:13:47Z",
+    "maturitySource": "valet-concept-maturity-v1",
+    "maturityConcept": {
+      "conceptId": "image-fiber",
+      "label": "image-fiber",
+      "siteIds": [
+        "image-fiber"
+      ],
+      "bestSiteId": "image-fiber",
+      "score": 72,
+      "level": "product",
+      "summary": "Product-level image editor/gallery pipeline with a real .NET/Lambda backend, tests, and live API proof; the public editor shell is polished, but its upload path still points at a non-proxied /resource route.",
+      "evidence": [
+        "Live editor shell returns 200",
+        "Live /api/gallery lists 624 images",
+        ".NET 8 Lambda backend plus EF/gallery services",
+        "Playwright and smoke tests cover upload/crop/mobile",
+        "GitHub private repo updated 2026-05-17",
+        "Editor /resource upload route 404s on public host"
+      ],
+      "confidence": 82,
+      "dimensions": {
+        "product": 73,
+        "reuse": 72,
+        "novelty": 68,
+        "proof": 69,
+        "implementation": 78
+      },
+      "updatedAt": "2026-05-21T05:13:47Z",
+      "source": "valet-concept-maturity-v1"
+    }
   },
   {
     "siteId": "images",
@@ -27558,20 +27666,20 @@
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T04:14:27.316Z",
+    "lastPublishedAt": "2026-05-21T08:38:56.362Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "69bdd493ed5cbc20b9954576474a2ac8ef133d22",
+        "sha": "9f70dd85c744d0924f6967cce6d7011d08db7954",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/models",
-        "branch": "master",
-        "commit": "69bdd493ed5cbc20b9954576474a2ac8ef133d22",
+        "root": "/Users/mist83/Code/models-round8-vertexoid-current",
+        "branch": "round8-plus-vertexoid-current",
+        "commit": "9f70dd85c744d0924f6967cce6d7011d08db7954",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -27586,7 +27694,7 @@
     "siteAliasesUpdatedAt": null,
     "displayName": "Models",
     "url": "https://models.mullmania.com/",
-    "assetVersion": "1.0.9",
+    "assetVersion": "1.0.26",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -34969,25 +35077,29 @@
       "rotoscope",
       "endless",
       "mashup",
-      "arcade"
+      "arcade",
+      "party",
+      "tv",
+      "match-cut",
+      "mini-games"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T04:41:44.201Z",
+    "lastPublishedAt": "2026-05-21T07:33:12.968Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/mashup-arcade",
+        "repository": "mist83/rotoscope",
         "ref": null,
-        "sha": "5959b71993e79266fe4bd855a80ea338f66166dd",
+        "sha": "fc039701016fcd1d5c5c9fa4f26ae22b8cc27b6f",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/mashup-arcade",
+        "root": "/Users/mist83/Code/rotoscope",
         "branch": "main",
-        "commit": "5959b71993e79266fe4bd855a80ea338f66166dd",
-        "remote": "https://github.com/mist83/mashup-arcade.git"
+        "commit": "fc039701016fcd1d5c5c9fa4f26ae22b8cc27b6f",
+        "remote": "https://github.com/mist83/rotoscope.git"
       }
     },
     "catalogTagsVersion": 2,
@@ -34999,7 +35111,10 @@
     "testNotes": "",
     "displayName": "rotoscope",
     "manualRank": 0,
-    "manualRankUpdatedAt": null
+    "manualRankUpdatedAt": null,
+    "assetVersion": "1.0.4",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "rsvp",
@@ -37780,17 +37895,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T02:31:21.315Z",
+    "lastPublishedAt": "2026-05-21T08:49:12.735Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26201880641",
-        "runNumber": "145"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "0bf38b7682723df4499db6cf37bf811c12c0e13a",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "0bf38b7682723df4499db6cf37bf811c12c0e13a",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -37820,7 +37940,7 @@
       "posterNote": "Local browser capture of the canonized Sites launchpad."
     },
     "showcaseRank": 240,
-    "assetVersion": "1.0.1",
+    "assetVersion": "1.0.2",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -39161,7 +39281,11 @@
     "catalogTagsVersion": 2,
     "url": "https://splatlab.mullmania.com/",
     "isPublic": true,
-    "siteAccessUpdatedAt": "2026-05-21T01:56:12.178Z"
+    "siteAccessUpdatedAt": "2026-05-21T01:56:12.178Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "split-color",

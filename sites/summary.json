@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-21T04:14:27.316Z",
-  "updatedAt": "2026-05-21T04:14:27.316Z",
+  "generatedAt": "2026-05-21T09:13:50.000Z",
+  "updatedAt": "2026-05-21T09:13:50.000Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
   "stats": {
-    "catalogSiteCount": 1108,
-    "hostedSiteCount": 1108,
+    "catalogSiteCount": 1109,
+    "hostedSiteCount": 1109,
     "dataNamespaceCount": 87,
     "syntheticSiteCount": 29,
-    "publicHostedSiteCount": 210,
-    "privateHostedSiteCount": 897,
+    "publicHostedSiteCount": 212,
+    "privateHostedSiteCount": 896,
     "operatorNoteCount": 1,
     "demoPosterCount": 143,
     "demoVideoCount": 7
@@ -41,12 +41,12 @@
   },
   "canonVersions": {
     "2026.04.19": 2,
-    "2026.04.26": 16,
+    "2026.04.26": 17,
     "2026.04.17": 1
   },
-  "lastPublishedSite": "models",
-  "visibleHostedSites": 1107,
-  "launchpadBuiltAt": "2026-05-21T04:28:49.546Z",
+  "lastPublishedSite": "fighters",
+  "visibleHostedSites": 1108,
+  "launchpadBuiltAt": "2026-05-21T09:15:12.298Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"

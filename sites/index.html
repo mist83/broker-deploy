@@ -2588,5 +2588,166 @@
     });
   })();
   </script>
+
+  <!-- OAuth gate reminder. Pings oath.<BASE_DOMAIN>/__health on load; if it
+       fails, shows a dismissible reminder on the first failed load and then
+       every fifth failed refresh. Remove this block once the gate is live. -->
+  <style>
+    #oath-breadcrumb {
+      position: fixed;
+      right: 14px;
+      top: calc(env(safe-area-inset-top, 0px) + 78px);
+      z-index: 11000;
+      max-width: min(360px, calc(100vw - 28px));
+      padding: 10px 12px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      border-radius: 14px;
+      background: #2a1a3a;
+      color: #f3e6ff;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      font: 12px/1.35 system-ui, -apple-system, sans-serif;
+      border: 1px solid #50356a;
+    }
+    #oath-breadcrumb.is-on { display: inline-flex; }
+    #oath-breadcrumb i { font-size: 16px; color: #c8a4ff; }
+    #oath-breadcrumb a {
+      min-width: 0;
+      color: inherit;
+      text-decoration: none;
+    }
+    #oath-breadcrumb a:hover,
+    #oath-breadcrumb a:focus-visible { text-decoration: underline; }
+    #oath-breadcrumb strong { color: #fff; font-weight: 650; }
+    #oath-breadcrumb code { background: rgba(255,255,255,.08); padding: 1px 4px; border-radius: 4px; font-size: 11px; }
+    #oath-breadcrumb-dismiss {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 28px;
+      min-height: 28px;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #f3e6ff;
+      cursor: pointer;
+    }
+    #oath-breadcrumb-dismiss:hover,
+    #oath-breadcrumb-dismiss:focus-visible {
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.28);
+      color: #fff;
+    }
+    #oath-breadcrumb-dismiss i { font-size: 15px; color: inherit; }
+    body.has-composer-open #oath-breadcrumb,
+    body.has-fullscreen-preview-open #oath-breadcrumb {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      #oath-breadcrumb {
+        right: 8px;
+        top: calc(env(safe-area-inset-top, 0px) + 66px);
+        max-width: calc(100vw - 16px);
+      }
+    }
+  </style>
+  <div id="oath-breadcrumb" role="status" aria-live="polite" aria-label="OAuth gate setup reminder">
+    <i class="ti ti-lock-open" aria-hidden="true"></i>
+    <a href="https://github.com/mist83/oauth/blob/main/lambda/SETUP.md" target="_blank" rel="noopener" title="OAuth gate setup notes">
+      <strong>OAuth gate pending.</strong> <span>See <code>~/Code/oauth/lambda</code>.</span>
+    </a>
+    <button id="oath-breadcrumb-dismiss" type="button" aria-label="Dismiss OAuth gate reminder" title="Dismiss reminder">
+      <i class="ti ti-x" aria-hidden="true"></i>
+    </button>
+  </div>
+  <script>
+  (function () {
+    var COUNT_KEY = 'mullmania-oath-reminder-unhealthy-load-count';
+    var DISMISSED_CYCLE_KEY = 'mullmania-oath-reminder-dismissed-cycle';
+    var REMINDER_INTERVAL = 5;
+    var host = (location.hostname || '').toLowerCase();
+    var parts = host.split('.');
+    var base = parts.length >= 2 ? parts.slice(-2).join('.') : host;
+    var oath = 'https://oath.' + base + '/__health';
+    var chip = document.getElementById('oath-breadcrumb');
+    var dismiss = document.getElementById('oath-breadcrumb-dismiss');
+    if (!chip) return;
+
+    function readNumber(key, fallback) {
+      try {
+        var raw = localStorage.getItem(key);
+        var parsed = raw === null ? NaN : Number(raw);
+        return Number.isFinite(parsed) ? parsed : fallback;
+      } catch (_) {
+        return fallback;
+      }
+    }
+
+    function writeNumber(key, value) {
+      try {
+        localStorage.setItem(key, String(value));
+      } catch (_) {}
+    }
+
+    function reminderCycleForCount(count) {
+      return count <= 1 ? 0 : Math.floor(count / REMINDER_INTERVAL);
+    }
+
+    function hideReminder() {
+      chip.classList.remove('is-on');
+      chip.setAttribute('aria-hidden', 'true');
+    }
+
+    function showReminder() {
+      chip.classList.add('is-on');
+      chip.removeAttribute('aria-hidden');
+    }
+
+    hideReminder();
+    if (dismiss) {
+      dismiss.addEventListener('click', function () {
+        var count = readNumber(COUNT_KEY, 1);
+        writeNumber(DISMISSED_CYCLE_KEY, reminderCycleForCount(count));
+        hideReminder();
+      });
+    }
+
+    function markGateUnhealthy() {
+      var count = Math.max(0, readNumber(COUNT_KEY, 0)) + 1;
+      var shouldShow = count === 1 || (count % REMINDER_INTERVAL) === 0;
+      var cycle = reminderCycleForCount(count);
+      var dismissedCycle = readNumber(DISMISSED_CYCLE_KEY, -1);
+      writeNumber(COUNT_KEY, count);
+      if (shouldShow && dismissedCycle !== cycle) {
+        showReminder();
+      } else {
+        hideReminder();
+      }
+    }
+
+    function markGateHealthy() {
+      writeNumber(COUNT_KEY, 0);
+      writeNumber(DISMISSED_CYCLE_KEY, -1);
+      hideReminder();
+    }
+
+    // AbortController gives us a timeout that doesn't keep the network tab busy.
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var t = setTimeout(function () { if (ctl) ctl.abort(); }, 2500);
+    fetch(oath, { mode: 'cors', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (body) {
+        clearTimeout(t);
+        if (body && body.ok) {
+          markGateHealthy();
+        } else {
+          markGateUnhealthy();
+        }
+      })
+      .catch(function () { clearTimeout(t); markGateUnhealthy(); });
+  })();
+  </script>
 </body>
 </html>
