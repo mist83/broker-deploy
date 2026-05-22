@@ -36,6 +36,10 @@ html, body {
 *, *::before, *::after { cursor: default !important; }
 
 body { padding: 12px; }
+body.is-web-hud {
+  user-select: text;
+  -webkit-user-select: text;
+}
 
 .hud {
   background: var(--bg);
@@ -56,6 +60,9 @@ body { padding: 12px; }
   border-color: rgba(var(--err-rgb), 0.42);
 }
 .hud * { -webkit-app-region: no-drag; }
+body.is-web-hud .hud {
+  -webkit-app-region: no-drag;
+}
 
 .hud-head {
   display: flex;
@@ -535,9 +542,9 @@ body { padding: 12px; }
 }
 .row {
   display: grid;
-  /* agent icon, label, started, elapsed. Right two columns are
-   * right-aligned with fixed ch widths so durations line up across rows. */
-  grid-template-columns: 20px minmax(0, 1fr) 5.5ch 5.5ch;
+  /* agent icon, session summary, last-write age. Conversation start lives in
+   * the icon tooltip to keep the row focused on current activity. */
+  grid-template-columns: 20px minmax(0, 1fr) 5.5ch;
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
@@ -546,17 +553,41 @@ body { padding: 12px; }
   font-size: 12px;
   transition: background 80ms ease;
 }
-.row .started {
-  color: var(--fg-faint);
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
+.row.has-surgery {
+  grid-template-columns: 20px minmax(0, 1fr) 5.5ch 24px;
 }
 .row .elapsed {
   font-variant-numeric: tabular-nums;
   color: var(--fg-dim);
   font-size: 11px;
   text-align: right;
+}
+.row-action {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg-faint);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer !important;
+  opacity: 0.72;
+  transition: color 90ms ease, background 90ms ease, opacity 90ms ease;
+}
+.row-action:hover,
+.row-action:focus-visible {
+  background: rgba(var(--link-rgb), 0.12);
+  color: var(--link);
+  opacity: 1;
+}
+.row-action .ti {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+  pointer-events: none;
 }
 .row:hover { background: var(--row-bg-hover); }
 
@@ -599,7 +630,8 @@ body { padding: 12px; }
 .row.is-expanded { background: var(--row-bg-hover); }
 .row:focus-visible,
 .row-collapse:focus-visible,
-.sort-cycle:focus-visible {
+.sort-cycle:focus-visible,
+.row-action:focus-visible {
   outline: 1px solid rgba(var(--link-rgb), 0.7);
   outline-offset: 2px;
 }
@@ -667,12 +699,12 @@ body { padding: 12px; }
   white-space: nowrap;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 64px auto minmax(0, 1fr);
+  grid-template-columns: minmax(72px, 1fr) auto;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
 }
 .tok-split {
-  width: 64px;
+  width: 100%;
   height: 5px;
   display: flex;
   overflow: hidden;
@@ -690,13 +722,6 @@ body { padding: 12px; }
 }
 .tok-agent-seg {
   background: var(--claude);
-}
-.tok-mini {
-  min-width: 0;
-  display: inline-flex;
-  gap: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .tok-user { color: var(--codex); }
 .tok-agent { color: var(--claude); }
@@ -720,3 +745,102 @@ body { padding: 12px; }
 .foot-sep { opacity: 0.5; }
 #foot-age { margin-left: auto; }
 .hud[data-state="stale"] #foot-age { color: var(--err); }
+
+@media (max-width: 520px) {
+  body.is-web-hud {
+    padding: 0;
+    background: var(--bg);
+  }
+
+  body.is-web-hud .hud {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 8px 10px 8px;
+    background: var(--bg);
+  }
+
+  body.is-web-hud .hud-head {
+    margin-bottom: 6px;
+  }
+
+  body.is-web-hud .hud-title {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+  }
+
+  body.is-web-hud .hud-actions {
+    gap: 2px;
+    margin-left: 4px;
+  }
+
+  body.is-web-hud .hud-btn {
+    width: 30px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  body.is-web-hud .hud-btn .ti {
+    width: 16px;
+    height: 16px;
+  }
+
+  body.is-web-hud .hud-screen {
+    margin-bottom: 6px;
+    border-radius: 6px;
+  }
+
+  body.is-web-hud .hud-screen-caption {
+    min-height: 22px;
+    padding: 4px 6px 5px;
+    font-size: 9px;
+  }
+
+  body.is-web-hud .hud-list .list-label {
+    margin-bottom: 4px;
+    gap: 6px;
+  }
+
+  body.is-web-hud .list-tools {
+    gap: 7px;
+  }
+
+  body.is-web-hud .row {
+    grid-template-columns: 18px minmax(0, 1fr) 5ch;
+    gap: 6px;
+    padding: 5px 8px;
+    border-radius: 6px;
+  }
+
+  body.is-web-hud .row .agent-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  body.is-web-hud .row .agent-icon .ti {
+    width: 16px;
+    height: 16px;
+  }
+
+  body.is-web-hud .row-tokenline {
+    grid-template-columns: minmax(64px, 1fr) auto;
+    gap: 4px;
+  }
+
+  body.is-web-hud .row-collapse {
+    margin-top: 3px;
+    padding: 7px 6px;
+    border-radius: 6px;
+  }
+
+  body.is-web-hud .hud-foot {
+    margin-top: 7px;
+    padding-top: 6px;
+    gap: 4px;
+    font-size: 9px;
+  }
+}

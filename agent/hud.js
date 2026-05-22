@@ -52,6 +52,7 @@ const screenCaption = document.getElementById("hud-screen-caption");
 const screenPlaceholder = document.getElementById("hud-screen-placeholder");
 const screenPlaceholderTitle = screenPlaceholder && screenPlaceholder.querySelector(".hud-screen-placeholder-title");
 const screenPlaceholderText = screenPlaceholder && screenPlaceholder.querySelector(".hud-screen-placeholder-text");
+const keepAwakeSection = document.getElementById("hud-keepawake");
 const keepAwakeToggle = document.getElementById("keep-awake-toggle");
 const keepAwakeStatus = document.getElementById("keep-awake-status");
 const screenOverlay = document.getElementById("hud-screen-overlay");
@@ -129,6 +130,8 @@ function tablerIcon(name, className = "") {
       return `<svg ${attrs}><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 1 1 7.072 7.072l-.535 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>`;
     case "qrcode":
       return `<svg ${attrs}><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M7 17l0 .01" /><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M7 7l0 .01" /><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M17 7l0 .01" /><path d="M14 14l3 0" /><path d="M20 14l0 .01" /><path d="M14 14l0 3" /><path d="M14 20l3 0" /><path d="M17 17l3 0" /><path d="M20 17l0 3" /></svg>`;
+    case "scalpel":
+      return `<svg ${attrs}><path d="M14 5l5 5" /><path d="M6 19l7.5 -7.5" /><path d="M9 16l-2 -2l9 -9l3 3l-9 9z" /><path d="M5 21l3 -3" /></svg>`;
     case "eye":
       return `<svg ${attrs}><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>`;
     case "eye-off":
@@ -451,23 +454,67 @@ let collapsePointerHandledAt = 0;
 // not flip a publisher on/off switch. Remote viewers publish short-lived
 // demand over signal-argh while this panel is open; the desk Mac worker uploads
 // frames only while that demand is fresh.
-const SCREEN_STORAGE_KEY = "valet-hud-screen-visible";
-let screenVisible = (() => {
-  try {
-    if (QUERY_PARAMS.get("screen") === "1") return true;
-    return localStorage.getItem(SCREEN_STORAGE_KEY) === "1";
-  } catch { return false; }
-})();
 const SCREEN_TOKEN = (() => {
   try { return QUERY_PARAMS.get("token") || ""; } catch { return ""; }
 })();
 const IS_DESKTOP_HUD = QUERY_PARAMS.get("desktop") === "1";
+const IS_WEB_HUD = !IS_DESKTOP_HUD;
+const SCREEN_STORAGE_KEY = "valet-hud-screen-visible";
+let screenVisible = (() => {
+  try {
+    if (IS_DESKTOP_HUD) {
+      if (QUERY_PARAMS.get("screen") === "1") return true;
+      return localStorage.getItem(SCREEN_STORAGE_KEY) === "1";
+    }
+    return !!SCREEN_TOKEN || QUERY_PARAMS.get("screen") === "1";
+  } catch { return false; }
+})();
 const SCREEN_REFRESH_MS = 10_000;
 const SCREEN_DEMAND_TOPIC = "screen-demand";
 const SCREEN_DEMAND_INTERVAL_MS = 8_000;
 const SCREEN_DEMAND_TTL_MS = 30_000;
 const SIGNALR_SCRIPT_URL = "/vendor/signalr.min.js";
 let screenRefreshTimer = null;
+
+function applySurfaceModeChrome() {
+  document.body.classList.toggle("is-desktop-hud", IS_DESKTOP_HUD);
+  document.body.classList.toggle("is-web-hud", IS_WEB_HUD);
+  if (btnQr) btnQr.hidden = IS_WEB_HUD;
+  if (btnClose) btnClose.hidden = IS_WEB_HUD;
+  if (keepAwakeSection) keepAwakeSection.hidden = IS_WEB_HUD;
+  if (btnScreen && IS_WEB_HUD && !SCREEN_TOKEN) btnScreen.hidden = true;
+}
+
+applySurfaceModeChrome();
+
+function localSurgeryUrlFor(session) {
+  if (!IS_DESKTOP_HUD || !session || typeof session !== "object") return "";
+  const kind = String(session.kind || "").toLowerCase();
+  const cwd = String(session.project || "").trim();
+  const sessionId = String(session.sessionId || "").trim();
+  if (kind !== "claude" || !cwd.startsWith("/") || !sessionId) return "";
+  try {
+    const url = new URL("/", "http://127.0.0.1:5173");
+    url.searchParams.set("cwd", cwd);
+    url.searchParams.set("session", sessionId);
+    url.searchParams.set("surface", "hud");
+    return url.href;
+  } catch {
+    return "";
+  }
+}
+
+function isAllowedLocalLecterUrl(url) {
+  return /^http:\/\/(?:127\.0\.0\.1|localhost):5173\//.test(String(url || ""));
+}
+
+function openLocalSurgery(url) {
+  const href = String(url || "");
+  if (!isAllowedLocalLecterUrl(href)) return;
+  if (!postToHost({ action: "openLocalSurgery", url: href })) {
+    window.open(href, "_blank", "noopener");
+  }
+}
 
 function synopsisPreview(syn) {
   if (!syn) return "";
@@ -534,7 +581,6 @@ function tokenStatsHtml(stats) {
       `<span class="tok-seg tok-agent-seg" style="${agentStyle}"></span>` +
     `</span>` +
     `<span class="tok-total">${formatTokenCount(total)} tok</span>` +
-    `<span class="tok-mini" aria-hidden="true"><span class="tok-user">you</span><span class="tok-agent">agent</span></span>` +
   `</span>`;
 }
 
@@ -553,12 +599,10 @@ function rowHtml(session, state, index) {
     shortSessionId(session.sessionId) || "—";
   const elapsed = formatDuration(session.secondsSinceActivity);
   const started = formatDuration(session.secondsSinceStart || 0);
-  const showStarted = (session.secondsSinceStart || 0) >= 60;
-  const startedSpan = showStarted
-    ? `<span class="started" title="conversation started this long ago">${escapeHtml(started)}</span>`
-    : `<span class="started"></span>`;
+  const kind = String(session.kind || "agent").toLowerCase();
   const tooltip = (session.title || session.project || session.sessionId || "") +
-    `\nstarted ${started} ago · last write ${elapsed} ago · click to peek at the recent session tail`;
+    `\nlast write ${elapsed} ago · click to peek at the recent session tail`;
+  const iconTitle = `${agentName(kind)} · ${state} · started ${started} ago`;
   const isExpanded = expandedSessionId === session.sessionId;
   const preview = synopsisPreview(session.synopsis);
   const previewInline = isExpanded && preview
@@ -569,13 +613,16 @@ function rowHtml(session, state, index) {
     ? `<div class="row-synopsis">${synopsisHtml(session.synopsis)}</div>`
     : "";
   const labelClass = "label" + (session.titleSynthetic ? " label-synthetic" : "");
-  const kind = String(session.kind || "agent").toLowerCase();
+  const surgeryUrl = localSurgeryUrlFor(session);
+  const surgeryAction = surgeryUrl
+    ? `<button class="row-action row-surgery" type="button" data-action="surgery" data-url="${escapeHtml(surgeryUrl)}" aria-label="Open in local Lecter surgery" title="Open this conversation in local Lecter surgery">${tablerIcon("scalpel")}</button>`
+    : "";
   return `
-    <li class="row row-${escapeHtml(kind)} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}" data-row-index="${index}" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}">
-      <span class="agent-icon" title="${escapeHtml(agentName(kind))} · ${escapeHtml(state)}" aria-label="${escapeHtml(agentName(kind))} ${escapeHtml(state)}">${agentIconFor(kind)}</span>
+    <li class="row row-${escapeHtml(kind)} row-${state}${isExpanded ? ' is-expanded' : ''}${surgeryUrl ? ' has-surgery' : ''}" data-session-id="${escapeHtml(session.sessionId)}" data-row-index="${index}" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}">
+      <span class="agent-icon" title="${escapeHtml(iconTitle)}" aria-label="${escapeHtml(iconTitle)}">${agentIconFor(kind)}</span>
       <span class="${labelClass}" title="${escapeHtml(tooltip)}"><span class="label-title">${escapeHtml(label)}</span>${previewInline}${tokenLine}</span>
-      ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
+      ${surgeryAction}
       ${expandedSection}
     </li>
   `;
@@ -612,53 +659,22 @@ function toggleRowCollapse() {
 
 // --- main render ------------------------------------------------------
 
-// User-pickable sort. Default is `started` (oldest at top, brand new
-// sessions append at the bottom) — that's the stable order: a session's
-// startedAt never changes, so the list doesn't reshuffle as sessions
-// pause and resume. The operator can cycle to a different sort via the
-// header chip; choice persists in localStorage.
-const SORT_MODES = ["started", "recent", "kind", "name"];
-const SORT_STORAGE_KEY = "valet-hud-sort";
-let sortMode = (() => {
-  try { return SORT_MODES.includes(localStorage.getItem(SORT_STORAGE_KEY))
-    ? localStorage.getItem(SORT_STORAGE_KEY) : "started"; } catch { return "started"; }
-})();
-
-function sortLabel(mode) {
-  switch (mode) {
-    case "recent": return "recent";
-    case "kind":   return "kind";
-    case "name":   return "name";
-    default:       return "started";
-  }
-}
-
-function rowNameForSort(s) {
-  return (s.title || s.project || s.sessionId || "").toLowerCase();
-}
-
-function applySort(rows, mode) {
-  const STATE_RANK = { live: 0, idle: 1 };
-  // Live always above idle within any sort — the icon color is the strongest
-  // signal and we don't want active sessions sinking under idle ones.
+// Fixed sort: freshest writes first. Live/idle is still visible through icon
+// tone, but the row order answers the only question that matters at a glance:
+// what changed most recently?
+function applySort(rows) {
   return rows.slice().sort((a, b) => {
-    const rankDiff = STATE_RANK[a.state] - STATE_RANK[b.state];
-    if (rankDiff !== 0) return rankDiff;
-    if (mode === "recent") return a.s.secondsSinceActivity - b.s.secondsSinceActivity;
-    if (mode === "kind") {
-      const k = a.s.kind.localeCompare(b.s.kind);
-      if (k !== 0) return k;
-      return b.s.secondsSinceStart - a.s.secondsSinceStart;
-    }
-    if (mode === "name") {
-      return rowNameForSort(a.s).localeCompare(rowNameForSort(b.s));
-    }
-    // "started" — oldest at top. secondsSinceStart desc.
+    const recent = (a.s.secondsSinceActivity || 0) - (b.s.secondsSinceActivity || 0);
+    if (recent !== 0) return recent;
     return b.s.secondsSinceStart - a.s.secondsSinceStart;
   });
 }
 
 function renderKeepAwake(snapshot) {
+  if (IS_WEB_HUD) {
+    if (keepAwakeSection) keepAwakeSection.hidden = true;
+    return;
+  }
   if (!keepAwakeToggle || !keepAwakeStatus) return;
   const ka = snapshot && snapshot.keepAwake && typeof snapshot.keepAwake === "object"
     ? snapshot.keepAwake
@@ -732,7 +748,6 @@ function render(snapshot) {
       ...live.map((s) => ({ s, state: "live" })),
       ...idle.map((s) => ({ s, state: "idle" })),
     ],
-    sortMode,
   );
   const rows = allRows;
 
@@ -798,7 +813,7 @@ function render(snapshot) {
     } else {
       modeEl.textContent = `${allRows.length} tracked`;
     }
-    // List label hosts the sort + compact + alert toggles. All stop event
+    // List label hosts compact + alert toggles. Both stop event
     // bubbling so clicks on these chips don't also toggle a row beneath.
     listLabel.innerHTML =
       `<span class="list-title">sessions</span>` +
@@ -806,8 +821,6 @@ function render(snapshot) {
         `<button class="sort-cycle icon-cycle" type="button" id="alert-toggle"` +
         ` aria-label="${alertsEnabled ? "Mute attention alerts" : "Enable attention alerts"}"` +
         ` title="${alertsEnabled ? "alerts on (click to mute attention pings)" : "alerts muted (click to enable)"}">${tablerIcon(alertsEnabled ? "bell" : "bell-off")}</button>` +
-        `<button class="sort-cycle" type="button" id="sort-cycle"` +
-        ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>` +
         `<button class="sort-cycle" type="button" id="compact-toggle"` +
         ` title="toggle compact synopsis (1 line vs 3)">${compactMode ? "expand" : "compact"}</button>` +
       `</span>`;
@@ -933,6 +946,11 @@ function refreshShareLink() {
 
 function setSharePanelVisible(visible, report = true) {
   if (!sharePanel || !btnQr) return;
+  if (IS_WEB_HUD) {
+    sharePanel.hidden = true;
+    btnQr.classList.remove("is-active");
+    return;
+  }
   const show = !!visible;
   if (show) hideScreenPanel(false);
   sharePanel.hidden = !show;
@@ -952,7 +970,7 @@ function setSharePanelVisible(visible, report = true) {
   if (report) reportSizeToHost();
 }
 
-if (btnClose) {
+if (btnClose && IS_DESKTOP_HUD) {
   btnClose.addEventListener("click", (e) => {
     e.preventDefault();
     if (!postToHost({ action: "close" })) window.close();
@@ -961,7 +979,7 @@ if (btnClose) {
 
 if (shareUrl) refreshShareLink();
 
-if (btnQr) {
+if (btnQr && IS_DESKTOP_HUD) {
   btnQr.addEventListener("click", (e) => {
     e.preventDefault();
     setSharePanelVisible(sharePanel ? sharePanel.hidden : true);
@@ -979,11 +997,7 @@ if (listLabel) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (button.id === "sort-cycle") {
-      const i = SORT_MODES.indexOf(sortMode);
-      sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
-      try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}
-    } else if (button.id === "compact-toggle") {
+    if (button.id === "compact-toggle") {
       compactMode = !compactMode;
       try { localStorage.setItem(COMPACT_STORAGE_KEY, compactMode ? "1" : "0"); } catch {}
     } else if (button.id === "alert-toggle") {
@@ -1004,6 +1018,16 @@ if (listEl) {
       ? rawTarget
       : rawTarget && rawTarget.parentElement;
     if (!target) return;
+
+    const actionButton = target.closest("button[data-action]");
+    if (actionButton && listEl.contains(actionButton)) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (actionButton.dataset.action === "surgery") {
+        openLocalSurgery(actionButton.dataset.url);
+      }
+      return;
+    }
 
     const row = target.closest(".row");
     if (row && listEl.contains(row)) {
@@ -1199,6 +1223,14 @@ function applyScreenButtonState() {
   btnScreen.classList.toggle("is-broadcasting", screenVisible && broadcasting);
   btnScreen.classList.toggle("is-broadcast-off", screenVisible && screenPublisherOff());
   btnScreen.classList.toggle("is-pending", false);
+  if (IS_WEB_HUD) {
+    btnScreen.setAttribute("aria-pressed", "false");
+    btnScreen.setAttribute("aria-label", "Refresh desk Mac screen preview");
+    btnScreen.title = SCREEN_TOKEN
+      ? "Refresh desk Mac screen preview"
+      : "Screen token missing";
+    return;
+  }
   btnScreen.setAttribute("aria-pressed", screenVisible ? "true" : "false");
   btnScreen.setAttribute("aria-label", screenVisible
     ? "Hide desk Mac screen preview"
@@ -1290,11 +1322,19 @@ function refreshScreenImage() {
 function showScreenPanel() {
   setSharePanelVisible(false, false);
   screenVisible = true;
-  try { localStorage.setItem(SCREEN_STORAGE_KEY, "1"); } catch {}
+  if (IS_DESKTOP_HUD) {
+    try { localStorage.setItem(SCREEN_STORAGE_KEY, "1"); } catch {}
+  }
   if (screenSection) screenSection.hidden = false;
 }
 
 function hideScreenPanel(report = true) {
+  if (IS_WEB_HUD) {
+    showScreenPanel();
+    if (SCREEN_TOKEN) refreshScreenImage();
+    if (report) reportSizeToHost();
+    return;
+  }
   screenVisible = false;
   try { localStorage.removeItem(SCREEN_STORAGE_KEY); } catch {}
   if (screenSection) screenSection.hidden = true;
@@ -1353,6 +1393,34 @@ function applyScreenVisibility() {
   if (!screenSection) return;
   applyScreenButtonState();
   applyScreenStateClasses();
+  if (IS_WEB_HUD && !SCREEN_TOKEN) {
+    screenSection.hidden = true;
+    stopScreenAutoRefresh();
+    return;
+  }
+  if (IS_WEB_HUD && SCREEN_TOKEN) {
+    screenVisible = true;
+    screenSection.hidden = false;
+    if (screenPublisherOff()) {
+      stopScreenAutoRefresh();
+      if (!localScreenPreviewActive && (!screenImg || screenImg.hidden || !screenImg.getAttribute("src"))) {
+        setScreenPlaceholder(
+          "Remote screen stream disabled",
+          "The desk Mac is not accepting remote screen requests.",
+        );
+      }
+      screenImageState = "disabled";
+      updateScreenCaption("disabled");
+      return;
+    }
+    if (!screenRefreshTimer) {
+      setScreenPlaceholder("Requesting desk Mac screen", "Asking the desk Mac for a fresh frame.");
+      screenImageState = "waiting";
+      updateScreenCaption("waiting");
+      startScreenAutoRefresh();
+    }
+    return;
+  }
   if (!SCREEN_TOKEN) {
     screenSection.hidden = !screenVisible;
     if (screenVisible) {
@@ -1408,6 +1476,16 @@ function applyScreenVisibility() {
 if (btnScreen) {
   btnScreen.addEventListener("click", (e) => {
     e.preventDefault();
+    if (IS_WEB_HUD) {
+      if (!SCREEN_TOKEN) return;
+      showScreenPanel();
+      localScreenPreviewActive = false;
+      localScreenPreviewCapturedAt = null;
+      setScreenPlaceholder("Refreshing desk Mac screen", "Asking the desk Mac for the latest frame.");
+      startScreenAutoRefresh();
+      reportSizeToHost();
+      return;
+    }
     if (screenVisible) {
       hideScreenPanel();
     } else {
@@ -1425,7 +1503,14 @@ if (btnScreen) {
 if (screenImg) {
   screenImg.addEventListener("click", (e) => {
     e.preventDefault();
-    requestLocalScreenPreview();
+    if (IS_DESKTOP_HUD) {
+      requestLocalScreenPreview();
+    } else if (SCREEN_TOKEN) {
+      showScreenPanel();
+      startScreenAutoRefresh();
+      refreshScreenImage();
+      reportSizeToHost();
+    }
   });
   screenImg.addEventListener("load", () => {
     if (!localScreenPreviewActive) lastScreenImageLoadedAt = Math.floor(Date.now() / 1000);
@@ -1452,6 +1537,7 @@ window.addEventListener("pagehide", () => { stopScreenDemand(); });
 if (keepAwakeToggle) {
   keepAwakeToggle.addEventListener("click", (e) => {
     e.preventDefault();
+    if (IS_WEB_HUD) return;
     const next = !keepAwakeEnabled;
     keepAwakeEnabled = next;
     renderKeepAwake({
