@@ -1,0 +1,105 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading " Agent" [level=1] [ref=e3]:
+      - generic [ref=e4]: 
+      - generic [ref=e5]: Agent
+    - link " GitHub" [ref=e7] [cursor=pointer]:
+      - /url: https://github.com/mist83/agent
+      - generic [ref=e8]: 
+      - generic [ref=e9]: GitHub
+  - tablist [ref=e10]:
+    - tab " Overview" [selected] [ref=e11] [cursor=pointer]:
+      - generic [ref=e12]: 
+      - text: Overview
+    - tab " Builder" [ref=e13] [cursor=pointer]:
+      - generic [ref=e14]: 
+      - text: Builder
+    - tab " Rules" [ref=e15] [cursor=pointer]:
+      - generic [ref=e16]: 
+      - text: Rules
+    - tab " Full Guides" [ref=e17] [cursor=pointer]:
+      - generic [ref=e18]: 
+      - text: Full Guides
+    - tab " Docs" [ref=e19] [cursor=pointer]:
+      - generic [ref=e20]: 
+      - text: Docs
+    - tab " UI Framework" [ref=e21] [cursor=pointer]:
+      - generic [ref=e22]: 
+      - text: UI Framework
+  - article [ref=e26]:
+    - generic [ref=e27]:
+      - heading "Agent" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Prompt rules, scaffolds, and workflows for agents. Snapshot of a working ruleset — every file is intended to be readable on its own and pastable into another agent shell.
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: "31"
+        - generic [ref=e33]: Synopsis rules
+      - generic [ref=e34]:
+        - generic [ref=e35]: "29"
+        - generic [ref=e36]: Full guides
+      - generic [ref=e37]:
+        - generic [ref=e38]: "4"
+        - generic [ref=e39]: Categories
+      - generic [ref=e40]:
+        - generic [ref=e41]: "16"
+        - generic [ref=e42]: Meta docs
+    - generic [ref=e43]:
+      - heading "Where to look" [level=2] [ref=e44]
+      - generic [ref=e45]:
+        - article [ref=e46]:
+          - heading " Rules" [level=3] [ref=e48]:
+            - generic [ref=e49]: 
+            - text: Rules
+          - paragraph [ref=e50]:
+            - text: Synopsis-style
+            - code [ref=e51]: .clinerules
+            - text: files. Trigger phrase, purpose, pointer to full implementation. Browse by category in the sidebar.
+        - article [ref=e52]:
+          - heading " Full guides" [level=3] [ref=e54]:
+            - generic [ref=e55]: 
+            - text: Full guides
+          - paragraph [ref=e56]: The expanded how-to for each rule. Read this when the synopsis points at a full file.
+        - article [ref=e57]:
+          - heading " Docs" [level=3] [ref=e59]:
+            - generic [ref=e60]: 
+            - text: Docs
+          - paragraph [ref=e61]: Project-level writeups — README, rule creation guide, indexes, consolidation notes.
+        - article [ref=e62]:
+          - heading " History" [level=3] [ref=e64]:
+            - generic [ref=e65]: 
+            - text: History
+          - paragraph [ref=e66]:
+            - text: This repo now uses the generic
+            - code [ref=e67]: agent
+            - text: name. Legacy
+            - code [ref=e68]: clinerules
+            - text: and
+            - code [ref=e69]: agent-rules
+            - text: references are breadcrumbs only.
+    - generic [ref=e70]:
+      - heading "Categories" [level=2] [ref=e71]
+      - generic [ref=e72]:
+        - article [ref=e73]:
+          - heading " Generators" [level=3] [ref=e75]:
+            - generic [ref=e76]: 
+            - text: Generators
+          - paragraph [ref=e77]: Scaffold commands that spin up a new thing.
+          - paragraph [ref=e78]: 5 rules
+        - article [ref=e79]:
+          - heading " Integrations" [level=3] [ref=e81]:
+            - generic [ref=e82]: 
+            - text: Integrations
+          - paragraph [ref=e83]: Wire the project into an external service.
+          - paragraph [ref=e84]: 8 rules
+        - article [ref=e85]:
+          - heading " Workflows" [level=3] [ref=e87]:
+            - generic [ref=e88]: 
+            - text: Workflows
+          - paragraph [ref=e89]: How the agent moves through a task.
+          - paragraph [ref=e90]: 10 rules
+        - article [ref=e91]:
+          - heading " Style & Quality" [level=3] [ref=e93]:
+            - generic [ref=e94]: 
+            - text: Style & Quality
+          - paragraph [ref=e95]: Code quality, style enforcement, anti-slop.
+          - paragraph [ref=e96]: 8 rules

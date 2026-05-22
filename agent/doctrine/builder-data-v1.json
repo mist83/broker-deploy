@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-22T16:28:12.670Z",
+  "generatedAt": "2026-05-22T20:07:41.746Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -57,7 +57,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-22T16:28:12.670Z",
+    "generatedAt": "2026-05-22T20:07:41.746Z",
     "runtimes": [
       {
         "id": "codex",
@@ -156,7 +156,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-22T16:28:12.670Z",
+    "generatedAt": "2026-05-22T20:07:41.746Z",
     "events": [
       {
         "id": "session_start",
@@ -232,7 +232,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-22T16:28:12.670Z",
+    "generatedAt": "2026-05-22T20:07:41.746Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -334,7 +334,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-22T16:28:12.670Z",
+    "generatedAt": "2026-05-22T20:07:41.746Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -399,7 +399,8 @@
           "feedback_domain_agnostic",
           "feedback_interconnect_and_suggest",
           "feedback_no_ai_stink",
-          "feedback_remote_doctrine_only_no_new_local_rules"
+          "feedback_remote_doctrine_only_no_new_local_rules",
+          "feedback_breadcrumb_protocol"
         ]
       },
       {
@@ -530,7 +531,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-22T16:28:12.670Z",
+    "generatedAt": "2026-05-22T20:07:41.746Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -546,6 +547,39 @@
         "tags": [
           "communication",
           "operator-style"
+        ],
+        "domains": [
+          "operator-style"
+        ],
+        "events": [
+          "session_start",
+          "task_execution",
+          "memory_read"
+        ],
+        "runtimes": [
+          "codex",
+          "claude",
+          "generic",
+          "agent"
+        ],
+        "profileIds": [
+          "shared-operator-core"
+        ]
+      },
+      {
+        "id": "feedback_breadcrumb_protocol",
+        "label": "feedback breadcrumb protocol",
+        "kind": "feedback-rule",
+        "summary": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can a",
+        "excerpt": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nTrigger\n\nAny of: breadcrumb protocol, bread protocol, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bp\" or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nResponse shape (the only valid shape)\n\nExactly two answers. Each is one line. Each starts with **yes** or **no**, followed by an em-dash, followed by ≤12 words of reason.\n\nIf either is **no**, name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.\n\nThat is the entire response. No header, no preamble, no suggestion, no \"want me to fix that?\", no offer of next steps, no recap of work, no emoji, no follow-up question. The operator did not ask for any of those things. They asked the two questions.\n\nWhat \"breadcrumbs laid\" means (the substantive check)\n\nAll five must be true:\n\n1. **Pushed**: every meaningful commit is on the canonical remote. No local-only work that matters.\n2. **Single source of truth**: no orphan copy of the work in a second repo / second path. Future-",
+        "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
+        "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
+        "sha256": "87d8b409bdbb4eb9d468cf633193971ba4a3b908db5e6c3c22ca95e42fe87dc4",
+        "durability": "standing",
+        "tags": [
+          "operator-style",
+          "handoff",
+          "continuity"
         ],
         "domains": [
           "operator-style"
