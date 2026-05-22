@@ -512,7 +512,8 @@ function openLocalSurgery(url) {
   const href = String(url || "");
   if (!isAllowedLocalLecterUrl(href)) return;
   if (!postToHost({ action: "openLocalSurgery", url: href })) {
-    window.open(href, "_blank", "noopener");
+    const opened = window.open(href, "_blank", "noopener");
+    if (!opened) window.location.href = href;
   }
 }
 
