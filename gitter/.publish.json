@@ -1,11 +1,21 @@
 {
   "siteId": "gitter",
   "host": "gitter.mullmania.com",
-  "publishedAt": "2026-05-17T12:08:12.430Z",
+  "publishedAt": "2026-05-22T17:53:57.544Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site",
+  "assetVersion": {
+    "semver": "1.0.0",
+    "previousSemver": null,
+    "bump": "patch",
+    "initialVersion": "1.0.0",
+    "token": "__MULLMANIA_ASSET_VERSION__",
+    "manifestPath": "./asset-version.json",
+    "manifestUrl": "https://gitter.mullmania.com/asset-version.json",
+    "publishedAt": "2026-05-22T17:53:57.544Z"
+  },
   "counts": {
-    "hostingFiles": 70,
-    "hostingBytes": 592992,
+    "hostingFiles": 8,
+    "hostingBytes": 129358,
     "dataFiles": 0,
     "dataBytes": 0
   }
