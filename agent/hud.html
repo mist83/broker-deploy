@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>agent · HUD</title>
+  <title>Lecter · HUD</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Glanceable view of Claude Code + Codex sessions that need attention." />
   <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="/lecter-theme.css" />
   <link rel="stylesheet" href="/hud.css" />
 </head>
 <body>
   <main id="hud" class="hud" data-state="loading">
     <header class="hud-head">
-      <span class="hud-title">agent</span>
-      <span class="hud-mode" id="hud-mode">…</span>
+      <span class="hud-brand">
+        <span class="hud-title">Lecter</span>
+      </span>
       <span class="hud-actions">
         <button class="hud-btn" id="btn-screen" type="button" aria-label="Show desk Mac screen preview" aria-pressed="false" title="Show desk Mac screen preview">
           <svg class="ti" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -22,7 +24,7 @@
             <path d="M15 16v4" />
           </svg>
         </button>
-        <button class="hud-btn" id="btn-qr" type="button" aria-label="Show scan code for live HUD" aria-expanded="false" title="Show scan code for live HUD">
+        <button class="hud-btn" id="btn-qr" type="button" aria-label="Show scan code for live HUD" aria-expanded="false" aria-pressed="false" title="Show scan code for live HUD">
           <svg class="ti" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
             <path d="M7 17l0 .01" />
@@ -97,7 +99,10 @@
     </section>
 
     <section class="hud-list" hidden>
-      <div class="list-label" id="list-label">live sessions</div>
+      <div class="list-label" id="list-label">
+        <span class="list-title">sessions</span>
+        <span class="list-tools"><span class="hud-mode" id="hud-mode">…</span></span>
+      </div>
       <ul id="needs-you-list"></ul>
       <button class="row-collapse" id="row-collapse-toggle" type="button" hidden aria-expanded="false"></button>
     </section>

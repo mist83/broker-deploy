@@ -56,6 +56,12 @@ const keepAwakeToggle = document.getElementById("keep-awake-toggle");
 const keepAwakeStatus = document.getElementById("keep-awake-status");
 const screenOverlay = document.getElementById("hud-screen-overlay");
 
+function attachModeToListTools() {
+  if (!modeEl || !listLabel) return;
+  const tools = listLabel.querySelector(".list-tools");
+  if (tools && modeEl.parentElement !== tools) tools.prepend(modeEl);
+}
+
 let consecutiveFailures = 0;
 let lastSnapshot = null;
 let keepAwakeEnabled = false;
@@ -438,6 +444,7 @@ const ALERT_COOLDOWN_SEC = 60;
 const ROW_COLLAPSE_THRESHOLD = 4;
 let showAllRows = false; // session-scoped, not persisted — defaults to collapsed
 let pendingListScroll = null;
+let pendingExpandedScrollId = null;
 let collapsePointerHandledAt = 0;
 
 // Screen-cast: remote view of the desk Mac's actual screen. The web HUD does
@@ -516,12 +523,18 @@ function tokenStatsHtml(stats) {
   const agent = Math.max(0, Math.floor(Number(stats.agent) || 0));
   const total = Math.max(user + agent, Math.floor(Number(stats.total) || 0));
   if (!total) return "";
-  return `<span class="row-tokenline" title="estimated transcript tokens from the deterministic local scan">` +
-    `<span class="tok-user">you ${formatTokenCount(user)}</span>` +
-    `<span class="tok-sep">·</span>` +
-    `<span class="tok-agent">agent ${formatTokenCount(agent)}</span>` +
-    `<span class="tok-sep">·</span>` +
-    `<span class="tok-total">total ${formatTokenCount(total)} tok</span>` +
+  const userPct = Math.max(0, Math.min(100, (user / total) * 100));
+  const agentPct = Math.max(0, 100 - userPct);
+  const userStyle = `width:${userPct.toFixed(1)}%`;
+  const agentStyle = `width:${agentPct.toFixed(1)}%`;
+  const title = `you ${formatTokenCount(user)} · agent ${formatTokenCount(agent)} · total ${formatTokenCount(total)} tok`;
+  return `<span class="row-tokenline" title="${escapeHtml(title)}">` +
+    `<span class="tok-split" aria-hidden="true">` +
+      `<span class="tok-seg tok-user-seg" style="${userStyle}"></span>` +
+      `<span class="tok-seg tok-agent-seg" style="${agentStyle}"></span>` +
+    `</span>` +
+    `<span class="tok-total">${formatTokenCount(total)} tok</span>` +
+    `<span class="tok-mini" aria-hidden="true"><span class="tok-user">you</span><span class="tok-agent">agent</span></span>` +
   `</span>`;
 }
 
@@ -569,16 +582,25 @@ function rowHtml(session, state, index) {
 }
 
 function scrollListAfterRender() {
-  if (!pendingListScroll) return;
+  if (!pendingListScroll && !pendingExpandedScrollId) return;
   const mode = pendingListScroll;
+  const expandedSid = pendingExpandedScrollId;
   pendingListScroll = null;
+  pendingExpandedScrollId = null;
   requestAnimationFrame(() => {
     if (!listEl) return;
     if (mode === "top") {
       listEl.scrollTop = 0;
-      return;
+    } else if (mode === "bottom") {
+      listEl.scrollTop = listEl.scrollHeight;
     }
-    listEl.scrollTop = listEl.scrollHeight;
+    if (expandedSid) {
+      const row = Array.from(listEl.querySelectorAll(".row"))
+        .find((el) => el.getAttribute("data-session-id") === expandedSid);
+      if (row && typeof row.scrollIntoView === "function") {
+        row.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
+    }
   });
 }
 
@@ -779,7 +801,7 @@ function render(snapshot) {
     // List label hosts the sort + compact + alert toggles. All stop event
     // bubbling so clicks on these chips don't also toggle a row beneath.
     listLabel.innerHTML =
-      `<span>sessions</span>` +
+      `<span class="list-title">sessions</span>` +
       `<span class="list-tools">` +
         `<button class="sort-cycle icon-cycle" type="button" id="alert-toggle"` +
         ` aria-label="${alertsEnabled ? "Mute attention alerts" : "Enable attention alerts"}"` +
@@ -789,6 +811,7 @@ function render(snapshot) {
         `<button class="sort-cycle" type="button" id="compact-toggle"` +
         ` title="toggle compact synopsis (1 line vs 3)">${compactMode ? "expand" : "compact"}</button>` +
       `</span>`;
+    attachModeToListTools();
     emptySection.hidden = true;
     listSection.hidden = false;
     // Collapse rows beyond the threshold unless the operator explicitly
@@ -814,31 +837,6 @@ function render(snapshot) {
       expandedSessionId = null;
     }
     scrollListAfterRender();
-    const cycle = document.getElementById("sort-cycle");
-    if (cycle) cycle.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const i = SORT_MODES.indexOf(sortMode);
-      sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
-      try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}
-      render(snapshot);
-    });
-    const compactBtn = document.getElementById("compact-toggle");
-    if (compactBtn) compactBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      compactMode = !compactMode;
-      try { localStorage.setItem(COMPACT_STORAGE_KEY, compactMode ? "1" : "0"); } catch {}
-      render(snapshot);
-    });
-    const alertBtn = document.getElementById("alert-toggle");
-    if (alertBtn) alertBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      alertsEnabled = !alertsEnabled;
-      try { localStorage.setItem(ALERT_STORAGE_KEY, alertsEnabled ? "1" : "0"); } catch {}
-      render(snapshot);
-    });
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);
@@ -927,17 +925,22 @@ function refreshShareLink() {
   const url = liveHudUrl();
   if (shareUrl) {
     shareUrl.href = url;
-    shareUrl.textContent = url;
+    shareUrl.textContent = "open live HUD";
+    shareUrl.title = url;
   }
   return url;
 }
 
-function setSharePanelVisible(visible) {
+function setSharePanelVisible(visible, report = true) {
   if (!sharePanel || !btnQr) return;
   const show = !!visible;
+  if (show) hideScreenPanel(false);
   sharePanel.hidden = !show;
   btnQr.classList.toggle("is-active", show);
   btnQr.setAttribute("aria-expanded", show ? "true" : "false");
+  btnQr.setAttribute("aria-pressed", show ? "true" : "false");
+  btnQr.setAttribute("aria-label", show ? "Hide scan code" : "Show scan code for live HUD");
+  btnQr.title = show ? "Hide scan code" : "Show scan code for live HUD";
   if (show && qrCode) {
     const url = refreshShareLink();
     try {
@@ -946,7 +949,7 @@ function setSharePanelVisible(visible) {
       qrCode.textContent = "QR unavailable";
     }
   }
-  reportSizeToHost();
+  if (report) reportSizeToHost();
 }
 
 if (btnClose) {
@@ -965,6 +968,35 @@ if (btnQr) {
   });
 }
 
+if (listLabel) {
+  listLabel.addEventListener("click", (e) => {
+    const rawTarget = e.target;
+    const target = rawTarget && rawTarget.nodeType === Node.ELEMENT_NODE
+      ? rawTarget
+      : rawTarget && rawTarget.parentElement;
+    const button = target && target.closest("button");
+    if (!button || !listLabel.contains(button)) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (button.id === "sort-cycle") {
+      const i = SORT_MODES.indexOf(sortMode);
+      sortMode = SORT_MODES[(i + 1) % SORT_MODES.length];
+      try { localStorage.setItem(SORT_STORAGE_KEY, sortMode); } catch {}
+    } else if (button.id === "compact-toggle") {
+      compactMode = !compactMode;
+      try { localStorage.setItem(COMPACT_STORAGE_KEY, compactMode ? "1" : "0"); } catch {}
+    } else if (button.id === "alert-toggle") {
+      alertsEnabled = !alertsEnabled;
+      try { localStorage.setItem(ALERT_STORAGE_KEY, alertsEnabled ? "1" : "0"); } catch {}
+    } else {
+      return;
+    }
+
+    if (lastSnapshot) render(lastSnapshot);
+  });
+}
+
 if (listEl) {
   listEl.addEventListener("click", (e) => {
     const rawTarget = e.target;
@@ -979,6 +1011,7 @@ if (listEl) {
       const sid = row.getAttribute("data-session-id");
       if (!sid) return;
       expandedSessionId = expandedSessionId === sid ? null : sid;
+      if (expandedSessionId) pendingExpandedScrollId = sid;
       if (lastSnapshot) render(lastSnapshot);
     }
   });
@@ -1163,8 +1196,8 @@ function applyScreenButtonState() {
   if (!btnScreen) return;
   const broadcasting = screenBroadcasting();
   btnScreen.classList.toggle("is-active", screenVisible);
-  btnScreen.classList.toggle("is-broadcasting", broadcasting);
-  btnScreen.classList.toggle("is-broadcast-off", screenPublisherOff());
+  btnScreen.classList.toggle("is-broadcasting", screenVisible && broadcasting);
+  btnScreen.classList.toggle("is-broadcast-off", screenVisible && screenPublisherOff());
   btnScreen.classList.toggle("is-pending", false);
   btnScreen.setAttribute("aria-pressed", screenVisible ? "true" : "false");
   btnScreen.setAttribute("aria-label", screenVisible
@@ -1255,12 +1288,13 @@ function refreshScreenImage() {
 }
 
 function showScreenPanel() {
+  setSharePanelVisible(false, false);
   screenVisible = true;
   try { localStorage.setItem(SCREEN_STORAGE_KEY, "1"); } catch {}
   if (screenSection) screenSection.hidden = false;
 }
 
-function hideScreenPanel() {
+function hideScreenPanel(report = true) {
   screenVisible = false;
   try { localStorage.removeItem(SCREEN_STORAGE_KEY); } catch {}
   if (screenSection) screenSection.hidden = true;
@@ -1269,6 +1303,7 @@ function hideScreenPanel() {
   stopScreenAutoRefresh();
   applyScreenButtonState();
   applyScreenStateClasses();
+  if (report) reportSizeToHost();
 }
 
 function requestLocalScreenPreview() {
@@ -1276,12 +1311,17 @@ function requestLocalScreenPreview() {
   localScreenPreviewActive = false;
   localScreenPreviewCapturedAt = null;
   updateScreenCaption("local-loading");
-  const delivered = postToHost({ action: "requestLocalScreenPreview" });
-  if (!delivered) {
-    updateScreenCaption("error");
-    if (screenCaption) screenCaption.textContent = "open desktop HUD for local screen preview";
-  }
-  return delivered;
+  reportSizeToHost();
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const delivered = postToHost({ action: "requestLocalScreenPreview" });
+      if (!delivered) {
+        updateScreenCaption("error");
+        if (screenCaption) screenCaption.textContent = "open desktop HUD for local screen preview";
+      }
+    }, 0);
+  });
+  return true;
 }
 
 window.agentHudSetLocalScreenPreview = function agentHudSetLocalScreenPreview(dataUrl, meta = {}) {

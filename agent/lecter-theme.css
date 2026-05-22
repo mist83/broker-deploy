@@ -1,0 +1,30 @@
+:root {
+  color-scheme: dark;
+  --lecter-bg: #0f1115;
+  --lecter-panel: #161922;
+  --lecter-panel-2: #1d212c;
+  --lecter-line: #262b38;
+  --lecter-text: #e6e8ee;
+  --lecter-muted: #8a93a6;
+  --lecter-faint: #505765;
+  --lecter-accent: #ff6e3c;
+  --lecter-accent-hover: #ff855e;
+  --lecter-blue: #6cb7ff;
+  --lecter-keep: #4cd07d;
+  --lecter-danger: #ff5d5d;
+  --lecter-warn: #ffb454;
+  --lecter-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  --bg: var(--lecter-bg);
+  --panel: var(--lecter-panel);
+  --panel-2: var(--lecter-panel-2);
+  --line: var(--lecter-line);
+  --text: var(--lecter-text);
+  --muted: var(--lecter-muted);
+  --accent: var(--lecter-accent);
+  --keep: var(--lecter-keep);
+  --drop: var(--lecter-danger);
+  --trunc: var(--lecter-warn);
+  --link: var(--lecter-blue);
+  --shadow: var(--lecter-shadow);
+}
