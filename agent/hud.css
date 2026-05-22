@@ -154,38 +154,13 @@ body { padding: 12px; }
 .share-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
   color: var(--fg-dim);
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-.share-close {
-  width: 22px;
-  height: 22px;
-  border: 0;
-  padding: 0;
-  border-radius: 5px;
-  background: transparent;
-  color: var(--fg-faint);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer !important;
-}
-.share-close:hover {
-  color: var(--fg);
-  background: rgba(255, 255, 255, 0.08);
-}
-.share-close .ti {
-  width: 15px;
-  height: 15px;
-}
-.share-close * {
-  cursor: pointer !important;
-  pointer-events: none;
 }
 .qr-code {
   width: min(100%, 220px);
@@ -484,54 +459,12 @@ body { padding: 12px; }
   width: 14px;
   height: 14px;
 }
-.hidden-toggle {
-  gap: 4px;
-}
-.hidden-toggle .ti {
-  width: 13px;
-  height: 13px;
-}
-.hidden-toggle.is-active {
-  color: var(--fg-dim);
-}
-
 /* Synthetic title (codex first-prompt derivation) — italic to signal
  * "not authored, derived". Still readable. */
 .row .label.label-synthetic {
   font-style: italic;
   color: var(--fg-dim);
 }
-
-/* Local row visibility control. This is not a stop/delete affordance; it only
- * hides clutter in this HUD and the row auto-returns when the session writes. */
-.row-visibility {
-  background: transparent;
-  border: none;
-  color: var(--fg-faint);
-  font: inherit;
-  line-height: 1;
-  padding: 0;
-  margin-left: 4px;
-  cursor: pointer !important;
-  opacity: 0.35;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 90ms ease, color 90ms ease;
-}
-.row-visibility .ti {
-  width: 14px;
-  height: 14px;
-}
-.row-visibility * {
-  cursor: pointer !important;
-  pointer-events: none;
-}
-.row:hover .row-visibility,
-.row.is-expanded .row-visibility,
-.row-visibility.is-hidden-row { opacity: 1; }
-.row-visibility:hover { color: var(--fg); opacity: 1; }
-.row-visibility.is-hidden-row { color: var(--fg-faint); }
 
 /* Compact synopsis — single line, smaller, no per-line columns. */
 .syn-compact {
@@ -585,9 +518,9 @@ body { padding: 12px; }
 }
 .row {
   display: grid;
-  /* agent icon, label, started, elapsed, visibility. Right two columns are
+  /* agent icon, label, started, elapsed. Right two columns are
    * right-aligned with fixed ch widths so durations line up across rows. */
-  grid-template-columns: 20px minmax(0, 1fr) 5.5ch 5.5ch 16px;
+  grid-template-columns: 20px minmax(0, 1fr) 5.5ch 5.5ch;
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
@@ -639,15 +572,8 @@ body { padding: 12px; }
 }
 .row.row-idle .label,
 .row.row-idle .elapsed {
-  /* idle rows fade into the background; the eye lands on live rows first */
+  /* idle rows fade into the background; live work stays visually dominant */
   opacity: 0.55;
-}
-.row.row-hidden {
-  opacity: 0.5;
-}
-.row.row-hidden .agent-icon {
-  filter: none;
-  color: var(--fg-faint);
 }
 
 /* Click-to-peek expansion */
@@ -655,7 +581,6 @@ body { padding: 12px; }
 .row:hover { background: var(--row-bg-hover); }
 .row.is-expanded { background: var(--row-bg-hover); }
 .row:focus-visible,
-.row-visibility:focus-visible,
 .row-collapse:focus-visible,
 .sort-cycle:focus-visible {
   outline: 1px solid rgba(122, 168, 255, 0.7);
@@ -715,6 +640,23 @@ body { padding: 12px; }
   color: var(--fg-dim);
   font-size: 10px;
   line-height: 1.25;
+}
+.row-tokenline {
+  min-width: 0;
+  color: var(--fg-faint);
+  font-size: 9px;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tok-user { color: var(--codex); }
+.tok-agent { color: var(--claude); }
+.tok-total { color: var(--fg-dim); }
+.tok-sep {
+  color: var(--fg-faint);
+  padding: 0 3px;
 }
 
 .hud-foot {

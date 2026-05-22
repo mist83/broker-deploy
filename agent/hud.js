@@ -15,6 +15,9 @@ const POLL_INTERVAL_MS = 2000;
 const STALE_SECONDS = 180;    // snapshot file older than this → "stale" red
 const TIMEOUT_MS = 4000;
 const ERROR_THRESHOLD = 5;    // 5 * 2s = ~10s sustained fail before red
+const QUERY_PARAMS = (() => {
+  try { return new URLSearchParams(window.location.search); } catch { return new URLSearchParams(); }
+})();
 
 // Once an hour, force a hard reload so a deployed page change propagates
 // even into already-open floating HUD windows. Without this, the WKWebView
@@ -43,7 +46,6 @@ const btnQr = document.getElementById("btn-qr");
 const sharePanel = document.getElementById("share-panel");
 const shareUrl = document.getElementById("share-url");
 const qrCode = document.getElementById("qr-code");
-const shareClose = document.getElementById("share-close");
 const screenSection = document.getElementById("hud-screen");
 const screenImg = document.getElementById("hud-screen-img");
 const screenCaption = document.getElementById("hud-screen-caption");
@@ -60,11 +62,14 @@ let keepAwakeEnabled = false;
 let keepAwakeWindowSeconds = 10 * 60;
 let currentScreenCast = null;
 let screenImageState = "waiting";
-let screenBroadcastChanging = false;
-let pendingScreenBroadcastEnabled = null;
 let localScreenPreviewActive = false;
 let localScreenPreviewCapturedAt = null;
 let lastScreenImageLoadedAt = null;
+let screenDemandConnection = null;
+let screenDemandStarting = null;
+let screenDemandTimer = null;
+let screenDemandLastSentAt = 0;
+const screenDemandUserId = `hud-${Math.random().toString(36).slice(2, 10)}`;
 
 // --- formatting helpers -----------------------------------------------
 
@@ -99,8 +104,6 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
-
-function plural(n, one, many) { return n === 1 ? one : many; }
 
 function tablerIcon(name, className = "") {
   const cls = `ti${className ? " " + className : ""}`;
@@ -437,63 +440,27 @@ let showAllRows = false; // session-scoped, not persisted — defaults to collap
 let pendingListScroll = null;
 let collapsePointerHandledAt = 0;
 
-// Screen-cast: opt-in remote view of the desk Mac's actual screen. Requires
-// the worker to be publishing screen-<token>.jpg AND the page bookmark to
-// carry ?token=<same token>. The token gates the discovery of the image
-// URL — it's obscurity, not auth, but it keeps the image off easily-
-// guessable URLs.
+// Screen-cast: remote view of the desk Mac's actual screen. The web HUD does
+// not flip a publisher on/off switch. Remote viewers publish short-lived
+// demand over signal-argh while this panel is open; the desk Mac worker uploads
+// frames only while that demand is fresh.
 const SCREEN_STORAGE_KEY = "valet-hud-screen-visible";
 let screenVisible = (() => {
   try {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("screen") === "1") return true;
+    if (QUERY_PARAMS.get("screen") === "1") return true;
     return localStorage.getItem(SCREEN_STORAGE_KEY) === "1";
   } catch { return false; }
 })();
 const SCREEN_TOKEN = (() => {
-  try { return new URLSearchParams(window.location.search).get("token") || ""; } catch { return ""; }
+  try { return QUERY_PARAMS.get("token") || ""; } catch { return ""; }
 })();
+const IS_DESKTOP_HUD = QUERY_PARAMS.get("desktop") === "1";
 const SCREEN_REFRESH_MS = 10_000;
+const SCREEN_DEMAND_TOPIC = "screen-demand";
+const SCREEN_DEMAND_INTERVAL_MS = 8_000;
+const SCREEN_DEMAND_TTL_MS = 30_000;
+const SIGNALR_SCRIPT_URL = "/vendor/signalr.min.js";
 let screenRefreshTimer = null;
-
-// Hidden sessions: local HUD visibility only, never a task kill. Hidden
-// rows reappear automatically the next time that session writes, so stale
-// clutter can be cleared without losing a live agent.
-const HIDDEN_STORAGE_KEY = "valet-hud-hidden-v1";
-const LEGACY_DISMISS_STORAGE_KEY = "valet-hud-dismissed-v2";
-const SHOW_HIDDEN_STORAGE_KEY = "valet-hud-show-hidden";
-let hiddenMap = (() => {
-  try {
-    const raw = localStorage.getItem(HIDDEN_STORAGE_KEY) ||
-      localStorage.getItem(LEGACY_DISMISS_STORAGE_KEY) || "{}";
-    const obj = JSON.parse(raw);
-    if (!obj || typeof obj !== "object") return new Map();
-    const clean = new Map();
-    for (const [sid, value] of Object.entries(obj)) {
-      const stamp = Number(value);
-      if (sid && Number.isFinite(stamp)) clean.set(sid, stamp);
-    }
-    return clean;
-  } catch { return new Map(); }
-})();
-let showHiddenRows = (() => {
-  try { return localStorage.getItem(SHOW_HIDDEN_STORAGE_KEY) === "1"; } catch { return false; }
-})();
-function saveHidden() {
-  try {
-    const obj = Object.fromEntries(hiddenMap);
-    localStorage.setItem(HIDDEN_STORAGE_KEY, JSON.stringify(obj));
-  } catch {}
-}
-function isHiddenFor(session) {
-  const at = hiddenMap.get(session.sessionId);
-  if (typeof at !== "number") return false;
-  // Hide expires the moment the session writes again.
-  return Number(session.lastActivityAt || 0) <= at;
-}
-function persistShowHidden() {
-  try { localStorage.setItem(SHOW_HIDDEN_STORAGE_KEY, showHiddenRows ? "1" : "0"); } catch {}
-}
 
 function synopsisPreview(syn) {
   if (!syn) return "";
@@ -532,7 +499,33 @@ function synopsisHtml(syn) {
   return parts.join("");
 }
 
-function rowHtml(session, state, index, hidden) {
+function formatTokenCount(value) {
+  const n = Math.max(0, Math.floor(Number(value) || 0));
+  if (n < 1000) return String(n);
+  if (n < 1_000_000) {
+    const k = n / 1000;
+    return `${k < 10 ? k.toFixed(1) : Math.round(k)}k`;
+  }
+  const m = n / 1_000_000;
+  return `${m < 10 ? m.toFixed(1) : Math.round(m)}m`;
+}
+
+function tokenStatsHtml(stats) {
+  if (!stats || typeof stats !== "object") return "";
+  const user = Math.max(0, Math.floor(Number(stats.user) || 0));
+  const agent = Math.max(0, Math.floor(Number(stats.agent) || 0));
+  const total = Math.max(user + agent, Math.floor(Number(stats.total) || 0));
+  if (!total) return "";
+  return `<span class="row-tokenline" title="estimated transcript tokens from the deterministic local scan">` +
+    `<span class="tok-user">you ${formatTokenCount(user)}</span>` +
+    `<span class="tok-sep">·</span>` +
+    `<span class="tok-agent">agent ${formatTokenCount(agent)}</span>` +
+    `<span class="tok-sep">·</span>` +
+    `<span class="tok-total">total ${formatTokenCount(total)} tok</span>` +
+  `</span>`;
+}
+
+function rowHtml(session, state, index) {
   // state ∈ {"live","idle"}. Two clocks per row:
   //   started — birthtime of the jsonl (how old is this conversation?)
   //   elapsed — mtime of the jsonl (how long since the last write?)
@@ -558,24 +551,18 @@ function rowHtml(session, state, index, hidden) {
   const previewInline = isExpanded && preview
     ? `<span class="label-preview">${escapeHtml(preview)}</span>`
     : "";
+  const tokenLine = tokenStatsHtml(session.tokenStats);
   const expandedSection = isExpanded
     ? `<div class="row-synopsis">${synopsisHtml(session.synopsis)}</div>`
     : "";
   const labelClass = "label" + (session.titleSynthetic ? " label-synthetic" : "");
-  const visibilityBtn =
-    `<button class="row-visibility${hidden ? " is-hidden-row" : ""}" type="button"` +
-    ` data-session-id="${escapeHtml(session.sessionId)}" data-visibility="${hidden ? "show" : "hide"}"` +
-    ` aria-label="${hidden ? "Show this row in the HUD again" : "Hide this row in this HUD"}"` +
-    ` title="${hidden ? "hidden locally — click to show again" : "hide locally — reappears when this session writes"}">` +
-    `${tablerIcon(hidden ? "eye-off" : "eye")}</button>`;
   const kind = String(session.kind || "agent").toLowerCase();
   return `
-    <li class="row row-${escapeHtml(kind)} row-${state}${hidden ? ' row-hidden' : ''}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}" data-row-index="${index}" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}">
+    <li class="row row-${escapeHtml(kind)} row-${state}${isExpanded ? ' is-expanded' : ''}" data-session-id="${escapeHtml(session.sessionId)}" data-row-index="${index}" role="button" tabindex="0" aria-expanded="${isExpanded ? "true" : "false"}">
       <span class="agent-icon" title="${escapeHtml(agentName(kind))} · ${escapeHtml(state)}" aria-label="${escapeHtml(agentName(kind))} ${escapeHtml(state)}">${agentIconFor(kind)}</span>
-      <span class="${labelClass}" title="${escapeHtml(tooltip)}"><span class="label-title">${escapeHtml(label)}</span>${previewInline}</span>
+      <span class="${labelClass}" title="${escapeHtml(tooltip)}"><span class="label-title">${escapeHtml(label)}</span>${previewInline}${tokenLine}</span>
       ${startedSpan}
       <span class="elapsed" title="time since last write">${escapeHtml(elapsed)}</span>
-      ${visibilityBtn}
       ${expandedSection}
     </li>
   `;
@@ -679,25 +666,6 @@ function renderScreenMeta(snapshot) {
     ? snapshot.screenCast
     : currentScreenCast;
   currentScreenCast = incomingScreenCast;
-  if (pendingScreenBroadcastEnabled !== null) {
-    if (currentScreenCast && currentScreenCast.enabled === pendingScreenBroadcastEnabled) {
-      pendingScreenBroadcastEnabled = null;
-      screenBroadcastChanging = false;
-    } else {
-      currentScreenCast = {
-        ...(currentScreenCast || {}),
-        enabled: pendingScreenBroadcastEnabled,
-        broadcasting: pendingScreenBroadcastEnabled
-          ? !!(currentScreenCast && currentScreenCast.broadcasting)
-          : false,
-        pausedReason: pendingScreenBroadcastEnabled
-          ? (currentScreenCast && currentScreenCast.pausedReason) || ""
-          : "upload off",
-      };
-    }
-  } else {
-    screenBroadcastChanging = false;
-  }
   applyScreenButtonState();
   applyScreenStateClasses();
   if (!screenVisible || !screenSection) return;
@@ -705,11 +673,18 @@ function renderScreenMeta(snapshot) {
     stopScreenAutoRefresh();
     if (!localScreenPreviewActive && (!screenImg || screenImg.hidden || !screenImg.getAttribute("src"))) {
       setScreenPlaceholder(
-        "Screen upload is off",
-        "Click the screen button to turn cloud upload back on from the desk Mac.",
+        "Remote screen stream disabled",
+        "The desk Mac is not accepting remote screen requests.",
       );
     }
-    updateScreenCaption("off");
+    updateScreenCaption("disabled");
+    return;
+  }
+  if (IS_DESKTOP_HUD) {
+    stopScreenAutoRefresh();
+    if (!localScreenPreviewActive && screenImageState !== "local-loading") {
+      requestLocalScreenPreview();
+    }
     return;
   }
   if (SCREEN_TOKEN && !screenRefreshTimer) {
@@ -732,30 +707,24 @@ function render(snapshot) {
 
   const allRows = applySort(
     [
-      ...live.map((s) => ({ s, state: "live", hidden: isHiddenFor(s) })),
-      ...idle.map((s) => ({ s, state: "idle", hidden: isHiddenFor(s) })),
+      ...live.map((s) => ({ s, state: "live" })),
+      ...idle.map((s) => ({ s, state: "idle" })),
     ],
     sortMode,
   );
-  const hiddenCount = allRows.filter((r) => r.hidden).length;
-  if (showHiddenRows && hiddenCount === 0) {
-    showHiddenRows = false;
-    persistShowHidden();
-  }
-  const rows = showHiddenRows ? allRows : allRows.filter((r) => !r.hidden);
+  const rows = allRows;
 
   // Alert detection: compare each row's state to what we recorded last
   // render. A live→idle transition (or first-seen-idle for a session that
   // looks like it just finished an assistant turn) triggers a single
-  // attention ping per cooldown window. Hidden sessions never alert.
+  // attention ping per cooldown window.
   const sessionsToAlert = [];
   const seenSidsThisRender = new Set();
-  for (const { s, state, hidden } of allRows) {
+  for (const { s, state } of allRows) {
     seenSidsThisRender.add(s.sessionId);
     const prev = previousStateBySid.get(s.sessionId);
     previousStateBySid.set(s.sessionId, state);
     if (!alertsEnabled) continue;
-    if (hidden) continue;
     if (state !== "idle") continue;
     // Only alert when we WATCHED a live→idle transition. If we boot up
     // and the row's already idle, that's not an event — skip.
@@ -809,19 +778,12 @@ function render(snapshot) {
     }
     // List label hosts the sort + compact + alert toggles. All stop event
     // bubbling so clicks on these chips don't also toggle a row beneath.
-    const hiddenToggle = (hiddenCount > 0 || showHiddenRows)
-      ? `<button class="sort-cycle hidden-toggle${showHiddenRows ? " is-active" : ""}" type="button" id="hidden-toggle"` +
-        ` aria-pressed="${showHiddenRows ? "true" : "false"}"` +
-        ` title="${showHiddenRows ? "hide hidden rows" : `show ${hiddenCount} hidden ${plural(hiddenCount, "row", "rows")}`}">` +
-        `${tablerIcon(showHiddenRows ? "eye" : "eye-off")}<span>${showHiddenRows ? "hide hidden" : `hidden ${hiddenCount}`}</span></button>`
-      : "";
     listLabel.innerHTML =
       `<span>sessions</span>` +
       `<span class="list-tools">` +
         `<button class="sort-cycle icon-cycle" type="button" id="alert-toggle"` +
         ` aria-label="${alertsEnabled ? "Mute attention alerts" : "Enable attention alerts"}"` +
         ` title="${alertsEnabled ? "alerts on (click to mute attention pings)" : "alerts muted (click to enable)"}">${tablerIcon(alertsEnabled ? "bell" : "bell-off")}</button>` +
-        hiddenToggle +
         `<button class="sort-cycle" type="button" id="sort-cycle"` +
         ` title="click to cycle sort order">sort: ${sortLabel(sortMode)} ▾</button>` +
         `<button class="sort-cycle" type="button" id="compact-toggle"` +
@@ -838,8 +800,8 @@ function render(snapshot) {
     listSection.classList.toggle("is-showing-all", overflow && showAllRows);
     listSection.classList.toggle("is-collapsed", overflow && !showAllRows);
     listEl.innerHTML = visibleRows.length > 0
-      ? visibleRows.map(({ s, state, hidden }, index) => rowHtml(s, state, index, hidden)).join("")
-      : `<li class="row-placeholder">all tracked sessions hidden</li>`;
+      ? visibleRows.map(({ s, state }, index) => rowHtml(s, state, index)).join("")
+      : `<li class="row-placeholder">no tracked sessions in the live window</li>`;
     if (collapseToggleBtn) {
       collapseToggleBtn.hidden = !overflow;
       collapseToggleBtn.setAttribute("aria-expanded", showAllRows ? "true" : "false");
@@ -877,21 +839,11 @@ function render(snapshot) {
       try { localStorage.setItem(ALERT_STORAGE_KEY, alertsEnabled ? "1" : "0"); } catch {}
       render(snapshot);
     });
-    const hiddenBtn = document.getElementById("hidden-toggle");
-    if (hiddenBtn) hiddenBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showHiddenRows = !showHiddenRows;
-      persistShowHidden();
-      if (!showHiddenRows && expandedSessionId && hiddenMap.has(expandedSessionId)) {
-        expandedSessionId = null;
-      }
-      render(snapshot);
-    });
   }
 
   footStamp.textContent = formatStamp(snapshot.generatedAt);
-  footThresholds.textContent = `live window ${describeWindow(thresholds.liveSeconds || 600)}`;
+  const deadWindow = Number(thresholds.deadSeconds);
+  footThresholds.textContent = `live ${describeWindow(thresholds.liveSeconds || 600)} · dead ${deadWindow > 0 ? describeWindow(deadWindow) : "off"}`;
   footAge.textContent = `pub ${formatDuration(ageSec)} ago`;
   renderKeepAwake(snapshot);
   renderScreenMeta(snapshot);
@@ -1013,13 +965,6 @@ if (btnQr) {
   });
 }
 
-if (shareClose) {
-  shareClose.addEventListener("click", (e) => {
-    e.preventDefault();
-    setSharePanelVisible(false);
-  });
-}
-
 if (listEl) {
   listEl.addEventListener("click", (e) => {
     const rawTarget = e.target;
@@ -1027,26 +972,6 @@ if (listEl) {
       ? rawTarget
       : rawTarget && rawTarget.parentElement;
     if (!target) return;
-
-    const visibility = target.closest(".row-visibility");
-    if (visibility && listEl.contains(visibility)) {
-      e.preventDefault();
-      e.stopPropagation();
-      const sid = visibility.getAttribute("data-session-id");
-      if (!sid) return;
-      const action = visibility.getAttribute("data-visibility");
-      if (action === "show") {
-        hiddenMap.delete(sid);
-      } else {
-        // Local hide only: the row reappears the moment the session writes
-        // anything after this timestamp.
-        hiddenMap.set(sid, Math.floor(Date.now() / 1000));
-        if (expandedSessionId === sid) expandedSessionId = null;
-      }
-      saveHidden();
-      if (lastSnapshot) render(lastSnapshot);
-      return;
-    }
 
     const row = target.closest(".row");
     if (row && listEl.contains(row)) {
@@ -1089,6 +1014,102 @@ if (collapseToggleBtn) {
   });
 }
 
+let signalRLoadPromise = null;
+function ensureSignalRLoaded() {
+  if (window.signalR) return Promise.resolve(window.signalR);
+  if (signalRLoadPromise) return signalRLoadPromise;
+  signalRLoadPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-agent-signalr="1"]');
+    const onReady = () => window.signalR
+      ? resolve(window.signalR)
+      : reject(new Error("SignalR loaded without window.signalR"));
+    if (existing) {
+      existing.addEventListener("load", onReady, { once: true });
+      existing.addEventListener("error", () => reject(new Error("SignalR failed to load")), { once: true });
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = SIGNALR_SCRIPT_URL;
+    script.async = true;
+    script.dataset.agentSignalr = "1";
+    script.addEventListener("load", onReady, { once: true });
+    script.addEventListener("error", () => reject(new Error("SignalR failed to load")), { once: true });
+    document.head.appendChild(script);
+  });
+  return signalRLoadPromise;
+}
+
+function baseDomainFromHost(hostname) {
+  const parts = String(hostname || "").split(".").filter(Boolean);
+  if (parts.length < 2) return "mullmania.com";
+  return parts.slice(-2).join(".");
+}
+
+function signalRHubUrl() {
+  return `https://signalargh.${baseDomainFromHost(window.location.hostname)}/hub`;
+}
+
+function screenDemandChannel() {
+  if (!SCREEN_TOKEN) return "";
+  return `agent-screen-${SCREEN_TOKEN}`.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+function shouldAdvertiseScreenDemand() {
+  return !!(screenVisible && SCREEN_TOKEN && !IS_DESKTOP_HUD);
+}
+
+async function sendScreenDemand() {
+  if (!shouldAdvertiseScreenDemand()) return false;
+  const channelId = screenDemandChannel();
+  if (!channelId) return false;
+  try {
+    const signalR = await ensureSignalRLoaded();
+    if (!screenDemandConnection) {
+      const url = `${signalRHubUrl()}?channelId=${encodeURIComponent(channelId)}&userId=${encodeURIComponent(screenDemandUserId)}`;
+      screenDemandConnection = new signalR.HubConnectionBuilder()
+        .withUrl(url)
+        .withAutomaticReconnect()
+        .configureLogging(signalR.LogLevel.Warning)
+        .build();
+      await screenDemandConnection.start();
+    }
+    const now = Math.floor(Date.now() / 1000);
+    const payload = JSON.stringify({
+      type: SCREEN_DEMAND_TOPIC,
+      viewerId: screenDemandUserId,
+      wantUntil: now + Math.floor(SCREEN_DEMAND_TTL_MS / 1000),
+    });
+    await screenDemandConnection.invoke("SendCustomMessage", channelId, SCREEN_DEMAND_TOPIC, payload);
+    screenDemandLastSentAt = now;
+    return true;
+  } catch (error) {
+    screenDemandConnection = null;
+    if (screenCaption) screenCaption.textContent = `viewer signal unavailable · ${String(error && error.message || error).slice(0, 80)}`;
+    return false;
+  }
+}
+
+function startScreenDemand() {
+  if (!shouldAdvertiseScreenDemand()) return;
+  if (!screenDemandStarting) {
+    screenDemandStarting = sendScreenDemand().finally(() => { screenDemandStarting = null; });
+  }
+  if (!screenDemandTimer) {
+    screenDemandTimer = setInterval(() => { sendScreenDemand(); }, SCREEN_DEMAND_INTERVAL_MS);
+  }
+}
+
+async function stopScreenDemand() {
+  if (screenDemandTimer) clearInterval(screenDemandTimer);
+  screenDemandTimer = null;
+  screenDemandStarting = null;
+  const conn = screenDemandConnection;
+  screenDemandConnection = null;
+  if (conn) {
+    try { await conn.stop(); } catch {}
+  }
+}
+
 // Screen image src is composed from the token in the page URL. Without a
 // token nothing fetches — the worker writes screen-<token>.jpg and the
 // bookmark for this page has ?token=<same>, so the same operator who set
@@ -1103,10 +1124,11 @@ function screenCastStatusText() {
   if (!sc || typeof sc !== "object") return "";
   const last = Number(sc.lastUploadAt || 0);
   const age = last > 0 ? Math.max(0, Math.floor(Date.now() / 1000) - last) : null;
-  if (sc.enabled === false) return "upload off";
+  if (sc.enabled === false) return "remote screen stream disabled";
+  if (sc.pausedReason === "waiting for viewer") return "waiting for viewer request";
   if (sc.pausedReason) return `paused · ${sc.pausedReason}`;
   if (sc.broadcasting && age != null) return `broadcasting · frame ${formatDuration(age)} ago`;
-  if (sc.lastError) return `upload error · ${sc.lastError}`;
+  if (sc.lastError) return `screen stream error · ${sc.lastError}`;
   if (age != null) return `last frame ${formatDuration(age)} ago`;
   return "";
 }
@@ -1129,7 +1151,7 @@ function screenBroadcasting() {
 
 function applyScreenStateClasses() {
   if (!screenSection) return;
-  const uploadOff = !screenBroadcastEnabled();
+  const uploadOff = screenPublisherOff();
   const hasVisibleImage = !!(screenImg && !screenImg.hidden && screenImg.getAttribute("src"));
   screenSection.classList.toggle("is-broadcast-off", uploadOff);
   screenSection.classList.toggle("is-broadcasting", screenBroadcasting());
@@ -1139,19 +1161,18 @@ function applyScreenStateClasses() {
 
 function applyScreenButtonState() {
   if (!btnScreen) return;
-  const enabled = screenBroadcastEnabled();
   const broadcasting = screenBroadcasting();
   btnScreen.classList.toggle("is-active", screenVisible);
-  btnScreen.classList.toggle("is-broadcasting", enabled && broadcasting);
-  btnScreen.classList.toggle("is-broadcast-off", !enabled);
-  btnScreen.classList.toggle("is-pending", screenBroadcastChanging);
-  btnScreen.setAttribute("aria-pressed", enabled ? "true" : "false");
-  btnScreen.setAttribute("aria-label", enabled
-    ? "Turn off desk Mac screen upload"
-    : "Turn on desk Mac screen upload");
-  btnScreen.title = enabled
-    ? "Screen upload on — click to turn off"
-    : "Screen upload off — click to turn on";
+  btnScreen.classList.toggle("is-broadcasting", broadcasting);
+  btnScreen.classList.toggle("is-broadcast-off", screenPublisherOff());
+  btnScreen.classList.toggle("is-pending", false);
+  btnScreen.setAttribute("aria-pressed", screenVisible ? "true" : "false");
+  btnScreen.setAttribute("aria-label", screenVisible
+    ? "Hide desk Mac screen preview"
+    : "Show desk Mac screen preview");
+  btnScreen.title = screenVisible
+    ? "Hide desk Mac screen preview"
+    : "Show desk Mac screen preview";
 }
 
 function setScreenPlaceholder(title, text) {
@@ -1181,7 +1202,7 @@ function updateScreenCaption(state) {
 
   if (localScreenPreviewActive) {
     const captured = localScreenPreviewCapturedAt ? `captured ${formatStamp(localScreenPreviewCapturedAt)}` : "captured locally";
-    screenCaption.textContent = `local preview · ${captured} · ${screenBroadcastEnabled() ? "upload on" : "upload off"}`;
+    screenCaption.textContent = `local preview · ${captured} · remote stream idle`;
     return;
   }
   if (state === "local-loading") {
@@ -1192,15 +1213,15 @@ function updateScreenCaption(state) {
     screenCaption.textContent = meta ? `${meta} · this HUD has no screen token` : "screen token missing";
     return;
   }
-  if (!screenBroadcastEnabled()) {
-    screenCaption.textContent = "upload off · click image for local preview";
+  if (screenPublisherOff()) {
+    screenCaption.textContent = "remote screen stream disabled";
     return;
   }
   if (state === "live") {
     const imageAge = lastScreenImageLoadedAt
       ? formatDuration(Math.max(0, Math.floor(Date.now() / 1000) - lastScreenImageLoadedAt))
       : "";
-    const upload = screenBroadcasting() || screenBroadcastEnabled() ? "broadcasting" : "upload on";
+    const upload = screenBroadcasting() ? "broadcasting" : "published frame";
     screenCaption.textContent = imageAge ? `${upload} · image ${imageAge} ago` : (meta || upload);
     return;
   }
@@ -1213,12 +1234,14 @@ function updateScreenCaption(state) {
 
 function startScreenAutoRefresh() {
   stopScreenAutoRefresh();
+  startScreenDemand();
   refreshScreenImage();
   screenRefreshTimer = setInterval(refreshScreenImage, SCREEN_REFRESH_MS);
 }
 function stopScreenAutoRefresh() {
   if (screenRefreshTimer) clearInterval(screenRefreshTimer);
   screenRefreshTimer = null;
+  stopScreenDemand();
 }
 function refreshScreenImage() {
   const url = screenImageUrl();
@@ -1235,6 +1258,17 @@ function showScreenPanel() {
   screenVisible = true;
   try { localStorage.setItem(SCREEN_STORAGE_KEY, "1"); } catch {}
   if (screenSection) screenSection.hidden = false;
+}
+
+function hideScreenPanel() {
+  screenVisible = false;
+  try { localStorage.removeItem(SCREEN_STORAGE_KEY); } catch {}
+  if (screenSection) screenSection.hidden = true;
+  localScreenPreviewActive = false;
+  localScreenPreviewCapturedAt = null;
+  stopScreenAutoRefresh();
+  applyScreenButtonState();
+  applyScreenStateClasses();
 }
 
 function requestLocalScreenPreview() {
@@ -1275,41 +1309,6 @@ window.agentHudSetLocalScreenPreviewFailed = function agentHudSetLocalScreenPrev
   reportSizeToHost();
 };
 
-window.agentHudSetScreenBroadcast = function agentHudSetScreenBroadcast(enabled, detail = {}) {
-  const next = enabled !== false;
-  pendingScreenBroadcastEnabled = null;
-  screenBroadcastChanging = false;
-  currentScreenCast = {
-    ...(currentScreenCast || {}),
-    enabled: next,
-    broadcasting: next ? !!(currentScreenCast && currentScreenCast.broadcasting) : false,
-    pausedReason: next ? "" : "upload off",
-    lastError: detail && detail.error ? String(detail.error) : "",
-  };
-  showScreenPanel();
-  applyScreenButtonState();
-  applyScreenStateClasses();
-  if (next) {
-    localScreenPreviewActive = false;
-    localScreenPreviewCapturedAt = null;
-    lastScreenImageLoadedAt = null;
-    if (SCREEN_TOKEN) {
-      setScreenPlaceholder("Loading screen preview", "Checking the latest published frame from the desk Mac.");
-      startScreenAutoRefresh();
-    } else {
-      setScreenPlaceholder(
-        "Screen preview needs a token",
-        "Open the desktop HUD so it can attach the local screen token.",
-      );
-      updateScreenCaption("error");
-    }
-  } else {
-    stopScreenAutoRefresh();
-    updateScreenCaption("off");
-  }
-  reportSizeToHost();
-};
-
 function applyScreenVisibility() {
   if (!screenSection) return;
   applyScreenButtonState();
@@ -1321,8 +1320,8 @@ function applyScreenVisibility() {
       screenImageState = "error";
       if (screenPublisherOff()) {
         setScreenPlaceholder(
-          "Screen upload is off",
-          "Click the screen button to turn cloud upload back on from the desk Mac.",
+          "Remote screen stream disabled",
+          "The desk Mac is not accepting remote screen requests.",
         );
       } else {
         setScreenPlaceholder(
@@ -1342,66 +1341,41 @@ function applyScreenVisibility() {
       stopScreenAutoRefresh();
       if (!localScreenPreviewActive && (!screenImg || screenImg.hidden || !screenImg.getAttribute("src"))) {
         setScreenPlaceholder(
-          "Screen upload is off",
-          "Click the screen button to turn cloud upload back on from the desk Mac.",
+          "Remote screen stream disabled",
+          "The desk Mac is not accepting remote screen requests.",
         );
       }
-      screenImageState = "off";
-      updateScreenCaption("off");
+      screenImageState = "disabled";
+      updateScreenCaption("disabled");
       return;
     }
-    setScreenPlaceholder("Loading screen preview", "Checking the latest published frame from the desk Mac.");
-    screenImageState = "waiting";
-    updateScreenCaption("waiting");
-    startScreenAutoRefresh();
+    if (IS_DESKTOP_HUD) {
+      stopScreenAutoRefresh();
+      setScreenPlaceholder("Capturing local screen preview", "The desktop HUD can use the local Mac without starting a remote stream.");
+      requestLocalScreenPreview();
+    } else {
+      setScreenPlaceholder("Requesting desk Mac screen", "Sending viewer demand over SignalR; frames publish only while this preview is open.");
+      screenImageState = "waiting";
+      updateScreenCaption("waiting");
+      startScreenAutoRefresh();
+    }
   } else {
     stopScreenAutoRefresh();
-    setScreenPlaceholder("Screen preview is hidden", "Click the screen button to open the preview and change upload.");
+    setScreenPlaceholder("Screen preview is hidden", "Click the screen button to request the desk Mac preview.");
   }
 }
 
 if (btnScreen) {
   btnScreen.addEventListener("click", (e) => {
     e.preventDefault();
-    showScreenPanel();
-    const previousEnabled = screenBroadcastEnabled();
-    const nextEnabled = !previousEnabled;
-    screenBroadcastChanging = true;
-    pendingScreenBroadcastEnabled = nextEnabled;
-    currentScreenCast = {
-      ...(currentScreenCast || {}),
-      enabled: nextEnabled,
-      broadcasting: nextEnabled ? !!(currentScreenCast && currentScreenCast.broadcasting) : false,
-      pausedReason: nextEnabled ? "" : "upload off",
-      lastError: "",
-    };
-    if (nextEnabled) {
+    if (screenVisible) {
+      hideScreenPanel();
+    } else {
+      showScreenPanel();
       localScreenPreviewActive = false;
       localScreenPreviewCapturedAt = null;
       lastScreenImageLoadedAt = null;
-      if (SCREEN_TOKEN) {
-        setScreenPlaceholder("Loading screen preview", "Checking the latest published frame from the desk Mac.");
-        startScreenAutoRefresh();
-      }
-    } else {
-      stopScreenAutoRefresh();
-      updateScreenCaption("off");
-    }
-    applyScreenButtonState();
-    applyScreenStateClasses();
-    const delivered = postToHost({ action: "setScreenBroadcast", enabled: nextEnabled });
-    if (!delivered) {
-      screenBroadcastChanging = false;
-      pendingScreenBroadcastEnabled = null;
-      currentScreenCast = {
-        ...(currentScreenCast || {}),
-        enabled: previousEnabled,
-        broadcasting: previousEnabled ? !!(currentScreenCast && currentScreenCast.broadcasting) : false,
-      };
-      applyScreenButtonState();
-      applyScreenStateClasses();
-      updateScreenCaption("error");
-      if (screenCaption) screenCaption.textContent = "open desktop HUD to change screen upload";
+      applyScreenVisibility();
     }
     reportSizeToHost();
   });
@@ -1420,14 +1394,20 @@ if (screenImg) {
     reportSizeToHost();
   });
   screenImg.addEventListener("error", () => {
+    if (IS_DESKTOP_HUD) {
+      requestLocalScreenPreview();
+      return;
+    }
     setScreenPlaceholder(
       "No screen frame loaded",
-      "Either the publisher is off, the token is wrong, or the last uploaded frame is unavailable.",
+      "Either the viewer signal has not reached the desk Mac yet, the token is wrong, or no fresh frame exists.",
     );
     updateScreenCaption("error");
     reportSizeToHost();
   });
 }
+
+window.addEventListener("pagehide", () => { stopScreenDemand(); });
 
 if (keepAwakeToggle) {
   keepAwakeToggle.addEventListener("click", (e) => {

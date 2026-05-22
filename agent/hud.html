@@ -14,7 +14,7 @@
       <span class="hud-title">agent</span>
       <span class="hud-mode" id="hud-mode">…</span>
       <span class="hud-actions">
-        <button class="hud-btn" id="btn-screen" type="button" aria-label="Turn desk Mac screen upload on or off" aria-pressed="false" title="Turn desk Mac screen upload on or off">
+        <button class="hud-btn" id="btn-screen" type="button" aria-label="Show desk Mac screen preview" aria-pressed="false" title="Show desk Mac screen preview">
           <svg class="ti" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z" />
             <path d="M7 20h10" />
@@ -50,12 +50,6 @@
     <section class="share-panel" id="share-panel" hidden>
       <div class="share-head">
         <span>scan live HUD</span>
-        <button class="share-close" id="share-close" type="button" aria-label="Close scan code" title="Close scan code">
-          <svg class="ti" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6l-12 12" />
-            <path d="M6 6l12 12" />
-          </svg>
-        </button>
       </div>
       <div class="qr-code" id="qr-code" role="img" aria-label="QR code for the live HUD"></div>
       <a class="share-url" id="share-url" href="/hud.html" target="_blank" rel="noopener">open live HUD</a>
@@ -83,13 +77,13 @@
             <path d="M3 3l18 18" />
           </svg>
         </span>
-        <span class="screen-overlay-text">cloud upload off</span>
+        <span class="screen-overlay-text">remote stream disabled</span>
       </div>
       <div class="hud-screen-placeholder" id="hud-screen-placeholder">
-        <div class="hud-screen-placeholder-title">Screen preview is off</div>
-        <div class="hud-screen-placeholder-text">Add the screen token to this HUD URL to view the live desk Mac frame.</div>
+        <div class="hud-screen-placeholder-title">Screen preview is hidden</div>
+        <div class="hud-screen-placeholder-text">Open the preview to request a live desk Mac frame.</div>
       </div>
-      <div class="hud-screen-caption" id="hud-screen-caption">screen preview off</div>
+      <div class="hud-screen-caption" id="hud-screen-caption">screen preview hidden</div>
     </section>
 
     <section class="hud-keepawake" id="hud-keepawake">
