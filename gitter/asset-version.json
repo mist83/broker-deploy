@@ -1,7 +1,7 @@
 {
   "siteId": "gitter",
   "host": "gitter.mullmania.com",
-  "semver": "1.0.0",
-  "previousSemver": null,
-  "publishedAt": "2026-05-22T17:53:57.544Z"
+  "semver": "1.0.1",
+  "previousSemver": "1.0.0",
+  "publishedAt": "2026-05-23T14:38:26.721Z"
 }
