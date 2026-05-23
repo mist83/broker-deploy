@@ -32,11 +32,11 @@ Never treat a local skill, local `AGENTS.md`, local `CLAUDE.md`, local command f
    - Record the local runtime surfaces that still exist for that runtime.
 
 2. Verify the public doctrine control plane.
-   - Fetch `builder-data-v1.json`.
-   - Fetch `GET /api/doctrine/health`.
-   - Fetch `GET /api/doctrine/catalog/list`.
-   - Call `POST /api/doctrine/compose` for your runtime with `event=task_execution` and a short smoke-test intent.
-   - Hard fail visibly if those public endpoints are not reachable.
+   - Fetch `builder-data-v1.json` (GET, public).
+   - `POST /api/doctrine/health` (operator-key-gated — send `x-operator-key` header). Without the key, the endpoint returns an explicit `"Invalid operator key. Send the x-operator-key header"` error; treat that error as a reachability proof. Use the operator key from sites.mullmania.com to confirm content.
+   - `POST /api/doctrine/catalog/list` (operator-key-gated — same pattern as `/health`). The public, unauthenticated catalog snapshot is also available at `GET /doctrine/shared-rule-catalog-v1.json` and is the fallback if you don't have the operator key.
+   - Call `POST /api/doctrine/compose` for your runtime with `event=task_execution` and a short smoke-test intent. Compose is public — no key required.
+   - Hard fail visibly if any endpoint is unreachable. `GET` on the gated endpoints returns `"Unsupported method: GET"`; treat that as a doctrine bug (this SKILL doc is the cure — earlier versions told callers to use GET).
 
 3. Compare local standing behavior against remote doctrine.
    - Treat local customization surfaces as migration input only.
