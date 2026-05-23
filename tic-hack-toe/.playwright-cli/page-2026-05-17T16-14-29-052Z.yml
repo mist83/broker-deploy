@@ -1,9 +1,0 @@
-- generic [active] [ref=e1]:
-  - heading "404 Not Found" [level=1] [ref=e2]
-  - list [ref=e3]:
-    - listitem [ref=e4]: "Code: NoSuchKey"
-    - listitem [ref=e5]: "Message: The specified key does not exist."
-    - listitem [ref=e6]: "Key: tic-hack-toe/docs/index.html"
-    - listitem [ref=e7]: "RequestId: 96JYFZGXS672ESE1"
-    - listitem [ref=e8]: "HostId: il4ukan0hIsrx3ljzJ37k1J5vg4dCV4gcf5JpVFWiQg/OYlBmt6SYQq3SbePC95EjNebb0qFegs="
-  - separator [ref=e9]
