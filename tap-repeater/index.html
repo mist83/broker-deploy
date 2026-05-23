@@ -299,7 +299,7 @@
     <details id="pairPane" style="position: fixed; left: 12px; bottom: 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: #333; max-width: 320px; z-index: 90;">
         <summary style="cursor: pointer; font-weight: 600; user-select: none;">📡 Pair to target</summary>
         <div style="margin-top: 8px; display: grid; gap: 8px;">
-            <p style="margin: 0; color: #666; line-height: 1.4;">Stream taps + phone tilt to <a href="https://baton.mullmania.com/" target="_blank" rel="noopener" style="color: #0071CE;">baton</a> or any pair.js screen. Enter the session code shown there.</p>
+            <p style="margin: 0; color: #666; line-height: 1.4;">Stream taps + phone tilt to <a id="batonLink" target="_blank" rel="noopener" style="color: #0071CE;">baton</a> or any pair.js screen. Enter the session code shown there.</p>
             <div style="display: flex; gap: 6px;">
                 <input id="pairSession" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" placeholder="session code"
                        style="flex: 1; padding: 8px 10px; border: 1px solid #e0e0e0; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;" />
@@ -321,6 +321,19 @@
         parsePattern,
         serializePattern
     } from './vendor/rhythm-engine/index.js';
+
+    // The fleet swaps tap-repeater between *.mullmania.com and *.mikesendpoint.com.
+    // Anything pointing at a sibling subdomain must follow the current parent base
+    // so the page stays self-consistent under either brand.
+    function fleetParentBase() {
+        const host = (location.hostname || '').toLowerCase();
+        if (host === 'mikesendpoint.com' || host.endsWith('.mikesendpoint.com')) return 'mikesendpoint.com';
+        return 'mullmania.com';
+    }
+    const FLEET_PARENT = fleetParentBase();
+
+    const batonLinkEl = document.getElementById('batonLink');
+    if (batonLinkEl) batonLinkEl.href = `https://baton.${FLEET_PARENT}/`;
 
     // ─────────────────────────────────────────────────────────────────────────
     // TIMING:
@@ -1414,7 +1427,7 @@
             els.connect.textContent = 'Connecting…';
             setStatus(`Pairing to ${sessionId}…`);
             try {
-                const { pairPhone, newPhoneId } = await import('https://ui.mullmania.com/js/pair.js');
+                const { pairPhone, newPhoneId } = await import(`https://ui.${FLEET_PARENT}/js/pair.js`);
                 let userId;
                 try { userId = localStorage.getItem('tap-repeater:phone-id') || ''; } catch { /* */ }
                 if (!userId) {

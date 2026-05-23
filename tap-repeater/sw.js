@@ -1,4 +1,7 @@
-const CACHE_NAME = 'tap-repeater-v1';
+// Cache name is bumped whenever the precache contents or fetch strategy change.
+// The activate handler deletes every cache that isn't the current one, so the
+// previous version's precache is evicted on the next visit.
+const CACHE_NAME = 'tap-repeater-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -32,20 +35,24 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Network-first with cache fallback. Mirrors mullmania.site.json cacheControl
+// for *.html / *.js / *.json (no-store / no-cache). The precached shell is the
+// offline fallback; live deploys land as soon as the user reloads online,
+// instead of being shadowed by a stale precache indefinitely.
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => (
-      cached || fetch(event.request).then((response) => {
-        if (response.ok) {
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.ok) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         }
         return response;
       })
-    ))
+      .catch(() => caches.match(event.request).then((cached) => cached || Response.error()))
   );
 });
