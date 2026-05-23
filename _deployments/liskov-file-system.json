@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "liskov-file-system",
     "status": "success",
-    "deployedAt": "2026-05-17T14:18:49.239Z",
+    "deployedAt": "2026-05-23T14:38:53.605Z",
     "trigger": "github-webhook",
-    "brokerRunId": "25993314299",
-    "brokerRunNumber": "75",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25993314299",
+    "brokerRunId": "26335465802",
+    "brokerRunNumber": "166",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26335465802",
     "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "liskov-file-system",
+      "status": "success",
+      "deployedAt": "2026-05-23T14:38:53.605Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26335465802",
+      "brokerRunNumber": "166",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26335465802",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "liskov-file-system",
       "status": "success",
