@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-22T20:23:39.906Z",
+  "generatedAt": "2026-05-23T14:02:50.128Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
