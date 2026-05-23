@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-20T16:26:26Z",
+  "updatedAt": "2026-05-21T20:48:13Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -2355,6 +2355,24 @@
       "contentType": "image/png",
       "size": 6588,
       "sourceUrl": "https://bloom-3184.mullmania.com/"
+    },
+    "blorp": {
+      "siteId": "blorp",
+      "status": "ok",
+      "path": "/api/previews/blorp.png",
+      "url": "/api/previews/blorp.png?v=1779396437684",
+      "objectKey": "sites/previews/blorp.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437684",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 363701,
+      "etag": "33d2a496809158ab2bf3ae93d8a619a9",
+      "sourceUrl": "https://blorp.mullmania.com/"
     },
     "blueberry-10098": {
       "siteId": "blueberry-10098",
@@ -9424,6 +9442,24 @@
       "etag": "17e45d4e2dd761ae89633ebb1710fc2b",
       "sourceUrl": "https://dice-games.mullmania.com/"
     },
+    "dire-straits": {
+      "siteId": "dire-straits",
+      "status": "ok",
+      "path": "/api/previews/dire-straits.png",
+      "url": "/api/previews/dire-straits.png?v=1779396437673",
+      "objectKey": "sites/previews/dire-straits.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437673",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 190816,
+      "etag": "5beb1c12ca44eac646b45d610016706e",
+      "sourceUrl": "https://dire-straits.mullmania.com/"
+    },
     "directional-gradient-updates-2381": {
       "siteId": "directional-gradient-updates-2381",
       "status": "ok",
@@ -10916,6 +10952,24 @@
       "contentType": "image/png",
       "size": 14851,
       "sourceUrl": "https://fig-8771.mullmania.com/"
+    },
+    "fighters": {
+      "siteId": "fighters",
+      "status": "ok",
+      "path": "/api/previews/fighters.png",
+      "url": "/api/previews/fighters.png?v=1779396437717",
+      "objectKey": "sites/previews/fighters.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437717",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 27968,
+      "etag": "674cbba09bf37e7f737c50479351a601",
+      "sourceUrl": "https://fighters.mullmania.com/"
     },
     "file-browser-src-fragment": {
       "siteId": "file-browser-src-fragment",
@@ -20993,6 +21047,54 @@
       "etag": "afb0007aff80f54bc117d1333053c3bb",
       "sourceUrl": "https://splat.mullmania.com/"
     },
+    "splatlab": {
+      "siteId": "splatlab",
+      "status": "ok",
+      "path": "/api/previews/splatlab.png",
+      "url": "/api/previews/splatlab.png?v=1779396437798",
+      "objectKey": "sites/previews/splatlab.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437798",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "splatlab",
+          "status": "ok",
+          "id": "1779396437798",
+          "path": "/api/previews/splatlab/1779396437798.png",
+          "url": "/api/previews/splatlab/1779396437798.png?v=1779396437798",
+          "objectKey": "sites/previews/splatlab/1779396437798.png",
+          "capturedAt": "2026-05-21T20:47:17Z",
+          "version": "1779396437798",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 14339,
+          "etag": "9bc10eff0bea386a2b24ac34e38e0f6c",
+          "sourceUrl": "https://splatlab.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 14339,
+      "etag": "9bc10eff0bea386a2b24ac34e38e0f6c",
+      "sourceUrl": "https://splatlab.mullmania.com/"
+    },
     "split-color": {
       "siteId": "split-color",
       "status": "ok",
@@ -21447,6 +21549,24 @@
       "size": 9209,
       "etag": "d4a5e9c073c906770edbfa984f111a00",
       "sourceUrl": "https://swarm-ping-tester.mullmania.com/"
+    },
+    "swing-sultans": {
+      "siteId": "swing-sultans",
+      "status": "ok",
+      "path": "/api/previews/swing-sultans.png",
+      "url": "/api/previews/swing-sultans.png?v=1779396437811",
+      "objectKey": "sites/previews/swing-sultans.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437811",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 186621,
+      "etag": "e9753db6fda272907949e77844babda7",
+      "sourceUrl": "https://swing-sultans.mullmania.com/"
     },
     "swipe-ball-hole-lanes": {
       "siteId": "swipe-ball-hole-lanes",
@@ -23164,6 +23284,24 @@
       "size": 56548,
       "etag": "635776a3acc9df522bef8094a7e5f8ea",
       "sourceUrl": "https://wavy-grass-demo.mullmania.com/"
+    },
+    "wealth-ops": {
+      "siteId": "wealth-ops",
+      "status": "ok",
+      "path": "/api/previews/wealth-ops.png",
+      "url": "/api/previews/wealth-ops.png?v=1779396437856",
+      "objectKey": "sites/previews/wealth-ops.png",
+      "capturedAt": "2026-05-21T20:47:17Z",
+      "version": "1779396437856",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 207948,
+      "etag": "954661d6ad3a1b7670fafbafc5643e74",
+      "sourceUrl": "https://wealth-ops.mullmania.com/"
     },
     "web-rtc": {
       "siteId": "web-rtc",

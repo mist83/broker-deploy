@@ -1,52 +1,53 @@
 {
-  "generatedAt": "2026-05-21T09:13:50.000Z",
-  "updatedAt": "2026-05-21T09:13:50.000Z",
+  "generatedAt": "2026-05-23T19:28:32.334Z",
+  "updatedAt": "2026-05-23T19:28:32.334Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
   "stats": {
-    "catalogSiteCount": 1109,
-    "hostedSiteCount": 1109,
+    "catalogSiteCount": 1067,
+    "hostedSiteCount": 1067,
     "dataNamespaceCount": 87,
     "syntheticSiteCount": 29,
-    "publicHostedSiteCount": 212,
-    "privateHostedSiteCount": 896,
+    "publicHostedSiteCount": 235,
+    "privateHostedSiteCount": 831,
     "operatorNoteCount": 1,
     "demoPosterCount": 143,
     "demoVideoCount": 7
   },
-  "frameworkSiteCount": 21,
+  "frameworkSiteCount": 22,
   "frameworkBuckets": {
     "surface": 2,
     "developer-tooling": 10,
+    "unbucketed": 2,
     "ui-tooling": 4,
     "workflow": 1,
     "runtime": 2,
-    "unbucketed": 1,
     "design-system": 1
   },
   "frameworkCriticality": {
     "framework-core": 3,
     "framework-support": 17,
-    "unspecified": 1
+    "unspecified": 2
   },
   "frameworkTestStatuses": {
     "smoke": 19,
-    "unknown": 1,
+    "unknown": 2,
     "deep": 1
   },
   "frameworkHealthStatuses": {
     "ok": 20,
-    "unknown": 1
+    "unknown": 2
   },
   "canonVersions": {
-    "2026.04.19": 2,
-    "2026.04.26": 17,
-    "2026.04.17": 1
+    "2026.04.19": 3,
+    "2026.04.26": 21,
+    "2026.04.17": 4,
+    "2026.04.30": 1
   },
-  "lastPublishedSite": "fighters",
-  "visibleHostedSites": 1108,
-  "launchpadBuiltAt": "2026-05-21T09:15:12.298Z",
+  "lastPublishedSite": "arcade",
+  "visibleHostedSites": 1066,
+  "launchpadBuiltAt": "2026-05-23T19:41:35.961Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"

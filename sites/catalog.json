@@ -593,19 +593,19 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T06:25:17.980Z",
+    "lastPublishedAt": "2026-05-23T15:04:39.940Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26209325444",
-        "runNumber": "149"
+        "runId": "26336058162",
+        "runNumber": "168"
       },
       "git": null
     },
-    "assetVersion": "1.0.66",
+    "assetVersion": "1.0.119",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1",
     "catalogTagsVersion": 2,
@@ -1475,7 +1475,12 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "carom",
+      "github-pages",
+      "mullmania-mirror",
+      "pwa",
+      "static-preview"
     ],
     "notes": [
       "Root redirect page plus wwwroot game surface for GitHub Pages / Mullmania publish readiness.",
@@ -1483,20 +1488,20 @@
       "Root redirect shell now lands cleanly in the bundled browser game surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:30:49.436Z",
+    "lastPublishedAt": "2026-05-23T19:12:17.450Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/angle-bang",
         "ref": null,
-        "sha": "4ef01588046c20bca17cb6de8a31bba8a8da9991",
+        "sha": "cab4cc04206fb79acbb779ec8ba039068edd4659",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/angle-bang",
         "branch": "master",
-        "commit": "4ef01588046c20bca17cb6de8a31bba8a8da9991",
+        "commit": "cab4cc04206fb79acbb779ec8ba039068edd4659",
         "remote": "https://github.com/mist83/angle-bang.git"
       }
     },
@@ -1567,7 +1572,10 @@
       },
       "updatedAt": "2026-05-21T00:14:26Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "api-experiment-bucket",
@@ -1957,16 +1965,36 @@
     "tags": [
       "frontend-ui",
       "gallery",
-      "showcase"
+      "showcase",
+      "framework",
+      "phone-remote",
+      "tv-surface",
+      "phone-pair",
+      "signal-argh",
+      "motion-lab",
+      "scaffold"
     ],
     "notes": [
-      "Canvas flyover that uses the Sites catalog and preview manifest."
+      "Canvas flyover that uses the Sites catalog and preview manifest.",
+      "overdrive sweep: 4 hardening chapters + 29 tests"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:50:59.739Z",
+    "lastPublishedAt": "2026-05-23T18:58:08.748Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/app-flyover",
+        "ref": null,
+        "sha": "fc074d9fd93b433d5cdb7da85d2e3b1dd11f613a",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/app-flyover",
+        "branch": "master",
+        "commit": "fc074d9fd93b433d5cdb7da85d2e3b1dd11f613a",
+        "remote": "https://github.com/mist83/app-flyover.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -2026,7 +2054,10 @@
       },
       "updatedAt": "2026-05-21T00:14:26Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "apple-trie",
@@ -2257,26 +2288,28 @@
       "tron",
       "neon",
       "crt",
-      "menu"
+      "menu",
+      "attract-screen",
+      "directory"
     ],
     "notes": [
       "80s arcade attract screen menu for the mullmania ecosystem."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:52:02.175Z",
+    "lastPublishedAt": "2026-05-23T19:28:32.334Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/arcade",
         "ref": null,
-        "sha": "0ecc2da48bc5fda4ccf731e53e4736e5827a3d21",
+        "sha": "0bdb0ad43a0819f800b3be6d96522c79329f844b",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/arcade",
         "branch": "main",
-        "commit": "0ecc2da48bc5fda4ccf731e53e4736e5827a3d21",
+        "commit": "0bdb0ad43a0819f800b3be6d96522c79329f844b",
         "remote": "https://github.com/mist83/arcade.git"
       }
     },
@@ -2336,7 +2369,10 @@
       },
       "updatedAt": "2026-05-21T00:14:26Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "ask-me",
@@ -2627,20 +2663,20 @@
       "Periodic-table game. 118 chibi Bohr-model elements with chemistry-driven mechanics. Click two cells to test a reaction. Press V for the playable arena."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:53:50.767Z",
+    "lastPublishedAt": "2026-05-23T15:15:22.321Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/atomic-game",
         "ref": null,
-        "sha": "d22aed610719ad33621faf01b9a144292056e5e9",
+        "sha": "3080980e5295062ca4a7d1d0912d9d0b143aa689",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/atomic-game",
         "branch": "main",
-        "commit": "d22aed610719ad33621faf01b9a144292056e5e9",
+        "commit": "3080980e5295062ca4a7d1d0912d9d0b143aa689",
         "remote": "https://github.com/mist83/atomic-game.git"
       }
     },
@@ -3239,7 +3275,12 @@
       "curated",
       "frontend-ui",
       "simulation",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror",
+      "shared-ui-ready",
+      "shared-ui-strict",
+      "shared-ui-styles"
     ],
     "notes": [
       "Static frontend. Publish the repository root directly; there is no build step.",
@@ -3248,20 +3289,20 @@
       "Root and module surfaces now consume shared UI styles through the canonical ui.[base-url] contract."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T04:36:18.246Z",
+    "lastPublishedAt": "2026-05-23T18:58:47.337Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/bad-llm",
         "ref": null,
-        "sha": "0a13bd7149f162b4ec11ae03597f29003581f27a",
+        "sha": "0a4f9eda8a6c8a54db779fa90bf251fa6d6ac420",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/bad-llm",
         "branch": "master",
-        "commit": "0a13bd7149f162b4ec11ae03597f29003581f27a",
+        "commit": "0a4f9eda8a6c8a54db779fa90bf251fa6d6ac420",
         "remote": "https://github.com/mist83/bad-llm.git"
       }
     },
@@ -3334,7 +3375,10 @@
       },
       "updatedAt": "2026-05-21T01:08:02Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.2",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "ball-drop-train-v27",
@@ -4077,94 +4121,503 @@
     }
   },
   {
-    "siteId": "bestiary",
-    "host": "bestiary.mullmania.com",
+    "siteId": "benny-lava",
+    "host": "benny-lava.mullmania.com",
+    "url": "https://benny-lava.mullmania.com/",
+    "hasHostedSite": true,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-21T22:42:06.339Z",
+    "managedBy": "brain-farts",
+    "lastPublishedAt": "2026-05-21T23:08:42.055Z",
+    "publishContext": {
+      "github": null,
+      "source": "brain-farts",
+      "steward": {
+        "repository": "mist83/brain-farts",
+        "path": "sites/benny-lava/public",
+        "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
+        "branch": "main",
+        "commit": "f380f58ebe1a663b700c96c1e5f038237a74836b"
+      }
+    },
+    "tags": [],
+    "catalogTagsVersion": 2,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": "",
+    "notes": []
+  },
+  {
+    "siteId": "bgrocc",
+    "host": "bgrocc.mullmania.com",
     "currentHostedSite": false,
     "hasHostedSite": true,
     "hasData": false,
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "curated"
+      "game",
+      "canvas",
+      "bgrocc",
+      "hub",
+      "public-frontdoor",
+      "mullmania-mirror"
     ],
     "notes": [
-      "Illuminated manuscript of every agent in the ecosystem."
+      "BGROCC hub — 9-chapter anthology selector. Static. Links to bgrocc-N.mullmania.com chapter sites."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-26T00:01:56.358Z",
+    "lastPublishedAt": "2026-05-23T15:02:40.078Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/bestiary",
+        "repository": "mist83/bgrocc",
         "ref": null,
-        "sha": "644fd64ca3cdc1f765dd32acef0caec540c632fb",
+        "sha": "8e85837513cbf891d17ab53124c027c9fdfd22eb",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/bestiary",
+        "root": "/Users/mist83/Code/bgrocc",
         "branch": "main",
-        "commit": "644fd64ca3cdc1f765dd32acef0caec540c632fb",
-        "remote": "https://github.com/mist83/bestiary.git"
+        "commit": "8e85837513cbf891d17ab53124c027c9fdfd22eb",
+        "remote": "https://github.com/mist83/bgrocc.git"
       }
     },
+    "assetVersion": "1.0.10",
+    "canonVersion": null,
+    "canonProfile": null,
     "catalogTagsVersion": 2,
     "isPublic": true,
-    "siteAccessUpdatedAt": "2026-04-25T16:40:37Z",
+    "siteAccessUpdatedAt": "2026-05-23T03:54:44Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": "",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "maturityScore": 46,
-    "maturityLevel": "capstone",
-    "maturitySummary": "Live illustrated ecosystem catalog concept with coherent presentation and repo backing, but thin operational signals and limited standalone utility.",
-    "maturityEvidence": [
-      "Live site returns 200",
-      "Sticker/pokedex concept visible",
-      "GitHub-backed mist83/bestiary",
-      "Public hosted site",
-      "No smoke/health metadata"
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-1-homeroom-horror",
+    "host": "bgrocc-1-homeroom-horror.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
     ],
-    "maturityConfidence": 74,
-    "maturityDimensions": {
-      "proof": 50,
-      "implementation": 48,
-      "product": 50,
-      "reuse": 36,
-      "novelty": 48
-    },
-    "maturityUpdatedAt": "2026-05-21T01:08:02Z",
-    "maturitySource": "valet-concept-maturity-v1",
-    "maturityConcept": {
-      "conceptId": "bestiary",
-      "label": "Bestiary",
-      "siteIds": [
-        "bestiary"
-      ],
-      "bestSiteId": "bestiary",
-      "score": 46,
-      "level": "capstone",
-      "summary": "Live illustrated ecosystem catalog concept with coherent presentation and repo backing, but thin operational signals and limited standalone utility.",
-      "evidence": [
-        "Live site returns 200",
-        "Sticker/pokedex concept visible",
-        "GitHub-backed mist83/bestiary",
-        "Public hosted site",
-        "No smoke/health metadata"
-      ],
-      "confidence": 74,
-      "dimensions": {
-        "proof": 50,
-        "implementation": 48,
-        "product": 50,
-        "reuse": 36,
-        "novelty": 48
+    "notes": [
+      "BGROCC 1 — Homeroom Horror. Side-scrolling beat-em-up. The playable one."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:03:18.178Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-1-homeroom-horror",
+        "ref": null,
+        "sha": "dad50e825ff194db92a9b778038bfddece0d5cce",
+        "runId": null,
+        "runNumber": null
       },
-      "updatedAt": "2026-05-21T01:08:02Z",
-      "source": "valet-concept-maturity-v1"
-    }
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-1-homeroom-horror",
+        "branch": "main",
+        "commit": "dad50e825ff194db92a9b778038bfddece0d5cce",
+        "remote": "https://github.com/mist83/bgrocc-1-homeroom-horror.git"
+      }
+    },
+    "assetVersion": "1.0.6",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:44:14Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-2-cafeteria-crash",
+    "host": "bgrocc-2-cafeteria-crash.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "CAFETERIA CRASH. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:03:38.951Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-2-cafeteria-crash",
+        "ref": null,
+        "sha": "3863c22178aefe4c42c5ee7b8392f14788981490",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-2-cafeteria-crash",
+        "branch": "main",
+        "commit": "3863c22178aefe4c42c5ee7b8392f14788981490",
+        "remote": "https://github.com/mist83/bgrocc-2-cafeteria-crash.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:47:17Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-3-hot-lunch-line",
+    "host": "bgrocc-3-hot-lunch-line.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "HOT LUNCH LINE. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:03:54.772Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-3-hot-lunch-line",
+        "ref": null,
+        "sha": "dfad68618ad713dd001c9289c3371c219c9b9292",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-3-hot-lunch-line",
+        "branch": "main",
+        "commit": "dfad68618ad713dd001c9289c3371c219c9b9292",
+        "remote": "https://github.com/mist83/bgrocc-3-hot-lunch-line.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:45:14Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-4-stapler-skate",
+    "host": "bgrocc-4-stapler-skate.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "STAPLER SKATE. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:04:11.678Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-4-stapler-skate",
+        "ref": null,
+        "sha": "40af92e19389d88d51149d8afda8a7a7c69c2787",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-4-stapler-skate",
+        "branch": "main",
+        "commit": "40af92e19389d88d51149d8afda8a7a7c69c2787",
+        "remote": "https://github.com/mist83/bgrocc-4-stapler-skate.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:49:18Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-5-coop-catacombs",
+    "host": "bgrocc-5-coop-catacombs.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "COOP CATACOMBS. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:04:29.070Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-5-coop-catacombs",
+        "ref": null,
+        "sha": "74d5b241d42915de09268967db2a7b7077d6026e",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-5-coop-catacombs",
+        "branch": "main",
+        "commit": "74d5b241d42915de09268967db2a7b7077d6026e",
+        "remote": "https://github.com/mist83/bgrocc-5-coop-catacombs.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:46:15Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-6-crop-duster",
+    "host": "bgrocc-6-crop-duster.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "CROP DUSTER DOGFIGHT. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:04:48.021Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-6-crop-duster",
+        "ref": null,
+        "sha": "998313304817e79cd32de828ca89d0992a0861a3",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-6-crop-duster",
+        "branch": "main",
+        "commit": "998313304817e79cd32de828ca89d0992a0861a3",
+        "remote": "https://github.com/mist83/bgrocc-6-crop-duster.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:53:33Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-7-steam-tray-stack",
+    "host": "bgrocc-7-steam-tray-stack.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "STEAM TRAY STACK. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:05:07.873Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-7-steam-tray-stack",
+        "ref": null,
+        "sha": "7e0c3f4a951630410c2fbc4d7ca86508121cd86e",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-7-steam-tray-stack",
+        "branch": "main",
+        "commit": "7e0c3f4a951630410c2fbc4d7ca86508121cd86e",
+        "remote": "https://github.com/mist83/bgrocc-7-steam-tray-stack.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:51:49Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-8-mosh-pit-mash",
+    "host": "bgrocc-8-mosh-pit-mash.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "MOSH PIT MASH. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:05:26.260Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-8-mosh-pit-mash",
+        "ref": null,
+        "sha": "48872a30defe4c3a6ffbaa99a785a73599631d28",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-8-mosh-pit-mash",
+        "branch": "main",
+        "commit": "48872a30defe4c3a6ffbaa99a785a73599631d28",
+        "remote": "https://github.com/mist83/bgrocc-8-mosh-pit-mash.git"
+      }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:50:25Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "bgrocc-9-factory-f-arms",
+    "host": "bgrocc-9-factory-f-arms.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "canvas",
+      "bgrocc",
+      "public-frontdoor",
+      "mullmania-mirror"
+    ],
+    "notes": [
+      "BROTHER IN [factory f]ARMS. Static Canvas2D scaffold. Publish repo root; no build step."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:05:43.468Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/bgrocc-9-factory-f-arms",
+        "ref": null,
+        "sha": "a20747e2ef84a43cdb9f088b8a814f32806fea2e",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bgrocc-9-factory-f-arms",
+        "branch": "main",
+        "commit": "a20747e2ef84a43cdb9f088b8a814f32806fea2e",
+        "remote": "https://github.com/mist83/bgrocc-9-factory-f-arms.git"
+      }
+    },
+    "assetVersion": "1.0.4",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T03:48:15Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "bib",
@@ -6029,8 +6482,8 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:07:09Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -7568,102 +8021,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "clipboard-html-file-publisher",
-    "host": "clipboard-html-file-publisher.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from tap2app-2025-05-17 during the April 2026 twelfth-pass cleanup."
-    ],
-    "description": "Reads clipboard HTML, posts it to a chosen project and folder, then opens the published result.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-file-publisher.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-twelfth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-go",
-    "host": "clipboard-html-go.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from pgo-7599 during the April 2026 twelfth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts it to a backend, and redirects to the returned page.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-go.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-twelfth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher",
-    "host": "clipboard-html-iter9-auto-launcher.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-13-35 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "clipboard-html-iter9-auto-launcher-copy",
     "host": "clipboard-html-iter9-auto-launcher-copy.mullmania.com",
     "currentHostedSite": false,
@@ -7679,38 +8036,6 @@
     "mainSiteUpdatedAt": null,
     "testNotes": "",
     "url": "https://clipboard-html-iter9-auto-launcher-copy.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-10",
-    "host": "clipboard-html-iter9-auto-launcher-copy-10.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-16-56 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-10.mullmania.com/",
     "displayName": "Clipboard Launcher",
     "managedBy": "manual-rename-batch",
     "publishContext": {
@@ -7760,70 +8085,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-12",
-    "host": "clipboard-html-iter9-auto-launcher-copy-12.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-16-58 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-12.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-13",
-    "host": "clipboard-html-iter9-auto-launcher-copy-13.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-16-59 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-13.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "clipboard-html-iter9-auto-launcher-copy-14",
     "host": "clipboard-html-iter9-auto-launcher-copy-14.mullmania.com",
     "currentHostedSite": false,
@@ -7839,166 +8100,6 @@
     "mainSiteUpdatedAt": null,
     "testNotes": "",
     "url": "https://clipboard-html-iter9-auto-launcher-copy-14.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-15",
-    "host": "clipboard-html-iter9-auto-launcher-copy-15.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-17-01 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-15.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-16",
-    "host": "clipboard-html-iter9-auto-launcher-copy-16.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-17-02 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-16.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-17",
-    "host": "clipboard-html-iter9-auto-launcher-copy-17.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-17-04 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-17.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-18",
-    "host": "clipboard-html-iter9-auto-launcher-copy-18.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-17-06 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-18.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-iter9-auto-launcher-copy-19",
-    "host": "clipboard-html-iter9-auto-launcher-copy-19.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-17-41 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Reads HTML from the clipboard, posts an Iter9 snapshot, opens the generated page, and includes an ellipsis shortcut to base Iter9.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-iter9-auto-launcher-copy-19.mullmania.com/",
     "displayName": "Clipboard Launcher",
     "managedBy": "manual-rename-batch",
     "publishContext": {
@@ -8453,38 +8554,6 @@
       "github": null,
       "git": null,
       "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-html-launcher",
-    "host": "clipboard-html-launcher.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from soursop-0-spoops during the April 2026 fourth-pass cleanup."
-    ],
-    "description": "Clipboard-to-launch tool that posts pasted HTML to Iter9 and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-html-launcher.mullmania.com/",
-    "displayName": "Clipboard Launcher",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-fourth-pass"
     },
     "tags": [
       "curated"
@@ -11036,134 +11105,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "clipboard-snapshot-dual-button-2843",
-    "host": "clipboard-snapshot-dual-button-2843.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from iter9-example-2843 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Two-button clipboard snapshot launcher.",
-    "testNotes": "",
-    "url": "https://clipboard-snapshot-dual-button-2843.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-snapshot-dual-button-2904",
-    "host": "clipboard-snapshot-dual-button-2904.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from iter9-example-2904 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Two-button clipboard snapshot launcher.",
-    "testNotes": "",
-    "url": "https://clipboard-snapshot-dual-button-2904.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-snapshot-dual-button-3271",
-    "host": "clipboard-snapshot-dual-button-3271.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from iter9-example-3271 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Two-button clipboard snapshot launcher.",
-    "testNotes": "",
-    "url": "https://clipboard-snapshot-dual-button-3271.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-snapshot-dual-button-3540",
-    "host": "clipboard-snapshot-dual-button-3540.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from iter9-example-3540 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Two-button clipboard snapshot launcher.",
-    "testNotes": "",
-    "url": "https://clipboard-snapshot-dual-button-3540.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "clipboard-snapshot-dual-button-3899",
     "host": "clipboard-snapshot-dual-button-3899.mullmania.com",
     "currentHostedSite": false,
@@ -11644,166 +11585,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "clipboard-title-autolaunch-6226",
-    "host": "clipboard-title-autolaunch-6226.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-6226 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-autolaunch-6226.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-autolaunch-8009",
-    "host": "clipboard-title-autolaunch-8009.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-8009 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-autolaunch-8009.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-autolaunch-8374",
-    "host": "clipboard-title-autolaunch-8374.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-8374 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-autolaunch-8374.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-autolaunch-8654",
-    "host": "clipboard-title-autolaunch-8654.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-8654 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-autolaunch-8654.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-autolaunch-9052",
-    "host": "clipboard-title-autolaunch-9052.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-9052 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-autolaunch-9052.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "clipboard-title-autolaunch-article-20250227",
     "host": "clipboard-title-autolaunch-article-20250227.mullmania.com",
     "currentHostedSite": false,
@@ -11920,1158 +11701,6 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "displayName": "Clipboard Launcher"
-  },
-  {
-    "siteId": "clipboard-title-launcher-172130",
-    "host": "clipboard-title-launcher-172130.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-21-30 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172130.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172131",
-    "host": "clipboard-title-launcher-172131.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-21-31 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172131.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172230",
-    "host": "clipboard-title-launcher-172230.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-30 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172230.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172245",
-    "host": "clipboard-title-launcher-172245.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-45 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172245.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172248",
-    "host": "clipboard-title-launcher-172248.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-48 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172248.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172250",
-    "host": "clipboard-title-launcher-172250.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-50 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172250.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172253",
-    "host": "clipboard-title-launcher-172253.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-53 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172253.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172255",
-    "host": "clipboard-title-launcher-172255.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-22-55 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172255.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172705",
-    "host": "clipboard-title-launcher-172705.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-05 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172705.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172707",
-    "host": "clipboard-title-launcher-172707.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-07 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172707.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172708",
-    "host": "clipboard-title-launcher-172708.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-08 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172708.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172709",
-    "host": "clipboard-title-launcher-172709.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-09 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172709.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172714",
-    "host": "clipboard-title-launcher-172714.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-14 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172714.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172716",
-    "host": "clipboard-title-launcher-172716.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-16 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172716.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172728",
-    "host": "clipboard-title-launcher-172728.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-28 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172728.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172730",
-    "host": "clipboard-title-launcher-172730.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-30 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172730.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-172732",
-    "host": "clipboard-title-launcher-172732.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-27-32 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "One-tap fullscreen clipboard launcher that reads pasted HTML, derives a slug from the title, creates an Iter9 snapshot, and opens it.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-172732.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-175043",
-    "host": "clipboard-title-launcher-175043.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-43 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-175043.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-175046",
-    "host": "clipboard-title-launcher-175046.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-46 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-175046.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-175052",
-    "host": "clipboard-title-launcher-175052.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-52 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-175052.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-175703",
-    "host": "clipboard-title-launcher-175703.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-57-03 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Paste and launch page that slugifies the clipboard HTML title and opens a generated snapshot.",
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-175703.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-180033",
-    "host": "clipboard-title-launcher-180033.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-18-00-33 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Paste and launch page that slugifies the clipboard HTML title and opens a generated snapshot.",
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-180033.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-180045",
-    "host": "clipboard-title-launcher-180045.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-18-00-45 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Paste and launch page that slugifies the clipboard HTML title and opens a generated snapshot.",
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-180045.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-180054",
-    "host": "clipboard-title-launcher-180054.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-18-00-54 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Paste and launch page that slugifies the clipboard HTML title and opens a generated snapshot.",
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-180054.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-180103",
-    "host": "clipboard-title-launcher-180103.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-18-01-03 during the April 2026 eleventh-pass cleanup."
-    ],
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "description": "Paste and launch page that slugifies the clipboard HTML title and opens a generated snapshot.",
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-180103.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-eleventh-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-2420",
-    "host": "clipboard-title-launcher-2420.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2420 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-2420.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-7466",
-    "host": "clipboard-title-launcher-7466.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-7466 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher that reads clipboard HTML, slugifies the title, and opens the generated snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-7466.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-reload-175442",
-    "host": "clipboard-title-launcher-reload-175442.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-54-42 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher with a datestamp and page reload after launching clipboard HTML as a titled snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-reload-175442.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-reload-175447",
-    "host": "clipboard-title-launcher-reload-175447.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-54-47 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher with a datestamp and page reload after launching clipboard HTML as a titled snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-reload-175447.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-launcher-reload-7141",
-    "host": "clipboard-title-launcher-reload-7141.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-7141 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step spark-button launcher with a datestamp and page reload after launching clipboard HTML as a titled snapshot.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-launcher-reload-7141.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-174857",
-    "host": "clipboard-title-paste-launcher-174857.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-48-57 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-174857.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-174904",
-    "host": "clipboard-title-paste-launcher-174904.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-49-04 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-174904.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-174907",
-    "host": "clipboard-title-paste-launcher-174907.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-49-07 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-174907.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-175023",
-    "host": "clipboard-title-paste-launcher-175023.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-23 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-175023.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-175026",
-    "host": "clipboard-title-paste-launcher-175026.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-26 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-175026.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
-    "siteId": "clipboard-title-paste-launcher-175040",
-    "host": "clipboard-title-paste-launcher-175040.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "notes": [
-      "Renamed from walvizaunch-2025-02-27-17-50-40 during the April 2026 thirteenth-pass cleanup."
-    ],
-    "description": "Two-step fullscreen clipboard launcher that first captures clipboard HTML, then launches an Iter9 snapshot using the title as the slug.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "testNotes": "",
-    "url": "https://clipboard-title-paste-launcher-175040.mullmania.com/",
-    "displayName": "404 Sites",
-    "managedBy": "manual-rename-batch",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "manual-rename-thirteenth-pass"
-    },
-    "tags": [
-      "curated"
-    ],
-    "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
   },
   {
     "siteId": "clock",
@@ -14239,33 +12868,72 @@
       "Created from the launchpad editor flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T08:33:31.664Z",
+    "lastPublishedAt": "2026-05-22T23:47:16.627Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/cozy-crate",
         "ref": null,
-        "sha": "18440a0bc9efb615359af19ed65c842b46b46f85",
+        "sha": "fb486177c6a81e1ceb912bd355fc821c9550fffa",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/cozy-crate",
         "branch": "main",
-        "commit": "18440a0bc9efb615359af19ed65c842b46b46f85",
+        "commit": "fb486177c6a81e1ceb912bd355fc821c9550fffa",
         "remote": "https://github.com/mist83/cozy-crate.git"
       }
     },
     "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-05-18T21:41:56Z",
+    "isPublic": false,
+    "siteAccessUpdatedAt": "2026-05-23T04:01:08Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
-    "assetVersion": "1.0.5",
+    "assetVersion": "1.0.23",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
+  },
+  {
+    "siteId": "cozybox",
+    "host": "cozybox.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T14:04:11.439Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/cozy-crate",
+        "ref": null,
+        "sha": "605cd6769d9d7cf353b0fe4918cde79edc9e6657",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/cozy-crate",
+        "branch": "main",
+        "commit": "605cd6769d9d7cf353b0fe4918cde79edc9e6657",
+        "remote": "https://github.com/mist83/cozy-crate.git"
+      }
+    },
+    "assetVersion": "1.0.10",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T04:00:07Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "cruddite",
@@ -14634,6 +13302,40 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "dad-bod-builder",
+    "host": "dad-bod-builder.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "idle",
+      "clicker",
+      "comedy",
+      "dad",
+      "bbq"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T15:54:58.257Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "assetVersion": "1.0.14",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:12:42Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "dag",
     "host": "dag.mullmania.com",
     "currentHostedSite": false,
@@ -14667,20 +13369,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T00:46:59.851Z",
+    "lastPublishedAt": "2026-05-23T13:42:09.007Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "bce61e80b1707199a7fc0fd533244cb66a7dadf9",
+        "sha": "2bda36f546c125e6a2aaa49f778bd2a26ae64044",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dag",
         "branch": "main",
-        "commit": "bce61e80b1707199a7fc0fd533244cb66a7dadf9",
+        "commit": "2bda36f546c125e6a2aaa49f778bd2a26ae64044",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -14710,7 +13412,7 @@
     "siteAccessUpdatedAt": "2026-04-25T17:28:02Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.19",
+    "assetVersion": "1.0.20",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -14829,6 +13531,34 @@
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": ""
+  },
+  {
+    "siteId": "dance-party",
+    "host": "dance-party.mullmania.com",
+    "url": "https://dance-party.mullmania.com/",
+    "hasHostedSite": true,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-22T18:04:31.791Z",
+    "managedBy": "brain-farts",
+    "lastPublishedAt": "2026-05-23T16:05:14.682Z",
+    "publishContext": {
+      "github": null,
+      "source": "brain-farts",
+      "steward": {
+        "repository": "mist83/brain-farts",
+        "path": null,
+        "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
+        "branch": "main",
+        "commit": "7b6db6b5fe23fd09afe6ee232a44aa7b771ada25"
+      }
+    },
+    "tags": [],
+    "catalogTagsVersion": 2,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": "",
+    "notes": []
   },
   {
     "siteId": "dark-flip-source-grid",
@@ -15347,20 +14077,20 @@
       "Live force-directed trie view over sites.mullmania.com/api/catalog with identity-preserving 2D-to-3D morphing. Hyphen-segmented prefix tree rooted at mullmania.com, with 6 alphabet buckets on the first ring and an 8-per-cluster soft cap."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T23:24:34.380Z",
+    "lastPublishedAt": "2026-05-23T16:11:50.676Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dendron",
         "ref": null,
-        "sha": "5af40340c12fb05ea5a6059cad1653c738c57ee5",
+        "sha": "c55d5a676afc562936c610cdc5abbc232c3329e8",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dendron",
         "branch": "main",
-        "commit": "5af40340c12fb05ea5a6059cad1653c738c57ee5",
+        "commit": "c55d5a676afc562936c610cdc5abbc232c3329e8",
         "remote": "https://github.com/mist83/dendron.git"
       }
     },
@@ -15373,7 +14103,7 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
-    "assetVersion": "1.0.2",
+    "assetVersion": "1.0.3",
     "canonVersion": "2026.04.19",
     "canonProfile": "frontdoor-v1"
   },
@@ -15773,20 +14503,20 @@
       "Just the way it is."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T15:15:14.784Z",
+    "lastPublishedAt": "2026-05-23T16:13:59.776Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dia",
         "ref": null,
-        "sha": "d08d57321b3dfec6ee3f96e1dcb452cc69891e9d",
+        "sha": "48f47c45c349dda4a311a71415aa57bde1a9f662",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dia",
         "branch": "main",
-        "commit": "d08d57321b3dfec6ee3f96e1dcb452cc69891e9d",
+        "commit": "48f47c45c349dda4a311a71415aa57bde1a9f662",
         "remote": "https://github.com/mist83/dia.git"
       }
     },
@@ -15798,7 +14528,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "dialogue-tree",
@@ -15976,20 +14709,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:05:43.730Z",
+    "lastPublishedAt": "2026-05-23T17:42:17.476Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/disem-bowling",
         "ref": null,
-        "sha": "1f27246c4085aecdb60217169ae63f13456e7192",
+        "sha": "19da44eb10de754d41929edb77e379e11469531a",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/disem-bowling",
         "branch": "main",
-        "commit": "1f27246c4085aecdb60217169ae63f13456e7192",
+        "commit": "19da44eb10de754d41929edb77e379e11469531a",
         "remote": "https://github.com/mist83/disem-bowling.git"
       }
     },
@@ -16010,7 +14743,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "domino",
@@ -16331,20 +15067,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:09:25.834Z",
+    "lastPublishedAt": "2026-05-23T16:06:41.484Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/drop",
         "ref": null,
-        "sha": "fc33d0d85211dd4d0246669f8ba6f5253efc4911",
+        "sha": "1cfb17adc52a42e48f283a00053523e7c8719a7b",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/drop",
         "branch": "main",
-        "commit": "fc33d0d85211dd4d0246669f8ba6f5253efc4911",
+        "commit": "1cfb17adc52a42e48f283a00053523e7c8719a7b",
         "remote": "https://github.com/mist83/drop.git"
       }
     },
@@ -18354,24 +17090,24 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T09:13:50.000Z",
+    "lastPublishedAt": "2026-05-22T20:20:03.251Z",
     "publishContext": {
       "github": {
-        "actions": false,
+        "actions": true,
         "repository": "mist83/fighters",
-        "ref": null,
-        "sha": "7e575cd99aafc83a779cb2e6bf50bd8fa2ffd7e3",
-        "runId": null,
-        "runNumber": null
+        "ref": "refs/heads/main",
+        "sha": "ece2f203f9d628056052e0c829a65c624a7c430f",
+        "runId": "26310018039",
+        "runNumber": "21"
       },
       "git": {
-        "root": "/Users/mist83/Code/fighters",
+        "root": "/home/runner/work/fighters/fighters",
         "branch": "main",
-        "commit": "7e575cd99aafc83a779cb2e6bf50bd8fa2ffd7e3",
-        "remote": "https://github.com/mist83/fighters.git"
+        "commit": "ece2f203f9d628056052e0c829a65c624a7c430f",
+        "remote": "https://github.com/mist83/fighters"
       }
     },
-    "assetVersion": "1.0.5",
+    "assetVersion": "1.0.22",
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
@@ -20650,15 +19386,15 @@
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:08:12.430Z",
+    "lastPublishedAt": "2026-05-23T14:38:26.721Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25990409284",
-        "runNumber": "72"
+        "runId": "26335461712",
+        "runNumber": "165"
       },
       "git": null
     },
@@ -20681,7 +19417,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-04-25T23:39:04Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "gnomon",
@@ -21151,20 +19890,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T04:28:43.361Z",
+    "lastPublishedAt": "2026-05-23T15:21:16.837Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/graveyard",
         "ref": null,
-        "sha": "abfc30c7601eef867a5286b1ea1fed64db99cf24",
+        "sha": "b5abe2392f578b1154ea393bc3519d3fdc1621be",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/graveyard",
         "branch": "main",
-        "commit": "abfc30c7601eef867a5286b1ea1fed64db99cf24",
+        "commit": "b5abe2392f578b1154ea393bc3519d3fdc1621be",
         "remote": "https://github.com/mist83/graveyard.git"
       }
     },
@@ -21176,7 +19915,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "graveyard-browser",
@@ -22126,8 +20868,8 @@
     "showcaseRank": 240,
     "description": "Live site for Html Better Builtins.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T18:00:00Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -22492,28 +21234,31 @@
       "gallery",
       "backend",
       "mullmania-data",
-      "ui-framework"
+      "ui-framework",
+      "image",
+      "upload",
+      "download"
     ],
     "notes": [
       "Image archive backend seeded from Codex-generated Nelsonville assets. ipzom.com is the bootstrap model; this repo is the images.mullmania.com rebrand target.",
       "Gallery sister site for Image Fiber with upload, browse, preview, and download support."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:43:34.774Z",
+    "lastPublishedAt": "2026-05-23T15:12:46.560Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/images.mullmania.com",
+        "repository": "mist83/image-fiber",
         "ref": null,
-        "sha": "bd83dfd97f1b88972a200e357c7c17e01b0e6924",
+        "sha": "1f923ed57a2a2f6b89f0a4cb3d48b18f158e2205",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/images.mullmania.com",
-        "branch": "main",
-        "commit": "bd83dfd97f1b88972a200e357c7c17e01b0e6924",
-        "remote": "https://github.com/mist83/images.mullmania.com.git"
+        "root": "/Users/mist83/Code/image-fiber",
+        "branch": "soc",
+        "commit": "1f923ed57a2a2f6b89f0a4cb3d48b18f158e2205",
+        "remote": "https://github.com/mist83/image-fiber.git"
       }
     },
     "description": "Canonical Mullmania image archive and generated asset backend.",
@@ -22524,7 +21269,10 @@
     "siteAliasesUpdatedAt": null,
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "infinite-scroll",
@@ -24180,41 +22928,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "launchpad-e2e-1778279867218",
-    "host": "launchpad-e2e-1778279867218.mullmania.com",
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-05-08T22:38:48Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null,
-    "currentHostedSite": false,
-    "mainSite": false,
-    "mainSiteUpdatedAt": "2026-05-08T22:40:54Z",
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "tags": [
-      "launchpad-created",
-      "editor"
-    ],
-    "notes": [
-      "Created from the launchpad editor flow."
-    ],
-    "managedBy": "sites-api",
-    "lastPublishedAt": "2026-05-08T22:38:12Z",
-    "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "sites.mullmania.com"
-    },
-    "catalogTagsVersion": 2,
-    "description": "",
-    "testNotes": "",
-    "manualRank": 0,
-    "manualRankUpdatedAt": "2026-05-08T22:38:30Z",
-    "displayName": "launchpad-e2e-1778279867218"
-  },
-  {
     "siteId": "layouts-everywhere",
     "host": "layouts-everywhere.mullmania.com",
     "currentHostedSite": false,
@@ -24990,22 +23703,17 @@
       "Publish the Liskov library demo UI to Mullmania and keep the filesystem API behind the same host /api surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T14:19:46.026Z",
+    "lastPublishedAt": "2026-05-23T14:38:35.955Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/liskov-file-system",
-        "ref": null,
-        "sha": "861d5221993304fe3ba77bd87c878d3663ddd98c",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26335465802",
+        "runNumber": "166"
       },
-      "git": {
-        "root": "/Users/mist83/Code/liskov-file-system",
-        "branch": "master",
-        "commit": "861d5221993304fe3ba77bd87c878d3663ddd98c",
-        "remote": "https://github.com/mist83/liskov-file-system.git"
-      }
+      "git": null
     },
     "description": "HTTP file browser for S3 and local storage.",
     "frameworkSite": true,
@@ -25033,7 +23741,7 @@
     "siteAccessUpdatedAt": "2026-04-26T23:57:58Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.5",
+    "assetVersion": "1.0.6",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -27666,20 +26374,20 @@
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T08:38:56.362Z",
+    "lastPublishedAt": "2026-05-23T15:14:38.344Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "9f70dd85c744d0924f6967cce6d7011d08db7954",
+        "sha": "1e46825d425d8582d9a492cac04adf09d0b3e7e4",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/models-round8-vertexoid-current",
-        "branch": "round8-plus-vertexoid-current",
-        "commit": "9f70dd85c744d0924f6967cce6d7011d08db7954",
+        "root": "/Users/mist83/Code/models",
+        "branch": "master",
+        "commit": "1e46825d425d8582d9a492cac04adf09d0b3e7e4",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -27694,7 +26402,7 @@
     "siteAliasesUpdatedAt": null,
     "displayName": "Models",
     "url": "https://models.mullmania.com/",
-    "assetVersion": "1.0.26",
+    "assetVersion": "1.0.28",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -28057,20 +26765,20 @@
       "Mullformed is a browser-native 3D sketchpad for quickly shaping rough ideas into usable 3D assets."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-19T02:48:49.301Z",
+    "lastPublishedAt": "2026-05-23T16:12:49.628Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mullformed",
         "ref": null,
-        "sha": "35d3418abbdd358ee7eb12d76238a090fe8cc280",
+        "sha": "ac77a40f62bfc6ebba01ed7d1e9e95c482ca2f95",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mullformed",
         "branch": "main",
-        "commit": "35d3418abbdd358ee7eb12d76238a090fe8cc280",
+        "commit": "ac77a40f62bfc6ebba01ed7d1e9e95c482ca2f95",
         "remote": "https://github.com/mist83/mullformed.git"
       }
     },
@@ -28083,7 +26791,7 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
-    "assetVersion": "1.0.2",
+    "assetVersion": "1.0.5",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -28406,8 +27114,8 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:05:51Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -28429,20 +27137,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:08:15.541Z",
+    "lastPublishedAt": "2026-05-23T16:13:38.064Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/nelsonville",
         "ref": null,
-        "sha": "5b9c78b6bbbb5b30e8a95bf48ee535abe20b72f9",
+        "sha": "627c381a8f01b40b2a0c7195fa93bb46b7333001",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/nelsonville",
         "branch": "main",
-        "commit": "5b9c78b6bbbb5b30e8a95bf48ee535abe20b72f9",
+        "commit": "627c381a8f01b40b2a0c7195fa93bb46b7333001",
         "remote": "https://github.com/mist83/nelsonville.git"
       }
     },
@@ -28454,7 +27162,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "neon-animals",
@@ -28643,6 +27354,37 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "testNotes": ""
+  },
+  {
+    "siteId": "nikita-vibes",
+    "host": "nikita-vibes.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "frontend-ui"
+    ],
+    "notes": [
+      "Public zip-upload host. Each /<category>/<site>/ path is a separately uploaded static site."
+    ],
+    "managedBy": "manual",
+    "lastPublishedAt": "2026-05-23T05:14:10Z",
+    "publishContext": {
+      "github": null,
+      "git": null,
+      "source": "manual-registration"
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T05:14:10Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "Public static-site host. Upload zips at the root; sites served at /<category>/<site>/.",
+    "testNotes": "",
+    "mainSite": false,
+    "mainSiteUpdatedAt": null
   },
   {
     "siteId": "nikitakramar",
@@ -29276,6 +28018,38 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
+    "testNotes": "",
+    "mainSite": false,
+    "mainSiteUpdatedAt": null
+  },
+  {
+    "siteId": "nv-backups",
+    "host": "nv-backups.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "backup",
+      "frontend-ui"
+    ],
+    "notes": [
+      "Backup mirror for nikita-vibes. When a site is deleted from nikita-vibes.mullmania.com, the lambda copies all files to nv-backups/<category>/<site>/<utc-timestamp>/ before deletion. Browse any backup at https://nv-backups.mullmania.com/<category>/<site>/<timestamp>/."
+    ],
+    "managedBy": "manual",
+    "lastPublishedAt": "2026-05-23T18:30:00Z",
+    "publishContext": {
+      "github": null,
+      "git": null,
+      "source": "manual-registration"
+    },
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T18:30:00Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "Timestamped backup mirror for nikita-vibes deletions. Written by the nikita-vibes lambda; no separate codebase.",
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null
@@ -30212,7 +28986,7 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-19T03:05:03.335Z",
     "managedBy": "brain-farts",
-    "lastPublishedAt": "2026-05-19T20:08:51.863Z",
+    "lastPublishedAt": "2026-05-23T16:15:17.182Z",
     "publishContext": {
       "github": null,
       "source": "brain-farts",
@@ -30221,7 +28995,7 @@
         "path": "sites/outatime/public",
         "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
         "branch": "main",
-        "commit": "a71e306794164ae89925b82dbfc2484d0380ef09"
+        "commit": "7b6db6b5fe23fd09afe6ee232a44aa7b771ada25"
       }
     },
     "tags": [],
@@ -34332,15 +33106,15 @@
       "Validated canonical repo-local deploy contract."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:06:48.953Z",
+    "lastPublishedAt": "2026-05-23T15:10:10.474Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25995861537",
-        "runNumber": "79"
+        "runId": "26336169595",
+        "runNumber": "169"
       },
       "git": null
     },
@@ -34369,7 +33143,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-16T18:00:00Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "rhythm-scene",
@@ -35085,20 +33862,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T07:33:12.968Z",
+    "lastPublishedAt": "2026-05-23T15:13:42.100Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/rotoscope",
         "ref": null,
-        "sha": "fc039701016fcd1d5c5c9fa4f26ae22b8cc27b6f",
+        "sha": "4efb610fc5333488844bb91d0a38ed3ba53f4f1a",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/rotoscope",
         "branch": "main",
-        "commit": "fc039701016fcd1d5c5c9fa4f26ae22b8cc27b6f",
+        "commit": "4efb610fc5333488844bb91d0a38ed3ba53f4f1a",
         "remote": "https://github.com/mist83/rotoscope.git"
       }
     },
@@ -35112,7 +33889,7 @@
     "displayName": "rotoscope",
     "manualRank": 0,
     "manualRankUpdatedAt": null,
-    "assetVersion": "1.0.4",
+    "assetVersion": "1.0.6",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -35357,8 +34134,8 @@
     "url": "https://saved-browser-toy-arcade.mullmania.com/",
     "displayName": "Saved Browser Toy Arcade",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T15:52:56Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -37319,8 +36096,8 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:06:30Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -37366,8 +36143,8 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:07:48Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -37895,22 +36672,17 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T08:49:12.735Z",
+    "lastPublishedAt": "2026-05-21T09:15:13.519Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/sites",
-        "ref": null,
-        "sha": "0bf38b7682723df4499db6cf37bf811c12c0e13a",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26216891659",
+        "runNumber": "150"
       },
-      "git": {
-        "root": "/Users/mist83/Code/sites",
-        "branch": "main",
-        "commit": "0bf38b7682723df4499db6cf37bf811c12c0e13a",
-        "remote": "https://github.com/mist83/sites.git"
-      },
+      "git": null,
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -37940,7 +36712,7 @@
       "posterNote": "Local browser capture of the canonized Sites launchpad."
     },
     "showcaseRank": 240,
-    "assetVersion": "1.0.2",
+    "assetVersion": "1.0.0",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -39094,20 +37866,20 @@
       "Specromancer redirects to the live generator because the working backend host is a Lambda URL, not a static mirror. The source repo is mist83/specromancer."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:37:19.105Z",
+    "lastPublishedAt": "2026-05-22T18:00:33.945Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/specromancer",
         "ref": null,
-        "sha": "b31b18ed493fa1faa5985a3ab070fe1f46737ca3",
+        "sha": "7fd44f20e003645cb0a8b5d10fc310b9397d2f39",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/specromancer",
         "branch": "master",
-        "commit": "b31b18ed493fa1faa5985a3ab070fe1f46737ca3",
+        "commit": "7fd44f20e003645cb0a8b5d10fc310b9397d2f39",
         "remote": "https://github.com/mist83/specromancer.git"
       }
     },
@@ -39117,7 +37889,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "spinner-refresh-grid",
@@ -39778,6 +38553,34 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "straight-rider",
+    "host": "straight-rider.mullmania.com",
+    "url": "https://straight-rider.mullmania.com/",
+    "hasHostedSite": true,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-21T22:27:20.595Z",
+    "managedBy": "brain-farts",
+    "lastPublishedAt": "2026-05-23T04:25:33.191Z",
+    "publishContext": {
+      "github": null,
+      "source": "brain-farts",
+      "steward": {
+        "repository": "mist83/brain-farts",
+        "path": "sites/straight-rider/public",
+        "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
+        "branch": "main",
+        "commit": "68d345dca8f603468aea430e2b9648841b3cc33f"
+      }
+    },
+    "tags": [],
+    "catalogTagsVersion": 2,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": "",
+    "notes": []
+  },
+  {
     "siteId": "strataforge",
     "host": "strataforge.mullmania.com",
     "currentHostedSite": false,
@@ -39822,8 +38625,8 @@
   {
     "siteId": "straw-showdown",
     "host": "straw-showdown.mullmania.com",
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:04:34Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "currentHostedSite": false,
@@ -39835,21 +38638,40 @@
     "syntheticIndex": false,
     "tags": [
       "launchpad-created",
-      "editor"
+      "editor",
+      "launchpad-promoted",
+      "single-page",
+      "rating",
+      "community",
+      "geotag"
     ],
     "notes": [
       "Created from the launchpad editor flow."
     ],
-    "managedBy": "sites-api",
-    "lastPublishedAt": "2026-05-02T17:22:30Z",
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T19:00:59.886Z",
     "publishContext": {
-      "github": null,
-      "git": null,
-      "source": "sites.mullmania.com"
+      "github": {
+        "actions": false,
+        "repository": "mist83/straw-showdown",
+        "ref": null,
+        "sha": "4894a2d39d2f74e6bb7832be3d2cb8fc23e9a0c2",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/straw-showdown",
+        "branch": "main",
+        "commit": "4894a2d39d2f74e6bb7832be3d2cb8fc23e9a0c2",
+        "remote": "https://github.com/mist83/straw-showdown.git"
+      }
     },
     "catalogTagsVersion": 2,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "stray-script-style-rescue",
@@ -40965,15 +39787,15 @@
       "Lambda backend deployer is preserved as deploy-lambda.sh; the canonical deploy wrapper occupies the root deploy.sh slot."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T06:48:59.064Z",
+    "lastPublishedAt": "2026-05-23T15:10:24.069Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25983881839",
-        "runNumber": "55"
+        "runId": "26336177262",
+        "runNumber": "170"
       },
       "git": null
     },
@@ -40996,7 +39818,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-16T18:00:00Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "tap-to-play-melody",
@@ -42180,22 +41005,17 @@
       "Standalone Tic Tac Toe game with a hosted browser surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:17:31.571Z",
+    "lastPublishedAt": "2026-05-23T15:10:33.248Z",
     "publishContext": {
       "github": {
-        "actions": false,
-        "repository": "mist83/tic-hack-toe",
-        "ref": null,
-        "sha": "27d6939bd0e356280280249cdc748838ebbc689f",
-        "runId": null,
-        "runNumber": null
+        "actions": true,
+        "repository": "mist83/broker-deploy",
+        "ref": "refs/heads/main",
+        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
+        "runId": "26336181500",
+        "runNumber": "171"
       },
-      "git": {
-        "root": "/Users/mist83/Code/tic-hack-toe",
-        "branch": "master",
-        "commit": "27d6939bd0e356280280249cdc748838ebbc689f",
-        "remote": "https://github.com/mist83/tic-hack-toe.git"
-      }
+      "git": null
     },
     "description": "A modern web-based implementation of the classic Tic-tac-toe game with automated deployment capabilities.",
     "mainSite": false,
@@ -42216,7 +41036,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-16T17:10:15Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "tic-tac-toe",
@@ -42260,8 +41083,8 @@
     "mainSite": false,
     "mainSiteUpdatedAt": null,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:08:26Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
   },
@@ -43366,20 +42189,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T16:45:17.611Z",
+    "lastPublishedAt": "2026-05-23T18:53:31.191Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tv-tail",
         "ref": null,
-        "sha": "40641c606407905f6ba4bacd29fbfaf66457c077",
+        "sha": "bedae1e6af403e38feb9bbb1d2b41921e1e73310",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tv-tail",
         "branch": "main",
-        "commit": "40641c606407905f6ba4bacd29fbfaf66457c077",
+        "commit": "bedae1e6af403e38feb9bbb1d2b41921e1e73310",
         "remote": "https://github.com/mist83/tv-tail.git"
       }
     },
@@ -43400,7 +42223,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.30",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "two-button-implementation-notes",
@@ -43875,20 +42701,20 @@
       "Meteor Protocol: push the repo to GitHub, then manually deploy this root publish dir to Mullmania so the live site survives local-machine loss."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:55:25.900Z",
+    "lastPublishedAt": "2026-05-23T19:19:43.400Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/v3",
         "ref": null,
-        "sha": "6bed32e765cb1cf5db5d77157e497ee451b49f46",
+        "sha": "e0e2c11bcb44bc7581fd6ae78c60fd7e75c46044",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/v3",
         "branch": "master",
-        "commit": "6bed32e765cb1cf5db5d77157e497ee451b49f46",
+        "commit": "e0e2c11bcb44bc7581fd6ae78c60fd7e75c46044",
         "remote": "https://github.com/mist83/v3.git"
       }
     },
@@ -43911,7 +42737,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-01T04:10:30Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "valet",
@@ -44053,8 +42882,8 @@
     "notes": [],
     "managedBy": "bulk-catalog-restore",
     "lastPublishedAt": "2026-04-23T21:53:08.516Z",
-    "isPublic": false,
-    "siteAccessUpdatedAt": "2026-05-02T23:26:49.869Z",
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T19:26:17Z",
     "publishContext": {
       "github": {
         "actions": false,
@@ -44850,24 +43679,24 @@
       "Static publish of cobalt-wealthops. Live server runs locally via `dotnet run` from the repo; the published site reads JSON fixtures and stages mutations client-side."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T20:56:06.830Z",
+    "lastPublishedAt": "2026-05-23T14:39:46.994Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/cobalt-wealthops",
         "ref": null,
-        "sha": "2b30e8cb708e23cc31ebbdb7f0779100eefe15c6",
+        "sha": "d1dd416fb87b5e004e6b85d3f4f901c4252b99a5",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/cobalt-wealthops",
         "branch": "main",
-        "commit": "2b30e8cb708e23cc31ebbdb7f0779100eefe15c6",
+        "commit": "d1dd416fb87b5e004e6b85d3f4f901c4252b99a5",
         "remote": "https://github.com/mist83/cobalt-wealthops.git"
       }
     },
-    "assetVersion": "1.0.1",
+    "assetVersion": "1.0.42",
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
