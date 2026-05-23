@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-profile-toc-v1",
   "summary": "Profile table of contents for the shared doctrine core.",
-  "generatedAt": "2026-05-23T14:30:13.621Z",
+  "generatedAt": "2026-05-23T14:49:48.407Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
   "defaultProfileIdsByRuntime": {
@@ -63,6 +63,7 @@
         "feedback_bootstrap_quiet_by_default",
         "feedback_context_sidecar_plain_context",
         "feedback_preempt_adhd_spiral",
+        "feedback_varied_chips_and_synopsis",
         "feedback_domain_agnostic",
         "feedback_interconnect_and_suggest",
         "feedback_no_ai_stink",

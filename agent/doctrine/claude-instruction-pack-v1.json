@@ -2,14 +2,14 @@
   "schemaVersion": "agents-claude-instruction-pack-v1",
   "flavor": "claude-code",
   "operator": "mist83",
-  "renderedAt": "2026-05-23T14:30:13.664Z",
+  "renderedAt": "2026-05-23T14:49:48.450Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json",
   "bootstrapScriptUrl": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh",
   "preambleInstruction": "At the start of every chat, fetch this manifest, materialize each item to its projectionTarget, verify each sha256, and only then proceed. If any fetch or verification fails, stop and report. Do not invent fallback policy.",
-  "totalItems": 17,
+  "totalItems": 18,
   "composition": {
     "sharedItemCount": 0,
-    "flavorItemCount": 17,
+    "flavorItemCount": 18,
     "sharedTreeUrl": "https://agent.mullmania.com/doctrine/shared",
     "flavorTreeUrl": "https://agent.mullmania.com/doctrine/claude-pack",
     "note": "Shared items are runtime-agnostic content (rules, skills, commands, hooks). They live at /doctrine/shared/ and are reused verbatim by every flavor pack. Flavor items are Claude-specific shims (CLAUDE.md, settings.json, .mcp.json, plugins, MEMORY.md). The codex pack will reference the same /doctrine/shared/ URLs with its own projection targets."
@@ -34,6 +34,16 @@
       "sizeBytes": 762,
       "mode": "regular",
       "projectionTarget": "~/.claude/commands/lecter.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "commands/overdrive.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/overdrive.md",
+      "sha256": "ba1c6fe5f52a3d0992eee22a6e6708d701a42b6a575f5b0034e5fab56059c11e",
+      "sizeBytes": 249,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/overdrive.md",
       "category": "command-trampoline"
     },
     {
@@ -218,6 +228,6 @@
     "rules/project/*.md files are operator scratch (in-flight initiative context) and are included here for full wipe-and-rehydrate fidelity. They are not durable doctrine and may rotate or expire.",
     "sha256 covers file bytes only; the manifest itself is unsigned in v1. Trust on first fetch.",
     "projectionTarget paths are operator-machine absolute paths with leading ~. The bootstrap script must expand them.",
-    "Shared/flavor split: 0 of 17 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 17 items are Claude-specific shims."
+    "Shared/flavor split: 0 of 18 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 18 items are Claude-specific shims."
   ]
 }

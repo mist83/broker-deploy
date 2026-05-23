@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-23T14:30:13.620Z",
+  "generatedAt": "2026-05-23T14:49:48.407Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -854,6 +854,38 @@
       ],
       "profileIds": [
         "shared-ui-stack"
+      ]
+    },
+    {
+      "id": "feedback_varied_chips_and_synopsis",
+      "label": "feedback varied chips and synopsis",
+      "kind": "feedback-rule",
+      "summary": "Format every response to be glanceable. Operator quote, 2026-05-23: \"We are millisecond shaving from my brain and tapping into my visual cortex and lizard brain to be able to efficiently absorb information.\"",
+      "excerpt": "Format every response to be glanceable. Operator quote, 2026-05-23: \"We are millisecond shaving from my brain and tapping into my visual cortex and lizard brain to be able to efficiently absorb information.\"\n\nThe vocabulary — fixed, do NOT rotate\n\n| chip | meaning |\n|------|---------|\n| 🚨 | **critical** — must read; consequence if skipped |\n| ⚠️ | **decide** — needs an answer or input from the operator |\n| 🟢 | **done** — confirmed / verified / no action needed |\n| 🔘×N | **N hands-off knobs** — autonomous decisions, skippable, listed below |\n\nThese four chips are the entire severity vocabulary. **Do not introduce others** (🛑 ⛔ 🔥 🪧 ⚡ 🆘 📛 🚦 are all deprecated — they were tried as \"varied chips\" in an earlier version of this rule and the operator rejected them: pattern habituation is solved by **rarity**, not rotation).\n\nA 🚨 in every response degrades to noise. Cap: at most one 🚨 per response unless safety-critical. If a response has two 🚨s, ask whether one is actually 🟢.\n\n🔘×N — one chip, count baked in\n\nWhen you made N autonomous decisions the operator can ignore but should know exist, surface them as **one** chip per response:\n\n> 🔘×3 hands-off — skip unless interested:\n> 1. <short title.> <one sentence.>\n> 2. <short title.> <one sentence.>\n> 3. <short title.> <one sentence.>\n\nThe multiplier is always present so the count reads at a glance. **Do not put a chip on ea",
+      "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_varied_chips_and_synopsis.md",
+      "sitePath": "/doctrine/shared/rules/feedback/feedback_varied_chips_and_synopsis.md",
+      "sha256": "5b3458c46bf454243b5a2db39ae27c5ecb57a3d76785fe7705eed48328efeaf5",
+      "durability": "standing",
+      "tags": [
+        "communication",
+        "operator-style"
+      ],
+      "domains": [
+        "operator-style"
+      ],
+      "events": [
+        "session_start",
+        "task_execution",
+        "memory_read"
+      ],
+      "runtimes": [
+        "codex",
+        "claude",
+        "generic",
+        "agent"
+      ],
+      "profileIds": [
+        "shared-operator-core"
       ]
     },
     {
