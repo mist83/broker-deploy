@@ -1,7 +1,7 @@
 {
   "siteId": "tic-hack-toe",
   "host": "tic-hack-toe.mullmania.com",
-  "semver": "1.0.0",
-  "previousSemver": null,
-  "publishedAt": "2026-05-23T15:10:33.248Z"
+  "semver": "1.0.1",
+  "previousSemver": "1.0.0",
+  "publishedAt": "2026-05-24T11:02:26.946Z"
 }

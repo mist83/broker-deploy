@@ -105,12 +105,37 @@
         .cell.winner {
             background: #ffd700;
             color: #000000;
+            animation: winner-pulse 0.9s ease-out infinite alternate;
         }
-        
+
+        @keyframes winner-pulse {
+            from {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6), 0 0 0 0 rgba(255, 215, 0, 0.0) inset;
+                transform: scale(1);
+            }
+            to {
+                box-shadow: 0 0 28px 6px rgba(255, 215, 0, 0.85), 0 0 18px 2px rgba(255, 215, 0, 0.5) inset;
+                transform: scale(1.06);
+            }
+        }
+
         .status {
             font-size: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             min-height: 30px;
+        }
+
+        .score {
+            font-size: 14px;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 18px;
+        }
+
+        .score b {
+            color: #ffd700;
+            font-weight: 600;
         }
         
         .controls {
@@ -145,22 +170,29 @@
         }
     </style>
 <link rel="icon" href="../favicon.ico">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#ffd700">
 </head>
 <body>
     <h1>TIC-HACK-TOE</h1>
     <div class="mode" id="mode">Mode: Normal</div>
-    <div class="status" id="status">Your turn</div>
-    
-    <div class="grid" id="grid">
-        <button class="cell" type="button" data-index="0"></button>
-        <button class="cell" type="button" data-index="1"></button>
-        <button class="cell" type="button" data-index="2"></button>
-        <button class="cell" type="button" data-index="3"></button>
-        <button class="cell" type="button" data-index="4"></button>
-        <button class="cell" type="button" data-index="5"></button>
-        <button class="cell" type="button" data-index="6"></button>
-        <button class="cell" type="button" data-index="7"></button>
-        <button class="cell" type="button" data-index="8"></button>
+    <div class="status" id="status" role="status" aria-live="polite">Your turn</div>
+    <div class="score" id="score" aria-label="Session score">
+        <span>Wins <b id="score-wins">0</b></span>
+        <span>Losses <b id="score-losses">0</b></span>
+        <span>Draws <b id="score-draws">0</b></span>
+    </div>
+
+    <div class="grid" id="grid" role="grid" aria-label="Tic-tac-toe board">
+        <button class="cell" type="button" data-index="0" aria-label="Top left, empty"></button>
+        <button class="cell" type="button" data-index="1" aria-label="Top middle, empty"></button>
+        <button class="cell" type="button" data-index="2" aria-label="Top right, empty"></button>
+        <button class="cell" type="button" data-index="3" aria-label="Middle left, empty"></button>
+        <button class="cell" type="button" data-index="4" aria-label="Center, empty"></button>
+        <button class="cell" type="button" data-index="5" aria-label="Middle right, empty"></button>
+        <button class="cell" type="button" data-index="6" aria-label="Bottom left, empty"></button>
+        <button class="cell" type="button" data-index="7" aria-label="Bottom middle, empty"></button>
+        <button class="cell" type="button" data-index="8" aria-label="Bottom right, empty"></button>
     </div>
     
     <div class="controls">
@@ -171,23 +203,56 @@
         <button class="tv-control" id="mode-normal" type="button">Normal mode</button>
         <button class="tv-control" id="mode-bomb" type="button">Bomb mode</button>
         <button class="tv-control" id="mode-laser" type="button">Laser mode</button>
+        <button class="tv-control" id="diff-chill" type="button">AI: Chill</button>
+        <button class="tv-control" id="diff-sharp" type="button">AI: Sharp</button>
         <button class="tv-control" id="reset-button" type="button">Reset board</button>
         <button class="tv-control" id="palette-button" type="button">Cycle color</button>
     </div>
 
-    <script>
-        let board = ['', '', '', '', '', '', '', '', ''];
+    <script type="module">
+        import {
+            EMPTY_BOARD,
+            applyMove,
+            findWin,
+            isDraw,
+            chooseAiMove,
+        } from './game-logic.js';
+
+        let board = EMPTY_BOARD.slice();
         let currentPlayer = 'X';
         let gameActive = true;
         let mode = 'normal'; // normal, bomb, laser
+        let difficulty = 'sharp'; // chill, sharp
         let bgColors = ['#2a2a3a', '#3a2a2a', '#2a3a3a', '#3a2a4a'];
         let colorIndex = 0;
 
-        const winPatterns = [
-            [0,1,2], [3,4,5], [6,7,8],
-            [0,3,6], [1,4,7], [2,5,8],
-            [0,4,8], [2,4,6]
+        const SCORE_KEY = 'tic-hack-toe.score.v1';
+        const CELL_POS_LABELS = [
+            'Top left', 'Top middle', 'Top right',
+            'Middle left', 'Center', 'Middle right',
+            'Bottom left', 'Bottom middle', 'Bottom right',
         ];
+
+        function loadScore() {
+            try {
+                const raw = localStorage.getItem(SCORE_KEY);
+                if (!raw) return { wins: 0, losses: 0, draws: 0 };
+                const parsed = JSON.parse(raw);
+                return {
+                    wins: Number(parsed.wins) || 0,
+                    losses: Number(parsed.losses) || 0,
+                    draws: Number(parsed.draws) || 0,
+                };
+            } catch {
+                return { wins: 0, losses: 0, draws: 0 };
+            }
+        }
+
+        function saveScore(score) {
+            try { localStorage.setItem(SCORE_KEY, JSON.stringify(score)); } catch { /* private mode */ }
+        }
+
+        let score = loadScore();
 
         function getTvControls() {
             return Array.from(document.querySelectorAll('.cell, .tv-control'));
@@ -251,103 +316,92 @@
 
         function setMode(nextMode) {
             mode = nextMode;
-            document.getElementById('mode').textContent = `Mode: ${mode === 'bomb' ? 'Bomb' : mode === 'laser' ? 'Laser' : 'Normal'}`;
+            renderModeLine();
             document.getElementById('mode-normal').classList.toggle('active', mode === 'normal');
             document.getElementById('mode-bomb').classList.toggle('active', mode === 'bomb');
             document.getElementById('mode-laser').classList.toggle('active', mode === 'laser');
         }
 
+        function setDifficulty(nextDifficulty) {
+            difficulty = nextDifficulty;
+            renderModeLine();
+            document.getElementById('diff-chill').classList.toggle('active', difficulty === 'chill');
+            document.getElementById('diff-sharp').classList.toggle('active', difficulty === 'sharp');
+        }
+
+        function renderModeLine() {
+            const modeLabel = mode === 'bomb' ? 'Bomb' : mode === 'laser' ? 'Laser' : 'Normal';
+            const diffLabel = difficulty === 'sharp' ? 'Sharp' : 'Chill';
+            document.getElementById('mode').textContent = `Mode: ${modeLabel} · AI: ${diffLabel}`;
+        }
+
         function makeMove(index) {
             if (!gameActive || board[index] !== '' || currentPlayer !== 'X') return;
-            
-            if (mode === 'bomb') {
-                board[index] = 'X';
-                clearAdjacent(index);
-            } else if (mode === 'laser') {
-                board[index] = 'X';
-                clearRowCol(index);
-            } else {
-                board[index] = 'X';
-            }
-            
+
+            board = applyMove(board, index, 'X', mode);
             render();
-            
+
             if (checkWin('X')) {
-                endGame('You win!');
+                endGame('You win!', 'win');
                 return;
             }
-            
-            if (board.every(cell => cell !== '')) {
-                endGame('Draw!');
+
+            if (isDraw(board)) {
+                endGame('Draw!', 'draw');
                 return;
             }
-            
+
             currentPlayer = 'O';
             document.getElementById('status').textContent = 'AI thinking...';
             setTimeout(aiMove, 500);
         }
 
-        function clearAdjacent(index) {
-            const adjacent = [
-                index-4, index-3, index-2,
-                index-1,         index+1,
-                index+2, index+3, index+4
-            ];
-            const row = Math.floor(index / 3);
-            adjacent.forEach(i => {
-                if (i >= 0 && i < 9 && Math.abs(Math.floor(i/3) - row) <= 1) {
-                    if (board[i] === 'O') board[i] = '';
-                }
-            });
-        }
-
-        function clearRowCol(index) {
-            const row = Math.floor(index / 3);
-            const col = index % 3;
-            for (let i = 0; i < 3; i++) {
-                if (board[row * 3 + i] === 'O') board[row * 3 + i] = '';
-                if (board[i * 3 + col] === 'O') board[i * 3 + col] = '';
-            }
-        }
-
         function aiMove() {
-            const empty = board.map((v, i) => v === '' ? i : null).filter(v => v !== null);
-            if (empty.length === 0) return;
-            
-            const move = empty[Math.floor(Math.random() * empty.length)];
-            board[move] = 'O';
+            const move = chooseAiMove(board, 'O', { difficulty, mode });
+            if (move < 0) return;
+
+            board = applyMove(board, move, 'O', 'normal');
             currentPlayer = 'X';
-            
             render();
-            
+
             if (checkWin('O')) {
-                endGame('AI wins!');
+                endGame('AI wins!', 'loss');
                 return;
             }
-            
-            if (board.every(cell => cell !== '')) {
-                endGame('Draw!');
+
+            if (isDraw(board)) {
+                endGame('Draw!', 'draw');
                 return;
             }
-            
+
             document.getElementById('status').textContent = 'Your turn';
         }
 
         function checkWin(player) {
-            return winPatterns.some(pattern => {
-                if (pattern.every(i => board[i] === player)) {
-                    pattern.forEach(i => {
-                        document.querySelector(`[data-index="${i}"]`).classList.add('winner');
-                    });
-                    return true;
-                }
-                return false;
+            const winLine = findWin(board, player);
+            if (!winLine) return false;
+            winLine.forEach((i) => {
+                document.querySelector(`[data-index="${i}"]`).classList.add('winner');
             });
+            return true;
         }
 
-        function endGame(message) {
+        function endGame(message, outcome) {
             gameActive = false;
             document.getElementById('status').textContent = message;
+            if (outcome === 'win') score.wins += 1;
+            else if (outcome === 'loss') score.losses += 1;
+            else if (outcome === 'draw') score.draws += 1;
+            if (outcome) {
+                saveScore(score);
+                renderScore();
+            }
+        }
+
+        function renderScore() {
+            document.getElementById('score-wins').textContent = score.wins;
+            document.getElementById('score-losses').textContent = score.losses;
+            document.getElementById('score-draws').textContent = score.draws;
         }
 
         function render() {
@@ -355,11 +409,14 @@
                 const cell = document.querySelector(`[data-index="${i}"]`);
                 cell.textContent = val;
                 cell.className = `cell ${val.toLowerCase()}`;
+                const pos = CELL_POS_LABELS[i];
+                const occ = val === 'X' ? 'your mark' : val === 'O' ? 'opponent mark' : 'empty';
+                cell.setAttribute('aria-label', `${pos}, ${occ}`);
             });
         }
 
         function reset() {
-            board = ['', '', '', '', '', '', '', '', ''];
+            board = EMPTY_BOARD.slice();
             currentPlayer = 'X';
             gameActive = true;
             setMode('normal');
@@ -405,12 +462,22 @@
         document.getElementById('mode-normal').addEventListener('click', () => setMode('normal'));
         document.getElementById('mode-bomb').addEventListener('click', () => setMode('bomb'));
         document.getElementById('mode-laser').addEventListener('click', () => setMode('laser'));
+        document.getElementById('diff-chill').addEventListener('click', () => setDifficulty('chill'));
+        document.getElementById('diff-sharp').addEventListener('click', () => setDifficulty('sharp'));
         document.getElementById('reset-button').addEventListener('click', reset);
         document.getElementById('palette-button').addEventListener('click', cycleColor);
 
         render();
+        renderScore();
         setMode('normal');
+        setDifficulty('sharp');
         focusTvControl(document.querySelector('[data-index="0"]'));
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch((err) => {
+                console.warn('[tic-hack-toe] service worker registration failed', err);
+            });
+        }
     </script>
 </body>
 </html>
