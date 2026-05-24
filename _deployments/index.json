@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-24T02:09:34.053Z",
+  "generatedAt": "2026-05-24T09:48:01.808Z",
   "sites": [
     {
       "siteId": "agent",
@@ -32,13 +32,13 @@
       "status": "success",
       "liveUrl": "https://bug-beacon.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/bug-beacon/",
-      "lastPublishedAt": "2026-05-17T12:08:28.040Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/25990394742",
-      "latestBrokerRunNumber": "71",
+      "lastPublishedAt": "2026-05-24T09:48:01.797Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26357967552",
+      "latestBrokerRunNumber": "180",
       "trigger": "github-webhook",
-      "hostingFiles": 10,
-      "hostingBytes": 116733,
-      "recordedDeployments": 2
+      "hostingFiles": 11,
+      "hostingBytes": 116892,
+      "recordedDeployments": 3
     },
     {
       "siteId": "cozy-crate",
