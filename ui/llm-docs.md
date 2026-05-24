@@ -307,7 +307,7 @@ Section `filters` block:
       "options": [
         { "id": "all", "label": "All" },
         { "id": "mullformed", "label": "Mullformed" },
-        { "id": "cozy-crate", "label": "Cozy Crate" }
+        { "id": "cozybox", "label": "CozyBox" }
       ]
     },
     "selects": [
