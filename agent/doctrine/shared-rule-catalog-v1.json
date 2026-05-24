@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-24T00:51:59.898Z",
+  "generatedAt": "2026-05-24T16:44:09.097Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
@@ -432,10 +432,10 @@
       "relPath": "feedback/feedback_never_remove_functionality.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_never_remove_functionality.md",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_never_remove_functionality.md",
-      "sha256": "b82bbc9c9540882094fbf5c0f768986d862b192c5edf35053a56062969d586db",
-      "sizeBytes": 1597,
+      "sha256": "0a5121402bb1aa96d0a71b61d5e7a0f06d83814f13ca747a97dd4fea5897d0bf",
+      "sizeBytes": 1594,
       "summary": "When working on the operator's apps (especially when given autonomy to \"make",
-      "excerpt": "When working on the operator's apps (especially when given autonomy to \"make\nit better\"), never remove functionality without explicit operator approval.\nRearranging, adding, and burying are all allowed — moving a feature behind\nanother click, into a deeper menu, or into a less prominent surface is fine\nif the UX improves. Removing the underlying capability is not.\n\n**Why:** Operator stated explicitly 2026-05-21 while delegating overnight\nautonomy on cozy-crate: *\"feel free to bury functionality by obscuring it a\ncertain delta or number of clicks or modals away, but NEVER EVER EVER remove\nfunctionality without my blessing.\"* The rule applies when the operator\ncan't be reached to approve — which is exactly when an autonomous agent is\nmost likely to delete-by-refactor.\n\n**How to apply:**\nAdding a new mode that wraps the existing default OFF is fine; replacing\n  the default behavior requires approval.\nReplacing a feature's UI is fine; removing the capability that powered it\n  is not. If the new UI is incomplete, preserve the old one alongside.\n\"Cleaning up dead code\" — verify it's actually dead via grep before\n  deleting. When unsure, comment out rather than delete and flag in the\n  morning brief.\nFor UI features: \"I moved this from the toolbar to Tools > Advanced\" =\n  fine. \"I deleted this button\" = not fine without sign-off.",
+      "excerpt": "When working on the operator's apps (especially when given autonomy to \"make\nit better\"), never remove functionality without explicit operator approval.\nRearranging, adding, and burying are all allowed — moving a feature behind\nanother click, into a deeper menu, or into a less prominent surface is fine\nif the UX improves. Removing the underlying capability is not.\n\n**Why:** Operator stated explicitly 2026-05-21 while delegating overnight\nautonomy on cozybox: *\"feel free to bury functionality by obscuring it a\ncertain delta or number of clicks or modals away, but NEVER EVER EVER remove\nfunctionality without my blessing.\"* The rule applies when the operator\ncan't be reached to approve — which is exactly when an autonomous agent is\nmost likely to delete-by-refactor.\n\n**How to apply:**\nAdding a new mode that wraps the existing default OFF is fine; replacing\n  the default behavior requires approval.\nReplacing a feature's UI is fine; removing the capability that powered it\n  is not. If the new UI is incomplete, preserve the old one alongside.\n\"Cleaning up dead code\" — verify it's actually dead via grep before\n  deleting. When unsure, comment out rather than delete and flag in the\n  morning brief.\nFor UI features: \"I moved this from the toolbar to Tools > Advanced\" =\n  fine. \"I deleted this button\" = not fine without sign-off.",
       "durability": "standing",
       "tags": [],
       "domains": [

@@ -12,7 +12,7 @@ another click, into a deeper menu, or into a less prominent surface is fine
 if the UX improves. Removing the underlying capability is not.
 
 **Why:** Operator stated explicitly 2026-05-21 while delegating overnight
-autonomy on cozy-crate: *"feel free to bury functionality by obscuring it a
+autonomy on cozybox: *"feel free to bury functionality by obscuring it a
 certain delta or number of clicks or modals away, but NEVER EVER EVER remove
 functionality without my blessing."* The rule applies when the operator
 can't be reached to approve — which is exactly when an autonomous agent is
