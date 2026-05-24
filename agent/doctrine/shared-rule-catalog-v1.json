@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-23T15:04:39.716Z",
+  "generatedAt": "2026-05-24T00:29:10.871Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
