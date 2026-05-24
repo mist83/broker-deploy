@@ -1,6 +1,6 @@
 /**
  * Bug Beacon Library
- * @version 1.1.0
+ * @version 1.1.1
  * @description Error monitoring FAB that lights up when bugs are detected
  * @license MIT
  * 

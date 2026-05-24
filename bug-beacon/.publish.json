@@ -1,21 +1,21 @@
 {
   "siteId": "bug-beacon",
   "host": "bug-beacon.mullmania.com",
-  "publishedAt": "2026-05-24T09:47:43.067Z",
+  "publishedAt": "2026-05-24T09:57:46.551Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/docs",
   "assetVersion": {
-    "semver": "1.0.0",
-    "previousSemver": null,
+    "semver": "1.0.1",
+    "previousSemver": "1.0.0",
     "bump": "patch",
     "initialVersion": "1.0.0",
     "token": "__MULLMANIA_ASSET_VERSION__",
     "manifestPath": "./asset-version.json",
     "manifestUrl": "https://bug-beacon.mullmania.com/asset-version.json",
-    "publishedAt": "2026-05-24T09:47:43.067Z"
+    "publishedAt": "2026-05-24T09:57:46.551Z"
   },
   "counts": {
     "hostingFiles": 11,
-    "hostingBytes": 116892,
+    "hostingBytes": 116895,
     "dataFiles": 0,
     "dataBytes": 0
   }
