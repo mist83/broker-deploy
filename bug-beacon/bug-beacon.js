@@ -660,11 +660,12 @@ if (!window.FABCollection) {
         writeToClipboard().then(() => {
             const btn = document.getElementById('bug-beacon-copy');
             const originalText = btn.innerHTML;
+            const originalBackground = btn.style.background;
             btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
             btn.style.background = '#28a745';
             setTimeout(() => {
                 btn.innerHTML = originalText;
-                btn.style.background = '#0071CE';
+                btn.style.background = originalBackground;
             }, 2000);
         }).catch(err => {
             reportInternalError('[Bug Beacon] Copy failed:', err);
