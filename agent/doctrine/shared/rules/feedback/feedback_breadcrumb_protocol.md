@@ -17,16 +17,21 @@ Do not require the operator to spell out what they mean. They know. Do not ask f
 
 ## Response shape (the only valid shape)
 
-Exactly two answers. Each is one line. Each starts with **yes** or **no**, followed by an em-dash, followed by ≤12 words of reason.
+Exactly two answers. Each is one line. Each line starts with `✅` (yes) or `🚨` (no), followed by the label, then **yes** or **no**, em-dash, ≤12 words of reason. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.
 
 ```
-breadcrumbs laid: yes — <≤12 words>
-safe to close:    yes — <≤12 words>
+✅ breadcrumbs laid: yes — <≤12 words>
+✅ safe to close:    yes — <≤12 words>
 ```
 
-If either is **no**, name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.
+If either is **no**, swap that line's leading `✅` for `🚨` and name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.
 
-That is the entire response. No header, no preamble, no suggestion, no "want me to fix that?", no offer of next steps, no recap of work, no emoji, no follow-up question. The operator did not ask for any of those things. They asked the two questions.
+```
+🚨 breadcrumbs laid: no — <single most blocking gap, ≤12 words>
+✅ safe to close:    yes — <≤12 words>
+```
+
+That is the entire response. No header, no preamble, no suggestion, no "want me to fix that?", no offer of next steps, no recap of work, no extra emoji beyond the two line markers, no follow-up question. The operator did not ask for any of those things. They asked the two questions.
 
 ## What "breadcrumbs laid" means (the substantive check)
 
@@ -68,7 +73,7 @@ When the chat had an `/overdrive` session, the agent must honestly verify all of
 12. Deferred items list captured (or "nothing deferred" stated)
 13. NO refactors, NO contract breaks, NO silent dep upgrades, NO aesthetic drift outside focus arg
 
-If any of these is false, the second line is `safe to close: no — <single most blocking gap, ≤12 words>`. The 13-item checklist itself stays internal. The operator is scrolling for the bottom line; the bottom line is two lines.
+If any of these is false, the second line is `🚨 safe to close: no — <single most blocking gap, ≤12 words>`. The 13-item checklist itself stays internal. The operator is scrolling for the bottom line; the bottom line is two lines.
 
 ## Anti-patterns (do not do)
 

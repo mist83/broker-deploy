@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-24T00:43:43.136Z",
+  "generatedAt": "2026-05-24T00:47:34.189Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -41,10 +41,10 @@
       "label": "feedback breadcrumb protocol",
       "kind": "feedback-rule",
       "summary": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can a",
-      "excerpt": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both the slash command (/breadcrumb, /bp) and the typed shorthand (bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nTrigger\n\nAny of: /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bp\" or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nResponse shape (the only valid shape)\n\nExactly two answers. Each is one line. Each starts with **yes** or **no**, followed by an em-dash, followed by ≤12 words of reason.\n\nIf either is **no**, name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.\n\nThat is the entire response. No header, no preamble, no suggestion, no \"want me to fix that?\", no offer of next steps, no recap of work, no emoji, no follow-up question. The operator did not ask for any of those things. They asked the two questions.\n\nWhat \"breadcrumbs laid\" means (the substantive check)\n\nAll ",
+      "excerpt": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both the slash command (/breadcrumb, /bp) and the typed shorthand (bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nTrigger\n\nAny of: /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bp\" or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nResponse shape (the only valid shape)\n\nExactly two answers. Each is one line. Each line starts with ✅ (yes) or 🚨 (no), followed by the label, then **yes** or **no**, em-dash, ≤12 words of reason. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.\n\nIf either is **no**, swap that line's leading ✅ for 🚨 and name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.\n\nThat is the entire response. No header, no preamble, no suggestion, no \"want me to fix that?\", no offer of next steps, no recap of work, no extra emoji bey",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "5576d4009a8a73f58ec3d01fff81155f0f6fc7bb7b6ec2b99c55d1e4a80dc6f1",
+      "sha256": "ba9587dcc91137d913631074212367bb874902845191c8f151e1ba9db0d7a56e",
       "durability": "standing",
       "tags": [
         "operator-style",
