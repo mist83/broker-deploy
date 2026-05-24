@@ -13,8 +13,15 @@ class GraphEverywhere {
             signalrUserId: options.signalrUserId || 'user-' + Math.random().toString(36).substr(2, 9),
             readOnly: options.readOnly || false,
             autoSave: options.autoSave !== false,
+            // Cytoscape layout config. Default 'preset' preserves the original
+            // explicit-position behavior. Pass e.g. { name: 'cose' } or 'cose'
+            // for force-directed layouts when node positions aren't pre-computed.
+            layout: options.layout || { name: 'preset' },
             ...options
         };
+        if (typeof this.options.layout === 'string') {
+            this.options.layout = { name: this.options.layout };
+        }
         
         this.cy = null;
         this.selectedNode = null;
@@ -71,7 +78,7 @@ class GraphEverywhere {
                     }
                 }
             ],
-            layout: { name: 'preset' },
+            layout: this.options.layout,
             userZoomingEnabled: true,
             userPanningEnabled: true,
             wheelSensitivity: 0.1
@@ -269,8 +276,8 @@ class GraphEverywhere {
             data.nodes.forEach(node => {
                 const nodeSize = node.size || 'medium';
                 const nodeTextSize = node.textSize || 'medium';
-                
-                const addedNode = this.cy.add({
+
+                const spec = {
                     group: 'nodes',
                     data: {
                         id: node.id,
@@ -279,9 +286,15 @@ class GraphEverywhere {
                         color: node.color || this.themeValue('--color-primary', '#0071CE'),
                         size: nodeSize,
                         textSize: nodeTextSize
-                    },
-                    position: { x: node.x, y: node.y }
-                });
+                    }
+                };
+                // Only pin a position when one was supplied. Without this, force
+                // layouts can't run because every node arrives pre-placed at
+                // (undefined, undefined) -> NaN.
+                if (typeof node.x === 'number' && typeof node.y === 'number') {
+                    spec.position = { x: node.x, y: node.y };
+                }
+                const addedNode = this.cy.add(spec);
                 
                 addedNode.style('width', sizeMap[nodeSize]);
                 addedNode.style('height', sizeMap[nodeSize]);
@@ -321,6 +334,20 @@ class GraphEverywhere {
         if (data.name) {
             this.currentGraphName = data.name;
         }
+    }
+
+    /**
+     * Re-run a Cytoscape layout. Pass a layout name ('cose', 'preset', etc.)
+     * or a full Cytoscape layout options object. Falls back to the layout
+     * configured at construction time.
+     */
+    runLayout(layoutSpec) {
+        if (!this.cy) return;
+        let spec = layoutSpec || this.options.layout || { name: 'preset' };
+        if (typeof spec === 'string') {
+            spec = { name: spec };
+        }
+        this.cy.layout(spec).run();
     }
 }
 
