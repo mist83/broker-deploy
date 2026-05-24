@@ -1,7 +1,7 @@
 {
   "siteId": "bug-beacon",
   "host": "bug-beacon.mullmania.com",
-  "semver": "1.0.1",
-  "previousSemver": "1.0.0",
-  "publishedAt": "2026-05-24T09:57:46.551Z"
+  "semver": "1.0.3",
+  "previousSemver": "1.0.2",
+  "publishedAt": "2026-05-24T10:30:27.938Z"
 }
