@@ -35,13 +35,12 @@ That is the entire response. No header, no preamble, no suggestion, no "want me 
 
 ## What "breadcrumbs laid" means (the substantive check)
 
-All five must be true:
+All four must be true:
 
 1. **Pushed**: every meaningful commit is on the canonical remote. No local-only work that matters.
 2. **Single source of truth**: no orphan copy of the work in a second repo / second path. Future-me lands in one place.
 3. **Next-step trail**: the canonical repo has a README, context sidecar, or pinned doc that tells the next agent (or future operator) exactly what to do to ship the next change. Includes the exact deploy command if there is one.
 4. **Deployed = local**: if the work has a live target, the live target matches the canonical source.
-5. **Retro logged**: a retro note for the most recent completed task is posted (per `feedback_retro_note_log`).
 
 If any of those is false, the answer is **no** and the reason names which one.
 
@@ -69,9 +68,8 @@ When the chat had an `/overdrive` session, the agent must honestly verify all of
 8. Deployed AND live-verified on the deployed URL if the repo has one
 9. Final cross-cutting suite run ≥3x AFTER all chapters landed
 10. Combinatorial run with all new flags ON if multiple flags landed
-11. Retro posted to retro.mullmania.com
-12. Deferred items list captured (or "nothing deferred" stated)
-13. NO refactors, NO contract breaks, NO silent dep upgrades, NO aesthetic drift outside focus arg
+11. Deferred items list captured (or "nothing deferred" stated)
+12. NO refactors, NO contract breaks, NO silent dep upgrades, NO aesthetic drift outside focus arg
 
 If any of these is false, the second line is `🚨 safe to close: no — <single most blocking gap, ≤12 words>`. The 13-item checklist itself stays internal. The operator is scrolling for the bottom line; the bottom line is two lines.
 

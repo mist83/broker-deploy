@@ -17,7 +17,7 @@ The response shape is fixed: exactly two lines. Each line leads with `✅` (yes)
 
 No header, no preamble, no recap, no extra emoji beyond the two line markers, no follow-up question, no third line. If either is **no**, swap that line's `✅` for `🚨` and name the single most blocking gap.
 
-When the chat had an `/overdrive` session, the 13-item overdrive homework (chapters shipped + SHAs, tests that fail without the fix, suite green, stability runs, RegressionTestCount bumped, snapshots refreshed, pushed, deployed + live-verified, cross-cutting runs, combinatorial flags, retro posted, deferred items captured, no refactors / no contract breaks / no silent dep upgrades / no aesthetic drift) must be honestly verified BEFORE stamping `safe to close: yes`. That checklist is internal homework — it does not appear in the response. The operator is scrolling for the bottom line; the bottom line is two lines.
+When the chat had an `/overdrive` session, the 12-item overdrive homework (chapters shipped + SHAs, tests that fail without the fix, suite green, stability runs, RegressionTestCount bumped, snapshots refreshed, pushed, deployed + live-verified, cross-cutting runs, combinatorial flags, deferred items captured, no refactors / no contract breaks / no silent dep upgrades / no aesthetic drift) must be honestly verified BEFORE stamping `safe to close: yes`. That checklist is internal homework — it does not appear in the response. The operator is scrolling for the bottom line; the bottom line is two lines.
 
 If the rule URL is unreachable, stop visibly. Do not improvise the protocol.
 

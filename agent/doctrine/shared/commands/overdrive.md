@@ -60,7 +60,7 @@ For each candidate, capture: the file/line, the specific symptom, the proposed f
 
 ### 5. Confirm or refute the operator's last known complaint
 
-If the operator gave a focus argument (`/overdrive <something>`), or if `git log` shows a recent retro / commit message / TODO complaining about something, confirm or refute it with what you actually observe. Quote the operator's words verbatim in your report; do not paraphrase a complaint.
+If the operator gave a focus argument (`/overdrive <something>`), or if `git log` shows a recent commit message / TODO complaining about something, confirm or refute it with what you actually observe. Quote the operator's words verbatim in your report; do not paraphrase a complaint.
 
 ### 6. Prioritize before you execute
 
@@ -89,11 +89,7 @@ Per chapter:
 
 After all chapters land, run the full suite at least 3x for stability. If multiple changes touched independent flags or subsystems, run once more with everything new turned on simultaneously — combinatorial breakage is the silent killer in flag-gated codebases.
 
-### 9. Retro
-
-Post one short retro to https://retro.mullmania.com via `POST /api/entries` with the `x-retro-token` header (`$RETRO_TOKEN`). Cover: what hardened, what surprised you in the audit, what you deliberately did NOT fix and why (link to the follow-up if you opened one), what would make the next /overdrive faster.
-
-### 10. Report
+### 9. Report
 
 End the turn with a terse, scannable summary:
 - N chapters shipped, M tests added.
