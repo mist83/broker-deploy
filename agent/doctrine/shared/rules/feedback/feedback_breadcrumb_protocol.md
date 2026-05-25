@@ -5,7 +5,7 @@ type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
-When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, and per-repo proof breadcrumb update before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
 
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
@@ -23,7 +23,7 @@ Do not require the operator to spell out what they mean. They know. Do not ask f
 
 This is not only a question. It is a small closing protocol.
 
-Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, and verify live URLs.
+Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, update the repo proof breadcrumb, and verify live URLs.
 
 Treat proof recording as product QA. If making the user-perspective proof video exposes broken, laggy, incoherent, or awkward software, do not work around it with a flattering recording. Fix the product within the original request and non-destructive edit constraints, then re-record. If the needed fix is too broad, risky, or requires an operator decision, answer `no` with that blocker.
 
@@ -90,6 +90,7 @@ All five must be true:
 3. **Next-step trail**: the canonical repo has a README, context sidecar, or pinned doc that tells the next agent (or future operator) exactly what to do to ship the next change. Includes the exact deploy command if there is one.
 4. **Deployed = local**: if the work has a live target, the live target matches the canonical source.
 5. **Proof pointer**: the closeout answer includes the proof evidence URL or says exactly why proof could not be produced.
+6. **Breadcrumb pointer**: the canonical repo has a durable `.proof.json` breadcrumb or equivalent pinned doc pointing at its proof vault/feed and latest deposit, unless the repo is read-only or the proof is intentionally owned elsewhere.
 
 If any of those is false, the answer is **no** and the reason names which one.
 
@@ -125,9 +126,32 @@ Upload path:
 4. Upload video to `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`.
 5. Upload a poster frame to the same proof folder.
 6. Run `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`.
-7. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed` or a direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL.
+7. Update or create `<repo>/.proof.json` with schema `videos.mullmania.com/proof-breadcrumb-v1`, the repo tag, `vault_for_this_repo`, `vault_cross_cut`, `proof_dashboard`, `flipbook`, and a latest deposit entry containing the video URL, poster URL, local source path, and timestamp.
+8. Commit and push that breadcrumb with the source repo when the repo is writable. If the source repo cannot own the breadcrumb, place the pointer in the strongest canonical handoff doc and name that location in the bookmark reason.
+9. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed`, the proof dashboard or flipbook when useful, or a direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL.
 
 If the task has no meaningful visual surface or video capture is blocked by the runtime, create the strongest hosted fallback that exists (screenshots, live URL, commit SHAs, test summary, exact resume instructions). The `visual evidence` line may be **yes** only when that fallback is hosted/durable and the reason makes clear that it is a fallback. Otherwise it is **no** and `safe to close` is also **no**.
+
+## Proof breadcrumbs
+
+The proof repository is `videos.mullmania.com`. It turns objects under `s3://mullmania.com/videos/proof/<repo>/` into the repo feed, the cross-cut `proof` feed, the Proof dashboard, and the Flipbook. A bookmark is not complete just because the proof video exists in S3; the source repo also needs a small breadcrumb that future agents can read without remembering the proof system.
+
+Preferred breadcrumb file:
+
+```json
+{
+  "schema": "videos.mullmania.com/proof-breadcrumb-v1",
+  "tag": "<repo>",
+  "vault_for_this_repo": "https://videos.mullmania.com/?tag=<repo>#feed",
+  "vault_cross_cut": "https://videos.mullmania.com/?tag=proof#feed",
+  "proof_dashboard": "https://videos.mullmania.com/#proof",
+  "flipbook": "https://videos.mullmania.com/#flipbook",
+  "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/<repo>/<name>.mp4 (optional poster-<name>.png alongside). Then run node scripts/sync-manifest.mjs --publish from videos.mullmania.com.",
+  "deposits": []
+}
+```
+
+Append the newest deposit first or preserve the repo's existing deposit order if one is already established. This file is the breadcrumb. The hosted proof video is the evidence. The flipbook is a generated view over the same evidence, not a separate source of truth.
 
 ## What "safe to close" means
 
@@ -185,3 +209,5 @@ Updated 2026-05-25 again: proof video creation is an acceptance test. The agent 
 Updated 2026-05-25 again: a successful bookmark closes the chapter. New substantial work after that should start in a fresh chat unless the operator explicitly authorizes continuing in the polluted chat.
 
 Updated 2026-05-25 again: Overdrive is an auto-continue exception after bookmark. If the operator's next command is only `overdrive` or a clear Overdrive invocation, warn loudly with `🚨🚨` and continue instead of asking for another approval.
+
+Updated 2026-05-25 again: bookmark closeout must leave a per-repo proof breadcrumb, usually `.proof.json`, pointing at the `videos.mullmania.com` proof feed, cross-cut proof reel, dashboard, flipbook, and latest deposit. The proof repository is `videos.mullmania.com`; the breadcrumb belongs in the source repo.

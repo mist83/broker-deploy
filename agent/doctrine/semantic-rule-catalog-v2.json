@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-25T16:58:11.744Z",
+  "generatedAt": "2026-05-25T19:56:13.610Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -41,10 +41,10 @@
       "label": "feedback breadcrumb protocol",
       "kind": "feedback-rule",
       "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on vide",
-      "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated bookmark requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.\n\nThe operator orchestrates many chats in parallel as a puppetee",
+      "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, and per-repo proof breadcrumb update before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated bookmark requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.\n\nThe operator orchestrates ma",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "2a1035e42bcb37a8c3dfc2fe73cfd8df637da4901269a6dcc7c86eb27944a69f",
+      "sha256": "b900823920657a3f16a02b40c0d5f5806b25c04775e0a0d78e8e6a31133280ed",
       "durability": "standing",
       "tags": [
         "operator-style",
