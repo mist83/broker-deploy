@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-shared-rule-catalog-v1",
   "summary": "Shared doctrine rule catalog for cross-runtime behavior. Static TOC fetched before compose.",
-  "generatedAt": "2026-05-25T13:21:40.772Z",
+  "generatedAt": "2026-05-25T13:24:20.618Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
   "items": [
     {
@@ -43,10 +43,10 @@
       "relPath": "feedback/feedback_breadcrumb_protocol.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "a7528a6d7c911a5e0580b9efab8b13218c2447f40abaaa69dfe8eff0fcd4bf65",
-      "sizeBytes": 9294,
+      "sha256": "85df181f8b9ff7ea65107c8b9f8c1a52216612209feb6e44294b6b0b6acb86af",
+      "sizeBytes": 10550,
       "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mu",
-      "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering.\n\nThe operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both slash commands (/bookmark, /bm, /breadcrumb, /bp) and typed shorthand (bookmark, bm, bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nThe current preferred name is **bookmark**. Breadcrumb remains a legacy alias.\n\nTrigger\n\nAny of: /bookmark, /bm, bookmark protocol, bookmark, bookmark?, bm, /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bookmark\", \"bookmark this\", \"ok bp\", or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nBehavior before answering\n\nTh",
+      "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. Repeated bookmark requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.\n\nThe operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both slash commands (/bookmark, /bm, /breadcrumb, /bp) and typed shorthand (bookmark, bm, bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nThe current preferred name is **bookmark**. Breadcrumb remains a legacy alias.\n\nTrigger\n\nAny of: /bookmark, /bm, bookmark protocol, bookmark, bookmark?, bm, /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match ",
       "durability": "standing",
       "tags": [
         "operator-style",

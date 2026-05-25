@@ -10,6 +10,8 @@ https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_p
 
 Before answering, finish bounded closure work if this is nearly a natural stopping point: verification, commit/push where appropriate, deploy/live check, proof recording/upload, and manifest sync.
 
+If the protocol was already completed in this chat and no meaningful state changed afterward, do not invent new unattended work or make duplicate proof. Reuse the existing bookmark/proof and say the operator is spinning wheels inside the fixed three-line response.
+
 The response shape is fixed: exactly three lines. Each line leads with `✅` (yes) or `🚨` (no), then the label, then **yes** / **no**, em-dash, concise reason or proof URL.
 
 ```

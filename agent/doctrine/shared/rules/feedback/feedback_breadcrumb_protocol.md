@@ -5,7 +5,7 @@ type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
-When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering.
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
 
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
@@ -26,6 +26,20 @@ This is not only a question. It is a small closing protocol.
 Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, and verify live URLs.
 
 If reaching a stopping point is not bounded or would require an operator decision, do not guess. Answer `no` with the single blocking gap.
+
+## Repeated invocation / idempotence
+
+This protocol is not a work generator. If the operator invokes `bookmark` again after a successful bookmark and no meaningful task state has changed, do not run new unattended work, do not create another proof video, and do not hunt for new tasks to justify the repeated command.
+
+Instead, reuse the prior durable trail and proof pointer. Keep the exact three-line response shape, and make the wheel-spinning state obvious in the reason:
+
+```
+✅ bookmark:        yes — already captured; no new state
+✅ visual evidence: yes — <same proof URL>
+✅ safe to close:   yes — already safe; spinning wheels
+```
+
+If the previous bookmark was **no** and nothing changed, repeat the same blocking gap. If meaningful work happened after the prior bookmark, run the protocol normally.
 
 ## Response shape (the only valid shape)
 
@@ -120,3 +134,5 @@ Direct operator instruction, 2026-05-22, end of the dance-party productionalizat
 Re-affirmed 2026-05-23 when the operator collapsed the verbose `/overdrive`-doneness audit (a 13-item status report) into this single rule: "make it the protocol command a/command or something and merge everything it's all meant for the same shit semantically." One protocol. One response shape. The 13 items survive as internal homework, not as output.
 
 Updated 2026-05-25: the operator renamed the desired shorthand to `bookmark` and required hosted visual/video evidence at natural stopping points: "all I want to do is be able to write the term bookmark and have it have all of this happen automatically ... I want videos and stuff."
+
+Updated 2026-05-25 again: repeated `bookmark` invocations are idempotent. They must not invent unattended work or duplicate proof; they should say the operator is spinning wheels when nothing changed.

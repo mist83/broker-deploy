@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-recipe-catalog-v1",
   "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-  "generatedAt": "2026-05-25T13:21:40.773Z",
+  "generatedAt": "2026-05-25T13:24:20.618Z",
   "recipes": [
     {
       "id": "repo-task-default",
