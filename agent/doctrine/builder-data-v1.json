@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-25T13:27:21.519Z",
+  "generatedAt": "2026-05-25T13:30:37.166Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -57,7 +57,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-25T13:27:21.519Z",
+    "generatedAt": "2026-05-25T13:30:37.166Z",
     "runtimes": [
       {
         "id": "codex",
@@ -156,7 +156,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-25T13:27:21.519Z",
+    "generatedAt": "2026-05-25T13:30:37.166Z",
     "events": [
       {
         "id": "session_start",
@@ -232,7 +232,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-25T13:27:21.519Z",
+    "generatedAt": "2026-05-25T13:30:37.166Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -334,7 +334,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-25T13:27:21.519Z",
+    "generatedAt": "2026-05-25T13:30:37.166Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -531,7 +531,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-25T13:27:21.518Z",
+    "generatedAt": "2026-05-25T13:30:37.166Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -570,11 +570,11 @@
         "id": "feedback_breadcrumb_protocol",
         "label": "feedback breadcrumb protocol",
         "kind": "feedback-rule",
-        "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mu",
-        "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. Repeated bookmark requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.\n\nThe operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both slash commands (/bookmark, /bm, /breadcrumb, /bp) and typed shorthand (bookmark, bm, bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nThe current preferred name is **bookmark**. Breadcrumb remains a legacy alias.\n\nTrigger\n\nAny of: /bookmark, /bm, bookmark protocol, bookmark, bookmark?, bm, /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match ",
+        "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on vide",
+        "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. Repeated bookmark requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.\n\nThe operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both slash commands (/bookmark, /bm, /breadcrumb, /bp) and typed shorthand (bookmark, bm, bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nThe current preferred name is **bookmark**. Breadcrumb remains a legacy alias.\n\nTrigger\n\nAny of: /bookmark, /bm, bookmark protocol, bookmark, bookmark?, bm,",
         "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
         "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-        "sha256": "85df181f8b9ff7ea65107c8b9f8c1a52216612209feb6e44294b6b0b6acb86af",
+        "sha256": "5663fe606197af28cb491e8196f4c686816bfe2106248f055f12ac8094bd9254",
         "durability": "standing",
         "tags": [
           "operator-style",

@@ -1,0 +1,155 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: agent
+    - generic [ref=e5]: 3 live
+    - generic [ref=e6]:
+      - button "Show the desk Mac screen preview" [ref=e7] [cursor=pointer]:
+        - img
+      - button "Hide this window" [ref=e8] [cursor=pointer]:
+        - img
+  - switch "Keep Mac awake off · Mac can sleep normally" [ref=e10] [cursor=pointer]:
+    - generic:
+      - generic: Keep Mac awake
+      - generic: off · Mac can sleep normally
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e82]: sessions
+      - generic [ref=e83]:
+        - button "Mute attention alerts" [ref=e84] [cursor=pointer]:
+          - img
+        - 'button "sort: started ▾" [ref=e85] [cursor=pointer]'
+        - button "compact" [ref=e86] [cursor=pointer]
+    - list [ref=e18]:
+      - button "Codex / ChatGPT live Plan Cozybox implementation 8h34m 22s Hide this row in this HUD" [ref=e87] [cursor=pointer]:
+        - generic "Codex / ChatGPT live" [ref=e88]:
+          - img [ref=e89]
+        - generic "Plan Cozybox implementation started 8h34m ago · last write 22s ago · click to peek at the recent session tail" [ref=e96]:
+          - generic [ref=e97]: Plan Cozybox implementation
+        - generic "conversation started this long ago" [ref=e98]: 8h34m
+        - generic "time since last write" [ref=e99]: 22s
+        - button "Hide this row in this HUD" [ref=e100]:
+          - img
+      - button "Codex / ChatGPT live Create gangster dance scene 8h22m 8s Hide this row in this HUD" [ref=e101] [cursor=pointer]:
+        - generic "Codex / ChatGPT live" [ref=e102]:
+          - img [ref=e103]
+        - generic "Create gangster dance scene started 8h22m ago · last write 8s ago · click to peek at the recent session tail" [ref=e110]:
+          - generic [ref=e111]: Create gangster dance scene
+        - generic "conversation started this long ago" [ref=e112]: 8h22m
+        - generic "time since last write" [ref=e113]: 8s
+        - button "Hide this row in this HUD" [ref=e114]:
+          - img
+      - button "Codex / ChatGPT live Clarify desktop broadcast status 8h20m 2s Hide this row in this HUD" [ref=e115] [cursor=pointer]:
+        - generic "Codex / ChatGPT live" [ref=e116]:
+          - img [ref=e117]
+        - generic "Clarify desktop broadcast status started 8h20m ago · last write 2s ago · click to peek at the recent session tail" [ref=e124]:
+          - generic [ref=e125]: Clarify desktop broadcast status
+        - generic "conversation started this long ago" [ref=e126]: 8h20m
+        - generic "time since last write" [ref=e127]: 2s
+        - button "Hide this row in this HUD" [ref=e128]:
+          - img
+      - button "Claude idle Investigate API for Lecter image compression tool 17h12m 27m03s Hide this row in this HUD" [ref=e129] [cursor=pointer]:
+        - generic "Claude idle" [ref=e130]:
+          - img [ref=e131]
+        - generic "Investigate API for Lecter image compression tool started 17h12m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e138]:
+          - generic [ref=e139]: Investigate API for Lecter image compression tool
+        - generic "conversation started this long ago" [ref=e140]: 17h12m
+        - generic "time since last write" [ref=e141]: 27m03s
+        - button "Hide this row in this HUD" [ref=e142]:
+          - img
+      - button "Claude idle 🖼 untitled (strip-images) 17h11m 26m31s Hide this row in this HUD" [ref=e143] [cursor=pointer]:
+        - generic "Claude idle" [ref=e144]:
+          - img [ref=e145]
+        - generic "🖼 untitled (strip-images) started 17h11m ago · last write 26m31s ago · click to peek at the recent session tail" [ref=e152]:
+          - generic [ref=e153]: 🖼 untitled (strip-images)
+        - generic "conversation started this long ago" [ref=e154]: 17h11m
+        - generic "time since last write" [ref=e155]: 26m31s
+        - button "Hide this row in this HUD" [ref=e156]:
+          - img
+      - button "Claude idle Add background progress display option to caffeine script 12h16m 27m03s Hide this row in this HUD" [ref=e157] [cursor=pointer]:
+        - generic "Claude idle" [ref=e158]:
+          - img [ref=e159]
+        - generic "Add background progress display option to caffeine script started 12h16m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e166]:
+          - generic [ref=e167]: Add background progress display option to caffeine script
+        - generic "conversation started this long ago" [ref=e168]: 12h16m
+        - generic "time since last write" [ref=e169]: 27m03s
+        - button "Hide this row in this HUD" [ref=e170]:
+          - img
+      - button "Claude idle Create animated tournament bracket fight demo 9h45m 27m03s Hide this row in this HUD" [ref=e171] [cursor=pointer]:
+        - generic "Claude idle" [ref=e172]:
+          - img [ref=e173]
+        - generic "Create animated tournament bracket fight demo started 9h45m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e180]:
+          - generic [ref=e181]: Create animated tournament bracket fight demo
+        - generic "conversation started this long ago" [ref=e182]: 9h45m
+        - generic "time since last write" [ref=e183]: 27m03s
+        - button "Hide this row in this HUD" [ref=e184]:
+          - img
+      - button "Claude idle Code 7h39m 27m03s Hide this row in this HUD" [ref=e185] [cursor=pointer]:
+        - generic "Claude idle" [ref=e186]:
+          - img [ref=e187]
+        - generic "/Users/mist83/Code started 7h39m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e194]:
+          - generic [ref=e195]: Code
+        - generic "conversation started this long ago" [ref=e196]: 7h39m
+        - generic "time since last write" [ref=e197]: 27m03s
+        - button "Hide this row in this HUD" [ref=e198]:
+          - img
+      - button "Claude idle Organize fighter.mullmania.com development ideas 6h39m 27m03s Hide this row in this HUD" [ref=e199] [cursor=pointer]:
+        - generic "Claude idle" [ref=e200]:
+          - img [ref=e201]
+        - generic "Organize fighter.mullmania.com development ideas started 6h39m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e208]:
+          - generic [ref=e209]: Organize fighter.mullmania.com development ideas
+        - generic "conversation started this long ago" [ref=e210]: 6h39m
+        - generic "time since last write" [ref=e211]: 27m03s
+        - button "Hide this row in this HUD" [ref=e212]:
+          - img
+      - button "Claude idle Rewrite Cozy Crate visitor copy to anchor claims in real features 6h35m 27m03s Hide this row in this HUD" [ref=e213] [cursor=pointer]:
+        - generic "Claude idle" [ref=e214]:
+          - img [ref=e215]
+        - generic "Rewrite Cozy Crate visitor copy to anchor claims in real features started 6h35m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e222]:
+          - generic [ref=e223]: Rewrite Cozy Crate visitor copy to anchor claims in real features
+        - generic "conversation started this long ago" [ref=e224]: 6h35m
+        - generic "time since last write" [ref=e225]: 27m03s
+        - button "Hide this row in this HUD" [ref=e226]:
+          - img
+      - button "Claude idle Rewrite Cozy Crate copy to anchor real features 6h29m 27m03s Hide this row in this HUD" [ref=e227] [cursor=pointer]:
+        - generic "Claude idle" [ref=e228]:
+          - img [ref=e229]
+        - generic "Rewrite Cozy Crate copy to anchor real features started 6h29m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e236]:
+          - generic [ref=e237]: Rewrite Cozy Crate copy to anchor real features
+        - generic "conversation started this long ago" [ref=e238]: 6h29m
+        - generic "time since last write" [ref=e239]: 27m03s
+        - button "Hide this row in this HUD" [ref=e240]:
+          - img
+      - button "Claude idle Implement climate-aware terrain morphing 6h28m 27m03s Hide this row in this HUD" [ref=e241] [cursor=pointer]:
+        - generic "Claude idle" [ref=e242]:
+          - img [ref=e243]
+        - generic "Implement climate-aware terrain morphing started 6h28m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e250]:
+          - generic [ref=e251]: Implement climate-aware terrain morphing
+        - generic "conversation started this long ago" [ref=e252]: 6h28m
+        - generic "time since last write" [ref=e253]: 27m03s
+        - button "Hide this row in this HUD" [ref=e254]:
+          - img
+      - button "Claude idle Implement day/night atmosphere feature in cozy-crate 5h31m 27m03s Hide this row in this HUD" [ref=e255] [cursor=pointer]:
+        - generic "Claude idle" [ref=e256]:
+          - img [ref=e257]
+        - generic "Implement day/night atmosphere feature in cozy-crate started 5h31m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e264]:
+          - generic [ref=e265]: Implement day/night atmosphere feature in cozy-crate
+        - generic "conversation started this long ago" [ref=e266]: 5h31m
+        - generic "time since last write" [ref=e267]: 27m03s
+        - button "Hide this row in this HUD" [ref=e268]:
+          - img
+      - button "Claude idle Build Mullformed phases 2 and 3 pipeline 5h31m 27m03s Hide this row in this HUD" [ref=e269] [cursor=pointer]:
+        - generic "Claude idle" [ref=e270]:
+          - img [ref=e271]
+        - generic "Build Mullformed phases 2 and 3 pipeline started 5h31m ago · last write 27m03s ago · click to peek at the recent session tail" [ref=e278]:
+          - generic [ref=e279]: Build Mullformed phases 2 and 3 pipeline
+        - generic "conversation started this long ago" [ref=e280]: 5h31m
+        - generic "time since last write" [ref=e281]: 27m03s
+        - button "Hide this row in this HUD" [ref=e282]:
+          - img
+    - button "show top 4 (collapse)" [expanded] [ref=e283] [cursor=pointer]
+  - generic [ref=e76]:
+    - generic [ref=e77]: 18:27:12
+    - generic [ref=e78]: ·
+    - generic [ref=e79]: live window 10m
+    - generic [ref=e80]: ·
+    - generic "how recently the desk Mac published this snapshot" [ref=e81]: pub 0s ago

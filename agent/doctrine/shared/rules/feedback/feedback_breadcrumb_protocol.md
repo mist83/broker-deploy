@@ -5,7 +5,7 @@ type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
-When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
 
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
@@ -77,10 +77,21 @@ If any of those is false, the answer is **no** and the reason names which one.
 
 At a natural stopping point, create or attach a short proof artifact so future-Mike can remember the work visually without rereading the chat.
 
-Preferred proof is a short hosted video:
+Preferred proof is a short hosted video, but only when it helps future-Mike recognize the completed work. Do not make random videos for video's sake.
+
+Quality bar for applicable software or feature proof:
+
+1. Show real usage of the changed software or feature, not just static screenshots, slow page pans, or a slideshow.
+2. Drive the workflow through Playwright, browser automation, app automation, or a comparable real runtime path whenever practical.
+3. Target roughly 30 FPS and 30-60 seconds for normal feature proof. Longer is acceptable only when the delivered work is unusually large or the proof video is itself a primary artifact.
+4. Exercise the primary path and at least one meaningful state change: click, type, drag, navigate, generate output, save, load, filter, play, or otherwise use the thing that changed.
+5. If the task already produced a meaningful video artifact, use that artifact instead of recording another proof video.
+6. If the task has no meaningful visual surface, do not manufacture a fake video. Use the strongest hosted fallback and label it as fallback in the `visual evidence` line.
+
+Upload path:
 
 1. Record the changed live/local surface with Playwright video, browser recording, OS screen capture, or an existing product-specific recorder.
-2. Convert to MP4 when practical.
+2. Convert to MP4 when practical, preserving or encoding to 30 FPS when the source supports it.
 3. Upload video to `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`.
 4. Upload a poster frame to the same proof folder.
 5. Run `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`.
@@ -136,3 +147,5 @@ Re-affirmed 2026-05-23 when the operator collapsed the verbose `/overdrive`-done
 Updated 2026-05-25: the operator renamed the desired shorthand to `bookmark` and required hosted visual/video evidence at natural stopping points: "all I want to do is be able to write the term bookmark and have it have all of this happen automatically ... I want videos and stuff."
 
 Updated 2026-05-25 again: repeated `bookmark` invocations are idempotent. They must not invent unattended work or duplicate proof; they should say the operator is spinning wheels when nothing changed.
+
+Updated 2026-05-25 again: proof videos should be real usage evidence for the operator's future amnesiac self: Playwright/runtime-driven where practical, roughly 30 FPS, 30-60 seconds for normal feature proof, and never random video for video's sake.
