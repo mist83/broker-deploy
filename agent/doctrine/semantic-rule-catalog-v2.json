@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-semantic-rule-catalog-v2",
   "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-  "generatedAt": "2026-05-25T04:30:43.887Z",
+  "generatedAt": "2026-05-25T13:04:58.930Z",
   "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
   "items": [
     {
@@ -40,11 +40,11 @@
       "id": "feedback_breadcrumb_protocol",
       "label": "feedback breadcrumb protocol",
       "kind": "feedback-rule",
-      "summary": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can a",
-      "excerpt": "The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both the slash command (/breadcrumb, /bp) and the typed shorthand (bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nTrigger\n\nAny of: /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bp\" or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nResponse shape (the only valid shape)\n\nExactly two answers. Each is one line. Each line starts with ✅ (yes) or 🚨 (no), followed by the label, then **yes** or **no**, em-dash, ≤12 words of reason. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.\n\nIf either is **no**, swap that line's leading ✅ for 🚨 and name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.\n\nThat is the entire response. No header, no preamble, no suggestion, no \"want me to fix that?\", no offer of next steps, no recap of work, no extra emoji bey",
+      "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mu",
+      "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on videos.mullmania.com; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering.\n\nThe operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills \"is this chat at a clean stopping point?\" check that they can ask every chat the same way.\n\nThis is the ONE protocol. Both slash commands (/bookmark, /bm, /breadcrumb, /bp) and typed shorthand (bookmark, bm, bp, crumbs, safe to close, etc.) route here. Same triggers, same response shape, every chat.\n\nThe current preferred name is **bookmark**. Breadcrumb remains a legacy alias.\n\nTrigger\n\nAny of: /bookmark, /bm, bookmark protocol, bookmark, bookmark?, bm, /breadcrumb, /bp, breadcrumb protocol, bread protocol, breadcrumb, bp, crumbs, safe to close, safe to close?, is this safe to close, BP?. Case-insensitive. Substring match — if the user says \"ok bookmark\", \"bookmark this\", \"ok bp\", or \"breadcrumbs?\" treat it as the trigger.\n\nDo not require the operator to spell out what they mean. They know. Do not ask for clarification.\n\nBehavior before answering\n\nTh",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
       "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "076109cc63e3b2adf752c58ba753192b9cffd58ca37783da237a7f2ace3daa9c",
+      "sha256": "a7528a6d7c911a5e0580b9efab8b13218c2447f40abaaa69dfe8eff0fcd4bf65",
       "durability": "standing",
       "tags": [
         "operator-style",

@@ -1,6 +1,6 @@
-Run the breadcrumb protocol — terse end-of-chat triage. One protocol, one response shape, every chat.
+Run the bookmark/breadcrumb protocol — evidence-backed end-of-chat triage. One protocol, one response shape, every chat.
 
-Usage: `/breadcrumb` (or `/bp` — same thing)
+Usage: `/bookmark`, `/bm`, `/breadcrumb`, or `/bp` — same thing.
 
 ## Procedure
 
@@ -8,16 +8,21 @@ Execute `feedback_breadcrumb_protocol` verbatim. The full protocol lives at:
 
 https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md
 
-The response shape is fixed: exactly two lines. Each line leads with `✅` (yes) or `🚨` (no), then the label, then **yes** / **no**, em-dash, ≤12 words of reason.
+Before answering, finish bounded closure work if this is nearly a natural stopping point: verification, commit/push where appropriate, deploy/live check, proof recording/upload, and manifest sync.
+
+The response shape is fixed: exactly three lines. Each line leads with `✅` (yes) or `🚨` (no), then the label, then **yes** / **no**, em-dash, concise reason or proof URL.
 
 ```
-✅ breadcrumbs laid: yes — <≤12 words>
-✅ safe to close:    yes — <≤12 words>
+✅ bookmark:        yes — <durable resume trail captured>
+✅ visual evidence: yes — <videos.mullmania.com proof URL or explicit fallback>
+✅ safe to close:   yes — <verified, clean, no chat-only state>
 ```
 
-No header, no preamble, no recap, no extra emoji beyond the two line markers, no follow-up question, no third line. If either is **no**, swap that line's `✅` for `🚨` and name the single most blocking gap.
+No header, no preamble, no recap, no extra emoji beyond the three line markers, no follow-up question, no fourth line. If any line is **no**, swap that line's `✅` for `🚨` and name the single most blocking gap.
 
-When the chat had an `/overdrive` session, the 12-item overdrive homework (chapters shipped + SHAs, tests that fail without the fix, suite green, stability runs, RegressionTestCount bumped, snapshots refreshed, pushed, deployed + live-verified, cross-cutting runs, combinatorial flags, deferred items captured, no refactors / no contract breaks / no silent dep upgrades / no aesthetic drift) must be honestly verified BEFORE stamping `safe to close: yes`. That checklist is internal homework — it does not appear in the response. The operator is scrolling for the bottom line; the bottom line is two lines.
+For natural stopping points, create or attach proof evidence. Preferred proof is a short video uploaded under `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`, with a poster frame, then `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`. Verify `https://videos.mullmania.com/?tag=<repo>#feed` or the direct video URL before marking `visual evidence: yes`.
+
+When the chat had an `/overdrive` session, the 12-item overdrive homework (chapters shipped + SHAs, tests that fail without the fix, suite green, stability runs, RegressionTestCount bumped, snapshots refreshed, pushed, deployed + live-verified, cross-cutting runs, combinatorial flags, deferred items captured, no refactors / no contract breaks / no silent dep upgrades / no aesthetic drift) must be honestly verified BEFORE stamping `safe to close: yes`. That checklist is internal homework — it does not appear in the response. The operator is scrolling for the bottom line; the bottom line is three lines.
 
 If the rule URL is unreachable, stop visibly. Do not improvise the protocol.
 

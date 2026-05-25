@@ -2,14 +2,14 @@
   "schemaVersion": "agents-claude-instruction-pack-v1",
   "flavor": "claude-code",
   "operator": "mist83",
-  "renderedAt": "2026-05-25T04:30:43.932Z",
+  "renderedAt": "2026-05-25T13:04:58.975Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json",
   "bootstrapScriptUrl": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh",
   "preambleInstruction": "At the start of every chat, fetch this manifest, materialize each item to its projectionTarget, verify each sha256, and only then proceed. If any fetch or verification fails, stop and report. Do not invent fallback policy.",
-  "totalItems": 19,
+  "totalItems": 22,
   "composition": {
     "sharedItemCount": 0,
-    "flavorItemCount": 19,
+    "flavorItemCount": 22,
     "sharedTreeUrl": "https://agent.mullmania.com/doctrine/shared",
     "flavorTreeUrl": "https://agent.mullmania.com/doctrine/claude-pack",
     "note": "Shared items are runtime-agnostic content (rules, skills, commands, hooks). They live at /doctrine/shared/ and are reused verbatim by every flavor pack. Flavor items are Claude-specific shims (CLAUDE.md, settings.json, .mcp.json, plugins, MEMORY.md). The codex pack will reference the same /doctrine/shared/ URLs with its own projection targets."
@@ -28,10 +28,40 @@
   "items": [
     {
       "source": "flavor",
+      "packPath": "commands/bm.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/bm.md",
+      "sha256": "0a2582b1fdbbf59f0bdec236f3db9f8f8ca00128b86d6336f696b5295335768f",
+      "sizeBytes": 235,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/bm.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "commands/bookmark.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/bookmark.md",
+      "sha256": "9e1d065fb3381a941371e55ef5bafc9c5bbd5699a5f3e8d533e8a0ec6fcc9664",
+      "sizeBytes": 247,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/bookmark.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "commands/bp.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/bp.md",
+      "sha256": "a20a1c2981bdbd36bad344977d1285cfa28b90b03b65e126c8d86acede050f94",
+      "sizeBytes": 235,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/commands/bp.md",
+      "category": "command-trampoline"
+    },
+    {
+      "source": "flavor",
       "packPath": "commands/breadcrumb.md",
       "url": "https://agent.mullmania.com/doctrine/claude-pack/commands/breadcrumb.md",
-      "sha256": "063e8e13e6cf926683b144b3d2bd9ff93915d95ac3442b3d96df56a8b3b56a69",
-      "sizeBytes": 251,
+      "sha256": "9c8a0ec218db28ee18e33acb57e0745835fea94259c85406aed91779108abf0c",
+      "sizeBytes": 295,
       "mode": "regular",
       "projectionTarget": "~/.claude/commands/breadcrumb.md",
       "category": "command-trampoline"
@@ -238,6 +268,6 @@
     "rules/project/*.md files are operator scratch (in-flight initiative context) and are included here for full wipe-and-rehydrate fidelity. They are not durable doctrine and may rotate or expire.",
     "sha256 covers file bytes only; the manifest itself is unsigned in v1. Trust on first fetch.",
     "projectionTarget paths are operator-machine absolute paths with leading ~. The bootstrap script must expand them.",
-    "Shared/flavor split: 0 of 19 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 19 items are Claude-specific shims."
+    "Shared/flavor split: 0 of 22 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 22 items are Claude-specific shims."
   ]
 }

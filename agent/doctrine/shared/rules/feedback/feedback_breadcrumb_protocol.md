@@ -1,56 +1,87 @@
 ---
-name: Breadcrumb protocol — terse end-of-chat triage
-description: GLOBAL — when the operator invokes the breadcrumb protocol (typed shorthand OR /breadcrumb/`/bp` slash command), respond with exactly two answers (breadcrumbs laid? safe to close?) and nothing else.
+name: Bookmark protocol — evidence-backed end-of-chat triage
+description: GLOBAL — when the operator invokes bookmark/breadcrumb shorthand, finish any reachable stopping-point work, create durable proof evidence when appropriate, then answer with the fixed bookmark checklist.
 type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a short video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering.
+
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
-This is the ONE protocol. Both the slash command (`/breadcrumb`, `/bp`) and the typed shorthand (`bp`, `crumbs`, `safe to close`, etc.) route here. Same triggers, same response shape, every chat.
+This is the ONE protocol. Both slash commands (`/bookmark`, `/bm`, `/breadcrumb`, `/bp`) and typed shorthand (`bookmark`, `bm`, `bp`, `crumbs`, `safe to close`, etc.) route here. Same triggers, same response shape, every chat.
+
+The current preferred name is **bookmark**. Breadcrumb remains a legacy alias.
 
 ## Trigger
 
-Any of: `/breadcrumb`, `/bp`, `breadcrumb protocol`, `bread protocol`, `breadcrumb`, `bp`, `crumbs`, `safe to close`, `safe to close?`, `is this safe to close`, `BP?`. Case-insensitive. Substring match — if the user says "ok bp" or "breadcrumbs?" treat it as the trigger.
+Any of: `/bookmark`, `/bm`, `bookmark protocol`, `bookmark`, `bookmark?`, `bm`, `/breadcrumb`, `/bp`, `breadcrumb protocol`, `bread protocol`, `breadcrumb`, `bp`, `crumbs`, `safe to close`, `safe to close?`, `is this safe to close`, `BP?`. Case-insensitive. Substring match — if the user says "ok bookmark", "bookmark this", "ok bp", or "breadcrumbs?" treat it as the trigger.
 
 Do not require the operator to spell out what they mean. They know. Do not ask for clarification.
 
+## Behavior before answering
+
+This is not only a question. It is a small closing protocol.
+
+Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, and verify live URLs.
+
+If reaching a stopping point is not bounded or would require an operator decision, do not guess. Answer `no` with the single blocking gap.
+
 ## Response shape (the only valid shape)
 
-Exactly two answers. Each is one line. Each line starts with `✅` (yes) or `🚨` (no), followed by the label, then **yes** or **no**, em-dash, ≤12 words of reason. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.
+Exactly three answers. Each is one line. Each line starts with `✅` (yes) or `🚨` (no), followed by the label, then **yes** or **no**, em-dash, concise reason or proof URL. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.
 
 ```
-✅ breadcrumbs laid: yes — <≤12 words>
-✅ safe to close:    yes — <≤12 words>
+✅ bookmark:        yes — <durable resume trail captured>
+✅ visual evidence: yes — <videos.mullmania.com proof URL or explicit fallback>
+✅ safe to close:   yes — <verified, clean, no chat-only state>
 ```
 
-If either is **no**, swap that line's leading `✅` for `🚨` and name the specific gap in the ≤12-word reason. Do not list multiple gaps. Pick the most blocking one.
+If any line is **no**, swap that line's leading `✅` for `🚨` and name the specific gap in the reason. Do not list multiple gaps. Pick the most blocking one.
 
 ```
-🚨 breadcrumbs laid: no — <single most blocking gap, ≤12 words>
-✅ safe to close:    yes — <≤12 words>
+✅ bookmark:        yes — resume doc and commits are durable
+🚨 visual evidence: no — proof video missing
+🚨 safe to close:   no — evidence missing
 ```
 
-That is the entire response. No header, no preamble, no suggestion, no "want me to fix that?", no offer of next steps, no recap of work, no extra emoji beyond the two line markers, no follow-up question. The operator did not ask for any of those things. They asked the two questions.
+That is the entire response. No header, no preamble, no suggestion, no "want me to fix that?", no offer of next steps, no recap of work, no extra emoji beyond the three line markers, no follow-up question. The operator did not ask for any of those things. They asked whether the chat can be closed with a durable bookmark.
 
-## What "breadcrumbs laid" means (the substantive check)
+## What "bookmark" means (the substantive check)
 
-All four must be true:
+All five must be true:
 
-1. **Pushed**: every meaningful commit is on the canonical remote. No local-only work that matters.
+1. **Canonical source**: every meaningful change is committed in the correct repo. If a canonical remote exists, commits are pushed or the missing push is named as the blocker.
 2. **Single source of truth**: no orphan copy of the work in a second repo / second path. Future-me lands in one place.
 3. **Next-step trail**: the canonical repo has a README, context sidecar, or pinned doc that tells the next agent (or future operator) exactly what to do to ship the next change. Includes the exact deploy command if there is one.
 4. **Deployed = local**: if the work has a live target, the live target matches the canonical source.
+5. **Proof pointer**: the closeout answer includes the proof evidence URL or says exactly why proof could not be produced.
 
 If any of those is false, the answer is **no** and the reason names which one.
 
+## What "visual evidence" means
+
+At a natural stopping point, create or attach a short proof artifact so future-Mike can remember the work visually without rereading the chat.
+
+Preferred proof is a short hosted video:
+
+1. Record the changed live/local surface with Playwright video, browser recording, OS screen capture, or an existing product-specific recorder.
+2. Convert to MP4 when practical.
+3. Upload video to `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`.
+4. Upload a poster frame to the same proof folder.
+5. Run `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`.
+6. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed` or a direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL.
+
+If the task has no meaningful visual surface or video capture is blocked by the runtime, create the strongest hosted fallback that exists (screenshots, live URL, commit SHAs, test summary, exact resume instructions). The `visual evidence` line may be **yes** only when that fallback is hosted/durable and the reason makes clear that it is a fallback. Otherwise it is **no** and `safe to close` is also **no**.
+
 ## What "safe to close" means
 
-All three must be true:
+All four must be true:
 
 1. No pending operator question the chat is waiting on the operator to answer.
 2. No background process / running task that only exists inside this chat's runtime (foreground server processes are fine — those survive; the question is about chat-bound work).
 3. Local working tree is either clean OR the dirty state is intentional and documented in the canonical next-step trail.
+4. Bookmark and visual evidence lines are both **yes**.
 
 If any is false, the answer is **no** and the reason names which one.
 
@@ -71,15 +102,15 @@ When the chat had an `/overdrive` session, the agent must honestly verify all of
 11. Deferred items list captured (or "nothing deferred" stated)
 12. NO refactors, NO contract breaks, NO silent dep upgrades, NO aesthetic drift outside focus arg
 
-If any of these is false, the second line is `🚨 safe to close: no — <single most blocking gap, ≤12 words>`. The 13-item checklist itself stays internal. The operator is scrolling for the bottom line; the bottom line is two lines.
+If any of these is false, the third line is `🚨 safe to close: no — <single most blocking gap, ≤12 words>`. The 13-item checklist itself stays internal. The operator is scrolling for the bottom line; the bottom line is three lines.
 
 ## Anti-patterns (do not do)
 
-- Do not turn the breadcrumb check into a status report. The operator gets that from other chats. This is a triage primitive.
+- Do not turn the bookmark check into a status report. The operator gets that from other chats. This is a triage primitive.
 - Do not enumerate the /overdrive 13-item homework in the response — that's internal verification, not user-visible output.
 - Do not suggest improvements to the operator's workflow when answering. They explicitly said: do not suggest anything to make this part of their life easier. They know what they need.
 - Do not be literal-minded about phrasing variants. Any reasonable shorthand for "is this done and can I close" is the trigger.
-- Do not add a third line, a follow-up, or a closing remark.
+- Do not add a fourth line, a follow-up, or a closing remark.
 - If you're tempted to write more — don't. The operator is moving fast across many chats. Brevity is the gift.
 
 ## Why this rule exists
@@ -87,3 +118,5 @@ If any of these is false, the second line is `🚨 safe to close: no — <single
 Direct operator instruction, 2026-05-22, end of the dance-party productionalization session: "I am being a puppeteer for several chats. I am orchestrating them myself, but they are so orthogonal an idea, I cannot delegate this." They built this rule so they can ask every chat the same shorthand question and get a uniform two-line answer.
 
 Re-affirmed 2026-05-23 when the operator collapsed the verbose `/overdrive`-doneness audit (a 13-item status report) into this single rule: "make it the protocol command a/command or something and merge everything it's all meant for the same shit semantically." One protocol. One response shape. The 13 items survive as internal homework, not as output.
+
+Updated 2026-05-25: the operator renamed the desired shorthand to `bookmark` and required hosted visual/video evidence at natural stopping points: "all I want to do is be able to write the term bookmark and have it have all of this happen automatically ... I want videos and stuff."
