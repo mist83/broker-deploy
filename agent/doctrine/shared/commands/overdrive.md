@@ -32,7 +32,9 @@ Do not chase random novelty. Squeeze the best product out of what the repo is al
 7. Ship each fix as a chapter: code, tests, full suite, commit.
 8. After all chapters, run the full suite at least 3 times.
 9. Deploy and live-verify if the repo has a deploy contract.
-10. Report chapters shipped, tests added, major hardenings, deferred items, live URL, and commit SHA.
+10. Produce durable proof for the work just completed. Proof must match the work: browser/app usage video for visual/user-facing behavior when practical; API transcript, test logs, live URL checks, screenshots, commit SHAs, or other hosted evidence for non-visual work. Prefer a real usage video over still screenshots when the product has a meaningful visual surface. Inspect the proof before claiming it: if it shows broken, awkward, blank, confusing, or unexercised behavior, fix within scope and re-record/re-run instead of hiding the defect.
+11. Leave the next `bookmark` command with enough evidence to close unattended: proof URL or fallback evidence, exact commits, deployed URLs, test commands/results, known deferred items, and any `.proof.json`/manifest breadcrumb the repo uses. If proof cannot be made durable, say so and do not present the chapter as fully closed.
+12. Report chapters shipped, tests added, major hardenings, deferred items, live URL, commit SHA, and proof artifact(s).
 
 ## Standards
 
@@ -45,6 +47,8 @@ No silent dependency upgrades.
 No "done" unless verified.
 
 No undeployed success claim when the expected result is live behavior.
+
+No proofless overdrive. The normal unattended cycle is `overdrive` followed by `bookmark`; Overdrive must hand Bookmark real evidence, not vibes or a chat-only summary.
 
 Slow is fine. Slop is not.
 
