@@ -1,7 +1,7 @@
 {
   "siteId": "agent",
   "host": "agent.mullmania.com",
-  "publishedAt": "2026-05-25T13:42:18.041Z",
+  "publishedAt": "2026-05-25T13:44:57.715Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site",
   "assetVersion": {
     "semver": "1.0.134",
@@ -11,7 +11,7 @@
     "token": "__MULLMANIA_ASSET_VERSION__",
     "manifestPath": "./asset-version.json",
     "manifestUrl": "https://agent.mullmania.com/asset-version.json",
-    "publishedAt": "2026-05-25T13:42:18.041Z"
+    "publishedAt": "2026-05-25T13:44:57.715Z"
   },
   "counts": {
     "hostingFiles": 291,
