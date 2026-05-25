@@ -47,9 +47,11 @@ If the previous bookmark was **no** and nothing changed, repeat the same blockin
 
 A successful bookmark means the current chapter can be closed. The bookmark is a shim for future pickup, not permission to keep appending unrelated work into the same context.
 
-After a successful bookmark, if the operator asks for a new feature, new overdrive pass, unrelated fix, or any substantial next chapter in the same chat, do not start automatically. Reply briefly that this chat is already bookmarked and the cleaner move is to open a new chat with the bookmark/proof/resume trail. Require explicit verbal authorization before continuing in the polluted chat.
+After a successful bookmark, if the operator asks for a new feature, unrelated fix, or any substantial next chapter in the same chat, do not start automatically. Reply briefly that this chat is already bookmarked and the cleaner move is to open a new chat with the bookmark/proof/resume trail. Require explicit verbal authorization before continuing in the polluted chat.
 
-Acceptable authorization examples: `continue here`, `use this chat anyway`, `authorized to continue in this chat`, or an equally clear operator statement.
+Overdrive exception: if the next operator command after a successful bookmark is only `overdrive`, `/overdrive`, `@overdrive`, or another clear Overdrive invocation, treat that Overdrive request itself as authorization to continue. Emit a loud one-line warning with leading `🚨🚨` that the chat was already bookmarked and a new chapter is starting, then run Overdrive instead of blocking. This exists so unattended refinement workflows can chain `bookmark` -> `overdrive` without a second approval prompt.
+
+Acceptable authorization examples: `continue here`, `use this chat anyway`, `authorized to continue in this chat`, `overdrive` after a bookmark, or an equally clear operator statement.
 
 If the operator authorizes continuing, proceed normally, but the old bookmark no longer covers the new chapter. The next `bookmark` after new work must evaluate the new state and create or reuse proof only when appropriate.
 
@@ -181,3 +183,5 @@ Updated 2026-05-25 again: proof videos should be real usage evidence for the ope
 Updated 2026-05-25 again: proof video creation is an acceptance test. The agent must inspect the actual final video, reject choppy or non-explanatory recordings, and fix product issues exposed by recording when bounded and non-destructive.
 
 Updated 2026-05-25 again: a successful bookmark closes the chapter. New substantial work after that should start in a fresh chat unless the operator explicitly authorizes continuing in the polluted chat.
+
+Updated 2026-05-25 again: Overdrive is an auto-continue exception after bookmark. If the operator's next command is only `overdrive` or a clear Overdrive invocation, warn loudly with `🚨🚨` and continue instead of asking for another approval.
