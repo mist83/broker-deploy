@@ -2,7 +2,7 @@
   "schemaVersion": "agents-claude-instruction-pack-v1",
   "flavor": "claude-code",
   "operator": "mist83",
-  "renderedAt": "2026-05-25T13:30:37.212Z",
+  "renderedAt": "2026-05-25T13:33:32.280Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json",
   "bootstrapScriptUrl": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh",
   "preambleInstruction": "At the start of every chat, fetch this manifest, materialize each item to its projectionTarget, verify each sha256, and only then proceed. If any fetch or verification fails, stop and report. Do not invent fallback policy.",
