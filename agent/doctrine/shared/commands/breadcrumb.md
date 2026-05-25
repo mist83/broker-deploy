@@ -12,12 +12,14 @@ Before answering, finish bounded closure work if this is nearly a natural stoppi
 
 If the protocol was already completed in this chat and no meaningful state changed afterward, do not invent new unattended work or make duplicate proof. Reuse the existing bookmark/proof and say the operator is spinning wheels inside the fixed three-line response.
 
+After a successful bookmark/breadcrumb, treat the chat as chapter-closed. If the operator later asks for a new substantial feature or next chapter in this same chat, do not start automatically. Remind them this chat is already bookmarked and recommend opening a fresh chat with the bookmark/proof/resume trail. Continue in the polluted chat only after explicit verbal authorization such as `continue here` or `use this chat anyway`.
+
 The response shape is fixed: exactly three lines. Each line leads with `✅` (yes) or `🚨` (no), then the label, then **yes** / **no**, em-dash, concise reason or proof URL.
 
 ```
 ✅ bookmark:        yes — <durable resume trail captured>
 ✅ visual evidence: yes — <videos.mullmania.com proof URL or explicit fallback>
-✅ safe to close:   yes — <verified, clean, no chat-only state>
+✅ safe to close:   yes — <verified, chapter closed, no chat-only state>
 ```
 
 No header, no preamble, no recap, no extra emoji beyond the three line markers, no follow-up question, no fourth line. If any line is **no**, swap that line's `✅` for `🚨` and name the single most blocking gap.

@@ -5,7 +5,7 @@ type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
-When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, and manifest sync before answering. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
 
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
@@ -43,6 +43,22 @@ Instead, reuse the prior durable trail and proof pointer. Keep the exact three-l
 
 If the previous bookmark was **no** and nothing changed, repeat the same blocking gap. If meaningful work happened after the prior bookmark, run the protocol normally.
 
+## Post-bookmark chapter boundary
+
+A successful bookmark means the current chapter can be closed. The bookmark is a shim for future pickup, not permission to keep appending unrelated work into the same context.
+
+After a successful bookmark, if the operator asks for a new feature, new overdrive pass, unrelated fix, or any substantial next chapter in the same chat, do not start automatically. Reply briefly that this chat is already bookmarked and the cleaner move is to open a new chat with the bookmark/proof/resume trail. Require explicit verbal authorization before continuing in the polluted chat.
+
+Acceptable authorization examples: `continue here`, `use this chat anyway`, `authorized to continue in this chat`, or an equally clear operator statement.
+
+If the operator authorizes continuing, proceed normally, but the old bookmark no longer covers the new chapter. The next `bookmark` after new work must evaluate the new state and create or reuse proof only when appropriate.
+
+Exceptions:
+
+1. A tiny clarification about the already-bookmarked work may be answered directly.
+2. A task that truly depends on unrecoverable chat-only context may continue after calling out why this chat context is needed.
+3. Emergency repair of a failed bookmark artifact may continue because it belongs to closing the same chapter.
+
 ## Response shape (the only valid shape)
 
 Exactly three answers. Each is one line. Each line starts with `✅` (yes) or `🚨` (no), followed by the label, then **yes** or **no**, em-dash, concise reason or proof URL. The leading emoji is the scannable marker — it's what the operator's eye locks onto first.
@@ -50,7 +66,7 @@ Exactly three answers. Each is one line. Each line starts with `✅` (yes) or `�
 ```
 ✅ bookmark:        yes — <durable resume trail captured>
 ✅ visual evidence: yes — <videos.mullmania.com proof URL or explicit fallback>
-✅ safe to close:   yes — <verified, clean, no chat-only state>
+✅ safe to close:   yes — <verified, chapter closed, no chat-only state>
 ```
 
 If any line is **no**, swap that line's leading `✅` for `🚨` and name the specific gap in the reason. Do not list multiple gaps. Pick the most blocking one.
@@ -163,3 +179,5 @@ Updated 2026-05-25 again: repeated `bookmark` invocations are idempotent. They m
 Updated 2026-05-25 again: proof videos should be real usage evidence for the operator's future amnesiac self: Playwright/runtime-driven where practical, roughly 30 FPS, 30-60 seconds for normal feature proof, and never random video for video's sake.
 
 Updated 2026-05-25 again: proof video creation is an acceptance test. The agent must inspect the actual final video, reject choppy or non-explanatory recordings, and fix product issues exposed by recording when bounded and non-destructive.
+
+Updated 2026-05-25 again: a successful bookmark closes the chapter. New substantial work after that should start in a fresh chat unless the operator explicitly authorizes continuing in the polluted chat.
