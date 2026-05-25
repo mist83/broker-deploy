@@ -1,8 +1,10 @@
 {
   "schema": "videos.mullmania.com/proof-breadcrumb-v1",
   "tag": "agent",
-  "vault_for_this_repo": "https://videos.mullmania.com/#feed?tag=agent",
-  "vault_cross_cut": "https://videos.mullmania.com/#feed?tag=proof",
+  "vault_for_this_repo": "https://videos.mullmania.com/?tag=agent#feed",
+  "vault_cross_cut": "https://videos.mullmania.com/?tag=proof#feed",
+  "proof_dashboard": "https://videos.mullmania.com/#proof",
+  "flipbook": "https://videos.mullmania.com/#flipbook",
   "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/agent/<name>.mp4 (optional poster-<name>.png alongside). Then cd ~/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish.",
   "deposits": [
     {
