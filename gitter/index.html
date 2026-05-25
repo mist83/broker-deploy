@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="repo-name" content="gitter">
     <title>Gitter for Mac</title>
-    <meta name="description" content="Gitter watches repos under ~/Code, auto-commits safe mainline changes, and starts itself at login on macOS.">
+    <meta name="description" content="Gitter watches repos under ~/Code, waits for quiet, finalizes safe mainline changes, and starts itself at login on macOS.">
     <script src="https://ui.mullmania.com/ui.js"></script>
   </head>
   <body>
@@ -19,7 +19,7 @@
         <div>
           <p class="text-muted text-sm">macOS background daemon</p>
           <h1>Gitter for Mac</h1>
-          <p class="text-secondary">Gitter watches repos under <code>~/Code</code>, auto-commits safe mainline changes, pushes them, and keeps a menu bar status view running in the background.</p>
+          <p class="text-secondary">Gitter watches repos under <code>~/Code</code>, waits for quiet, finalizes safe mainline changes, pushes them, and keeps a menu bar status view running in the background.</p>
         </div>
 
         <div class="stack gap-sm">
@@ -34,7 +34,7 @@
           <h2>What It Does</h2>
           <ul>
             <li>Watches Git repos under <code>~/Code</code>.</li>
-            <li>Auto-commits and pushes <code>main</code> and <code>master</code>.</li>
+            <li>Waits for quiet before committing and pushing <code>main</code> and <code>master</code>.</li>
             <li>Starts itself at login with <code>launchd</code>.</li>
             <li>Keeps a local loopback dashboard at <code>127.0.0.1:9477</code>.</li>
           </ul>
