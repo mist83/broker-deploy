@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-25T01:07:56.191Z",
+  "generatedAt": "2026-05-25T01:12:29.652Z",
   "sites": [
     {
       "siteId": "agent",
@@ -58,13 +58,13 @@
       "status": "success",
       "liveUrl": "https://gitter.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/gitter/",
-      "lastPublishedAt": "2026-05-25T01:07:56.180Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26378016369",
-      "latestBrokerRunNumber": "190",
+      "lastPublishedAt": "2026-05-25T01:12:29.642Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26378122000",
+      "latestBrokerRunNumber": "191",
       "trigger": "github-webhook",
       "hostingFiles": 8,
       "hostingBytes": 129411,
-      "recordedDeployments": 6
+      "recordedDeployments": 7
     },
     {
       "siteId": "golden-apple",
