@@ -20,24 +20,26 @@
       "main",
       "entrypoint",
       "framework",
-      "framework-core"
+      "framework-core",
+      "threejs",
+      "frog-bowling"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-01T04:21:17.537Z",
+    "lastPublishedAt": "2026-05-26T00:07:37.720Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/ipzom",
+        "repository": "mist83/mullmania",
         "ref": null,
-        "sha": "2f4ea1ec090d3a72c4364772ddaf4f8d3892eb9a",
+        "sha": "67842507286f3e2a4cc8fc4c7ebf4cbfff53b97b",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/lorem-ipzom",
+        "root": "/Users/mist83/Code/mullmania",
         "branch": "main",
-        "commit": "2f4ea1ec090d3a72c4364772ddaf4f8d3892eb9a",
-        "remote": "https://github.com/mist83/ipzom.git"
+        "commit": "67842507286f3e2a4cc8fc4c7ebf4cbfff53b97b",
+        "remote": "https://github.com/mist83/mullmania.git"
       },
       "source": "launchpad-bootstrap"
     },
@@ -346,7 +348,8 @@
       "asset-catalog",
       "github-pages",
       "mullmania-mirror",
-      "static-gallery"
+      "static-gallery",
+      "creative"
     ],
     "notes": [
       "Root-publishable static gallery of ad assets and browsing smoke path.",
@@ -593,19 +596,19 @@
       "['Generic agent prompt asset repo. Canon tool surface (header + tabs + sidebar workspace). Build step renders rules into tabs/*.html fragments referenced by sitemap.json.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:04:39.940Z",
+    "lastPublishedAt": "2026-05-26T03:30:26.690Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26336058162",
-        "runNumber": "168"
+        "runId": "26430583269",
+        "runNumber": "222"
       },
       "git": null
     },
-    "assetVersion": "1.0.119",
+    "assetVersion": "1.0.159",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1",
     "catalogTagsVersion": 2,
@@ -1379,7 +1382,8 @@
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "1830s farmer almanac for ecosystem weather."
@@ -1488,21 +1492,21 @@
       "Root redirect shell now lands cleanly in the bundled browser game surface."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T19:12:17.450Z",
+    "lastPublishedAt": "2026-05-23T20:21:41.937Z",
     "publishContext": {
       "github": {
-        "actions": false,
+        "actions": true,
         "repository": "mist83/angle-bang",
-        "ref": null,
-        "sha": "cab4cc04206fb79acbb779ec8ba039068edd4659",
-        "runId": null,
-        "runNumber": null
+        "ref": "refs/heads/master",
+        "sha": "a230a1d2bde82bbb2b409dee437c213fed4833ba",
+        "runId": "26342615932",
+        "runNumber": "11"
       },
       "git": {
-        "root": "/Users/mist83/Code/angle-bang",
+        "root": "/home/runner/work/angle-bang/angle-bang",
         "branch": "master",
-        "commit": "cab4cc04206fb79acbb779ec8ba039068edd4659",
-        "remote": "https://github.com/mist83/angle-bang.git"
+        "commit": "a230a1d2bde82bbb2b409dee437c213fed4833ba",
+        "remote": "https://github.com/mist83/angle-bang"
       }
     },
     "description": "A web-based game application deployed via AWS Lambda.",
@@ -1521,8 +1525,8 @@
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T20:08:37Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "maturityScore": 57,
@@ -1573,7 +1577,7 @@
       "updatedAt": "2026-05-21T00:14:26Z",
       "source": "valet-concept-maturity-v1"
     },
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.6",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -1972,14 +1976,21 @@
       "phone-pair",
       "signal-argh",
       "motion-lab",
-      "scaffold"
+      "scaffold",
+      "visualization",
+      "catalog",
+      "viewer",
+      "infinite-scroll",
+      "tilt",
+      "creative"
     ],
     "notes": [
       "Canvas flyover that uses the Sites catalog and preview manifest.",
-      "overdrive sweep: 4 hardening chapters + 29 tests"
+      "overdrive sweep: 4 hardening chapters + 29 tests",
+      "Infinite tilted thumbnail wall over sites.mullmania.com/api/catalog. Phone pairs via pair.js; tilt steers, density/drift/hover/images controls. Honors ?cycle=on for the viewer rotation."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T18:58:08.748Z",
+    "lastPublishedAt": "2026-05-24T01:00:59.492Z",
     "publishContext": {
       "github": {
         "actions": false,
@@ -2055,9 +2066,93 @@
       "updatedAt": "2026-05-21T00:14:26Z",
       "source": "valet-concept-maturity-v1"
     },
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1"
+  },
+  {
+    "siteId": "app-not-unused-skill",
+    "host": "app-not-unused-skill.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-26T02:43:25.865Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/app-not-unused-skill",
+        "ref": null,
+        "sha": "fa11ad088654239f17e1b923cdf487f78c34266f",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/app-not-unused-skill",
+        "branch": "main",
+        "commit": "fa11ad088654239f17e1b923cdf487f78c34266f",
+        "remote": "https://github.com/mist83/app-not-unused-skill.git"
+      }
+    },
     "assetVersion": "1.0.0",
     "canonVersion": "2026.04.26",
-    "canonProfile": "frontdoor-v1"
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-26T03:16:07Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
+    "siteId": "appfarm",
+    "host": "appfarm.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "visualization",
+      "catalog",
+      "viewer",
+      "3d",
+      "threejs",
+      "farm",
+      "biome",
+      "isometric",
+      "phone-remote",
+      "creative"
+    ],
+    "notes": [
+      "Tag-driven biomes around a central monument: games (arcade district), visualizations (observatory hill), frameworks (workshop row), experiments (lab plots), default (meadow). Plots fade up like seedlings on load."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T00:53:23.071Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/appfarm",
+        "branch": "main",
+        "commit": "6789b3bba19cc229b992c05fdcdac5b7d24bacb7",
+        "remote": null
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T00:53:43Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "apple-trie",
@@ -2657,7 +2752,8 @@
       "educational",
       "game",
       "threejs",
-      "webgl"
+      "webgl",
+      "creative"
     ],
     "notes": [
       "Periodic-table game. 118 chibi Bohr-model elements with chemistry-driven mechanics. Click two cells to test a reaction. Press V for the playable arena."
@@ -3280,7 +3376,8 @@
       "mullmania-mirror",
       "shared-ui-ready",
       "shared-ui-strict",
-      "shared-ui-styles"
+      "shared-ui-styles",
+      "creative"
     ],
     "notes": [
       "Static frontend. Publish the repository root directly; there is no build step.",
@@ -3678,20 +3775,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T23:22:37.585Z",
+    "lastPublishedAt": "2026-05-24T10:54:56.053Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/baton",
         "ref": null,
-        "sha": "5d2035523beb38ab15b5554b1421b5d4fe56bd20",
+        "sha": "ffd35382bd5ce0aaa8710d45ef36f171bc543c53",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/baton",
         "branch": "main",
-        "commit": "5d2035523beb38ab15b5554b1421b5d4fe56bd20",
+        "commit": "ffd35382bd5ce0aaa8710d45ef36f171bc543c53",
         "remote": "https://github.com/mist83/baton.git"
       }
     },
@@ -3751,7 +3848,10 @@
       },
       "updatedAt": "2026-05-21T01:08:02Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "battleship",
@@ -4635,7 +4735,8 @@
       "dual-static",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "creative"
     ],
     "notes": [
       "Repo docs page.",
@@ -4745,7 +4846,9 @@
       "dual-static",
       "github",
       "curated",
-      "games"
+      "games",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Static canvas app. Publish the repository root directly; there is no build step.",
@@ -4753,20 +4856,20 @@
       "Root canvas now seeds an honest idle state instead of shipping a blank black preview."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:33:31.685Z",
+    "lastPublishedAt": "2026-05-23T21:41:39.786Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/biff-pow",
         "ref": null,
-        "sha": "aefab0867183e107941c86a8cb18e106465019f3",
+        "sha": "ed63737306d6f4919630e1d0a309009711d1c81d",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/biff-pow",
         "branch": "master",
-        "commit": "aefab0867183e107941c86a8cb18e106465019f3",
+        "commit": "ed63737306d6f4919630e1d0a309009711d1c81d",
         "remote": "https://github.com/mist83/biff-pow.git"
       }
     },
@@ -4839,7 +4942,10 @@
       },
       "updatedAt": "2026-05-21T01:08:02Z",
       "source": "valet-concept-maturity-v1"
-    }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "blank-html-stub",
@@ -5889,10 +5995,22 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T22:08:49.327Z",
+    "lastPublishedAt": "2026-05-24T08:00:06.213Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/bucket-relay",
+        "ref": null,
+        "sha": "2d7050c9b20181e671a4fed0cd3ab08959364ecb",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/bucket-relay",
+        "branch": "main",
+        "commit": "2d7050c9b20181e671a4fed0cd3ab08959364ecb",
+        "remote": "https://github.com/mist83/bucket-relay.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -5900,7 +6018,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.7",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "bug-beacon",
@@ -5932,15 +6053,15 @@
       "['Static bug beacon demo published from the repository root.', 'GitHub Pages serves the root directly.']"
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T12:07:32.525Z",
+    "lastPublishedAt": "2026-05-24T10:54:31.986Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "25990394742",
-        "runNumber": "71"
+        "runId": "26359293327",
+        "runNumber": "185"
       },
       "git": null
     },
@@ -5963,7 +6084,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-16T17:19:34Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.6",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "bug-beacon-bsod-task-snapshot",
@@ -6358,20 +6482,20 @@
       "Repo-root live browser proof page for the Cant Wait Update library and its version-change flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:54:50.004Z",
+    "lastPublishedAt": "2026-05-24T10:47:56.078Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/cant-wait-update",
         "ref": null,
-        "sha": "f6c2661aacb7cbda71794f2184d63c42bb664776",
+        "sha": "5ba86de104d87e4828ed5112ff4e90f36e271ba8",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/cant-wait-update",
-        "branch": "demo/oscar-cant-wait-update",
-        "commit": "f6c2661aacb7cbda71794f2184d63c42bb664776",
+        "branch": "master",
+        "commit": "5ba86de104d87e4828ed5112ff4e90f36e271ba8",
         "remote": "https://github.com/mist83/cant-wait-update.git"
       }
     },
@@ -6406,7 +6530,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-04-28T04:52:09Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.3",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "canvas-tetris-clone",
@@ -6763,6 +6890,50 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "chachunk",
+    "host": "chachunk.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "visualization",
+      "catalog",
+      "viewer",
+      "3d",
+      "threejs",
+      "view-master",
+      "phone-remote",
+      "reel",
+      "creative"
+    ],
+    "notes": [
+      "Seven-slot 3D View-Master reel that ingests sites.mullmania.com/api/catalog. Each ka-chunk rotates the disc 1/7 of a turn. Phone pairs via pair.js as the clicker; tap, spacebar, click also chunk."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T21:40:52.785Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/chachunk",
+        "branch": "main",
+        "commit": "078929deff73f909d02109f6cbf75b54379a69cf",
+        "remote": null
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T01:16:04Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "chaos-box",
     "host": "chaos-box.mullmania.com",
     "currentHostedSite": false,
@@ -6777,7 +6948,11 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "canvas",
+      "github-pages",
+      "mullmania-mirror",
+      "static-game"
     ],
     "notes": [
       "Static browser game surface for GitHub Pages and Mullmania; backend bits are only for the Lambda delivery path.",
@@ -6785,20 +6960,20 @@
       "Root publish surface redirects cleanly into the shipped browser game and keeps the existing demo video metadata."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-18T23:36:18.946Z",
+    "lastPublishedAt": "2026-05-23T21:39:25.340Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/chaos-box",
         "ref": null,
-        "sha": "09c6883181e6f54b99d239b62b80f39696c14d02",
+        "sha": "0f996b2a01eedee4a6f455151ef8e7011f7d163d",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/chaos-box",
         "branch": "master",
-        "commit": "09c6883181e6f54b99d239b62b80f39696c14d02",
+        "commit": "0f996b2a01eedee4a6f455151ef8e7011f7d163d",
         "remote": "https://github.com/mist83/chaos-box.git"
       }
     },
@@ -6828,7 +7003,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "displayName": "chaos-box",
-    "manualRankUpdatedAt": null
+    "manualRankUpdatedAt": null,
+    "assetVersion": "1.0.2",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "chatgpt-repo-bridge",
@@ -6906,7 +7084,8 @@
       "particles",
       "three-js",
       "chipper",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "Feed branches in; chips erupt out. Drag the tube to aim."
@@ -12471,20 +12650,20 @@
       "Connjure Launcher V2 static root publish surface with admin, feedback, and demo pages."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:56:55.837Z",
+    "lastPublishedAt": "2026-05-24T10:05:22.935Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/connjure-launcher",
         "ref": null,
-        "sha": "7a3c3f0e8f2a60cd3c3de4121d83f996c5447720",
+        "sha": "c382592b947bb6796a14708546943b98dd834015",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/connjure-launcher",
         "branch": "master",
-        "commit": "7a3c3f0e8f2a60cd3c3de4121d83f996c5447720",
+        "commit": "c382592b947bb6796a14708546943b98dd834015",
         "remote": "https://github.com/mist83/connjure-launcher.git"
       }
     },
@@ -12495,6 +12674,9 @@
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null,
     "demo": {
       "sources": [],
       "posterUrl": "./demo/connjure-launcher/poster.svg",
@@ -12705,26 +12887,27 @@
       "conversation",
       "visualization",
       "pm-a2a",
-      "static-site"
+      "static-site",
+      "creative"
     ],
     "notes": [
       "Conversation replay front door with scene switching and first-pass PMA2A room playback."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-14T23:57:54.727Z",
+    "lastPublishedAt": "2026-05-24T02:42:24.231Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/conversation-multiverse",
         "ref": null,
-        "sha": "461da31d47819c72f015e48cf4b01464cf758dc1",
+        "sha": "8ac3d812822abe094616119997f1605de378a583",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/conversation-multiverse",
         "branch": "main",
-        "commit": "461da31d47819c72f015e48cf4b01464cf758dc1",
+        "commit": "8ac3d812822abe094616119997f1605de378a583",
         "remote": "https://github.com/mist83/conversation-multiverse.git"
       }
     },
@@ -12738,7 +12921,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-04-26T00:35:20Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "cott-action-test-harness",
@@ -12907,24 +13093,24 @@
     "tags": [],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T14:04:11.439Z",
+    "lastPublishedAt": "2026-05-26T00:50:23.624Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/cozy-crate",
+        "repository": "mist83/cozybox",
         "ref": null,
-        "sha": "605cd6769d9d7cf353b0fe4918cde79edc9e6657",
+        "sha": "ef161210c649d949eca3a2a2d68b53a24299681a",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/cozy-crate",
+        "root": "/Users/mist83/Code/cozybox",
         "branch": "main",
-        "commit": "605cd6769d9d7cf353b0fe4918cde79edc9e6657",
-        "remote": "https://github.com/mist83/cozy-crate.git"
+        "commit": "ef161210c649d949eca3a2a2d68b53a24299681a",
+        "remote": "https://github.com/mist83/cozybox.git"
       }
     },
-    "assetVersion": "1.0.10",
+    "assetVersion": "1.0.21",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1",
     "catalogTagsVersion": 2,
@@ -13021,10 +13207,11 @@
     "hasHostedSite": true,
     "hasData": true,
     "dataNamespace": "css-rocket-rescue",
-    "syntheticIndex": true,
+    "syntheticIndex": false,
     "notes": [
       "Synthetic index.html will be generated from a file list rather than guessing a canonical entrypoint.",
-      "Renamed from rocket2 during the April 2026 ninth-pass cleanup."
+      "Renamed from rocket2 during the April 2026 ninth-pass cleanup.",
+      "Static browser game. DOM + CSS rocket, no canvas. Publish the repository root directly; no build step."
     ],
     "mainSite": false,
     "mainSiteUpdatedAt": null,
@@ -13032,20 +13219,27 @@
     "testNotes": "",
     "url": "https://css-rocket-rescue.mullmania.com/",
     "displayName": "CSS Rocket Rescue",
-    "managedBy": "manual-rename-batch",
+    "managedBy": "publish-site",
     "publishContext": {
       "github": null,
-      "git": null,
-      "source": "manual-rename-ninth-pass"
+      "git": null
     },
     "tags": [
-      "data"
+      "data",
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
     ],
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T10:40:05Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "lastPublishedAt": "2026-05-24T10:04:48.438Z",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "css-tools",
@@ -13359,7 +13553,8 @@
       "graph",
       "mullmania-mirror",
       "workspace-root",
-      "signalr"
+      "signalr",
+      "creative"
     ],
     "notes": [
       "Workflow and graph surface that feeds the broader Mullmania toolchain.",
@@ -13369,20 +13564,20 @@
       "Root now routes straight into workspace.html. docs/ only carries proof artifacts and a redirect stub."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T13:42:09.007Z",
+    "lastPublishedAt": "2026-05-26T03:26:07.997Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dag",
         "ref": null,
-        "sha": "2bda36f546c125e6a2aaa49f778bd2a26ae64044",
+        "sha": "c34bb676e98ef386af7f7082e308b74aa501240a",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/dag",
+        "root": "/Users/mist83/Code/dag.mullmania.com",
         "branch": "main",
-        "commit": "2bda36f546c125e6a2aaa49f778bd2a26ae64044",
+        "commit": "c34bb676e98ef386af7f7082e308b74aa501240a",
         "remote": "https://github.com/mist83/dag.git"
       }
     },
@@ -13412,7 +13607,7 @@
     "siteAccessUpdatedAt": "2026-04-25T17:28:02Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.20",
+    "assetVersion": "1.0.31",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -13530,7 +13725,55 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "maturityScore": 52,
+    "maturityLevel": "capstone",
+    "maturitySummary": "Complete, playful static rhythm toy with generated Web Audio, scoring, keyboard/touch controls, and original assets. Coherent live capstone, but still a one-off game with little test or reusable product surface.",
+    "maturityEvidence": [
+      "Live URL returns 200 and starts in browser",
+      "Web Audio scheduler, note chart, scoring, WASD/touch controls",
+      "Original SVG assets and responsive stage styling",
+      "health.json and canon metadata/proof manifest present",
+      "No automated tests or CI deploy signal found"
+    ],
+    "maturityConfidence": 78,
+    "maturityDimensions": {
+      "novelty": 36,
+      "product": 55,
+      "reuse": 45,
+      "proof": 58,
+      "implementation": 56
+    },
+    "maturityUpdatedAt": "2026-05-24T01:56:10Z",
+    "maturitySource": "valet-concept-maturity-v1",
+    "maturityConcept": {
+      "conceptId": "dance-monkey",
+      "label": "Dance Monkey",
+      "siteIds": [
+        "dance-monkey"
+      ],
+      "bestSiteId": "dance-monkey",
+      "score": 52,
+      "level": "capstone",
+      "summary": "Complete, playful static rhythm toy with generated Web Audio, scoring, keyboard/touch controls, and original assets. Coherent live capstone, but still a one-off game with little test or reusable product surface.",
+      "evidence": [
+        "Live URL returns 200 and starts in browser",
+        "Web Audio scheduler, note chart, scoring, WASD/touch controls",
+        "Original SVG assets and responsive stage styling",
+        "health.json and canon metadata/proof manifest present",
+        "No automated tests or CI deploy signal found"
+      ],
+      "confidence": 78,
+      "dimensions": {
+        "novelty": 36,
+        "product": 55,
+        "reuse": 45,
+        "proof": 58,
+        "implementation": 56
+      },
+      "updatedAt": "2026-05-24T01:56:10Z",
+      "source": "valet-concept-maturity-v1"
+    }
   },
   {
     "siteId": "dance-party",
@@ -13540,7 +13783,7 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-22T18:04:31.791Z",
     "managedBy": "brain-farts",
-    "lastPublishedAt": "2026-05-23T16:05:14.682Z",
+    "lastPublishedAt": "2026-05-26T03:32:35.457Z",
     "publishContext": {
       "github": null,
       "source": "brain-farts",
@@ -13549,16 +13792,68 @@
         "path": null,
         "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
         "branch": "main",
-        "commit": "7b6db6b5fe23fd09afe6ee232a44aa7b771ada25"
+        "commit": "bb00aa47654cda3a7d054efcf19ec3c5b2da3bde"
       }
     },
-    "tags": [],
+    "tags": [
+      "creative"
+    ],
     "catalogTagsVersion": 2,
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
-    "notes": []
+    "notes": [],
+    "maturityScore": 85,
+    "maturityLevel": "breakthrough",
+    "maturitySummary": "Strategically novel, working 3D music-video and phone-control platform: SignalR rooms, QR phone controllers, policy schema, and 47 tested cinema packs. Breakthrough leverage, with hardening gaps like manual deploy/no favicon.",
+    "maturityEvidence": [
+      "Live host renders Three.js scene, QR room, SignalR status live",
+      "Phone controller joined room and changed host HUD via dance-burst",
+      "Cinema lists 47 packs and opens YouTube-synced 3D scene",
+      "npm test passed: pack audit plus 17 cinema-core tests",
+      "Reusable control policy schema and JSON pack engine",
+      "Manual deploy/no auto-deploy and favicon 404 remain"
+    ],
+    "maturityConfidence": 84,
+    "maturityDimensions": {
+      "novelty": 91,
+      "product": 80,
+      "reuse": 86,
+      "proof": 82,
+      "implementation": 88
+    },
+    "maturityUpdatedAt": "2026-05-24T01:56:10Z",
+    "maturitySource": "valet-concept-maturity-v1",
+    "maturityConcept": {
+      "conceptId": "dance-party",
+      "label": "Dance Party",
+      "siteIds": [
+        "dance-party"
+      ],
+      "bestSiteId": "dance-party",
+      "score": 85,
+      "level": "breakthrough",
+      "summary": "Strategically novel, working 3D music-video and phone-control platform: SignalR rooms, QR phone controllers, policy schema, and 47 tested cinema packs. Breakthrough leverage, with hardening gaps like manual deploy/no favicon.",
+      "evidence": [
+        "Live host renders Three.js scene, QR room, SignalR status live",
+        "Phone controller joined room and changed host HUD via dance-burst",
+        "Cinema lists 47 packs and opens YouTube-synced 3D scene",
+        "npm test passed: pack audit plus 17 cinema-core tests",
+        "Reusable control policy schema and JSON pack engine",
+        "Manual deploy/no auto-deploy and favicon 404 remain"
+      ],
+      "confidence": 84,
+      "dimensions": {
+        "novelty": 91,
+        "product": 80,
+        "reuse": 86,
+        "proof": 82,
+        "implementation": 88
+      },
+      "updatedAt": "2026-05-24T01:56:10Z",
+      "source": "valet-concept-maturity-v1"
+    }
   },
   {
     "siteId": "dark-flip-source-grid",
@@ -13687,20 +13982,20 @@
     "tags": [],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T15:23:09.360Z",
+    "lastPublishedAt": "2026-05-24T10:54:16.169Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/deck-duel",
         "ref": null,
-        "sha": "54ea4ece7f034de639261cf71d1c9b85bea8eebd",
+        "sha": "744487cdda9ec0d23af408877eb1ce7e53643a4c",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/deck-duel",
         "branch": "main",
-        "commit": "54ea4ece7f034de639261cf71d1c9b85bea8eebd",
+        "commit": "744487cdda9ec0d23af408877eb1ce7e53643a4c",
         "remote": "https://github.com/mist83/deck-duel.git"
       }
     },
@@ -13710,7 +14005,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "decks-out",
@@ -13841,77 +14139,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "demo",
-    "host": "demo.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "tags": [
-      "mullmania",
-      "public-frontdoor",
-      "repo-artifacts",
-      "canon-deploy-ready",
-      "dual-static",
-      "github",
-      "curated",
-      "demo",
-      "device-router",
-      "phone-surface",
-      "desktop-surface",
-      "tv-surface",
-      "diagnostics",
-      "shared-ui-runtime",
-      "ui-framework"
-    ],
-    "notes": [
-      "Publish the repository root directly. The HTML demo pages are the actual content; the root should act as a navigable landing page for static hosting.",
-      "Validated canonical repo-local deploy contract.",
-      "Root publish surface is a navigable landing page for the shipped demo HTML files.",
-      "TV-mechanic showcase: D-pad, phone cursor over signalargh, telestrate, WebGL, image gallery, and a hardware/diagnostic surface.",
-      "Front page routes to phone, desktop, and TV demo surfaces. TV remains remote-first: D-pad, phone cursor over signalargh, telestrate, WebGL, image gallery, and diagnostics."
-    ],
-    "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:02:05.557Z",
-    "publishContext": {
-      "github": {
-        "actions": false,
-        "repository": "mist83/demo",
-        "ref": null,
-        "sha": "54d289ab36f6a39ce94ea02505549842794e50e7",
-        "runId": null,
-        "runNumber": null
-      },
-      "git": {
-        "root": "/Users/mist83/Code/demo",
-        "branch": "main",
-        "commit": "54d289ab36f6a39ce94ea02505549842794e50e7",
-        "remote": "https://github.com/mist83/demo.git"
-      }
-    },
-    "manualRank": 20,
-    "testStatus": "smoke",
-    "testNotes": "Checked live.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "demo": {
-      "sources": [],
-      "posterUrl": "./demo/demo/poster.png",
-      "durationSec": null,
-      "mode": "poster",
-      "posterKind": "showcase-poster",
-      "posterNote": "Hand-authored SVG composition — placeholder. A real rendered poster is queued via the image-generation queue and will replace this when delivered."
-    },
-    "showcaseRank": 240,
-    "description": "This directory contains 5 self-contained demo content pages with CSS animations for testing the deeplink feedback system without requiring external Spectrum deeplinks.",
-    "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-04-30T17:59:01Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "demo-for-me",
     "host": "demo-for-me.mullmania.com",
     "currentHostedSite": false,
@@ -14014,32 +14241,53 @@
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "apple-trie",
       "demos",
-      "github-pages",
-      "mullmania-mirror",
+      "demo",
+      "html5-demos",
+      "tech-demos",
+      "device-router",
+      "phone-surface",
+      "desktop-surface",
+      "tv-surface",
+      "diagnostics",
+      "shared-ui-runtime",
+      "canon-deploy-ready",
+      "ui-framework",
       "repo-artifacts",
-      "static-frontend",
-      "batch4"
+      "public-frontdoor",
+      "curated"
     ],
-    "notes": [],
-    "managedBy": "bulk-catalog-restore",
-    "lastPublishedAt": "2026-04-24T02:25:36.719Z",
-    "isPublic": false,
-    "siteAccessUpdatedAt": "2026-05-02T23:26:49.869Z",
+    "notes": [
+      "Canonical combined demo surface. Absorbs the previous demo, html5-demos, and tech-demos hosts into demos.mullmania.com."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-25T23:51:26.154Z",
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-25T23:57:33Z",
     "publishContext": {
-      "github": null,
+      "github": {
+        "actions": false,
+        "repository": "mist83/demo",
+        "ref": null,
+        "sha": "54d289ab36f6a39ce94ea02505549842794e50e7",
+        "runId": null,
+        "runNumber": null
+      },
       "git": {
-        "root": "/Users/mist83/Code/sites-mixed-archive-2026-04-21",
+        "root": "/Users/mist83/Code/demo",
         "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/sites.git"
+        "commit": "54d289ab36f6a39ce94ea02505549842794e50e7",
+        "remote": "https://github.com/mist83/demo.git"
       }
     },
-    "description": "Search Apple TV shows, movies, and episodes from one search box.",
+    "description": "Combined demo hub for device diagnostics, HTML5 demos, and Mullmania tech proof surfaces.",
     "catalogTagsVersion": 2,
-    "aliases": [],
-    "siteAliasesUpdatedAt": null,
+    "aliases": [
+      "demo",
+      "html5-demos",
+      "tech-demos"
+    ],
+    "siteAliasesUpdatedAt": "2026-05-25T23:57:33Z",
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
@@ -14047,11 +14295,19 @@
       "sources": [],
       "posterUrl": "./demo/demos/poster.png",
       "durationSec": null,
-      "mode": null,
-      "posterKind": "showcase-reel",
-      "posterNote": "Published screenshot for this repo."
+      "mode": "poster",
+      "posterKind": "showcase-poster",
+      "posterNote": "Combined demo hub poster."
     },
-    "showcaseRank": 240
+    "showcaseRank": 240,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1",
+    "displayName": "Demos",
+    "manualRank": 320,
+    "manualRankUpdatedAt": "2026-05-25T23:57:33Z",
+    "operatorNote": "Canonical combined demo hub replacing demo, html5-demos, and tech-demos.",
+    "operatorNoteUpdatedAt": "2026-05-25T23:57:33Z"
   },
   {
     "siteId": "dendron",
@@ -14070,27 +14326,28 @@
       "d3",
       "tooling",
       "threejs",
-      "3d"
+      "3d",
+      "creative"
     ],
     "notes": [
       "Live force-directed trie view over sites.mullmania.com/catalog.json. Hyphen-segmented prefix tree rooted at mullmania.com, with 6 alphabet buckets on the first ring and an 8-per-cluster soft cap.",
       "Live force-directed trie view over sites.mullmania.com/api/catalog with identity-preserving 2D-to-3D morphing. Hyphen-segmented prefix tree rooted at mullmania.com, with 6 alphabet buckets on the first ring and an 8-per-cluster soft cap."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T16:11:50.676Z",
+    "lastPublishedAt": "2026-05-24T02:59:29.453Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dendron",
         "ref": null,
-        "sha": "c55d5a676afc562936c610cdc5abbc232c3329e8",
+        "sha": "438fc46979127a17a5cc80e4d29141c6de084127",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dendron",
         "branch": "main",
-        "commit": "c55d5a676afc562936c610cdc5abbc232c3329e8",
+        "commit": "438fc46979127a17a5cc80e4d29141c6de084127",
         "remote": "https://github.com/mist83/dendron.git"
       }
     },
@@ -14103,7 +14360,7 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
-    "assetVersion": "1.0.3",
+    "assetVersion": "1.0.7",
     "canonVersion": "2026.04.19",
     "canonProfile": "frontdoor-v1"
   },
@@ -14705,7 +14962,8 @@
       "physics",
       "multiplayer",
       "tv",
-      "ipzom"
+      "ipzom",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
@@ -14808,7 +15066,9 @@
       "dual-static",
       "github",
       "curated",
-      "games"
+      "games",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
@@ -14817,20 +15077,20 @@
       "Restored repo-backed siteId after accidental eighth-pass rename."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T20:52:10Z",
+    "lastPublishedAt": "2026-05-24T10:38:12.066Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/dong",
         "ref": null,
-        "sha": "92c416d6517c7c6553e1969a3f269670b79effd0",
+        "sha": "a7f38e50f3edb728ebe8dc0f8d3a697a56b5737e",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/dong",
         "branch": "master",
-        "commit": "92c416d6517c7c6553e1969a3f269670b79effd0",
+        "commit": "a7f38e50f3edb728ebe8dc0f8d3a697a56b5737e",
         "remote": "https://github.com/mist83/dong.git"
       }
     },
@@ -14853,7 +15113,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-17T13:14:59Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "doppelganger",
@@ -14902,7 +15165,8 @@
       "operator-key-gated",
       "liskov-backed",
       "people-graph",
-      "communication-coach"
+      "communication-coach",
+      "creative"
     ],
     "notes": [
       "Private subdomain. Whitelist exposes only dossier/web/* to dossier.mullmania.com. dossier/data/* is server-side only behind LiskovServiceSecurity operator-key auth."
@@ -15063,24 +15327,25 @@
       "deck",
       "carousel",
       "drop",
-      "decision-flow"
+      "decision-flow",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T16:06:41.484Z",
+    "lastPublishedAt": "2026-05-24T10:49:07.443Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/drop",
         "ref": null,
-        "sha": "1cfb17adc52a42e48f283a00053523e7c8719a7b",
+        "sha": "6dd8678ba9de6d9ce1463171377aeccc962fa036",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/drop",
         "branch": "main",
-        "commit": "1cfb17adc52a42e48f283a00053523e7c8719a7b",
+        "commit": "6dd8678ba9de6d9ce1463171377aeccc962fa036",
         "remote": "https://github.com/mist83/drop.git"
       }
     },
@@ -15090,7 +15355,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.5",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "dual-button-clipboard-snapshot-launcher-4735",
@@ -16798,6 +17066,54 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "feed",
+    "host": "feed.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "feed",
+      "milestones",
+      "bookmark",
+      "proof",
+      "operator-memory",
+      "lecter-future"
+    ],
+    "notes": [
+      "Static v1. Bookmark doctrine writes future milestone entries here before closing."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-26T02:54:08.598Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/feed.mullmania.com",
+        "ref": null,
+        "sha": "205124a0d8ee8d53d2326b525102b10f534afccc",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/feed.mullmania.com",
+        "branch": "main",
+        "commit": "205124a0d8ee8d53d2326b525102b10f534afccc",
+        "remote": "https://github.com/mist83/feed.mullmania.com.git"
+      }
+    },
+    "assetVersion": "1.0.6",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-26T00:27:24Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "feedbuilder",
     "host": "feedbuilder.mullmania.com",
     "currentHostedSite": false,
@@ -16852,6 +17168,51 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "fever-dream",
+    "host": "fever-dream.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "three-js",
+      "gaussian-splatting",
+      "mesh-capture",
+      "tech-demo",
+      "mullformed"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-26T02:59:11.090Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/fever-dream",
+        "ref": null,
+        "sha": "8e74d798dceebe4d36c27f2ca54cc2c503c413ff",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/fever-dream",
+        "branch": "main",
+        "commit": "8e74d798dceebe4d36c27f2ca54cc2c503c413ff",
+        "remote": "https://github.com/mist83/fever-dream.git"
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-26T03:28:58Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "fictional-bio-scrolling-grid-3216",
@@ -17042,24 +17403,33 @@
     "tags": [
       "github",
       "curated",
-      "simulation"
+      "simulation",
+      "blazor",
+      "webassembly",
+      "dotnet10",
+      "svg",
+      "vector-fields",
+      "electromagnetism",
+      "science-art"
     ],
-    "notes": [],
+    "notes": [
+      "['Makes invisible vector fields legible through layered lines, gradients, and proof artifacts.', 'Intentionally separate from the other repos in both subject matter and visual style.']"
+    ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-29T03:14:09.960Z",
+    "lastPublishedAt": "2026-05-23T21:44:30.033Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/fieldloom",
         "ref": null,
-        "sha": "521e17f520c69d3c24cee5cdda8ed22b9a26b341",
+        "sha": "6cb9000855bb2c92c951681492696dea7d9dfa11",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/tenfold-mania/fieldloom",
+        "root": "/Users/mist83/Code/fieldloom",
         "branch": "main",
-        "commit": "521e17f520c69d3c24cee5cdda8ed22b9a26b341",
+        "commit": "6cb9000855bb2c92c951681492696dea7d9dfa11",
         "remote": "https://github.com/mist83/fieldloom.git"
       }
     },
@@ -17071,7 +17441,16 @@
     "siteAliasesUpdatedAt": null,
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://fieldloom.mullmania.com/demo/poster.svg",
+      "durationSec": null,
+      "mode": "poster",
+      "posterKind": null,
+      "posterNote": null
+    },
+    "showcaseRank": 240
   },
   {
     "siteId": "fighters",
@@ -17086,28 +17465,29 @@
       "phone-first",
       "browser",
       "mullmania-models",
-      "thumb-zone-ui"
+      "thumb-zone-ui",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-22T20:20:03.251Z",
+    "lastPublishedAt": "2026-05-26T03:26:49.870Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/fighters",
         "ref": "refs/heads/main",
-        "sha": "ece2f203f9d628056052e0c829a65c624a7c430f",
-        "runId": "26310018039",
-        "runNumber": "21"
+        "sha": "523ed2b4512b146d6483520129d20f3a5b41b173",
+        "runId": "26430481478",
+        "runNumber": "39"
       },
       "git": {
         "root": "/home/runner/work/fighters/fighters",
         "branch": "main",
-        "commit": "ece2f203f9d628056052e0c829a65c624a7c430f",
+        "commit": "523ed2b4512b146d6483520129d20f3a5b41b173",
         "remote": "https://github.com/mist83/fighters"
       }
     },
-    "assetVersion": "1.0.22",
+    "assetVersion": "1.0.49",
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
@@ -19171,6 +19551,50 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "funnel",
+    "host": "funnel.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "funnel",
+      "planner",
+      "idea-inbox",
+      "constellation",
+      "creative"
+    ],
+    "notes": [
+      "Static-only first cut. Inbox + arc list persisted to localStorage. Reads agent.<host>/hud/snapshot.json live. Server-side sync deferred until proven."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T02:18:18.498Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/funnel",
+        "ref": null,
+        "sha": "5c70944c36ca8bc99e243c553cf2e0afbca52b4b",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/funnel",
+        "branch": "main",
+        "commit": "5c70944c36ca8bc99e243c553cf2e0afbca52b4b",
+        "remote": "https://github.com/mist83/funnel.git"
+      }
+    },
+    "description": "Creativity router. Idea inbox + constellation view + next-cut emitter. Sits upstream of dag and lecter.",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T20:46:15Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "testNotes": ""
+  },
+  {
     "siteId": "fv2",
     "host": "fv2.mullmania.com",
     "currentHostedSite": false,
@@ -19220,7 +19644,8 @@
     "tags": [
       "simulation",
       "redirect",
-      "mullformed"
+      "mullformed",
+      "creative"
     ],
     "notes": [
       "Drop in an STL or gcode file, watch it become voxels you can collapse, explode, or pour like marbles.",
@@ -19379,22 +19804,23 @@
       "tooling",
       "ui-framework",
       "github-pages",
-      "mullmania-mirror"
+      "mullmania-mirror",
+      "creative"
     ],
     "notes": [
       "Static launcher surface for the local-first gitter daemon. Publish the repository root directly.",
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T14:38:26.721Z",
+    "lastPublishedAt": "2026-05-25T01:12:11.034Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26335461712",
-        "runNumber": "165"
+        "runId": "26378122000",
+        "runNumber": "191"
       },
       "git": null
     },
@@ -19418,7 +19844,7 @@
     "siteAccessUpdatedAt": "2026-04-25T23:39:04Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.1",
+    "assetVersion": "1.0.3",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -19655,7 +20081,8 @@
     "tags": [
       "github",
       "curated",
-      "simulation"
+      "simulation",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
@@ -20649,7 +21076,8 @@
     "syntheticIndex": false,
     "tags": [
       "simulation",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Three.js simulation: hilbert."
@@ -20791,16 +21219,29 @@
       "three-js",
       "hot-wire",
       "styrofoam",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "Hot wire cuts styrofoam. Pick a shape, set the wire, watch the foam vanish."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:10:22.367Z",
+    "lastPublishedAt": "2026-05-24T09:58:57.117Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/hot-wire",
+        "ref": null,
+        "sha": "38b7b1324fbeeb91c438aa99ba9f0ad783e8faf8",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/hot-wire",
+        "branch": "main",
+        "commit": "38b7b1324fbeeb91c438aa99ba9f0ad783e8faf8",
+        "remote": "https://github.com/mist83/hot-wire.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -20808,7 +21249,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "html-better-builtins",
@@ -20951,64 +21395,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "html5-demos",
-    "host": "html5-demos.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "tags": [
-      "mullmania",
-      "public-frontdoor",
-      "repo-artifacts",
-      "github",
-      "curated",
-      "ui-framework",
-      "github-pages",
-      "mullmania-mirror"
-    ],
-    "notes": [
-      "Repo docs page."
-    ],
-    "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T11:32:01.712Z",
-    "publishContext": {
-      "github": {
-        "actions": false,
-        "repository": "mist83/html5_demos",
-        "ref": null,
-        "sha": "098ea7e2d2539dfed83eca0d0199ca6e6e11d195",
-        "runId": null,
-        "runNumber": null
-      },
-      "git": {
-        "root": "/Users/mist83/Code/html5_demos",
-        "branch": "master",
-        "commit": "098ea7e2d2539dfed83eca0d0199ca6e6e11d195",
-        "remote": "https://github.com/mist83/html5_demos.git"
-      }
-    },
-    "description": "HTML5 Demo Collection.",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "demo": {
-      "sources": [],
-      "posterUrl": "./demo/html5-demos/poster.png",
-      "durationSec": null,
-      "mode": "screenshot-first",
-      "posterKind": "showcase-reel",
-      "posterNote": "Published screenshot for this repo."
-    },
-    "showcaseRank": 240,
-    "testNotes": "",
-    "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-05-17T11:37:09Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "hydropress",
     "host": "hydropress.mullmania.com",
     "currentHostedSite": false,
@@ -21022,7 +21408,8 @@
       "soft-body",
       "three-js",
       "hydropress",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "A hydraulic press squashes 3D objects flat. Tap to fire."
@@ -21237,7 +21624,8 @@
       "ui-framework",
       "image",
       "upload",
-      "download"
+      "download",
+      "creative"
     ],
     "notes": [
       "Image archive backend seeded from Codex-generated Nelsonville assets. ipzom.com is the bootstrap model; this repo is the images.mullmania.com rebrand target.",
@@ -21301,20 +21689,20 @@
       "Local and production regression suites pass."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T00:38:27.235Z",
+    "lastPublishedAt": "2026-05-24T10:52:30.382Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/infinite-scroll",
         "ref": null,
-        "sha": "6f8ba349b878ab8318e4a699bec56118796feb9a",
+        "sha": "b2e237ce7a729759e93c00d9f4b3bf2c3a726ebb",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/infinite-scroll",
         "branch": "main",
-        "commit": "6f8ba349b878ab8318e4a699bec56118796feb9a",
+        "commit": "b2e237ce7a729759e93c00d9f4b3bf2c3a726ebb",
         "remote": "https://github.com/mist83/infinite-scroll.git"
       }
     },
@@ -21329,7 +21717,7 @@
     "siteAccessUpdatedAt": "2026-04-29T19:14:53Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.30",
+    "assetVersion": "1.0.31",
     "canonVersion": null,
     "canonProfile": null,
     "manualRankUpdatedAt": "2026-04-29T19:14:53Z"
@@ -21881,14 +22269,21 @@
       "Framework-adjacent scratch and storage surface hosted at Mullmania."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T00:20:58.840Z",
+    "lastPublishedAt": "2026-05-24T11:27:05.513Z",
     "publishContext": {
-      "github": null,
+      "github": {
+        "actions": true,
+        "repository": "mist83/itchy-brain",
+        "ref": "refs/heads/main",
+        "sha": "c91eef522c0a00dda0a28e2433b982098f7838d5",
+        "runId": "26359954287",
+        "runNumber": "56"
+      },
       "git": {
-        "root": "/Users/mist83/Code/itchy-brain",
+        "root": "/home/runner/work/itchy-brain/itchy-brain",
         "branch": "main",
-        "commit": "0f3b1e145d0693ba2254a179bfad88f26ec3a9f6",
-        "remote": "https://github.com/mist83/itchy-brain.git"
+        "commit": "c91eef522c0a00dda0a28e2433b982098f7838d5",
+        "remote": "https://github.com/mist83/itchy-brain"
       }
     },
     "frameworkSite": true,
@@ -22460,7 +22855,8 @@
       "github",
       "curated",
       "tooling",
-      "ui-framework"
+      "ui-framework",
+      "creative"
     ],
     "notes": [
       "Repo docs page.",
@@ -22649,7 +23045,8 @@
     "syntheticIndex": false,
     "tags": [
       "simulation",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Three.js simulation: kuramoto."
@@ -23051,26 +23448,30 @@
       "claude-code",
       "visualization",
       "static-site",
-      "demo"
+      "demo",
+      "agent-session-surgery",
+      "creative"
     ],
     "notes": [
-      "lecter — context surgery for Claude Code. This subdomain is an interactive demo with a single canned session; the real tool runs locally (see github.com/mist83/lecter)."
+      "lecter — context surgery for Claude Code. This subdomain is an interactive demo with a single canned session; the real tool runs locally (see github.com/mist83/lecter).",
+      "lecter - agent session surgery and visualization. This subdomain is an interactive demo with a single canned session; the local tool currently has a writable Claude Code adapter plus HUD/live sources.",
+      "lecter - agent session surgery and visualization. This subdomain is an interactive demo with a seeded operating-theater project; the local tool currently has a writable Claude Code adapter plus HUD/live sources."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T05:42:01.931Z",
+    "lastPublishedAt": "2026-05-26T03:13:50.919Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/lecter",
         "ref": null,
-        "sha": "2cea768f82b93af592308c0d6cf9d0018b13d5e7",
+        "sha": "bf2a4d9e0814ceb1cf2b1ecc809e61f4219c2f1d",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/lecter",
         "branch": "main",
-        "commit": "2cea768f82b93af592308c0d6cf9d0018b13d5e7",
+        "commit": "bf2a4d9e0814ceb1cf2b1ecc809e61f4219c2f1d",
         "remote": "https://github.com/mist83/lecter.git"
       }
     },
@@ -23080,7 +23481,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.9",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "leftover-file-index",
@@ -23689,7 +24093,8 @@
       "github-pages",
       "http-api",
       "file-browser",
-      "mullmania-mirror"
+      "mullmania-mirror",
+      "creative"
     ],
     "notes": [
       "Repo docs page.",
@@ -23957,7 +24362,8 @@
       "rigid-body",
       "three-js",
       "logsplit",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "Tap to swing the maul. One round, two halves."
@@ -24044,6 +24450,52 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "loop-deck",
+    "host": "loop-deck.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "instrument",
+      "music",
+      "polyrhythm",
+      "static-ui"
+    ],
+    "notes": [
+      "Radial browser instrument with shareable patterns and Web Audio playback."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T21:41:21.649Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/loop-deck",
+        "ref": null,
+        "sha": "3a54201e5be536b5ffc53f1cdb816702bfc71ca9",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/loop-deck",
+        "branch": "main",
+        "commit": "3a54201e5be536b5ffc53f1cdb816702bfc71ca9",
+        "remote": "https://github.com/mist83/loop-deck.git"
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T21:43:42Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "loop-reset-note-sequencer-6480",
@@ -24313,20 +24765,20 @@
       "TV + mobile app-building workflow. Repo root index.html is a hand-built dark hero (theme-coherent, not a generic frontdoor) that links to the actual app surfaces under tv/, mobile/, test/."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T14:25:22.225Z",
+    "lastPublishedAt": "2026-05-24T02:29:52.207Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mainline-coding",
         "ref": null,
-        "sha": "c3bacb44b8a61ea7f9d0bb2aa226c3efad08e9b1",
+        "sha": "12bd12b896a6c807c39e630f2562545e97faf66a",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mainline-coding",
         "branch": "master",
-        "commit": "c3bacb44b8a61ea7f9d0bb2aa226c3efad08e9b1",
+        "commit": "12bd12b896a6c807c39e630f2562545e97faf66a",
         "remote": "https://github.com/mist83/mainline-coding.git"
       }
     },
@@ -24349,7 +24801,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-05-17T13:04:26Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.4",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "managed-blank-proof",
@@ -24559,20 +25014,20 @@
       "First consumer of https://ui.mullmania.com/js/pair.js — the canon TV+phone-via-QR pairing primitive."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T17:18:19.537Z",
+    "lastPublishedAt": "2026-05-23T21:45:05.664Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/marble-maze",
         "ref": null,
-        "sha": "9a84ae11bc4eb8500399089fc24dd49a2090c36e",
+        "sha": "0602813d6593ab3aeac8535d6f31b30be1d22489",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/marble-maze",
         "branch": "main",
-        "commit": "9a84ae11bc4eb8500399089fc24dd49a2090c36e",
+        "commit": "0602813d6593ab3aeac8535d6f31b30be1d22489",
         "remote": "https://github.com/mist83/marble-maze.git"
       }
     },
@@ -24582,7 +25037,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "marble-playground",
@@ -24598,7 +25056,8 @@
       "signal-argh",
       "multi-screen",
       "physics",
-      "uses-pair-js"
+      "uses-pair-js",
+      "creative"
     ],
     "notes": [
       "Compositor pattern: physics runs in the control plane above a 2D world; each iframe or remote TV is a viewport into that shared world. Marbles never 'transfer' between screens — they fly above all of them."
@@ -25570,6 +26029,47 @@
     "mainSiteUpdatedAt": null
   },
   {
+    "siteId": "menagerie",
+    "host": "menagerie.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "visualization",
+      "catalog",
+      "hub",
+      "index",
+      "viewer",
+      "creative"
+    ],
+    "notes": [
+      "Static tile-board of every catalog viewer (chachunk, appfarm, skyline, dendron, app-flyover, showcase, infinite-scroll, project-and). Each tile launches its viewer with ?cycle=on. A BEGIN THE CYCLE button picks one at random."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T01:02:52.775Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/menagerie",
+        "branch": "main",
+        "commit": "c5350d29515626031090064cddecf20f38057830",
+        "remote": null
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T01:03:52Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "meowster-whiskerpaws-purrtfolio",
     "host": "meowster-whiskerpaws-purrtfolio.mullmania.com",
     "currentHostedSite": false,
@@ -26368,26 +26868,27 @@
       "obj",
       "glb",
       "3d-assets",
-      "operator-tool"
+      "operator-tool",
+      "creative"
     ],
     "notes": [
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:14:38.344Z",
+    "lastPublishedAt": "2026-05-25T16:59:21.382Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/Models",
         "ref": null,
-        "sha": "1e46825d425d8582d9a492cac04adf09d0b3e7e4",
+        "sha": "29d18fc36499e552124835959e68595cf3b44b24",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/models",
         "branch": "master",
-        "commit": "1e46825d425d8582d9a492cac04adf09d0b3e7e4",
+        "commit": "29d18fc36499e552124835959e68595cf3b44b24",
         "remote": "https://github.com/mist83/Models.git"
       }
     },
@@ -26402,7 +26903,7 @@
     "siteAliasesUpdatedAt": null,
     "displayName": "Models",
     "url": "https://models.mullmania.com/",
-    "assetVersion": "1.0.28",
+    "assetVersion": "1.0.44",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -26759,26 +27260,27 @@
       "three-js",
       "physics",
       "modeling",
-      "assets"
+      "assets",
+      "creative"
     ],
     "notes": [
       "Mullformed is a browser-native 3D sketchpad for quickly shaping rough ideas into usable 3D assets."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T16:12:49.628Z",
+    "lastPublishedAt": "2026-05-24T19:49:26.934Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/mullformed",
         "ref": null,
-        "sha": "ac77a40f62bfc6ebba01ed7d1e9e95c482ca2f95",
+        "sha": "933be18b733a5b0ba716c0e6aea83c13c8a719de",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/mullformed",
         "branch": "main",
-        "commit": "ac77a40f62bfc6ebba01ed7d1e9e95c482ca2f95",
+        "commit": "933be18b733a5b0ba716c0e6aea83c13c8a719de",
         "remote": "https://github.com/mist83/mullformed.git"
       }
     },
@@ -26791,7 +27293,7 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
-    "assetVersion": "1.0.5",
+    "assetVersion": "1.0.1",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -27000,7 +27502,8 @@
       "repo-artifacts",
       "data",
       "github",
-      "curated"
+      "curated",
+      "creative"
     ],
     "managedBy": "publish-site",
     "lastPublishedAt": "2026-04-20T04:25:13.658Z",
@@ -27073,53 +27576,6 @@
     "siteAliasesUpdatedAt": null
   },
   {
-    "siteId": "multiplayer-pong",
-    "host": "multiplayer-pong.mullmania.com",
-    "currentHostedSite": false,
-    "hasHostedSite": true,
-    "hasData": false,
-    "dataNamespace": null,
-    "syntheticIndex": false,
-    "tags": [
-      "mullmania",
-      "public-frontdoor",
-      "repo-artifacts",
-      "github",
-      "curated"
-    ],
-    "notes": [
-      "Interactive Mullmania starfield and launch controls.",
-      "Saved Pong page."
-    ],
-    "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T15:34:32.207Z",
-    "publishContext": {
-      "github": {
-        "actions": false,
-        "repository": "mist83/mullmania",
-        "ref": null,
-        "sha": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "runId": null,
-        "runNumber": null
-      },
-      "git": {
-        "root": "/Users/mist83/Code/mullmania",
-        "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/mullmania.git"
-      }
-    },
-    "description": "Arcade toy.",
-    "testNotes": "",
-    "mainSite": false,
-    "mainSiteUpdatedAt": null,
-    "catalogTagsVersion": 2,
-    "isPublic": true,
-    "siteAccessUpdatedAt": "2026-05-23T19:05:51Z",
-    "aliases": [],
-    "siteAliasesUpdatedAt": null
-  },
-  {
     "siteId": "nelsonville",
     "host": "nelsonville.mullmania.com",
     "currentHostedSite": false,
@@ -27133,24 +27589,25 @@
       "pwa",
       "mobile",
       "signalargh",
-      "itchy-brain"
+      "itchy-brain",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T16:13:38.064Z",
+    "lastPublishedAt": "2026-05-23T21:41:18.780Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/nelsonville",
         "ref": null,
-        "sha": "627c381a8f01b40b2a0c7195fa93bb46b7333001",
+        "sha": "cd61d7c50c18741947071873838f0eef26f13052",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/nelsonville",
         "branch": "main",
-        "commit": "627c381a8f01b40b2a0c7195fa93bb46b7333001",
+        "commit": "cd61d7c50c18741947071873838f0eef26f13052",
         "remote": "https://github.com/mist83/nelsonville.git"
       }
     },
@@ -27163,7 +27620,7 @@
     "testNotes": "",
     "mainSite": false,
     "mainSiteUpdatedAt": null,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.2",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -28425,7 +28882,8 @@
       "chatgpt",
       "archive",
       "standalone",
-      "static"
+      "static",
+      "creative"
     ],
     "notes": [
       "Validated canonical repo-local deploy contract.",
@@ -29342,7 +29800,8 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Peeper's static browser surface lives in html/. GitHub Pages publishes docs/ as the public hub, while Mullmania mirrors html/ and leaves the .NET backend out of the static contract.",
@@ -29482,7 +29941,8 @@
     "syntheticIndex": false,
     "tags": [
       "simulation",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Three.js simulation: penrose."
@@ -29541,7 +30001,8 @@
     "tags": [
       "github",
       "curated",
-      "simulation"
+      "simulation",
+      "creative"
     ],
     "notes": [],
     "managedBy": "publish-site",
@@ -29830,21 +30291,21 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T20:38:39.776Z",
+    "lastPublishedAt": "2026-05-25T14:39:18.569Z",
     "publishContext": {
       "github": {
-        "actions": false,
+        "actions": true,
         "repository": "mist83/phone-remote",
-        "ref": null,
-        "sha": "80b9846b637cb2b66afba514c4f1941d08fa4289",
-        "runId": null,
-        "runNumber": null
+        "ref": "refs/heads/main",
+        "sha": "82584c4b617523ff7c82c4fe621d4da3009033b7",
+        "runId": "26405964256",
+        "runNumber": "9"
       },
       "git": {
-        "root": "/Users/mist83/Code/phone-remote",
+        "root": "/home/runner/work/phone-remote/phone-remote",
         "branch": "main",
-        "commit": "80b9846b637cb2b66afba514c4f1941d08fa4289",
-        "remote": "https://github.com/mist83/phone-remote.git"
+        "commit": "82584c4b617523ff7c82c4fe621d4da3009033b7",
+        "remote": "https://github.com/mist83/phone-remote"
       }
     },
     "catalogTagsVersion": 2,
@@ -29854,7 +30315,7 @@
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
-    "assetVersion": "1.0.1",
+    "assetVersion": "1.0.13",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -29869,7 +30330,8 @@
     "syntheticIndex": false,
     "tags": [
       "simulation",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Three.js simulation: physarum."
@@ -30207,20 +30669,32 @@
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror",
+      "public-frontdoor",
+      "repo-artifacts"
     ],
     "notes": [
-      "Interactive preview from the visualizer output."
+      "Interactive preview from the visualizer output.",
+      "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-20T17:36:38.178Z",
+    "lastPublishedAt": "2026-05-24T10:57:18.831Z",
     "publishContext": {
-      "github": null,
+      "github": {
+        "actions": true,
+        "repository": "mist83/plan-visualizer",
+        "ref": "refs/heads/main",
+        "sha": "cb5e2f7f639763bee221b88c8d36efceb19b33f2",
+        "runId": "26359351101",
+        "runNumber": "2"
+      },
       "git": {
-        "root": "/Users/mist83/Code/mullmania",
+        "root": "/home/runner/work/plan-visualizer/plan-visualizer",
         "branch": "main",
-        "commit": "dc7c8664c2fe00220eb32841a9680296f2ea19d0",
-        "remote": "https://github.com/mist83/mullmania.git"
+        "commit": "cb5e2f7f639763bee221b88c8d36efceb19b33f2",
+        "remote": "https://github.com/mist83/plan-visualizer"
       }
     },
     "description": "",
@@ -30231,7 +30705,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "planetary-orbit-simulation",
@@ -30662,6 +31139,53 @@
       "posterNote": "Placeholder image."
     },
     "showcaseRank": 240
+  },
+  {
+    "siteId": "portamento",
+    "host": "portamento.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "game",
+      "party",
+      "audio",
+      "phone-pair",
+      "signal-argh",
+      "web-audio",
+      "split-phrase"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-25T00:32:29.243Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/portamento",
+        "ref": null,
+        "sha": "3885efcdd792df40c6b9dc83f3aa6008b76e2f52",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/portamento",
+        "branch": "main",
+        "commit": "3885efcdd792df40c6b9dc83f3aa6008b76e2f52",
+        "remote": "https://github.com/mist83/portamento.git"
+      }
+    },
+    "assetVersion": "1.0.2",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-25T00:28:18Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "portfolio-hero-page",
@@ -31183,7 +31707,8 @@
       "texture",
       "three-js",
       "powerwasher",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "Drag the nozzle, grime peels off in clean stripes."
@@ -31442,20 +31967,20 @@
       "Static frontend for the project-and dashboard builder, viewer, and widget library, published from DashboardBackend/wwwroot/. The runtime backend is discovered from DashboardBackend/wwwroot/api-config.json, with window.API_BASE available for local overrides."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T03:48:47.323Z",
+    "lastPublishedAt": "2026-05-24T10:52:52.727Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/project-and",
         "ref": null,
-        "sha": "292bef0c68122c87cfcafa94a1767882b48b9c23",
+        "sha": "686df9c8410dd9b96a0a7606cc2d97e04cec0644",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/project-and",
         "branch": "master",
-        "commit": "292bef0c68122c87cfcafa94a1767882b48b9c23",
+        "commit": "686df9c8410dd9b96a0a7606cc2d97e04cec0644",
         "remote": "https://github.com/mist83/project-and.git"
       }
     },
@@ -31479,7 +32004,7 @@
     "siteAccessUpdatedAt": "2026-04-26T03:31:34Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.4",
+    "assetVersion": "1.0.7",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -31540,7 +32065,8 @@
       "repo-artifacts",
       "github",
       "curated",
-      "frontend-ui"
+      "frontend-ui",
+      "creative"
     ],
     "notes": [
       "The actual browser surface lives in backend/wwwroot. GitHub Pages should publish that directory, and Mullmania should mirror the same static surface without dragging backend compute along for the ride."
@@ -32925,7 +33451,8 @@
       "mullmania",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "creative"
     ],
     "notes": [
       "Dry-run consolidation control room for grouping repos, parking interrupted work, and generating next-turn handoff briefs."
@@ -33000,9 +33527,9 @@
     "testNotes": "",
     "catalogTagsVersion": 2,
     "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "siteAccessUpdatedAt": "2026-05-25T05:33:12Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": "2026-05-25T05:32:33Z"
   },
   {
     "siteId": "responsive-layout-theme-system",
@@ -33098,7 +33625,8 @@
       "mullmania-mirror",
       "rhythm-engine",
       "scene-viewer",
-      "static-frontend"
+      "static-frontend",
+      "creative"
     ],
     "notes": [
       "Publish the repo root as the static surface so the canonical scene viewer can import engine source correctly.",
@@ -33106,15 +33634,15 @@
       "Validated canonical repo-local deploy contract."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:10:10.474Z",
+    "lastPublishedAt": "2026-05-26T13:20:43.104Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26336169595",
-        "runNumber": "169"
+        "runId": "26450499079",
+        "runNumber": "223"
       },
       "git": null
     },
@@ -33144,7 +33672,7 @@
     "siteAccessUpdatedAt": "2026-05-16T18:00:00Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.1",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -33862,20 +34390,20 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:13:42.100Z",
+    "lastPublishedAt": "2026-05-24T09:55:43.536Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/rotoscope",
         "ref": null,
-        "sha": "4efb610fc5333488844bb91d0a38ed3ba53f4f1a",
+        "sha": "54cb05f3c84d08641b4e3491711e6ab61f8235e8",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/rotoscope",
         "branch": "main",
-        "commit": "4efb610fc5333488844bb91d0a38ed3ba53f4f1a",
+        "commit": "54cb05f3c84d08641b4e3491711e6ab61f8235e8",
         "remote": "https://github.com/mist83/rotoscope.git"
       }
     },
@@ -33889,7 +34417,7 @@
     "displayName": "rotoscope",
     "manualRank": 0,
     "manualRankUpdatedAt": null,
-    "assetVersion": "1.0.6",
+    "assetVersion": "1.0.7",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -33966,7 +34494,8 @@
       "github",
       "curated",
       "frontend-ui",
-      "tooling"
+      "tooling",
+      "creative"
     ],
     "notes": [
       "Static browser frontend lives in S3BrowserApi/wwwroot. Repo root stays Lambda/backend and is not part of the static mirror.",
@@ -34110,7 +34639,8 @@
       "repo-artifacts",
       "data",
       "github",
-      "curated"
+      "curated",
+      "creative"
     ],
     "managedBy": "manual-rename-batch",
     "lastPublishedAt": "2026-04-21T01:09:58Z",
@@ -34522,7 +35052,8 @@
       "remote-browser",
       "screenshot-ui",
       "static-landing",
-      "url-preview"
+      "url-preview",
+      "creative"
     ],
     "notes": [
       "Mullmania-hosted UI for the remote screenshot Lambda. Publish the browser front end from wwwroot and keep the renderer behind the API."
@@ -35036,23 +35567,25 @@
       "self-help",
       "ui-framework"
     ],
-    "notes": [],
+    "notes": [
+      "['Private operator self-reflection dossier. Gated by x-site-key whitelist. Generated by claude-opus-4-7 on 2026-05-16. Updated with parenting/listening reflection on 2026-05-24.']"
+    ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T17:12:38.686Z",
+    "lastPublishedAt": "2026-05-24T18:59:28.807Z",
     "publishContext": {
       "github": {
         "actions": false,
-        "repository": "mist83/self-reflection",
+        "repository": "mist83/self-help",
         "ref": null,
-        "sha": "e9be6854be00b4f4effb8e0ce751dc2bea5ff68d",
+        "sha": "d03eb60d6f40b0838f01d264255292a2e76848a5",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/self-reflection",
+        "root": "/Users/mist83/Code/self-help",
         "branch": "main",
-        "commit": "e9be6854be00b4f4effb8e0ce751dc2bea5ff68d",
-        "remote": "https://github.com/mist83/self-reflection.git"
+        "commit": "d03eb60d6f40b0838f01d264255292a2e76848a5",
+        "remote": "https://github.com/mist83/self-help.git"
       }
     },
     "catalogTagsVersion": 2,
@@ -35061,7 +35594,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "sensor-particle-canvas",
@@ -35659,7 +36195,8 @@
       "curated",
       "ui-framework",
       "github-pages",
-      "mullmania-mirror"
+      "mullmania-mirror",
+      "creative"
     ],
     "notes": [
       "Static app gallery and Repo Reels. Publish the repository root directly; there is no build step.",
@@ -35989,26 +36526,31 @@
     "tags": [
       "github",
       "curated",
-      "frontend-ui"
+      "frontend-ui",
+      "creative-tool",
+      "design",
+      "poster",
+      "static-site",
+      "vanilla-js"
     ],
     "notes": [
       "Browser zine and poster compositor with seeded layouts, share links, and PNG export."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-13T04:59:19.533Z",
+    "lastPublishedAt": "2026-05-24T10:52:21.387Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/signal-zine",
         "ref": null,
-        "sha": "ad7d351bc2258716336ed9f9d1829f0a8b580175",
+        "sha": "ba112e47eaec691eabbc5ebefe7a45f01261bb7b",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/signal-zine",
         "branch": "main",
-        "commit": "ad7d351bc2258716336ed9f9d1829f0a8b580175",
+        "commit": "ba112e47eaec691eabbc5ebefe7a45f01261bb7b",
         "remote": "https://github.com/mist83/signal-zine.git"
       }
     },
@@ -36020,7 +36562,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.2",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "signalr-sql-jumpbox-flow",
@@ -36664,7 +37209,8 @@
       "launchpad",
       "catalog",
       "framework",
-      "framework-core"
+      "framework-core",
+      "creative"
     ],
     "notes": [
       "Site index.",
@@ -36672,17 +37218,22 @@
       "Created from the launchpad blank-site flow."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T09:15:13.519Z",
+    "lastPublishedAt": "2026-05-26T03:16:37.358Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26216891659",
-        "runNumber": "150"
+        "actions": false,
+        "repository": "mist83/sites",
+        "ref": null,
+        "sha": "970deeb8231085d6699c3920ba2deeea5469a986",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null,
+      "git": {
+        "root": "/Users/mist83/Code/sites",
+        "branch": "main",
+        "commit": "970deeb8231085d6699c3920ba2deeea5469a986",
+        "remote": "https://github.com/mist83/sites.git"
+      },
       "source": "launchpad-bootstrap"
     },
     "frameworkSite": true,
@@ -36712,7 +37263,7 @@
       "posterNote": "Local browser capture of the canonized Sites launchpad."
     },
     "showcaseRank": 240,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.1",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -36731,27 +37282,31 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "chrome-extension",
+      "github-pages",
+      "mullmania-mirror",
+      "static-preview"
     ],
     "notes": [
       "Chrome extension preview surface and demo page for GitHub Pages / Mullmania deployment readiness.",
       "Validated canonical repo-local deploy contract in the Apr 2026 canon sweep wave."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:36:26.848Z",
+    "lastPublishedAt": "2026-05-25T20:21:25.022Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/six-seven",
         "ref": null,
-        "sha": "b2d76a69154aace555efc74c220a166a509b600f",
+        "sha": "8fae03f014bceddbe57d1380c9dd3a10b84e3829",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/six-seven",
         "branch": "master",
-        "commit": "b2d76a69154aace555efc74c220a166a509b600f",
+        "commit": "8fae03f014bceddbe57d1380c9dd3a10b84e3829",
         "remote": "https://github.com/mist83/six-seven.git"
       }
     },
@@ -36771,10 +37326,13 @@
     "testStatus": "smoke",
     "testNotes": "Checked live.",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T20:19:34Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.46",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "sketchy-ball-drop-train",
@@ -36807,6 +37365,50 @@
     "siteAccessUpdatedAt": null,
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "skyline",
+    "host": "skyline.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "visualization",
+      "catalog",
+      "viewer",
+      "3d",
+      "threejs",
+      "city",
+      "skyline",
+      "low-poly",
+      "creative"
+    ],
+    "notes": [
+      "Low-poly Three.js city. Catalog apps as buildings on a rectangular grid, four district color zones, neon signs on top floors. Cycle-aware."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T01:06:52.569Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/skyline",
+        "branch": "main",
+        "commit": "83eee1ac6ab72ccfe8709814bf8ff40088a9ce36",
+        "remote": null
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.19",
+    "canonProfile": "frontdoor-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T01:07:46Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "slack-block-builder",
@@ -37110,24 +37712,26 @@
       "public-frontdoor",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "slack",
+      "control-panel"
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-12T01:51:13.200Z",
+    "lastPublishedAt": "2026-05-24T07:55:22.935Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/slapp",
         "ref": null,
-        "sha": "bd032d6c01cc60ba8c8c2415dd917b82f492bba8",
+        "sha": "62ddc0c7c39b51280f073c0c19aa44ad003b7dc2",
         "runId": null,
         "runNumber": null
       },
       "git": {
-        "root": "/Users/mist83/Code/SLAPP",
+        "root": "/Users/mist83/Code/slapp",
         "branch": "main",
-        "commit": "bd032d6c01cc60ba8c8c2415dd917b82f492bba8",
+        "commit": "62ddc0c7c39b51280f073c0c19aa44ad003b7dc2",
         "remote": "https://github.com/mist83/slapp.git"
       }
     },
@@ -37141,7 +37745,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "sleet-config-reference",
@@ -37305,26 +37912,27 @@
       "soap",
       "three-js",
       "soapcut",
-      "satisfying"
+      "satisfying",
+      "creative"
     ],
     "notes": [
       "A blade peels rainbow curls off a soap loaf."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-18T01:29:20.775Z",
+    "lastPublishedAt": "2026-05-24T03:00:52.718Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/soapcut",
         "ref": null,
-        "sha": "c7abfaeb421184b2aa260ab38adac4168b355aeb",
+        "sha": "9f803bfa42ef5b1d7f630ae129d86ef5484eba61",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/soapcut",
         "branch": "main",
-        "commit": "c7abfaeb421184b2aa260ab38adac4168b355aeb",
+        "commit": "9f803bfa42ef5b1d7f630ae129d86ef5484eba61",
         "remote": "https://github.com/mist83/soapcut.git"
       }
     },
@@ -37334,7 +37942,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "soft-alarm",
@@ -37999,7 +38610,8 @@
       "three-js",
       "hybrid",
       "viewer",
-      "capture"
+      "capture",
+      "creative"
     ],
     "notes": [
       "Sister to mullformed. Splats render as background/environment, traditional three.js meshes render in the same scene as editable foreground."
@@ -38033,22 +38645,15 @@
       "projection-texturing",
       "impostors",
       "rendering-lab",
-      "operator-tool"
+      "operator-tool",
+      "creative"
     ],
     "notes": [],
-    "managedBy": "brain-farts",
-    "lastPublishedAt": "2026-05-21T01:56:12.178Z",
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-23T21:45:42.074Z",
     "publishContext": {
       "github": null,
-      "git": null,
-      "source": "brain-farts",
-      "steward": {
-        "repository": "mist83/brain-farts",
-        "path": "sites/splatlab/public",
-        "payloadPolicy": "sites/<siteId>/public may track lightweight source; raw assets and data are blocked from brain-farts",
-        "branch": "main",
-        "commit": "b7a1642103d93c4a17333096b64ab8dc4821df69"
-      }
+      "git": null
     },
     "assetVersion": "1.0.0",
     "canonVersion": null,
@@ -38343,6 +38948,66 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "starglass",
+    "host": "starglass.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "github-trends",
+      "repo-artifacts",
+      "public-explainers",
+      "private-opportunity-rail",
+      "sitemap-driven",
+      "creative"
+    ],
+    "notes": [
+      "Daily GitHub trend-to-scene pipeline. Public artifacts are sanitized; private opportunity cards are written only to a locked Itchy Brain room."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-25T07:54:28.480Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/starglass",
+        "ref": null,
+        "sha": "4592ddf0b4761608f1ebad4ae74a9d326a02ab82",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/starglass",
+        "branch": "main",
+        "commit": "4592ddf0b4761608f1ebad4ae74a9d326a02ab82",
+        "remote": "https://github.com/mist83/starglass.git"
+      }
+    },
+    "assetVersion": "1.0.4",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1",
+    "demo": {
+      "sources": [],
+      "posterUrl": "https://starglass.mullmania.com/demo/poster.svg",
+      "durationSec": null,
+      "mode": "poster",
+      "posterKind": null,
+      "posterNote": null
+    },
+    "showcaseRank": 240,
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T16:47:20Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": "2026-05-25T05:50:10Z",
+    "description": "",
+    "testNotes": "",
+    "displayName": "Star Glass",
+    "manualRank": 0,
+    "manualRankUpdatedAt": null
+  },
+  {
     "siteId": "starz-live-watch-map",
     "host": "starz-live-watch-map.mullmania.com",
     "currentHostedSite": false,
@@ -38478,21 +39143,21 @@
       "Sensory loop tool. Sound off, microphone off, haptics on by default. No scoring, no streaks, no ads."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:18:24.943Z",
+    "lastPublishedAt": "2026-05-24T10:05:32.966Z",
     "publishContext": {
       "github": {
-        "actions": false,
+        "actions": true,
         "repository": "mist83/stim",
-        "ref": null,
-        "sha": "d982616348b5cdcd497ea9c09e8bbd06ea689558",
-        "runId": null,
-        "runNumber": null
+        "ref": "refs/heads/main",
+        "sha": "32203d2406b710ffaeeb1a00f76ad3f149b251f5",
+        "runId": "26358317166",
+        "runNumber": "4"
       },
       "git": {
-        "root": "/Users/mist83/Code/stim",
+        "root": "/home/runner/work/stim/stim",
         "branch": "main",
-        "commit": "d982616348b5cdcd497ea9c09e8bbd06ea689558",
-        "remote": "https://github.com/mist83/stim.git"
+        "commit": "32203d2406b710ffaeeb1a00f76ad3f149b251f5",
+        "remote": "https://github.com/mist83/stim"
       }
     },
     "demo": {
@@ -38513,7 +39178,10 @@
     "testNotes": "",
     "displayName": "stim — sensory loops",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "storyboard",
@@ -38530,17 +39198,22 @@
     ],
     "notes": [],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-17T02:37:57.711Z",
+    "lastPublishedAt": "2026-05-26T03:21:19.067Z",
     "publishContext": {
       "github": {
-        "actions": true,
-        "repository": "mist83/broker-deploy",
-        "ref": "refs/heads/main",
-        "sha": "678afdf4f20e595de4f5514c9921767327cf33e6",
-        "runId": "25979315072",
-        "runNumber": "31"
+        "actions": false,
+        "repository": "mist83/storyboard",
+        "ref": null,
+        "sha": "7146fb115c7cf0537caa995af089076f8f5c14e6",
+        "runId": null,
+        "runNumber": null
       },
-      "git": null
+      "git": {
+        "root": "/Users/mist83/Code/storyboard",
+        "branch": "main",
+        "commit": "7146fb115c7cf0537caa995af089076f8f5c14e6",
+        "remote": "https://github.com/mist83/storyboard.git"
+      }
     },
     "mainSite": false,
     "mainSiteUpdatedAt": null,
@@ -38550,7 +39223,10 @@
     "isPublic": true,
     "siteAccessUpdatedAt": "2026-04-27T01:11:34Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.2",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "straight-rider",
@@ -39046,7 +39722,8 @@
       "icons",
       "catalog",
       "personal",
-      "assets"
+      "assets",
+      "creative"
     ],
     "notes": [
       "Drop-in SVG cataloger. Add .svg files under public/icons/<group>/ and rerun build:catalog. Each icon renders inline so currentColor follows the theme."
@@ -39278,6 +39955,48 @@
     "mainSiteUpdatedAt": null
   },
   {
+    "siteId": "swagger-graph",
+    "host": "swagger-graph.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "developer-tool",
+      "openapi",
+      "swagger",
+      "graph-viewer",
+      "mullmania",
+      "public-frontdoor",
+      "static-site"
+    ],
+    "notes": [
+      "Single-page viewer. Accepts swagger via URL, file upload, paste, or ?url= query string. Built on cytoscape + the ui.mullmania.com GraphEverywhere shim."
+    ],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T10:54:05.033Z",
+    "publishContext": {
+      "github": null,
+      "git": {
+        "root": "/Users/mist83/Code/swagger-graph",
+        "branch": "main",
+        "commit": "87dbe9a0910ec08b1cc1b70bee1c62566eb50016",
+        "remote": null
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null,
+    "catalogTagsVersion": 2,
+    "isPublic": false,
+    "siteAccessUpdatedAt": null,
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
+  },
+  {
     "siteId": "swarm-ping-tester",
     "host": "swarm-ping-tester.mullmania.com",
     "currentHostedSite": false,
@@ -39375,26 +40094,29 @@
     "dataNamespace": null,
     "syntheticIndex": false,
     "tags": [
-      "curated"
+      "curated",
+      "observatory",
+      "switchboard",
+      "patch-panel"
     ],
     "notes": [
       "1940s patch panel for cross-linking PM-A2A rooms."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-26T00:03:30.627Z",
+    "lastPublishedAt": "2026-05-24T09:23:39.224Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/switchboard",
         "ref": null,
-        "sha": "37a3b669f1d57b276985f1e4d23044c81f557d7b",
+        "sha": "0df1372a7c45cb71caf6c43dbc3cca5c9f139be0",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/switchboard",
         "branch": "main",
-        "commit": "37a3b669f1d57b276985f1e4d23044c81f557d7b",
+        "commit": "0df1372a7c45cb71caf6c43dbc3cca5c9f139be0",
         "remote": "https://github.com/mist83/switchboard.git"
       }
     },
@@ -39778,7 +40500,8 @@
       "github",
       "curated",
       "github-pages",
-      "mullmania-mirror"
+      "mullmania-mirror",
+      "creative"
     ],
     "notes": [
       "GitHub hosts the front door; Mullmania publishes the repo's actual static surface when a real publish directory exists, otherwise it falls back to the front door.",
@@ -39787,15 +40510,15 @@
       "Lambda backend deployer is preserved as deploy-lambda.sh; the canonical deploy wrapper occupies the root deploy.sh slot."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:10:24.069Z",
+    "lastPublishedAt": "2026-05-24T02:09:12.991Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26336177262",
-        "runNumber": "170"
+        "runId": "26349305755",
+        "runNumber": "179"
       },
       "git": null
     },
@@ -39819,7 +40542,7 @@
     "siteAccessUpdatedAt": "2026-05-16T18:00:00Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.3",
     "canonVersion": null,
     "canonProfile": null
   },
@@ -39948,6 +40671,47 @@
     "siteAliasesUpdatedAt": null
   },
   {
+    "siteId": "tech-demos",
+    "host": "tech-demos.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "tech-demos",
+      "catalog-lens",
+      "proof",
+      "ui-framework",
+      "canon-deploy-ready",
+      "creative"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-26T03:32:21.935Z",
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/tech-demos",
+        "ref": null,
+        "sha": "df22625f4bc062e41b5de5d3868f636f77462061",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/tech-demos",
+        "branch": "main",
+        "commit": "df22625f4bc062e41b5de5d3868f636f77462061",
+        "remote": "https://github.com/mist83/tech-demos.git"
+      }
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "workspace-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": false
+  },
+  {
     "siteId": "teeter-totter",
     "host": "teeter-totter.mullmania.com",
     "currentHostedSite": false,
@@ -40051,7 +40815,9 @@
       "dual-static",
       "github",
       "curated",
-      "frontend-ui"
+      "frontend-ui",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page.",
@@ -40062,20 +40828,20 @@
       "Canon frontdoor at /, phone trackpad app at /remote/."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-19T01:15:56.529Z",
+    "lastPublishedAt": "2026-05-23T21:40:11.087Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/telestrate",
         "ref": null,
-        "sha": "af2f3dc3e02a3475bd9dafbee221f18b64dbe04a",
+        "sha": "7c6e35475ce2d95e04599d2b934e284f0929951e",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/telestrate",
         "branch": "master",
-        "commit": "af2f3dc3e02a3475bd9dafbee221f18b64dbe04a",
+        "commit": "7c6e35475ce2d95e04599d2b934e284f0929951e",
         "remote": "https://github.com/mist83/telestrate.git"
       }
     },
@@ -40095,10 +40861,13 @@
     },
     "showcaseRank": 240,
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-23T21:35:06Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": "2026.04.17",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "templates",
@@ -40192,13 +40961,17 @@
     "syntheticIndex": false,
     "tags": [
       "simulation",
-      "curated"
+      "curated",
+      "tensegrity",
+      "physics",
+      "creative"
     ],
     "notes": [
-      "Three.js simulation: tensegrity."
+      "Three.js simulation: tensegrity.",
+      "Live form-finding for tensegrity structures."
     ],
-    "managedBy": "manual-fix",
-    "lastPublishedAt": "2026-04-25T18:22:00.000Z",
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-24T10:45:59.986Z",
     "aliases": [],
     "catalogTagsVersion": 2,
     "siteAccessUpdatedAt": null,
@@ -40206,7 +40979,23 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "publishContext": {
+      "github": {
+        "actions": false,
+        "repository": "mist83/tensegrity",
+        "ref": null,
+        "sha": "ae6565cd202f6f4ea8586fb51563582bdbf8ad53",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/tensegrity",
+        "branch": "main",
+        "commit": "ae6565cd202f6f4ea8586fb51563582bdbf8ad53",
+        "remote": "https://github.com/mist83/tensegrity.git"
+      }
+    }
   },
   {
     "siteId": "tentacle-monster-graph",
@@ -40264,26 +41053,31 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "github-pages",
+      "mullmania-mirror",
+      "restaurant",
+      "static-landing"
     ],
     "notes": [
-      "Static front door lives at the repo root for GitHub Pages and Mullmania. The ASP.NET project remains a backend host, but the publishable frontend is this root landing page."
+      "Static front door lives at the repo root for GitHub Pages and Mullmania. The ASP.NET project remains a backend host, but the publishable frontend is this root landing page.",
+      "Static front door lives at the repo root. No backend project anymore — the ASP.NET / Angular scaffolding was removed when it became clear it never deployed and was a stale-dependency liability."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T21:39:37.068Z",
+    "lastPublishedAt": "2026-05-24T10:32:52.144Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/testaurant",
         "ref": null,
-        "sha": "e25a90b90e4cc85b1abdccc7a9936c89abc59061",
+        "sha": "b4214a51b0825bb317b3f270efe5a6e6237bb8ff",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/testaurant",
         "branch": "main",
-        "commit": "e25a90b90e4cc85b1abdccc7a9936c89abc59061",
+        "commit": "b4214a51b0825bb317b3f270efe5a6e6237bb8ff",
         "remote": "https://github.com/mist83/testaurant.git"
       }
     },
@@ -40304,7 +41098,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "tests-everywhere",
@@ -40831,20 +41628,20 @@
       "Webcam motion centroid controls pitch and gain; mouse and touch remain fallback controls."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-16T23:44:18.330Z",
+    "lastPublishedAt": "2026-05-24T09:43:19.817Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/theremin",
         "ref": null,
-        "sha": "4b5c64bdeb20a8213c87003437e051dcdc740811",
+        "sha": "e1bc6434a514804afaf26873db4a8e54bc65e68a",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/theremin",
         "branch": "main",
-        "commit": "4b5c64bdeb20a8213c87003437e051dcdc740811",
+        "commit": "e1bc6434a514804afaf26873db4a8e54bc65e68a",
         "remote": "https://github.com/mist83/theremin.git"
       }
     },
@@ -40856,7 +41653,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "frontdoor-v1"
   },
   {
     "siteId": "thirty-segment-rigid-rope",
@@ -40937,7 +41737,8 @@
       "github",
       "curated",
       "github-pages",
-      "mullmania-mirror"
+      "mullmania-mirror",
+      "creative"
     ],
     "notes": [
       "Repo docs page."
@@ -41002,18 +41803,19 @@
     "notes": [
       "The repository root is the Mullmania static game surface. GitHub Pages publishes docs/. The ASP.NET sidecar and deployment script stay out of the static contract.",
       "Validated canonical repo-local deploy contract.",
-      "Standalone Tic Tac Toe game with a hosted browser surface."
+      "Standalone Tic Tac Toe game with a hosted browser surface.",
+      "The repository root is the Mullmania static game surface. The mullmania broker is the only deploy path."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T15:10:33.248Z",
+    "lastPublishedAt": "2026-05-24T11:02:26.946Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26336181500",
-        "runNumber": "171"
+        "runId": "26359457604",
+        "runNumber": "186"
       },
       "git": null
     },
@@ -41037,7 +41839,7 @@
     "siteAccessUpdatedAt": "2026-05-16T17:10:15Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.1",
     "canonVersion": "2026.04.17",
     "canonProfile": "frontdoor-v1"
   },
@@ -41115,20 +41917,20 @@
       "Rewrite board for reusable Codex/Claude paragraphs plus evidence counters for recurring speech tics. Reseed script scans local Codex/Claude JSONL transcripts and refreshes the generated Tic Rewrites prompt pack. Raw tic buttons copy polished replacement paragraphs where available."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T23:57:30.917Z",
+    "lastPublishedAt": "2026-05-23T21:41:08.433Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/tics.mullmania.com",
         "ref": null,
-        "sha": "bfd821ade41b76d629ffe183e3837180f983ec92",
+        "sha": "5d60bcff805c52c0cdd698d13f8b0532f052771b",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/tics.mullmania.com",
         "branch": "main",
-        "commit": "bfd821ade41b76d629ffe183e3837180f983ec92",
+        "commit": "5d60bcff805c52c0cdd698d13f8b0532f052771b",
         "remote": "https://github.com/mist83/tics.mullmania.com.git"
       }
     },
@@ -41139,7 +41941,7 @@
     "siteAliasesUpdatedAt": null,
     "description": "",
     "testNotes": "",
-    "assetVersion": "1.0.6",
+    "assetVersion": "1.0.7",
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1"
   },
@@ -41628,6 +42430,40 @@
     "siteAccessUpdatedAt": "2026-05-17T13:16:13Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null
+  },
+  {
+    "siteId": "tools",
+    "host": "tools.mullmania.com",
+    "currentHostedSite": false,
+    "hasHostedSite": true,
+    "hasData": false,
+    "dataNamespace": null,
+    "syntheticIndex": false,
+    "tags": [
+      "tools",
+      "catalog-lens",
+      "operator",
+      "ui-framework",
+      "canon-deploy-ready",
+      "creative"
+    ],
+    "notes": [],
+    "managedBy": "publish-site",
+    "lastPublishedAt": "2026-05-25T20:51:35.305Z",
+    "publishContext": {
+      "github": null,
+      "git": null
+    },
+    "assetVersion": "1.0.0",
+    "canonVersion": "2026.04.26",
+    "canonProfile": "workspace-v1",
+    "catalogTagsVersion": 2,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-25T20:57:19Z",
+    "aliases": [],
+    "siteAliasesUpdatedAt": null,
+    "description": "",
+    "testNotes": ""
   },
   {
     "siteId": "touch-spin-arrow-dial",
@@ -42374,15 +43210,15 @@
       "Repository root is the static publish surface for GitHub Pages and Mullmania."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-20T01:18:16.505Z",
+    "lastPublishedAt": "2026-05-24T17:28:57.127Z",
     "publishContext": {
       "github": {
         "actions": true,
         "repository": "mist83/broker-deploy",
         "ref": "refs/heads/main",
         "sha": "4f112cbb78e954be4640b72c9b9dd15a0c02bf99",
-        "runId": "26135305970",
-        "runNumber": "113"
+        "runId": "26367968581",
+        "runNumber": "189"
       },
       "git": null,
       "source": "launchpad-bootstrap"
@@ -42421,7 +43257,7 @@
     "canonVersion": "2026.04.26",
     "canonProfile": "frontdoor-v1",
     "siteAccessUpdatedAt": null,
-    "assetVersion": "1.0.49",
+    "assetVersion": "1.0.52",
     "activeTheme": "walmart"
   },
   {
@@ -42630,7 +43466,8 @@
       "public-frontdoor",
       "repo-artifacts",
       "github",
-      "curated"
+      "curated",
+      "creative"
     ],
     "notes": [
       "Static frontend shell for GitHub Pages and Mullmania. The Lambda renderer remains behind the API; the deployable front door is the root landing page."
@@ -42701,20 +43538,20 @@
       "Meteor Protocol: push the repo to GitHub, then manually deploy this root publish dir to Mullmania so the live site survives local-machine loss."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T19:19:43.400Z",
+    "lastPublishedAt": "2026-05-23T20:36:13.346Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/v3",
         "ref": null,
-        "sha": "e0e2c11bcb44bc7581fd6ae78c60fd7e75c46044",
+        "sha": "fabbec79792710acad51035ad02a8094e253264a",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/v3",
         "branch": "master",
-        "commit": "e0e2c11bcb44bc7581fd6ae78c60fd7e75c46044",
+        "commit": "fabbec79792710acad51035ad02a8094e253264a",
         "remote": "https://github.com/mist83/v3.git"
       }
     },
@@ -42738,7 +43575,7 @@
     "siteAccessUpdatedAt": "2026-05-01T04:10:30Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.0",
+    "assetVersion": "1.0.3",
     "canonVersion": "2026.04.19",
     "canonProfile": "frontdoor-v1"
   },
@@ -42768,20 +43605,20 @@
       "Includes the science-art app foundry flow with explicit doctrine profiles, deploy intent, and completion webhook messaging."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-21T02:06:15.854Z",
+    "lastPublishedAt": "2026-05-25T22:06:45.468Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/valet",
         "ref": null,
-        "sha": "816304fa5cb39dcf5442b8d86fbcffa635cdaaa4",
+        "sha": "36532c28212d1b39e64bcac5307298193d33aaa4",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/valet",
         "branch": "main",
-        "commit": "816304fa5cb39dcf5442b8d86fbcffa635cdaaa4",
+        "commit": "36532c28212d1b39e64bcac5307298193d33aaa4",
         "remote": "https://github.com/mist83/valet.git"
       }
     },
@@ -42797,7 +43634,7 @@
     "siteAccessUpdatedAt": "2026-04-26T00:19:33Z",
     "aliases": [],
     "siteAliasesUpdatedAt": null,
-    "assetVersion": "1.0.8",
+    "assetVersion": "1.0.11",
     "canonVersion": "2026.04.17",
     "canonProfile": "frontdoor-v1",
     "demo": {
@@ -42852,13 +43689,32 @@
     "hasData": false,
     "dataNamespace": null,
     "syntheticIndex": false,
-    "tags": [],
-    "notes": [],
+    "tags": [
+      "vatocean-spray",
+      "game",
+      "phone-pair",
+      "ui-mullmania"
+    ],
+    "notes": [
+      "Vato Blacktop Blast — phone-paired first-person catch game scored to a Dreams (Fleetwood Mac) loop. Host page is the TV; phone joins via QR using ui.mullmania.com pair.js."
+    ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:30:05.362Z",
+    "lastPublishedAt": "2026-05-24T10:49:59.998Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/vatocean-spray",
+        "ref": null,
+        "sha": "abe54b67c489891e09dd017a5164cfab9805c52f",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/vatocean-spray",
+        "branch": "main",
+        "commit": "abe54b67c489891e09dd017a5164cfab9805c52f",
+        "remote": "https://github.com/mist83/vatocean-spray.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -42866,7 +43722,10 @@
     "aliases": [],
     "siteAliasesUpdatedAt": null,
     "description": "",
-    "testNotes": ""
+    "testNotes": "",
+    "assetVersion": "1.0.1",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "vibe",
@@ -42954,16 +43813,34 @@
       "feed",
       "tiktok-style",
       "personal",
-      "ui-framework"
+      "ui-framework",
+      "sora-2",
+      "proof",
+      "cross-cut",
+      "generated-video",
+      "creative"
     ],
     "notes": [
-      "Personal Sora-2 video archive: tiled wall + swipeable feed. Sora 2 shut down — these are the saved generations."
+      "Personal Sora-2 video archive: tiled wall + swipeable feed. Sora 2 shut down — these are the saved generations.",
+      "Manifest at data/manifest.json drives all three views. `delete:false` because video assets in S3 (proof/, demo/, thumbs/) live outside the repo and must not be wiped by a deploy."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-15T01:30:55.617Z",
+    "lastPublishedAt": "2026-05-26T02:04:45.635Z",
     "publishContext": {
-      "github": null,
-      "git": null
+      "github": {
+        "actions": false,
+        "repository": "mist83/videos.mullmania.com",
+        "ref": null,
+        "sha": "3d918e881dd62f54435c5a474a33dc4f75e9a8fd",
+        "runId": null,
+        "runNumber": null
+      },
+      "git": {
+        "root": "/Users/mist83/Code/videos.mullmania.com",
+        "branch": "main",
+        "commit": "3d918e881dd62f54435c5a474a33dc4f75e9a8fd",
+        "remote": "https://github.com/mist83/videos.mullmania.com.git"
+      }
     },
     "catalogTagsVersion": 2,
     "isPublic": true,
@@ -42973,7 +43850,10 @@
     "description": "",
     "testNotes": "",
     "mainSite": false,
-    "mainSiteUpdatedAt": null
+    "mainSiteUpdatedAt": null,
+    "assetVersion": "1.0.20",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "vigil",
@@ -43596,7 +44476,8 @@
       "simulation",
       "curated",
       "wfc",
-      "voxel"
+      "voxel",
+      "creative"
     ],
     "notes": [
       "Three.js simulation: wavefunction.",
@@ -43679,24 +44560,24 @@
       "Static publish of cobalt-wealthops. Live server runs locally via `dotnet run` from the repo; the published site reads JSON fixtures and stages mutations client-side."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-05-23T14:39:46.994Z",
+    "lastPublishedAt": "2026-05-25T13:09:29.348Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/cobalt-wealthops",
         "ref": null,
-        "sha": "d1dd416fb87b5e004e6b85d3f4f901c4252b99a5",
+        "sha": "a252d18beceb84084018d4a20d4474bfba240967",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/cobalt-wealthops",
         "branch": "main",
-        "commit": "d1dd416fb87b5e004e6b85d3f4f901c4252b99a5",
+        "commit": "a252d18beceb84084018d4a20d4474bfba240967",
         "remote": "https://github.com/mist83/cobalt-wealthops.git"
       }
     },
-    "assetVersion": "1.0.42",
+    "assetVersion": "1.0.48",
     "canonVersion": null,
     "canonProfile": null,
     "catalogTagsVersion": 2,
@@ -43721,26 +44602,28 @@
       "repo-artifacts",
       "github",
       "curated",
-      "ui-framework"
+      "ui-framework",
+      "github-pages",
+      "mullmania-mirror"
     ],
     "notes": [
       "Repo docs page."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T22:05:00.412Z",
+    "lastPublishedAt": "2026-05-24T10:55:05.015Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/web-rtc",
         "ref": null,
-        "sha": "403ade1b5eb52e447762ad2f7131d916ec6f9625",
+        "sha": "fcae8f9b4eeb366243c88a22ecd008872779b0f8",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/web-rtc",
         "branch": "master",
-        "commit": "403ade1b5eb52e447762ad2f7131d916ec6f9625",
+        "commit": "fcae8f9b4eeb366243c88a22ecd008872779b0f8",
         "remote": "https://github.com/mist83/web-rtc.git"
       }
     },
@@ -43761,7 +44644,10 @@
     "isPublic": false,
     "siteAccessUpdatedAt": null,
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "welcome-link-page",
@@ -44243,7 +45129,12 @@
       "canon-deploy-ready",
       "dual-static",
       "github",
-      "curated"
+      "curated",
+      "board-directory",
+      "github-pages",
+      "mullmania-mirror",
+      "static-frontend",
+      "vizio"
     ],
     "notes": [
       "Repo-root static entry point for the board-of-directors FAB collection and the TV directory surface.",
@@ -44251,20 +45142,20 @@
       "VIZIO board-of-directors FAB collection with a board-directory TV surface, served from the repo root static tree."
     ],
     "managedBy": "publish-site",
-    "lastPublishedAt": "2026-04-11T22:28:27.847Z",
+    "lastPublishedAt": "2026-05-23T21:41:54.583Z",
     "publishContext": {
       "github": {
         "actions": false,
         "repository": "mist83/ww-reminder",
         "ref": null,
-        "sha": "18954dc63fcdd797044591609ece1405abfad861",
+        "sha": "e0b1549f0a7f181fc32d1eaa1483b82eac462c3f",
         "runId": null,
         "runNumber": null
       },
       "git": {
         "root": "/Users/mist83/Code/ww-reminder",
         "branch": "master",
-        "commit": "18954dc63fcdd797044591609ece1405abfad861",
+        "commit": "e0b1549f0a7f181fc32d1eaa1483b82eac462c3f",
         "remote": "https://github.com/mist83/ww-reminder.git"
       }
     },
@@ -44285,10 +45176,13 @@
     "testNotes": "Tightened mullmania.site.json exclude list so docs/, scripts/, *.md, and *.ps1 stop leaking into the static publish tree.",
     "manualRankUpdatedAt": "2026-04-20T04:11:24Z",
     "catalogTagsVersion": 2,
-    "isPublic": false,
-    "siteAccessUpdatedAt": null,
+    "isPublic": true,
+    "siteAccessUpdatedAt": "2026-05-24T00:55:40Z",
     "aliases": [],
-    "siteAliasesUpdatedAt": null
+    "siteAliasesUpdatedAt": null,
+    "assetVersion": "1.0.0",
+    "canonVersion": null,
+    "canonProfile": null
   },
   {
     "siteId": "wwb-reminder",

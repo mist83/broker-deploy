@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-21T20:48:13Z",
+  "updatedAt": "2026-05-26T04:13:13Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -1323,6 +1323,42 @@
       "etag": "66f13804eec2386ed95e404d72daf11c",
       "sourceUrl": "https://app-flyover.mullmania.com/"
     },
+    "app-not-unused-skill": {
+      "siteId": "app-not-unused-skill",
+      "status": "ok",
+      "path": "/api/previews/app-not-unused-skill.png",
+      "url": "/api/previews/app-not-unused-skill.png?v=1779768574009",
+      "objectKey": "sites/previews/app-not-unused-skill.png",
+      "capturedAt": "2026-05-26T04:09:34Z",
+      "version": "1779768574009",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 328529,
+      "etag": "e65a334940b71506a63556df43af4f35",
+      "sourceUrl": "https://app-not-unused-skill.mullmania.com/"
+    },
+    "appfarm": {
+      "siteId": "appfarm",
+      "status": "ok",
+      "path": "/api/previews/appfarm.png",
+      "url": "/api/previews/appfarm.png?v=1779586178639",
+      "objectKey": "sites/previews/appfarm.png",
+      "capturedAt": "2026-05-24T01:29:38Z",
+      "version": "1779586178639",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 97578,
+      "etag": "8058fecc94e3443a2e93b4e882a64770",
+      "sourceUrl": "https://appfarm.mullmania.com/"
+    },
     "apple": {
       "siteId": "apple",
       "status": "ok",
@@ -2212,6 +2248,24 @@
       "etag": "50962cd8984d0ddb239d9bd5b2614475",
       "sourceUrl": "https://before-light.mullmania.com/"
     },
+    "benny-lava": {
+      "siteId": "benny-lava",
+      "status": "ok",
+      "path": "/api/previews/benny-lava.png",
+      "url": "/api/previews/benny-lava.png?v=1779571270501",
+      "objectKey": "sites/previews/benny-lava.png",
+      "capturedAt": "2026-05-23T21:21:10Z",
+      "version": "1779571270501",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 491047,
+      "etag": "75239c6793bd8261306aa01b3b25f720",
+      "sourceUrl": "https://benny-lava.mullmania.com/"
+    },
     "bestiary": {
       "siteId": "bestiary",
       "status": "ok",
@@ -2254,6 +2308,246 @@
       "contentType": "image/png",
       "size": 4714,
       "sourceUrl": "https://better-distributed-mesh-graph-live.mullmania.com/"
+    },
+    "bgrocc": {
+      "siteId": "bgrocc",
+      "status": "ok",
+      "path": "/api/previews/bgrocc.png",
+      "url": "/api/previews/bgrocc.png?v=1779571271229",
+      "objectKey": "sites/previews/bgrocc.png",
+      "capturedAt": "2026-05-23T21:21:11Z",
+      "version": "1779571271229",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "bgrocc",
+          "status": "ok",
+          "id": "1779571271229",
+          "path": "/api/previews/bgrocc/1779571271229.png",
+          "url": "/api/previews/bgrocc/1779571271229.png?v=1779571271229",
+          "objectKey": "sites/previews/bgrocc/1779571271229.png",
+          "capturedAt": "2026-05-23T21:21:11Z",
+          "version": "1779571271229",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 298627,
+          "etag": "e719e4b5c177e728c09934ec938cde9c",
+          "sourceUrl": "https://bgrocc.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 298627,
+      "etag": "e719e4b5c177e728c09934ec938cde9c",
+      "sourceUrl": "https://bgrocc.mullmania.com/"
+    },
+    "bgrocc-1-homeroom-horror": {
+      "siteId": "bgrocc-1-homeroom-horror",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-1-homeroom-horror.png",
+      "url": "/api/previews/bgrocc-1-homeroom-horror.png?v=1779571271746",
+      "objectKey": "sites/previews/bgrocc-1-homeroom-horror.png",
+      "capturedAt": "2026-05-23T21:21:11Z",
+      "version": "1779571271746",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 437403,
+      "etag": "dee3df6b5ad11589919c6e32ebf7423d",
+      "sourceUrl": "https://bgrocc-1-homeroom-horror.mullmania.com/"
+    },
+    "bgrocc-2-cafeteria-crash": {
+      "siteId": "bgrocc-2-cafeteria-crash",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-2-cafeteria-crash.png",
+      "url": "/api/previews/bgrocc-2-cafeteria-crash.png?v=1779571272223",
+      "objectKey": "sites/previews/bgrocc-2-cafeteria-crash.png",
+      "capturedAt": "2026-05-23T21:21:12Z",
+      "version": "1779571272223",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 296915,
+      "etag": "556bcf308afce92a28a8e691528c42ea",
+      "sourceUrl": "https://bgrocc-2-cafeteria-crash.mullmania.com/"
+    },
+    "bgrocc-3-hot-lunch-line": {
+      "siteId": "bgrocc-3-hot-lunch-line",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-3-hot-lunch-line.png",
+      "url": "/api/previews/bgrocc-3-hot-lunch-line.png?v=1779571272390",
+      "objectKey": "sites/previews/bgrocc-3-hot-lunch-line.png",
+      "capturedAt": "2026-05-23T21:21:12Z",
+      "version": "1779571272390",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 278929,
+      "etag": "fe9f5315fb3fdd023dadce0a6793b505",
+      "sourceUrl": "https://bgrocc-3-hot-lunch-line.mullmania.com/"
+    },
+    "bgrocc-4-stapler-skate": {
+      "siteId": "bgrocc-4-stapler-skate",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-4-stapler-skate.png",
+      "url": "/api/previews/bgrocc-4-stapler-skate.png?v=1779571272195",
+      "objectKey": "sites/previews/bgrocc-4-stapler-skate.png",
+      "capturedAt": "2026-05-23T21:21:12Z",
+      "version": "1779571272195",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 293860,
+      "etag": "ad93dd25795ad6e75e5c5ab2563f76de",
+      "sourceUrl": "https://bgrocc-4-stapler-skate.mullmania.com/"
+    },
+    "bgrocc-5-coop-catacombs": {
+      "siteId": "bgrocc-5-coop-catacombs",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-5-coop-catacombs.png",
+      "url": "/api/previews/bgrocc-5-coop-catacombs.png?v=1779571287341",
+      "objectKey": "sites/previews/bgrocc-5-coop-catacombs.png",
+      "capturedAt": "2026-05-23T21:21:27Z",
+      "version": "1779571287341",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 433881,
+      "etag": "55859dd3c3388baa22b7d2f27d260d55",
+      "sourceUrl": "https://bgrocc-5-coop-catacombs.mullmania.com/"
+    },
+    "bgrocc-6-crop-duster": {
+      "siteId": "bgrocc-6-crop-duster",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-6-crop-duster.png",
+      "url": "/api/previews/bgrocc-6-crop-duster.png?v=1779571289343",
+      "objectKey": "sites/previews/bgrocc-6-crop-duster.png",
+      "capturedAt": "2026-05-23T21:21:29Z",
+      "version": "1779571289343",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 294198,
+      "etag": "55eda094ffabb18f5482998c03727691",
+      "sourceUrl": "https://bgrocc-6-crop-duster.mullmania.com/"
+    },
+    "bgrocc-7-steam-tray-stack": {
+      "siteId": "bgrocc-7-steam-tray-stack",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-7-steam-tray-stack.png",
+      "url": "/api/previews/bgrocc-7-steam-tray-stack.png?v=1779571287992",
+      "objectKey": "sites/previews/bgrocc-7-steam-tray-stack.png",
+      "capturedAt": "2026-05-23T21:21:27Z",
+      "version": "1779571287992",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "bgrocc-7-steam-tray-stack",
+          "status": "ok",
+          "id": "1779571287992",
+          "path": "/api/previews/bgrocc-7-steam-tray-stack/1779571287992.png",
+          "url": "/api/previews/bgrocc-7-steam-tray-stack/1779571287992.png?v=1779571287992",
+          "objectKey": "sites/previews/bgrocc-7-steam-tray-stack/1779571287992.png",
+          "capturedAt": "2026-05-23T21:21:27Z",
+          "version": "1779571287992",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 286405,
+          "etag": "6e703b1416178b670f74617a7efb9655",
+          "sourceUrl": "https://bgrocc-7-steam-tray-stack.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 286405,
+      "etag": "6e703b1416178b670f74617a7efb9655",
+      "sourceUrl": "https://bgrocc-7-steam-tray-stack.mullmania.com/"
+    },
+    "bgrocc-8-mosh-pit-mash": {
+      "siteId": "bgrocc-8-mosh-pit-mash",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-8-mosh-pit-mash.png",
+      "url": "/api/previews/bgrocc-8-mosh-pit-mash.png?v=1779571289632",
+      "objectKey": "sites/previews/bgrocc-8-mosh-pit-mash.png",
+      "capturedAt": "2026-05-23T21:21:29Z",
+      "version": "1779571289632",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 308616,
+      "etag": "e49769ba22e07c8e4ce36009f32e4ea2",
+      "sourceUrl": "https://bgrocc-8-mosh-pit-mash.mullmania.com/"
+    },
+    "bgrocc-9-factory-f-arms": {
+      "siteId": "bgrocc-9-factory-f-arms",
+      "status": "ok",
+      "path": "/api/previews/bgrocc-9-factory-f-arms.png",
+      "url": "/api/previews/bgrocc-9-factory-f-arms.png?v=1779571288898",
+      "objectKey": "sites/previews/bgrocc-9-factory-f-arms.png",
+      "capturedAt": "2026-05-23T21:21:28Z",
+      "version": "1779571288898",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 271719,
+      "etag": "4a6eea21f7762a01b0c728d0c4f11a38",
+      "sourceUrl": "https://bgrocc-9-factory-f-arms.mullmania.com/"
     },
     "bib": {
       "siteId": "bib",
@@ -3322,6 +3616,24 @@
       "contentType": "image/png",
       "size": 19063,
       "sourceUrl": "https://centered-icons-in-css-grid-7956.mullmania.com/"
+    },
+    "chachunk": {
+      "siteId": "chachunk",
+      "status": "ok",
+      "path": "/api/previews/chachunk.png",
+      "url": "/api/previews/chachunk.png?v=1779586179143",
+      "objectKey": "sites/previews/chachunk.png",
+      "capturedAt": "2026-05-24T01:29:39Z",
+      "version": "1779586179143",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 322028,
+      "etag": "f86da5689bda93f8455cc750d13ee0e1",
+      "sourceUrl": "https://chachunk.mullmania.com/"
     },
     "chaos-box": {
       "siteId": "chaos-box",
@@ -7669,6 +7981,24 @@
       "etag": "e14c45a639f28fdbc19cc8cbd2522e00",
       "sourceUrl": "https://cozy-crate.mullmania.com/"
     },
+    "cozybox": {
+      "siteId": "cozybox",
+      "status": "ok",
+      "path": "/api/previews/cozybox.png",
+      "url": "/api/previews/cozybox.png?v=1779571297694",
+      "objectKey": "sites/previews/cozybox.png",
+      "capturedAt": "2026-05-23T21:21:37Z",
+      "version": "1779571297694",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 642300,
+      "etag": "1ba25bcfa7e4f37be5bd814880de34ea",
+      "sourceUrl": "https://cozybox.mullmania.com/"
+    },
     "crab-6878": {
       "siteId": "crab-6878",
       "status": "ok",
@@ -7988,6 +8318,24 @@
       "contentType": "image/png",
       "size": 12447,
       "sourceUrl": "https://cytoscape-visual-binding-fix.mullmania.com/"
+    },
+    "dad-bod-builder": {
+      "siteId": "dad-bod-builder",
+      "status": "ok",
+      "path": "/api/previews/dad-bod-builder.png",
+      "url": "/api/previews/dad-bod-builder.png?v=1779571298027",
+      "objectKey": "sites/previews/dad-bod-builder.png",
+      "capturedAt": "2026-05-23T21:21:38Z",
+      "version": "1779571298027",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 310497,
+      "etag": "146fac6aca8d5bc9c6c63321637921bd",
+      "sourceUrl": "https://dad-bod-builder.mullmania.com/"
     },
     "dag": {
       "siteId": "dag",
@@ -8723,6 +9071,24 @@
       "etag": "1e13a347c4a08caf5c1571da027f60ac",
       "sourceUrl": "https://dance-monkey.mullmania.com/"
     },
+    "dance-party": {
+      "siteId": "dance-party",
+      "status": "ok",
+      "path": "/api/previews/dance-party.png",
+      "url": "/api/previews/dance-party.png?v=1779571298825",
+      "objectKey": "sites/previews/dance-party.png",
+      "capturedAt": "2026-05-23T21:21:38Z",
+      "version": "1779571298825",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 100874,
+      "etag": "bac3150a8a7e2d586f5d4f8b6ea3a945",
+      "sourceUrl": "https://dance-party.mullmania.com/"
+    },
     "dark-card-layout": {
       "siteId": "dark-card-layout",
       "status": "ok",
@@ -9137,21 +9503,6 @@
       "contentType": "image/png",
       "size": 62654,
       "sourceUrl": "https://deeply-nested-onboarding-wizard-3366.mullmania.com/"
-    },
-    "demo": {
-      "siteId": "demo",
-      "status": "ok",
-      "path": "/api/previews/demo.png",
-      "url": "/api/previews/demo.png?v=1777166820708",
-      "objectKey": "sites/previews/demo.png",
-      "capturedAt": "2026-04-26T01:27:00Z",
-      "version": "1777166820708",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 255890,
-      "etag": "add0236e9c5ec6253a9330618f395dcf",
-      "sourceUrl": "https://demo.mullmania.com/"
     },
     "demo-for-me": {
       "siteId": "demo-for-me",
@@ -10736,6 +11087,24 @@
       "etag": "d62fe6db7be5db5be2102b8b4af65302",
       "sourceUrl": "https://favicon.mullmania.com/"
     },
+    "feed": {
+      "siteId": "feed",
+      "status": "ok",
+      "path": "/api/previews/feed.png",
+      "url": "/api/previews/feed.png?v=1779768574558",
+      "objectKey": "sites/previews/feed.png",
+      "capturedAt": "2026-05-26T04:09:34Z",
+      "version": "1779768574558",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 221662,
+      "etag": "5498d0253bc99bb1686e612477a4fb35",
+      "sourceUrl": "https://feed.mullmania.com/"
+    },
     "feedback-decision-tree-4415": {
       "siteId": "feedback-decision-tree-4415",
       "status": "ok",
@@ -10778,6 +11147,24 @@
       "contentType": "image/png",
       "size": 17887,
       "sourceUrl": "https://fetch-and-copy-html-2267.mullmania.com/"
+    },
+    "fever-dream": {
+      "siteId": "fever-dream",
+      "status": "ok",
+      "path": "/api/previews/fever-dream.png",
+      "url": "/api/previews/fever-dream.png?v=1779768575669",
+      "objectKey": "sites/previews/fever-dream.png",
+      "capturedAt": "2026-05-26T04:09:35Z",
+      "version": "1779768575669",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 232732,
+      "etag": "de677aa2b599b7f9ccd4ada9e445803e",
+      "sourceUrl": "https://fever-dream.mullmania.com/"
     },
     "fictional-bio-scrolling-grid-3216": {
       "siteId": "fictional-bio-scrolling-grid-3216",
@@ -12237,6 +12624,24 @@
       "etag": "ceff378e47936c968a9f9a99d80d1293",
       "sourceUrl": "https://funk-out.mullmania.com/"
     },
+    "funnel": {
+      "siteId": "funnel",
+      "status": "ok",
+      "path": "/api/previews/funnel.png",
+      "url": "/api/previews/funnel.png?v=1779571299988",
+      "objectKey": "sites/previews/funnel.png",
+      "capturedAt": "2026-05-23T21:21:39Z",
+      "version": "1779571299988",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 32269,
+      "etag": "0a1c370e62e2ecff5d6ebffd6da97931",
+      "sourceUrl": "https://funnel.mullmania.com/"
+    },
     "fv2": {
       "siteId": "fv2",
       "status": "ok",
@@ -13531,20 +13936,6 @@
       "etag": "faf87f4a0c464a1f18bcb0307a374c88",
       "sourceUrl": "https://html-canvas-overlay.mullmania.com/"
     },
-    "html5-demos": {
-      "siteId": "html5-demos",
-      "status": "ok",
-      "path": "/api/previews/html5-demos.png",
-      "url": "/api/previews/html5-demos.png?v=1775859317000",
-      "objectKey": "sites/previews/html5-demos.png",
-      "capturedAt": "2026-04-10T22:15:17Z",
-      "version": "1775859317000",
-      "width": 1280,
-      "height": 800,
-      "contentType": "image/png",
-      "size": 47368,
-      "sourceUrl": "https://html5-demos.mullmania.com/"
-    },
     "huckleberry": {
       "siteId": "huckleberry",
       "status": "ok",
@@ -14769,6 +15160,54 @@
       "etag": "eab32eabdab58fc3b5ffbc0bae5ac441",
       "sourceUrl": "https://lonetree-brewing-sign.mullmania.com/"
     },
+    "loop-deck": {
+      "siteId": "loop-deck",
+      "status": "ok",
+      "path": "/api/previews/loop-deck.png",
+      "url": "/api/previews/loop-deck.png?v=1779586180180",
+      "objectKey": "sites/previews/loop-deck.png",
+      "capturedAt": "2026-05-24T01:29:40Z",
+      "version": "1779586180180",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "loop-deck",
+          "status": "ok",
+          "id": "1779586180180",
+          "path": "/api/previews/loop-deck/1779586180180.png",
+          "url": "/api/previews/loop-deck/1779586180180.png?v=1779586180180",
+          "objectKey": "sites/previews/loop-deck/1779586180180.png",
+          "capturedAt": "2026-05-24T01:29:40Z",
+          "version": "1779586180180",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 243841,
+          "etag": "6746a7d34ac90a58fe4297c7b5cccbad",
+          "sourceUrl": "https://loop-deck.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 243841,
+      "etag": "6746a7d34ac90a58fe4297c7b5cccbad",
+      "sourceUrl": "https://loop-deck.mullmania.com/"
+    },
     "loop-reset-note-sequencer-6480": {
       "siteId": "loop-reset-note-sequencer-6480",
       "status": "ok",
@@ -15531,6 +15970,24 @@
       "etag": "d4901ad21c82936ba38627cafee7b0f9",
       "sourceUrl": "https://memory-game.mullmania.com/"
     },
+    "menagerie": {
+      "siteId": "menagerie",
+      "status": "ok",
+      "path": "/api/previews/menagerie.png",
+      "url": "/api/previews/menagerie.png?v=1779586180369",
+      "objectKey": "sites/previews/menagerie.png",
+      "capturedAt": "2026-05-24T01:29:40Z",
+      "version": "1779586180369",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 274066,
+      "etag": "1f64c460ece757ee7565981f983243af",
+      "sourceUrl": "https://menagerie.mullmania.com/"
+    },
     "meowster-whiskerpaws-purrtfolio": {
       "siteId": "meowster-whiskerpaws-purrtfolio",
       "status": "ok",
@@ -16208,21 +16665,6 @@
       "etag": "ab86dc4f629d02401891c9dc4c6d9d18",
       "sourceUrl": "https://multilanguage-scrap-index.mullmania.com/"
     },
-    "multiplayer-pong": {
-      "siteId": "multiplayer-pong",
-      "status": "ok",
-      "path": "/api/previews/multiplayer-pong.png",
-      "url": "/api/previews/multiplayer-pong.png?v=1776708895520",
-      "objectKey": "sites/previews/multiplayer-pong.png",
-      "capturedAt": "2026-04-20T18:14:55Z",
-      "version": "1776708895520",
-      "width": 640,
-      "height": 360,
-      "contentType": "image/png",
-      "size": 9283,
-      "etag": "a4daac4b2b15399578d6c9076fce0c87",
-      "sourceUrl": "https://multiplayer-pong.mullmania.com/"
-    },
     "nelsonville": {
       "siteId": "nelsonville",
       "status": "ok",
@@ -16459,6 +16901,54 @@
       "size": 65523,
       "etag": "c684edfb1af0badb121375c886e3748e",
       "sourceUrl": "https://nichols-and-dimes.mullmania.com/"
+    },
+    "nikita-vibes": {
+      "siteId": "nikita-vibes",
+      "status": "ok",
+      "path": "/api/previews/nikita-vibes.png",
+      "url": "/api/previews/nikita-vibes.png?v=1779571299905",
+      "objectKey": "sites/previews/nikita-vibes.png",
+      "capturedAt": "2026-05-23T21:21:39Z",
+      "version": "1779571299905",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "nikita-vibes",
+          "status": "ok",
+          "id": "1779571299905",
+          "path": "/api/previews/nikita-vibes/1779571299905.png",
+          "url": "/api/previews/nikita-vibes/1779571299905.png?v=1779571299905",
+          "objectKey": "sites/previews/nikita-vibes/1779571299905.png",
+          "capturedAt": "2026-05-23T21:21:39Z",
+          "version": "1779571299905",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 55603,
+          "etag": "d523f0e3c4baaf2344762a28aaaf2715",
+          "sourceUrl": "https://nikita-vibes.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 55603,
+      "etag": "d523f0e3c4baaf2344762a28aaaf2715",
+      "sourceUrl": "https://nikita-vibes.mullmania.com/"
     },
     "nikitakramar": {
       "siteId": "nikitakramar",
@@ -17512,36 +18002,6 @@
       "etag": "3542b8c5644a5df4303decd7b2607fac",
       "sourceUrl": "https://phase-harp.mullmania.com/"
     },
-    "phone-cursor": {
-      "siteId": "phone-cursor",
-      "status": "ok",
-      "path": "/api/previews/phone-cursor.png",
-      "url": "/api/previews/phone-cursor.png?v=1776709014241",
-      "objectKey": "sites/previews/phone-cursor.png",
-      "capturedAt": "2026-04-20T18:16:54Z",
-      "version": "1776709014241",
-      "width": 640,
-      "height": 360,
-      "contentType": "image/png",
-      "size": 55200,
-      "etag": "8594e0700dc1163ae072102ee9ab7916",
-      "sourceUrl": "https://phone-cursor.mullmania.com/"
-    },
-    "phone-input": {
-      "siteId": "phone-input",
-      "status": "ok",
-      "path": "/api/previews/phone-input.png",
-      "url": "/api/previews/phone-input.png?v=1776709016342",
-      "objectKey": "sites/previews/phone-input.png",
-      "capturedAt": "2026-04-20T18:16:56Z",
-      "version": "1776709016342",
-      "width": 640,
-      "height": 360,
-      "contentType": "image/png",
-      "size": 4941,
-      "etag": "6bf1fc0d638cedc526fe2d45b96a9877",
-      "sourceUrl": "https://phone-input.mullmania.com/"
-    },
     "phone-remote": {
       "siteId": "phone-remote",
       "status": "ok",
@@ -17892,6 +18352,54 @@
       "size": 21622,
       "etag": "6f845539ce5739bfe74aa33a5d4215d8",
       "sourceUrl": "https://port-directory.mullmania.com/"
+    },
+    "portamento": {
+      "siteId": "portamento",
+      "status": "ok",
+      "path": "/api/previews/portamento.png",
+      "url": "/api/previews/portamento.png?v=1779742093129",
+      "objectKey": "sites/previews/portamento.png",
+      "capturedAt": "2026-05-25T20:48:13Z",
+      "version": "1779742093129",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "portamento",
+          "status": "ok",
+          "id": "1779742093129",
+          "path": "/api/previews/portamento/1779742093129.png",
+          "url": "/api/previews/portamento/1779742093129.png?v=1779742093129",
+          "objectKey": "sites/previews/portamento/1779742093129.png",
+          "capturedAt": "2026-05-25T20:48:13Z",
+          "version": "1779742093129",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 520013,
+          "etag": "4e3f65674b360efdd1e888fd8a8dc5ea",
+          "sourceUrl": "https://portamento.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 520013,
+      "etag": "4e3f65674b360efdd1e888fd8a8dc5ea",
+      "sourceUrl": "https://portamento.mullmania.com/"
     },
     "portfolio-hero-page": {
       "siteId": "portfolio-hero-page",
@@ -20448,6 +20956,24 @@
       "size": 9256,
       "sourceUrl": "https://sketchy-ball-drop-train.mullmania.com/"
     },
+    "skyline": {
+      "siteId": "skyline",
+      "status": "ok",
+      "path": "/api/previews/skyline.png",
+      "url": "/api/previews/skyline.png?v=1779586180160",
+      "objectKey": "sites/previews/skyline.png",
+      "capturedAt": "2026-05-24T01:29:40Z",
+      "version": "1779586180160",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 73358,
+      "etag": "2c38ea718c5b803e95ba1e612823f967",
+      "sourceUrl": "https://skyline.mullmania.com/"
+    },
     "slack-block-builder": {
       "siteId": "slack-block-builder",
       "status": "ok",
@@ -21203,6 +21729,54 @@
       "etag": "4eaa9179b2719530d0599f962ff85cae",
       "sourceUrl": "https://starfield.mullmania.com/"
     },
+    "starglass": {
+      "siteId": "starglass",
+      "status": "ok",
+      "path": "/api/previews/starglass.png",
+      "url": "/api/previews/starglass.png?v=1779664860368",
+      "objectKey": "sites/previews/starglass.png",
+      "capturedAt": "2026-05-24T23:21:00Z",
+      "version": "1779664860368",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "starglass",
+          "status": "ok",
+          "id": "1779664860368",
+          "path": "/api/previews/starglass/1779664860368.png",
+          "url": "/api/previews/starglass/1779664860368.png?v=1779664860368",
+          "objectKey": "sites/previews/starglass/1779664860368.png",
+          "capturedAt": "2026-05-24T23:21:00Z",
+          "version": "1779664860368",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 299933,
+          "etag": "4e431255868062441d883e350999fad0",
+          "sourceUrl": "https://starglass.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 299933,
+      "etag": "4e431255868062441d883e350999fad0",
+      "sourceUrl": "https://starglass.mullmania.com/"
+    },
     "starz-live-watch-map": {
       "siteId": "starz-live-watch-map",
       "status": "ok",
@@ -21277,6 +21851,54 @@
       "size": 43159,
       "etag": "a7d6b2b5111c2753d46b3de157a65c69",
       "sourceUrl": "https://storyboard.mullmania.com/"
+    },
+    "straight-rider": {
+      "siteId": "straight-rider",
+      "status": "ok",
+      "path": "/api/previews/straight-rider.png",
+      "url": "/api/previews/straight-rider.png?v=1779571309277",
+      "objectKey": "sites/previews/straight-rider.png",
+      "capturedAt": "2026-05-23T21:21:49Z",
+      "version": "1779571309277",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "straight-rider",
+          "status": "ok",
+          "id": "1779571309277",
+          "path": "/api/previews/straight-rider/1779571309277.png",
+          "url": "/api/previews/straight-rider/1779571309277.png?v=1779571309277",
+          "objectKey": "sites/previews/straight-rider/1779571309277.png",
+          "capturedAt": "2026-05-23T21:21:49Z",
+          "version": "1779571309277",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 456408,
+          "etag": "a974134c53bef5b46e67e6d2a92040a0",
+          "sourceUrl": "https://straight-rider.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 456408,
+      "etag": "a974134c53bef5b46e67e6d2a92040a0",
+      "sourceUrl": "https://straight-rider.mullmania.com/"
     },
     "strataforge": {
       "siteId": "strataforge",
@@ -21534,6 +22156,24 @@
       "size": 191950,
       "etag": "1d35a9e616c8a4ec3ab3f0c6984a215a",
       "sourceUrl": "https://swagger-customization.mullmania.com/"
+    },
+    "swagger-graph": {
+      "siteId": "swagger-graph",
+      "status": "ok",
+      "path": "/api/previews/swagger-graph.png",
+      "url": "/api/previews/swagger-graph.png?v=1779664860396",
+      "objectKey": "sites/previews/swagger-graph.png",
+      "capturedAt": "2026-05-24T23:21:00Z",
+      "version": "1779664860396",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 25216,
+      "etag": "007664f7154d604de32f441833aebd03",
+      "sourceUrl": "https://swagger-graph.mullmania.com/"
     },
     "swarm-ping-tester": {
       "siteId": "swarm-ping-tester",
@@ -21806,6 +22446,54 @@
       "contentType": "image/png",
       "size": 216358,
       "sourceUrl": "https://tasks.mullmania.com/"
+    },
+    "tech-demos": {
+      "siteId": "tech-demos",
+      "status": "ok",
+      "path": "/api/previews/tech-demos.png",
+      "url": "/api/previews/tech-demos.png?v=1779768586100",
+      "objectKey": "sites/previews/tech-demos.png",
+      "capturedAt": "2026-05-26T04:09:46Z",
+      "version": "1779768586100",
+      "width": 1280,
+      "height": 720,
+      "style": "random",
+      "params": {
+        "width": 1280,
+        "height": 720,
+        "settleDelayMs": 5000,
+        "randomizeStyle": true
+      },
+      "screenshots": [
+        {
+          "siteId": "tech-demos",
+          "status": "ok",
+          "id": "1779768586100",
+          "path": "/api/previews/tech-demos/1779768586100.png",
+          "url": "/api/previews/tech-demos/1779768586100.png?v=1779768586100",
+          "objectKey": "sites/previews/tech-demos/1779768586100.png",
+          "capturedAt": "2026-05-26T04:09:46Z",
+          "version": "1779768586100",
+          "label": "random / 1280x720",
+          "style": "random",
+          "params": {
+            "width": 1280,
+            "height": 720,
+            "settleDelayMs": 5000,
+            "randomizeStyle": true
+          },
+          "width": 1280,
+          "height": 720,
+          "contentType": "image/png",
+          "size": 272388,
+          "etag": "b3b6c071e2661b07b9ea70d694f84419",
+          "sourceUrl": "https://tech-demos.mullmania.com/"
+        }
+      ],
+      "contentType": "image/png",
+      "size": 272388,
+      "etag": "b3b6c071e2661b07b9ea70d694f84419",
+      "sourceUrl": "https://tech-demos.mullmania.com/"
     },
     "teeter-totter": {
       "siteId": "teeter-totter",
@@ -22489,6 +23177,24 @@
       "size": 20306,
       "etag": "74dd397376aa7692001493aa40110384",
       "sourceUrl": "https://tommy-scanner.mullmania.com/"
+    },
+    "tools": {
+      "siteId": "tools",
+      "status": "ok",
+      "path": "/api/previews/tools.png",
+      "url": "/api/previews/tools.png?v=1779751505070",
+      "objectKey": "sites/previews/tools.png",
+      "capturedAt": "2026-05-25T23:25:05Z",
+      "version": "1779751505070",
+      "width": 640,
+      "height": 360,
+      "style": null,
+      "params": {},
+      "screenshots": [],
+      "contentType": "image/png",
+      "size": 289725,
+      "etag": "15e18c4f8224c4ccebb4657024d2136d",
+      "sourceUrl": "https://tools.mullmania.com/"
     },
     "touch-spin-arrow-dial": {
       "siteId": "touch-spin-arrow-dial",

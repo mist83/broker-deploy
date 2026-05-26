@@ -22,6 +22,8 @@ api-source-loop,https://api-source-loop.mullmania.com/
 api-test-loop,https://api-test-loop.mullmania.com/
 apocalypse-grocery,https://apocalypse-grocery.mullmania.com/
 app-flyover,https://app-flyover.mullmania.com/
+app-not-unused-skill,https://app-not-unused-skill.mullmania.com/
+appfarm,https://appfarm.mullmania.com/
 apple-trie,https://apple-trie.mullmania.com/
 apple-tv-search,https://apple-tv-search.mullmania.com/
 arcade,https://arcade.mullmania.com/
@@ -104,6 +106,7 @@ caroms,https://caroms.mullmania.com/
 carousel,https://carousel.mullmania.com/
 center-bumper-note-bounce,https://center-bumper-note-bounce.mullmania.com/
 center-crosshairs-orbit-test,https://center-crosshairs-orbit-test.mullmania.com/
+chachunk,https://chachunk.mullmania.com/
 chaos-box,https://chaos-box.mullmania.com/
 chatgpt-repo-bridge,https://chatgpt-repo-bridge.mullmania.com/
 chipper,https://chipper.mullmania.com/
@@ -296,7 +299,6 @@ dark-source-production-grid,https://dark-source-production-grid.mullmania.com/
 deck-duel,https://deck-duel.mullmania.com/
 decks-out,https://decks-out.mullmania.com/
 deeplink-tester,https://deeplink-tester.mullmania.com/
-demo,https://demo.mullmania.com/
 demo-for-me,https://demo-for-me.mullmania.com/
 demo-gods,https://demo-gods.mullmania.com/
 demos,https://demos.mullmania.com/
@@ -366,7 +368,9 @@ falling-shape-physics-sandbox,https://falling-shape-physics-sandbox.mullmania.co
 fastapp,https://fastapp.mullmania.com/
 fastapp-builder-demo,https://fastapp-builder-demo.mullmania.com/
 favicon,https://favicon.mullmania.com/
+feed,https://feed.mullmania.com/
 feedbuilder,https://feedbuilder.mullmania.com/
+fever-dream,https://fever-dream.mullmania.com/
 fictional-bio-scrolling-grid-3216,https://fictional-bio-scrolling-grid-3216.mullmania.com/
 fictional-bio-scrolling-grid-4553,https://fictional-bio-scrolling-grid-4553.mullmania.com/
 fictional-bio-scrolling-grid-6004,https://fictional-bio-scrolling-grid-6004.mullmania.com/
@@ -432,6 +436,7 @@ fullscreen-scoop-force-graph,https://fullscreen-scoop-force-graph.mullmania.com/
 fullscreen-themed-jackpot-slot,https://fullscreen-themed-jackpot-slot.mullmania.com/
 fullscreen-themed-slot-machine,https://fullscreen-themed-slot-machine.mullmania.com/
 funk-out,https://funk-out.mullmania.com/
+funnel,https://funnel.mullmania.com/
 fv2,https://fv2.mullmania.com/
 gcode-voxels,https://gcode-voxels.mullmania.com/
 geography-jeopardy,https://geography-jeopardy.mullmania.com/
@@ -475,7 +480,6 @@ hosting-onboarding-wizard-basic,https://hosting-onboarding-wizard-basic.mullmani
 hot-wire,https://hot-wire.mullmania.com/
 html-better-builtins,https://html-better-builtins.mullmania.com/
 html-canvas-overlay,https://html-canvas-overlay.mullmania.com/
-html5-demos,https://html5-demos.mullmania.com/
 hydropress,https://hydropress.mullmania.com/
 iamverysmart,https://iamverysmart.mullmania.com/
 image-fiber,https://image-fiber.mullmania.com/
@@ -548,6 +552,7 @@ llm-help,https://llm-help.mullmania.com/
 logo-designer,https://logo-designer.mullmania.com/
 logsplit,https://logsplit.mullmania.com/
 lonetree-brewing-sign,https://lonetree-brewing-sign.mullmania.com/
+loop-deck,https://loop-deck.mullmania.com/
 loop-reset-note-sequencer-6480,https://loop-reset-note-sequencer-6480.mullmania.com/
 loop-reset-note-sequencer-6617,https://loop-reset-note-sequencer-6617.mullmania.com/
 loose-code-scraps,https://loose-code-scraps.mullmania.com/
@@ -588,6 +593,7 @@ melody-bounce-scoreboard,https://melody-bounce-scoreboard.mullmania.com/
 melody-bounce-scoreboard-feedback,https://melody-bounce-scoreboard-feedback.mullmania.com/
 melody-wall-bounce-minimal,https://melody-wall-bounce-minimal.mullmania.com/
 memory-game,https://memory-game.mullmania.com/
+menagerie,https://menagerie.mullmania.com/
 meowster-whiskerpaws-purrtfolio,https://meowster-whiskerpaws-purrtfolio.mullmania.com/
 minimal-emoji-mobile-slot-machine,https://minimal-emoji-mobile-slot-machine.mullmania.com/
 minimalist-cytoscape-graph,https://minimalist-cytoscape-graph.mullmania.com/
@@ -629,7 +635,6 @@ mullman-websites-tommy-market,https://mullman-websites-tommy-market.mullmania.co
 mullman-websites-tv,https://mullman-websites-tv.mullmania.com/
 mullmania,https://mullmania.mullmania.com/
 multilanguage-scrap-index,https://multilanguage-scrap-index.mullmania.com/
-multiplayer-pong,https://multiplayer-pong.mullmania.com/
 nelsonville,https://nelsonville.mullmania.com/
 neon-animals,https://neon-animals.mullmania.com/
 new-random-site,https://new-random-site.mullmania.com/
@@ -721,6 +726,7 @@ polyglot-filename-map,https://polyglot-filename-map.mullmania.com/
 poor-man-s-locust-ping-tool,https://poor-man-s-locust-ping-tool.mullmania.com/
 poor-mans-queue,https://poor-mans-queue.mullmania.com/
 port-directory,https://port-directory.mullmania.com/
+portamento,https://portamento.mullmania.com/
 portfolio-hero-page,https://portfolio-hero-page.mullmania.com/
 portfolio-landing-page,https://portfolio-landing-page.mullmania.com/
 portfolio-placeholder,https://portfolio-placeholder.mullmania.com/
@@ -873,6 +879,7 @@ sir-oinksalot-pigtastic-portfolio,https://sir-oinksalot-pigtastic-portfolio.mull
 sites,https://sites.mullmania.com/
 six-seven,https://six-seven.mullmania.com/
 sketchy-ball-drop-train,https://sketchy-ball-drop-train.mullmania.com/
+skyline,https://skyline.mullmania.com/
 slack-block-builder,https://slack-block-builder.mullmania.com/
 slack-block-kit-playground,https://slack-block-kit-playground.mullmania.com/
 slack-block-kit-sandbox,https://slack-block-kit-sandbox.mullmania.com/
@@ -912,6 +919,7 @@ sqlite-visualizer,https://sqlite-visualizer.mullmania.com/
 squash,https://squash.mullmania.com/
 stacking,https://stacking.mullmania.com/
 starfield,https://starfield.mullmania.com/
+starglass,https://starglass.mullmania.com/
 starz-live-watch-map,https://starz-live-watch-map.mullmania.com/
 state,https://state.mullmania.com/
 status-monitor,https://status-monitor.mullmania.com/
@@ -935,6 +943,7 @@ swagger-api-force-directed-graph,https://swagger-api-force-directed-graph.mullma
 swagger-api-graph,https://swagger-api-graph.mullmania.com/
 swagger-api-graph-snapshot,https://swagger-api-graph-snapshot.mullmania.com/
 swagger-customization,https://swagger-customization.mullmania.com/
+swagger-graph,https://swagger-graph.mullmania.com/
 swarm-ping-tester,https://swarm-ping-tester.mullmania.com/
 swing-sultans,https://swing-sultans.mullmania.com/
 swipe-ball-hole-lanes,https://swipe-ball-hole-lanes.mullmania.com/
@@ -953,6 +962,7 @@ tap-repeater,https://tap-repeater.mullmania.com/
 tap-to-play-melody,https://tap-to-play-melody.mullmania.com/
 tap2app-file-index,https://tap2app-file-index.mullmania.com/
 tasks,https://tasks.mullmania.com/
+tech-demos,https://tech-demos.mullmania.com/
 teeter-totter,https://teeter-totter.mullmania.com/
 teleprompter,https://teleprompter.mullmania.com/
 telestrate,https://telestrate.mullmania.com/
@@ -994,6 +1004,7 @@ toggle-mode-list,https://toggle-mode-list.mullmania.com/
 toggle-qr-code-simulation,https://toggle-qr-code-simulation.mullmania.com/
 toggle-qr-code-simulation-copy,https://toggle-qr-code-simulation-copy.mullmania.com/
 tommy-scanner,https://tommy-scanner.mullmania.com/
+tools,https://tools.mullmania.com/
 touch-spin-arrow-dial,https://touch-spin-arrow-dial.mullmania.com/
 traffic-flow-visualization,https://traffic-flow-visualization.mullmania.com/
 traffic-flow-visualization-copy,https://traffic-flow-visualization-copy.mullmania.com/

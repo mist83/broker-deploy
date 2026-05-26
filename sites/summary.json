@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-05-23T19:28:32.334Z",
-  "updatedAt": "2026-05-23T19:28:32.334Z",
+  "generatedAt": "2026-05-26T13:20:43.104Z",
+  "updatedAt": "2026-05-26T13:20:43.104Z",
   "hostedBucket": "mullmania.com",
   "dataBucket": "mullmania.com-data",
   "archiveBucket": "mullmania.com-archive",
   "stats": {
-    "catalogSiteCount": 1067,
-    "hostedSiteCount": 1067,
+    "catalogSiteCount": 1078,
+    "hostedSiteCount": 1078,
     "dataNamespaceCount": 87,
-    "syntheticSiteCount": 29,
-    "publicHostedSiteCount": 235,
-    "privateHostedSiteCount": 831,
-    "operatorNoteCount": 1,
+    "syntheticSiteCount": 28,
+    "publicHostedSiteCount": 250,
+    "privateHostedSiteCount": 827,
+    "operatorNoteCount": 2,
     "demoPosterCount": 143,
     "demoVideoCount": 7
   },
@@ -40,14 +40,14 @@
     "unknown": 2
   },
   "canonVersions": {
-    "2026.04.19": 3,
-    "2026.04.26": 21,
-    "2026.04.17": 4,
+    "2026.04.19": 8,
+    "2026.04.26": 33,
+    "2026.04.17": 9,
     "2026.04.30": 1
   },
-  "lastPublishedSite": "arcade",
-  "visibleHostedSites": 1066,
-  "launchpadBuiltAt": "2026-05-23T19:41:35.961Z",
+  "lastPublishedSite": "rhythm-engine",
+  "visibleHostedSites": 1077,
+  "launchpadBuiltAt": "2026-05-26T13:30:33.772Z",
   "mainSiteId": "sites",
   "mainSiteHost": "sites.mullmania.com",
   "mainSiteUrl": "https://sites.mullmania.com/"
