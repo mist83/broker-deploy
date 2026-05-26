@@ -119,10 +119,20 @@ Proof QA gate before upload or `visual evidence: yes`:
 4. If the video is poor because the software is poor, fix the software within scope and re-record. Do not hide the defect with a narrower staged route.
 5. If clear proof cannot be produced after bounded effort, mark `visual evidence: no` and `safe to close: no`.
 
+Proof film default when video is required or chosen:
+
+1. Do not produce silent proof video by default. Use narration unless the work is genuinely better without it or the runtime blocks audio; if silent, state that as the fallback.
+2. Narration must explain what is happening at the moment it happens: the premise, the action, the expected result, and the proof that it worked. Choreograph and telegraph the "plays" so a future human can follow the clip without reading the chat.
+3. Default voice: dry, concise, slightly sarcastic operator-friendly narration from the primary voice. Use additional voices rarely and only when the repo or feature naturally has distinct roles (for example, a fighter/game repo can justify character voices). Do not turn every proof into a sketch.
+4. Use generated or licensed music only. Default style, unless the repo suggests otherwise: lo-fi techno or outrun bed with a visible build, crescendo, and beat drop aligned to meaningful state changes. No copyrighted tracks unless the operator explicitly supplies rights.
+5. Vary the film grammar by repo. Match the app's actual personality: devtool, game, finance app, proof vault, visual toy, or backend API should not all sound the same.
+6. Use pitch, speed, pauses, captions, and beat timing sparingly to make key state changes legible, not as random effects.
+7. Prefer the shared Storyboard/films pipeline when available; if the proof video needed manual post-processing, leave the recipe or request payload in the durable breadcrumb.
+
 Upload path:
 
 1. Record the changed live/local surface with Playwright video, browser recording, OS screen capture, or an existing product-specific recorder.
-2. Convert to MP4 when practical, preserving or encoding to 30 FPS when the source supports it.
+2. Convert to MP4 when practical, preserving or encoding to 30 FPS when the source supports it. Add narration/music through Storyboard or the canonical films pipeline when video proof is the right artifact.
 3. Run the proof QA gate above.
 4. Upload video to `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`.
 5. Upload a poster frame to the same proof folder.

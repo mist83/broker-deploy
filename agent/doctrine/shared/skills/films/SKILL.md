@@ -5,7 +5,7 @@ description: Produce a polished narrated demo film for one or many Mullmania rep
 
 # films
 
-Produce a 45-90s narrated, cinematized demo film for one Mullmania repo's live URL. The pipeline lives at `/Users/mist83/Code/project-and/tests/marionette/`. This skill is a thin orchestration layer around it — the pipeline code is the source of truth.
+Produce a 45-90s narrated, cinematized demo film for one Mullmania repo's live URL. The pipeline lives at `/Users/mist83/Code/project-and/tests/marionette/`. Storyboard (`https://storyboard.mullmania.com`) is the narration/audio render service behind this style of proof. This skill is a thin orchestration layer around the pipeline — the pipeline code is the source of truth.
 
 ## Cold-start preflight (do every time)
 
@@ -63,6 +63,15 @@ const { Marionette } = require('./marionette.cjs');
 ```
 
 Beats are realistic, not marketing-speak. Selectors must exist on the live page.
+
+Narration and music defaults:
+
+- Default narrator voice remains Brian unless the repo clearly calls for another primary voice.
+- Write dry, concise, slightly sarcastic narration that tells the viewer what is being proved. It can have a point of view; it cannot lie or hype fake behavior.
+- Use multiple voices only rarely, and only when the repo has natural roles or characters. A fighter/game repo can support it; a settings panel usually cannot.
+- Choreograph the film so narration, cursor movement, captions, speed changes, and cuts telegraph the next action and the outcome.
+- Use generated/licensed lo-fi techno or outrun-style music by default, with a build/crescendo and beat drop aligned to the payoff. Do not use copyrighted music unless the operator supplied rights.
+- Use pitch/speed changes sparingly for emphasis, not as random decoration.
 
 **3. Run it**:
 

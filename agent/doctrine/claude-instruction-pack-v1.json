@@ -2,14 +2,14 @@
   "schemaVersion": "agents-claude-instruction-pack-v1",
   "flavor": "claude-code",
   "operator": "mist83",
-  "renderedAt": "2026-05-25T23:41:23.821Z",
+  "renderedAt": "2026-05-26T00:01:09.166Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json",
   "bootstrapScriptUrl": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh",
   "preambleInstruction": "At the start of every chat, fetch this manifest, materialize each item to its projectionTarget, verify each sha256, and only then proceed. If any fetch or verification fails, stop and report. Do not invent fallback policy.",
-  "totalItems": 22,
+  "totalItems": 23,
   "composition": {
     "sharedItemCount": 0,
-    "flavorItemCount": 22,
+    "flavorItemCount": 23,
     "sharedTreeUrl": "https://agent.mullmania.com/doctrine/shared",
     "flavorTreeUrl": "https://agent.mullmania.com/doctrine/claude-pack",
     "note": "Shared items are runtime-agnostic content (rules, skills, commands, hooks). They live at /doctrine/shared/ and are reused verbatim by every flavor pack. Flavor items are Claude-specific shims (CLAUDE.md, settings.json, .mcp.json, plugins, MEMORY.md). The codex pack will reference the same /doctrine/shared/ URLs with its own projection targets."
@@ -208,6 +208,16 @@
     },
     {
       "source": "flavor",
+      "packPath": "skills/daily-brief/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/daily-brief/SKILL.md",
+      "sha256": "97acc66c8aebb357fffe936b05c6f11f9b93feb7b4f1e45562008be1b66f6058",
+      "sizeBytes": 758,
+      "mode": "regular",
+      "projectionTarget": "~/.claude/skills/daily-brief/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
       "packPath": "skills/dance-party/SKILL.md",
       "url": "https://agent.mullmania.com/doctrine/claude-pack/skills/dance-party/SKILL.md",
       "sha256": "1f9ddc28d4973c46c7221b389737163ce2bd04fcc65bd9d25697cda31dd439d3",
@@ -268,6 +278,6 @@
     "rules/project/*.md files are operator scratch (in-flight initiative context) and are included here for full wipe-and-rehydrate fidelity. They are not durable doctrine and may rotate or expire.",
     "sha256 covers file bytes only; the manifest itself is unsigned in v1. Trust on first fetch.",
     "projectionTarget paths are operator-machine absolute paths with leading ~. The bootstrap script must expand them.",
-    "Shared/flavor split: 0 of 22 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 22 items are Claude-specific shims."
+    "Shared/flavor split: 0 of 23 items live at /doctrine/shared/ and will be reused verbatim by codex or any future flavor pack. Only 23 items are Claude-specific shims."
   ]
 }

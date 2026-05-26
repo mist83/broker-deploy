@@ -116,7 +116,7 @@
     {
       "id": "feedback_breadcrumb_protocol",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "c405f729e8b1c079931d9466e40567e7dd479b90007ef1bb192c5643b159a6e9"
+      "sha256": "6c2f4511e725346d56e313d8c82d12e4b96522098c351b56ddd206b48d99fdeb"
     },
     {
       "id": "feedback_ship_to_deployed",
