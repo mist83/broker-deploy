@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "rhythm-engine",
     "status": "success",
-    "deployedAt": "2026-05-23T15:10:33.497Z",
+    "deployedAt": "2026-05-26T13:21:04.988Z",
     "trigger": "github-webhook",
-    "brokerRunId": "26336169595",
-    "brokerRunNumber": "169",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26336169595",
+    "brokerRunId": "26450499079",
+    "brokerRunNumber": "223",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26450499079",
     "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "rhythm-engine",
+      "status": "success",
+      "deployedAt": "2026-05-26T13:21:04.988Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26450499079",
+      "brokerRunNumber": "223",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26450499079",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "rhythm-engine",
       "status": "success",
