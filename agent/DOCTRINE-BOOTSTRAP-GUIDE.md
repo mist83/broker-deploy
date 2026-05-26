@@ -153,6 +153,8 @@ Do not treat them as the future source of truth.
 - Human compose guide: [DOCTRINE-COMPOSE-API.md](./DOCTRINE-COMPOSE-API.md)
 - Generic agent bootstrap prompt: [AGENT-BOOTSTRAP-PROMPT.md](./AGENT-BOOTSTRAP-PROMPT.md)
 - Codex bootstrap prompt: [CODEX-BOOTSTRAP-PROMPT.md](./CODEX-BOOTSTRAP-PROMPT.md)
+- Claude instruction pack: [doctrine/claude-instruction-pack-v1.json](./doctrine/claude-instruction-pack-v1.json)
+- Codex instruction pack: [doctrine/codex-instruction-pack-v1.json](./doctrine/codex-instruction-pack-v1.json)
 - Codex memory seed: [doctrine/codex-memory-seed-v1.json](./doctrine/codex-memory-seed-v1.json)
 - Claude memory seed: [doctrine/claude-memory-seed-v1.json](./doctrine/claude-memory-seed-v1.json)
 - Codex local runtime inventory: [doctrine/codex-local-runtime-inventory-v1.json](./doctrine/codex-local-runtime-inventory-v1.json)

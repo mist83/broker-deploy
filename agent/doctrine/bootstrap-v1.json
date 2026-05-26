@@ -67,6 +67,7 @@
       "codex": "https://agent.mullmania.com/SAFE-TO-WIPE-CODEX.md"
     },
     "instructionPackUrls": {
+      "codex": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
       "claude": "https://agent.mullmania.com/doctrine/claude-instruction-pack-v1.json"
     },
     "bootstrapScriptUrls": {

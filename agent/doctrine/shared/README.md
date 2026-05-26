@@ -4,10 +4,10 @@ Runtime-agnostic content. Lives once, projected everywhere.
 
 ## What lives here
 
-Everything in this directory is rule content, skill bodies, command logic, or hook scripts that are not specific to any one agent runtime. The same file gets fetched by:
+Everything in this directory is rule content, skill bodies, command logic, or hook scripts that are not specific to any one agent runtime. The same file gets fetched or referenced by:
 
 - the Claude pack manifest (`/doctrine/claude-instruction-pack-v1.json`)
-- the Codex pack manifest (`/doctrine/codex-instruction-pack-v1.json`, when it exists)
+- the Codex pack manifest (`/doctrine/codex-instruction-pack-v1.json`)
 - the shared rule catalog (`/doctrine/shared-rule-catalog-v1.json`)
 - the shared profile TOC (`/doctrine/profile-toc-v1.json`)
 - any future flavor pack (Cursor, Aider, your-cli-here)
@@ -19,7 +19,7 @@ Each flavor pack declares its own projection targets — where on the operator m
 Anything that has a different shape per runtime:
 
 - `CLAUDE.md` (Claude-specific preamble) → lives in `/doctrine/claude-pack/`
-- `AGENTS.md` (Codex-specific preamble) → lives in `/doctrine/codex-pack/` (when codex builds one)
+- `AGENTS.md` (Codex-specific preamble) -> lives in `/doctrine/codex-pack/`
 - Harness configs (`settings.json`, `.mcp.json`, plugin registries) → flavor-specific
 - Memory index files (`MEMORY.md` for Claude's auto-memory, codex's equivalent) → flavor-specific format
 
@@ -42,14 +42,14 @@ shared/
 
 ## How a flavor pack consumes this
 
-A flavor manifest item that lives in shared/ has `source: "shared"` and a `url` under `/doctrine/shared/...`. The bootstrap script doesn't care which tree the file came from — it fetches the URL, verifies sha256, and projects it to `projectionTarget` on the operator machine.
+A flavor manifest may either project shared items directly or project runtime trampolines that fetch shared URLs. In the current v1 packs, shared command and skill bodies stay cloud-only under `/doctrine/shared/...`, while `/doctrine/claude-pack/` and `/doctrine/codex-pack/` contain local shims that fetch them at runtime.
 
-When two flavor packs both reference `/doctrine/shared/rules/feedback/feedback_ui_canon_first.md`, they're guaranteed identical. Edit once, both runtimes get the change on next bootstrap.
+When two flavor packs both reference `/doctrine/shared/rules/feedback/feedback_ui_canon_first.md` or `/doctrine/shared/commands/shipit.md`, they are guaranteed to resolve the same remote body. Edit once, both runtimes get the change on next bootstrap or next trampoline execution.
 
 ## Editing rules
 
 1. Edit the file in `shared/`
-2. Run `npm run build` (or at minimum `npm run build:doctrine` plus `npm run build:claude-pack`) to refresh the shared catalog, profiles, and manifests with new sha256s
+2. Run `npm run build` (or at minimum the relevant `build:*` scripts) to refresh the shared catalog, profiles, and manifests with new sha256s
 3. Deploy: `bash scripts/deploy.sh apply`
 4. Operators re-run their bootstrap to pick up the new content
 

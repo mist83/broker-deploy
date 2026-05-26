@@ -17,6 +17,7 @@ Browse the site at <https://agent.mullmania.com/>.
 - `agent.mullmania.com` is the current live host. If `agents.mullmania.com` is introduced later, it should replace or mirror this host instead of forking the doctrine.
 - Doctrine artifacts should be publicly readable from the current host. If they are not reachable, consumers should fail visibly instead of silently falling back.
 - The shared doctrine core now lives in `doctrine/shared-rule-catalog-v1.json` plus `doctrine/profile-toc-v1.json`. Runtime packs are overlays, not separate brains.
+- Runtime instruction packs live at `doctrine/claude-instruction-pack-v1.json` and `doctrine/codex-instruction-pack-v1.json`; their flavor trees are projection shims, while durable command and skill behavior stays under `doctrine/shared/`.
 - Existing `.clinerules`, `full/*.md`, `custom_instructions.md`, and similar platform-shaped files are now legacy compatibility material and historical inputs.
 - New source-of-truth behavior belongs in the doctrine artifacts and their guiding docs, not in ad hoc local Codex/Claude files.
 - Local platform files should become generated projections or tiny bootstrap/fuse shims, not authored policy.

@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "agents-codex-instruction-pack-v1",
+  "flavor": "codex",
+  "operator": "mist83",
+  "renderedAt": "2026-05-26T01:13:04.178Z",
+  "manifestUrl": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
+  "preambleInstruction": "At the start of every chat, fetch bootstrap-v1.json, materialize this pack only as generated projections, and stop visibly if fetch or verification fails. Do not invent fallback policy.",
+  "totalItems": 13,
+  "composition": {
+    "sharedItemCount": 0,
+    "flavorItemCount": 13,
+    "sharedTreeUrl": "https://agent.mullmania.com/doctrine/shared",
+    "flavorTreeUrl": "https://agent.mullmania.com/doctrine/codex-pack",
+    "note": "Codex local files should stay pointer/projection only. Durable behavior belongs in doctrine/shared/ and is fetched by these thin skill trampolines."
+  },
+  "totals": {
+    "globalInstructions": 1,
+    "skills": 12
+  },
+  "items": [
+    {
+      "source": "flavor",
+      "packPath": "instructions/global/AGENTS.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/instructions/global/AGENTS.md",
+      "sha256": "cbebe5b9a87b4f742e0c58bb523f21b36c9c4cb2b9a16d097e54a76fd7bd9295",
+      "sizeBytes": 387,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/AGENTS.md",
+      "category": "global-instructions"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/agent-sync/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/agent-sync/SKILL.md",
+      "sha256": "a405cdc4ba3c905b11fc5740259180aeaee387862d0a6248bd34f1d69c2596c6",
+      "sizeBytes": 491,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/agent-sync/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/bookmark/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/bookmark/SKILL.md",
+      "sha256": "317da1c529f0939ff98977f5ec95363498ffbcfe3e03fe76bf2326a31170b58b",
+      "sizeBytes": 453,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/bookmark/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/canonize/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/canonize/SKILL.md",
+      "sha256": "723ae811211813676c85e0af3f29085e9e713e6e21e3dfb33e47258b1aadd2c0",
+      "sizeBytes": 399,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/canonize/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/daily-brief/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/daily-brief/SKILL.md",
+      "sha256": "8408294a3056b5460e488bf2b72872e5ccf72ed6cc846ad6f5b44ef277f1fe21",
+      "sizeBytes": 397,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/daily-brief/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/dance-party/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/dance-party/SKILL.md",
+      "sha256": "83fa853c84f6978c6e445d9b2bebdfa108ef5d283e9fa3bac529cede28d9db5a",
+      "sizeBytes": 330,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/dance-party/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/films/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/films/SKILL.md",
+      "sha256": "0ccab3c95aa26bdf5bf2209e0a670162eb6d02c4b28e38c82e67e36675280785",
+      "sizeBytes": 318,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/films/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/image-generation-protocol/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/image-generation-protocol/SKILL.md",
+      "sha256": "a8d716fe0b97315dc04572c9fb413b2289de23ebedb83c502fc5d37203a8078e",
+      "sizeBytes": 334,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/image-generation-protocol/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/overdrive/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/overdrive/SKILL.md",
+      "sha256": "16775bf3796cb15d066c3e8cdfa675a33bbe6dcfaebd736cbd2b399cc66a86e3",
+      "sizeBytes": 448,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/overdrive/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/publish-package/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/publish-package/SKILL.md",
+      "sha256": "6b3525136b3ae2a5e5c2cbf3de89dd8194cf37d705659b99ed529f27eff8d486",
+      "sizeBytes": 342,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/publish-package/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/roomup/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/roomup/SKILL.md",
+      "sha256": "b3c33af1b305a0118936489e7842fec80f658be013eecfbfcbe59d25743400d3",
+      "sizeBytes": 304,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/roomup/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/shipit/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/shipit/SKILL.md",
+      "sha256": "c03ec1ab6ac08bc15857a51463816347a59da833d1fa2068a7d08f8fbbf3ee1b",
+      "sizeBytes": 340,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/shipit/SKILL.md",
+      "category": "skill-trampoline"
+    },
+    {
+      "source": "flavor",
+      "packPath": "skills/tombstone/SKILL.md",
+      "url": "https://agent.mullmania.com/doctrine/codex-pack/skills/tombstone/SKILL.md",
+      "sha256": "5275b668882b08ebe2880d053f807367ad261057e02246f54db1c09b024352c3",
+      "sizeBytes": 323,
+      "mode": "regular",
+      "projectionTarget": "~/.codex/skills/tombstone/SKILL.md",
+      "category": "skill-trampoline"
+    }
+  ],
+  "notes": [
+    "This pack intentionally excludes ~/.codex/auth.json, ~/.codex/config.toml, connector caches, plugin caches, logs, and generated state.",
+    "~/.codex/rules/default.rules remains a local permission fuse until it is reduced or generated from doctrine.",
+    "sha256 covers file bytes only; the manifest itself is unsigned in v1."
+  ]
+}

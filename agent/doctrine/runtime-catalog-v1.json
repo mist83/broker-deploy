@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-runtime-catalog-v1",
   "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-  "generatedAt": "2026-05-26T00:29:28.026Z",
+  "generatedAt": "2026-05-26T01:13:04.096Z",
   "runtimes": [
     {
       "id": "codex",
