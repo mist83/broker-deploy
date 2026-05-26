@@ -5,7 +5,7 @@ type: feedback
 originSessionId: dance-party-handoff-2026-05-22
 ---
 
-When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, per-repo proof breadcrumb update, and source-chat link capture before answering. Every proof asset and fallback asset created by the bookmark must point back to the specific chat that created it so the operator can identify the exact archived chat to reopen. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result and tell the operator they are spinning wheels.
+When this protocol triggers, answer with exactly three lines: `bookmark`, `visual evidence`, and `safe to close`. A `yes` closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on `videos.mullmania.com`, and a readable milestone card on `feed.mullmania.com` whenever the feed repo and deploy path are reachable; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, per-repo proof breadcrumb update, public feed milestone update, and source-chat link capture before answering. The `visual evidence` line should prefer the `feed.mullmania.com/#<milestone-id>` URL because that card is the operator-readable front door to proof, commits, live URLs, breadcrumbs, and chat locators. Every proof asset and fallback asset created by the bookmark must point back to the specific chat that created it so the operator can identify the exact archived chat to reopen. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkward software, fix within scope and re-record instead of hiding the defect with a staged route. A successful bookmark closes the chapter: later new-feature work should move to a fresh chat unless the operator gives explicit verbal authorization to continue in the polluted chat. Repeated `bookmark` requests are idempotent: if no meaningful state changed after a successful bookmark, do not invent new unattended work or create new proof; reuse the existing result/feed milestone and tell the operator they are spinning wheels.
 
 The operator orchestrates many chats in parallel as a puppeteer. They cannot delegate which chat they're talking to, so they need a uniform, fast, no-frills "is this chat at a clean stopping point?" check that they can ask every chat the same way.
 
@@ -23,7 +23,7 @@ Do not require the operator to spell out what they mean. They know. Do not ask f
 
 This is not only a question. It is a small closing protocol.
 
-Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, update the repo proof breadcrumb, capture the current chat URL or exact chat locator, and verify live URLs.
+Before answering, inspect the current task state. If this is almost a natural stopping point and the remaining work is bounded, finish the missing closure work instead of asking the operator to do it. Examples: run the last verification, commit obvious final changes, deploy when the task expects live behavior, upload proof evidence, sync manifests, update the repo proof breadcrumb, append or update the public feed milestone, capture the current chat URL or exact chat locator, and verify live URLs.
 
 Treat proof recording as product QA. If making the user-perspective proof video exposes broken, laggy, incoherent, or awkward software, do not work around it with a flattering recording. Fix the product within the original request and non-destructive edit constraints, then re-record. If the needed fix is too broad, risky, or requires an operator decision, answer `no` with that blocker.
 
@@ -33,11 +33,11 @@ If reaching a stopping point is not bounded or would require an operator decisio
 
 This protocol is not a work generator. If the operator invokes `bookmark` again after a successful bookmark and no meaningful task state has changed, do not run new unattended work, do not create another proof video, and do not hunt for new tasks to justify the repeated command.
 
-Instead, reuse the prior durable trail and proof pointer. Keep the exact three-line response shape, and make the wheel-spinning state obvious in the reason:
+Instead, reuse the prior durable trail, proof pointer, and feed milestone. Keep the exact three-line response shape, and make the wheel-spinning state obvious in the reason:
 
 ```
 ✅ bookmark:        yes — already captured; no new state
-✅ visual evidence: yes — <same proof URL>
+✅ visual evidence: yes — <same feed milestone or proof URL>
 ✅ safe to close:   yes — already safe; spinning wheels
 ```
 
@@ -67,7 +67,7 @@ Exactly three answers. Each is one line. Each line starts with `✅` (yes) or `�
 
 ```
 ✅ bookmark:        yes — <durable resume trail captured>
-✅ visual evidence: yes — <videos.mullmania.com proof URL or explicit fallback>
+✅ visual evidence: yes — <feed.mullmania.com milestone URL, proof URL, or explicit fallback>
 ✅ safe to close:   yes — <verified, chapter closed, no chat-only state>
 ```
 
@@ -89,15 +89,16 @@ All seven must be true:
 2. **Single source of truth**: no orphan copy of the work in a second repo / second path. Future-me lands in one place.
 3. **Next-step trail**: the canonical repo has a README, context sidecar, or pinned doc that tells the next agent (or future operator) exactly what to do to ship the next change. Includes the exact deploy command if there is one.
 4. **Deployed = local**: if the work has a live target, the live target matches the canonical source.
-5. **Proof pointer**: the closeout answer includes the proof evidence URL or says exactly why proof could not be produced.
+5. **Proof pointer**: the closeout answer includes the feed milestone URL or proof evidence URL, or says exactly why proof could not be produced.
 6. **Breadcrumb pointer**: the canonical repo has a durable `.proof.json` breadcrumb or equivalent pinned doc pointing at its proof vault/feed and latest deposit, unless the repo is read-only or the proof is intentionally owned elsewhere.
 7. **Source-chat pointer**: every proof asset, poster asset, fallback artifact, and breadcrumb deposit created by the bookmark includes a `created_by_chat` pointer with a navigable chat URL when the runtime exposes one, or an exact runtime/thread/session locator when it does not. If neither can be captured, the bookmark is **no** because the operator cannot know which archived chat to reopen.
+8. **Feed milestone pointer**: when `~/Code/feed.mullmania.com` and its deploy path are reachable, the bookmark has a newest-first milestone in `data/milestones.json` using schema `feed.mullmania.com/milestone-feed-v1`, deployed to `https://feed.mullmania.com/#<milestone-id>`, and the `visual evidence` line points there first. If this is blocked after bounded effort, name the blocker and include the direct proof fallback.
 
 If any of those is false, the answer is **no** and the reason names which one.
 
 ## What "visual evidence" means
 
-At a natural stopping point, create or attach a short proof artifact so future-Mike can remember the work visually without rereading the chat.
+At a natural stopping point, create or attach a short proof artifact so future-Mike can remember the work visually without rereading the chat. Also create the human-readable feed milestone so the proof is not hidden inside a raw asset URL.
 
 Preferred proof is a short hosted video, but only when it helps future-Mike recognize the completed work. Do not make random videos for video's sake.
 
@@ -138,14 +139,15 @@ Upload path:
 5. Upload a poster frame to the same proof folder.
 6. Run `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`.
 7. Update or create `<repo>/.proof.json` with schema `videos.mullmania.com/proof-breadcrumb-v1`, the repo tag, `vault_for_this_repo`, `vault_cross_cut`, `proof_dashboard`, `flipbook`, and a latest deposit entry containing the video URL, poster URL, local source path, timestamp, and `created_by_chat` pointer. Repeat the same `created_by_chat` pointer on every asset object in the deposit so a copied video URL, poster URL, screenshot, evidence page, or fallback artifact can still be traced to the exact chat that created it.
-8. Commit and push that breadcrumb with the source repo when the repo is writable. If the source repo cannot own the breadcrumb, place the pointer in the strongest canonical handoff doc and name that location in the bookmark reason.
-9. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed`, the proof dashboard or flipbook when useful, or a direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL.
+8. Append or update the newest-first milestone in `~/Code/feed.mullmania.com/data/milestones.json` using schema `feed.mullmania.com/milestone-feed-v1`. Include the repo, title, summary, proof asset(s), live URL, commit URL, breadcrumb URL, and the same `created_by_chat` information as `chat`.
+9. Commit and push the source repo breadcrumb when the repo is writable. Commit, push, deploy, and verify the feed repo when the feed path is reachable. If the source repo cannot own the breadcrumb, place the pointer in the strongest canonical handoff doc and name that location in the bookmark reason.
+10. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed`, the proof dashboard or flipbook when useful, the direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL, or the feed milestone URL. Prefer the feed milestone URL in the final `visual evidence` line.
 
-If the task has no meaningful visual surface or video capture is blocked by the runtime, create the strongest hosted fallback that exists (screenshots, live URL, commit SHAs, test summary, exact resume instructions). The `visual evidence` line may be **yes** only when that fallback is hosted/durable and the reason makes clear that it is a fallback. Otherwise it is **no** and `safe to close` is also **no**.
+If the task has no meaningful visual surface or video capture is blocked by the runtime, create the strongest hosted fallback that exists (screenshots, live URL, commit SHAs, test summary, exact resume instructions). Put that fallback into the feed milestone when reachable so it is readable later. The `visual evidence` line may be **yes** only when that fallback is hosted/durable and the reason makes clear that it is a fallback. Otherwise it is **no** and `safe to close` is also **no**.
 
 ## Proof breadcrumbs
 
-The proof repository is `videos.mullmania.com`. It turns objects under `s3://mullmania.com/videos/proof/<repo>/` into the repo feed, the cross-cut `proof` feed, the Proof dashboard, and the Flipbook. A bookmark is not complete just because the proof video exists in S3; the source repo also needs a small breadcrumb that future agents can read without remembering the proof system.
+The proof repository is `videos.mullmania.com`. It turns objects under `s3://mullmania.com/videos/proof/<repo>/` into the repo feed, the cross-cut `proof` feed, the Proof dashboard, and the Flipbook. The public milestone repository is `feed.mullmania.com`; it turns proof and breadcrumb pointers into large readable cards. A bookmark is not complete just because the proof video exists in S3; the source repo also needs a small breadcrumb that future agents can read without remembering the proof system, and the feed should carry the operator-facing milestone whenever reachable.
 
 ## Source-chat links
 
@@ -189,7 +191,7 @@ Preferred deposit shape:
 }
 ```
 
-For non-video fallback proof, use the same rule: the evidence page, screenshot, live URL proof note, test summary, or pinned handoff doc must include `created_by_chat` with enough information to reopen the exact originating chat. A repo-level `.proof.json` pointer alone is not enough if the individual asset can be separated from the breadcrumb.
+For non-video fallback proof, use the same rule: the evidence page, screenshot, live URL proof note, test summary, feed milestone, or pinned handoff doc must include `created_by_chat` or `chat` with enough information to reopen the exact originating chat. A repo-level `.proof.json` pointer alone is not enough if the individual asset can be separated from the breadcrumb.
 
 Preferred breadcrumb file:
 
@@ -296,3 +298,5 @@ Updated 2026-05-25 again: Overdrive is an auto-continue exception after bookmark
 Updated 2026-05-25 again: bookmark closeout must leave a per-repo proof breadcrumb, usually `.proof.json`, pointing at the `videos.mullmania.com` proof feed, cross-cut proof reel, dashboard, flipbook, and latest deposit. The proof repository is `videos.mullmania.com`; the breadcrumb belongs in the source repo.
 
 Updated 2026-05-25 again: every proof asset and fallback asset created by bookmark must carry a `created_by_chat` pointer so the operator can identify the exact archived chat to unarchive later.
+
+Updated 2026-05-26: bookmark evidence must be made front and center through `feed.mullmania.com` when reachable. The feed milestone is the readable operator-facing trail; `videos.mullmania.com` remains the proof vault, and repo `.proof.json` remains the source breadcrumb.
