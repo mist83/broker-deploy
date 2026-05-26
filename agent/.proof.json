@@ -8,6 +8,72 @@
   "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/agent/<name>.mp4 (optional poster-<name>.png alongside). Then cd ~/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish.",
   "deposits": [
     {
+      "video_id": "bookmark-backfill-proof-20260525",
+      "site_src": "https://videos.mullmania.com/proof/agent/bookmark-backfill-proof-20260525.mp4",
+      "poster_src": "https://videos.mullmania.com/proof/agent/poster-bookmark-backfill-proof-20260525.png",
+      "vault_url": "https://videos.mullmania.com/?tag=agent#feed",
+      "source_commit": "c20fef3",
+      "duration_seconds": 34.8,
+      "frame_rate": "30/1",
+      "qa": "Final video inspected via ffprobe metadata and representative contact sheet; it shows live doctrine, Storyboard proof-film controls, rendered output, narration, and generated outrun music.",
+      "storyboard_output_url": "https://storyboard.mullmania.com/outputs/8a593c027aaf82530ed924fe.mp4",
+      "source_url": "https://storyboard.mullmania.com/proof-source/storyboard-ui-proof-source-long-20260525.mp4",
+      "created_by_chat": {
+        "runtime": "codex",
+        "thread_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+        "session_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+        "locator": "CODEX_THREAD_ID=019e6178-d1c4-71e1-b049-bbf54084d4c3; session_jsonl=/Users/mist83/.codex/sessions/2026/05/25/rollout-2026-05-25T17-29-28-019e6178-d1c4-71e1-b049-bbf54084d4c3.jsonl; cwd=/Users/mist83/Code; title=BOOKMARK BACKFILL",
+        "captured_at": "2026-05-26T00:27:12.407Z"
+      },
+      "assets": [
+        {
+          "kind": "video",
+          "url": "https://videos.mullmania.com/proof/agent/bookmark-backfill-proof-20260525.mp4",
+          "created_by_chat": {
+            "runtime": "codex",
+            "thread_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "session_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "locator": "CODEX_THREAD_ID=019e6178-d1c4-71e1-b049-bbf54084d4c3; session_jsonl=/Users/mist83/.codex/sessions/2026/05/25/rollout-2026-05-25T17-29-28-019e6178-d1c4-71e1-b049-bbf54084d4c3.jsonl; cwd=/Users/mist83/Code; title=BOOKMARK BACKFILL",
+            "captured_at": "2026-05-26T00:27:12.407Z"
+          }
+        },
+        {
+          "kind": "poster",
+          "url": "https://videos.mullmania.com/proof/agent/poster-bookmark-backfill-proof-20260525.png",
+          "created_by_chat": {
+            "runtime": "codex",
+            "thread_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "session_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "locator": "CODEX_THREAD_ID=019e6178-d1c4-71e1-b049-bbf54084d4c3; session_jsonl=/Users/mist83/.codex/sessions/2026/05/25/rollout-2026-05-25T17-29-28-019e6178-d1c4-71e1-b049-bbf54084d4c3.jsonl; cwd=/Users/mist83/Code; title=BOOKMARK BACKFILL",
+            "captured_at": "2026-05-26T00:27:12.407Z"
+          }
+        },
+        {
+          "kind": "storyboard-output",
+          "url": "https://storyboard.mullmania.com/outputs/8a593c027aaf82530ed924fe.mp4",
+          "created_by_chat": {
+            "runtime": "codex",
+            "thread_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "session_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "locator": "CODEX_THREAD_ID=019e6178-d1c4-71e1-b049-bbf54084d4c3; session_jsonl=/Users/mist83/.codex/sessions/2026/05/25/rollout-2026-05-25T17-29-28-019e6178-d1c4-71e1-b049-bbf54084d4c3.jsonl; cwd=/Users/mist83/Code; title=BOOKMARK BACKFILL",
+            "captured_at": "2026-05-26T00:27:12.407Z"
+          }
+        },
+        {
+          "kind": "source-video",
+          "url": "https://storyboard.mullmania.com/proof-source/storyboard-ui-proof-source-long-20260525.mp4",
+          "created_by_chat": {
+            "runtime": "codex",
+            "thread_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "session_id": "019e6178-d1c4-71e1-b049-bbf54084d4c3",
+            "locator": "CODEX_THREAD_ID=019e6178-d1c4-71e1-b049-bbf54084d4c3; session_jsonl=/Users/mist83/.codex/sessions/2026/05/25/rollout-2026-05-25T17-29-28-019e6178-d1c4-71e1-b049-bbf54084d4c3.jsonl; cwd=/Users/mist83/Code; title=BOOKMARK BACKFILL",
+            "captured_at": "2026-05-26T00:27:12.407Z"
+          }
+        }
+      ],
+      "deposited_at": "2026-05-26T00:27:12.407Z"
+    },
+    {
       "video_id": "bookmark-closeout-proof-20260525",
       "site_src": "https://videos.mullmania.com/proof/agent/bookmark-closeout-proof-20260525.mp4",
       "poster_src": "https://videos.mullmania.com/proof/agent/poster-bookmark-closeout-proof-20260525.png",
