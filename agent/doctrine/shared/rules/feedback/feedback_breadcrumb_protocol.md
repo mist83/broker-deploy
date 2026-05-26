@@ -129,6 +129,7 @@ Proof film default when video is required or chosen:
 5. Vary the film grammar by repo. Match the app's actual personality: devtool, game, finance app, proof vault, visual toy, or backend API should not all sound the same.
 6. Use pitch, speed, pauses, captions, and beat timing sparingly to make key state changes legible, not as random effects.
 7. Prefer the shared Storyboard/films pipeline when available; if the proof video needed manual post-processing, leave the recipe or request payload in the durable breadcrumb.
+8. For chronological or backfilled work, make the video and its metadata tell the right time story. Use the work date/time as `timeline_at` when known, keep upload/deposit time separately, and label inferred chronology with `timeline_source` and precision instead of making old work look new.
 
 Upload path:
 
@@ -138,7 +139,7 @@ Upload path:
 4. Upload video to `s3://mullmania.com/videos/proof/<repo>/<slug>.mp4`.
 5. Upload a poster frame to the same proof folder.
 6. Run `cd /Users/mist83/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish`.
-7. Update or create `<repo>/.proof.json` with schema `videos.mullmania.com/proof-breadcrumb-v1`, the repo tag, `vault_for_this_repo`, `vault_cross_cut`, `proof_dashboard`, `flipbook`, and a latest deposit entry containing the video URL, poster URL, local source path, timestamp, and `created_by_chat` pointer. Repeat the same `created_by_chat` pointer on every asset object in the deposit so a copied video URL, poster URL, screenshot, evidence page, or fallback artifact can still be traced to the exact chat that created it.
+7. Update or create `<repo>/.proof.json` with schema `videos.mullmania.com/proof-breadcrumb-v1`, the repo tag, `vault_for_this_repo`, `vault_cross_cut`, `proof_dashboard`, `flipbook`, and a latest deposit entry containing the video URL, poster URL, provenance sidecar URL when available, local source path, deposited timestamp, chronological fields (`timeline_at`, `timeline_source`, `timeline_precision` when known), and `created_by_chat` pointer. Repeat the same `created_by_chat` pointer on every asset object in the deposit so a copied video URL, poster URL, screenshot, evidence page, sidecar, feed milestone, or fallback artifact can still be traced to the exact chat that created it.
 8. Append or update the newest-first milestone in `~/Code/feed.mullmania.com/data/milestones.json` using schema `feed.mullmania.com/milestone-feed-v1`. Include the repo, title, summary, proof asset(s), live URL, commit URL, breadcrumb URL, and the same `created_by_chat` information as `chat`.
 9. Commit and push the source repo breadcrumb when the repo is writable. Commit, push, deploy, and verify the feed repo when the feed path is reachable. If the source repo cannot own the breadcrumb, place the pointer in the strongest canonical handoff doc and name that location in the bookmark reason.
 10. Verify the proof appears through `https://videos.mullmania.com/?tag=<repo>#feed`, the proof dashboard or flipbook when useful, the direct `https://mullmania.com/videos/proof/<repo>/<slug>.mp4` URL, or the feed milestone URL. Prefer the feed milestone URL in the final `visual evidence` line.
@@ -152,6 +153,10 @@ The proof repository is `videos.mullmania.com`. It turns objects under `s3://mul
 ## Source-chat links
 
 Every bookmark-created asset needs origin provenance for chat recovery. The operator may archive chats but does not delete them; the breadcrumb must make the exact chat discoverable again.
+
+This is an all-assets rule, not only a repo-level note. Any video, poster, screenshot, generated image, evidence page, feed milestone, DAG/state diagram, JSON sidecar, test transcript, or fallback artifact created during bookmark closeout must include either `created_by_chat` or `chat` on that asset object. If the hosting system supports per-asset sidecars, publish the sidecar next to the asset and link it from the catalog/manifest. If an asset can be separated from `.proof.json`, it still needs its own chat locator.
+
+Chronology is part of provenance. For current work, `timeline_at` may equal the work/deposit day. For backfilled work, use the original work timestamp from chat logs, commits, proof metadata, or deploy metadata when available; otherwise mark the chronology as inferred or unknown. Do not sort a backfilled reel by upload time alone if that would make the story anachronistic.
 
 Capture the strongest current-chat pointer the runtime exposes:
 
@@ -167,6 +172,10 @@ Preferred deposit shape:
   "video_id": "<slug>",
   "site_src": "https://videos.mullmania.com/proof/<repo>/<slug>.mp4",
   "poster_src": "https://videos.mullmania.com/proof/<repo>/poster-<slug>.png",
+  "provenance_src": "https://videos.mullmania.com/proof/<repo>/<slug>.provenance.json",
+  "timeline_at": "<ISO-8601 work timestamp or inferred day>",
+  "timeline_source": "<chat|commit|proof-metadata|deploy-metadata|filename|inferred|unknown>",
+  "timeline_precision": "<timestamp|day|month|unknown>",
   "created_by_chat": {
     "runtime": "codex",
     "url": "<chat URL or app deep link when available>",
@@ -179,12 +188,14 @@ Preferred deposit shape:
     {
       "kind": "video",
       "url": "https://videos.mullmania.com/proof/<repo>/<slug>.mp4",
-      "created_by_chat": { "url": "<same chat URL or locator>" }
+      "created_by_chat": { "url": "<same chat URL or locator>" },
+      "timeline_at": "<same work timestamp>"
     },
     {
       "kind": "poster",
       "url": "https://videos.mullmania.com/proof/<repo>/poster-<slug>.png",
-      "created_by_chat": { "url": "<same chat URL or locator>" }
+      "created_by_chat": { "url": "<same chat URL or locator>" },
+      "timeline_at": "<same work timestamp>"
     }
   ],
   "deposited_at": "<ISO-8601 timestamp>"
@@ -203,12 +214,16 @@ Preferred breadcrumb file:
   "vault_cross_cut": "https://videos.mullmania.com/?tag=proof#feed",
   "proof_dashboard": "https://videos.mullmania.com/#proof",
   "flipbook": "https://videos.mullmania.com/#flipbook",
-  "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/<repo>/<name>.mp4 (optional poster-<name>.png alongside). Then run node scripts/sync-manifest.mjs --publish from videos.mullmania.com.",
+  "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/<repo>/<name>.mp4 with poster-<name>.png and <name>.provenance.json alongside when available. Then run node scripts/sync-manifest.mjs --publish from videos.mullmania.com.",
   "deposits": [
     {
       "video_id": "<slug>",
       "site_src": "https://videos.mullmania.com/proof/<repo>/<slug>.mp4",
       "poster_src": "https://videos.mullmania.com/proof/<repo>/poster-<slug>.png",
+      "provenance_src": "https://videos.mullmania.com/proof/<repo>/<slug>.provenance.json",
+      "timeline_at": "<ISO-8601 work timestamp or inferred day>",
+      "timeline_source": "<chat|commit|proof-metadata|deploy-metadata|filename|inferred|unknown>",
+      "timeline_precision": "<timestamp|day|month|unknown>",
       "created_by_chat": {
         "runtime": "codex",
         "url": "<chat URL or app deep link when available>",
@@ -300,3 +315,5 @@ Updated 2026-05-25 again: bookmark closeout must leave a per-repo proof breadcru
 Updated 2026-05-25 again: every proof asset and fallback asset created by bookmark must carry a `created_by_chat` pointer so the operator can identify the exact archived chat to unarchive later.
 
 Updated 2026-05-26: bookmark evidence must be made front and center through `feed.mullmania.com` when reachable. The feed milestone is the readable operator-facing trail; `videos.mullmania.com` remains the proof vault, and repo `.proof.json` remains the source breadcrumb.
+
+Updated 2026-05-26 again: asset provenance is per asset, not just per repo. Bookmark-created videos, posters, screenshots, evidence pages, feed cards, DAGs, and fallback objects need source-chat locators, and backfilled or chronological reels must carry non-anachronistic `timeline_at`/source/precision metadata.

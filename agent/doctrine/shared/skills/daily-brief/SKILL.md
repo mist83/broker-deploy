@@ -7,11 +7,14 @@ description: Build a daily or backfilled accomplishment brief across Codex, Clau
 
 Create an evidence-backed story of what changed, where it came from, and how to resume it. This is the continuity layer over many chats, not a replacement for the bookmark protocol.
 
+This skill is also the scheduled-automation body for the operator's daily accomplishment brief. It must be useful as a one-off answer, a recurring daily job, or the first step of a long backfill/reel project.
+
 ## Modes
 
 - **Daily mode**: cover the previous local day unless the operator gives a date range.
 - **Backfill mode**: build an index first, then summarize by repo/app/theme across weeks or months.
 - **Import mode**: when a ChatGPT export is provided, add it as another source and correlate by repo names, dates, URLs, commits, and proof artifacts.
+- **Reel mode**: produce a chronological manifest that a future video wall, proof chronicle, or 3D flyover can consume. Do not render the whole reel unless explicitly asked; make the ordered evidence list first.
 
 ## Sources
 
@@ -36,6 +39,8 @@ Read only what is needed for the requested window.
    - source runtime (`codex`, `claude`, `valet`, `chatgpt-export`, `git`, `proof-vault`)
    - source chat/session locator, including Codex thread id/archive JSONL path/unarchive target when known
    - related commits, proof URLs, deployed URLs, files, and tests
+   - proof assets with their own `created_by_chat`/`chat` provenance when available
+   - `timeline_at`, `timeline_source`, and `timeline_precision` so backfilled work does not become anachronistic
    - confidence: `strong`, `medium`, or `weak`
 3. Merge duplicates across agents. Prefer proof URLs, commit SHAs, and deployed URLs over chat claims.
 4. Produce the brief:
@@ -46,14 +51,17 @@ Read only what is needed for the requested window.
    - likely cross-chat continuations
    - missing provenance or weak-evidence gaps
 5. For backfill, write an index artifact first, then build the narrative from that index. Do not try to write the grand story directly from raw chats.
+6. For reel mode or long backfills, emit a `reel_items` list sorted by `timeline_at`, not by parse/upload time. Each item should carry title, repo, timestamp label, proof/video URL, poster URL, live URL, commit URL(s), source chat locator, and confidence. This is the contract for future "sphere / TV wall / everything I vibe-coded" views.
 
 ## Evidence Rules
 
 - Never claim a task shipped based only on chat text. Look for a commit, proof artifact, deploy metadata, test output, or live URL.
 - If evidence conflicts, say so and keep the weaker item in `needs_followup`.
 - Preserve exact chat/session locators when available so the operator can unarchive the right chat.
+- Preserve chronology honestly. Use the original work time when available; if only upload time exists, label it `timeline_source: "proof-upload"`; if inferred from filenames or summaries, label it as inferred and keep confidence below `strong`.
 - Keep synthetic memory visibly labeled. This skill creates an evidence index, not durable remote memory.
 - Do not delete, archive, or modify chat histories.
+- Default to read-only scanning. Only write durable brief/index artifacts when the operator asks for a backfill deliverable, when the automation prompt explicitly asks for an artifact, or when a project-local convention already exists for daily briefs.
 
 ## Suggested Output Shape
 
@@ -70,6 +78,19 @@ Read only what is needed for the requested window.
       "summary": "What got done.",
       "evidence": ["commit sha", "proof URL", "live URL"],
       "source_chats": ["runtime/session locator"],
+      "timeline_at": "YYYY-MM-DDTHH:mm:ssZ",
+      "timeline_source": "commit|chat|proof-upload|inferred",
+      "confidence": "strong"
+    }
+  ],
+  "reel_items": [
+    {
+      "timeline_at": "YYYY-MM-DDTHH:mm:ssZ",
+      "repo": "example",
+      "title": "Short label for the video wall",
+      "proof_url": "https://videos.mullmania.com/proof/example/example-proof.mp4",
+      "poster_url": "https://videos.mullmania.com/proof/example/poster-example-proof.png",
+      "source_chat": "runtime/thread/session locator",
       "confidence": "strong"
     }
   ],
