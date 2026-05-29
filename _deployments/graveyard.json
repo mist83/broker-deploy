@@ -1,0 +1,25 @@
+{
+  "siteId": "graveyard",
+  "latest": {
+    "siteId": "graveyard",
+    "status": "success",
+    "deployedAt": "2026-05-29T15:07:39.927Z",
+    "trigger": "operator",
+    "brokerRunId": "26645045045",
+    "brokerRunNumber": "234",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645045045",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "graveyard",
+      "status": "success",
+      "deployedAt": "2026-05-29T15:07:39.927Z",
+      "trigger": "operator",
+      "brokerRunId": "26645045045",
+      "brokerRunNumber": "234",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645045045",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}

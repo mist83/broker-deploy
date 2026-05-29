@@ -1,0 +1,165 @@
+{
+  "header": {
+    "icon": "ti ti-pumpkin-scary",
+    "title": "graveyard",
+    "subtitle": "Archive of retired repos.",
+    "controls": [
+      {
+        "type": "link",
+        "href": "https://github.com/mist83/graveyard",
+        "icon": "ti ti-brand-github",
+        "text": "Repo"
+      },
+      {
+        "type": "link",
+        "href": "./data/graves.json",
+        "icon": "ti ti-database",
+        "text": "graves.json"
+      },
+      {
+        "type": "link",
+        "href": "https://development-canon.mullmania.com/",
+        "icon": "ti ti-scale",
+        "text": "Rules"
+      }
+    ]
+  },
+  "tabs": [
+    {
+      "id": "grounds",
+      "label": "Browse",
+      "icon": "ti ti-building-castle",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "park",
+              "name": "Browser",
+              "icon": "ti ti-pumpkin-scary",
+              "description": "Browse repos in the 3D view.",
+              "preset": "graveyard.grounds.park"
+            },
+            {
+              "id": "fresh",
+              "name": "Recent",
+              "icon": "ti ti-candle",
+              "description": "Latest repos added to the archive.",
+              "preset": "graveyard.grounds.fresh"
+            },
+            {
+              "id": "sections",
+              "name": "Sections",
+              "icon": "ti ti-map-2",
+              "description": "Section counts and stable plot placement.",
+              "preset": "graveyard.grounds.sections"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lineage",
+      "label": "Replacements",
+      "icon": "ti ti-git-merge",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "successors",
+              "name": "By Replacement",
+              "icon": "ti ti-arrows-join-2",
+              "description": "Repos grouped by their replacement repo.",
+              "preset": "graveyard.lineage.successors"
+            },
+            {
+              "id": "unclaimed",
+              "name": "No Replacement",
+              "icon": "ti ti-skull",
+              "description": "Repos with no replacement repo.",
+              "preset": "graveyard.lineage.unclaimed"
+            },
+            {
+              "id": "salvage",
+              "name": "Notes",
+              "icon": "ti ti-shovel-pitchforks",
+              "description": "Saved notes, paths, and useful leftovers.",
+              "preset": "graveyard.lineage.salvage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "funerals",
+      "label": "Archive",
+      "icon": "ti ti-scroll-text",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "ledger",
+              "name": "Commits",
+              "icon": "ti ti-book-2",
+              "description": "Recent archive commits and dates.",
+              "preset": "graveyard.funerals.ledger"
+            },
+            {
+              "id": "bundles",
+              "name": "Bundles",
+              "icon": "ti ti-package",
+              "description": "Snapshot and bundle coverage.",
+              "preset": "graveyard.funerals.bundles"
+            },
+            {
+              "id": "heavy",
+              "name": "Largest",
+              "icon": "ti ti-weight",
+              "description": "Largest snapshots and bundles.",
+              "preset": "graveyard.funerals.heavy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canon",
+      "label": "Rules",
+      "icon": "ti ti-scale",
+      "layout": "workspace",
+      "sections": [
+        {
+          "type": "list",
+          "inlineData": [
+            {
+              "id": "rules",
+              "name": "Archive Rules",
+              "icon": "ti ti-gavel",
+              "description": "Archive rules and deletion order.",
+              "preset": "graveyard.canon.rules"
+            },
+            {
+              "id": "plots",
+              "name": "Plot Map",
+              "icon": "ti ti-hash",
+              "description": "Stable placement by repo hash.",
+              "preset": "graveyard.canon.plots"
+            },
+            {
+              "id": "artifact",
+              "name": "Site Data",
+              "icon": "ti ti-layers-linked",
+              "description": "Generated from commits, snapshots, bundles, and notes.",
+              "preset": "graveyard.canon.artifact"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

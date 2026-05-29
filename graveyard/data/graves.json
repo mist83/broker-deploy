@@ -1,0 +1,1951 @@
+[
+  {
+    "repo": "at-my-fingertips",
+    "title": "Infinite Scratches",
+    "summary": "Persistent scratch space sharing with S3 auto-save and instant static hosting. Transfer text, images, and files between devices through PIN-based rooms - everything saves automatically and persists forever (until you clear it).",
+    "epitaph": null,
+    "born": "2026-02-23T11:24:02-07:00",
+    "died": "2026-04-14T15:16:25-06:00",
+    "supersededBy": "mist83/itchy-brain",
+    "sourceWas": "github.com/mist83/at-my-fingertips (deleted post-entombment)",
+    "commit": "490da6c192c03e60104c614072876508011cc465",
+    "plot": {
+      "hash": "8d0b6b8388f372c20f157624b8507eea78f6ab4eaacf49c69402c055f58c365f",
+      "sectionCode": "8d",
+      "plotCode": "0b",
+      "sectionIndex": 141,
+      "plotIndex": 11,
+      "sectionGrid": {
+        "x": 13,
+        "z": 8
+      },
+      "plotGrid": {
+        "x": 11,
+        "z": 0
+      }
+    },
+    "files": 46,
+    "snapshotBytes": 172679,
+    "snapshotSizeLabel": "169 KB",
+    "bundleBytes": 92336,
+    "bundleSizeLabel": "90 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "at-my-fingertips",
+    "bundlePath": "at-my-fingertips.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "at-my-fingertips Infinite Scratches Persistent scratch space sharing with S3 auto-save and instant static hosting. Transfer text, images, and files between devices through PIN-based rooms - everything saves automatically and persists forever (until you clear it).  mist83/itchy-brain"
+  },
+  {
+    "repo": "cline-workarounds",
+    "title": "Cline Conversation Search",
+    "summary": "Search your Cline conversation history. Hybrid indexing: trie-based keywords + OpenAI semantic embeddings.",
+    "epitaph": null,
+    "born": "2025-09-28T20:08:02-06:00",
+    "died": "2026-04-14T15:23:01-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/cline-workarounds (deleted post-entombment)",
+    "commit": "d680e94a7a94b3cdd41c4c23d99f4c1cb1b51c1b",
+    "plot": {
+      "hash": "1772dd2d8cf2e318343186d89c503c9685917e807de461eb28bbbfca9055c49b",
+      "sectionCode": "17",
+      "plotCode": "72",
+      "sectionIndex": 23,
+      "plotIndex": 114,
+      "sectionGrid": {
+        "x": 7,
+        "z": 1
+      },
+      "plotGrid": {
+        "x": 2,
+        "z": 7
+      }
+    },
+    "files": 17895,
+    "snapshotBytes": 300960863,
+    "snapshotSizeLabel": "287 MB",
+    "bundleBytes": 64550235,
+    "bundleSizeLabel": "62 MB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "cline-workarounds",
+    "bundlePath": "cline-workarounds.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "cline-workarounds Cline Conversation Search Search your Cline conversation history. Hybrid indexing: trie-based keywords + OpenAI semantic embeddings.  NONE"
+  },
+  {
+    "repo": "modals-everywhere",
+    "title": "Modals Everywhere",
+    "summary": "Simple, configurable modal system with auto-close X button and zero required dependencies. Icons can be plain glyphs/emoji, inline markup, or optional icon-font classes if you load one.",
+    "epitaph": null,
+    "born": "2026-01-17T20:51:06-07:00",
+    "died": "2026-04-14T15:23:02-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/modals-everywhere (deleted post-entombment)",
+    "commit": "aa50881c9b79a95a3b059c550ece2eef1058cc17",
+    "plot": {
+      "hash": "7af59acce22d575e186558219660cf65217b85bdb3efc3da024218f1c87adaf0",
+      "sectionCode": "7a",
+      "plotCode": "f5",
+      "sectionIndex": 122,
+      "plotIndex": 245,
+      "sectionGrid": {
+        "x": 10,
+        "z": 7
+      },
+      "plotGrid": {
+        "x": 5,
+        "z": 15
+      }
+    },
+    "files": 21,
+    "snapshotBytes": 109493,
+    "snapshotSizeLabel": "107 KB",
+    "bundleBytes": 41443,
+    "bundleSizeLabel": "40 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "modals-everywhere",
+    "bundlePath": "modals-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "modals-everywhere Modals Everywhere Simple, configurable modal system with auto-close X button and zero required dependencies. Icons can be plain glyphs/emoji, inline markup, or optional icon-font classes if you load one.  mist83/ui"
+  },
+  {
+    "repo": "tabs-everywhere",
+    "title": "Tabs Everywhere",
+    "summary": "A data-driven tab system that reads from sitemap.json and renders tabs, subtabs, and action buttons automatically.",
+    "epitaph": null,
+    "born": "2025-12-13T13:25:58-07:00",
+    "died": "2026-04-13T14:19:14-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/tabs-everywhere (deleted post-entombment)",
+    "commit": "6d6862b97ef593e74ccd21e5f51d4423640010c5",
+    "plot": {
+      "hash": "bbb292a70f4098c60b6f9310307c524e6554ddc96e2ba6d229346fc110bb0917",
+      "sectionCode": "bb",
+      "plotCode": "b2",
+      "sectionIndex": 187,
+      "plotIndex": 178,
+      "sectionGrid": {
+        "x": 11,
+        "z": 11
+      },
+      "plotGrid": {
+        "x": 2,
+        "z": 11
+      }
+    },
+    "files": 42,
+    "snapshotBytes": 433468,
+    "snapshotSizeLabel": "423 KB",
+    "bundleBytes": 298962,
+    "bundleSizeLabel": "292 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "tabs-everywhere",
+    "bundlePath": "tabs-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "tabs-everywhere Tabs Everywhere A data-driven tab system that reads from sitemap.json and renders tabs, subtabs, and action buttons automatically.  mist83/ui"
+  },
+  {
+    "repo": "toasts-everywhere",
+    "title": "Toasts Everywhere",
+    "summary": "Toast notification system that integrates with styles-everywhere for consistent theming.",
+    "epitaph": null,
+    "born": "2026-01-19T22:52:15-07:00",
+    "died": "2026-04-13T14:19:25-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/toasts-everywhere (deleted post-entombment)",
+    "commit": "79195e885093ec27312984bd23cd0a47184c7d37",
+    "plot": {
+      "hash": "92aa35c5a0d097ae94ec517ae80e5e4d583b08e10e6446055db26b2066536585",
+      "sectionCode": "92",
+      "plotCode": "aa",
+      "sectionIndex": 146,
+      "plotIndex": 170,
+      "sectionGrid": {
+        "x": 2,
+        "z": 9
+      },
+      "plotGrid": {
+        "x": 10,
+        "z": 10
+      }
+    },
+    "files": 18,
+    "snapshotBytes": 82950,
+    "snapshotSizeLabel": "81 KB",
+    "bundleBytes": 31328,
+    "bundleSizeLabel": "31 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "toasts-everywhere",
+    "bundlePath": "toasts-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "toasts-everywhere Toasts Everywhere Toast notification system that integrates with styles-everywhere for consistent theming.  mist83/ui"
+  },
+  {
+    "repo": "ui-everywhere",
+    "title": "UI Everywhere",
+    "summary": "Bundle loader that dynamically loads tabs-everywhere, modals-everywhere, and styles-everywhere with a single script tag. No build step required.",
+    "epitaph": null,
+    "born": "2026-01-17T20:54:11-07:00",
+    "died": "2026-04-13T14:19:31-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/ui-everywhere (deleted post-entombment)",
+    "commit": "f49bc18d45824b9243da53054ea19b3c8f41b07e",
+    "plot": {
+      "hash": "15a9c1946ede57df069d88259c1c2648c583bc5a3ff0be28e8feb3f24b891f12",
+      "sectionCode": "15",
+      "plotCode": "a9",
+      "sectionIndex": 21,
+      "plotIndex": 169,
+      "sectionGrid": {
+        "x": 5,
+        "z": 1
+      },
+      "plotGrid": {
+        "x": 9,
+        "z": 10
+      }
+    },
+    "files": 20,
+    "snapshotBytes": 138393,
+    "snapshotSizeLabel": "135 KB",
+    "bundleBytes": 90585,
+    "bundleSizeLabel": "88 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "ui-everywhere",
+    "bundlePath": "ui-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "ui-everywhere UI Everywhere Bundle loader that dynamically loads tabs-everywhere, modals-everywhere, and styles-everywhere with a single script tag. No build step required.  mist83/ui"
+  },
+  {
+    "repo": "pi-gremlin",
+    "title": "TV Network Monitor - Cross-Platform Daemon System",
+    "summary": "Multi-platform daemon for discovering and monitoring Vizio TVs on local networks. Supports both Go and .NET implementations with automatic updates via keepalive wrapper.",
+    "epitaph": null,
+    "born": "2026-01-14T15:58:04-07:00",
+    "died": "2026-04-14T15:22:26-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/pi-gremlin (deleted post-entombment)",
+    "commit": "964ae024ed05a6a7e6784a5ddda09de6505de835",
+    "plot": {
+      "hash": "66a0f9790b40b3dfb05390b8267951b72763d554c958762886839835a3ee3a4b",
+      "sectionCode": "66",
+      "plotCode": "a0",
+      "sectionIndex": 102,
+      "plotIndex": 160,
+      "sectionGrid": {
+        "x": 6,
+        "z": 6
+      },
+      "plotGrid": {
+        "x": 0,
+        "z": 10
+      }
+    },
+    "files": 438,
+    "snapshotBytes": 303771013,
+    "snapshotSizeLabel": "290 MB",
+    "bundleBytes": 0,
+    "bundleSizeLabel": "0 B",
+    "hasSnapshot": true,
+    "hasBundle": false,
+    "hasBundlePointer": true,
+    "snapshotPath": "pi-gremlin",
+    "bundlePath": null,
+    "bundlePointerPath": "pi-gremlin.bundle.s3",
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "pi-gremlin TV Network Monitor - Cross-Platform Daemon System Multi-platform daemon for discovering and monitoring Vizio TVs on local networks. Supports both Go and .NET implementations with automatic updates via keepalive wrapper.  NONE"
+  },
+  {
+    "repo": "themes",
+    "title": "themes",
+    "summary": "Example bundle repo for themes, grouping many small subprojects under top-level folders.",
+    "epitaph": null,
+    "born": "2025-09-18T11:34:43-06:00",
+    "died": "2026-04-14T15:23:05-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/themes (deleted post-entombment)",
+    "commit": "f3de30f030997a47c0a47d0fd7d2908800b06ffa",
+    "plot": {
+      "hash": "cbc626e9330c82f80f6f33b46545324bf1534090e0d39e44a3afd5e7fdf9946f",
+      "sectionCode": "cb",
+      "plotCode": "c6",
+      "sectionIndex": 203,
+      "plotIndex": 198,
+      "sectionGrid": {
+        "x": 11,
+        "z": 12
+      },
+      "plotGrid": {
+        "x": 6,
+        "z": 12
+      }
+    },
+    "files": 13,
+    "snapshotBytes": 35726,
+    "snapshotSizeLabel": "35 KB",
+    "bundleBytes": 20570,
+    "bundleSizeLabel": "20 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "themes",
+    "bundlePath": "themes.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "themes themes Example bundle repo for themes, grouping many small subprojects under top-level folders.  mist83/ui"
+  },
+  {
+    "repo": "keepalive",
+    "title": "keepalive",
+    "summary": "Wrapper repo for keepalive, with the main material living under the top-level entry `go-daemon`.",
+    "epitaph": null,
+    "born": "2026-02-08T16:11:53-07:00",
+    "died": "2026-04-14T15:23:06-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/keepalive (deleted post-entombment)",
+    "commit": "aa5693e8f1d6c3c0db9c4b3595893b4dc65f7199",
+    "plot": {
+      "hash": "e238355c05128d4baf81843c78642324613085b9da8f99b1c18d840cf4fdc850",
+      "sectionCode": "e2",
+      "plotCode": "38",
+      "sectionIndex": 226,
+      "plotIndex": 56,
+      "sectionGrid": {
+        "x": 2,
+        "z": 14
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 3
+      }
+    },
+    "files": 35,
+    "snapshotBytes": 478034,
+    "snapshotSizeLabel": "467 KB",
+    "bundleBytes": 138677,
+    "bundleSizeLabel": "135 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "keepalive",
+    "bundlePath": "keepalive.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "keepalive keepalive Wrapper repo for keepalive, with the main material living under the top-level entry `go-daemon`.  NONE"
+  },
+  {
+    "repo": "slack-bot",
+    "title": "slack-bot",
+    "summary": ".NET solution for slack bot, organized around `slack-bot.sln`.",
+    "epitaph": "Deprecated bot work left behind after SLAPP became the living line.",
+    "born": "2025-09-05T22:37:19-06:00",
+    "died": "2026-04-14T16:06:41-06:00",
+    "supersededBy": "mist83/SLAPP",
+    "sourceWas": "github.com/mist83/slack-bot (deleted post-entombment)",
+    "commit": "6b27e95fda626a6292b846fce55571dfb078ec80",
+    "plot": {
+      "hash": "c54c1d14dfb2de8d657f2cfb5365c1710bd33951ef24cf6cddd585de2e4941fc",
+      "sectionCode": "c5",
+      "plotCode": "4c",
+      "sectionIndex": 197,
+      "plotIndex": 76,
+      "sectionGrid": {
+        "x": 5,
+        "z": 12
+      },
+      "plotGrid": {
+        "x": 12,
+        "z": 4
+      }
+    },
+    "files": 33,
+    "snapshotBytes": 130261,
+    "snapshotSizeLabel": "127 KB",
+    "bundleBytes": 43982,
+    "bundleSizeLabel": "43 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "slack-bot",
+    "bundlePath": "slack-bot.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "slack",
+      "bot",
+      "control-plane"
+    ],
+    "salvagePaths": [
+      "SlackBotControlPlane/",
+      "SlackEmu/"
+    ],
+    "searchText": "slack-bot slack-bot .NET solution for slack bot, organized around `slack-bot.sln`. Deprecated bot work left behind after SLAPP became the living line. mist83/SLAPP slack bot control-plane SlackBotControlPlane/ SlackEmu/"
+  },
+  {
+    "repo": "code-universe",
+    "title": "code-universe",
+    "summary": "Reference notes repo for code universe, focused on prompt, agent, or implementation documentation.",
+    "epitaph": null,
+    "born": "2026-03-05T17:09:48-07:00",
+    "died": "2026-03-30T22:08:08-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/code-universe (deleted post-entombment)",
+    "commit": "29ccaed6b76f00152d42546a98a87ade18127c36",
+    "plot": {
+      "hash": "ad60ff131e2f6dd863bc591fd2709cede21c43d8a10b6c702c84679fa68845f2",
+      "sectionCode": "ad",
+      "plotCode": "60",
+      "sectionIndex": 173,
+      "plotIndex": 96,
+      "sectionGrid": {
+        "x": 13,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 0,
+        "z": 6
+      }
+    },
+    "files": 2,
+    "snapshotBytes": 50958,
+    "snapshotSizeLabel": "50 KB",
+    "bundleBytes": 40614,
+    "bundleSizeLabel": "40 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "code-universe",
+    "bundlePath": "code-universe.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "code-universe code-universe Reference notes repo for code universe, focused on prompt, agent, or implementation documentation.  NONE"
+  },
+  {
+    "repo": "gocrud",
+    "title": "gocrud",
+    "summary": "",
+    "epitaph": null,
+    "born": "2022-01-21T19:05:01-07:00",
+    "died": "2026-04-14T16:06:55-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/gocrud (deleted post-entombment)",
+    "commit": "decc7a6f8e06e947973a79b4060bf38d9d9d4987",
+    "plot": {
+      "hash": "df548a643a64f3c6084f4e35354075751bc15accfeda1bb00d3baecfe2810b66",
+      "sectionCode": "df",
+      "plotCode": "54",
+      "sectionIndex": 223,
+      "plotIndex": 84,
+      "sectionGrid": {
+        "x": 15,
+        "z": 13
+      },
+      "plotGrid": {
+        "x": 4,
+        "z": 5
+      }
+    },
+    "files": 96,
+    "snapshotBytes": 402639,
+    "snapshotSizeLabel": "393 KB",
+    "bundleBytes": 288967,
+    "bundleSizeLabel": "282 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "gocrud",
+    "bundlePath": "gocrud.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "gocrud gocrud   NONE"
+  },
+  {
+    "repo": "agent",
+    "title": "agent",
+    "summary": "Reference notes repo for agent, focused on prompt, agent, or implementation documentation.",
+    "epitaph": "Prompt notes and deployment cruft, kept for archaeology rather than resurrection.",
+    "born": "2025-09-05T22:37:03-06:00",
+    "died": "2026-04-14T17:34:24-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/agent (deleted post-entombment)",
+    "commit": "0df6000bf11e84e4a990046534cb58ddb74ff536",
+    "plot": {
+      "hash": "090d66cb80c7df08b50ae4663bdf852a074242dbe426756e7ee211f4492d6183",
+      "sectionCode": "09",
+      "plotCode": "0d",
+      "sectionIndex": 9,
+      "plotIndex": 13,
+      "sectionGrid": {
+        "x": 9,
+        "z": 0
+      },
+      "plotGrid": {
+        "x": 13,
+        "z": 0
+      }
+    },
+    "files": 14,
+    "snapshotBytes": 102722,
+    "snapshotSizeLabel": "100 KB",
+    "bundleBytes": 46472,
+    "bundleSizeLabel": "45 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "agent",
+    "bundlePath": "agent.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "docs",
+      "deploy",
+      "mikesendpoint"
+    ],
+    "salvagePaths": [
+      "transcript.txt",
+      "scripts/deploy-site.mjs"
+    ],
+    "searchText": "agent agent Reference notes repo for agent, focused on prompt, agent, or implementation documentation. Prompt notes and deployment cruft, kept for archaeology rather than resurrection. NONE docs deploy mikesendpoint transcript.txt scripts/deploy-site.mjs"
+  },
+  {
+    "repo": "aws-hosting-system",
+    "title": "aws-hosting-system",
+    "summary": "A system for automating AWS hosting setup and deployment processes through a web-based interface.",
+    "epitaph": "Hosting wizard logic retired after the platform moved on.",
+    "born": "2025-12-28T08:41:31-07:00",
+    "died": "2026-04-14T17:34:31-06:00",
+    "supersededBy": "mist83/mullmania",
+    "sourceWas": "github.com/mist83/aws-hosting-system (deleted post-entombment)",
+    "commit": "975f3b98917e0af2f38a75fc62aa32e1e09a7975",
+    "plot": {
+      "hash": "d1188ea2b3666a5a982812a4b6021a23a5faa1ba35bc2c855b6639d3064d89c3",
+      "sectionCode": "d1",
+      "plotCode": "18",
+      "sectionIndex": 209,
+      "plotIndex": 24,
+      "sectionGrid": {
+        "x": 1,
+        "z": 13
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 1
+      }
+    },
+    "files": 40,
+    "snapshotBytes": 238422,
+    "snapshotSizeLabel": "233 KB",
+    "bundleBytes": 64746,
+    "bundleSizeLabel": "63 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "aws-hosting-system",
+    "bundlePath": "aws-hosting-system.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "aws",
+      "hosting",
+      "wizard"
+    ],
+    "salvagePaths": [],
+    "searchText": "aws-hosting-system aws-hosting-system A system for automating AWS hosting setup and deployment processes through a web-based interface. Hosting wizard logic retired after the platform moved on. mist83/mullmania aws hosting wizard"
+  },
+  {
+    "repo": "cline2",
+    "title": "Chrome DevTools Protocol Automation Demo",
+    "summary": "This repo contains a single static conversation analyzer plus a minimal compatibility alias for the old `chatgpt-analyzer.html` name. The point is to show how to automate an external Chrome browser window using Chrome DevTools Protocol, not to cosplay as a full tooling suite.",
+    "epitaph": "A static CDP analyzer demo that taught enough and then stopped moving.",
+    "born": "2025-09-05T22:37:12-06:00",
+    "died": "2026-04-14T17:34:38-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/cline2 (deleted post-entombment)",
+    "commit": "05a6ef428963ffd86578d0adb37905df2f58d4b9",
+    "plot": {
+      "hash": "72464b133afb2623f855ae12ddc8a93e83381d62e65dc3af274787af059c4b0a",
+      "sectionCode": "72",
+      "plotCode": "46",
+      "sectionIndex": 114,
+      "plotIndex": 70,
+      "sectionGrid": {
+        "x": 2,
+        "z": 7
+      },
+      "plotGrid": {
+        "x": 6,
+        "z": 4
+      }
+    },
+    "files": 19,
+    "snapshotBytes": 111050,
+    "snapshotSizeLabel": "108 KB",
+    "bundleBytes": 34489,
+    "bundleSizeLabel": "34 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "cline2",
+    "bundlePath": "cline2.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "cdp",
+      "browser",
+      "analysis"
+    ],
+    "salvagePaths": [],
+    "searchText": "cline2 Chrome DevTools Protocol Automation Demo This repo contains a single static conversation analyzer plus a minimal compatibility alias for the old `chatgpt-analyzer.html` name. The point is to show how to automate an external Chrome browser window using Chrome DevTools Protocol, not to cosplay as a full tooling suite. A static CDP analyzer demo that taught enough and then stopped moving. NONE cdp browser analysis"
+  },
+  {
+    "repo": "cline3",
+    "title": "Cline Automation Extension Project",
+    "summary": "This project aims to extend Cline (the agentic coder) with remote automation capabilities, allowing external systems to trigger and control Cline tasks without manual VS Code interaction.",
+    "epitaph": "Automation-extension planning work archived before it hardened into a real product.",
+    "born": "2025-08-30T20:19:33-06:00",
+    "died": "2026-04-14T17:34:44-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/cline3 (deleted post-entombment)",
+    "commit": "b97dfeb83c98a9b75e04e85d9ddc5e61fed848bb",
+    "plot": {
+      "hash": "2cf02f35ef75f83ba04aa13fcb43b30c541ea287cbdeead425b35bf5e63e713c",
+      "sectionCode": "2c",
+      "plotCode": "f0",
+      "sectionIndex": 44,
+      "plotIndex": 240,
+      "sectionGrid": {
+        "x": 12,
+        "z": 2
+      },
+      "plotGrid": {
+        "x": 0,
+        "z": 15
+      }
+    },
+    "files": 39,
+    "snapshotBytes": 112057,
+    "snapshotSizeLabel": "109 KB",
+    "bundleBytes": 550489,
+    "bundleSizeLabel": "538 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "cline3",
+    "bundlePath": "cline3.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "proxy",
+      "vscode",
+      "automation"
+    ],
+    "salvagePaths": [],
+    "searchText": "cline3 Cline Automation Extension Project This project aims to extend Cline (the agentic coder) with remote automation capabilities, allowing external systems to trigger and control Cline tasks without manual VS Code interaction. Automation-extension planning work archived before it hardened into a real product. NONE proxy vscode automation"
+  },
+  {
+    "repo": "demos",
+    "title": "demos",
+    "summary": "Example bundle repo for demos, grouping many small subprojects under top-level folders.",
+    "epitaph": "Bundle repo whose only living lesson was to extract the real example from the container.",
+    "born": "2026-02-23T11:50:09-07:00",
+    "died": "2026-04-14T17:34:52-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/demos (deleted post-entombment)",
+    "commit": "b623d56ccd26cbf975bb5660018f437909be1211",
+    "plot": {
+      "hash": "aa7a6085c65226c786d342fa05728754377bc1c7f81b70da76c860a6e143d03a",
+      "sectionCode": "aa",
+      "plotCode": "7a",
+      "sectionIndex": 170,
+      "plotIndex": 122,
+      "sectionGrid": {
+        "x": 10,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 10,
+        "z": 7
+      }
+    },
+    "files": 17,
+    "snapshotBytes": 70251,
+    "snapshotSizeLabel": "69 KB",
+    "bundleBytes": 35965,
+    "bundleSizeLabel": "35 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "demos",
+    "bundlePath": "demos.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "bundle",
+      "demo",
+      "apple-trie"
+    ],
+    "salvagePaths": [
+      "apple-trie/",
+      "scripts/deploy-site.mjs"
+    ],
+    "searchText": "demos demos Example bundle repo for demos, grouping many small subprojects under top-level folders. Bundle repo whose only living lesson was to extract the real example from the container. NONE bundle demo apple-trie apple-trie/ scripts/deploy-site.mjs"
+  },
+  {
+    "repo": "phone-cursor",
+    "title": "phone-cursor",
+    "summary": "ASP.NET-style project for phone cursor, with a server-side codebase and a committed static web surface in `wwwroot`.",
+    "epitaph": "Cursor control work likely absorbed into Telestrate, with controller patterns still worth stealing.",
+    "born": "2025-09-18T11:34:23-06:00",
+    "died": "2026-04-14T17:34:58-06:00",
+    "supersededBy": "mist83/telestrate",
+    "sourceWas": "github.com/mist83/phone-cursor (deleted post-entombment)",
+    "commit": "e842e448f91de0183712673d4a2bddebda64d3e8",
+    "plot": {
+      "hash": "dc4812b90aad968b93651e0cc6e0e299213658d2088256c0046c8adb09ecb8a7",
+      "sectionCode": "dc",
+      "plotCode": "48",
+      "sectionIndex": 220,
+      "plotIndex": 72,
+      "sectionGrid": {
+        "x": 12,
+        "z": 13
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 4
+      }
+    },
+    "files": 27,
+    "snapshotBytes": 304327,
+    "snapshotSizeLabel": "297 KB",
+    "bundleBytes": 216779,
+    "bundleSizeLabel": "212 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "phone-cursor",
+    "bundlePath": "phone-cursor.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "cursor",
+      "signalr",
+      "controller"
+    ],
+    "salvagePaths": [
+      "Program.cs",
+      "wwwroot/controller.html",
+      "scripts/verify-local.sh"
+    ],
+    "searchText": "phone-cursor phone-cursor ASP.NET-style project for phone cursor, with a server-side codebase and a committed static web surface in `wwwroot`. Cursor control work likely absorbed into Telestrate, with controller patterns still worth stealing. mist83/telestrate cursor signalr controller Program.cs wwwroot/controller.html scripts/verify-local.sh"
+  },
+  {
+    "repo": "phone-input",
+    "title": "phone-input",
+    "summary": "ASP.NET-style project for phone input, with a server-side codebase and a committed static web surface in `wwwroot`.",
+    "epitaph": "Phone-side input experiments likely folded into Telestrate.",
+    "born": "2025-09-18T11:34:32-06:00",
+    "died": "2026-04-14T17:35:05-06:00",
+    "supersededBy": "mist83/telestrate",
+    "sourceWas": "github.com/mist83/phone-input (deleted post-entombment)",
+    "commit": "2271e641b025c7bc1a56a4eeb3b44503477a4745",
+    "plot": {
+      "hash": "07090f896d0bf896575c463d8ad9c828927b59bc2cff53863ab8845c7a73c7dd",
+      "sectionCode": "07",
+      "plotCode": "09",
+      "sectionIndex": 7,
+      "plotIndex": 9,
+      "sectionGrid": {
+        "x": 7,
+        "z": 0
+      },
+      "plotGrid": {
+        "x": 9,
+        "z": 0
+      }
+    },
+    "files": 31,
+    "snapshotBytes": 2215024,
+    "snapshotSizeLabel": "2.1 MB",
+    "bundleBytes": 2122450,
+    "bundleSizeLabel": "2.0 MB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "phone-input",
+    "bundlePath": "phone-input.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "input",
+      "controller",
+      "signalr"
+    ],
+    "salvagePaths": [
+      "Program.cs",
+      "Controllers/",
+      "wwwroot/"
+    ],
+    "searchText": "phone-input phone-input ASP.NET-style project for phone input, with a server-side codebase and a committed static web surface in `wwwroot`. Phone-side input experiments likely folded into Telestrate. mist83/telestrate input controller signalr Program.cs Controllers/ wwwroot/"
+  },
+  {
+    "repo": "sidebars-everywhere",
+    "title": "Sidebars Everywhere",
+    "summary": "General-purpose sidebar panel system with CSS isolation and singleton enforcement. Part of the x-everywhere library family.",
+    "epitaph": null,
+    "born": "2026-01-27T15:51:31-07:00",
+    "died": "2026-04-13T14:19:01-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/sidebars-everywhere (deleted post-entombment)",
+    "commit": "8862eeb1e2fc7c236fef79af8128983dd7b8b518",
+    "plot": {
+      "hash": "8f860b062f025fa8858e35b9d805f71b25d655dcce29e9917be3709746da4790",
+      "sectionCode": "8f",
+      "plotCode": "86",
+      "sectionIndex": 143,
+      "plotIndex": 134,
+      "sectionGrid": {
+        "x": 15,
+        "z": 8
+      },
+      "plotGrid": {
+        "x": 6,
+        "z": 8
+      }
+    },
+    "files": 30,
+    "snapshotBytes": 218711,
+    "snapshotSizeLabel": "214 KB",
+    "bundleBytes": 75262,
+    "bundleSizeLabel": "73 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "sidebars-everywhere",
+    "bundlePath": "sidebars-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "sidebars-everywhere Sidebars Everywhere General-purpose sidebar panel system with CSS isolation and singleton enforcement. Part of the x-everywhere library family.  mist83/ui"
+  },
+  {
+    "repo": "styles-everywhere",
+    "title": "Styles Everywhere",
+    "summary": "Constraint-based styling system that enforces the use of CSS variables for all visual properties. Reduces cognitive overhead from \"300 ways to display 10 concepts\" to a single, consistent approach.",
+    "epitaph": "Old styling experiments put down once ui.mullmania.com became the system.",
+    "born": "2026-01-17T20:53:17-07:00",
+    "died": "2026-04-14T17:35:24-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/styles-everywhere (deleted post-entombment)",
+    "commit": "ae8dbf005346c2d8a13f3cca9ba1c9c9d4f0ae4f",
+    "plot": {
+      "hash": "4c38c12cbc28b535a60d26e9065a64e7d2364ea5ce3bbaaeba24f2159b310a47",
+      "sectionCode": "4c",
+      "plotCode": "38",
+      "sectionIndex": 76,
+      "plotIndex": 56,
+      "sectionGrid": {
+        "x": 12,
+        "z": 4
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 3
+      }
+    },
+    "files": 26,
+    "snapshotBytes": 140257,
+    "snapshotSizeLabel": "137 KB",
+    "bundleBytes": 49014,
+    "bundleSizeLabel": "48 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "styles-everywhere",
+    "bundlePath": "styles-everywhere.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "styles",
+      "ui",
+      "design-system"
+    ],
+    "salvagePaths": [
+      "index.html",
+      "docs/index.html"
+    ],
+    "searchText": "styles-everywhere Styles Everywhere Constraint-based styling system that enforces the use of CSS variables for all visual properties. Reduces cognitive overhead from \"300 ways to display 10 concepts\" to a single, consistent approach. Old styling experiments put down once ui.mullmania.com became the system. mist83/ui styles ui design-system index.html docs/index.html"
+  },
+  {
+    "repo": "superhot",
+    "title": "SuperHot UI Library",
+    "summary": "A stylish, distinctive UI framework extracted from your original OpenSearch application, featuring Patrick Hand typography and bold black border design aesthetics.",
+    "epitaph": "Potential theme language, no longer a standalone repo.",
+    "born": "2025-09-05T22:37:19-06:00",
+    "died": "2026-04-14T17:35:31-06:00",
+    "supersededBy": "mist83/ui",
+    "sourceWas": "github.com/mist83/superhot (deleted post-entombment)",
+    "commit": "026f2471a9805a90256c2ebd6100580807e18984",
+    "plot": {
+      "hash": "fbf3671d97e6d3e77301fbc11b140a9bc889c55a3731d59dbcb9a30570b25c86",
+      "sectionCode": "fb",
+      "plotCode": "f3",
+      "sectionIndex": 251,
+      "plotIndex": 243,
+      "sectionGrid": {
+        "x": 11,
+        "z": 15
+      },
+      "plotGrid": {
+        "x": 3,
+        "z": 15
+      }
+    },
+    "files": 22,
+    "snapshotBytes": 202502,
+    "snapshotSizeLabel": "198 KB",
+    "bundleBytes": 50485,
+    "bundleSizeLabel": "49 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "superhot",
+    "bundlePath": "superhot.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "theme",
+      "ui",
+      "style"
+    ],
+    "salvagePaths": [
+      "docs/index.html"
+    ],
+    "searchText": "superhot SuperHot UI Library A stylish, distinctive UI framework extracted from your original OpenSearch application, featuring Patrick Hand typography and bold black border design aesthetics. Potential theme language, no longer a standalone repo. mist83/ui theme ui style docs/index.html"
+  },
+  {
+    "repo": "templates",
+    "title": "templates",
+    "summary": "A collection of project templates for quickly scaffolding new AWS Lambda API projects in .NET.",
+    "epitaph": "Template guidance that mostly belongs in canon now.",
+    "born": "2025-09-25T12:52:23-06:00",
+    "died": "2026-04-14T17:35:38-06:00",
+    "supersededBy": "mist83/development-canon",
+    "sourceWas": "github.com/mist83/templates (deleted post-entombment)",
+    "commit": "e89cf5cd63fecdcbd4868ed2c3ae70346aea3c01",
+    "plot": {
+      "hash": "79861fb5c5c222afc3d276e1843f2359097ba0d0fac05f3d323ce56af6659bf6",
+      "sectionCode": "79",
+      "plotCode": "86",
+      "sectionIndex": 121,
+      "plotIndex": 134,
+      "sectionGrid": {
+        "x": 9,
+        "z": 7
+      },
+      "plotGrid": {
+        "x": 6,
+        "z": 8
+      }
+    },
+    "files": 27,
+    "snapshotBytes": 290346,
+    "snapshotSizeLabel": "284 KB",
+    "bundleBytes": 225588,
+    "bundleSizeLabel": "220 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "templates",
+    "bundlePath": "templates.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "templates",
+      "canon",
+      "deploy"
+    ],
+    "salvagePaths": [
+      "scripts/deploy.sh"
+    ],
+    "searchText": "templates templates A collection of project templates for quickly scaffolding new AWS Lambda API projects in .NET. Template guidance that mostly belongs in canon now. mist83/development-canon templates canon deploy scripts/deploy.sh"
+  },
+  {
+    "repo": "iter9",
+    "title": "ScrapeGoat",
+    "summary": "Chrome extension that captures and organizes code snippets from ChatGPT conversations into structured projects.",
+    "epitaph": "ScrapeGoat-era capture tooling with useful storage and UI migration residue.",
+    "born": "2024-10-08T22:36:51-06:00",
+    "died": "2026-04-14T17:38:24-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/iter9 (deleted post-entombment)",
+    "commit": "7bf09060811c7794c3396ad118830ded3ea24345",
+    "plot": {
+      "hash": "0544257030ab855fa6fec4a5e385eb73c3d665d2fe69747fa3f43e4a5a9c2e8a",
+      "sectionCode": "05",
+      "plotCode": "44",
+      "sectionIndex": 5,
+      "plotIndex": 68,
+      "sectionGrid": {
+        "x": 5,
+        "z": 0
+      },
+      "plotGrid": {
+        "x": 4,
+        "z": 4
+      }
+    },
+    "files": 141,
+    "snapshotBytes": 519690,
+    "snapshotSizeLabel": "508 KB",
+    "bundleBytes": 1022295,
+    "bundleSizeLabel": "998 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "iter9",
+    "bundlePath": "iter9.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "extension",
+      "sqlite",
+      "localstorage",
+      "ui.mikesendpoint"
+    ],
+    "salvagePaths": [
+      "Services/ScrapeGoatService.cs",
+      "chrome/src/defaults.js",
+      "DEVELOPMENT.md",
+      "chrome/src/scoop/"
+    ],
+    "searchText": "iter9 ScrapeGoat Chrome extension that captures and organizes code snippets from ChatGPT conversations into structured projects. ScrapeGoat-era capture tooling with useful storage and UI migration residue. NONE extension sqlite localstorage ui.mikesendpoint Services/ScrapeGoatService.cs chrome/src/defaults.js DEVELOPMENT.md chrome/src/scoop/"
+  },
+  {
+    "repo": "clott",
+    "title": "clott",
+    "summary": "A web-based application for managing and interacting with AI-powered card systems and configurations.",
+    "epitaph": "AI card experiments, remote keyboard work, and mikesendpoint-era deployment residue.",
+    "born": "2025-07-20T20:07:16-06:00",
+    "died": "2026-04-14T17:38:39-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/clott (deleted post-entombment)",
+    "commit": "2b31ce7d46097988f3c8069ebce22fdf223e0777",
+    "plot": {
+      "hash": "e58bf46e11fbbc4343ce0d3ab1b61e975bdfd86a3a5005dc4c466c62128a3ea0",
+      "sectionCode": "e5",
+      "plotCode": "8b",
+      "sectionIndex": 229,
+      "plotIndex": 139,
+      "sectionGrid": {
+        "x": 5,
+        "z": 14
+      },
+      "plotGrid": {
+        "x": 11,
+        "z": 8
+      }
+    },
+    "files": 112,
+    "snapshotBytes": 983980,
+    "snapshotSizeLabel": "961 KB",
+    "bundleBytes": 883465,
+    "bundleSizeLabel": "863 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "clott",
+    "bundlePath": "clott.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "cards",
+      "lambda",
+      "signalargh",
+      "mikesendpoint"
+    ],
+    "salvagePaths": [
+      "lambda/CottApi/Configuration/S3Config.cs",
+      "scripts/publish-lambda.ps1",
+      "lambda/CottApi/wwwroot/keyboard.html",
+      "lambda/CottApi/wwwroot/remote-keyboard.html"
+    ],
+    "searchText": "clott clott A web-based application for managing and interacting with AI-powered card systems and configurations. AI card experiments, remote keyboard work, and mikesendpoint-era deployment residue. NONE cards lambda signalargh mikesendpoint lambda/CottApi/Configuration/S3Config.cs scripts/publish-lambda.ps1 lambda/CottApi/wwwroot/keyboard.html lambda/CottApi/wwwroot/remote-keyboard.html"
+  },
+  {
+    "repo": "bidew",
+    "title": "bidew",
+    "summary": ".NET solution for bidew, organized around `BiDew.sln`.",
+    "epitaph": "Old .NET utility kept as reference only.",
+    "born": "2024-07-28T13:22:31-06:00",
+    "died": "2026-04-14T19:48:45-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/bidew (deleted post-entombment)",
+    "commit": "6b3cad87e87b617d48e95f837393dc2c57100308",
+    "plot": {
+      "hash": "0842806a4df498d079a690730023299cf158c3bf27e6291b444fb5d013a773d1",
+      "sectionCode": "08",
+      "plotCode": "42",
+      "sectionIndex": 8,
+      "plotIndex": 66,
+      "sectionGrid": {
+        "x": 8,
+        "z": 0
+      },
+      "plotGrid": {
+        "x": 2,
+        "z": 4
+      }
+    },
+    "files": 42,
+    "snapshotBytes": 96521,
+    "snapshotSizeLabel": "94 KB",
+    "bundleBytes": 77408,
+    "bundleSizeLabel": "76 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "bidew",
+    "bundlePath": "bidew.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "dotnet",
+      "sqlite",
+      "tool"
+    ],
+    "salvagePaths": [],
+    "searchText": "bidew bidew .NET solution for bidew, organized around `BiDew.sln`. Old .NET utility kept as reference only. NONE dotnet sqlite tool"
+  },
+  {
+    "repo": "adam-nichols-demo",
+    "title": "adam-nichols-demo",
+    "summary": "Public front door and shareable artifact hub for this repo.",
+    "epitaph": "Ultra-low-latency streaming proof preserved as a finished dead end.",
+    "born": "2025-09-29T09:44:07-06:00",
+    "died": "2026-04-14T19:48:51-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/adam-nichols-demo (deleted post-entombment)",
+    "commit": "c92487090f87e3ed32c0eb8a864af2fba67b0cfe",
+    "plot": {
+      "hash": "092875e5f86f2c40c2c3d4210c8b366b9d64f4237a4229eea796d76ddf55325e",
+      "sectionCode": "09",
+      "plotCode": "28",
+      "sectionIndex": 9,
+      "plotIndex": 40,
+      "sectionGrid": {
+        "x": 9,
+        "z": 0
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 2
+      }
+    },
+    "files": 34,
+    "snapshotBytes": 156036,
+    "snapshotSizeLabel": "152 KB",
+    "bundleBytes": 1295731,
+    "bundleSizeLabel": "1.2 MB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "adam-nichols-demo",
+    "bundlePath": "adam-nichols-demo.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "streaming",
+      "signalr",
+      "demo"
+    ],
+    "salvagePaths": [],
+    "searchText": "adam-nichols-demo adam-nichols-demo Public front door and shareable artifact hub for this repo. Ultra-low-latency streaming proof preserved as a finished dead end. NONE streaming signalr demo"
+  },
+  {
+    "repo": "port-directory",
+    "title": "Port Directory Management System",
+    "summary": "ASP.NET Core Lambda application for tracking port assignments across local development projects.",
+    "epitaph": "Directory-shaped utility with no living successor.",
+    "born": "2026-01-16T23:24:54-07:00",
+    "died": "2026-04-14T19:48:59-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/port-directory (deleted post-entombment)",
+    "commit": "856eac610e0c117b5df2f5696cb3d23e7ce8c365",
+    "plot": {
+      "hash": "f2aa4e23fc30a474cdcedc314fa74b0612b5b1a894f7994fad7a84c6a4ae1e21",
+      "sectionCode": "f2",
+      "plotCode": "aa",
+      "sectionIndex": 242,
+      "plotIndex": 170,
+      "sectionGrid": {
+        "x": 2,
+        "z": 15
+      },
+      "plotGrid": {
+        "x": 10,
+        "z": 10
+      }
+    },
+    "files": 29,
+    "snapshotBytes": 68843,
+    "snapshotSizeLabel": "67 KB",
+    "bundleBytes": 35288,
+    "bundleSizeLabel": "34 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "port-directory",
+    "bundlePath": "port-directory.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "ports",
+      "utility"
+    ],
+    "salvagePaths": [],
+    "searchText": "port-directory Port Directory Management System ASP.NET Core Lambda application for tracking port assignments across local development projects. Directory-shaped utility with no living successor. NONE ports utility"
+  },
+  {
+    "repo": "brain-dump-translator",
+    "title": "Brain Dump Translator",
+    "summary": "A Lambda function that processes raw chat conversations (brain dumps) into organized, actionable content.",
+    "epitaph": "A raw-conversation processor with a decent front door and nowhere left to go.",
+    "born": "2025-09-29T10:53:23-06:00",
+    "died": "2026-04-14T19:49:06-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/brain-dump-translator (deleted post-entombment)",
+    "commit": "1e6e2fcad6e882f1e5836b45607bb0b75a2c4b25",
+    "plot": {
+      "hash": "fd232870124b1e1a2dc568dd38f0dba010f778f08908ff870fc7e98f99ad50de",
+      "sectionCode": "fd",
+      "plotCode": "23",
+      "sectionIndex": 253,
+      "plotIndex": 35,
+      "sectionGrid": {
+        "x": 13,
+        "z": 15
+      },
+      "plotGrid": {
+        "x": 3,
+        "z": 2
+      }
+    },
+    "files": 25,
+    "snapshotBytes": 116183,
+    "snapshotSizeLabel": "113 KB",
+    "bundleBytes": 68301,
+    "bundleSizeLabel": "67 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "brain-dump-translator",
+    "bundlePath": "brain-dump-translator.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "lambda",
+      "parser",
+      "frontend"
+    ],
+    "salvagePaths": [],
+    "searchText": "brain-dump-translator Brain Dump Translator A Lambda function that processes raw chat conversations (brain dumps) into organized, actionable content. A raw-conversation processor with a decent front door and nowhere left to go. NONE lambda parser frontend"
+  },
+  {
+    "repo": "ask-me",
+    "title": "Ask Me - HTML Questionnaire Generator Library",
+    "summary": "Browser-based questionnaire system for gathering design specifications. Used by the Cline `guided-design-wizard` command.",
+    "epitaph": "Questionnaire scaffolding folded into later prompt and wizard work.",
+    "born": "2025-12-16T13:11:58-07:00",
+    "died": "2026-04-14T19:49:12-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/ask-me (deleted post-entombment)",
+    "commit": "bb51af4a349751948f5568241fee71f5a1e45b6b",
+    "plot": {
+      "hash": "a6f4ed32e9c010192cbb3ddc0e21b24f0581fe5c6223bd2f27e24ad1aee7b5c1",
+      "sectionCode": "a6",
+      "plotCode": "f4",
+      "sectionIndex": 166,
+      "plotIndex": 244,
+      "sectionGrid": {
+        "x": 6,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 4,
+        "z": 15
+      }
+    },
+    "files": 18,
+    "snapshotBytes": 88695,
+    "snapshotSizeLabel": "87 KB",
+    "bundleBytes": 34398,
+    "bundleSizeLabel": "34 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "ask-me",
+    "bundlePath": "ask-me.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "wizard",
+      "forms",
+      "html"
+    ],
+    "salvagePaths": [],
+    "searchText": "ask-me Ask Me - HTML Questionnaire Generator Library Browser-based questionnaire system for gathering design specifications. Used by the Cline `guided-design-wizard` command. Questionnaire scaffolding folded into later prompt and wizard work. NONE wizard forms html"
+  },
+  {
+    "repo": "fv2",
+    "title": "fv2",
+    "summary": ".NET solution for fv2, organized around `GoCrud.sln`.",
+    "epitaph": null,
+    "born": "2021-12-23T09:01:12-07:00",
+    "died": "2026-04-18T19:07:42-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/fv2 (deleted post-entombment)",
+    "commit": "f3a8e5b59cd718474fa19a55bad042aa33bc8390",
+    "plot": {
+      "hash": "6e6888e67e53cb5e35bcb63f3bd7d241c6cedfb9142f4d6a76f259ee263febb8",
+      "sectionCode": "6e",
+      "plotCode": "68",
+      "sectionIndex": 110,
+      "plotIndex": 104,
+      "sectionGrid": {
+        "x": 14,
+        "z": 6
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 6
+      }
+    },
+    "files": 103,
+    "snapshotBytes": 494195,
+    "snapshotSizeLabel": "483 KB",
+    "bundleBytes": 403064,
+    "bundleSizeLabel": "394 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "fv2",
+    "bundlePath": "fv2.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "fv2 fv2 .NET solution for fv2, organized around `GoCrud.sln`.  NONE"
+  },
+  {
+    "repo": "gocrud.plugin",
+    "title": "gocrud.plugin",
+    "summary": "C# source repo for gocrud plugin, likely intended to plug into a larger .NET application or service.",
+    "epitaph": null,
+    "born": "2022-01-22T10:53:25-07:00",
+    "died": "2026-04-18T19:18:24-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/gocrud.plugin (deleted post-entombment)",
+    "commit": "202ab055e3db9425ea24e21f723f25be20cb3949",
+    "plot": {
+      "hash": "e4391d4d32afa9f37be7ee843c312d53228f69e322008077a746ea22fe2b60d5",
+      "sectionCode": "e4",
+      "plotCode": "39",
+      "sectionIndex": 228,
+      "plotIndex": 57,
+      "sectionGrid": {
+        "x": 4,
+        "z": 14
+      },
+      "plotGrid": {
+        "x": 9,
+        "z": 3
+      }
+    },
+    "files": 54,
+    "snapshotBytes": 177862,
+    "snapshotSizeLabel": "174 KB",
+    "bundleBytes": 80131,
+    "bundleSizeLabel": "78 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "gocrud.plugin",
+    "bundlePath": "gocrud.plugin.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "gocrud.plugin gocrud.plugin C# source repo for gocrud plugin, likely intended to plug into a larger .NET application or service.  NONE"
+  },
+  {
+    "repo": "1769563090355",
+    "title": "1769563090355",
+    "summary": "Archived task/session artifact repo for task 1769563090355, with captured conversation history, settings, and UI state files.",
+    "epitaph": "Captured task state and conversation artifacts with no living product behind them.",
+    "born": "2026-02-03T15:04:14-07:00",
+    "died": "2026-04-18T20:52:19-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/1769563090355",
+    "commit": "c191312b38ac197b303a45fcbe4f0af4e79f87e6",
+    "plot": {
+      "hash": "b820e0d4ea9605fc83d988658fb2da691e0ec2a6931529d4e77b2f02839cae2d",
+      "sectionCode": "b8",
+      "plotCode": "20",
+      "sectionIndex": 184,
+      "plotIndex": 32,
+      "sectionGrid": {
+        "x": 8,
+        "z": 11
+      },
+      "plotGrid": {
+        "x": 0,
+        "z": 2
+      }
+    },
+    "files": 15,
+    "snapshotBytes": 127990,
+    "snapshotSizeLabel": "125 KB",
+    "bundleBytes": 33009,
+    "bundleSizeLabel": "32 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "1769563090355",
+    "bundlePath": "1769563090355.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "artifact",
+      "session",
+      "json"
+    ],
+    "salvagePaths": [
+      "api_conversation_history.json",
+      "focus_chain_taskid_1769563090355.md",
+      "task_metadata.json"
+    ],
+    "searchText": "1769563090355 1769563090355 Archived task/session artifact repo for task 1769563090355, with captured conversation history, settings, and UI state files. Captured task state and conversation artifacts with no living product behind them. NONE artifact session json api_conversation_history.json focus_chain_taskid_1769563090355.md task_metadata.json"
+  },
+  {
+    "repo": "462664006",
+    "title": "462664006",
+    "summary": "Minimal placeholder repo for task 462664006, with almost no material beyond the root README and repository metadata.",
+    "epitaph": "Placeholder task snapshot preserved purely for recordkeeping.",
+    "born": "2026-01-28T01:33:16+00:00",
+    "died": "2026-04-18T20:52:48-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/462664006",
+    "commit": "1e84522b86f0ec878ec823f462110eee012cf882",
+    "plot": {
+      "hash": "33682abebe01f775232d2a85603371081bf0f58eb4bfed35d9e76cfe63833f59",
+      "sectionCode": "33",
+      "plotCode": "68",
+      "sectionIndex": 51,
+      "plotIndex": 104,
+      "sectionGrid": {
+        "x": 3,
+        "z": 3
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 6
+      }
+    },
+    "files": 9,
+    "snapshotBytes": 36427,
+    "snapshotSizeLabel": "36 KB",
+    "bundleBytes": 15679,
+    "bundleSizeLabel": "15 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "462664006",
+    "bundlePath": "462664006.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "artifact",
+      "placeholder"
+    ],
+    "salvagePaths": [],
+    "searchText": "462664006 462664006 Minimal placeholder repo for task 462664006, with almost no material beyond the root README and repository metadata. Placeholder task snapshot preserved purely for recordkeeping. NONE artifact placeholder"
+  },
+  {
+    "repo": ".clinerules",
+    "title": ".clinerules",
+    "summary": "Ruleset and prompt asset repo for clinerules, centered on Cline or Codex workflow guidance.",
+    "epitaph": "Prompt-rule fragments retired once the wider canon became the real source of truth.",
+    "born": "2026-02-03T14:52:50-07:00",
+    "died": "2026-04-18T20:53:03-06:00",
+    "supersededBy": "mist83/development-canon",
+    "sourceWas": "github.com/mist83/.clinerules",
+    "commit": "8b5fda6551906f1041edf45a831e806652e7de2e",
+    "plot": {
+      "hash": "4d9e8bb9291d83bd430a9269a639d4253fcd50cb4a740268a88acf2dc7feb255",
+      "sectionCode": "4d",
+      "plotCode": "9e",
+      "sectionIndex": 77,
+      "plotIndex": 158,
+      "sectionGrid": {
+        "x": 13,
+        "z": 4
+      },
+      "plotGrid": {
+        "x": 14,
+        "z": 9
+      }
+    },
+    "files": 13,
+    "snapshotBytes": 42264,
+    "snapshotSizeLabel": "41 KB",
+    "bundleBytes": 19997,
+    "bundleSizeLabel": "20 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": ".clinerules",
+    "bundlePath": ".clinerules.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "rules",
+      "prompt",
+      "canon"
+    ],
+    "salvagePaths": [
+      "high-stakes-coding.clinerules"
+    ],
+    "searchText": ".clinerules .clinerules Ruleset and prompt asset repo for clinerules, centered on Cline or Codex workflow guidance. Prompt-rule fragments retired once the wider canon became the real source of truth. mist83/development-canon rules prompt canon high-stakes-coding.clinerules"
+  },
+  {
+    "repo": "dynamo-db-local-editor",
+    "title": "dynamo-db-local-editor",
+    "summary": "Features:",
+    "epitaph": "Static Dynamo browser that solved a real local problem and then stopped belonging in the active set.",
+    "born": "2018-11-20T14:58:19-07:00",
+    "died": "2026-04-18T20:53:14-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "github.com/mist83/dynamo-db-local-editor",
+    "commit": "e185ad142adca27d5bb1541722ccdc71d3ebfa93",
+    "plot": {
+      "hash": "ac04cb78c4b47ac840972016ad561b1364d483dbf785e607add0c2b5058fe6ee",
+      "sectionCode": "ac",
+      "plotCode": "04",
+      "sectionIndex": 172,
+      "plotIndex": 4,
+      "sectionGrid": {
+        "x": 12,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 4,
+        "z": 0
+      }
+    },
+    "files": 18,
+    "snapshotBytes": 1433578,
+    "snapshotSizeLabel": "1.4 MB",
+    "bundleBytes": 419649,
+    "bundleSizeLabel": "410 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "dynamo-db-local-editor",
+    "bundlePath": "dynamo-db-local-editor.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "dynamodb",
+      "static",
+      "aws"
+    ],
+    "salvagePaths": [
+      "app.js",
+      "smoke.sh"
+    ],
+    "searchText": "dynamo-db-local-editor dynamo-db-local-editor Features: Static Dynamo browser that solved a real local problem and then stopped belonging in the active set. NONE dynamodb static aws app.js smoke.sh"
+  },
+  {
+    "repo": "jsa-icon-proof",
+    "title": "JSA Icon Proof",
+    "summary": "This repo proves a simple point on macOS:",
+    "epitaph": "A tight icon-pipeline proof promoted into the shared examples repo instead of living alone.",
+    "born": "2026-04-13T21:35:45-06:00",
+    "died": "2026-04-18T20:53:26-06:00",
+    "supersededBy": "mist83/examples",
+    "sourceWas": "github.com/mist83/jsa-icon-proof",
+    "commit": "aa67fd8db68e367c3b6c286142273eea0723444d",
+    "plot": {
+      "hash": "3a9ed37fc4cfeaee8069e96e793169385f923fdf99341a5d56bf97b45bf3e2fd",
+      "sectionCode": "3a",
+      "plotCode": "9e",
+      "sectionIndex": 58,
+      "plotIndex": 158,
+      "sectionGrid": {
+        "x": 10,
+        "z": 3
+      },
+      "plotGrid": {
+        "x": 14,
+        "z": 9
+      }
+    },
+    "files": 9,
+    "snapshotBytes": 12454,
+    "snapshotSizeLabel": "12 KB",
+    "bundleBytes": 5754,
+    "bundleSizeLabel": "5.6 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "jsa-icon-proof",
+    "bundlePath": "jsa-icon-proof.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "example",
+      "macos",
+      "icons",
+      "jxa"
+    ],
+    "salvagePaths": [
+      "scripts/render-icons.sh",
+      "scripts/build-app.sh"
+    ],
+    "searchText": "jsa-icon-proof JSA Icon Proof This repo proves a simple point on macOS: A tight icon-pipeline proof promoted into the shared examples repo instead of living alone. mist83/examples example macos icons jxa scripts/render-icons.sh scripts/build-app.sh"
+  },
+  {
+    "repo": "project-index",
+    "title": "Project Indexer",
+    "summary": "Bulk-processes directories (local or S3), standardizes names to kebab-case, generates READMEs, and deploys to mikesendpoint.com.",
+    "epitaph": "A narrow operator board whose real survivors are the bulk sweep heuristics and the drag-and-drop deploy triage, not the standalone site.",
+    "born": "2025-12-20T10:59:40-07:00",
+    "died": "2026-04-19T11:34:25-06:00",
+    "supersededBy": "mist83/mullmania",
+    "sourceWas": "github.com/mist83/project-index",
+    "commit": "7281af3eb2657c1f5f05f8e1789351f902f16f3c",
+    "plot": {
+      "hash": "c718a243855954d356c06cb4ff5aa7a3a2bf9f8d2c3f420c3b189745f91cae4e",
+      "sectionCode": "c7",
+      "plotCode": "18",
+      "sectionIndex": 199,
+      "plotIndex": 24,
+      "sectionGrid": {
+        "x": 7,
+        "z": 12
+      },
+      "plotGrid": {
+        "x": 8,
+        "z": 1
+      }
+    },
+    "files": 210,
+    "snapshotBytes": 32127838,
+    "snapshotSizeLabel": "31 MB",
+    "bundleBytes": 10117388,
+    "bundleSizeLabel": "9.6 MB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "project-index",
+    "bundlePath": "project-index.bundle",
+    "bundlePointerPath": null,
+    "tags": [
+      "deploy",
+      "kanban",
+      "bulk-triage",
+      "dotnet",
+      "s3"
+    ],
+    "salvagePaths": [
+      "Controllers/ProjectIndexController.cs",
+      "Services/ProcessingService.cs",
+      "wwwroot/app.js"
+    ],
+    "searchText": "project-index Project Indexer Bulk-processes directories (local or S3), standardizes names to kebab-case, generates READMEs, and deploys to mikesendpoint.com. A narrow operator board whose real survivors are the bulk sweep heuristics and the drag-and-drop deploy triage, not the standalone site. mist83/mullmania deploy kanban bulk-triage dotnet s3 Controllers/ProjectIndexController.cs Services/ProcessingService.cs wwwroot/app.js"
+  },
+  {
+    "repo": "BreakpointAllTheThings",
+    "title": "BreakpointAllTheThings",
+    "summary": "",
+    "epitaph": null,
+    "born": "2019-09-09T17:05:00-06:00",
+    "died": "2026-05-23T07:53:32-06:00",
+    "supersededBy": "mist83/contrast-dye",
+    "sourceWas": "github.com/mist83/BreakpointAllTheThings (deleted post-entombment)",
+    "commit": "d19cbf93a92efa3180a7bba5aaefe24a0ca85cef",
+    "plot": {
+      "hash": "ab03ee79d7bacf19a3be32134d3ee7578f781dd82fa04a7de0fcd94a3495c5e7",
+      "sectionCode": "ab",
+      "plotCode": "03",
+      "sectionIndex": 171,
+      "plotIndex": 3,
+      "sectionGrid": {
+        "x": 11,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 3,
+        "z": 0
+      }
+    },
+    "files": 31,
+    "snapshotBytes": 91744,
+    "snapshotSizeLabel": "90 KB",
+    "bundleBytes": 80606,
+    "bundleSizeLabel": "79 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "BreakpointAllTheThings",
+    "bundlePath": "BreakpointAllTheThings.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "BreakpointAllTheThings BreakpointAllTheThings   mist83/contrast-dye"
+  },
+  {
+    "repo": "bestiary",
+    "title": "bestiary",
+    "summary": "",
+    "epitaph": null,
+    "born": "2026-04-25T17:27:15-06:00",
+    "died": "2026-05-23T09:18:19-06:00",
+    "supersededBy": "mist83/Models",
+    "sourceWas": "github.com/mist83/bestiary",
+    "commit": "171b3fb3a477675860308cba04dedd2f47a105d8",
+    "plot": {
+      "hash": "1949dc4c90920c13d13ccccab0532507eec48b6981fca2fc7d790d29bab3fb85",
+      "sectionCode": "19",
+      "plotCode": "49",
+      "sectionIndex": 25,
+      "plotIndex": 73,
+      "sectionGrid": {
+        "x": 9,
+        "z": 1
+      },
+      "plotGrid": {
+        "x": 9,
+        "z": 4
+      }
+    },
+    "files": 5,
+    "snapshotBytes": 48634,
+    "snapshotSizeLabel": "47 KB",
+    "bundleBytes": 18781,
+    "bundleSizeLabel": "18 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "bestiary",
+    "bundlePath": "bestiary.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "bestiary bestiary   mist83/Models"
+  },
+  {
+    "repo": "prompt-kiln",
+    "title": "Prompt Kiln",
+    "summary": "`prompt-kiln` was generated by the `new-random-site` skill with seed `1776304582584`.",
+    "epitaph": null,
+    "born": "2026-04-15T19:58:00-06:00",
+    "died": "2026-05-23T09:51:23-06:00",
+    "supersededBy": "mist83/agent",
+    "sourceWas": "github.com/mist83/prompt-kiln",
+    "commit": "61dc566ed5809b37fb08a99f7c32c6942deb279e",
+    "plot": {
+      "hash": "a0e533b7e3c2b53aefc2751050f00ef9a52fc62c45805744d1deeb8522e2a1b5",
+      "sectionCode": "a0",
+      "plotCode": "e5",
+      "sectionIndex": 160,
+      "plotIndex": 229,
+      "sectionGrid": {
+        "x": 0,
+        "z": 10
+      },
+      "plotGrid": {
+        "x": 5,
+        "z": 14
+      }
+    },
+    "files": 35,
+    "snapshotBytes": 1183179,
+    "snapshotSizeLabel": "1.1 MB",
+    "bundleBytes": 594781,
+    "bundleSizeLabel": "581 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "prompt-kiln",
+    "bundlePath": "prompt-kiln.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "prompt-kiln Prompt Kiln `prompt-kiln` was generated by the `new-random-site` skill with seed `1776304582584`.  mist83/agent"
+  },
+  {
+    "repo": "XMLReporting",
+    "title": "XMLReporting",
+    "summary": ".NET solution for XMLReporting, organized around `ConsoleApplication1.sln`, `XMLReporting.sln`.",
+    "epitaph": null,
+    "born": "2014-06-03T15:46:44-06:00",
+    "died": "2026-05-24T02:42:11-06:00",
+    "supersededBy": "mist83/cobalt-wealthops",
+    "sourceWas": "github.com/mist83/XMLReporting",
+    "commit": "766e465b5a47751ce86950c59aa01b3dde7f2439",
+    "plot": {
+      "hash": "9a56b22d7753c1b948211da4dfbde3b40bc9df43961cd8d14f210c6ef1a82519",
+      "sectionCode": "9a",
+      "plotCode": "56",
+      "sectionIndex": 154,
+      "plotIndex": 86,
+      "sectionGrid": {
+        "x": 10,
+        "z": 9
+      },
+      "plotGrid": {
+        "x": 6,
+        "z": 5
+      }
+    },
+    "files": 59,
+    "snapshotBytes": 18660944,
+    "snapshotSizeLabel": "18 MB",
+    "bundleBytes": 12941348,
+    "bundleSizeLabel": "12 MB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "XMLReporting",
+    "bundlePath": "XMLReporting.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "XMLReporting XMLReporting .NET solution for XMLReporting, organized around `ConsoleApplication1.sln`, `XMLReporting.sln`.  mist83/cobalt-wealthops"
+  },
+  {
+    "repo": "index",
+    "title": "DEFUNCT",
+    "summary": "This repository is defunct as of 2026-04-08.",
+    "epitaph": null,
+    "born": "2026-01-22T00:39:53-07:00",
+    "died": "2026-05-24T03:40:27-06:00",
+    "supersededBy": "mist83/mullmania",
+    "sourceWas": "github.com/mist83/index",
+    "commit": "2110072a9daec5a429a707bc0a5720b32eb84365",
+    "plot": {
+      "hash": "e1ef55909654373527b00e0f5fc3458a888a16e6ff72a1c766bea92b1b435ecc",
+      "sectionCode": "e1",
+      "plotCode": "ef",
+      "sectionIndex": 225,
+      "plotIndex": 239,
+      "sectionGrid": {
+        "x": 1,
+        "z": 14
+      },
+      "plotGrid": {
+        "x": 15,
+        "z": 14
+      }
+    },
+    "files": 1,
+    "snapshotBytes": 208,
+    "snapshotSizeLabel": "208 B",
+    "bundleBytes": 167611,
+    "bundleSizeLabel": "164 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "index",
+    "bundlePath": "index.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "index DEFUNCT This repository is defunct as of 2026-04-08.  mist83/mullmania"
+  },
+  {
+    "repo": "mullman-websites-tv",
+    "title": "mullman-websites-tv",
+    "summary": "",
+    "epitaph": null,
+    "born": "2026-04-25T21:38:03-06:00",
+    "died": "2026-05-24T03:51:49-06:00",
+    "supersededBy": "NONE",
+    "sourceWas": "s3://mullmania.com/mullman-websites-tv/",
+    "commit": "f80e6e8cf3b17378626b5e3e9af2431ef1330e09",
+    "plot": {
+      "hash": "38977693d889f87e716c197a5a0f36127bf20b8a98c78543b95bbe8dff62d9fc",
+      "sectionCode": "38",
+      "plotCode": "97",
+      "sectionIndex": 56,
+      "plotIndex": 151,
+      "sectionGrid": {
+        "x": 8,
+        "z": 3
+      },
+      "plotGrid": {
+        "x": 7,
+        "z": 9
+      }
+    },
+    "files": 5,
+    "snapshotBytes": 12490,
+    "snapshotSizeLabel": "12 KB",
+    "bundleBytes": 4626,
+    "bundleSizeLabel": "4.5 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "mullman-websites-tv",
+    "bundlePath": "mullman-websites-tv.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "mullman-websites-tv mullman-websites-tv   NONE"
+  },
+  {
+    "repo": "prompt-soundboard",
+    "title": "DEFUNCT",
+    "summary": "This repository is defunct as of 2026-03-31.",
+    "epitaph": null,
+    "born": "2026-02-11T00:19:44-07:00",
+    "died": "2026-05-24T03:52:08-06:00",
+    "supersededBy": "tics.mullmania.com",
+    "sourceWas": "github.com/mist83/prompt-soundboard",
+    "commit": "4a82ea015dc7fb51de5beb394ba19967fc9be853",
+    "plot": {
+      "hash": "327e888a24c2b228396085ae9cacb46583b653fccdb83475077373e09bb9204e",
+      "sectionCode": "32",
+      "plotCode": "7e",
+      "sectionIndex": 50,
+      "plotIndex": 126,
+      "sectionGrid": {
+        "x": 2,
+        "z": 3
+      },
+      "plotGrid": {
+        "x": 14,
+        "z": 7
+      }
+    },
+    "files": 1,
+    "snapshotBytes": 221,
+    "snapshotSizeLabel": "221 B",
+    "bundleBytes": 106170,
+    "bundleSizeLabel": "104 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "prompt-soundboard",
+    "bundlePath": "prompt-soundboard.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "prompt-soundboard DEFUNCT This repository is defunct as of 2026-03-31.  tics.mullmania.com"
+  }
+]
