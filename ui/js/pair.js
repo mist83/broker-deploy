@@ -88,6 +88,27 @@ function remoteUrlFor(remotePath, sessionId) {
   return url.toString();
 }
 
+// Loopback guard. The QR encodes remoteUrl; if that URL's host is a loopback
+// address the QR points back at the machine that rendered it, and a separate
+// phone on the room wifi can't reach it. pairScreen surfaces the verdict as
+// `isLoopback` on its return object so consumers don't each re-implement this.
+// An empty / unparseable host counts as loopback — better to warn than to let
+// a demo die to a dead scan.
+function isLoopbackUrl(urlString) {
+  let host = "";
+  try { host = new URL(urlString).hostname; }
+  catch { return true; }
+  return host === "" || host === "localhost" || host === "127.0.0.1"
+    || host === "::1" || host === "[::1]";
+}
+
+// Canonical copy of the warning a consumer shows when isLoopback is true.
+// Exported so the "render the warning" line doesn't re-type the string in
+// every consumer. Domain-agnostic on purpose — it names "the deployed site",
+// not a specific host.
+export const LOOPBACK_WARNING =
+  "⚠ Local server — phones can't scan this. Open the deployed site.";
+
 export async function renderQrCanvas(canvas, url, opts = {}) {
   const QRCode = await loadQRCode();
   await QRCode.toCanvas(canvas, url, {
@@ -126,6 +147,8 @@ function publisher(connection, channelId) {
 //   screen.remoteUrl   // open the phone-side page (also encoded in the QR)
 //   screen.sessionId   // short id; appears as ?s=... on the phone URL
 //   screen.phones      // live Set<userId>
+//   screen.isLoopback  // true when remoteUrl is a loopback origin a phone
+//                      // can't reach — render LOOPBACK_WARNING when set
 export async function pairScreen({
   channelPrefix,
   sessionId = newSessionId(),
@@ -142,6 +165,7 @@ export async function pairScreen({
 
   const channelId = `${channelPrefix}-${sessionId}`;
   const remoteUrl = remoteUrlFor(remotePath, sessionId);
+  const isLoopback = isLoopbackUrl(remoteUrl);
   const phones = new Set();
 
   const noteJoin = (userId) => {
@@ -197,6 +221,7 @@ export async function pairScreen({
     sessionId,
     channelId,
     remoteUrl,
+    isLoopback,
     phones,
     connection: conn,
     publish: publisher(conn, channelId),
