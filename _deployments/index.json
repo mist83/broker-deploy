@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T15:25:20.877Z",
+  "generatedAt": "2026-05-29T15:38:45.424Z",
   "sites": [
     {
       "siteId": "agent",
@@ -84,13 +84,13 @@
       "status": "success",
       "liveUrl": "https://graveyard.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/graveyard/",
-      "lastPublishedAt": "2026-05-29T15:07:39.927Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645045045",
-      "latestBrokerRunNumber": "234",
-      "trigger": "operator",
+      "lastPublishedAt": "2026-05-29T15:38:45.416Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26646606092",
+      "latestBrokerRunNumber": "236",
+      "trigger": "github-webhook",
       "hostingFiles": 12,
       "hostingBytes": 1477905,
-      "recordedDeployments": 1
+      "recordedDeployments": 2
     },
     {
       "siteId": "liskov-file-system",
