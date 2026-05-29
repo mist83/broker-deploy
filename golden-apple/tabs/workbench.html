@@ -1,6 +1,11 @@
-<div class="golden-workbench">
+<div class="golden-workbench" data-mode="video">
   <section class="card">
-    <div class="source-panel">
+    <div class="grid-row" style="gap: var(--space-xs); margin-bottom: var(--space-md);">
+      <button class="btn-tab is-active" type="button" data-mode-tab="video">Video</button>
+      <button class="btn-tab" type="button" data-mode-tab="image">Image</button>
+    </div>
+
+    <div class="source-panel" data-only-mode="video">
       <div class="field-group">
         <label class="field-label" for="f-video">Source video</label>
         <input id="f-video" class="field-input" type="url" placeholder="https://example.com/path/to/clip.mp4">
@@ -9,58 +14,19 @@
         <label class="field-label" for="f-srt">Subtitles (.srt)</label>
         <input id="f-srt" class="field-input" type="text" placeholder="optional caption source">
       </div>
-      <button id="btn-detect" class="btn-secondary" type="button">Detect scenes</button>
       <button id="btn-example" class="btn-secondary" type="button">Load example</button>
     </div>
-  </section>
 
-  <section class="card">
-    <div class="grid-row" style="justify-content: space-between; align-items: baseline; margin-bottom: var(--space-sm);">
-      <h2 style="margin: 0;">Scenes</h2>
-      <span id="scene-summary" class="text-muted" style="font-size: var(--text-sm);">10 packets - 1 needs review</span>
-    </div>
-    <div class="scene-strip">
-      <button class="scene-card active" type="button" data-scene="01" data-time="0:00.95" data-role="establishing" data-copy="Live-action people: this is the real filter check.">
-        <div class="scene-thumb" data-num="01" style="background-position: 100% 0%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:00.95</div><div class="scene-role">establishing</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="02" data-time="0:01.99" data-role="dialogue" data-copy="Dialogue panel with subtitle timing.">
-        <div class="scene-thumb" data-num="02" style="background-position: 100% 14%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:01.99</div><div class="scene-role">dialogue</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="03" data-time="0:05.95" data-role="reaction" data-copy="Reaction beat for held expression.">
-        <div class="scene-thumb" data-num="03" style="background-position: 100% 28%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:05.95</div><div class="scene-role">reaction</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="04" data-time="0:05.97" data-role="action" data-copy="Action beat for motion strip.">
-        <div class="scene-thumb" data-num="04" style="background-position: 100% 42%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:05.97</div><div class="scene-role">action</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="05" data-time="0:09.95" data-role="dialogue" data-copy="Second dialogue candidate.">
-        <div class="scene-thumb" data-num="05" style="background-position: 100% 56%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:09.95</div><div class="scene-role">dialogue</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="06" data-time="0:11.95" data-role="insert" data-copy="Low-confidence insert candidate.">
-        <div class="scene-thumb" data-num="06" style="background-position: 100% 70%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:11.95</div><div class="scene-role">insert</div><span class="scene-flag">low confidence</span></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="07" data-time="0:13.93" data-role="reaction" data-copy="Reaction beat after the insert.">
-        <div class="scene-thumb" data-num="07" style="background-position: 100% 85%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:13.93</div><div class="scene-role">reaction</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="08" data-time="0:17.91" data-role="dialogue" data-copy="Late dialogue panel.">
-        <div class="scene-thumb" data-num="08" style="background-position: 100% 100%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:17.91</div><div class="scene-role">dialogue</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="09" data-time="0:17.95" data-role="action" data-copy="Cutaway action beat.">
-        <div class="scene-thumb" data-num="09" style="background-position: 100% 14%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:17.95</div><div class="scene-role">action</div></div>
-      </button>
-      <button class="scene-card" type="button" data-scene="10" data-time="0:21.89" data-role="discard" data-copy="Discard candidate at the tail.">
-        <div class="scene-thumb" data-num="10" style="background-position: 100% 56%;"></div>
-        <div class="scene-meta"><div class="scene-time">0:21.89</div><div class="scene-role">discard</div></div>
-      </button>
-      <button id="btn-add-scene" class="scene-add" type="button">+ scene</button>
+    <div class="source-panel" data-only-mode="image">
+      <div class="field-group">
+        <label class="field-label" for="f-image-file">Source image</label>
+        <input id="f-image-file" class="field-input" type="file" accept="image/*">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="f-image-url">…or paste an image URL</label>
+        <input id="f-image-url" class="field-input" type="url" placeholder="https://example.com/photo.jpg">
+      </div>
+      <button id="btn-image-example" class="btn-secondary" type="button">Load example</button>
     </div>
   </section>
 
@@ -70,86 +36,51 @@
       <div class="field-group" style="margin-bottom: var(--space-md);">
         <select id="f-style" class="field-input">
           <option value="print">print - louder comic-print</option>
+          <option value="pixel">pixel - sepia palette grid</option>
           <option value="sketch">sketch - pencil + color wash</option>
           <option value="comic">comic - flat posterized</option>
         </select>
       </div>
 
-      <h3 class="rail-heading">Print params</h3>
+      <h3 class="rail-heading">Style params</h3>
       <div class="slider-row"><label class="field-label">Colors <span class="slider-value">16</span></label><input id="s-colors" type="range" min="2" max="32" step="1" value="16"></div>
       <div class="slider-row"><label class="field-label">Edge strength <span class="slider-value">0.88</span></label><input id="s-edge" type="range" min="0" max="1" step="0.01" value="0.88"></div>
       <div class="slider-row"><label class="field-label">Saturation <span class="slider-value">1.75</span></label><input id="s-saturation" type="range" min="0" max="3" step="0.05" value="1.75"></div>
       <div class="slider-row"><label class="field-label">Halftone <span class="slider-value">0.42</span></label><input id="s-halftone" type="range" min="0" max="1" step="0.01" value="0.42"></div>
       <div class="slider-row"><label class="field-label">Crystal <span class="slider-value">0.38</span></label><input id="s-crystal" type="range" min="0" max="1" step="0.01" value="0.38"></div>
 
-      <h3 class="rail-heading">Output</h3>
-      <div class="slider-row"><label class="field-label">Max width <span class="slider-value">854</span></label><input id="s-max-width" type="range" min="320" max="1920" step="2" value="854"></div>
+      <h3 class="rail-heading" data-only-mode="video">Output</h3>
+      <div class="slider-row" data-only-mode="video"><label class="field-label">Max width <span class="slider-value">854</span></label><input id="s-max-width" type="range" min="320" max="1920" step="2" value="854"></div>
+      <div class="slider-row" data-only-mode="video"><label class="field-label">Trim to <span class="slider-value">30</span> seconds</label><input id="s-duration" type="range" min="5" max="300" step="5" value="30"></div>
     </aside>
 
     <section class="card">
       <div class="grid-row" style="justify-content: space-between; align-items: baseline; margin-bottom: var(--space-sm);">
-        <h2 id="preview-title" style="margin: 0;">Preview - Scene 01</h2>
-        <span id="preview-note" class="text-muted" style="font-size: var(--text-sm);">ready to render</span>
+        <h2 id="preview-title" style="margin: 0;">Preview</h2>
+        <span id="preview-note" class="text-muted" style="font-size: var(--text-sm);">pick a source to start</span>
       </div>
-      <div id="preview" class="comic-page" aria-label="Comic page preview">
-        <div class="panel"><span>held panel</span></div>
-        <div class="panel"><span>motion strip</span></div>
+
+      <div id="preview" class="comic-page is-placeholder" aria-label="Comic page preview" data-only-mode="video">
+        <div class="panel"><span>render output appears here</span></div>
       </div>
-      <div class="preview-actions">
+
+      <div id="image-preview" class="comic-image-preview" aria-label="Image preview" data-only-mode="image">
+        <canvas id="image-canvas"></canvas>
+        <div class="image-placeholder">drop a source image to start</div>
+      </div>
+
+      <div class="preview-actions" data-only-mode="video">
         <button id="btn-render" class="btn-primary" type="button">Render comic</button>
         <button id="btn-json" class="btn-secondary" type="button">View JSON</button>
       </div>
+
+      <div class="preview-actions" data-only-mode="image">
+        <button id="btn-download-png" class="btn-primary" type="button" disabled>Download PNG</button>
+        <span id="image-stats" class="text-muted" style="font-size: var(--text-sm);"></span>
+      </div>
+
       <div id="status" class="mt-md"></div>
       <pre id="json-view" hidden style="margin-top: var(--space-md);"></pre>
     </section>
-
-    <aside class="card">
-      <h3 class="rail-heading">Scene</h3>
-      <div style="margin-bottom: var(--space-md);">
-        <div id="scene-kf" class="text-muted" style="font-size: var(--text-xs); font-family: var(--font-mono);">kf001 - 0:00.95</div>
-        <h3 id="scene-title" style="margin: 2px 0 6px;">Scene 01</h3>
-        <div id="scene-copy" class="text-muted" style="font-size: var(--text-sm);">"Live-action people: this is the real filter check."</div>
-      </div>
-
-      <h3 class="rail-heading">Panel role</h3>
-      <div class="field-group" style="margin-bottom: var(--space-sm);">
-        <div class="tab-row">
-          <button class="tab active" type="button">establishing</button>
-          <button class="tab" type="button">dialogue</button>
-          <button class="tab" type="button">reaction</button>
-          <button class="tab" type="button">action</button>
-          <button class="tab" type="button">insert</button>
-          <button class="tab" type="button">discard</button>
-        </div>
-        <div id="role-note" class="text-muted" style="font-size: var(--text-xs); margin-top: 6px;">AI suggested - confidence 0.82</div>
-      </div>
-
-      <h3 class="rail-heading">Crop subject</h3>
-      <div class="field-group" style="margin-bottom: var(--space-md);">
-        <select id="crop-subject" class="field-input">
-          <option>Auto - speaker face</option>
-          <option>Wide - full frame</option>
-          <option>Hands</option>
-          <option>Custom box...</option>
-        </select>
-      </div>
-
-      <h3 class="rail-heading">Speech bubble</h3>
-      <div class="field-group" style="margin-bottom: var(--space-md);">
-        <div class="grid-row" style="grid-template-columns: 1fr 1fr; gap: var(--space-sm);">
-          <select id="bubble-side" class="field-input">
-            <option>side: bottom</option>
-            <option>side: top</option>
-            <option>side: left</option>
-            <option>side: right</option>
-          </select>
-          <select id="bubble-anchor" class="field-input">
-            <option>anchor: speaker</option>
-            <option>anchor: center</option>
-            <option>anchor: custom...</option>
-          </select>
-        </div>
-      </div>
-    </aside>
   </div>
 </div>

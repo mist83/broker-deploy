@@ -1,8 +1,5 @@
 {
   "component": "app",
-  "icon": "ti ti-route",
-  "title": "Decision Map",
-  "subtitle": "Scene packets keep the AI suggestions reviewable before the render job runs.",
   "sections": [
     {
       "component": "section",

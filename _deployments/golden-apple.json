@@ -1,0 +1,25 @@
+{
+  "siteId": "golden-apple",
+  "latest": {
+    "siteId": "golden-apple",
+    "status": "success",
+    "deployedAt": "2026-05-29T15:06:01.607Z",
+    "trigger": "operator",
+    "brokerRunId": "26644989968",
+    "brokerRunNumber": "232",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26644989968",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "golden-apple",
+      "status": "success",
+      "deployedAt": "2026-05-29T15:06:01.607Z",
+      "trigger": "operator",
+      "brokerRunId": "26644989968",
+      "brokerRunNumber": "232",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26644989968",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}

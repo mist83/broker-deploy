@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T13:35:29.541Z",
+  "generatedAt": "2026-05-29T15:06:01.617Z",
   "sites": [
     {
       "siteId": "agent",
@@ -68,16 +68,16 @@
     },
     {
       "siteId": "golden-apple",
-      "status": "mirrored",
+      "status": "success",
       "liveUrl": "https://golden-apple.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/golden-apple/",
-      "lastPublishedAt": "2026-05-17T02:36:24.375Z",
-      "latestBrokerRunUrl": "",
-      "latestBrokerRunNumber": "",
-      "trigger": "",
-      "hostingFiles": 19,
-      "hostingBytes": 947952,
-      "recordedDeployments": 0
+      "lastPublishedAt": "2026-05-29T15:06:01.607Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26644989968",
+      "latestBrokerRunNumber": "232",
+      "trigger": "operator",
+      "hostingFiles": 21,
+      "hostingBytes": 960732,
+      "recordedDeployments": 1
     },
     {
       "siteId": "liskov-file-system",

@@ -55,7 +55,7 @@
               "id": "workbench",
               "name": "Workbench",
               "icon": "ti ti-artboard",
-              "description": "Source inputs, scene strip, render controls, preview, and per-scene decisions.",
+              "description": "Source URL, render controls, and live preview.",
               "allowHtmlSource": true,
               "htmlSource": "./tabs/workbench.html"
             },

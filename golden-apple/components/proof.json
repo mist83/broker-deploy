@@ -1,8 +1,5 @@
 {
   "component": "app",
-  "icon": "ti ti-photo-check",
-  "title": "Proof Assets",
-  "subtitle": "Published demo files used by the live Workbench preview.",
   "actions": [
     {
       "label": "Open manifest",
