@@ -19,9 +19,58 @@
     display: block;
 }
 
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs, 6px);
+}
+
+.field-input,
+.field-textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.field-textarea {
+    min-height: 220px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.data-row {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: var(--space-sm, 8px);
+    padding: 3px 0;
+    align-items: start;
+}
+
+.data-label {
+    color: var(--text-muted, #667085);
+}
+
+.data-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.music-grid {
+    grid-template-columns: minmax(160px, 1.4fr) repeat(3, minmax(96px, 1fr));
+}
+
 /* Single-column on narrow viewports. Grid utility doesn't know our breakpoint. */
 @media (max-width: 960px) {
     .page-container > .grid-row {
         grid-template-columns: 1fr !important;
+    }
+
+    .music-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .music-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T15:06:01.617Z",
+  "generatedAt": "2026-05-29T15:07:00.414Z",
   "sites": [
     {
       "siteId": "agent",
@@ -185,16 +185,16 @@
     },
     {
       "siteId": "storyboard",
-      "status": "mirrored",
+      "status": "success",
       "liveUrl": "https://storyboard.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/storyboard/",
-      "lastPublishedAt": "2026-05-17T02:37:57.711Z",
-      "latestBrokerRunUrl": "",
-      "latestBrokerRunNumber": "",
-      "trigger": "",
-      "hostingFiles": 3,
-      "hostingBytes": 11053,
-      "recordedDeployments": 0
+      "lastPublishedAt": "2026-05-29T15:07:00.404Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645043291",
+      "latestBrokerRunNumber": "233",
+      "trigger": "operator",
+      "hostingFiles": 5,
+      "hostingBytes": 32631,
+      "recordedDeployments": 1
     },
     {
       "siteId": "tap-repeater",

@@ -1,0 +1,25 @@
+{
+  "siteId": "storyboard",
+  "latest": {
+    "siteId": "storyboard",
+    "status": "success",
+    "deployedAt": "2026-05-29T15:07:00.404Z",
+    "trigger": "operator",
+    "brokerRunId": "26645043291",
+    "brokerRunNumber": "233",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645043291",
+    "brokerSha": "4f112cbb78e9"
+  },
+  "history": [
+    {
+      "siteId": "storyboard",
+      "status": "success",
+      "deployedAt": "2026-05-29T15:07:00.404Z",
+      "trigger": "operator",
+      "brokerRunId": "26645043291",
+      "brokerRunNumber": "233",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26645043291",
+      "brokerSha": "4f112cbb78e9"
+    }
+  ]
+}
