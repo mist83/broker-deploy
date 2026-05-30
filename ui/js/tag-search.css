@@ -2,23 +2,27 @@
  * Tag Search — Canon Primitive styles (pairs with js/tag-search.js)
  * @url https://ui.mullmania.com/js/tag-search.css
  *
- * Only the tokenized-input-with-pills shell lives here. The pills and facet
- * options reuse the shared .surface-chip primitive (core/surface-shell.css);
- * the rail padding comes from .sidebar-filter-rail (core/layout.css).
+ * Two surfaces, one state:
+ *   • Easy mode  — always-visible labeled facet chips (.tag-search__facets).
+ *   • Advanced   — tokenized search box (.tag-search__field) with field:value pills.
+ *   • Dropdown   — optional "Filters" menu (.tag-search__menu).
+ * Used options gray out via .is-selected (or hide under .tag-search--hide-selected).
+ * Pills/chips reuse the shared .surface-chip primitive (core/surface-shell.css);
+ * rail padding comes from .sidebar-filter-rail (core/layout.css).
  */
 
 .tag-search {
     display: grid;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
 }
 
+/* ── Advanced token box ── */
 .tag-search__field {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 5px;
-    padding: 5px 8px;
+    gap: 6px;
+    padding: 5px 6px 5px 10px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm, 6px);
     background: var(--bg-primary);
@@ -35,9 +39,18 @@
     font-size: 14px;
 }
 
+.tag-search__entry {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
 .tag-search__input {
-    flex: 1 1 90px;
-    min-width: 90px;
+    flex: 1 1 80px;
+    min-width: 80px;
     padding: 3px 0;
     border: 0;
     outline: none;
@@ -51,29 +64,15 @@
     color: var(--text-muted);
 }
 
-.tag-search__clear {
-    flex: 0 0 auto;
-    padding: 0 2px;
-    border: 0;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 16px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.tag-search__clear:hover {
-    color: var(--text-primary);
-}
-
-.tag-search__clear[hidden] {
-    display: none;
-}
-
-/* Selected tags — base look comes from .surface-chip.is-active */
 .tag-search__pill {
     cursor: default;
     padding-right: 5px;
+}
+
+.tag-search__pill-token {
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace);
+    font-size: 11px;
+    letter-spacing: -0.01em;
 }
 
 .tag-search__pill-remove {
@@ -96,10 +95,33 @@
     background: color-mix(in srgb, currentColor 18%, transparent);
 }
 
-/* Facet options (click-to-add) — base look comes from .surface-chip */
+.tag-search__clear {
+    flex: 0 0 auto;
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm, 6px);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.tag-search__clear:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.tag-search__clear[hidden] {
+    display: none;
+}
+
+/* ── Easy-mode facet chips ── */
 .tag-search__facets {
     display: grid;
-    gap: 6px;
+    gap: 8px;
     min-width: 0;
 }
 
@@ -112,7 +134,7 @@
 }
 
 .tag-search__facet-label {
-    margin-right: 2px;
+    flex: 1 0 100%;
     color: var(--text-muted);
     font-size: 10px;
     font-weight: var(--weight-bold, 700);
@@ -122,4 +144,159 @@
 
 .tag-search__facet-chip {
     cursor: pointer;
+}
+
+/* selected options gray out of the "available" pool (still clickable to remove) */
+.tag-search__facet-chip.is-selected,
+.tag-search__opt.is-selected {
+    opacity: 0.4;
+}
+
+.tag-search__facet-chip.is-selected {
+    border-style: dashed;
+}
+
+.tag-search__facet-chip.is-selected:hover {
+    opacity: 0.7;
+}
+
+.tag-search--hide-selected .is-selected {
+    display: none;
+}
+
+/* a wrapping row of chips per group */
+.tag-search__facet-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* ── Dropdown (optional) ── */
+.tag-search__menu-wrap {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.tag-search__menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 28px;
+    padding: 0 8px 0 9px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm, 6px);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 12px;
+    font-weight: var(--weight-semibold, 600);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tag-search__menu-btn:hover,
+.tag-search--open .tag-search__menu-btn {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.tag-search__menu-caret {
+    font-size: 13px;
+    transition: transform 0.15s ease;
+}
+
+.tag-search--open .tag-search__menu-caret {
+    transform: rotate(180deg);
+}
+
+.tag-search__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 40;
+    display: grid;
+    gap: 8px;
+    width: max-content;
+    min-width: 220px;
+    max-width: min(320px, 86vw);
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm, 6px);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-md, 0 12px 36px rgba(15, 23, 42, 0.16));
+}
+
+.tag-search__menu[hidden] {
+    display: none;
+}
+
+.tag-search__menu-group {
+    display: grid;
+    gap: 2px;
+}
+
+.tag-search__menu-label {
+    padding: 2px 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: var(--weight-bold, 700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tag-search__opt {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: var(--radius-sm, 6px);
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.tag-search__opt:hover {
+    background: var(--bg-tertiary);
+}
+
+.tag-search__opt-check {
+    font-size: 14px;
+    color: var(--color-primary);
+    visibility: hidden;
+}
+
+.tag-search__opt.is-selected .tag-search__opt-check {
+    visibility: visible;
+}
+
+.tag-search__opt-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tag-search__opt-token {
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace);
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.tag-search__opt-count {
+    display: grid;
+    place-items: center;
+    min-width: 22px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--bg-secondary));
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: var(--weight-bold, 700);
 }
