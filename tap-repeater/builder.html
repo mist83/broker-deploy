@@ -136,6 +136,11 @@
         .dag-frame-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #0e131b; }
         #dag-frame { width: 100%; height: 360px; border: 0; display: block; background: #0e131b; }
         .dag-note { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #93a1b3; font-size: 13px; padding: 24px; background: #0e131b; line-height: 1.5; }
+        .dag-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; text-transform: none; letter-spacing: 0; }
+        .dag-toggle button { font: 700 11px system-ui, sans-serif; padding: 4px 12px; background: #fff; color: var(--muted); border: 0; cursor: pointer; }
+        .dag-toggle button.on { background: var(--blue); color: #fff; }
+        .dag-inline { width: 100%; height: 360px; background: #0e131b; display: block; }
+        .dag-empty { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #93a1b3; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -194,8 +199,9 @@
             </div>
 
             <div class="card dag-card">
-                <h2><i class="ti ti-binary-tree"></i> DAG preview — live via SignalR
-                    <span id="dag-status" class="dag-status">connecting…</span>
+                <h2><i class="ti ti-binary-tree"></i> DAG preview
+                    <span class="dag-toggle" id="dag-toggle"><button data-mode="inline">Inline</button><button data-mode="signalr">SignalR</button></span>
+                    <span id="dag-status" class="dag-status">—</span>
                     <span id="dag-rtt" class="chip" style="margin-left:auto"><i class="ti ti-activity"></i> RTT <b>—</b></span>
                 </h2>
                 <div class="dag-controls">
@@ -204,6 +210,7 @@
                     <span id="dag-room" class="dag-room"></span>
                 </div>
                 <div class="dag-frame-wrap">
+                    <div id="dag-inline" class="dag-inline"></div>
                     <iframe id="dag-frame" title="DAG preview" allow="autoplay; encrypted-media"></iframe>
                     <div id="dag-note" class="dag-note" hidden></div>
                 </div>

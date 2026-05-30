@@ -138,7 +138,7 @@ function renderAll() {
         const avg = pat.intervalsMs.reduce((a, b) => a + b, 0) / pat.intervalsMs.length;
         els.tlLoop.textContent = fmtTime(pat.durationMs + avg);
     } else els.tlLoop.textContent = '—';
-    dagAutoProject();
+    dagRefresh();
 }
 
 function frame() {
@@ -250,13 +250,14 @@ function copyRhythmUrl() {
 // the same engine DAG uses — reused here for the inline projection.
 const dagEls = {
     status: $('dag-status'), rtt: $('dag-rtt'), project: $('dag-project'),
-    auto: $('dag-auto'), room: $('dag-room'), frame: $('dag-frame'), note: $('dag-note')
+    auto: $('dag-auto'), room: $('dag-room'), frame: $('dag-frame'), note: $('dag-note'), inline: $('dag-inline'), toggle: $('dag-toggle')
 };
 const dagRoom = `tr-${Math.random().toString(36).slice(2, 9)}`;
 const dagUserId = `builder-${Math.random().toString(36).slice(2, 9)}`;
 let dagConn = null;
 let dagAutoTimer = null;
 let dagPingAt = null;
+let dagMode = 'inline';
 
 function dagContext() {
     const override = new URLSearchParams(location.search).get('dagBase');
@@ -324,7 +325,50 @@ function initDag() {
         setInterval(dagPing, 2000);
     }).catch(() => setDagStatus('hub unreachable', 'off'));
 }
+// Inline mode: render the SAME projectPatternToDag output directly as SVG — instant,
+// no network, no SignalR. A zero-latency baseline to eyeball the SignalR lag against.
+function renderInlineDag() {
+    const host = dagEls.inline;
+    if (!host) return;
+    if (!S.taps.length) { host.innerHTML = '<div class="dag-empty">tap some beats to see the DAG</div>'; return; }
+    const proj = projectPatternToDag(currentPattern(), { mode: 'timing-chain' });
+    const nodes = proj.nodes, edges = proj.edges;
+    const W = host.clientWidth || 800, H = host.clientHeight || 360;
+    const pad = 56, nodeW = 116, nodeH = 38;
+    const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y);
+    const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+    const sx = (W - pad * 2 - nodeW) / ((maxX - minX) || 1), sy = (H - pad * 2 - nodeH) / ((maxY - minY) || 1);
+    const pos = n => ({ x: pad + (n.x - minX) * sx, y: pad + (n.y - minY) * sy });
+    const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+    const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    let svg = `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+    for (const e of edges) {
+        const a = byId[e.source], b = byId[e.target]; if (!a || !b) continue;
+        const pa = pos(a), pb = pos(b);
+        svg += `<line x1="${pa.x + nodeW / 2}" y1="${pa.y + nodeH / 2}" x2="${pb.x + nodeW / 2}" y2="${pb.y + nodeH / 2}" stroke="#9aa7b6" stroke-width="2"/>`;
+    }
+    for (const n of nodes) {
+        const p = pos(n);
+        svg += `<rect x="${p.x}" y="${p.y}" width="${nodeW}" height="${nodeH}" rx="9" fill="${n.color || '#0071CE'}"/>`
+            + `<text x="${p.x + nodeW / 2}" y="${p.y + nodeH / 2 + 4}" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="11">${esc(String(n.label || '').slice(0, 16))}</text>`;
+    }
+    host.innerHTML = svg + '</svg>';
+}
+function dagRefresh() { if (dagMode === 'signalr') dagAutoProject(); else renderInlineDag(); }
+function setDagMode(mode) {
+    dagMode = mode === 'signalr' ? 'signalr' : 'inline';
+    try { localStorage.setItem('tap-repeater:dagMode', dagMode); } catch {}
+    dagEls.toggle?.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.mode === dagMode));
+    const sr = dagMode === 'signalr';
+    if (dagEls.frame) dagEls.frame.style.display = sr ? 'block' : 'none';
+    if (dagEls.inline) dagEls.inline.style.display = sr ? 'none' : 'block';
+    [dagEls.rtt, dagEls.room, dagEls.status, dagEls.project].forEach(el => { if (el) el.style.display = sr ? '' : 'none'; });
+    if (dagEls.note && !sr) dagEls.note.hidden = true;
+    if (sr) { if (!dagConn) initDag(); else projectToDag(false); }
+    else renderInlineDag();
+}
 if (dagEls.project) dagEls.project.onclick = () => projectToDag(true);
+if (dagEls.toggle) dagEls.toggle.querySelectorAll('button').forEach(b => { b.onclick = () => setDagMode(b.dataset.mode); });
 
 // ── wire up ──────────────────────────────────────────────────────────────────
 els.load.onclick = () => {
@@ -373,7 +417,7 @@ if (deepSlug && loadLibrary()[deepSlug]) openProfile(loadLibrary()[deepSlug]);
 else if (deepId) { els.url.value = deepId; loadSong(deepId); }
 renderAll();
 requestAnimationFrame(frame);
-initDag();
+try { setDagMode(localStorage.getItem('tap-repeater:dagMode') || 'inline'); } catch { setDagMode('inline'); }
 
 // Debug surface (consistent with window.tapRepeaterDebug on the instrument).
 window.tapRepeaterBuilderDebug = {
