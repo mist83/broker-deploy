@@ -18,6 +18,7 @@ For repos under `mist83/`, the shared engineering canon is the source of truth f
 - Treat katai + ineed + this doctrine as the source of truth for repo and workflow policy.
 - Do not recreate these rules ad hoc in local platform files.
 - When a new rule feels global and durable, put it where it belongs: durable doctrine → the brain; a "how to build X" recipe → a new kata on katai; a reusable capability → a row on the ineed shelf. Don't sprinkle it into one runtime.
+- **Registering a capability on ineed is part of bookmark/breadcrumb closeout** (`feedback_breadcrumb_protocol`). When you close out a chapter that built something reusable, add the ineed row (and a katai kata for a repeatable recipe) as part of that closeout, so the proof trail and the capability shelf stay in sync. ineed owns the capability registry; the bookmark proves the work and points at it — it is not a second registry.
 
 ## Why
 

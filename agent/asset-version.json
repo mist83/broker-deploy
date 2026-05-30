@@ -1,7 +1,7 @@
 {
   "siteId": "agent",
   "host": "agent.mullmania.com",
-  "semver": "1.0.163",
-  "previousSemver": "1.0.162",
-  "publishedAt": "2026-05-30T04:35:51.233Z"
+  "semver": "1.0.165",
+  "previousSemver": "1.0.164",
+  "publishedAt": "2026-05-30T05:36:51.169Z"
 }

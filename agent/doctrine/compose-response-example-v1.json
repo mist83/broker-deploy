@@ -56,7 +56,7 @@
     {
       "id": "feedback_development_canon_source_of_truth",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_development_canon_source_of_truth.md",
-      "sha256": "95f43669620299f572bebdda84257091313e00111bb9e3585269bcac19c6a72a"
+      "sha256": "36a9a23c57a40ac053b538a85952e97b5c7a2bf0485e7ed5f5002a903a7a1eb2"
     },
     {
       "id": "feedback_deployment_completion",
@@ -116,7 +116,7 @@
     {
       "id": "feedback_breadcrumb_protocol",
       "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-      "sha256": "69f06ab1cabd0f7c231587322a875acba5e2d88296530d54a6dcd256fda4d1a2"
+      "sha256": "e0ed2ae09030df596d6caa82448e7a01665bc29cfb9fc5b1cbc88e12b875603a"
     },
     {
       "id": "feedback_ship_to_deployed",

@@ -83,7 +83,7 @@ That is the entire response. No header, no preamble, no suggestion, no "want me 
 
 ## What "bookmark" means (the substantive check)
 
-All seven must be true:
+All of these must be true:
 
 1. **Canonical source**: every meaningful change is committed in the correct repo. If a canonical remote exists, commits are pushed or the missing push is named as the blocker.
 2. **Single source of truth**: no orphan copy of the work in a second repo / second path. Future-me lands in one place.
@@ -93,6 +93,7 @@ All seven must be true:
 6. **Breadcrumb pointer**: the canonical repo has a durable `.proof.json` breadcrumb or equivalent pinned doc pointing at its proof vault/feed and latest deposit, unless the repo is read-only or the proof is intentionally owned elsewhere.
 7. **Source-chat pointer**: every proof asset, poster asset, fallback artifact, and breadcrumb deposit created by the bookmark includes a `created_by_chat` pointer with a navigable chat URL when the runtime exposes one, or an exact runtime/thread/session locator when it does not. If neither can be captured, the bookmark is **no** because the operator cannot know which archived chat to reopen.
 8. **Feed milestone pointer**: when `~/Code/feed.mullmania.com` and its deploy path are reachable, the bookmark has a newest-first milestone in `data/milestones.json` using schema `feed.mullmania.com/milestone-feed-v1`, deployed to `https://feed.mullmania.com/#<milestone-id>`, and the `visual evidence` line points there first. If this is blocked after bounded effort, name the blocker and include the direct proof fallback.
+9. **Capability registered (ineed is the registry)**: if the chapter produced a reusable capability — a deployed thing other repos could use — or a repeatable "how to build X", it is registered where the fleet will actually find it: a capability row on the **ineed shelf** (`ineed.mullmania.com`, machine-readable `ineed.json`), and a kata on **katai** for a repeatable recipe — not only proven in its own repo. This is the division of labour with the ineed protocol (`feedback_development_canon_source_of_truth`): **ineed owns the capability registry; the bookmark proves the work and points at it, it does not become a second registry.** A capability that only lives in its repo is invisible to the next person and gets rebuilt — the sprawl ineed exists to prevent. If the chapter produced nothing reusable, this item is trivially satisfied.
 
 If any of those is false, the answer is **no** and the reason names which one.
 
