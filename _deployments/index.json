@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-30T21:55:39.519Z",
+  "generatedAt": "2026-05-30T22:00:16.354Z",
   "sites": [
     {
       "siteId": "agent",
@@ -214,13 +214,13 @@
       "status": "success",
       "liveUrl": "https://tap-repeater.mullmania.com/",
       "mirrorUrl": "https://mist83.github.io/broker-deploy/tap-repeater/",
-      "lastPublishedAt": "2026-05-30T21:34:37.312Z",
-      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26695497678",
-      "latestBrokerRunNumber": "252",
+      "lastPublishedAt": "2026-05-30T22:00:16.344Z",
+      "latestBrokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26696015344",
+      "latestBrokerRunNumber": "254",
       "trigger": "github-webhook",
       "hostingFiles": 24,
       "hostingBytes": 222164,
-      "recordedDeployments": 10
+      "recordedDeployments": 11
     },
     {
       "siteId": "tic-hack-toe",
