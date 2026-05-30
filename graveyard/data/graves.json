@@ -1947,5 +1947,45 @@
     "tags": [],
     "salvagePaths": [],
     "searchText": "prompt-soundboard DEFUNCT This repository is defunct as of 2026-03-31.  tics.mullmania.com"
+  },
+  {
+    "repo": "pm-a2a",
+    "title": "pm-a2a - Poor Man's Agent-to-Agent Protocol",
+    "summary": "Lightweight protocol for AI agents to coordinate across different contexts using itchy-brain as a message bus.",
+    "epitaph": null,
+    "born": "2026-03-23T20:28:27-06:00",
+    "died": "2026-05-30T14:16:23-06:00",
+    "supersededBy": "mist83/itchy-brain",
+    "sourceWas": "github.com/mist83/pm-a2a",
+    "commit": "6739f8b48b50ebe7902721c9414618fed6d3d59c",
+    "plot": {
+      "hash": "d93b1ecb23066ffe4dbc89b6a541307bd29c9566116755e3d77936abe541c202",
+      "sectionCode": "d9",
+      "plotCode": "3b",
+      "sectionIndex": 217,
+      "plotIndex": 59,
+      "sectionGrid": {
+        "x": 9,
+        "z": 13
+      },
+      "plotGrid": {
+        "x": 11,
+        "z": 3
+      }
+    },
+    "files": 18,
+    "snapshotBytes": 102667,
+    "snapshotSizeLabel": "100 KB",
+    "bundleBytes": 45267,
+    "bundleSizeLabel": "44 KB",
+    "hasSnapshot": true,
+    "hasBundle": true,
+    "hasBundlePointer": false,
+    "snapshotPath": "pm-a2a",
+    "bundlePath": "pm-a2a.bundle",
+    "bundlePointerPath": null,
+    "tags": [],
+    "salvagePaths": [],
+    "searchText": "pm-a2a pm-a2a - Poor Man's Agent-to-Agent Protocol Lightweight protocol for AI agents to coordinate across different contexts using itchy-brain as a message bus.  mist83/itchy-brain"
   }
 ]

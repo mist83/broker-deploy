@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "graveyard",
     "status": "success",
-    "deployedAt": "2026-05-29T15:38:45.416Z",
+    "deployedAt": "2026-05-30T20:18:53.222Z",
     "trigger": "github-webhook",
-    "brokerRunId": "26646606092",
-    "brokerRunNumber": "236",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26646606092",
+    "brokerRunId": "26693899966",
+    "brokerRunNumber": "249",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26693899966",
     "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "graveyard",
+      "status": "success",
+      "deployedAt": "2026-05-30T20:18:53.222Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26693899966",
+      "brokerRunNumber": "249",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26693899966",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "graveyard",
       "status": "success",
