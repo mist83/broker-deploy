@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-30T05:36:50.907Z",
+  "generatedAt": "2026-05-30T21:54:59.272Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -57,7 +57,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-30T05:36:50.907Z",
+    "generatedAt": "2026-05-30T21:54:59.272Z",
     "runtimes": [
       {
         "id": "codex",
@@ -156,7 +156,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-30T05:36:50.907Z",
+    "generatedAt": "2026-05-30T21:54:59.272Z",
     "events": [
       {
         "id": "session_start",
@@ -232,7 +232,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-30T05:36:50.907Z",
+    "generatedAt": "2026-05-30T21:54:59.272Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -334,7 +334,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-30T05:36:50.907Z",
+    "generatedAt": "2026-05-30T21:54:59.272Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -531,7 +531,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-30T05:36:50.907Z",
+    "generatedAt": "2026-05-30T21:54:59.272Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -570,11 +570,11 @@
         "id": "feedback_breadcrumb_protocol",
         "label": "feedback breadcrumb protocol",
         "kind": "feedback-rule",
-        "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on vide",
-        "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence, preferably a real usage video on videos.mullmania.com, and a readable milestone card on feed.mullmania.com whenever the feed repo and deploy path are reachable; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, per-repo proof breadcrumb update, public feed milestone update, and source-chat link capture before answering. The visual evidence line should prefer the feed.mullmania.com/#<milestone-id> URL because that card is the operator-readable front door to proof, commits, live URLs, breadcrumbs, and chat locators. Every proof asset and fallback asset created by the bookmark must point back to the specific chat that created it so the operator can identify the exact archived chat to reopen. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recording is product QA: if the user-perspective recording exposes broken or awkwa",
+        "summary": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence — **either a real usage video on video",
+        "excerpt": "When this protocol triggers, answer with exactly three lines: bookmark, visual evidence, and safe to close. A yes closeout requires a durable resume trail plus hosted proof evidence — **either a real usage video on videos.mullmania.com, or at least 6 hosted screenshots that walk the key states/interactions** — and a readable milestone card on feed.mullmania.com whenever the feed repo and deploy path are reachable; if the chat is near a natural stopping point, finish bounded verification, commit/push, deploy, proof upload, manifest sync, per-repo proof breadcrumb update, public feed milestone update, and source-chat link capture before answering. The visual evidence line should prefer the feed.mullmania.com/#<milestone-id> URL because that card is the operator-readable front door to proof, commits, live URLs, breadcrumbs, and chat locators. Every proof asset and fallback asset created by the bookmark must point back to the specific chat that created it so the operator can identify the exact archived chat to reopen. When visual proof is applicable, the video should demonstrate the implemented software or feature in use at roughly 30 FPS for 30-60 seconds, not a slow snapshot reel. The agent must inspect the final video for clarity, smoothness, and explanatory value before marking proof valid; choppy, laggy, confusing, or slideshow-style recordings are failed proof. Proof recordin",
         "url": "https://agent.mullmania.com/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
         "sitePath": "/doctrine/shared/rules/feedback/feedback_breadcrumb_protocol.md",
-        "sha256": "e0ed2ae09030df596d6caa82448e7a01665bc29cfb9fc5b1cbc88e12b875603a",
+        "sha256": "8da2e1d97768408125b8495ea66ef596e321a8aefe1a34423d80a2b73e103a85",
         "durability": "standing",
         "tags": [
           "operator-style",
