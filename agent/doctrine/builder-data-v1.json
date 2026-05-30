@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-30T03:37:09.896Z",
+  "generatedAt": "2026-05-30T03:41:28.844Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -57,7 +57,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-30T03:37:09.896Z",
+    "generatedAt": "2026-05-30T03:41:28.844Z",
     "runtimes": [
       {
         "id": "codex",
@@ -156,7 +156,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-30T03:37:09.896Z",
+    "generatedAt": "2026-05-30T03:41:28.844Z",
     "events": [
       {
         "id": "session_start",
@@ -232,7 +232,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-30T03:37:09.896Z",
+    "generatedAt": "2026-05-30T03:41:28.844Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -334,7 +334,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-30T03:37:09.896Z",
+    "generatedAt": "2026-05-30T03:41:28.844Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -531,7 +531,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-30T03:37:09.896Z",
+    "generatedAt": "2026-05-30T03:41:28.844Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -1451,10 +1451,10 @@
         "label": "project mec initiative",
         "kind": "project-rule",
         "summary": "Decision reached 2026-04-17 after a long ChatGPT thread: pin MovieLabs MDDF (MEC + MMC + Avails + EIDR) as the ingest *language*, publish Mullmania MDDF Profile 1.0 as the *contract*, use the official validator as the ga",
-        "excerpt": "Decision reached 2026-04-17 after a long ChatGPT thread: pin MovieLabs MDDF (MEC + MMC + Avails + EIDR) as the ingest *language*, publish Mullmania MDDF Profile 1.0 as the *contract*, use the official validator as the gate, treat validated supplier packages as the authoritative store. v3 apple-trie internal item shape becomes one of N compiled outputs, not the center. No LCD schema. No LLM in the translation path. No raw partner XML as database.\n\n**Why:** the existing v3 internal schema ({id, type, title, releaseYear, description, posterImage, widescreenImage, images[], raw[]}) is sediment, not moat. ~7 fields where MEC has ~80, nothing for availability, localization, tracks, or edits. Mike wants to \"run away from the junk\" and standardize on an industry-adopted spec so partners can deliver what they're already delivering to Amazon/Roku/WBD/Google.\n\n**How to apply:**\nDecision doc lives at /Users/mist83/Code/mec/ (not yet deployed to mec.mullmania.com).\nPickup notes in /Users/mist83/Code/mec/NEXT.md — includes deploy status, the open Apple-feed-creds security finding on the apple-trie lambda, and the next concrete artifact to author (Mullmania MDDF Profile 1.0, to live under the mec project / mec.mullmania.com — the former development-canon home is retired).\nWhen Mike references MEC/MMC/MDDF/Avails, or talks about the v3 ingestion playbook, this is the current state — don't re-l",
+        "excerpt": "Decision reached 2026-04-17 after a long ChatGPT thread: pin MovieLabs MDDF (MEC + MMC + Avails + EIDR) as the ingest *language*, publish Mullmania MDDF Profile 1.0 as the *contract*, use the official validator as the gate, treat validated supplier packages as the authoritative store. v3 apple-trie internal item shape becomes one of N compiled outputs, not the center. No LCD schema. No LLM in the translation path. No raw partner XML as database.\n\n**Why:** the existing v3 internal schema ({id, type, title, releaseYear, description, posterImage, widescreenImage, images[], raw[]}) is sediment, not moat. ~7 fields where MEC has ~80, nothing for availability, localization, tracks, or edits. Mike wants to \"run away from the junk\" and standardize on an industry-adopted spec so partners can deliver what they're already delivering to Amazon/Roku/WBD/Google.\n\n**How to apply:**\nDecision doc lives at /Users/mist83/Code/mec/ (not yet deployed to mec.mullmania.com).\nPickup notes in /Users/mist83/Code/mec/NEXT.md — includes deploy status, the open Apple-feed-creds security finding on the apple-trie lambda, and the next concrete artifact to author (Mullmania MDDF Profile 1.0, authored in the mec project at /Users/mist83/Code/mec/, deploying to mec.mullmania.com once that site is live — the former development-canon home is retired).\nWhen Mike references MEC/MMC/MDDF/Avails, or talks about the v",
         "url": "https://agent.mullmania.com/doctrine/shared/rules/project/project_mec_initiative.md",
         "sitePath": "/doctrine/shared/rules/project/project_mec_initiative.md",
-        "sha256": "c3bd00933e3399e6874d51743542ff5d1cadc67e810f6db67c5452db950afdf7",
+        "sha256": "5d9462796251c978ea3fbcd9e5e807e9da9751eac795332fbf1a6fc14977cab4",
         "durability": "scratch",
         "tags": [
           "project-scratch"

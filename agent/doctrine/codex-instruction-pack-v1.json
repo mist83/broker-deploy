@@ -2,7 +2,7 @@
   "schemaVersion": "agents-codex-instruction-pack-v1",
   "flavor": "codex",
   "operator": "mist83",
-  "renderedAt": "2026-05-30T03:37:09.983Z",
+  "renderedAt": "2026-05-30T03:41:28.928Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
   "preambleInstruction": "At the start of every chat, fetch bootstrap-v1.json, materialize this pack only as generated projections, and stop visibly if fetch or verification fails. Do not invent fallback policy.",
   "totalItems": 13,
