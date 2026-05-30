@@ -1,3 +1,26 @@
+/* VENDORED COPY of lecter/public/lecter-theme.css — DO NOT EDIT HERE.
+   Source of truth is the canon; re-sync with: bash lecter/sync-theme.sh
+   canon-sha256: 20386fa088b43eaf7800f37d12381f2669d1a1f36e81b770d05266b34b020762 */
+/* ============================================================================
+   LECTER THEME — CANONICAL SOURCE OF TRUTH for every Lecter surface.
+
+   Token-only (no component classes). A surface consumes the theme by LINKING
+   this file and aliasing the raw --lecter-* tokens to its own short names with
+   a fallback, e.g.   --bg: var(--lecter-bg, #0f1115);   (see hud.css,
+   wallpaper.css). Change a value HERE and every linked surface updates at once.
+   Never fork these values into a surface's own :root — alias them instead.
+
+   Surfaces that CAN link this file live:
+     - all lecter/public/*.html web surfaces (control planes, popups, wallpaper)
+     - agent/hud.html
+     - Apple / menu-bar / watch / phone pages hosted in a WKWebView
+   Surfaces that must VENDOR a checksummed copy (cannot link a remote file —
+   Chrome MV3 CSP forbids remote CSS, and doctrine forbids hardcoding the
+   mullmania/mikesendpoint domain): the lecter-files Chrome extension.
+
+   Keep vendored copies honest:   bash lecter/sync-theme.sh
+   (copies this file out + stamps a checksum so drift is detectable).
+   ============================================================================ */
 :root {
   color-scheme: dark;
   --lecter-bg: #0f1115;
@@ -14,6 +37,11 @@
   --lecter-danger: #ff5d5d;
   --lecter-warn: #ffb454;
   --lecter-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  /* Translucent accent tints — derived from --lecter-accent (#ff6e3c) so
+     hover/selected states stay on-brand. Added 2026-05 for the lecter-files
+     extension; reusable by any surface. */
+  --lecter-accent-soft: rgba(255, 110, 60, 0.12);
+  --lecter-accent-soft-2: rgba(255, 110, 60, 0.20);
 
   --bg: var(--lecter-bg);
   --panel: var(--lecter-panel);
@@ -22,6 +50,7 @@
   --text: var(--lecter-text);
   --muted: var(--lecter-muted);
   --accent: var(--lecter-accent);
+  --accent-hover: var(--lecter-accent-hover);
   --keep: var(--lecter-keep);
   --drop: var(--lecter-danger);
   --trunc: var(--lecter-warn);
