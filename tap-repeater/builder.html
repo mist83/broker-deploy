@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0071CE">
+    <title>Tap Repeater — Builder</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230071CE'/%3E%3Cpath d='M18 34c0-7.7 6.3-14 14-14 6.6 0 12.2 4.6 13.5 10.8H40l9 9 9-9h-5.4C51.4 19.3 43.3 12 32 12 20.9 12 12 20.9 12 32c0 4.8 1.7 9.2 4.6 12.6L22 39.2A13.8 13.8 0 0 1 18 34z' fill='%23FFC220'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root {
+            --blue: #0071CE; --yellow: #FFC220; --pink: #FF2D95;
+            --ink: #16202c; --muted: #6b7785; --line: #e3e8ee; --bg: #f4f6f9; --card: #fff;
+        }
+        html, body { height: 100%; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg); color: var(--ink); display: flex; flex-direction: column; height: 100vh;
+        }
+        button { font-family: inherit; cursor: pointer; border: none; }
+        input { font-family: inherit; }
+
+        /* Header */
+        header {
+            display: flex; align-items: center; gap: 14px; padding: 10px 18px;
+            background: var(--blue); color: #fff; flex: 0 0 auto;
+        }
+        header .logo { font-weight: 800; font-size: 17px; letter-spacing: .2px; display: flex; align-items: center; gap: 8px; }
+        header .logo .tag { background: rgba(255,255,255,.18); padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+        header nav { margin-left: auto; display: flex; gap: 6px; }
+        header nav a {
+            color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
+            padding: 6px 12px; border-radius: 7px; background: rgba(255,255,255,.14); display: flex; align-items: center; gap: 6px;
+        }
+        header nav a:hover { background: rgba(255,255,255,.26); }
+
+        /* Layout */
+        main { flex: 1; display: grid; grid-template-columns: 1fr 320px; gap: 16px; padding: 16px; min-height: 0; }
+        @media (max-width: 860px) { main { grid-template-columns: 1fr; overflow: auto; } }
+        .stage { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+        .panel { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+        .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+
+        /* Load row */
+        .load { display: flex; gap: 8px; align-items: center; }
+        .load input {
+            flex: 1; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 10px; font-size: 14px; color: var(--ink); background: #fbfcfe;
+        }
+        .load input:focus { outline: none; border-color: var(--blue); }
+        .btn { padding: 11px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 7px; }
+        .btn.primary { background: var(--blue); color: #fff; }
+        .btn.primary:hover { background: #005ba8; }
+        .btn.ghost { background: #eef2f7; color: var(--ink); }
+        .btn.ghost:hover { background: #e2e8f0; }
+        .btn.pink { background: var(--pink); color: #fff; }
+        .btn.pink:hover { filter: brightness(.94); }
+        .btn:disabled { opacity: .45; cursor: not-allowed; }
+        .btn.block { width: 100%; justify-content: center; }
+
+        /* Stage: video + tap pad */
+        .deck { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; min-height: 0; }
+        @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+        .video-wrap { background: #000; border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 16 / 9; }
+        .video-wrap #player, .video-wrap iframe { width: 100%; height: 100%; border: 0; }
+        .video-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #5c6b7a; gap: 10px; text-align: center; padding: 20px; }
+        .video-empty i { font-size: 40px; color: #38465a; }
+
+        .tappad {
+            background: linear-gradient(160deg, #11151c, #1d2330); border-radius: 14px; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+            color: #fff; cursor: pointer; user-select: none; overflow: hidden; min-height: 180px; border: 2px solid transparent;
+        }
+        .tappad:active, .tappad.flash { border-color: var(--pink); }
+        .tappad .ring { position: absolute; width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--pink); opacity: 0; pointer-events: none; }
+        .tappad.flash .ring { animation: ping .35s ease-out; }
+        @keyframes ping { from { opacity: .9; transform: scale(.6); } to { opacity: 0; transform: scale(2.2); } }
+        .tappad .big { font-size: 17px; font-weight: 800; letter-spacing: .4px; display: flex; align-items: center; gap: 8px; }
+        .tappad .sub { font-size: 12px; color: #93a1b3; }
+        .tappad .live { position: absolute; top: 10px; left: 12px; font-size: 11px; color: var(--pink); font-weight: 700; opacity: 0; display: flex; align-items: center; gap: 5px; }
+        .tappad.rec .live { opacity: 1; }
+
+        /* Transport + stats */
+        .transport { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .transport .btn.icon { width: 42px; height: 42px; padding: 0; justify-content: center; font-size: 18px; }
+        .stat-chips { display: flex; gap: 8px; margin-left: auto; }
+        .chip { background: #eef2f7; border-radius: 9px; padding: 7px 11px; font-size: 13px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+        .chip b { color: var(--blue); }
+        .chip.pink b { color: var(--pink); }
+
+        /* Timeline */
+        .timeline-card h2 { margin-bottom: 8px; }
+        .timeline { position: relative; height: 64px; background: #0e131b; border-radius: 10px; overflow: hidden; cursor: pointer; }
+        .timeline .tick { position: absolute; top: 8px; bottom: 8px; width: 2px; background: var(--pink); border-radius: 2px; opacity: .85; transform: translateX(-1px); }
+        .timeline .tick.beat4 { background: var(--yellow); width: 3px; }
+        .timeline .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,.7); }
+        .timeline .tl-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #4a596b; font-size: 12px; }
+        .timeline-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 12px; color: var(--muted); }
+        .timeline-meta span b { color: var(--ink); }
+
+        /* Panel: save + library */
+        .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+        .field label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+        .field input { padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 9px; font-size: 13px; background: #fbfcfe; color: var(--ink); }
+        .field input:focus { outline: none; border-color: var(--blue); }
+        .save-actions { display: flex; flex-direction: column; gap: 8px; }
+        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+        .library { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+        .lib-list { overflow: auto; display: flex; flex-direction: column; gap: 8px; }
+        .lib-item { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; display: flex; align-items: center; gap: 10px; }
+        .lib-item .meta { min-width: 0; flex: 1; }
+        .lib-item .meta .t { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lib-item .meta .s { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lib-item .act { display: flex; gap: 4px; }
+        .lib-item .act button { width: 30px; height: 30px; border-radius: 8px; background: #eef2f7; color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+        .lib-item .act button:hover { background: #e2e8f0; }
+        .lib-item .act button.del:hover { background: #ffe2e9; color: #d11149; }
+        .lib-empty { color: var(--muted); font-size: 12px; padding: 6px 2px; }
+
+        .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; opacity: 0; transition: all .25s; pointer-events: none; z-index: 50; display: flex; align-items: center; gap: 8px; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.pink { background: var(--pink); }
+
+        /* DAG preview (iframe + SignalR) */
+        .stage { overflow-y: auto; }
+        .dag-card h2 { display: flex; align-items: center; gap: 8px; }
+        .dag-status { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: none; letter-spacing: 0; padding: 2px 9px; border-radius: 999px; background: #eef2f7; }
+        .dag-status.live { color: #0a7d3b; background: #e3f7ec; }
+        .dag-status.off { color: #b4232f; background: #fde8ea; }
+        .dag-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .dag-auto { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .dag-room { font-size: 11px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; margin-left: auto; }
+        .dag-frame-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #0e131b; }
+        #dag-frame { width: 100%; height: 360px; border: 0; display: block; background: #0e131b; }
+        .dag-note { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #93a1b3; font-size: 13px; padding: 24px; background: #0e131b; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="ti ti-rewind-forward-10"></i> Tap Repeater <span class="tag">BUILDER</span></div>
+        <nav>
+            <a href="./index.html"><i class="ti ti-keyboard"></i> Instrument</a>
+            <a id="nav-dag" href="#" target="_blank"><i class="ti ti-binary-tree"></i> Open DAG</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="stage">
+            <div class="card">
+                <div class="load">
+                    <input id="url" type="text" placeholder="Paste a YouTube link or video id (e.g. ROatPGGMvXg)…" autocomplete="off">
+                    <button id="load" class="btn primary"><i class="ti ti-player-play"></i> Load song</button>
+                </div>
+            </div>
+
+            <div class="deck">
+                <div class="video-wrap">
+                    <div id="player"></div>
+                    <div id="video-empty" class="video-empty"><i class="ti ti-brand-youtube"></i><div>Load a song to start tapping along.<br>The video plays here — tap the pad or hit <b>Space</b> on every beat.</div></div>
+                </div>
+                <div id="tappad" class="tappad">
+                    <span class="live"><i class="ti ti-circle-filled"></i> RECORDING</span>
+                    <span class="ring"></span>
+                    <span class="big"><i class="ti ti-hand-finger"></i> TAP</span>
+                    <span class="sub">click here or press <b>Space</b> on every beat</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="transport">
+                    <button id="play" class="btn ghost icon" title="Play / pause"><i class="ti ti-player-play"></i></button>
+                    <button id="restart" class="btn ghost icon" title="Back to start"><i class="ti ti-player-skip-back"></i></button>
+                    <button id="undo" class="btn ghost"><i class="ti ti-arrow-back-up"></i> Undo</button>
+                    <button id="clear" class="btn ghost"><i class="ti ti-trash"></i> Clear</button>
+                    <div class="stat-chips">
+                        <span class="chip pink"><i class="ti ti-music"></i> <b id="stat-taps">0</b> taps</span>
+                        <span class="chip"><i class="ti ti-activity-heartbeat"></i> <b id="stat-bpm">—</b> bpm</span>
+                        <span class="chip"><i class="ti ti-clock"></i> <span id="stat-time">0:00</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card timeline-card">
+                <h2><i class="ti ti-timeline"></i> Timeline</h2>
+                <div id="timeline" class="timeline"><div class="tl-empty">taps appear here along the song — click to seek</div></div>
+                <div class="timeline-meta">
+                    <span>song <b id="tl-dur">0:00</b></span>
+                    <span>loops every <b id="tl-loop">—</b></span>
+                    <span id="tl-hint" style="margin-left:auto">tip: tap a full phrase, then loop &amp; refine</span>
+                </div>
+            </div>
+
+            <div class="card dag-card">
+                <h2><i class="ti ti-binary-tree"></i> DAG preview — live via SignalR
+                    <span id="dag-status" class="dag-status">connecting…</span>
+                    <span id="dag-rtt" class="chip" style="margin-left:auto"><i class="ti ti-activity"></i> RTT <b>—</b></span>
+                </h2>
+                <div class="dag-controls">
+                    <button id="dag-project" class="btn pink"><i class="ti ti-send"></i> Project taps → DAG</button>
+                    <label class="dag-auto"><input type="checkbox" id="dag-auto" checked> auto while tapping</label>
+                    <span id="dag-room" class="dag-room"></span>
+                </div>
+                <div class="dag-frame-wrap">
+                    <iframe id="dag-frame" title="DAG preview" allow="autoplay; encrypted-media"></iframe>
+                    <div id="dag-note" class="dag-note" hidden></div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="panel">
+            <div class="card">
+                <h2><i class="ti ti-device-floppy"></i> Save profile</h2>
+                <div class="field"><label>Profile name</label><input id="p-name" type="text" placeholder="e.g. Sweetness — main beat"></div>
+                <div class="field"><label>Song title</label><input id="p-title" type="text" placeholder="auto-filled from YouTube"></div>
+                <div class="field"><label>Artist</label><input id="p-artist" type="text" placeholder="auto-filled from YouTube"></div>
+                <div class="field"><label>Slug (the join key across DAG &amp; dance-party)</label><input id="p-slug" type="text" placeholder="sweetness"></div>
+                <div class="save-actions">
+                    <button id="save" class="btn primary block"><i class="ti ti-device-floppy"></i> Save to library</button>
+                    <div class="row2">
+                        <button id="send-dag" class="btn pink"><i class="ti ti-binary-tree"></i> Send to DAG</button>
+                        <button id="download" class="btn ghost"><i class="ti ti-download"></i> Publish JSON</button>
+                    </div>
+                    <button id="copy-url" class="btn ghost block"><i class="ti ti-link"></i> Copy rhythm URL</button>
+                </div>
+            </div>
+
+            <div class="card library">
+                <h2><i class="ti ti-folder"></i> Library</h2>
+                <div id="lib-list" class="lib-list"><div class="lib-empty">No saved profiles yet — tap a song and hit Save.</div></div>
+            </div>
+        </aside>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script type="module" src="./builder.js"></script>
+</body>
+</html>

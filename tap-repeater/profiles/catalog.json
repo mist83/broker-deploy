@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "sweetness",
+      "name": "Sweetness — steady pulse seed",
+      "song": {
+        "slug": "sweetness",
+        "title": "Sweetness",
+        "artist": "Jimmy Eat World",
+        "youtubeId": "ROatPGGMvXg",
+        "durationSec": 219
+      },
+      "summary": {
+        "bpm": 140,
+        "beatCount": 32,
+        "eventCount": 32,
+        "durationMs": 13285.714
+      },
+      "source": "seed",
+      "createdAt": "2026-05-30",
+      "file": "./sweetness.json"
+    }
+  ]
+}

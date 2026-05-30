@@ -1,7 +1,7 @@
 {
   "siteId": "tap-repeater",
   "host": "tap-repeater.mullmania.com",
-  "semver": "1.0.4",
-  "previousSemver": "1.0.3",
-  "publishedAt": "2026-05-26T13:35:08.973Z"
+  "semver": "1.0.7",
+  "previousSemver": "1.0.6",
+  "publishedAt": "2026-05-30T15:46:11.617Z"
 }
