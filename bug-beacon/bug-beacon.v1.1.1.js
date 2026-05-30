@@ -232,9 +232,14 @@ if (!window.FABCollection) {
 (function(window, document) {
     'use strict';
 
+    // Cap stored error detail so a page that errors in a loop can't grow the
+    // array without bound. The report still reports the true total captured.
+    const MAX_STORED_ERRORS = 100;
+
     let isOpen = false;
     let panel = null;
     let errors = [];
+    let totalErrorsCaptured = 0;
     let layoutIssues = [];
     let originalConsoleError = console.error;
     let suppressConsoleErrorCapture = false;
@@ -390,7 +395,14 @@ if (!window.FABCollection) {
 
     // Capture error and show FAB
     function captureError(error) {
+        totalErrorsCaptured++;
         errors.push(error);
+
+        // Keep only the most recent MAX_STORED_ERRORS so the array can't grow
+        // unbounded on a long-lived page that throws repeatedly.
+        if (errors.length > MAX_STORED_ERRORS) {
+            errors.shift();
+        }
 
         // Show the FAB when an error is captured
         window.FABCollection.showFAB('bug-beacon');
@@ -562,26 +574,32 @@ if (!window.FABCollection) {
     function generateLLMFriendlyReport() {
         let report = `# Bug Beacon Report\n`;
         report += `Generated: ${new Date().toISOString()}\n`;
-        report += `JS Errors: ${errors.length}\n`;
+        if (totalErrorsCaptured > errors.length) {
+            report += `JS Errors: ${totalErrorsCaptured} (most recent ${errors.length} shown)\n`;
+        } else {
+            report += `JS Errors: ${errors.length}\n`;
+        }
         report += `Layout Issues: ${layoutIssues.length}\n`;
         report += `URL: ${window.location.href}\n`;
         report += `Viewport: ${window.innerWidth} x ${window.innerHeight}\n`;
         report += `User Agent: ${navigator.userAgent}\n\n`;
 
-        report += `## Errors\n\n`;
+        if (errors.length > 0) {
+            report += `## Errors\n\n`;
 
-        errors.forEach((error, index) => {
-            report += `### Error ${index + 1}: ${error.type}\n`;
-            report += `Time: ${error.timestamp}\n`;
-            report += `Message: ${error.message}\n`;
-            
-            if (error.filename) {
-                report += `File: ${error.filename}:${error.lineno}:${error.colno}\n`;
-            }
-            
-            report += `\nStack Trace:\n\`\`\`\n${error.stack}\n\`\`\`\n\n`;
-            report += `-------------------------------\n\n`;
-        });
+            errors.forEach((error, index) => {
+                report += `### Error ${index + 1}: ${error.type}\n`;
+                report += `Time: ${error.timestamp}\n`;
+                report += `Message: ${error.message}\n`;
+
+                if (error.filename) {
+                    report += `File: ${error.filename}:${error.lineno}:${error.colno}\n`;
+                }
+
+                report += `\nStack Trace:\n\`\`\`\n${error.stack}\n\`\`\`\n\n`;
+                report += `-------------------------------\n\n`;
+            });
+        }
 
         if (layoutIssues.length > 0) {
             report += `## Layout Issues\n\n`;
@@ -712,6 +730,7 @@ if (!window.FABCollection) {
     // Clear errors and layout issues, hide FAB
     function clearErrors() {
         errors = [];
+        totalErrorsCaptured = 0;
         layoutIssues = [];
 
         // Hide the FAB when both error and layout snapshots are clear.
@@ -730,8 +749,18 @@ if (!window.FABCollection) {
 
     // Initialize
     function init() {
+        // Guard against double-load. The README documents both a pinned and an
+        // unpinned URL; a page that includes both (or the same script twice)
+        // would otherwise register a second #fab-bug-beacon button, double-wrap
+        // console.error, and double-attach the error/observer listeners — so
+        // every error would be counted twice and two bug icons would stack.
+        if (window.__bugBeaconInitialized) {
+            return;
+        }
+        window.__bugBeaconInitialized = true;
+
         console.log('[Bug Beacon] Library loaded - monitoring for errors');
-        
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', createFAB);
         } else {
