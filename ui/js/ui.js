@@ -43,6 +43,7 @@
         { file: 'cards.js', id: 'ui-cards-js' },
         { file: 'collapsible.js', id: 'ui-collapsible-js' },
         { file: 'components.js', id: 'ui-components-js' },
+        { file: 'tag-search.js', id: 'ui-tag-search-js' },
         { file: 'screensaver.js', id: 'ui-screensaver-js' },
         { file: 'theme-builder.js', id: 'ui-theme-builder-js' },
         { file: 'presets.js', id: 'ui-presets-js' },

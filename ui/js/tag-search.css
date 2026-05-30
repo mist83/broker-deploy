@@ -1,0 +1,125 @@
+/**
+ * Tag Search — Canon Primitive styles (pairs with js/tag-search.js)
+ * @url https://ui.mullmania.com/js/tag-search.css
+ *
+ * Only the tokenized-input-with-pills shell lives here. The pills and facet
+ * options reuse the shared .surface-chip primitive (core/surface-shell.css);
+ * the rail padding comes from .sidebar-filter-rail (core/layout.css).
+ */
+
+.tag-search {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
+
+.tag-search__field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm, 6px);
+    background: var(--bg-primary);
+    min-width: 0;
+}
+
+.tag-search__field:focus-within {
+    border-color: var(--color-primary);
+}
+
+.tag-search__icon {
+    flex: 0 0 auto;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.tag-search__input {
+    flex: 1 1 90px;
+    min-width: 90px;
+    padding: 3px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+}
+
+.tag-search__input::placeholder {
+    color: var(--text-muted);
+}
+
+.tag-search__clear {
+    flex: 0 0 auto;
+    padding: 0 2px;
+    border: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.tag-search__clear:hover {
+    color: var(--text-primary);
+}
+
+.tag-search__clear[hidden] {
+    display: none;
+}
+
+/* Selected tags — base look comes from .surface-chip.is-active */
+.tag-search__pill {
+    cursor: default;
+    padding-right: 5px;
+}
+
+.tag-search__pill-remove {
+    display: inline-grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    margin-left: 1px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.tag-search__pill-remove:hover {
+    background: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+/* Facet options (click-to-add) — base look comes from .surface-chip */
+.tag-search__facets {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.tag-search__facet-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+.tag-search__facet-label {
+    margin-right: 2px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: var(--weight-bold, 700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tag-search__facet-chip {
+    cursor: pointer;
+}

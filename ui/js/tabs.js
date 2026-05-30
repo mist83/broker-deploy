@@ -1997,6 +1997,11 @@ class WorkspaceController {
         if (!sidebar || !filters) return;
         if (sidebar.querySelector('.sidebar-filter-rail')) return;
 
+        if (filters.tagSearch) {
+            this.renderTagSearchRail(sidebar, filters.tagSearch);
+            return;
+        }
+
         if (!this.filterState) {
             this.filterState = { query: '', chip: 'all', selects: {} };
             if (filters.chips?.options?.length) {
@@ -2061,9 +2066,55 @@ class WorkspaceController {
         });
     }
 
+    renderTagSearchRail(sidebar, config) {
+        if (!this.filterState || !(this.filterState.tags instanceof Set)) {
+            this.filterState = { query: '', tags: new Set() };
+        }
+
+        // Static per-option match counts over the full dataset (informative facets).
+        const facets = (config.facets || []).map((facet) => {
+            const field = facet.field || facet.id;
+            const options = (facet.options || []).map((opt) => {
+                const count = this.data.reduce((total, item) => {
+                    const value = item[field];
+                    const has = Array.isArray(value) ? value.includes(opt.id) : value === opt.id;
+                    return has ? total + 1 : total;
+                }, 0);
+                return { ...opt, count: opt.count != null ? opt.count : count };
+            });
+            return { ...facet, field, options };
+        });
+
+        const rail = document.createElement('div');
+        rail.className = 'sidebar-filter-rail';
+        sidebar.insertBefore(rail, sidebar.firstChild);
+
+        const tagSearch = window.UI?.TagSearch;
+        if (!tagSearch || typeof tagSearch.mount !== 'function') {
+            console.warn('[UI Shell] UI.TagSearch unavailable; tagSearch filter not mounted.');
+            return;
+        }
+
+        this._tagSearch = tagSearch.mount(rail, {
+            facets,
+            freeText: config.freeText || { placeholder: 'Filter', fields: ['name', 'title', 'description'] },
+            value: { text: this.filterState.query || '', tags: Array.from(this.filterState.tags || []) },
+            onChange: ({ text, tags }) => {
+                this.filterState.query = String(text || '').trim().toLowerCase();
+                this.filterState.tags = tags instanceof Set ? tags : new Set(tags || []);
+                this.renderSidebarItems();
+            },
+        });
+    }
+
     getFilteredData() {
         const filters = this.getListSection()?.filters;
         if (!filters || !this.filterState) return this.data;
+
+        if (filters.tagSearch) {
+            return this.getTagSearchFilteredData(filters.tagSearch);
+        }
+
         const state = this.filterState;
         const searchFields = filters.search?.fields || ['name', 'title', 'description'];
         return this.data.filter((item) => {
@@ -2086,6 +2137,46 @@ class WorkspaceController {
                 const field = select.field || select.id;
                 const value = item[field];
                 const matches = Array.isArray(value) ? value.includes(selected) : value === selected;
+                if (!matches) return false;
+            }
+            return true;
+        });
+    }
+
+    getTagSearchFilteredData(config) {
+        const state = this.filterState;
+        const query = state.query || '';
+        const tags = state.tags instanceof Set ? state.tags : new Set();
+        const fields = config.freeText?.fields || ['name', 'title', 'description'];
+
+        const fieldByFacet = {};
+        (config.facets || []).forEach((facet) => { fieldByFacet[facet.id] = facet.field || facet.id; });
+
+        const selectedByFacet = {};
+        tags.forEach((key) => {
+            const idx = key.indexOf(':');
+            if (idx < 0) return;
+            const facetId = key.slice(0, idx);
+            const optId = key.slice(idx + 1);
+            (selectedByFacet[facetId] = selectedByFacet[facetId] || []).push(optId);
+        });
+
+        return this.data.filter((item) => {
+            if (query) {
+                const haystack = fields.map((field) => {
+                    const value = item[field];
+                    return Array.isArray(value) ? value.join(' ') : (value ?? '');
+                }).join(' ').toLowerCase();
+                if (!haystack.includes(query)) return false;
+            }
+            // OR within a facet, AND across facets.
+            for (const facetId of Object.keys(selectedByFacet)) {
+                const field = fieldByFacet[facetId] || facetId;
+                const value = item[field];
+                const wanted = selectedByFacet[facetId];
+                const matches = wanted.some((optId) => (
+                    Array.isArray(value) ? value.includes(optId) : value === optId
+                ));
                 if (!matches) return false;
             }
             return true;
