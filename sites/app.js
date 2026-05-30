@@ -18226,6 +18226,36 @@ function onPreviewDone() {
   setTimeout(drainPreviewQueue, previewQueue.delayMs);
 }
 
+// Keep only the previews near the viewport decoded. With a large catalog a long
+// mobile scroll would otherwise hold hundreds of full screenshots in memory at
+// once (~1-2MB each once decoded), climbing until the browser kills the tab. The
+// observer now runs both ways: load a preview as it approaches, and drop the
+// decoded bitmap once it scrolls well clear so memory stays flat at any depth.
+const PREVIEW_KEEP_ALIVE_MARGIN = '600px 0px';
+
+function unloadOffscreenPreview(img) {
+  if (!img || img.dataset.previewState !== 'loaded' || !img.dataset.src) {
+    return;
+  }
+  // data-src already holds the resolved (resized) URL, so re-showing it later is
+  // an instant cache hit — no refetch and no server resize round-trip.
+  img.src = PREVIEW_PLACEHOLDER_URL;
+  img.dataset.previewState = 'unloaded';
+  img.classList.add('is-placeholder');
+  img.classList.remove('is-loaded');
+}
+
+function restoreUnloadedPreview(img) {
+  const url = img.dataset.src;
+  if (!url) {
+    return;
+  }
+  img.src = url;
+  img.dataset.previewState = 'loaded';
+  img.classList.add('is-loaded');
+  img.classList.remove('is-placeholder', 'is-failed');
+}
+
 function setupLazyPreviews() {
   if (state.previewObserver) {
     state.previewObserver.disconnect();
@@ -18237,21 +18267,30 @@ function setupLazyPreviews() {
     return;
   }
 
-  state.previewObserver = new IntersectionObserver((entries, observer) => {
+  state.previewObserver = new IntersectionObserver((entries) => {
     for (const item of entries) {
-      if (!item.isIntersecting) {
+      const img = item.target;
+      if (item.isIntersecting) {
+        if (img.dataset.previewState === 'unloaded') {
+          restoreUnloadedPreview(img);
+        } else if (img.dataset.src
+          && img.dataset.previewState === 'placeholder'
+          && !previewQueue.pending.includes(img)) {
+          previewQueue.pending.push(img);
+        }
         continue;
       }
-
-      const img = item.target;
-      observer.unobserve(img);
-      if (img.dataset.src && img.dataset.previewState === 'placeholder') {
-        previewQueue.pending.push(img);
+      // Scrolled clear of the viewport (plus margin): forget any pending load and
+      // release the decoded screenshot so memory can't run away on long scrolls.
+      const queuedIndex = previewQueue.pending.indexOf(img);
+      if (queuedIndex !== -1) {
+        previewQueue.pending.splice(queuedIndex, 1);
       }
+      unloadOffscreenPreview(img);
     }
     drainPreviewQueue();
   }, {
-    rootMargin: '300px 0px',
+    rootMargin: PREVIEW_KEEP_ALIVE_MARGIN,
     threshold: 0.01,
   });
 
@@ -30870,7 +30909,18 @@ function closeSwipeToolbar() {
 /* renderSwipeView is called from render() when state.swipeMode is true */
 
 async function fetchJson(url, options = {}) {
-  const response = await fetch(url, { cache: 'no-store', ...options });
+  // Bound every JSON fetch with a timeout so a hung endpoint (e.g. a cold catalog
+  // Lambda) can't freeze boot forever — the launchpad loader only clears after
+  // init()'s await chain settles. On timeout we abort and reject; callers like
+  // loadCatalogBundle() already fall back to the built catalog.
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  let response;
+  try {
+    response = await fetch(url, { cache: 'no-store', signal: controller.signal, ...options });
+  } finally {
+    clearTimeout(timeoutId);
+  }
   if (!response.ok) {
     throw new Error(`Failed to load ${url}: ${response.status}`);
   }

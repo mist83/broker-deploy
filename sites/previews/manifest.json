@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-26T04:13:13Z",
+  "updatedAt": "2026-05-29T06:54:08Z",
   "entries": {
     "3d-ball-with-dynamic-lighting-and-shadow-5054": {
       "siteId": "3d-ball-with-dynamic-lighting-and-shadow-5054",
@@ -14646,21 +14646,6 @@
       "etag": "a247de1ca6c780030d5446d0d056893b",
       "sourceUrl": "https://kurzgesagt-bbq-scene.mullmania.com/"
     },
-    "kurzgesagt-rocket-demo": {
-      "siteId": "kurzgesagt-rocket-demo",
-      "status": "ok",
-      "path": "/api/previews/kurzgesagt-rocket-demo.png",
-      "url": "/api/previews/kurzgesagt-rocket-demo.png?v=1776394359179",
-      "objectKey": "sites/previews/kurzgesagt-rocket-demo.png",
-      "capturedAt": "2026-04-17T02:52:39Z",
-      "version": "1776394359179",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 2670,
-      "etag": "68f50d18a0c34bcd1a7b324663fce929",
-      "sourceUrl": "https://kurzgesagt-rocket-demo.mullmania.com/"
-    },
     "l-shaped-train-coupler-demo": {
       "siteId": "l-shaped-train-coupler-demo",
       "status": "ok",
@@ -19447,36 +19432,6 @@
       "etag": "81a55496878387100e94308ad944334a",
       "sourceUrl": "https://rhythm-scene.mullmania.com/"
     },
-    "rigid-rope-full-drag": {
-      "siteId": "rigid-rope-full-drag",
-      "status": "ok",
-      "path": "/api/previews/rigid-rope-full-drag.png",
-      "url": "/api/previews/rigid-rope-full-drag.png?v=1777076308918",
-      "objectKey": "sites/previews/rigid-rope-full-drag.png",
-      "capturedAt": "2026-04-25T00:18:28Z",
-      "version": "1777076308918",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 17083,
-      "etag": "ea7f5dff35a1c3865a11f7d574cbee01",
-      "sourceUrl": "https://rigid-rope-full-drag.mullmania.com/"
-    },
-    "rigid-rope-soft-drag": {
-      "siteId": "rigid-rope-soft-drag",
-      "status": "ok",
-      "path": "/api/previews/rigid-rope-soft-drag.png",
-      "url": "/api/previews/rigid-rope-soft-drag.png?v=1777076311258",
-      "objectKey": "sites/previews/rigid-rope-soft-drag.png",
-      "capturedAt": "2026-04-25T00:18:31Z",
-      "version": "1777076311258",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 17083,
-      "etag": "ea7f5dff35a1c3865a11f7d574cbee01",
-      "sourceUrl": "https://rigid-rope-soft-drag.mullmania.com/"
-    },
     "rigid-three-car-train-v28": {
       "siteId": "rigid-three-car-train-v28",
       "status": "ok",
@@ -22157,24 +22112,6 @@
       "etag": "1d35a9e616c8a4ec3ab3f0c6984a215a",
       "sourceUrl": "https://swagger-customization.mullmania.com/"
     },
-    "swagger-graph": {
-      "siteId": "swagger-graph",
-      "status": "ok",
-      "path": "/api/previews/swagger-graph.png",
-      "url": "/api/previews/swagger-graph.png?v=1779664860396",
-      "objectKey": "sites/previews/swagger-graph.png",
-      "capturedAt": "2026-05-24T23:21:00Z",
-      "version": "1779664860396",
-      "width": 640,
-      "height": 360,
-      "style": null,
-      "params": {},
-      "screenshots": [],
-      "contentType": "image/png",
-      "size": 25216,
-      "etag": "007664f7154d604de32f441833aebd03",
-      "sourceUrl": "https://swagger-graph.mullmania.com/"
-    },
     "swarm-ping-tester": {
       "siteId": "swarm-ping-tester",
       "status": "ok",
@@ -22297,21 +22234,6 @@
       "size": 29019,
       "etag": "87152c1d06fa2b80a11b43bb6707f41c",
       "sourceUrl": "https://table-column-builder-classic.mullmania.com/"
-    },
-    "table-column-builder-wide": {
-      "siteId": "table-column-builder-wide",
-      "status": "ok",
-      "path": "/api/previews/table-column-builder-wide.png",
-      "url": "/api/previews/table-column-builder-wide.png?v=1776302105607",
-      "objectKey": "sites/previews/table-column-builder-wide.png",
-      "capturedAt": "2026-04-16T01:15:05Z",
-      "version": "1776302105607",
-      "width": 960,
-      "height": 540,
-      "contentType": "image/png",
-      "size": 17812,
-      "etag": "7492572c441741134bbd5f4c3982b7b1",
-      "sourceUrl": "https://table-column-builder-wide.mullmania.com/"
     },
     "table-overflow-demo-2968": {
       "siteId": "table-overflow-demo-2968",
