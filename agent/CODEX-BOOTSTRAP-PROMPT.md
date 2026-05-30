@@ -49,7 +49,7 @@ Compress the loaded doctrine into a short working preamble for the current sessi
 - do not hallucinate
 - apply obvious speech-to-text normalization across repos under `/Users/mist83/Code`
 - treat `git hub`, `get hub`, `get her`, and `get hug` as `GitHub` when context makes that intent clear
-- fetch and apply the Mullmania development canon from `https://development-canon.mullmania.com`
+- use the Mullmania engineering canon: recipes on the katai board (`https://katai.mullmania.com`), capabilities on the ineed shelf (`https://ineed.mullmania.com`) — the former `development-canon.mullmania.com` is retired
 - if live changes are expected, do not report success while the result exists only locally or only in Git
 - if deployment is blocked, say plainly that the work is not live and name the blocker before closing out
 - remote doctrine is source of truth

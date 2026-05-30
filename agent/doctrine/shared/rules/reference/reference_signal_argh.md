@@ -13,7 +13,7 @@ ASP.NET Core 8 SignalR hub, deployed to ECS Fargate, reachable at
 ## Where to read
 
 - Operator + agent guide: `mist83/signal-argh/AGENTS.md` — run locally in 60s, full hub method table, REST endpoints, deploy, gotchas.
-- Cross-repo integration recipe: `mist83/development-canon/integrations/signalargh.md` — JS/C# client examples for pulling it into another project.
+- Cross-repo integration recipe: the **Add real-time (signalargh)** kata on the katai board (`https://katai.mullmania.com`, kata `add-realtime-signalargh`) — how to pull it into another project, with JS/C# client examples. (Migrated off the retired development-canon site.)
 
 ## Must-know gotchas (full list in AGENTS.md)
 

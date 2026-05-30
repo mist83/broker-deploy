@@ -1,6 +1,6 @@
 ---
 name: UI canon first — never invent CSS; read BOTH layers before writing markup
-description: GLOBAL — before any markup that uses the UI framework, read ui.[base]/llm-docs.md (primitives) AND development-canon/core/ui-style-guide.md (shell layer). Use framework classes; if missing, add upstream first. Browser-verify shell contract after deploy.
+description: GLOBAL — before any markup that uses the UI framework, read ui.[base]/llm-docs.md — it covers BOTH the primitives layer and the Shell Contract (shell layer). Use framework classes; if missing, add upstream first. Browser-verify shell contract after deploy.
 type: feedback
 originSessionId: 9d01b121-8837-442b-ab09-8890417ab07b
 ---
@@ -9,7 +9,7 @@ When building any Mullmania/mikesendpoint page that uses the UI framework: read 
 ## Read both layers
 
 1. **`https://ui.[base-url]/llm-docs.md`** — primitives layer. Tokens (`--bg-secondary`, `--text-muted`, `--space-md`), components (`.card`, `.tone-badge`, `.badge-list`, `.btn-primary`, `.tone-info/success/warning/danger/neutral`, `.gallery-card__tags`), theme/mode loader.
-2. **`development-canon/core/ui-style-guide.md`** (fetch from the development-canon repo) — shell layer. Dictates the structural skeleton:
+2. **The `## Shell Contract` section of that same `https://ui.[base-url]/llm-docs.md`** — shell layer. (Formerly `development-canon/core/ui-style-guide.md`; folded into `llm-docs.md` when development-canon was retired 2026-05-29.) Dictates the structural skeleton:
    - **Document / single-purpose front door**: `.header` + `#content-container` + `.page-container`
    - **Tool surface (2+ tasks, browse, list/detail)**: `#header-container` + `#tabs-container` + `#content-container`, default header + tabs + sidebar
    - **`.container` is NOT a generic page wrapper.** A package index, endpoint browser, settings panel, admin surface, dashboard — these are tool surfaces, not document pages.

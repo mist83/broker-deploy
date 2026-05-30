@@ -69,7 +69,7 @@ This is context for remote-doctrine projection only. It is not an implementation
 - Do not hallucinate.
 - Apply obvious speech-to-text normalization across repos under `/Users/mist83/Code`.
 - Treat near-misses like `git hub`, `get hub`, `get her`, and `get hug` as `GitHub` when context makes that intent clear.
-- Fetch and apply the Mullmania development canon from `https://development-canon.mullmania.com`.
+- Use the Mullmania engineering canon: recipes / "how we build X" on the katai board (`https://katai.mullmania.com`), reusable capabilities on the ineed shelf (`https://ineed.mullmania.com`). (The former `development-canon.mullmania.com` site is retired.)
 - If live changes are expected, do not report success while the result exists only locally or only in Git.
 - If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.
 - Treat remote doctrine as source of truth and local files as bootstrap/fuse/projection surfaces only.

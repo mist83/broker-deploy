@@ -55,7 +55,7 @@ The Claude Code harness has surfaces Codex CLI does not. These exist as projecti
 
 A snapshot of Claude-side surfaces that exist on the operator machine today. This is context for remote-doctrine projection only, not an implementation backlog. Counts and categories, not file contents.
 
-- 1 global instructions file (`~/.claude/CLAUDE.md`): Mullmania development canon reference.
+- 1 global instructions file (`~/.claude/CLAUDE.md`): remote-doctrine bootstrap pointer (composes the agent brain at runtime).
 - 1 settings.json with one PostToolUse hook (`mullmania-s3-resync.sh`).
 - 1 MCP server (itchy-brain).
 - 3 slash commands (`/roomup`, `/shipit`, `/tombstone`).
@@ -76,11 +76,11 @@ These are durable behaviors the doctrine must encode if we want a fresh Claude s
 - Do not hallucinate.
 - Apply obvious speech-to-text normalization across repos under `/Users/mist83/Code`.
 - Treat `git hub`, `get hub`, `get her`, and `get hug` as `GitHub` when context makes that intent clear.
-- Mullmania development canon is the global ruleset for `mist83/*` repos; fetched from `https://development-canon.mullmania.com`. Per-repo behaviors live there, not in this seed.
+- Mullmania engineering canon for `mist83/*` repos lives on two boards: recipes / "how we build X" on the katai board (`https://katai.mullmania.com`) and reusable capabilities on the ineed shelf (`https://ineed.mullmania.com`). Per-repo behaviors live there, not in this seed. (The former `development-canon.mullmania.com` site is retired.)
 - If live changes are expected, do not report success while the result exists only locally or only in Git.
 - If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.
 - Mullmania API/bucket safety contract: API-first writes, per-site `.git`, deletion gates on the shared bucket.
-- UI canon contract: read both `ui.[base-url]/llm-docs.md` and the canon style guide before writing markup.
+- UI canon contract: read `ui.[base-url]/llm-docs.md` (it covers both the primitives layer and the Shell Contract) before writing markup.
 - Closing habit: commit + push + deploy as one bundle when work is verified.
 - PM-A2A is the default multi-agent workflow; join the room when another agent is mentioned, post a retrospective before leaving.
 - Tombstone protocol via `mist83/graveyard` for retired repos.

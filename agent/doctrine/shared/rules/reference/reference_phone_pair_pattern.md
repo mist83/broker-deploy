@@ -58,7 +58,7 @@ hub. Other consumers: `app-flyover.[base]` (tilt-to-fly), `marble-maze.[base]`
 ## Where to read
 
 - Source: `mist83/ui/js/pair.js`
-- Canon integration page: `development-canon/integrations/phone-pair.md`
+- Integration recipe: the **Pair phones to a TV (QR + tilt)** kata on the katai board (`https://katai.mullmania.com`, kata `pair-phones-to-a-tv`). (Migrated off the retired development-canon site.)
 - Underlying hub: see `reference_signal_argh`
 
 ## When NOT to use

@@ -90,7 +90,7 @@
     "Do not hallucinate.",
     "Apply obvious speech-to-text normalization across repos under /Users/mist83/Code.",
     "Treat near-misses like git hub, get hub, get her, and get hug as GitHub when context makes that intent clear.",
-    "Mullmania development canon is the ruleset for mist83/* repos (https://development-canon.mullmania.com).",
+    "Mullmania engineering canon for mist83/* repos lives on two boards: recipes / how we build X on the katai board (https://katai.mullmania.com), and reusable capabilities on the ineed shelf (https://ineed.mullmania.com). The former development-canon.mullmania.com site is retired.",
     "If live changes are expected, do not report success while the result exists only locally or only in Git.",
     "If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.",
     "API-first writes to the shared mullmania.com bucket; per-site .git history; aws s3 ls before recursive rm.",

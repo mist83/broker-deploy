@@ -8,6 +8,8 @@ type: project
 
 **Started:** 2026-04-17. Strategic direction agreed, no code yet.
 
+**Canon retired 2026-05-29:** the `development-canon` site/repo is gone (404, archived). Its prose split to the **katai** board (recipes/how-tos, `katai.mullmania.com`) + the **ineed** shelf (capabilities, `ineed.mullmania.com`). Read "development canon as prose rules" below as "the katai katas" — the generator end-state still stands, the source moved.
+
 **Sibling prototype (also 2026-04-17):** `~/Code/universe/` — read-only observatory over the ecosystem. Phase-A canonical snapshot (184 entities, deterministic). Eventually meets this initiative at "DAG composer writes mullmania.site.json" (step 7 below). See `project_universe_prototype.md`.
 
 ## The goal (in Mike's words)
@@ -41,11 +43,11 @@ Move from "development canon as prose rules" → "development canon as runnable 
 ## Build order (when Mike picks this up)
 
 1. Draft the component manifest schema (+ idempotence contract written down, enforced by shared test harness)
-2. Build `scaffold` CLI: `add`, `upgrade`, `check`, `remove` (likely in `development-canon/` or new `mist83/scaffold` repo)
+2. Build `scaffold` CLI: `add`, `upgrade`, `check`, `remove` (likely a new `mist83/scaffold` repo — the `development-canon` repo is retired/archived)
 3. Component #0: `mullmania-site` — de-drifts 138 frontdoor.json copies
 4. Components #1-3: `ui-shell`, `github-deploy-workflow`, `favicon-set`
 5. Library-paired generators: `bug-beacon`, `f3`, `signal-argh` each ship their own. `npx bug-beacon init .` adds FAB + lockfile entry. Library owns its own scaffolding; canon prose for these disappears.
-6. Retrofit loop: point existing `development-canon/scripts/audit-app.mjs` at `scaffold check --json` across all repos → health dashboard.
+6. Retrofit loop: point the existing audit harness (now the `audit-an-app` kata on katai, `katai.mullmania.com`; the `audit-app.mjs` script formerly lived in the archived development-canon repo) at `scaffold check --json` across all repos → health dashboard.
 7. DAG composer: add "read components, emit edits to mullmania.site.json" endpoint to `dag/backend`. Visual editor is a lockfile editor in disguise.
 
 ## What Mike is underweighting (flag if he forgets)

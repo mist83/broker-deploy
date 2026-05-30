@@ -54,7 +54,7 @@
 <h2>Runtime Inventory Snapshot</h2>
 <p>A snapshot of Claude-side surfaces that exist on the operator machine today. This is context for remote-doctrine projection only, not an implementation backlog. Counts and categories, not file contents.</p>
 <ul>
-<li>1 global instructions file (<code>~/.claude/CLAUDE.md</code>): Mullmania development canon reference.</li>
+<li>1 global instructions file (<code>~/.claude/CLAUDE.md</code>): remote-doctrine bootstrap pointer (composes the agent brain at runtime).</li>
 <li>1 settings.json with one PostToolUse hook (<code>mullmania-s3-resync.sh</code>).</li>
 <li>1 MCP server (itchy-brain).</li>
 <li>3 slash commands (<code>/roomup</code>, <code>/shipit</code>, <code>/tombstone</code>).</li>
@@ -73,11 +73,11 @@
 <li>Do not hallucinate.</li>
 <li>Apply obvious speech-to-text normalization across repos under <code>/Users/mist83/Code</code>.</li>
 <li>Treat <code>git hub</code>, <code>get hub</code>, <code>get her</code>, and <code>get hug</code> as <code>GitHub</code> when context makes that intent clear.</li>
-<li>Mullmania development canon is the global ruleset for <code>mist83/*</code> repos; fetched from <code>https://development-canon.mullmania.com</code>. Per-repo behaviors live there, not in this seed.</li>
+<li>Mullmania engineering canon for <code>mist83/*</code> repos lives on two boards: recipes / &quot;how we build X&quot; on the katai board (<code>https://katai.mullmania.com</code>) and reusable capabilities on the ineed shelf (<code>https://ineed.mullmania.com</code>). Per-repo behaviors live there, not in this seed. (The former <code>development-canon.mullmania.com</code> site is retired.)</li>
 <li>If live changes are expected, do not report success while the result exists only locally or only in Git.</li>
 <li>If deployment is blocked, say plainly that the work is not live and name the blocker before closing out.</li>
 <li>Mullmania API/bucket safety contract: API-first writes, per-site <code>.git</code>, deletion gates on the shared bucket.</li>
-<li>UI canon contract: read both <code>ui.[base-url]/llm-docs.md</code> and the canon style guide before writing markup.</li>
+<li>UI canon contract: read <code>ui.[base-url]/llm-docs.md</code> (it covers both the primitives layer and the Shell Contract) before writing markup.</li>
 <li>Closing habit: commit + push + deploy as one bundle when work is verified.</li>
 <li>PM-A2A is the default multi-agent workflow; join the room when another agent is mentioned, post a retrospective before leaving.</li>
 <li>Tombstone protocol via <code>mist83/graveyard</code> for retired repos.</li>

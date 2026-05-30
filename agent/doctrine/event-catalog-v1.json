@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-event-catalog-v1",
   "summary": "Lifecycle events that doctrine can tailor against.",
-  "generatedAt": "2026-05-26T03:30:26.421Z",
+  "generatedAt": "2026-05-30T03:37:09.896Z",
   "events": [
     {
       "id": "session_start",
