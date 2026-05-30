@@ -415,6 +415,7 @@ const deepId = parseVideoId(qp.get('v') || qp.get('url') || '');
 const deepSlug = qp.get('load');
 if (deepSlug && loadLibrary()[deepSlug]) openProfile(loadLibrary()[deepSlug]);
 else if (deepId) { els.url.value = deepId; loadSong(deepId); }
+else { els.url.value = 'uaP6KgwbOvo'; loadSong('uaP6KgwbOvo', { title: 'Pain', artist: 'Jimmy Eat World', slug: 'pain' }); }   // pre-seed: Jimmy Eat World — Pain
 renderAll();
 requestAnimationFrame(frame);
 try { setDagMode(localStorage.getItem('tap-repeater:dagMode') || 'inline'); } catch { setDagMode('inline'); }

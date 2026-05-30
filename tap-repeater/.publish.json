@@ -1,21 +1,21 @@
 {
   "siteId": "tap-repeater",
   "host": "tap-repeater.mullmania.com",
-  "publishedAt": "2026-05-30T17:01:51.030Z",
+  "publishedAt": "2026-05-30T17:12:11.381Z",
   "sourceDir": "/home/runner/work/broker-deploy/broker-deploy/target-site/wwwroot",
   "assetVersion": {
-    "semver": "1.0.9",
-    "previousSemver": "1.0.8",
+    "semver": "1.0.11",
+    "previousSemver": "1.0.10",
     "bump": "patch",
     "initialVersion": "1.0.0",
     "token": "__MULLMANIA_ASSET_VERSION__",
     "manifestPath": "./asset-version.json",
     "manifestUrl": "https://tap-repeater.mullmania.com/asset-version.json",
-    "publishedAt": "2026-05-30T17:01:51.030Z"
+    "publishedAt": "2026-05-30T17:12:11.381Z"
   },
   "counts": {
     "hostingFiles": 19,
-    "hostingBytes": 147491,
+    "hostingBytes": 147672,
     "dataFiles": 0,
     "dataBytes": 0
   }
