@@ -2,1518 +2,261 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Tap Repeater">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0071CE">
     <title>Tap Repeater</title>
-    <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="apple-touch-icon" href="./icon.svg">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230071CE'/%3E%3Cpath d='M18 34c0-7.7 6.3-14 14-14 6.6 0 12.2 4.6 13.5 10.8H40l9 9 9-9h-5.4C51.4 19.3 43.3 12 32 12 20.9 12 12 20.9 12 32c0 4.8 1.7 9.2 4.6 12.6L22 39.2A13.8 13.8 0 0 1 18 34zm28 14c0 7.7-6.3 14-14 14-6.6 0-12.2-4.6-13.5-10.8H24l-9-9-9 9h5.4C12.6 44.7 20.7 52 32 52c11.1 0 20-8.9 20-20 0-4.8-1.7-9.2-4.6-12.6L42 24.8A13.8 13.8 0 0 1 46 30z' fill='%23FFC220'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230071CE'/%3E%3Cpath d='M18 34c0-7.7 6.3-14 14-14 6.6 0 12.2 4.6 13.5 10.8H40l9 9 9-9h-5.4C51.4 19.3 43.3 12 32 12 20.9 12 12 20.9 12 32c0 4.8 1.7 9.2 4.6 12.6L22 39.2A13.8 13.8 0 0 1 18 34z' fill='%23FFC220'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <style>
-        @font-face { font-family: 'tabler-icons'; font-display: block; }
-
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none; -webkit-user-select: none;
+    <link rel="stylesheet" href="./band-party.css">
+    <script>
+        // Fleet rule: tap-repeater is served from BOTH *.mullmania.com and
+        // *.mikesendpoint.com — never hardcode either brand. Derive the parent
+        // base from location.hostname at runtime so sibling links (dag, ui)
+        // follow whichever domain served the page.
+        function fleetParentBase() {
+            const host = (location.hostname || '').toLowerCase();
+            if (host === 'mikesendpoint.com' || host.endsWith('.mikesendpoint.com')) return 'mikesendpoint.com';
+            return 'mullmania.com';
         }
-        html, body { height: 100%; overflow: hidden; }
+        window.FLEET_PARENT = fleetParentBase();
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root {
+            --blue: #0071CE; --yellow: #FFC220; --pink: #FF2D95;
+            --ink: #16202c; --muted: #6b7785; --line: #e3e8ee; --bg: #f4f6f9; --card: #fff;
+        }
+        html, body { min-height: 100%; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #fff; display: flex; flex-direction: column; touch-action: none;
+            background: var(--bg); color: var(--ink); display: flex; flex-direction: column; min-height: 100vh;
         }
+        button { font-family: inherit; cursor: pointer; border: none; }
+        input { font-family: inherit; }
 
-        /* ── Tap area ── */
-        .tap-area {
-            flex: 1; background: #f5f5f5; cursor: crosshair;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden; touch-action: none;
+        /* Header */
+        header {
+            display: flex; align-items: center; gap: 14px; padding: 10px 18px;
+            background: var(--blue); color: #fff; flex: 0 0 auto;
         }
-        .tap-area.recording { background: #fff9e6; }
-        .tap-area.playing   { background: #e3f2fd; }
+        header .logo { font-weight: 800; font-size: 17px; letter-spacing: .2px; display: flex; align-items: center; gap: 8px; }
+        header .logo .tag { background: rgba(255,255,255,.18); padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+        header nav { margin-left: auto; display: flex; gap: 6px; }
+        header nav a {
+            color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
+            padding: 6px 12px; border-radius: 7px; background: rgba(255,255,255,.14); display: flex; align-items: center; gap: 6px;
+        }
+        header nav a:hover { background: rgba(255,255,255,.26); }
 
-        .tap-area-stats {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex; gap: 60px;
-            font-size: 64px; color: #e0e0e0; font-weight: 300;
-            pointer-events: none; font-variant-numeric: tabular-nums;
-        }
-        .tap-area-stats .stat { display: flex; align-items: center; gap: 12px; }
-        .tap-area-stats i { font-size: 48px; }
+        /* Layout */
+        main { flex: 1; display: grid; grid-template-columns: 1fr 320px; gap: 16px; padding: 16px; align-items: start; }
+        @media (max-width: 860px) { main { grid-template-columns: 1fr; overflow: auto; } }
+        .stage { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+        .panel { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
 
-        /* ── BPM badge ── */
-        .bpm-badge {
-            position: absolute; top: 16px; right: 16px;
-            background: rgba(0,113,206,0.1); border: 1.5px solid #0071CE;
-            border-radius: 8px; padding: 5px 12px;
-            font-size: 16px; font-weight: 700; color: #0071CE;
-            pointer-events: none; opacity: 0; transition: opacity 0.3s;
-            font-variant-numeric: tabular-nums;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .bpm-badge.visible { opacity: 1; }
-        .bpm-badge i { font-size: 16px; }
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+        .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
 
-        /* ── Loop badge ── */
-        .loop-badge {
-            position: absolute; top: 16px; right: 120px;
-            background: rgba(0,113,206,0.1); border: 1.5px solid #0071CE;
-            border-radius: 8px; padding: 5px 10px;
-            font-size: 14px; font-weight: 700; color: #0071CE;
-            opacity: 0; transition: opacity 0.3s;
-            display: flex; align-items: center; gap: 4px;
-            cursor: pointer;
+        /* Load row */
+        .load { display: flex; gap: 8px; align-items: center; }
+        .load input {
+            flex: 1; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 10px; font-size: 14px; color: var(--ink); background: #fbfcfe;
         }
-        .loop-badge.visible { opacity: 1; }
-        .loop-badge.active  { background: #0071CE; color: white; }
-        .loop-badge i { font-size: 16px; }
+        .load input:focus { outline: none; border-color: var(--blue); }
+        .btn { padding: 11px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 7px; }
+        .btn.primary { background: var(--blue); color: #fff; }
+        .btn.primary:hover { background: #005ba8; }
+        .btn.ghost { background: #eef2f7; color: var(--ink); }
+        .btn.ghost:hover { background: #e2e8f0; }
+        .btn.pink { background: var(--pink); color: #fff; }
+        .btn.pink:hover { filter: brightness(.94); }
+        .btn:disabled { opacity: .45; cursor: not-allowed; }
+        .btn.block { width: 100%; justify-content: center; }
 
-        /* ── Note grid overlay ── */
-        .note-grid {
-            position: absolute; inset: 0;
-            pointer-events: none; opacity: 0; transition: opacity 0.25s;
-        }
-        .note-grid.visible { opacity: 1; }
-        .note-dot {
-            position: absolute; width: 44px; height: 44px; border-radius: 50%;
-            border: 2px solid rgba(124,58,237,0.6); background: rgba(124,58,237,0.08);
-            transform: translate(-50%, -50%);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 700; color: #7c3aed;
-            line-height: 1.1; text-align: center;
-        }
-        .note-dot.black-key {
-            border-color: rgba(220,38,38,0.5); background: rgba(220,38,38,0.06); color: #dc2626;
-        }
-        .note-dot.hidden-note {
-            border-color: rgba(100,100,100,0.5); background: rgba(100,100,100,0.08);
-            color: #999; cursor: pointer;
-        }
-        .note-dot.hidden-note:hover {
-            background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.5);
-        }
+        /* Stage: video + tap pad */
+        .deck { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; min-height: 0; }
+        @media (max-width: 1100px) { .deck { grid-template-columns: 1fr; } }
+        .video-wrap { background: #000; border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 16 / 9; }
+        .video-wrap #player, .video-wrap iframe { width: 100%; height: 100%; border: 0; }
+        .video-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #5c6b7a; gap: 10px; text-align: center; padding: 20px; }
+        .video-empty i { font-size: 40px; color: #38465a; }
 
-        /* ── Overlay buttons (top-left cluster) ── */
-        .overlay-btns {
-            position: absolute; top: 16px; left: 16px;
-            display: flex; gap: 6px; z-index: 20;
+        .tappad {
+            background: linear-gradient(160deg, #11151c, #1d2330); border-radius: 14px; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+            color: #fff; cursor: pointer; user-select: none; overflow: hidden; min-height: 180px; border: 2px solid transparent;
         }
-        .btn-overlay {
-            background: rgba(124,58,237,0.1); border: 1.5px solid #7c3aed;
-            color: #7c3aed; font-size: 13px; font-weight: 700;
-            padding: 5px 10px; border-radius: 6px; cursor: pointer;
-            display: flex; align-items: center; gap: 5px;
-            transition: background 0.15s;
-        }
-        .btn-overlay.active { background: #7c3aed; color: white; }
-        .btn-overlay:active { opacity: 0.8; }
-        .btn-overlay i { font-size: 15px; }
+        .tappad:active, .tappad.flash { border-color: var(--pink); }
+        .tappad .ring { position: absolute; width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--pink); opacity: 0; pointer-events: none; }
+        .tappad.flash .ring { animation: ping .35s ease-out; }
+        @keyframes ping { from { opacity: .9; transform: scale(.6); } to { opacity: 0; transform: scale(2.2); } }
+        .tappad .big { font-size: 17px; font-weight: 800; letter-spacing: .4px; display: flex; align-items: center; gap: 8px; }
+        .tappad .sub { font-size: 12px; color: #93a1b3; }
+        .tappad .live { position: absolute; top: 10px; left: 12px; font-size: 11px; color: var(--pink); font-weight: 700; opacity: 0; display: flex; align-items: center; gap: 5px; }
+        .tappad.rec .live { opacity: 1; }
 
-        /* ── Record-first toggle ── */
-        .btn-record-first {
-            position: absolute; bottom: 40px; left: 16px;
-            background: #FFC220; border: none; color: #000;
-            font-size: 12px; padding: 6px 10px; border-radius: 2px;
-            cursor: pointer; display: flex; align-items: center; gap: 6px;
-            transition: opacity 0.3s; z-index: 10; font-weight: 600;
-        }
-        .btn-record-first.checked { background: #0071CE; color: white; }
-        .btn-record-first.hidden  { opacity: 0; pointer-events: none; }
-        .btn-record-first i { font-size: 14px; }
+        /* Transport + stats */
+        .transport { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .transport .btn.icon { width: 42px; height: 42px; padding: 0; justify-content: center; font-size: 18px; }
+        .stat-chips { display: flex; gap: 8px; margin-left: auto; }
+        .chip { background: #eef2f7; border-radius: 9px; padding: 7px 11px; font-size: 13px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+        .chip b { color: var(--blue); }
+        .chip.pink b { color: var(--pink); }
 
-        /* ── Visualize button ── */
-        .visualize-stack {
-            position: absolute; bottom: 40px; right: 16px;
-            display: flex; flex-direction: column; gap: 8px;
-            align-items: flex-end;
-            z-index: 10;
-        }
-        .btn-visualize {
-            background: #7c3aed; border: none; color: white;
-            font-size: 12px; padding: 6px 12px; border-radius: 2px;
-            cursor: pointer; display: flex; align-items: center; gap: 6px;
-            font-weight: 600;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s, background 0.15s;
-        }
-        .btn-visualize.visible { opacity: 1; pointer-events: auto; }
-        .btn-visualize:active  { background: #5b21b6; }
-        .btn-visualize i { font-size: 14px; }
-        .btn-scene {
-            background: #f97316;
-        }
-        .btn-scene:active {
-            background: #c2410c;
-        }
+        /* Timeline */
+        .timeline-card h2 { margin-bottom: 8px; }
+        .timeline { position: relative; height: 64px; background: #0e131b; border-radius: 10px; overflow: hidden; cursor: pointer; }
+        .timeline .tick { position: absolute; top: 8px; bottom: 8px; width: 2px; background: var(--pink); border-radius: 2px; opacity: .85; transform: translateX(-1px); }
+        .timeline .tick.beat4 { background: var(--yellow); width: 3px; }
+        .timeline .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,.7); }
+        .timeline .tl-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #4a596b; font-size: 12px; }
+        .timeline-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 12px; color: var(--muted); }
+        .timeline-meta span b { color: var(--ink); }
 
-        /* ── Keyboard hint ── */
-        .kbd-hint {
-            position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-            font-size: 11px; color: #bbb; pointer-events: none;
-            white-space: nowrap; display: flex; align-items: center; gap: 6px;
-        }
-        .kbd-hint i { font-size: 13px; }
+        /* Panel: save + library */
+        .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+        .field label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+        .field input { padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 9px; font-size: 13px; background: #fbfcfe; color: var(--ink); }
+        .field input:focus { outline: none; border-color: var(--blue); }
+        .save-actions { display: flex; flex-direction: column; gap: 8px; }
+        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-        /* ── Tap indicator ── */
-        .tap-indicator {
-            position: absolute; width: 60px; height: 60px; border-radius: 50%;
-            background: rgba(0,113,206,0.4); transform: scale(0); pointer-events: none;
-        }
-        .tap-indicator.long-note {
-            background: rgba(124,58,237,0.35);
-            transition: width 0.1s, height 0.1s, left 0.05s, top 0.05s;
-        }
+        .library { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+        .lib-list { overflow: auto; display: flex; flex-direction: column; gap: 8px; }
+        .lib-item { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; display: flex; align-items: center; gap: 10px; }
+        .lib-item .meta { min-width: 0; flex: 1; }
+        .lib-item .meta .t { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lib-item .meta .s { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lib-item .act { display: flex; gap: 4px; }
+        .lib-item .act button { width: 30px; height: 30px; border-radius: 8px; background: #eef2f7; color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+        .lib-item .act button:hover { background: #e2e8f0; }
+        .lib-item .act button.del:hover { background: #ffe2e9; color: #d11149; }
+        .lib-empty { color: var(--muted); font-size: 12px; padding: 6px 2px; }
 
-        /* ── Timeline ── */
-        .timeline-container {
-            background: white; border-top: 1px solid #e0e0e0;
-            padding: 8px; flex-shrink: 0;
-        }
-        .timeline-controls { display: flex; gap: 4px; align-items: center; }
-        .timeline-controls .timeline { flex: 1; }
-        .timeline {
-            height: 48px; background: #f5f5f5; position: relative;
-            overflow: hidden; cursor: pointer;
-        }
-        .timeline-tap {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            width: 8px; height: 8px; border-radius: 50%; background: #0071CE;
-        }
-        .timeline-tap.long { background: #7c3aed; width: 4px; border-radius: 2px; height: 70%; top: 15%; transform: none; }
-        .timeline-drag {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            height: 4px; background: #FFC220;
-        }
-        .timeline-playhead {
-            position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-            background: #FFC220; display: none; z-index: 2;
-        }
-        .timeline-playhead.active { display: block; }
-        .timeline-marker {
-            position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-            background: #0071CE; display: none; z-index: 1;
-        }
-        .timeline-marker.visible { display: block; }
+        .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; opacity: 0; transition: all .25s; pointer-events: none; z-index: 50; display: flex; align-items: center; gap: 8px; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.pink { background: var(--pink); }
 
-        /* ── Buttons ── */
-        button {
-            padding: 0; font-size: 14px; font-weight: 500;
-            border: none; border-radius: 0; cursor: pointer;
-            transition: background 0.15s; touch-action: manipulation;
-            display: flex; align-items: center; justify-content: center; gap: 4px;
-        }
-        button i { font-size: 20px; }
-        button:active { opacity: 0.8; }
-        button.hidden { display: none !important; }
-
-        .btn-timeline { height: 48px; font-size: 12px; }
-        .btn-play-timeline   { background: #0071CE; color: white; width: 48px; }
-        .btn-play-timeline:active   { background: #005a9e; }
-        .btn-play-timeline i { font-size: 24px; }
-        .btn-pause-timeline  { background: #FFC220; color: #000; width: 48px; }
-        .btn-pause-timeline:active  { background: #e6ad00; }
-        .btn-pause-timeline i { font-size: 24px; }
-        .btn-stop-timeline   { background: #FFC220; color: #000; width: 48px; }
-        .btn-stop-timeline:active   { background: #e6ad00; }
-        .btn-stop-timeline i { font-size: 24px; }
-        .btn-clear-timeline  { background: #e0e0e0; color: #000; width: 48px; }
-        .btn-clear-timeline:active  { background: #bdbdbd; }
+        /* DAG preview (iframe + SignalR) */
+        .stage > * { flex-shrink: 0; }
+        .dag-card h2 { display: flex; align-items: center; gap: 8px; }
+        .dag-status { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: none; letter-spacing: 0; padding: 2px 9px; border-radius: 999px; background: #eef2f7; }
+        .dag-status.live { color: #0a7d3b; background: #e3f7ec; }
+        .dag-status.off { color: #b4232f; background: #fde8ea; }
+        .dag-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .dag-auto { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .dag-room { font-size: 11px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; margin-left: auto; }
+        .dag-frame-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #0e131b; }
+        #dag-frame { width: 100%; height: 360px; border: 0; display: block; background: #0e131b; }
+        .dag-note { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #93a1b3; font-size: 13px; padding: 24px; background: #0e131b; line-height: 1.5; }
+        .dag-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; text-transform: none; letter-spacing: 0; }
+        .dag-toggle button { font: 700 11px system-ui, sans-serif; padding: 4px 12px; background: #fff; color: var(--muted); border: 0; cursor: pointer; }
+        .dag-toggle button.on { background: var(--blue); color: #fff; }
+        .dag-inline { width: 100%; height: 360px; background: #0e131b; display: block; }
+        .dag-empty { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #93a1b3; font-size: 13px; }
     </style>
 </head>
 <body>
-    <div class="tap-area" id="tapArea">
-        <div class="tap-area-stats">
-            <div class="stat"><i class="ti ti-hand-click"></i><span id="tapCount">0</span></div>
-            <div class="stat"><i class="ti ti-clock"></i><span id="duration">0.0s</span></div>
-        </div>
+    <header>
+        <div class="logo"><i class="ti ti-rewind-forward-10"></i> Tap Repeater <span class="tag">BUILDER</span></div>
+        <nav>
+            <a href="./instrument.html"><i class="ti ti-keyboard"></i> Instrument</a>
+            <a id="nav-dag" href="#" target="_blank"><i class="ti ti-binary-tree"></i> Open DAG</a>
+        </nav>
+    </header>
 
-        <div class="note-grid" id="noteGrid"></div>
-
-        <div class="bpm-badge" id="bpmBadge">
-            <i class="ti ti-metronome"></i><span id="bpmText">— BPM</span>
-        </div>
-
-        <!-- Top-left overlay buttons -->
-        <div class="overlay-btns">
-            <button class="btn-overlay" id="notesToggleBtn">
-                <i class="ti ti-music"></i><span>Notes</span>
-            </button>
-            <button class="btn-overlay" id="loopBtn">
-                <i class="ti ti-repeat"></i><span>Loop</span>
-            </button>
-        </div>
-
-        <button class="btn-record-first checked" id="recordFirstTapBtn">
-            <i class="ti ti-circle-dot" id="recordFirstIcon"></i>
-            <span>Record first tap</span>
-        </button>
-
-        <div class="visualize-stack">
-            <button class="btn-visualize btn-scene" id="sceneBtn">
-                <i class="ti ti-sparkles"></i>
-                <span>Rhythm Scene</span>
-            </button>
-            <button class="btn-visualize" id="visualizeBtn">
-                <i class="ti ti-git-branch"></i>
-                <span>Rhythm DAG</span>
-            </button>
-        </div>
-
-        <div class="kbd-hint">
-            <i class="ti ti-keyboard"></i>
-            Space/Enter = tap (hold = long note) &nbsp;·&nbsp;
-            P = play/pause &nbsp;·&nbsp;
-            L = loop &nbsp;·&nbsp;
-            N = notes &nbsp;·&nbsp;
-            Esc = stop &nbsp;·&nbsp;
-            Backspace = clear
-        </div>
-    </div>
-
-    <div class="timeline-container">
-        <div class="timeline-controls">
-            <button class="btn-timeline btn-play-timeline hidden" id="playBtn">
-                <i class="ti ti-player-play"></i>
-            </button>
-            <button class="btn-timeline btn-pause-timeline hidden" id="pauseBtn">
-                <i class="ti ti-player-pause"></i>
-            </button>
-            <div class="timeline" id="timeline">
-                <div class="timeline-marker" id="marker"></div>
-                <div class="timeline-playhead" id="playhead"></div>
+    <main>
+        <div class="stage">
+            <div id="bandPartyHost"></div>
+            <div class="card">
+                <div class="load">
+                    <input id="url" type="text" placeholder="Paste a YouTube link or video id (e.g. ROatPGGMvXg)…" autocomplete="off">
+                    <button id="load" class="btn primary"><i class="ti ti-player-play"></i> Load song</button>
+                </div>
             </div>
-            <button class="btn-timeline btn-clear-timeline hidden" id="clearBtn">
-                <i class="ti ti-trash"></i>
-            </button>
-            <button class="btn-timeline btn-stop-timeline hidden" id="stopBtn">
-                <i class="ti ti-player-stop"></i>
-            </button>
-        </div>
-    </div>
 
-    <!-- Pair-to-target: stream taps + tilt to baton or any pair.js screen. Opt-in. -->
-    <details id="pairPane" style="position: fixed; left: 12px; bottom: 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: #333; max-width: 320px; z-index: 90;">
-        <summary style="cursor: pointer; font-weight: 600; user-select: none;">📡 Pair to target</summary>
-        <div style="margin-top: 8px; display: grid; gap: 8px;">
-            <p style="margin: 0; color: #666; line-height: 1.4;">Stream taps + phone tilt to <a id="batonLink" target="_blank" rel="noopener" style="color: #0071CE;">baton</a> or any pair.js screen. Enter the session code shown there.</p>
-            <div style="display: flex; gap: 6px;">
-                <input id="pairSession" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" placeholder="session code"
-                       style="flex: 1; padding: 8px 10px; border: 1px solid #e0e0e0; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;" />
-                <button id="pairConnectBtn" type="button" style="background: #0071CE; color: #fff; border: 0; padding: 8px 14px; border-radius: 4px; font: inherit; cursor: pointer;">Connect</button>
+            <div class="deck">
+                <div class="video-wrap">
+                    <div id="player"></div>
+                    <div id="video-empty" class="video-empty"><i class="ti ti-brand-youtube"></i><div>Load a song to start tapping along.<br>The video plays here — tap the pad or hit <b>Space</b> on every beat.</div></div>
+                </div>
+                <div id="tappad" class="tappad">
+                    <span class="live"><i class="ti ti-circle-filled"></i> RECORDING</span>
+                    <span class="ring"></span>
+                    <span class="big"><i class="ti ti-hand-finger"></i> TAP</span>
+                    <span class="sub">click here or press <b>Space</b> on every beat</span>
+                </div>
             </div>
-            <div style="display: flex; gap: 6px;">
-                <button id="pairMotionBtn" type="button" style="flex: 1; background: #f5f5f5; color: #333; border: 1px solid #e0e0e0; padding: 6px 10px; border-radius: 4px; font: inherit; cursor: pointer;">Enable motion</button>
-                <button id="pairReauthBtn" type="button" hidden style="flex: 1; background: #fff8e1; color: #333; border: 1px solid #FFC220; padding: 6px 10px; border-radius: 4px; font: inherit; cursor: pointer;">Re-enable motion</button>
+
+            <div class="card">
+                <div class="transport">
+                    <button id="play" class="btn ghost icon" title="Play / pause"><i class="ti ti-player-play"></i></button>
+                    <button id="restart" class="btn ghost icon" title="Back to start"><i class="ti ti-player-skip-back"></i></button>
+                    <button id="undo" class="btn ghost"><i class="ti ti-arrow-back-up"></i> Undo</button>
+                    <button id="clear" class="btn ghost"><i class="ti ti-trash"></i> Clear</button>
+                    <div class="stat-chips">
+                        <span class="chip pink"><i class="ti ti-music"></i> <b id="stat-taps">0</b> taps</span>
+                        <span class="chip"><i class="ti ti-activity-heartbeat"></i> <b id="stat-bpm">—</b> bpm</span>
+                        <span class="chip"><i class="ti ti-clock"></i> <span id="stat-time">0:00</span></span>
+                    </div>
+                </div>
             </div>
-            <p id="pairStatus" style="margin: 0; font-size: 11px; color: #888;">Not paired.</p>
+
+            <div class="card timeline-card">
+                <h2><i class="ti ti-timeline"></i> Timeline</h2>
+                <div id="timeline" class="timeline"><div class="tl-empty">taps appear here along the song — click to seek</div></div>
+                <div class="timeline-meta">
+                    <span>song <b id="tl-dur">0:00</b></span>
+                    <span>loops every <b id="tl-loop">—</b></span>
+                    <span id="tl-hint" style="margin-left:auto">tip: tap a full phrase, then loop &amp; refine</span>
+                </div>
+            </div>
+
+            <div class="card dag-card">
+                <h2><i class="ti ti-binary-tree"></i> DAG preview
+                    <span class="dag-toggle" id="dag-toggle"><button data-mode="inline">Inline</button><button data-mode="signalr">SignalR</button></span>
+                    <span id="dag-status" class="dag-status">—</span>
+                    <span id="dag-rtt" class="chip" style="margin-left:auto"><i class="ti ti-activity"></i> RTT <b>—</b></span>
+                </h2>
+                <div class="dag-controls">
+                    <button id="dag-project" class="btn pink"><i class="ti ti-send"></i> Project taps → DAG</button>
+                    <label class="dag-auto"><input type="checkbox" id="dag-auto" checked> auto while tapping</label>
+                    <span id="dag-room" class="dag-room"></span>
+                </div>
+                <div class="dag-frame-wrap">
+                    <div id="dag-inline" class="dag-inline"></div>
+                    <iframe id="dag-frame" title="DAG preview" allow="autoplay; encrypted-media"></iframe>
+                    <div id="dag-note" class="dag-note" hidden></div>
+                </div>
+            </div>
         </div>
-    </details>
 
-    <script type="module">
-    import {
-        buildDagRhythmURL,
-        compileTapRepeaterPattern,
-        createPlaybackSchedule,
-        parsePattern,
-        serializePattern
-    } from './vendor/rhythm-engine/index.js';
-
-    // The fleet swaps tap-repeater between *.mullmania.com and *.mikesendpoint.com.
-    // Anything pointing at a sibling subdomain must follow the current parent base
-    // so the page stays self-consistent under either brand.
-    function fleetParentBase() {
-        const host = (location.hostname || '').toLowerCase();
-        if (host === 'mikesendpoint.com' || host.endsWith('.mikesendpoint.com')) return 'mikesendpoint.com';
-        return 'mullmania.com';
-    }
-    const FLEET_PARENT = fleetParentBase();
-
-    const batonLinkEl = document.getElementById('batonLink');
-    if (batonLinkEl) batonLinkEl.href = `https://baton.${FLEET_PARENT}/`;
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // TIMING:
-    //   Recording  → performance.now() offsets (sub-ms, monotonic)
-    //   Playback   → absolute-time scheduling from single anchor (no drift)
-    //   Audio      → Web Audio API clock (hardware sample-rate, ~20µs)
-    // TAP TYPES:
-    //   isDrag:false, duration:0   → normal discrete tap
-    //   isDrag:false, duration:>0  → long note (held key/touch)
-    //   isDrag:true                → drag/glide (excluded from BPM)
-    // ─────────────────────────────────────────────────────────────────────────
-
-    let audioCtx = null;
-    let state = 'idle';   // idle | recording | stopped | playing
-    let taps = [];        // {perfOffset, x, y, isDrag, duration}
-    let durationInterval = null;
-    let recordingStartPerf = null;
-
-    // Mouse/touch drag state
-    let isDragging = false, lastDragTime = 0;
-    let dragStartX = 0, dragStartY = 0, dragThresholdMet = false;
-    const DRAG_THRESHOLD = 20;
-
-    // Mouse-held long note state (click-and-drag pitch sweep, mirrors space-key behaviour)
-    let mouseHeldActive = false;
-    let mouseHeldStartPerf = null;
-    let mouseHeldIndicator = null;
-
-    // Scrub state
-    let isScrubbing = false, scrubPosition = 0, lastScrubCueId = null;
-
-    // Playback
-    let playbackToken = null;
-    let loopEnabled = false;
-    let tapSequence = 0;
-    let recordingSurface = null;
-    let rhythmRevision = 0;
-    let compiledPatternRevision = -1;
-    let compiledPatternSizeKey = '';
-    let compiledPatternCache = null;
-
-    // Keyboard state
-    const keysDown = new Set();
-    let longNoteActive = false;
-    let longNoteStartPerf = null;
-    let longNoteOsc = null;   // sustained oscillator for held key
-    let longNoteGain = null;
-    let longNoteIndicator = null;
-
-    // Cursor tracking (for keyboard tap position)
-    let lastCursorX = null, lastCursorY = null;
-
-    // Note grid
-    let notesVisible = false;
-    const DEFAULT_TAP_DURATION_MS = 130;
-
-    // ── DOM refs ──────────────────────────────────────────────────────────────
-    const tapArea         = document.getElementById('tapArea');
-    const playBtn         = document.getElementById('playBtn');
-    const pauseBtn        = document.getElementById('pauseBtn');
-    const stopBtn         = document.getElementById('stopBtn');
-    const clearBtn        = document.getElementById('clearBtn');
-    const recordFirstTapBtn = document.getElementById('recordFirstTapBtn');
-    const recordFirstIcon = document.getElementById('recordFirstIcon');
-    const tapCountEl      = document.getElementById('tapCount');
-    const durationEl      = document.getElementById('duration');
-    const timelineEl      = document.getElementById('timeline');
-    const playheadEl      = document.getElementById('playhead');
-    const markerEl        = document.getElementById('marker');
-    const bpmBadge        = document.getElementById('bpmBadge');
-    const bpmText         = document.getElementById('bpmText');
-    const visualizeBtn    = document.getElementById('visualizeBtn');
-    const sceneBtn        = document.getElementById('sceneBtn');
-    const noteGrid        = document.getElementById('noteGrid');
-    const notesToggleBtn  = document.getElementById('notesToggleBtn');
-    const loopBtn         = document.getElementById('loopBtn');
-
-    function markRhythmDirty() {
-        rhythmRevision += 1;
-    }
-
-    function getTapAreaSize() {
-        const rect = tapArea.getBoundingClientRect();
-        return {
-            width: Math.max(1, rect.width || tapArea.offsetWidth || 1),
-            height: Math.max(1, rect.height || tapArea.offsetHeight || 1)
-        };
-    }
-
-    function getTapById(id) {
-        return taps.find(tap => tap.id === id) || null;
-    }
-
-    function getCompiledPattern() {
-        if (!taps.length) {
-            compiledPatternCache = null;
-            compiledPatternRevision = rhythmRevision;
-            return null;
-        }
-
-        const sourceSurface = recordingSurface || getTapAreaSize();
-        const sizeKey = `${sourceSurface.width}:${sourceSurface.height}:${loopEnabled ? 'loop' : 'once'}`;
-        if (
-            compiledPatternCache &&
-            compiledPatternRevision === rhythmRevision &&
-            compiledPatternSizeKey === sizeKey
-        ) {
-            return compiledPatternCache;
-        }
-
-        compiledPatternCache = compileTapRepeaterPattern(taps, {
-            width: sourceSurface.width,
-            height: sourceSurface.height,
-            loopable: loopEnabled,
-            source: 'tap-repeater'
-        });
-        compiledPatternRevision = rhythmRevision;
-        compiledPatternSizeKey = sizeKey;
-        return compiledPatternCache;
-    }
-
-    function getPlaybackScheduleFromPattern(startPct = 0) {
-        const pattern = getCompiledPattern();
-        return {
-            pattern,
-            schedule: pattern ? createPlaybackSchedule(pattern, {
-                startPct,
-                defaultTapDurationMs: DEFAULT_TAP_DURATION_MS
-            }) : []
-        };
-    }
-
-    function getCueCoordinates(cue) {
-        const { width, height } = getTapAreaSize();
-        return {
-            x: cue.xNorm * width,
-            y: cue.yNorm * height
-        };
-    }
-
-    function showCueIndicator(cue) {
-        const { x, y } = getCueCoordinates(cue);
-        const originalTap = getTapById(cue.id);
-        showTapIndicator(x, y, (originalTap?.duration || 0) > 0);
-    }
-
-    function playCuePreview(cue) {
-        const { x, y } = getCueCoordinates(cue);
-        playBeepNow(x, y, cue.durationMs / 1000);
-    }
-
-    function loadPatternIntoTaps(pattern, source = 'import') {
-        const surface = getTapAreaSize();
-        playbackToken = null;
-        if (durationInterval) {
-            clearInterval(durationInterval);
-            durationInterval = null;
-        }
-
-        recordingSurface = surface;
-        taps = (pattern?.events || []).map((event, index) => ({
-            id: event.id || `tap-${index + 1}`,
-            perfOffset: event.tMs || 0,
-            x: (event.xNorm || 0) * surface.width,
-            y: (event.yNorm || 0) * surface.height,
-            isDrag: event.isDrag === true,
-            duration: event.durationMs || 0,
-            source
-        }));
-        tapSequence = taps.length;
-        loopEnabled = pattern?.loopable !== false;
-        scrubPosition = 0;
-        lastScrubCueId = null;
-        markerEl.classList.remove('visible');
-        playheadEl.style.left = '0px';
-        state = taps.length ? 'stopped' : 'idle';
-        markRhythmDirty();
-        updateUI();
-    }
-
-    function loadSerializedPatternIntoTaps(serialized, source = 'url') {
-        const pattern = parsePattern(serialized);
-        loadPatternIntoTaps(pattern, source);
-        return pattern;
-    }
-
-    function loadInitialPatternFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        const rhythm = params.get('rhythm');
-        if (!rhythm) return;
-
-        try {
-            loadSerializedPatternIntoTaps(rhythm, 'url');
-        } catch (error) {
-            console.warn('Failed to import rhythm pattern from URL:', error);
-        }
-    }
-
-    // ── Audio ─────────────────────────────────────────────────────────────────
-
-    function initAudio() {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
-
-    function scheduleBeep(audioTime, x, y, dur = 0.13) {
-        if (!audioCtx) return;
-        const osc  = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain); gain.connect(audioCtx.destination);
-        osc.frequency.value = xyToFreq(x, y);
-        osc.type = 'sine';
-        gain.gain.setValueAtTime(0, audioTime);
-        gain.gain.linearRampToValueAtTime(0.3, audioTime + 0.005);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioTime + Math.max(0.05, dur - 0.01));
-        osc.start(audioTime);
-        osc.stop(audioTime + Math.max(0.06, dur));
-    }
-
-    function playBeepNow(x, y, dur) { scheduleBeep(audioCtx.currentTime + 0.005, x, y, dur); }
-
-    function xyToFreq(x, y) {
-        const rect = tapArea.getBoundingClientRect();
-        const nx = x / (rect.width  || 1);
-        const ny = 1 - y / (rect.height || 1);
-        return 400 + ((nx + ny) / 2) * 800;
-    }
-
-    // Sustained oscillator for long-note preview
-    function startLongNoteOsc(x, y) {
-        if (!audioCtx) return;
-        stopLongNoteOsc();
-        longNoteOsc  = audioCtx.createOscillator();
-        longNoteGain = audioCtx.createGain();
-        longNoteOsc.connect(longNoteGain);
-        longNoteGain.connect(audioCtx.destination);
-        longNoteOsc.type = 'sine';
-        longNoteOsc.frequency.value = xyToFreq(x, y);
-        longNoteGain.gain.setValueAtTime(0, audioCtx.currentTime);
-        longNoteGain.gain.linearRampToValueAtTime(0.25, audioCtx.currentTime + 0.02);
-        longNoteOsc.start();
-    }
-
-    function updateLongNoteOsc(x, y) {
-        if (!longNoteOsc) return;
-        longNoteOsc.frequency.setTargetAtTime(xyToFreq(x, y), audioCtx.currentTime, 0.02);
-    }
-
-    function stopLongNoteOsc() {
-        if (!longNoteOsc) return;
-        try {
-            longNoteGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.03);
-            longNoteOsc.stop(audioCtx.currentTime + 0.1);
-        } catch(e) {}
-        longNoteOsc = null; longNoteGain = null;
-    }
-
-    // ── Visual ────────────────────────────────────────────────────────────────
-
-    function showTapIndicator(x, y, isLong = false) {
-        const el = document.createElement('div');
-        el.className = 'tap-indicator' + (isLong ? ' long-note' : '');
-        el.style.left = (x - 30) + 'px';
-        el.style.top  = (y - 30) + 'px';
-        tapArea.appendChild(el);
-        requestAnimationFrame(() => {
-            el.style.transition = 'transform 0.4s, opacity 0.4s';
-            el.style.transform  = 'scale(1.5)';
-            el.style.opacity    = '0';
-        });
-        setTimeout(() => el.remove(), 400);
-        return el;
-    }
-
-    function createLongNoteIndicator(x, y) {
-        const el = document.createElement('div');
-        el.className = 'tap-indicator long-note';
-        el.style.left = (x - 30) + 'px';
-        el.style.top  = (y - 30) + 'px';
-        el.style.transform = 'scale(1)';
-        el.style.opacity = '0.7';
-        tapArea.appendChild(el);
-        return el;
-    }
-
-    function moveLongNoteIndicator(el, x, y) {
-        if (!el) return;
-        el.style.left = (x - 30) + 'px';
-        el.style.top  = (y - 30) + 'px';
-    }
-
-    function removeLongNoteIndicator(el) {
-        if (!el) return;
-        el.style.transition = 'transform 0.3s, opacity 0.3s';
-        el.style.transform = 'scale(2)';
-        el.style.opacity = '0';
-        setTimeout(() => el.remove(), 300);
-    }
-
-    // ── Note grid ─────────────────────────────────────────────────────────────
-    // Pitch: freq = 400 + ((x/W + (1-y/H)) / 2) * 800
-    // Canonical position: x/W = pf, y/H = 1-pf  (diagonal, low=bottom-left)
-
-    const ALL_NOTES = [
-        { name: 'C4',  freq: 261.63, black: false },
-        { name: 'C#4', freq: 277.18, black: true  },
-        { name: 'D4',  freq: 293.66, black: false },
-        { name: 'D#4', freq: 311.13, black: true  },
-        { name: 'E4',  freq: 329.63, black: false },
-        { name: 'F4',  freq: 349.23, black: false },
-        { name: 'F#4', freq: 369.99, black: true  },
-        { name: 'G4',  freq: 392.00, black: false },
-        { name: 'G#4', freq: 415.30, black: true  },
-        { name: 'A4',  freq: 440.00, black: false },
-        { name: 'A#4', freq: 466.16, black: true  },
-        { name: 'B4',  freq: 493.88, black: false },
-        { name: 'C5',  freq: 523.25, black: false },
-        { name: 'D5',  freq: 587.33, black: false },
-        { name: 'E5',  freq: 659.25, black: false },
-    ];
-
-    // C major scale subset
-    const SCALE_NOTES = ALL_NOTES.filter(n => !n.black && n.freq <= 523.25);
-
-    // Songs: sequence of note names → positions derived from SCALE_NOTES
-    const SONGS = {
-        mary: ['E4','D4','C4','D4','E4','E4','E4','D4','D4','D4','E4','G4','G4',
-                'E4','D4','C4','D4','E4','E4','E4','E4','D4','D4','E4','D4','C4'],
-        twinkle: ['C4','C4','G4','G4','A4','A4','G4','F4','F4','E4','E4','D4','D4','C4',
-                  'G4','G4','F4','F4','E4','E4','D4','G4','G4','F4','F4','E4','E4','D4',
-                  'C4','C4','G4','G4','A4','A4','G4','F4','F4','E4','E4','D4','D4','C4'],
-    };
-
-    // Note modes cycle
-    const NOTE_MODES = ['off', 'scale', 'chromatic', 'vertical', 'mary', 'twinkle', 'reveal'];
-    const NOTE_MODE_LABELS = {
-        'off':       'Notes: Off',
-        'scale':     'Notes: Scale',
-        'chromatic': 'Notes: Chromatic',
-        'vertical':  'Notes: Vertical',
-        'mary':      'Notes: Mary Had a Little Lamb',
-        'twinkle':   'Notes: Twinkle Twinkle',
-        'reveal':    'Notes: Reveal',
-    };
-    let noteModeIndex = 0; // starts at 'off'
-
-    // Reveal state: which dots have been tapped
-    const revealedNotes = new Set();
-
-    function noteFreqToXY(freq, mode) {
-        // Default diagonal mapping (matches xyToFreq)
-        const pf = (freq - 400) / 800;
-        const xC = Math.max(0.05, Math.min(0.95, pf));
-        const yC = Math.max(0.05, Math.min(0.95, 1 - pf));
-        return { x: xC, y: yC };
-    }
-
-    function buildNoteGrid() {
-        noteGrid.innerHTML = '';
-        const mode = NOTE_MODES[noteModeIndex];
-        if (mode === 'off') return;
-
-        if (mode === 'scale' || mode === 'chromatic') {
-            const notes = mode === 'scale' ? SCALE_NOTES : ALL_NOTES;
-            notes.forEach(note => {
-                const { x, y } = noteFreqToXY(note.freq, mode);
-                addNoteDot(note.name, note.freq, x, y, note.black, false);
-            });
-
-        } else if (mode === 'vertical') {
-            // Lay scale notes vertically: C4 at bottom, C5 at top
-            SCALE_NOTES.forEach((note, i) => {
-                const xC = 0.5;
-                const yC = 1 - (i / (SCALE_NOTES.length - 1)) * 0.85 - 0.075;
-                addNoteDot(note.name, note.freq, xC, yC, false, false);
-            });
-
-        } else if (mode === 'mary' || mode === 'twinkle') {
-            const seq = SONGS[mode];
-            const noteMap = {};
-            ALL_NOTES.forEach(n => noteMap[n.name] = n);
-            const cols = seq.length;
-            seq.forEach((noteName, i) => {
-                const note = noteMap[noteName];
-                if (!note) return;
-                const xC = 0.04 + (i / (cols - 1)) * 0.92;
-                // y = pitch position (higher note = higher on screen)
-                const pf = (note.freq - 400) / 800;
-                const yC = Math.max(0.05, Math.min(0.92, 1 - pf * 0.8 - 0.1));
-                addNoteDot(`${i+1}`, note.freq, xC, yC, note.black, false, noteName);
-            });
-
-        } else if (mode === 'reveal') {
-            SCALE_NOTES.forEach(note => {
-                const { x, y } = noteFreqToXY(note.freq, mode);
-                const revealed = revealedNotes.has(note.name);
-                addNoteDot(revealed ? note.name : '?', note.freq, x, y, false, !revealed, note.name);
-            });
-        }
-    }
-
-    function addNoteDot(label, freq, xFrac, yFrac, isBlack, isHidden, noteName) {
-        const dot = document.createElement('div');
-        dot.className = 'note-dot' + (isBlack ? ' black-key' : '') + (isHidden ? ' hidden-note' : '');
-        dot.style.left = (xFrac * 100) + '%';
-        dot.style.top  = (yFrac * 100) + '%';
-        dot.textContent = label;
-        dot.title = noteName ? `${noteName} — ${freq.toFixed(1)} Hz` : `${freq.toFixed(1)} Hz`;
-        dot.dataset.freq = freq;
-        dot.dataset.noteName = noteName || label;
-        dot.dataset.hidden = isHidden ? '1' : '0';
-
-        // Reveal mode: tap dot to reveal
-        if (NOTE_MODES[noteModeIndex] === 'reveal') {
-            dot.style.pointerEvents = 'auto';
-            dot.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const name = dot.dataset.noteName;
-                revealedNotes.add(name);
-                dot.textContent = name;
-                dot.classList.remove('hidden-note');
-                dot.dataset.hidden = '0';
-                // Play the note
-                initAudio();
-                playBeepNow(
-                    parseFloat(dot.style.left) / 100 * tapArea.offsetWidth,
-                    parseFloat(dot.style.top)  / 100 * tapArea.offsetHeight,
-                    0.4
-                );
-            });
-        }
-
-        noteGrid.appendChild(dot);
-    }
-
-    function cycleNotes() {
-        noteModeIndex = (noteModeIndex + 1) % NOTE_MODES.length;
-        const mode = NOTE_MODES[noteModeIndex];
-        notesVisible = mode !== 'off';
-
-        if (mode === 'reveal') revealedNotes.clear();
-
-        if (notesVisible) {
-            buildNoteGrid();
-            noteGrid.classList.add('visible');
-            notesToggleBtn.classList.add('active');
-        } else {
-            noteGrid.classList.remove('visible');
-            notesToggleBtn.classList.remove('active');
-        }
-
-        // Update button label
-        const span = notesToggleBtn.querySelector('span');
-        if (span) {
-            const shortLabels = {
-                'off': 'Notes', 'scale': 'Scale', 'chromatic': 'Chromatic',
-                'vertical': 'Vertical', 'mary': 'Mary', 'twinkle': 'Twinkle', 'reveal': 'Reveal'
-            };
-            span.textContent = shortLabels[mode] || mode;
-        }
-        notesToggleBtn.title = NOTE_MODE_LABELS[mode] || mode;
-    }
-
-    // Keep legacy toggleNotes for keyboard shortcut
-    function toggleNotes() { cycleNotes(); }
-
-    window.addEventListener('resize', () => {
-        if (notesVisible) buildNoteGrid();
-    });
-
-    // ── BPM (discrete taps only, no drags) ───────────────────────────────────
-
-    // Discrete taps are compiled by rhythm-engine, which excludes drags and long notes.
-    function discreteTaps() {
-        const beatIds = new Set((getCompiledPattern()?.beats || []).map(beat => beat.id));
-        return taps.filter(tap => beatIds.has(tap.id));
-    }
-
-    function calcBPM() {
-        const bpm = getCompiledPattern()?.bpm;
-        return Number.isFinite(bpm) ? bpm : null;
-    }
-
-    function updateBPM() {
-        const bpm = calcBPM();
-        if (bpm !== null) { bpmText.textContent = bpm + ' BPM'; bpmBadge.classList.add('visible'); }
-        else              { bpmBadge.classList.remove('visible'); }
-    }
-
-    // ── Timeline ──────────────────────────────────────────────────────────────
-
-    function updateTimeline() {
-        timelineEl.querySelectorAll('.timeline-tap, .timeline-drag').forEach(el => el.remove());
-        if (taps.length === 0) return;
-        const total = taps[taps.length-1].perfOffset - taps[0].perfOffset;
-        const W = timelineEl.offsetWidth;
-
-        for (let i = 0; i < taps.length; i++) {
-            const rel = taps[i].perfOffset - taps[0].perfOffset;
-            const pos = taps.length === 1 ? 0 : total > 0 ? (rel/total)*W : (i/(taps.length-1))*W;
-
-            if (taps[i].isDrag && i > 0 && taps[i-1].isDrag) {
-                const prevRel = taps[i-1].perfOffset - taps[0].perfOffset;
-                const prevPos = total > 0 ? (prevRel/total)*W : ((i-1)/(taps.length-1))*W;
-                const line = document.createElement('div');
-                line.className = 'timeline-drag';
-                line.style.left = prevPos + 'px'; line.style.width = (pos - prevPos) + 'px';
-                timelineEl.appendChild(line);
-            } else {
-                const dot = document.createElement('div');
-                dot.className = 'timeline-tap' + (taps[i].duration > 0 ? ' long' : '');
-                dot.style.left = pos + 'px';
-                if (taps[i].duration > 0 && total > 0) {
-                    dot.style.width = Math.max(4, (taps[i].duration / total) * W) + 'px';
-                }
-                timelineEl.appendChild(dot);
-            }
-        }
-    }
-
-    function updateDuration() {
-        let val = '0.0';
-        if (state === 'recording' && recordingStartPerf !== null)
-            val = ((performance.now() - recordingStartPerf) / 1000).toFixed(1);
-        else if (taps.length > 1)
-            val = ((taps[taps.length-1].perfOffset - taps[0].perfOffset) / 1000).toFixed(1);
-        durationEl.textContent = val + 's';
-    }
-
-    function updateUI() {
-        tapCountEl.textContent = taps.length;
-        updateDuration(); updateTimeline(); updateBPM();
-        const hasTaps = (getCompiledPattern()?.beats?.length || 0) >= 2;
-
-        // Loop button always visible when there are taps
-        loopBtn.classList.toggle('active', loopEnabled);
-
-        switch (state) {
-            case 'idle':
-                tapArea.className = 'tap-area';
-                playBtn.classList.add('hidden'); stopBtn.classList.add('hidden');
-                clearBtn.classList.add('hidden'); playheadEl.classList.remove('active');
-                visualizeBtn.classList.remove('visible');
-                sceneBtn.classList.remove('visible');
-                break;
-            case 'recording':
-                tapArea.className = 'tap-area recording';
-                playBtn.classList.add('hidden'); pauseBtn.classList.add('hidden');
-                stopBtn.classList.remove('hidden'); clearBtn.classList.add('hidden');
-                playheadEl.classList.remove('active'); visualizeBtn.classList.remove('visible');
-                sceneBtn.classList.remove('visible');
-                break;
-            case 'stopped':
-                tapArea.className = 'tap-area';
-                playBtn.classList.remove('hidden'); pauseBtn.classList.add('hidden');
-                stopBtn.classList.add('hidden'); clearBtn.classList.remove('hidden');
-                playheadEl.classList.remove('active');
-                if (hasTaps) {
-                    visualizeBtn.classList.add('visible');
-                    sceneBtn.classList.add('visible');
-                } else {
-                    visualizeBtn.classList.remove('visible');
-                    sceneBtn.classList.remove('visible');
-                }
-                break;
-            case 'playing':
-                tapArea.className = 'tap-area playing';
-                playBtn.classList.add('hidden'); pauseBtn.classList.remove('hidden');
-                stopBtn.classList.remove('hidden'); clearBtn.classList.add('hidden');
-                playheadEl.classList.add('active'); visualizeBtn.classList.remove('visible');
-                sceneBtn.classList.remove('visible');
-                break;
-        }
-    }
-
-    // ── Recording ─────────────────────────────────────────────────────────────
-
-    function recordTap(x, y, isDrag = false, duration = 0) {
-        const offset = recordingStartPerf !== null ? (performance.now() - recordingStartPerf) : 0;
-        if (!recordingSurface) {
-            recordingSurface = getTapAreaSize();
-        }
-        taps.push({ id: `tap-${++tapSequence}`, perfOffset: offset, x, y, isDrag, duration });
-        markRhythmDirty();
-        if (!isDrag) showTapIndicator(x, y, duration > 0);
-        if (!isDrag) playBeepNow(x, y, duration > 0 ? duration / 1000 : DEFAULT_TAP_DURATION_MS / 1000);
-        updateUI();
-    }
-
-    function startRecording(x, y) {
-        initAudio();
-        taps = [];
-        tapSequence = 0;
-        recordingSurface = getTapAreaSize();
-        scrubPosition = 0;
-        lastScrubCueId = null;
-        markerEl.classList.remove('visible');
-        markRhythmDirty();
-        recordingStartPerf = performance.now();
-        state = 'recording';
-        if (durationInterval) clearInterval(durationInterval);
-        durationInterval = setInterval(updateDuration, 100);
-        if (recordFirstTapBtn.classList.contains('checked')) recordTap(x, y, false, 0);
-        updateUI();
-    }
-
-    // ── Mouse/touch handlers ──────────────────────────────────────────────────
-
-    function getXY(e) {
-        const rect = tapArea.getBoundingClientRect();
-        const cx = e.clientX ?? e.touches?.[0]?.clientX;
-        const cy = e.clientY ?? e.touches?.[0]?.clientY;
-        return { x: cx - rect.left, y: cy - rect.top };
-    }
-
-    function handleTapStart(e) {
-        e.preventDefault();
-        const { x, y } = getXY(e);
-        lastCursorX = x; lastCursorY = y;
-
-        if (state === 'idle' || state === 'stopped') {
-            isDragging = true; dragThresholdMet = false;
-            dragStartX = x; dragStartY = y;
-            startRecording(x, y);
-        } else if (state === 'recording') {
-            isDragging = true; dragThresholdMet = false;
-            dragStartX = x; dragStartY = y;
-            recordTap(x, y, false, 0);
-        } else {
-            return;
-        }
-
-        // Start mouse-held long note (mirrors space-key behaviour)
-        mouseHeldActive = true;
-        mouseHeldStartPerf = performance.now();
-        mouseHeldIndicator = createLongNoteIndicator(x, y);
-        startLongNoteOsc(x, y);
-    }
-
-    function handleTapMove(e) {
-        if (!isDragging || state !== 'recording') return;
-        e.preventDefault();
-        const { x, y } = getXY(e);
-        lastCursorX = x; lastCursorY = y;
-
-        // Update pitch as mouse moves while held
-        if (mouseHeldActive) {
-            updateLongNoteOsc(x, y);
-            moveLongNoteIndicator(mouseHeldIndicator, x, y);
-        }
-
-        if (!dragThresholdMet) {
-            const dx = x - dragStartX, dy = y - dragStartY;
-            if (Math.sqrt(dx*dx + dy*dy) < DRAG_THRESHOLD) return;
-            dragThresholdMet = true;
-        }
-        const now = performance.now();
-        if (now - lastDragTime < 50) return;
-        lastDragTime = now;
-        recordTap(x, y, true, 0);
-    }
-
-    function handleTapEnd(e) {
-        isDragging = false; dragThresholdMet = false;
-
-        if (!mouseHeldActive) return;
-        const dur = performance.now() - mouseHeldStartPerf;
-        const x = lastCursorX ?? tapArea.offsetWidth / 2;
-        const y = lastCursorY ?? tapArea.offsetHeight / 2;
-
-        stopLongNoteOsc();
-        removeLongNoteIndicator(mouseHeldIndicator);
-        mouseHeldIndicator = null;
-        mouseHeldActive = false;
-
-        // If it was a long hold (>120ms) and we're recording, replace the last
-        // discrete tap with a long note at the release position
-        if (state === 'recording' && dur >= 120) {
-            // Remove the initial tap-down we recorded in handleTapStart
-            // (it was the last non-drag tap added)
-            for (let i = taps.length - 1; i >= 0; i--) {
-                if (!taps[i].isDrag) {
-                    taps.splice(i, 1);
-                    markRhythmDirty();
-                    break;
-                }
-            }
-            recordTap(x, y, false, dur);
-        }
-    }
-
-    tapArea.addEventListener('mousemove', e => {
-        const rect = tapArea.getBoundingClientRect();
-        lastCursorX = e.clientX - rect.left;
-        lastCursorY = e.clientY - rect.top;
-        // Update long note pitch if held
-        if (longNoteActive) {
-            updateLongNoteOsc(lastCursorX, lastCursorY);
-            moveLongNoteIndicator(longNoteIndicator, lastCursorX, lastCursorY);
-        }
-    });
-
-    tapArea.addEventListener('mousedown',  handleTapStart);
-    tapArea.addEventListener('touchstart', handleTapStart, { passive: false });
-    tapArea.addEventListener('mousemove',  handleTapMove);
-    tapArea.addEventListener('touchmove',  handleTapMove,  { passive: false });
-    tapArea.addEventListener('mouseup',    handleTapEnd);
-    tapArea.addEventListener('touchend',   handleTapEnd);
-    tapArea.addEventListener('mouseleave', handleTapEnd);
-
-    // ── Keyboard ──────────────────────────────────────────────────────────────
-
-    function getKeyPos() {
-        const rect = tapArea.getBoundingClientRect();
-        if (lastCursorX !== null) return {
-            x: Math.max(0, Math.min(rect.width,  lastCursorX)),
-            y: Math.max(0, Math.min(rect.height, lastCursorY))
-        };
-        return { x: rect.width / 2, y: rect.height / 2 };
-    }
-
-    function doStop() {
-        playbackToken = null;
-        if (durationInterval) { clearInterval(durationInterval); durationInterval = null; }
-        if (state === 'recording') { state = 'stopped'; updateUI(); }
-        else if (state === 'playing') {
-            const pos = parseInt(playheadEl.style.left) || 0;
-            scrubPosition = pos / timelineEl.offsetWidth;
-            markerEl.style.left = pos + 'px'; markerEl.classList.add('visible');
-            state = 'stopped'; updateUI();
-        }
-    }
-
-    function doClear() {
-        playbackToken = null;
-        if (durationInterval) { clearInterval(durationInterval); durationInterval = null; }
-        taps = [];
-        tapSequence = 0;
-        recordingSurface = null;
-        scrubPosition = 0;
-        lastScrubCueId = null;
-        markerEl.classList.remove('visible');
-        markRhythmDirty();
-        state = 'idle'; updateUI();
-    }
-
-    function doPlayPause() {
-        if (state === 'stopped' && taps.length > 0) {
-            initAudio(); playPatternFrom(scrubPosition);
-        } else if (state === 'playing') {
-            doStop();
-        }
-    }
-
-    document.addEventListener('keydown', e => {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-        if (e.key === 'Escape')     { doStop(); return; }
-        if (e.key === 'Backspace')  { e.preventDefault(); doClear(); return; }
-        if (e.key === 'n' || e.key === 'N') { toggleNotes(); return; }
-        if (e.key === 'l' || e.key === 'L') { toggleLoop(); return; }
-        if (e.key === 'p' || e.key === 'P') { doPlayPause(); return; }
-
-        if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            if (keysDown.has(e.key)) {
-                // Key is held — update long note position
-                if (longNoteActive) {
-                    const { x, y } = getKeyPos();
-                    updateLongNoteOsc(x, y);
-                    moveLongNoteIndicator(longNoteIndicator, x, y);
-                }
-                return;
-            }
-            keysDown.add(e.key);
-            initAudio();
-            const { x, y } = getKeyPos();
-
-            if (state === 'idle' || state === 'stopped') {
-                startRecording(x, y);
-            }
-            // Start long note
-            longNoteActive = true;
-            longNoteStartPerf = performance.now();
-            longNoteIndicator = createLongNoteIndicator(x, y);
-            startLongNoteOsc(x, y);
-        }
-    });
-
-    document.addEventListener('keyup', e => {
-        if (e.key === ' ' || e.key === 'Enter') {
-            keysDown.delete(e.key);
-            if (!longNoteActive) return;
-
-            const dur = performance.now() - longNoteStartPerf;
-            const { x, y } = getKeyPos();
-            stopLongNoteOsc();
-            removeLongNoteIndicator(longNoteIndicator);
-            longNoteIndicator = null;
-            longNoteActive = false;
-
-            if (state === 'recording') {
-                // Short press (<120ms) = normal tap; long press = long note
-                if (dur < 120) {
-                    recordTap(x, y, false, 0);
-                } else {
-                    recordTap(x, y, false, dur);
-                }
-            }
-        } else {
-            keysDown.delete(e.key);
-        }
-    });
-
-    // ── Scrubbing ─────────────────────────────────────────────────────────────
-
-    function handleScrubStart(e) {
-        if (state !== 'stopped' || taps.length === 0) return;
-        e.stopPropagation(); isScrubbing = true; initAudio();
-        const rect = timelineEl.getBoundingClientRect();
-        scrubPosition = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        playheadEl.style.left = (scrubPosition * rect.width) + 'px';
-        playheadEl.classList.add('active');
-        previewScrub(scrubPosition);
-    }
-    function handleScrubMove(e) {
-        if (!isScrubbing) return; e.preventDefault();
-        const rect = timelineEl.getBoundingClientRect();
-        scrubPosition = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        playheadEl.style.left = (scrubPosition * rect.width) + 'px';
-        previewScrub(scrubPosition);
-    }
-    function handleScrubEnd(e) {
-        if (!isScrubbing) return; isScrubbing = false;
-        playheadEl.classList.remove('active');
-        markerEl.style.left = (scrubPosition * timelineEl.offsetWidth) + 'px';
-        markerEl.classList.add('visible');
-    }
-    function previewScrub(pct) {
-        const { schedule } = getPlaybackScheduleFromPattern(pct);
-        const cue = schedule[0];
-        if (!cue) return;
-        if (cue.id !== lastScrubCueId) {
-            lastScrubCueId = cue.id;
-            showCueIndicator(cue);
-            playCuePreview(cue);
-        }
-    }
-
-    timelineEl.addEventListener('mousedown',  handleScrubStart);
-    timelineEl.addEventListener('touchstart', handleScrubStart, { passive: false });
-    document.addEventListener('mousemove',  handleScrubMove);
-    document.addEventListener('touchmove',  handleScrubMove, { passive: false });
-    document.addEventListener('mouseup',    handleScrubEnd);
-    document.addEventListener('touchend',   handleScrubEnd);
-
-    // ── Playback (drift-free, loop-aware) ─────────────────────────────────────
-
-    async function playPatternFrom(startPct = 0) {
-        if (taps.length === 0) return;
-        state = 'playing'; updateUI();
-
-        const token = Symbol('pb');
-        playbackToken = token;
-
-        do {
-            const { pattern, schedule } = getPlaybackScheduleFromPattern(startPct);
-            if (!pattern || schedule.length === 0) break;
-
-            const total = Math.max(
-                pattern.durationMs || 0,
-                (schedule[schedule.length - 1].atMs || 0) + (schedule[schedule.length - 1].durationMs || 0),
-                DEFAULT_TAP_DURATION_MS
-            );
-            const startOffsetMs = Math.max(0, Math.min(total, total * startPct));
-            const W = timelineEl.offsetWidth;
-            const perfOrigin  = performance.now();
-            const audioOrigin = audioCtx.currentTime;
-
-            // rAF playhead
-            let rafId;
-            (function raf() {
-                if (playbackToken !== token) return;
-                const elapsed = performance.now() - perfOrigin;
-                playheadEl.style.left = (Math.min((startOffsetMs + elapsed) / total, 1) * W) + 'px';
-                rafId = requestAnimationFrame(raf);
-            })();
-
-            // Pre-schedule ALL audio (hardware precision)
-            for (const cue of schedule) {
-                const { x, y } = getCueCoordinates(cue);
-                scheduleBeep(audioOrigin + cue.atMs / 1000, x, y, cue.durationMs / 1000);
-            }
-
-            // Visual indicators (absolute-time, no accumulation)
-            for (const cue of schedule) {
-                if (playbackToken !== token) break;
-                const targetPerf = perfOrigin + cue.atMs;
-                const rem = targetPerf - performance.now();
-                if (rem > 0) await new Promise(r => setTimeout(r, rem));
-                if (playbackToken !== token) break;
-                showCueIndicator(cue);
-            }
-
-            cancelAnimationFrame(rafId);
-            if (playbackToken !== token) break;
-
-            // Loop: reset scrub to 0 and repeat
-            startPct = 0;
-            if (!loopEnabled) break;
-
-            // Brief pause between loops
-            await new Promise(r => setTimeout(r, 200));
-            if (playbackToken !== token) break;
-
-        } while (loopEnabled && playbackToken === token);
-
-        if (playbackToken === token) {
-            playheadEl.style.left = '0px';
-            state = 'stopped'; updateUI();
-        }
-    }
-
-    // ── Loop toggle ───────────────────────────────────────────────────────────
-
-    function toggleLoop() {
-        loopEnabled = !loopEnabled;
-        loopBtn.classList.toggle('active', loopEnabled);
-        markRhythmDirty();
-    }
-
-    // ── Button wiring ─────────────────────────────────────────────────────────
-    // Buttons inside tapArea MUST stopPropagation on mousedown/touchstart
-    // to prevent tapArea's mousedown from calling preventDefault() and
-    // suppressing the click event.
-
-    function protectBtn(btn) {
-        btn.addEventListener('mousedown',  e => e.stopPropagation());
-        btn.addEventListener('mouseup',    e => e.stopPropagation());
-        btn.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
-        btn.addEventListener('touchend',   e => e.stopPropagation(), { passive: true });
-        btn.addEventListener('click',      e => e.stopPropagation());
-    }
-    [visualizeBtn, sceneBtn, recordFirstTapBtn, notesToggleBtn, loopBtn].forEach(protectBtn);
-
-    pauseBtn.addEventListener('click', doStop);
-    stopBtn.addEventListener('click', () => {
-        playbackToken = null;
-        if (durationInterval) { clearInterval(durationInterval); durationInterval = null; }
-        if (state === 'recording') { state = 'stopped'; }
-        else if (state === 'playing') { scrubPosition = 0; markerEl.classList.remove('visible'); state = 'stopped'; }
-        updateUI();
-    });
-    playBtn.addEventListener('click', () => { if (taps.length === 0) return; initAudio(); playPatternFrom(scrubPosition); });
-    clearBtn.addEventListener('click', doClear);
-    recordFirstTapBtn.addEventListener('click', () => {
-        const checked = recordFirstTapBtn.classList.toggle('checked');
-        recordFirstIcon.className = checked ? 'ti ti-circle-dot' : 'ti ti-circle';
-        setTimeout(() => recordFirstTapBtn.classList.add('hidden'), 300);
-    });
-    notesToggleBtn.addEventListener('click', toggleNotes);
-    loopBtn.addEventListener('click', toggleLoop);
-
-    // ── Rhythm DAG ────────────────────────────────────────────────────────────
-    // window.open() called SYNCHRONOUSLY to avoid popup blocker
-
-    visualizeBtn.addEventListener('click', () => {
-        const pattern = getCompiledPattern();
-        if (!pattern || pattern.beats.length < 2) return;
-
-        const serialized = serializePattern(pattern);
-        // baseUrl derives from window.location at runtime via dag.js adapter default.
-        const url = buildDagRhythmURL(serialized);
-
-        // Open immediately (synchronous gesture context)
-        const win = window.open(url, '_blank');
-        if (!win) alert('Popup blocked — please allow popups for this site and try again.');
-    });
-
-    sceneBtn.addEventListener('click', () => {
-        const pattern = getCompiledPattern();
-        if (!pattern || pattern.beats.length < 2) return;
-
-        const serialized = serializePattern(pattern);
-        const url = buildDagRhythmURL(serialized, {
-            baseUrl: 'https://mist83.github.io/rhythm-scene/'
-        });
-
-        const win = window.open(url, '_blank');
-        if (!win) alert('Popup blocked — please allow popups for this site and try again.');
-    });
-
-    window.tapRepeaterDebug = {
-        getSnapshot() {
-            const { pattern, schedule } = getPlaybackScheduleFromPattern(scrubPosition);
-            return {
-                state,
-                tapCount: taps.length,
-                loopEnabled,
-                scrubPosition,
-                taps: taps.map(tap => ({ ...tap })),
-                pattern,
-                playbackSchedule: schedule
-            };
-        },
-        buildRhythmURL() {
-            const pattern = getCompiledPattern();
-            if (!pattern) return null;
-            // baseUrl derives from window.location at runtime via dag.js adapter default.
-            return buildDagRhythmURL(serializePattern(pattern));
-        },
-        buildSceneURL() {
-            const pattern = getCompiledPattern();
-            if (!pattern) return null;
-            return buildDagRhythmURL(serializePattern(pattern), {
-                baseUrl: 'https://mist83.github.io/rhythm-scene/'
-            });
-        },
-        loadSerializedPattern(serialized) {
-            return loadSerializedPatternIntoTaps(serialized, 'test-import');
-        },
-        loadTestTaps(testTaps = []) {
-            playbackToken = null;
-            taps = testTaps.map((tap, index) => ({
-                id: tap.id || `tap-${index + 1}`,
-                perfOffset: tap.perfOffset || 0,
-                x: tap.x || 0,
-                y: tap.y || 0,
-                isDrag: tap.isDrag === true,
-                duration: tap.duration || 0
-            }));
-            tapSequence = taps.length;
-            recordingSurface = getTapAreaSize();
-            scrubPosition = 0;
-            lastScrubCueId = null;
-            markerEl.classList.remove('visible');
-            state = taps.length ? 'stopped' : 'idle';
-            markRhythmDirty();
-            updateUI();
-        },
-        getPlaybackSchedule(startPct = 0) {
-            return getPlaybackScheduleFromPattern(startPct).schedule;
-        }
-    };
-
-    loadInitialPatternFromURL();
-    updateUI();
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch((error) => {
-                    console.warn('tap-repeater service worker registration failed', error);
-                });
-            });
-        }
-
-    // ─── Pair to target ───────────────────────────────────────────────────
-    // Lets tap-repeater stream taps + (optional) device tilt to any pair.js
-    // screen (e.g. baton). Wraps the existing recordTap() so every tap is
-    // mirrored as a "tap" message, plus a 30Hz "tilt" pump if motion is
-    // permitted. Re-enable Motion is always available — iOS only asks once
-    // per page load, so the escape hatch is a reload.
-    {
-        const els = {
-            pane: document.getElementById('pairPane'),
-            session: document.getElementById('pairSession'),
-            connect: document.getElementById('pairConnectBtn'),
-            motion: document.getElementById('pairMotionBtn'),
-            reauth: document.getElementById('pairReauthBtn'),
-            status: document.getElementById('pairStatus'),
-        };
-        const tilt = { alpha: 0, beta: 0, gamma: 0, hasMotion: false };
-        let phone = null;
-        let tiltTimer = 0;
-        // Honor ?pair=ABCD URL param so a QR can launch tap-repeater
-        // pre-paired to a baton session.
-        const urlSession = (new URLSearchParams(window.location.search).get('pair') || '').trim();
-        if (urlSession) {
-            els.session.value = urlSession.toUpperCase();
-            els.pane.open = true;
-        }
-
-        function setStatus(text) {
-            els.status.textContent = text;
-        }
-
-        async function pairConnect() {
-            const sessionId = (els.session.value || '').trim();
-            if (!sessionId) { setStatus('Enter the session code first.'); return; }
-            els.connect.disabled = true;
-            els.connect.textContent = 'Connecting…';
-            setStatus(`Pairing to ${sessionId}…`);
-            try {
-                const { pairPhone, newPhoneId } = await import(`https://ui.${FLEET_PARENT}/js/pair.js`);
-                let userId;
-                try { userId = localStorage.getItem('tap-repeater:phone-id') || ''; } catch { /* */ }
-                if (!userId) {
-                    userId = newPhoneId('tapper');
-                    try { localStorage.setItem('tap-repeater:phone-id', userId); } catch { /* */ }
-                }
-                phone = await pairPhone({
-                    channelPrefix: 'baton',
-                    sessionId,
-                    userId,
-                    onStatus: (st) => {
-                        if (st === 'live') { setStatus(`Paired to ${sessionId} — taps are streaming.`); els.connect.textContent = 'Connected'; }
-                        else if (st === 'reconnecting') setStatus('Reconnecting…');
-                        else if (st === 'closed') {
-                            setStatus('Dropped. Click Connect to retry.');
-                            els.connect.disabled = false;
-                            els.connect.textContent = 'Reconnect';
-                            phone = null;
-                        }
-                    },
-                });
-                if (tilt.hasMotion) startTiltPump();
-            } catch (err) {
-                console.error('tap-repeater pair failed', err);
-                setStatus(`Pair failed: ${err.message || err}`);
-                els.connect.disabled = false;
-                els.connect.textContent = 'Retry';
-            }
-        }
-
-        function attachOrientation() {
-            window.addEventListener('deviceorientation', (e) => {
-                tilt.hasMotion = true;
-                tilt.alpha = Number(e.alpha) || 0;
-                tilt.beta = Number(e.beta) || 0;
-                tilt.gamma = Number(e.gamma) || 0;
-            }, { passive: true });
-        }
-
-        async function enableMotion() {
-            if (typeof DeviceOrientationEvent === 'undefined') { setStatus('No motion API on this device.'); els.reauth.hidden = false; return; }
-            const req = DeviceOrientationEvent.requestPermission;
-            if (typeof req === 'function') {
-                try {
-                    const r = await req.call(DeviceOrientationEvent);
-                    if (r !== 'granted') { setStatus('Motion denied — re-enable with the orange button.'); els.reauth.hidden = false; return; }
-                } catch { setStatus('Motion permission errored.'); els.reauth.hidden = false; return; }
-            }
-            attachOrientation();
-            els.motion.hidden = true;
-            els.reauth.hidden = false; // always-available escape hatch
-            if (phone) startTiltPump();
-        }
-
-        function startTiltPump() {
-            if (tiltTimer) return;
-            let lastA = null, lastB = null, lastG = null;
-            tiltTimer = setInterval(() => {
-                if (!phone) return;
-                const a = Math.round(tilt.alpha * 10) / 10;
-                const b = Math.round(tilt.beta * 10) / 10;
-                const g = Math.round(tilt.gamma * 10) / 10;
-                if (a === lastA && b === lastB && g === lastG) return;
-                lastA = a; lastB = b; lastG = g;
-                phone.publish('tilt', { a, b, g }).catch(() => {});
-            }, 33);
-        }
-
-        // Wrap recordTap so every tap is mirrored to the paired target.
-        // Non-invasive: existing code is unchanged; this just adds a side
-        // effect when a phone is connected.
-        const originalRecordTap = recordTap;
-        recordTap = function(x, y, isDrag, duration) {
-            originalRecordTap(x, y, isDrag, duration);
-            if (phone) {
-                phone.publish('tap', { x, y, isDrag: !!isDrag, duration: duration || 0, tMs: performance.now() }).catch(() => {});
-            }
-        };
-
-        els.connect.addEventListener('click', pairConnect);
-        els.motion.addEventListener('click', enableMotion);
-        els.reauth.addEventListener('click', () => location.reload());
-        els.session.addEventListener('keydown', (e) => { if (e.key === 'Enter') pairConnect(); });
-        // Auto-connect if URL param provided
-        if (urlSession) pairConnect();
-    }
-    </script>
+        <aside class="panel">
+            <div class="card">
+                <h2><i class="ti ti-device-floppy"></i> Save profile</h2>
+                <div class="field"><label>Profile name</label><input id="p-name" type="text" placeholder="e.g. Sweetness — main beat"></div>
+                <div class="field"><label>Song title</label><input id="p-title" type="text" placeholder="auto-filled from YouTube"></div>
+                <div class="field"><label>Artist</label><input id="p-artist" type="text" placeholder="auto-filled from YouTube"></div>
+                <div class="field"><label>Slug (the join key across DAG &amp; dance-party)</label><input id="p-slug" type="text" placeholder="sweetness"></div>
+                <div class="save-actions">
+                    <button id="save" class="btn primary block"><i class="ti ti-device-floppy"></i> Save to library</button>
+                    <div class="row2">
+                        <button id="send-dag" class="btn pink"><i class="ti ti-binary-tree"></i> Send to DAG</button>
+                        <button id="download" class="btn ghost"><i class="ti ti-download"></i> Publish JSON</button>
+                    </div>
+                    <button id="copy-url" class="btn ghost block"><i class="ti ti-link"></i> Copy rhythm URL</button>
+                </div>
+            </div>
+
+            <div class="card library">
+                <h2><i class="ti ti-folder"></i> Library</h2>
+                <div id="lib-list" class="lib-list"><div class="lib-empty">No saved profiles yet — tap a song and hit Save.</div></div>
+            </div>
+        </aside>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 
 import { compileTapRepeaterPattern, serializePattern, buildDagRhythmURL, projectPatternToDag } from './vendor/rhythm-engine/index.js';
 import { buildProfile } from './vendor/rhythm-engine/profile.js';
+import { mountBandParty } from './band-party.js';
 
 const TAP_AREA = { width: 1000, height: 700 };
 const LS_KEY = 'tap-repeater:profiles:v1';
@@ -419,6 +420,15 @@ else { els.url.value = 'uaP6KgwbOvo'; loadSong('uaP6KgwbOvo', { title: 'Pain', a
 renderAll();
 requestAnimationFrame(frame);
 try { setDagMode(localStorage.getItem('tap-repeater:dagMode') || 'inline'); } catch { setDagMode('inline'); }
+
+// Mount the band-party composer at the top of the stage. It saves into the SAME
+// profile library (buildBandProfile extends the same envelope), so on-the-fly
+// band compositions show up alongside the YouTube tap-along profiles.
+mountBandParty(document.getElementById('bandPartyHost'), {
+    song: () => ({ title: els.pTitle.value, artist: els.pArtist.value, youtubeId: S.videoId, durationSec: Math.round((S.duration || 0) / 1000) }),
+    songClock: () => (S.player && S.player.getPlayerState && S.player.getPlayerState() === 1 && S.player.getCurrentTime ? S.player.getCurrentTime() * 1000 : null),
+    onProfile: (profile) => { const lib = loadLibrary(); lib[profile.id] = profile; writeLibrary(lib); renderLibrary(); }
+});
 
 // Debug surface (consistent with window.tapRepeaterDebug on the instrument).
 window.tapRepeaterBuilderDebug = {

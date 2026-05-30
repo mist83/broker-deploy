@@ -1,10 +1,15 @@
 // Cache name is bumped whenever the precache contents or fetch strategy change.
 // The activate handler deletes every cache that isn't the current one, so the
 // previous version's precache is evicted on the next visit.
-const CACHE_NAME = 'tap-repeater-v2';
+const CACHE_NAME = 'tap-repeater-v3';
 const APP_SHELL = [
   './',
   './index.html',
+  './instrument.html',
+  './index.js',
+  './band-party.js',
+  './voices.js',
+  './band-party.css',
   './manifest.webmanifest',
   './icon.svg',
   './vendor/rhythm-engine/events.js',
@@ -12,7 +17,12 @@ const APP_SHELL = [
   './vendor/rhythm-engine/pattern.js',
   './vendor/rhythm-engine/playback.js',
   './vendor/rhythm-engine/projection.js',
-  './vendor/rhythm-engine/serialization.js'
+  './vendor/rhythm-engine/serialization.js',
+  './vendor/rhythm-engine/profile.js',
+  './vendor/rhythm-engine/band-party.js',
+  './vendor/rhythm-engine/motion.js',
+  './vendor/rhythm-engine/adapters/tapRepeater.js',
+  './vendor/rhythm-engine/adapters/dag.js'
 ];
 
 self.addEventListener('install', (event) => {

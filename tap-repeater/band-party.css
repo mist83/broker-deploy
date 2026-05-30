@@ -1,0 +1,112 @@
+/* band-party.css — the on-the-fly beat composer.
+   Reuses the page design tokens (--blue/--yellow/--pink/--ink/--muted/--line)
+   defined on :root in index.html. Direct-manipulation + instant feedback: every
+   placed instance pulses when its SOURCE cell fires, so structure-sharing is
+   something you can see, not just reason about. */
+
+.bp-wrap {
+    background: var(--card, #fff);
+    border: 1px solid var(--line, #e3e8ee);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.bp-wrap h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .6px;
+    color: var(--muted, #6b7785); margin: 0; display: flex; align-items: center; gap: 6px;
+}
+.bp-wrap h2 .bp-tag { background: var(--pink, #FF2D95); color: #fff; border-radius: 6px; padding: 2px 7px; font-size: 10px; }
+
+/* toolbar */
+.bp-toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.bp-toolbar .bp-sep { width: 1px; height: 26px; background: var(--line, #e3e8ee); margin: 0 2px; }
+.bp-field { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted, #6b7785); }
+.bp-field select, .bp-field input {
+    font: inherit; font-size: 13px; padding: 7px 9px; border: 1.5px solid var(--line, #e3e8ee);
+    border-radius: 8px; background: #fbfcfe; color: var(--ink, #16202c);
+}
+.bp-field input[type="number"] { width: 64px; font-variant-numeric: tabular-nums; }
+.bp-bpm-steppers { display: inline-flex; gap: 2px; }
+.bp-bpm-steppers button { width: 26px; height: 30px; border-radius: 7px; background: #eef2f7; color: var(--ink); font-size: 16px; }
+.bp-rec.on { background: var(--pink, #FF2D95); color: #fff; animation: bp-rec-pulse 1s infinite; }
+@keyframes bp-rec-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,45,149,.5); } 50% { box-shadow: 0 0 0 6px rgba(255,45,149,0); } }
+.bp-toggle.on { background: var(--blue, #0071CE); color: #fff; }
+
+/* beat dots (metronome meter readout) */
+.bp-beatdots { display: inline-flex; gap: 5px; margin-left: 2px; }
+.bp-beatdots .d { width: 11px; height: 11px; border-radius: 50%; background: #d6deea; transition: transform .05s, background .05s; }
+.bp-beatdots .d.lit { background: var(--blue, #0071CE); transform: scale(1.35); }
+.bp-beatdots .d.lit.down { background: var(--pink, #FF2D95); }
+
+/* tap pad */
+.bp-pad {
+    position: relative; min-height: 150px; border-radius: 12px; overflow: hidden;
+    background: linear-gradient(160deg, #11151c, #1d2330);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    user-select: none; border: 2px solid transparent; touch-action: none;
+}
+.bp-pad.armed { border-color: var(--pink, #FF2D95); }
+.bp-pad .bp-pad-hint { color: #93a1b3; font-size: 13px; text-align: center; pointer-events: none; padding: 16px; }
+.bp-pad .bp-pad-dev { color: #fff; font-weight: 800; font-size: 16px; }
+.bp-pad-ripple { position: absolute; width: 54px; height: 54px; border-radius: 50%; background: rgba(255,45,149,.45); transform: translate(-50%,-50%) scale(0); pointer-events: none; }
+/* metronome grid lines over the pad */
+.bp-padgrid { position: absolute; inset: 0; pointer-events: none; }
+.bp-padgrid .gl { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,.07); }
+.bp-padgrid .gl.bar { background: rgba(255,255,255,.18); width: 2px; }
+.bp-padgrid .gh { position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(255,194,32,.55); box-shadow: 0 0 6px rgba(255,194,32,.5); }
+.bp-padgrid .ph { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; box-shadow: 0 0 6px rgba(255,255,255,.7); }
+
+/* cell shelf */
+.bp-section-label { font-size: 11px; font-weight: 700; color: var(--muted, #6b7785); text-transform: uppercase; letter-spacing: .4px; }
+.bp-shelf { display: flex; gap: 8px; flex-wrap: wrap; min-height: 20px; }
+.bp-shelf .bp-empty { color: var(--muted, #6b7785); font-size: 12px; }
+.bp-cell {
+    border: 1.5px solid var(--line, #e3e8ee); border-radius: 10px; padding: 8px 10px;
+    background: #fff; min-width: 132px; display: flex; flex-direction: column; gap: 6px; cursor: pointer;
+    transition: border-color .12s, transform .06s;
+}
+.bp-cell:hover { border-color: var(--blue, #0071CE); }
+.bp-cell.sel { border-color: var(--pink, #FF2D95); box-shadow: 0 0 0 2px rgba(255,45,149,.15); }
+.bp-cell.pulse { animation: bp-pulse .22s ease-out; }
+@keyframes bp-pulse { 0% { transform: scale(1); } 35% { transform: scale(1.06); box-shadow: 0 0 0 4px rgba(255,45,149,.35); } 100% { transform: scale(1); } }
+.bp-cell .t { font-size: 13px; font-weight: 700; color: var(--ink, #16202c); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+.bp-cell .s { font-size: 11px; color: var(--muted, #6b7785); font-variant-numeric: tabular-nums; }
+.bp-spark { height: 22px; background: #0e131b; border-radius: 5px; position: relative; overflow: hidden; }
+.bp-spark i { position: absolute; top: 3px; bottom: 3px; width: 2px; background: var(--yellow, #FFC220); border-radius: 2px; }
+.bp-cell .bp-cell-acts { display: flex; gap: 4px; flex-wrap: wrap; }
+.bp-cell .bp-cell-acts button { font-size: 11px; padding: 4px 7px; border-radius: 6px; background: #eef2f7; color: var(--ink, #16202c); }
+.bp-cell .bp-cell-acts button:hover { background: #e2e8f0; }
+.bp-cell .bp-cell-acts button.lay { background: var(--blue, #0071CE); color: #fff; }
+.bp-cell .bp-cell-acts button.loop { background: var(--pink, #FF2D95); color: #fff; }
+
+/* track lanes (the arrangement DAG) */
+.bp-tracks { display: flex; flex-direction: column; gap: 6px; }
+.bp-lane { display: grid; grid-template-columns: 116px 1fr; gap: 8px; align-items: stretch; }
+.bp-lane-head { display: flex; flex-direction: column; gap: 3px; justify-content: center; padding: 6px 8px; border: 1px solid var(--line, #e3e8ee); border-radius: 8px; background: #fbfcfe; }
+.bp-lane-head .n { font-size: 12px; font-weight: 700; color: var(--ink, #16202c); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bp-lane-head .i { font-size: 10px; color: var(--muted, #6b7785); }
+.bp-lane-head.muted { opacity: .5; }
+.bp-lane-body { position: relative; min-height: 46px; background: #0e131b; border-radius: 8px; overflow: hidden; }
+.bp-block {
+    position: absolute; top: 5px; bottom: 5px; border-radius: 6px; min-width: 26px;
+    background: linear-gradient(180deg, #2563eb, #1e40af); border: 1px solid rgba(255,255,255,.25);
+    color: #fff; font-size: 10px; font-weight: 700; padding: 3px 5px; overflow: hidden; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.bp-block.pulse { animation: bp-block-pulse .22s ease-out; }
+@keyframes bp-block-pulse { 0% { filter: brightness(1); } 35% { filter: brightness(1.7); box-shadow: 0 0 10px rgba(255,194,32,.8); } 100% { filter: brightness(1); } }
+.bp-block .rep { background: rgba(0,0,0,.35); border-radius: 4px; padding: 0 4px; align-self: flex-start; }
+.bp-block .x { position: absolute; top: 2px; right: 3px; opacity: .7; }
+.bp-lane-body .ph { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--yellow, #FFC220); display: none; z-index: 3; }
+.bp-lane-body .ph.on { display: block; }
+.bp-addtrack { align-self: flex-start; font-size: 12px; padding: 6px 10px; border-radius: 8px; background: #eef2f7; color: var(--ink, #16202c); }
+
+.bp-lane-group { font: 700 10px system-ui, sans-serif; padding: 2px 7px; border-radius: 5px; background: #eef2f7; color: var(--ink, #16202c); align-self: flex-start; margin-top: 3px; cursor: pointer; border: 0; }
+.bp-lane-group:hover { background: #ede4ff; color: #6d28d9; }
+.bp-cell.group { background: #f6f2ff; border-color: #c9b6ff; }
+.bp-cell.group .t { color: #6d28d9; }
+
+.bp-hint { font-size: 11px; color: var(--muted, #6b7785); }
+.bp-hint b { color: var(--ink, #16202c); }
