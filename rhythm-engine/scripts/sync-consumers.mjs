@@ -7,21 +7,28 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, '..');
 const sourceDir = path.join(repoRoot, 'src');
 
+// Both browser consumers need a {type:module} marker so Node tooling (and
+// older runtimes without ESM syntax-detection) treat the vendored .js as ESM.
+// Without this the rm+cp re-vendor silently drops a previously-committed
+// package.json and the consumer drifts.
+const writeModulePackageJson = async (targetDir) => {
+    await writeFile(
+        path.join(targetDir, 'package.json'),
+        `${JSON.stringify({ type: 'module' }, null, 2)}\n`,
+        'utf8'
+    );
+};
+
 const targets = [
     {
         name: 'dag',
         targetDir: path.resolve(repoRoot, '..', 'dag', 'src', 'vendor', 'rhythm-engine'),
-        afterSync: async (targetDir) => {
-            await writeFile(
-                path.join(targetDir, 'package.json'),
-                `${JSON.stringify({ type: 'module' }, null, 2)}\n`,
-                'utf8'
-            );
-        }
+        afterSync: writeModulePackageJson
     },
     {
         name: 'tap-repeater',
-        targetDir: path.resolve(repoRoot, '..', 'tap-repeater', 'wwwroot', 'vendor', 'rhythm-engine')
+        targetDir: path.resolve(repoRoot, '..', 'tap-repeater', 'wwwroot', 'vendor', 'rhythm-engine'),
+        afterSync: writeModulePackageJson
     }
 ];
 
