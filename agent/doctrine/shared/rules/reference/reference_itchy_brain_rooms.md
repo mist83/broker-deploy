@@ -4,7 +4,12 @@ description: Room pins and keys for valet task queue and Itchy Brain API endpoin
 type: reference
 ---
 
-## Valet Task Room (Clipboard API)
+## Valet Task Room (Clipboard API) — LEGACY v1 intake
+
+> **Canonical "hand a task to a backend agent" protocol → https://ineed.mullmania.com/agent-task-protocol.html** (machine mirror: `/agent-task-protocol.json`).
+> The current way to dispatch work to a Valet worker — used by dance-party, the ValetRemote companion, and the .NET `Valet.Worker` — is a **PM-A2A `command` message** POSTed to `https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws/api/pm-a2a/VALET/messages`, with `data.command = { commandId, kind: "codex-exec" | "claude-exec", workspaceRef, instructions, timeoutSeconds }` addressed via `data.to: [actorId]`. The worker replies with a `type:"result"` message; poll the room for it. See the "pm-a2a Coordination" section below and the ineed page for the full envelope.
+> The clipboard room below is the older `valet-task-v1` intake. It is still live but **dormant** (most recent item 2026-04-10). Prefer the command/result flow above; treat this pin as historical.
+
 - **Room Pin:** `valet-tasks`
 - **Room Key:** `s4k4vq6DWe4b3BOS05RHNb3k-RSJsPGr`
 - **API Base:** `https://37v5gf2sk2ocd2i7c6upoghya40jisvr.lambda-url.us-west-2.on.aws`

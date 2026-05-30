@@ -27,7 +27,7 @@
   "primaryLanguage": "PowerShell",
   "canon": {
     "version": "2026.04.26",
-    "source": "https://development-canon.mullmania.com/canon.json",
+    "source": "https://agent.mullmania.com",
     "profile": "frontdoor-v1",
     "syncPrompt": "Look at the new canon and sync yourself with canon.",
     "summary": "agent frontdoor proof checked against canon 2026.04.26.",

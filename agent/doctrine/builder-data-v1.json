@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-builder-data-v1",
   "summary": "One-shot doctrine builder payload for UIs and launchers.",
-  "generatedAt": "2026-05-30T03:41:28.844Z",
+  "generatedAt": "2026-05-30T04:35:50.989Z",
   "host": "https://agent.mullmania.com",
   "catalogs": {
     "sharedRuleCatalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
@@ -57,7 +57,7 @@
   "runtimeCatalog": {
     "schemaVersion": "agents-doctrine-runtime-catalog-v1",
     "summary": "Runtime catalog for doctrine-aware composition and Valet launch kinds.",
-    "generatedAt": "2026-05-30T03:41:28.844Z",
+    "generatedAt": "2026-05-30T04:35:50.989Z",
     "runtimes": [
       {
         "id": "codex",
@@ -156,7 +156,7 @@
   "eventCatalog": {
     "schemaVersion": "agents-doctrine-event-catalog-v1",
     "summary": "Lifecycle events that doctrine can tailor against.",
-    "generatedAt": "2026-05-30T03:41:28.844Z",
+    "generatedAt": "2026-05-30T04:35:50.989Z",
     "events": [
       {
         "id": "session_start",
@@ -232,7 +232,7 @@
   "recipeCatalog": {
     "schemaVersion": "agents-doctrine-recipe-catalog-v1",
     "summary": "Named doctrine recipes for repeatable task composition and Valet launches.",
-    "generatedAt": "2026-05-30T03:41:28.844Z",
+    "generatedAt": "2026-05-30T04:35:50.989Z",
     "recipes": [
       {
         "id": "repo-task-default",
@@ -334,7 +334,7 @@
   "profileToc": {
     "schemaVersion": "agents-doctrine-profile-toc-v1",
     "summary": "Profile table of contents for the shared doctrine core.",
-    "generatedAt": "2026-05-30T03:41:28.844Z",
+    "generatedAt": "2026-05-30T04:35:50.989Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/shared-rule-catalog-v1.json",
     "profileTocUrl": "https://agent.mullmania.com/doctrine/profile-toc-v1.json",
     "defaultProfileIdsByRuntime": {
@@ -531,7 +531,7 @@
   "semanticCatalog": {
     "schemaVersion": "agents-semantic-rule-catalog-v2",
     "summary": "Semantic doctrine rule catalog organized by domains and lifecycle events rather than runtime-specific packs.",
-    "generatedAt": "2026-05-30T03:41:28.844Z",
+    "generatedAt": "2026-05-30T04:35:50.989Z",
     "catalogUrl": "https://agent.mullmania.com/doctrine/semantic-rule-catalog-v2.json",
     "items": [
       {
@@ -1654,11 +1654,11 @@
         "id": "reference_itchy_brain_rooms",
         "label": "reference itchy brain rooms",
         "kind": "reference-rule",
-        "summary": "**Room Pin:** valet-tasks",
-        "excerpt": "Valet Task Room (Clipboard API)\n**Room Pin:** valet-tasks\n**Room Key:** s4k4vq6DWe4b3BOS05RHNb3k-RSJsPGr\n**API Base:** https://37v5gf2sk2ocd2i7c6upoghya40jisvr.lambda-url.us-west-2.on.aws\n**Endpoint:** GET/POST /api/clipboard/valet-tasks with x-room-key header\n\nLorem Ipzom Edits Room (asset metadata overrides)\n**Room Pin:** lorem-ipzom-edits (normalized to LOREM-IPZOM-EDITS)\n**Room Key:** 7a5f75ee9223b0c511f23ae0d97934f1\n**API Base:** https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws (same Lambda as pm-a2a)\n**Visibility:** Public read, locked write (X-Room-Key required to POST/DELETE)\n**Usage:** Each item stores one asset's metadata overrides. fileName = <asset_id>, type = 0 (Text), content = JSON.stringify({ attachment_name?, conversation_title?, tags?, primary_tags?, is_zombie? }). Latest item per fileName wins on build. scripts/build_lorem_ipzom_api.js fetches and overlays at build time. Admin UI at https://lorem-ipzom.mullmania.com/edit.html.\n\nCTX Context Documents (plain context sidecars)\n\n**This is not PM-A2A.** Use CTX rooms for the current portable working context of a task or conversation. They are plain context only: no transcript replay, no hidden reasoning, no inner-thought dump.\n\nCanonical URLs\n**Lambda API base:** https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws\n**Context app (human view):** https://context.mullmania.com/?roo",
+        "summary": "> **Canonical \"hand a task to a backend agent\" protocol → https://ineed.mullmania.com/agent-task-protocol.html** (machine mirror: /agent-task-protocol.json).",
+        "excerpt": "Valet Task Room (Clipboard API) — LEGACY v1 intake\n\n> **Canonical \"hand a task to a backend agent\" protocol → https://ineed.mullmania.com/agent-task-protocol.html** (machine mirror: /agent-task-protocol.json).\n> The current way to dispatch work to a Valet worker — used by dance-party, the ValetRemote companion, and the .NET Valet.Worker — is a **PM-A2A command message** POSTed to https://6lt4idrlpnr6fxk4r2p2o666ji0jzdnp.lambda-url.us-west-2.on.aws/api/pm-a2a/VALET/messages, with data.command = { commandId, kind: \"codex-exec\" | \"claude-exec\", workspaceRef, instructions, timeoutSeconds } addressed via data.to: [actorId]. The worker replies with a type:\"result\" message; poll the room for it. See the \"pm-a2a Coordination\" section below and the ineed page for the full envelope.\n> The clipboard room below is the older valet-task-v1 intake. It is still live but **dormant** (most recent item 2026-04-10). Prefer the command/result flow above; treat this pin as historical.\n**Room Pin:** valet-tasks\n**Room Key:** s4k4vq6DWe4b3BOS05RHNb3k-RSJsPGr\n**API Base:** https://37v5gf2sk2ocd2i7c6upoghya40jisvr.lambda-url.us-west-2.on.aws\n**Endpoint:** GET/POST /api/clipboard/valet-tasks with x-room-key header\n\nLorem Ipzom Edits Room (asset metadata overrides)\n**Room Pin:** lorem-ipzom-edits (normalized to LOREM-IPZOM-EDITS)\n**Room Key:** 7a5f75ee9223b0c511f23ae0d97934f1\n**API Base:** https://6lt4idr",
         "url": "https://agent.mullmania.com/doctrine/shared/rules/reference/reference_itchy_brain_rooms.md",
         "sitePath": "/doctrine/shared/rules/reference/reference_itchy_brain_rooms.md",
-        "sha256": "19a86bc26988ca57e5a2dd3937c010012ab350c347e465486a93811242cb054e",
+        "sha256": "f0ff7868093acdf1eedb687ce9f6fbe044ab101b610ca26fb7887e981480becc",
         "durability": "standing",
         "tags": [
           "multi-agent"
