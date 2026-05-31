@@ -5,7 +5,7 @@
 // The Lambda Function URL. Filled in by deploy.sh so the frontend doesn't
 // ship with a hardcoded URL. The server also CORS-allows the origin so
 // cross-fetch works from storyboard.mullmania.com.
-const API_URL = window.STORYBOARD_API_URL || localStorage.getItem('storyboard.api') || '';
+let API_URL = window.STORYBOARD_API_URL || localStorage.getItem('storyboard.api') || '';
 
 const $ = (id) => document.getElementById(id);
 
@@ -49,7 +49,8 @@ $('btn-load-manifest').addEventListener('click', async () => {
 });
 
 $('btn-render').addEventListener('click', async () => {
-    if (!API_URL) {
+    const apiUrl = await resolveApiUrl();
+    if (!apiUrl) {
         setStatus('API URL not configured. Deploy first or set localStorage["storyboard.api"].', true);
         return;
     }
@@ -76,7 +77,7 @@ $('btn-render').addEventListener('click', async () => {
     $('btn-render').disabled = true;
     try {
         const t0 = performance.now();
-        const res = await fetch(API_URL, {
+        const res = await fetch(apiUrl, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(buildRequestBody({ video_url, script, voice, music, sourceSync })),
@@ -95,6 +96,22 @@ $('btn-render').addEventListener('click', async () => {
         $('btn-render').disabled = false;
     }
 });
+
+async function resolveApiUrl() {
+    if (API_URL) return API_URL;
+    try {
+        const res = await fetch('./api-url.json', { cache: 'no-store' });
+        if (!res.ok) return '';
+        const config = await res.json();
+        if (typeof config.url === 'string' && config.url.trim()) {
+            API_URL = config.url.trim().replace(/\/+$/, '');
+            return API_URL;
+        }
+    } catch {
+        // Status text below already tells the user how to configure it.
+    }
+    return '';
+}
 
 function buildRequestBody({ video_url, script, voice, music, sourceSync }) {
     const body = { video_url, voice };
