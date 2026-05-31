@@ -1,93 +1,51 @@
-<div class="theme-preview-editorial" style="overflow-y: auto; padding: 32px;">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap');
+<script src="/js/theme-catalog.js"></script>
 
-        .theme-preview-editorial {
-            --color-primary: #2450ff;
-            --color-secondary: #c7682d;
-            --bg-primary: #fffdf8;
-            --bg-secondary: #f4efe6;
-            --bg-tertiary: #ece3d4;
-            --text-primary: #121212;
-            --text-secondary: #60594f;
-            --text-muted: #8b8174;
-            --border-color: #d3c6b0;
-            --font-family: "Manrope", sans-serif;
-            --font-mono: "IBM Plex Mono", monospace;
-            --font-family-display: "Instrument Serif", serif;
-        }
+<div class="p-lg" data-ui-theme-page="editorial">
+    <h2><i class="ti" data-theme-page-role="icon"></i> <span data-theme-page-role="title"></span></h2>
+    <p class="text-secondary mb-lg" data-theme-page-role="description"></p>
 
-        .editorial-brand {
-            margin: 0;
-            font-family: var(--font-family);
-            font-size: clamp(56px, 8vw, 120px);
-            font-weight: 800;
-            line-height: 0.88;
-            letter-spacing: -0.08em;
-        }
+    <div class="grid gap-lg">
+        <div class="card">
+            <h3 class="mb-md">Mode</h3>
+            <div class="tabs">
+                <button class="tab active" data-mode="light" aria-pressed="true">Light</button>
+                <button class="tab" data-mode="dark" aria-pressed="false">Dark</button>
+            </div>
+        </div>
 
-        .editorial-accent {
-            margin: 0;
-            font-family: var(--font-family-display);
-            font-size: clamp(40px, 6vw, 88px);
-            line-height: 0.92;
-            letter-spacing: -0.05em;
-        }
-
-        .editorial-meta {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-    </style>
-
-    <div>
-        <div class="editorial-meta mb-md">Editorial Theme</div>
-        <h2 class="editorial-brand">MULLMANIA</h2>
-        <p class="editorial-accent mb-lg">edited</p>
-        <p class="mb-lg">Typography-led theme for branded surfaces that want paper, ink, cobalt, and strong role separation between display, UI, and metadata.</p>
-
-        <div class="grid gap-lg">
+        <div class="grid-2 gap-md">
             <div class="card">
-                <h3 class="mb-md"><i class="ti ti-code"></i> Usage</h3>
-                <pre><code>&lt;script src="https://ui.mullmania.com/ui.js" data-ui-theme="editorial"&gt;&lt;/script&gt;</code></pre>
-                <button onclick="navigator.clipboard.writeText('<script src=&quot;https://ui.mullmania.com/ui.js&quot; data-ui-theme=&quot;editorial&quot;></script>').then(() => alert('Snippet copied!'))" class="btn-primary mt-md">
-                    <i class="ti ti-copy"></i> Copy Include
-                </button>
+                <h3 class="mb-sm">Use the CSS Bundle</h3>
+                <pre><code id="theme-css-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-css-snippet"><i class="ti ti-copy"></i> Copy CSS</button>
             </div>
 
             <div class="card">
-                <h3 class="mb-md"><i class="ti ti-typography"></i> Type System</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li class="mb-sm"><i class="ti ti-check"></i> Manrope for UI and body copy</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> Instrument Serif for display moments</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> IBM Plex Mono for labels and diagnostics</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> Role variables instead of one-off selectors</li>
-                </ul>
+                <h3 class="mb-sm">Use the Runtime</h3>
+                <pre><code id="theme-runtime-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-runtime-snippet"><i class="ti ti-copy"></i> Copy Runtime</button>
             </div>
+        </div>
 
-            <div class="card">
-                <h3 class="mb-md"><i class="ti ti-sparkles"></i> Characteristics</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li class="mb-sm"><i class="ti ti-check"></i> Paper and ink surfaces with one cobalt accent</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> Cardless layout bias</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> Strong brand lockups and calmer operational chrome</li>
-                    <li class="mb-sm"><i class="ti ti-check"></i> Better fit for docs, launch surfaces, and editorial UI</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3 class="mb-md"><i class="ti ti-eye"></i> Live Preview</h3>
-                <iframe src="/preview.html?theme=editorial" style="width: 100%; height: 400px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);"></iframe>
+        <div class="card">
+            <h3 class="mb-md">Live Preview</h3>
+            <div class="preview-screen">
+                <div class="preview-screen__frame">
+                    <div class="preview-screen__chrome">
+                        <span class="preview-screen__chrome-dot" aria-hidden="true"></span>
+                        <span class="preview-screen__chrome-label" id="theme-preview-label"></span>
+                        <a class="preview-screen__chrome-link" id="theme-preview-open" href="/preview.html?theme=editorial&mode=light" target="_blank" rel="noreferrer">
+                            <i class="ti ti-external-link"></i>
+                            Open
+                        </a>
+                    </div>
+                    <div class="preview-screen__viewport">
+                        <iframe class="preview-screen__media preview-screen__media--iframe preview-screen__media--read-only" id="theme-preview-frame" src="/preview.html?theme=editorial&mode=light" title="Editorial theme preview" tabindex="-1" referrerpolicy="no-referrer"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-pre { background: var(--bg-tertiary); padding: var(--space-md); border-radius: var(--radius-sm); overflow-x: auto; border-left: 3px solid var(--color-primary); }
-code { font-family: var(--font-mono); font-size: var(--text-sm); }
-ul li i { color: var(--color-primary); margin-right: var(--space-xs); }
-</style>
+<script src="/js/theme-page.js"></script>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Overdrive Proof Poster</title>
+<style>
+:root { --ink:#101418; --paper:#f8f6f1; --line:#1f2a33; --blue:#1e6f9f; --green:#21735f; --red:#af3f39; --gold:#b57824; --violet:#6a4aa0; }
+* { box-sizing:border-box; }
+body { margin:0; width:1600px; min-height:1120px; background:var(--paper); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing:0; }
+.poster { padding:48px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:32px; }
+.hero { border:4px solid var(--line); min-height:345px; padding:34px; display:grid; align-content:space-between; background:#fff; }
+.kicker { font-size:18px; text-transform:uppercase; font-weight:800; color:var(--red); }
+h1 { margin:12px 0 10px; font-size:74px; line-height:.95; max-width:900px; }
+.lede { font-size:24px; line-height:1.35; max-width:940px; margin:0; }
+.scoreboard { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px; }
+.score { border:3px solid var(--line); padding:18px; min-height:120px; background:#fefefe; }
+.score strong { display:block; font-size:42px; line-height:1; }
+.score span { display:block; margin-top:10px; font-size:15px; line-height:1.25; font-weight:700; text-transform:uppercase; }
+.map { border:4px solid var(--line); padding:30px; background:#12161b; color:#fff; }
+.map h2 { margin:0 0 20px; font-size:28px; }
+.rail { display:grid; gap:15px; }
+.step { display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:stretch; }
+.badge { border:3px solid #fff; display:grid; place-items:center; font-weight:900; font-size:22px; }
+.step div:last-child { border:2px solid rgba(255,255,255,.55); padding:15px 17px; }
+.step strong { display:block; font-size:20px; margin-bottom:4px; }
+.step span { color:#d7dee7; font-size:15px; line-height:1.35; }
+.evidence { grid-column:1 / -1; display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+.card { border:3px solid var(--line); background:#fff; padding:22px; min-height:205px; display:grid; align-content:space-between; }
+.card h3 { margin:0 0 8px; font-size:24px; }
+.card p { margin:0; font-size:15px; line-height:1.35; }
+.card .pass { margin-top:18px; border-top:3px solid var(--line); padding-top:16px; font-size:28px; font-weight:900; }
+.card:nth-child(1) { border-top:14px solid var(--red); }
+.card:nth-child(2) { border-top:14px solid var(--blue); }
+.card:nth-child(3) { border-top:14px solid var(--green); }
+.card:nth-child(4) { border-top:14px solid var(--gold); }
+.card:nth-child(5) { border-top:14px solid var(--violet); }
+.changes { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.change { min-height:150px; border:3px dashed var(--line); padding:22px; background:#fbfaf7; }
+.change strong { display:block; font-size:22px; margin-bottom:8px; }
+.change span { font-size:16px; line-height:1.35; }
+.footer { grid-column:1 / -1; display:flex; justify-content:space-between; border-top:4px solid var(--line); padding-top:20px; font-size:16px; font-weight:800; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<main class="poster">
+  <section class="hero">
+    <div><div class="kicker">Overdrive evidence board</div><h1>README claims locked with deterministic gates</h1><p class="lede">Scope covered dance-party, dag, models, mullformed, and ui. The final pass turned stale theme pages into the shared preview contract and reran each maintained proof gate.</p></div>
+    <div class="scoreboard"><div class="score"><strong>185/185</strong><span>UI theme matrix</span></div><div class="score"><strong>58/58</strong><span>UI canonical examples</span></div><div class="score"><strong>65/65</strong><span>Mullformed node tests</span></div><div class="score"><strong>40/40</strong><span>DAG remote phase</span></div></div>
+  </section>
+  <section class="map"><h2>Journey Map</h2><div class="rail"><div class="step"><div class="badge">1</div><div><strong>Claim inventory</strong><span>Found README claim locks in every target repo and mapped them to maintained test entrypoints.</span></div></div><div class="step"><div class="badge">2</div><div><strong>Contract gap</strong><span>Seven legacy theme pages did not expose the shared preview controls required by the UI contract.</span></div></div><div class="step"><div class="badge">3</div><div><strong>Product fix</strong><span>Normalized those pages to the shared data-driven theme shell instead of weakening the tests.</span></div></div><div class="step"><div class="badge">4</div><div><strong>Proof sweep</strong><span>Ran direct README locks, full repo gates, browser matrices, and remote checks until green.</span></div></div></div></section>
+  <section class="evidence"><div class="card"><h3>dance-party</h3><p>Full npm gate passed: packs, routes, DSL, actor motion, cameras, controls, capture, companion, and screen-party checks.</p><div class="pass">PASS</div></div><div class="card"><h3>dag</h3><p>Full npm gate passed: syntax, maintainability, dependency audit, units, browser harness, and remote phase.</p><div class="pass">PASS</div></div><div class="card"><h3>models</h3><p>Predeploy gate passed: catalog integrity, presentation contracts, lazy loading, rig conformance, and pytest.</p><div class="pass">19/19</div></div><div class="card"><h3>mullformed</h3><p>Node test suite passed across deploy hygiene, health contract, mscene, splat import, disposal, voxel export, and README locks.</p><div class="pass">65/65</div></div><div class="card"><h3>ui</h3><p>README/theme contracts, canonical examples, and full theme/mode surface matrix passed in browser.</p><div class="pass">283/283</div></div></section>
+  <section class="changes"><div class="change"><strong>Legacy pages normalized</strong><span>Cyberpink, editorial, mockup, ocean, pumpkin, sunset, and walmart now expose the shared light/dark preview frame.</span></div><div class="change"><strong>Theme matrix locked</strong><span>Every supported theme is verified across root shell, preview page, live preview route, and static detail page.</span></div><div class="change"><strong>Cleanup hang isolated</strong><span>The giant combined UI run can hang after browsers close; the equivalent proof is now separated into deterministic gates.</span></div></section>
+  <div class="footer"><span>Generated locally from green gates</span><span>output/overdrive</span></div>
+</main>
+</body>
+</html>

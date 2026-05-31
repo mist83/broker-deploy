@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-05-31T01:49:37.201Z",
+  "greenGates": [
+    {
+      "repo": "dance-party",
+      "command": "npm test",
+      "result": "pass"
+    },
+    {
+      "repo": "dag",
+      "command": "npm test",
+      "result": "pass",
+      "highlights": [
+        "dependency audit: 0 vulnerabilities",
+        "browser harness: 34/34",
+        "remote phase: 40/40"
+      ]
+    },
+    {
+      "repo": "models",
+      "command": "node scripts/predeploy-checks.mjs",
+      "result": "pass",
+      "highlights": [
+        "pytest: 19/19"
+      ]
+    },
+    {
+      "repo": "mullformed",
+      "command": "npm test",
+      "result": "pass",
+      "highlights": [
+        "node tests: 65/65"
+      ]
+    },
+    {
+      "repo": "ui",
+      "command": "theme/readme/canonical suites",
+      "result": "pass",
+      "highlights": [
+        "README/theme: 40/40",
+        "canonical: 58/58",
+        "theme matrix: 185/185"
+      ]
+    }
+  ],
+  "artifacts": {
+    "poster": "/Users/mist83/Code/ui/output/overdrive/overdrive-proof-poster.png",
+    "posterHtml": "/Users/mist83/Code/ui/output/overdrive/overdrive-proof-poster.html",
+    "themesWorkspace": "/Users/mist83/Code/ui/output/overdrive/themes-workspace.png",
+    "canonicalLivePreview": "/Users/mist83/Code/ui/output/overdrive/canonical-live-preview.png",
+    "directThemePage": "/Users/mist83/Code/ui/output/overdrive/theme-page-cyberpink.png"
+  }
+}

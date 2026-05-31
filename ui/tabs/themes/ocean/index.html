@@ -1,48 +1,51 @@
-<div class="theme-preview-ocean" style="overflow-y: auto; background: #e6f3f9;  padding: 32px;">
-    <style>
-        .theme-preview-ocean {
-            --color-primary: #006994;
-            --color-secondary: #00A8CC;
-            --bg-primary: #f0f8ff;
-            --bg-secondary: #e6f3f9;
-            --bg-tertiary: #d4ebf2;
-            --text-primary: #003d5c;
-            --text-secondary: #006994;
-            --text-muted: #7fa8b8;
-            --border-color: #00A8CC;
-        }
-    </style>
-    <div>
-        <h2>Ocean Theme</h2>
-        <p class="mb-lg">Cool blues and teals inspired by the sea.</p>
-        <div class="grid gap-lg">
+<script src="/js/theme-catalog.js"></script>
+
+<div class="p-lg" data-ui-theme-page="ocean">
+    <h2><i class="ti" data-theme-page-role="icon"></i> <span data-theme-page-role="title"></span></h2>
+    <p class="text-secondary mb-lg" data-theme-page-role="description"></p>
+
+    <div class="grid gap-lg">
+        <div class="card">
+            <h3 class="mb-md">Mode</h3>
+            <div class="tabs">
+                <button class="tab active" data-mode="light" aria-pressed="true">Light</button>
+                <button class="tab" data-mode="dark" aria-pressed="false">Dark</button>
+            </div>
+        </div>
+
+        <div class="grid-2 gap-md">
             <div class="card">
-                <h3 class="mb-md"><i class="ti ti-palette"></i> Color Palette</h3>
-                <div class="grid grid-2 gap-md">
-                    <div>
-                        <div style="overflow-y: auto; background: #006994; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
-                        <strong>Primary: #006994</strong>
-                        <p class="text-muted">Deep Blue</p>
+                <h3 class="mb-sm">Use the CSS Bundle</h3>
+                <pre><code id="theme-css-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-css-snippet"><i class="ti ti-copy"></i> Copy CSS</button>
+            </div>
+
+            <div class="card">
+                <h3 class="mb-sm">Use the Runtime</h3>
+                <pre><code id="theme-runtime-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-runtime-snippet"><i class="ti ti-copy"></i> Copy Runtime</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md">Live Preview</h3>
+            <div class="preview-screen">
+                <div class="preview-screen__frame">
+                    <div class="preview-screen__chrome">
+                        <span class="preview-screen__chrome-dot" aria-hidden="true"></span>
+                        <span class="preview-screen__chrome-label" id="theme-preview-label"></span>
+                        <a class="preview-screen__chrome-link" id="theme-preview-open" href="/preview.html?theme=ocean&mode=light" target="_blank" rel="noreferrer">
+                            <i class="ti ti-external-link"></i>
+                            Open
+                        </a>
                     </div>
-                    <div>
-                        <div style="overflow-y: auto; background: #00A8CC; height: 60px; border-radius: var(--radius-sm); margin-bottom: var(--space-sm);"></div>
-                        <strong>Secondary: #00A8CC</strong>
-                        <p class="text-muted">Teal</p>
+                    <div class="preview-screen__viewport">
+                        <iframe class="preview-screen__media preview-screen__media--iframe preview-screen__media--read-only" id="theme-preview-frame" src="/preview.html?theme=ocean&mode=light" title="Ocean theme preview" tabindex="-1" referrerpolicy="no-referrer"></iframe>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <h3 class="mb-md"><i class="ti ti-code"></i> Usage</h3>
-                <pre><code>&lt;link rel="stylesheet" href="https://ui.mullmania.com/ocean/style.css"&gt;</code></pre>
-                <button onclick="navigator.clipboard.writeText('https://ui.mullmania.com/ocean/style.css').then(() => alert('URL copied!'))" class="btn-primary mt-md">
-                    <i class="ti ti-copy"></i> Copy URL
-                </button>
             </div>
         </div>
     </div>
 </div>
-<style>
-pre { background: var(--bg-tertiary); padding: var(--space-md); border-radius: var(--radius-sm); overflow-x: auto; border-left: 3px solid var(--color-primary); }
-code { font-family: var(--font-mono); font-size: var(--text-sm); }
-ul li i { color: var(--color-success); margin-right: var(--space-xs); }
-</style>
+
+<script src="/js/theme-page.js"></script>
