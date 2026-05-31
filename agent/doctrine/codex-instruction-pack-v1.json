@@ -2,9 +2,9 @@
   "schemaVersion": "agents-codex-instruction-pack-v1",
   "flavor": "codex",
   "operator": "mist83",
-  "renderedAt": "2026-05-31T06:32:56.653Z",
+  "renderedAt": "2026-05-31T10:05:29.119Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
-  "preambleInstruction": "At the start of every chat, fetch bootstrap-v1.json, materialize this pack only as generated projections, and stop visibly if fetch or verification fails. Do not invent fallback policy.",
+  "preambleInstruction": "At the start of every chat, prefer a verified local doctrine cache, otherwise fetch bootstrap-v1.json, materialize this pack only as generated projections, and stop visibly if neither cache nor fetch verifies. Do not invent fallback policy.",
   "totalItems": 13,
   "composition": {
     "sharedItemCount": 0,
@@ -22,8 +22,8 @@
       "source": "flavor",
       "packPath": "instructions/global/AGENTS.md",
       "url": "https://agent.mullmania.com/doctrine/codex-pack/instructions/global/AGENTS.md",
-      "sha256": "cbebe5b9a87b4f742e0c58bb523f21b36c9c4cb2b9a16d097e54a76fd7bd9295",
-      "sizeBytes": 387,
+      "sha256": "d088fb9726ca152036111f07466dfd970b849af95730f35e0f0f1e7088a8da53",
+      "sizeBytes": 882,
       "mode": "regular",
       "projectionTarget": "~/.codex/AGENTS.md",
       "category": "global-instructions"

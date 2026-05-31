@@ -6,6 +6,18 @@ This is the remote preamble target for Codex.
 
 `At the beginning of every chat, read this doctrine and craft a sensible working preamble from it before doing the task.`
 
+## Cache-First Contract
+
+Before any network fetch, check the trusted local read-only doctrine cache at:
+
+```text
+~/.codex/cache/doctrine/current
+```
+
+Use the cache when it contains `doctrine/bootstrap-v1.json`, the Codex doctrine artifacts referenced by that bootstrap file, and cached hash metadata that verifies the file bytes. A verified cache hit is sufficient for startup; do not fetch the network only to revalidate it.
+
+If the cache is missing, incomplete, or unverified, fall back to the network fetch contract below. The cache is a projection of the remote doctrine, not a separate source of truth.
+
 ## Fetch Contract
 
 Example fetch pattern:
@@ -28,7 +40,7 @@ Preferred path:
 2. if the compose API is available, request one crafted preamble from those profiles plus task context
 3. otherwise use the compatibility artifacts above and preserve the same standing behavior
 
-If any fetch or verification step fails:
+If neither the local cache nor remote fetch can be loaded and verified:
 
 - stop visibly
 - say doctrine could not be loaded

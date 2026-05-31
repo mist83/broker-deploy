@@ -1,7 +1,7 @@
 {
   "schemaVersion": "agents-doctrine-bootstrap-v1",
   "summary": "Doctrine-first bootstrap contract for remote agent brains. Current live host is agent.mullmania.com.",
-  "bootstrapInstruction": "At the beginning of every chat, read this doctrine. If doctrine cannot be loaded and verified, stop visibly and require operator override before continuing.",
+  "bootstrapInstruction": "At the beginning of every chat, read this doctrine. Prefer a verified local read-only doctrine cache before fetching the network. If doctrine cannot be loaded and verified from cache or remote, stop visibly and require operator override before continuing.",
   "currentHost": {
     "primary": "https://agent.mullmania.com/",
     "notes": [
@@ -73,6 +73,19 @@
     "bootstrapScriptUrls": {
       "claude": "https://agent.mullmania.com/doctrine/claude-bootstrap.sh"
     }
+  },
+  "localCache": {
+    "allowed": true,
+    "cacheRootByRuntime": {
+      "codex": "~/.codex/cache/doctrine/current"
+    },
+    "verification": [
+      "required artifacts exist",
+      "JSON artifacts parse with expected schemaVersion values",
+      "cached hash metadata matches file bytes"
+    ],
+    "startupBehavior": "If the cache verifies, use it directly and skip network revalidation. If it is missing, incomplete, or unverified, fall back to the remote sourceOfTruth URLs.",
+    "sourceOfTruthBoundary": "The local cache is a read-only projection of remote doctrine, not a separate source of truth."
   },
   "access": {
     "agentSite": {

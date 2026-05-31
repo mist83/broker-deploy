@@ -43,6 +43,20 @@ Local files are allowed only when the runtime requires a foothold:
 
 Everything else is remote.
 
+## Cache-First Bootstrap
+
+Agents may use a trusted local read-only doctrine cache before contacting the network. For Codex on the operator machine, the cache root is:
+
+```text
+~/.codex/cache/doctrine/current
+```
+
+A cache hit is valid when it contains the bootstrap artifact, the static doctrine table of contents it points to, runtime-specific Codex artifacts, and cached hash metadata that verifies the file bytes. When the cache verifies, agents should use it directly and skip network revalidation for startup.
+
+If the cache is missing, incomplete, or unverified, fall back to the remote bootstrap URL. If neither cache nor remote doctrine can be loaded and verified, apply the fail-visible, gated-continue failure contract.
+
+The cache is a projection of the remote doctrine. Updating doctrine centrally should update the cache as part of the same operator-controlled rollout.
+
 ## No Ad Hoc Local Adds
 
 Do not add new source-of-truth behavior directly to:
@@ -62,13 +76,15 @@ Those local surfaces may exist only as projections or trampolines generated from
 
 Session start should do this:
 
-1. Fetch the bootstrap artifact.
-2. Fetch the static doctrine table of contents it points to.
-3. Verify signature, hash, and schema.
-4. Expand the default shared profiles for the current runtime.
-5. Prefer a single compose request that returns a crafted preamble from the selected profiles and task context.
-6. Materialize the minimum runtime-specific projections needed by the current agent.
-7. Optionally call a narrow dynamic scoping service for task-specific profile selection.
+1. Check the trusted local doctrine cache.
+2. If the cache contains the needed artifacts and verifies, use it without network revalidation.
+3. If the cache is missing, incomplete, or unverified, fetch the bootstrap artifact from the remote host.
+4. Fetch the static doctrine table of contents it points to.
+5. Verify signature, hash, and schema.
+6. Expand the default shared profiles for the current runtime.
+7. Prefer a single compose request that returns a crafted preamble from the selected profiles and task context.
+8. Materialize the minimum runtime-specific projections needed by the current agent.
+9. Optionally call a narrow dynamic scoping service for task-specific profile selection.
 
 The agent should not invent fallback policy on its own.
 

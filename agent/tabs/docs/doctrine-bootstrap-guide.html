@@ -38,6 +38,13 @@
 <li>read-only cache</li>
 </ul>
 <p>Everything else is remote.</p>
+<h2>Cache-First Bootstrap</h2>
+<p>Agents may use a trusted local read-only doctrine cache before contacting the network. For Codex on the operator machine, the cache root is:</p>
+<pre><code class="language-text">~/.codex/cache/doctrine/current
+</code></pre>
+<p>A cache hit is valid when it contains the bootstrap artifact, the static doctrine table of contents it points to, runtime-specific Codex artifacts, and cached hash metadata that verifies the file bytes. When the cache verifies, agents should use it directly and skip network revalidation for startup.</p>
+<p>If the cache is missing, incomplete, or unverified, fall back to the remote bootstrap URL. If neither cache nor remote doctrine can be loaded and verified, apply the fail-visible, gated-continue failure contract.</p>
+<p>The cache is a projection of the remote doctrine. Updating doctrine centrally should update the cache as part of the same operator-controlled rollout.</p>
 <h2>No Ad Hoc Local Adds</h2>
 <p>Do not add new source-of-truth behavior directly to:</p>
 <ul>
@@ -54,7 +61,9 @@
 <h2>Bootstrap Contract</h2>
 <p>Session start should do this:</p>
 <ol>
-<li>Fetch the bootstrap artifact.</li>
+<li>Check the trusted local doctrine cache.</li>
+<li>If the cache contains the needed artifacts and verifies, use it without network revalidation.</li>
+<li>If the cache is missing, incomplete, or unverified, fetch the bootstrap artifact from the remote host.</li>
 <li>Fetch the static doctrine table of contents it points to.</li>
 <li>Verify signature, hash, and schema.</li>
 <li>Expand the default shared profiles for the current runtime.</li>
