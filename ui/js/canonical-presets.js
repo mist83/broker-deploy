@@ -1803,7 +1803,9 @@
         const host = document.createElement('div');
         UI.mount(host, spec);
         if (typeof setup === 'function') {
+            host.__uiMountedPresetSetup = setup;
             setup(host);
+            host.__uiMountedPresetSetupApplied = true;
         }
         return host;
     }

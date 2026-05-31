@@ -525,6 +525,10 @@ class UIShell {
             if (spec.__uiShellPage) {
                 clonedNode.__uiShellPage = { ...spec.__uiShellPage };
             }
+            if (typeof spec.__uiMountedPresetSetup === 'function') {
+                clonedNode.__uiMountedPresetSetup = spec.__uiMountedPresetSetup;
+                clonedNode.__uiMountedPresetSetupApplied = false;
+            }
             return clonedNode;
         }
 
@@ -642,11 +646,38 @@ class UIShell {
             }
 
             window.UI.mount(container, preparedContent.content);
+            this.runMountedPresetSetup(container);
             return;
         }
 
         container.innerHTML = preparedContent.content || '';
         this.executeEmbeddedScripts(container);
+    }
+
+    runMountedPresetSetup(container) {
+        if (!container) {
+            return;
+        }
+
+        const candidates = [];
+        if (typeof container.__uiMountedPresetSetup === 'function') {
+            candidates.push(container);
+        }
+
+        if (typeof container.querySelectorAll === 'function') {
+            candidates.push(...Array.from(container.querySelectorAll('*')).filter((node) => (
+                typeof node.__uiMountedPresetSetup === 'function'
+            )));
+        }
+
+        candidates.forEach((node) => {
+            if (node.__uiMountedPresetSetupApplied) {
+                return;
+            }
+
+            node.__uiMountedPresetSetup(node);
+            node.__uiMountedPresetSetupApplied = true;
+        });
     }
 
     async init() {
@@ -2228,7 +2259,7 @@ class WorkspaceController {
 
             const icon = this.resolveIcon(item.icon, index);
             const label = item.name || item.title || 'Unnamed';
-            const statusMarkup = isCurrentTheme ? '<span class="sidebar-item-status">Live</span>' : '';
+            const statusMarkup = isCurrentTheme ? '<span class="sidebar-item-status">Published</span>' : '';
 
             if (isRich) {
                 const thumbInner = item.thumbnail

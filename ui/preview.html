@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theme Preview</title>
+    <link rel="stylesheet" href="/core/detail-shell.css">
     <style>
         body {
             margin: 0;
             padding: 16px;
             background: transparent;
+        }
+
+        body.preview-shell-mode {
+            padding: 0;
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        body.preview-shell-mode #app {
+            display: grid;
+            grid-template-rows: auto auto minmax(0, 1fr);
+            min-height: 100vh;
+            height: 100vh;
+        }
+
+        body.preview-shell-mode #content-container {
+            min-height: 0;
+        }
+
+        .preview-error {
+            margin: 16px;
         }
     </style>
 </head>
@@ -16,21 +40,81 @@
     <div id="app"></div>
     <script>
         (function() {
-            const themeOptions = ['active', 'blackwhite', 'blue', 'cyberblue', 'cyberpink', 'editorial', 'ghoul', 'green', 'indigo', 'mac', 'mockup', 'monochrome', 'ocean', 'orange', 'pastelzom', 'precog', 'pumpkin', 'red', 'sunset', 'terminal', 'violet', 'walmart', 'windows31', 'yellow'];
+            const themeOptions = ['active', 'blackwhite', 'blue', 'cyberblue', 'cyberpink', 'editorial', 'ghoul', 'green', 'indigo', 'mac', 'mockup', 'monochrome', 'ocean', 'orange', 'pastelzom', 'precog', 'pumpkin', 'red', 'simple', 'sunset', 'terminal', 'violet', 'walmart', 'windows31', 'yellow'];
             const modeOptions = ['light', 'dark'];
             const params = new URLSearchParams(window.location.search);
             const theme = themeOptions.includes(params.get('theme')) ? params.get('theme') : 'active';
             const mode = modeOptions.includes(params.get('mode')) ? params.get('mode') : 'light';
+            const spec64 = params.get('spec64');
             const script = document.createElement('script');
             script.src = `/ui.js?theme=${encodeURIComponent(theme)}&mode=${encodeURIComponent(mode)}`;
             script.async = false;
             document.head.appendChild(script);
 
             script.addEventListener('load', async () => {
-                await window.UI.ready();
-                document.title = `Theme Preview · ${theme} · ${mode}`;
-                window.UI.presets.mount('#app', 'preview.theme', { themeId: theme });
+                try {
+                    await window.UI.ready();
+
+                    if (spec64) {
+                        document.body.classList.add('preview-shell-mode');
+                        document.title = `Shell Preview · ${theme} · ${mode}`;
+                        mountShellPreview(decodeSpec64(spec64));
+                        return;
+                    }
+
+                    document.title = `Theme Preview · ${theme} · ${mode}`;
+                    window.UI.presets.mount('#app', 'preview.theme', { themeId: theme });
+                } catch (error) {
+                    showError(error);
+                }
             }, { once: true });
+
+            function decodeSpec64(value) {
+                const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
+                const padded = normalized + '='.repeat((4 - (normalized.length % 4 || 4)) % 4);
+                return JSON.parse(atob(padded));
+            }
+
+            function mountShellPreview(sitemap) {
+                const app = document.getElementById('app');
+                app.innerHTML = `
+                    <header id="header-container"></header>
+                    <div id="tabs-container" class="tabs"></div>
+                    <div id="content-container"></div>
+                `;
+
+                const shell = window.UI.createShell({
+                    tabsContainerId: 'tabs-container',
+                    contentContainerId: 'content-container',
+                    sitemap,
+                    frameworkTools: false,
+                    relatedProjects: false,
+                });
+
+                shell.init().catch(showError);
+            }
+
+            function showError(error) {
+                const message = error && error.message ? error.message : 'Preview could not be rendered.';
+                const app = document.getElementById('app');
+                document.body.classList.remove('preview-shell-mode');
+                app.innerHTML = `
+                    <div class="alert alert-error preview-error" role="alert">
+                        <i class="ti ti-alert-circle"></i>
+                        <span>${escapeHtml(message)}</span>
+                    </div>
+                `;
+                console.error('[Preview]', error);
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
         })();
     </script>
 </body>

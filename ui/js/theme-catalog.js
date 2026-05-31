@@ -160,6 +160,20 @@
             secondary: '#7A4317',
         },
         {
+            id: 'simple',
+            name: 'Simple',
+            icon: 'ti ti-layout-grid',
+            description: 'Clean, flat, enterprise-utility aesthetic. White surfaces, Bootstrap blue, system fonts, and minimal shadows.',
+            usage: 'Use when the surface should feel like the neutral default of a major component library.',
+            traits: [
+                'Flat white surfaces and restrained borders.',
+                'Bootstrap-blue accent with system fonts.',
+                'Baseline for the single-accent simple theme variants.',
+            ],
+            primary: '#0d6efd',
+            secondary: '#6c757d',
+        },
+        {
             id: 'sunset',
             name: 'Sunset',
             icon: 'ti ti-sunset-2',

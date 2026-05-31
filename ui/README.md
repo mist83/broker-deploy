@@ -29,13 +29,30 @@ Or follow the published default explicitly:
 
 ## Supported Themes
 
-- `cyberpink` - Loud dark synthwave treatment
-- `editorial` - Typography-led paper-and-ink system
-- `mockup` - Sketch / wireframe treatment
-- `ocean` - Calmer blue product tone
-- `pumpkin` - Warm rounded product tone
-- `sunset` - Warm expressive showcase palette
-- `walmart` - Walmart visual language
+- `cyberblue` - Theme Builder copy of cyberpink with the hot pink pushed to electric blue.
+- `cyberpink` - Neon-heavy synthwave treatment for loud demos and high-energy branded work.
+- `editorial` - Typography-led paper-and-ink theme for authored, high-intent surfaces.
+- `ghoul` - Acid green and blood red on near-black for dense consoles, TV-room dashboards, and log streams.
+- `mockup` - Sketch-like wireframe treatment for concept reviews and low-fidelity product planning.
+- `monochrome` - Neutral grayscale system with matching grayscale dark mode.
+- `red` - Clean simple-theme surfaces with a red accent.
+- `orange` - Clean simple-theme surfaces with an orange accent.
+- `yellow` - Clean simple-theme surfaces with a deep-amber accent.
+- `green` - Clean simple-theme surfaces with a green accent.
+- `blue` - Clean simple-theme surfaces with a blue accent.
+- `indigo` - Clean simple-theme surfaces with an indigo accent.
+- `violet` - Clean simple-theme surfaces with a violet accent.
+- `mac` - Apple/macOS control language.
+- `blackwhite` - Strict two-color theme.
+- `ocean` - Cool blue system for calmer dashboards and ambient product surfaces.
+- `pastelzom` - Light mint, lilac, and candy-pink zombie treatment.
+- `precog` - Signal-room palette for timeline, automation, and monitoring surfaces.
+- `pumpkin` - Warm rounded theme for approachable product work.
+- `simple` - Clean, flat enterprise-utility aesthetic.
+- `sunset` - Warmer editorial palette for expressive showcase and storytelling surfaces.
+- `terminal` - Sharp monochrome terminal style for command-heavy tools.
+- `walmart` - Brand-specific blue and yellow treatment for explicit Walmart-flavored work.
+- `windows31` - Sharp gray bevels, blue chrome, and retro desktop styling.
 
 ## Supported Modes
 
@@ -63,13 +80,30 @@ html[data-ui-mode="light" | "dark"]
 
 - `/active-theme.json`
 - `/active/style.css`
+- `/blackwhite/style.css`
+- `/blue/style.css`
+- `/cyberblue/style.css`
 - `/cyberpink/style.css`
 - `/editorial/style.css`
+- `/ghoul/style.css`
+- `/green/style.css`
+- `/indigo/style.css`
+- `/mac/style.css`
 - `/mockup/style.css`
+- `/monochrome/style.css`
 - `/ocean/style.css`
+- `/orange/style.css`
+- `/pastelzom/style.css`
+- `/precog/style.css`
 - `/pumpkin/style.css`
+- `/red/style.css`
+- `/simple/style.css`
 - `/sunset/style.css`
+- `/terminal/style.css`
+- `/violet/style.css`
 - `/walmart/style.css`
+- `/windows31/style.css`
+- `/yellow/style.css`
 - `/js/ui.js`
 - `/preview.html?theme=active&mode=light`
 - `/preview.html?theme=mockup&mode=dark`
@@ -95,7 +129,7 @@ Dark mode flows through `data-ui-mode="dark"`. Themes can override it locally, a
 
 ## Runtime Contract
 
-- `data-ui-theme` accepts `active`, `cyberpink`, `editorial`, `mockup`, `ocean`, `pumpkin`, `sunset`, `walmart`
+- `data-ui-theme` accepts `active` plus every concrete theme id in `styles.json`
 - `data-ui-mode` accepts `light`, `dark`
 - `UI.setTheme(theme, { mode })` updates the current document theme and preserves the current mode unless you pass a new one
 - `UI.setTheme()` is local-only and does not publish the global default

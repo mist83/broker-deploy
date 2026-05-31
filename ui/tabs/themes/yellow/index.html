@@ -1,0 +1,51 @@
+<script src="/js/theme-catalog.js"></script>
+
+<div class="p-lg" data-ui-theme-page="yellow">
+    <h2><i class="ti" data-theme-page-role="icon"></i> <span data-theme-page-role="title"></span></h2>
+    <p class="text-secondary mb-lg" data-theme-page-role="description"></p>
+
+    <div class="grid gap-lg">
+        <div class="card">
+            <h3 class="mb-md">Mode</h3>
+            <div class="tabs">
+                <button class="tab active" data-mode="light" aria-pressed="true">Light</button>
+                <button class="tab" data-mode="dark" aria-pressed="false">Dark</button>
+            </div>
+        </div>
+
+        <div class="grid-2 gap-md">
+            <div class="card">
+                <h3 class="mb-sm">Use the CSS Bundle</h3>
+                <pre><code id="theme-css-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-css-snippet"><i class="ti ti-copy"></i> Copy CSS</button>
+            </div>
+
+            <div class="card">
+                <h3 class="mb-sm">Use the Runtime</h3>
+                <pre><code id="theme-runtime-snippet"></code></pre>
+                <button class="btn-secondary mt-md" id="copy-runtime-snippet"><i class="ti ti-copy"></i> Copy Runtime</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-md">Live Preview</h3>
+            <div class="preview-screen">
+                <div class="preview-screen__frame">
+                    <div class="preview-screen__chrome">
+                        <span class="preview-screen__chrome-dot" aria-hidden="true"></span>
+                        <span class="preview-screen__chrome-label" id="theme-preview-label"></span>
+                        <a class="preview-screen__chrome-link" id="theme-preview-open" href="/preview.html?theme=yellow&mode=light" target="_blank" rel="noreferrer">
+                            <i class="ti ti-external-link"></i>
+                            Open
+                        </a>
+                    </div>
+                    <div class="preview-screen__viewport">
+                        <iframe class="preview-screen__media preview-screen__media--iframe preview-screen__media--read-only" id="theme-preview-frame" src="/preview.html?theme=yellow&mode=light" title="Yellow theme preview" tabindex="-1" referrerpolicy="no-referrer"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/theme-page.js"></script>
