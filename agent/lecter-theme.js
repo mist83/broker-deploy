@@ -1,17 +1,17 @@
 /* VENDORED COPY of lecter/public/lecter-theme.js — DO NOT EDIT HERE.
    Source of truth is the canon; re-sync with: bash lecter/sync-theme.sh
-   canon-js-sha256: 823deb865b5aa3955147b8a596e5a60391344e3ee02379bdd4701dc2d13710f2 */
+   canon-js-sha256: a9e8b6b3ed35e0ad460b10e5f99e45305bab04051f70029c57bcef0baf841864 */
 (function () {
   "use strict";
 
   var STORAGE_KEY = "lecter.theme";
   var DEFAULT_THEME = "ember-blue";
   var THEMES = [
-    { id: "ember-blue", label: "Ember / Blue", accent: "#ff6e3c", secondary: "#6cb7ff" },
-    { id: "violet-green", label: "Violet / Green", accent: "#6f72ff", secondary: "#36df6f" },
-    { id: "rose-cyan", label: "Rose / Cyan", accent: "#ff4f9a", secondary: "#38d8ff" },
-    { id: "gold-teal", label: "Gold / Teal", accent: "#f6c945", secondary: "#2bd6bd" },
-    { id: "lime-azure", label: "Lime / Azure", accent: "#b8f052", secondary: "#33b7ff" },
+    { id: "ember-blue", label: "Ember / Blue", accent: "#ff5a2f", secondary: "#4cc9ff" },
+    { id: "violet-green", label: "Violet / Green", accent: "#7c6cff", secondary: "#32ff72" },
+    { id: "rose-cyan", label: "Rose / Cyan", accent: "#ff3ea5", secondary: "#21e7ff" },
+    { id: "gold-teal", label: "Gold / Teal", accent: "#ffd43d", secondary: "#22f3d0" },
+    { id: "lime-azure", label: "Limegreen / Azure", accent: "#a7ff18", secondary: "#2fb8ff" },
   ];
   var themeIds = THEMES.map(function (theme) { return theme.id; });
 
@@ -77,12 +77,12 @@
     style.id = "lecter-theme-picker-style";
     style.textContent = [
       ".lecter-theme-control{position:fixed;right:12px;bottom:12px;z-index:2147483000;font:12px/1.3 -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color:var(--lecter-text,#e6e8ee)}",
-      ".lecter-theme-toggle{width:34px;height:34px;border-radius:999px;border:1px solid var(--lecter-line,#262b38);background:var(--lecter-panel,#161922);color:var(--lecter-text,#e6e8ee);box-shadow:var(--lecter-shadow,0 8px 24px rgba(0,0,0,.35));display:grid;place-items:center;padding:0;cursor:pointer}",
+      ".lecter-theme-toggle{width:34px;height:34px;border-radius:999px;border:1px solid rgb(var(--lecter-accent-rgb,255 110 60)/.55);background:linear-gradient(135deg,rgb(var(--lecter-accent-rgb,255 110 60)/.18),rgb(var(--lecter-blue-rgb,108 183 255)/.14)),var(--lecter-panel,#161922);color:var(--lecter-text,#e6e8ee);box-shadow:var(--lecter-shadow,0 8px 24px rgba(0,0,0,.35)),0 0 22px rgb(var(--lecter-accent-rgb,255 110 60)/.16);display:grid;place-items:center;padding:0;cursor:pointer}",
       ".lecter-theme-toggle:hover,.lecter-theme-toggle[aria-expanded='true']{border-color:var(--lecter-accent,#ff6e3c)}",
       ".lecter-theme-menu{position:absolute;right:0;bottom:42px;width:184px;display:grid;gap:5px;padding:8px;border-radius:8px;border:1px solid var(--lecter-line,#262b38);background:var(--lecter-panel,#161922);box-shadow:var(--lecter-shadow,0 8px 24px rgba(0,0,0,.35))}",
       ".lecter-theme-menu[hidden]{display:none}",
       ".lecter-theme-choice{width:100%;min-height:32px;display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;border:1px solid transparent;background:transparent;color:var(--lecter-text,#e6e8ee);font:inherit;text-align:left;cursor:pointer}",
-      ".lecter-theme-choice:hover,.lecter-theme-choice[aria-pressed='true']{background:var(--lecter-panel-2,#1d212c);border-color:var(--lecter-line,#262b38)}",
+      ".lecter-theme-choice:hover,.lecter-theme-choice[aria-pressed='true']{background:linear-gradient(90deg,rgb(var(--lecter-accent-rgb,255 110 60)/.18),rgb(var(--lecter-blue-rgb,108 183 255)/.10)),var(--lecter-panel-2,#1d212c);border-color:var(--lecter-line,#262b38)}",
       ".lecter-theme-choice[aria-pressed='true']{border-color:var(--lecter-accent,#ff6e3c)}",
       ".lecter-theme-swatch{display:inline-grid;grid-template-columns:1fr 1fr;width:23px;height:23px;border-radius:7px;overflow:hidden;border:1px solid rgb(255 255 255 / .16);flex:0 0 auto;background:var(--lecter-panel-2,#1d212c)}",
       ".lecter-theme-toggle .lecter-theme-swatch{width:20px;height:20px}",

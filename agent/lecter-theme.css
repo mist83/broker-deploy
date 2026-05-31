@@ -1,6 +1,6 @@
 /* VENDORED COPY of lecter/public/lecter-theme.css — DO NOT EDIT HERE.
    Source of truth is the canon; re-sync with: bash lecter/sync-theme.sh
-   canon-sha256: 70869ec63bc1094f782286e4c93500cf5957c23e749cf62a08037f030b28a64d */
+   canon-sha256: bb8dade54e06b1f3375af76e9997e6081976ac735c22876387be0ef0417e857a */
 /* ============================================================================
    LECTER THEME — CANONICAL SOURCE OF TRUTH for every Lecter surface.
 
@@ -32,136 +32,141 @@
   --lecter-text: #e6e8ee;
   --lecter-muted: #8a93a6;
   --lecter-faint: #505765;
-  --lecter-accent: #ff6e3c;
-  --lecter-accent-hover: #ff855e;
-  --lecter-blue: #6cb7ff;
-  --lecter-blue-hover: #8cc8ff;
-  --lecter-keep: #4cd07d;
-  --lecter-danger: #ff5d5d;
-  --lecter-warn: #ffb454;
+  --lecter-accent: #ff5a2f;
+  --lecter-accent-hover: #ff7956;
+  --lecter-blue: #4cc9ff;
+  --lecter-blue-hover: #7bd8ff;
+  --lecter-keep: #49f784;
+  --lecter-danger: #ff4d6d;
+  --lecter-warn: #ffd166;
+  --lecter-on-accent: #061018;
   --lecter-bg-rgb: 15 17 21;
   --lecter-panel-rgb: 22 25 34;
   --lecter-line-rgb: 38 43 56;
-  --lecter-accent-rgb: 255 110 60;
-  --lecter-blue-rgb: 108 183 255;
-  --lecter-keep-rgb: 76 208 125;
-  --lecter-warn-rgb: 255 180 84;
-  --lecter-danger-rgb: 255 93 93;
+  --lecter-accent-rgb: 255 90 47;
+  --lecter-blue-rgb: 76 201 255;
+  --lecter-keep-rgb: 73 247 132;
+  --lecter-warn-rgb: 255 209 102;
+  --lecter-danger-rgb: 255 77 109;
   --lecter-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 :root[data-lecter-theme="violet-green"] {
   --lecter-theme-id: violet-green;
-  --lecter-bg: #0d1016;
-  --lecter-panel: #151a22;
-  --lecter-panel-2: #1b2230;
-  --lecter-line: #2a3240;
-  --lecter-text: #f0f3fb;
-  --lecter-muted: #94a0b4;
-  --lecter-faint: #566275;
-  --lecter-accent: #6f72ff;
-  --lecter-accent-hover: #8a8cff;
-  --lecter-blue: #36df6f;
-  --lecter-blue-hover: #65ef90;
-  --lecter-keep: #36df6f;
-  --lecter-danger: #ff5d7f;
-  --lecter-warn: #f8c85e;
-  --lecter-bg-rgb: 13 16 22;
-  --lecter-panel-rgb: 21 26 34;
-  --lecter-line-rgb: 42 50 64;
-  --lecter-accent-rgb: 111 114 255;
-  --lecter-blue-rgb: 54 223 111;
-  --lecter-keep-rgb: 54 223 111;
-  --lecter-warn-rgb: 248 200 94;
-  --lecter-danger-rgb: 255 93 127;
+  --lecter-bg: #080a14;
+  --lecter-panel: #111527;
+  --lecter-panel-2: #181e34;
+  --lecter-line: #303a5d;
+  --lecter-text: #f6f8ff;
+  --lecter-muted: #aab4cf;
+  --lecter-faint: #6a7592;
+  --lecter-accent: #7c6cff;
+  --lecter-accent-hover: #978aff;
+  --lecter-blue: #32ff72;
+  --lecter-blue-hover: #72ff9d;
+  --lecter-keep: #32ff72;
+  --lecter-danger: #ff4f81;
+  --lecter-warn: #ffdc66;
+  --lecter-on-accent: #061018;
+  --lecter-bg-rgb: 8 10 20;
+  --lecter-panel-rgb: 17 21 39;
+  --lecter-line-rgb: 48 58 93;
+  --lecter-accent-rgb: 124 108 255;
+  --lecter-blue-rgb: 50 255 114;
+  --lecter-keep-rgb: 50 255 114;
+  --lecter-warn-rgb: 255 220 102;
+  --lecter-danger-rgb: 255 79 129;
 }
 
 :root[data-lecter-theme="rose-cyan"] {
   --lecter-theme-id: rose-cyan;
-  --lecter-bg: #100d14;
-  --lecter-panel: #191520;
-  --lecter-panel-2: #231d2d;
-  --lecter-line: #382d45;
-  --lecter-text: #f7f0ff;
-  --lecter-muted: #a59bb5;
-  --lecter-faint: #62586f;
-  --lecter-accent: #ff4f9a;
-  --lecter-accent-hover: #ff73ae;
-  --lecter-blue: #38d8ff;
-  --lecter-blue-hover: #6ee3ff;
-  --lecter-keep: #5fe398;
-  --lecter-danger: #ff6060;
-  --lecter-warn: #ffd05a;
-  --lecter-bg-rgb: 16 13 20;
-  --lecter-panel-rgb: 25 21 32;
-  --lecter-line-rgb: 56 45 69;
-  --lecter-accent-rgb: 255 79 154;
-  --lecter-blue-rgb: 56 216 255;
-  --lecter-keep-rgb: 95 227 152;
-  --lecter-warn-rgb: 255 208 90;
-  --lecter-danger-rgb: 255 96 96;
+  --lecter-bg: #0d0813;
+  --lecter-panel: #17101f;
+  --lecter-panel-2: #21162e;
+  --lecter-line: #40295b;
+  --lecter-text: #fff4ff;
+  --lecter-muted: #b9a8ca;
+  --lecter-faint: #765f8b;
+  --lecter-accent: #ff3ea5;
+  --lecter-accent-hover: #ff6bbb;
+  --lecter-blue: #21e7ff;
+  --lecter-blue-hover: #68efff;
+  --lecter-keep: #56ff9a;
+  --lecter-danger: #ff5266;
+  --lecter-warn: #ffda66;
+  --lecter-on-accent: #061018;
+  --lecter-bg-rgb: 13 8 19;
+  --lecter-panel-rgb: 23 16 31;
+  --lecter-line-rgb: 64 41 91;
+  --lecter-accent-rgb: 255 62 165;
+  --lecter-blue-rgb: 33 231 255;
+  --lecter-keep-rgb: 86 255 154;
+  --lecter-warn-rgb: 255 218 102;
+  --lecter-danger-rgb: 255 82 102;
 }
 
 :root[data-lecter-theme="gold-teal"] {
   --lecter-theme-id: gold-teal;
-  --lecter-bg: #10100e;
-  --lecter-panel: #181a17;
-  --lecter-panel-2: #20251f;
-  --lecter-line: #34382f;
-  --lecter-text: #f1f0e8;
-  --lecter-muted: #a29f92;
-  --lecter-faint: #606258;
-  --lecter-accent: #f6c945;
-  --lecter-accent-hover: #ffda70;
-  --lecter-blue: #2bd6bd;
-  --lecter-blue-hover: #62e3d0;
-  --lecter-keep: #62d98c;
-  --lecter-danger: #ff6b5a;
-  --lecter-warn: #f6c945;
-  --lecter-bg-rgb: 16 16 14;
-  --lecter-panel-rgb: 24 26 23;
-  --lecter-line-rgb: 52 56 47;
-  --lecter-accent-rgb: 246 201 69;
-  --lecter-blue-rgb: 43 214 189;
-  --lecter-keep-rgb: 98 217 140;
-  --lecter-warn-rgb: 246 201 69;
-  --lecter-danger-rgb: 255 107 90;
+  --lecter-bg: #0b0b10;
+  --lecter-panel: #141722;
+  --lecter-panel-2: #1d2330;
+  --lecter-line: #343d55;
+  --lecter-text: #fff9e9;
+  --lecter-muted: #b9b0a1;
+  --lecter-faint: #746d62;
+  --lecter-accent: #ffd43d;
+  --lecter-accent-hover: #ffe477;
+  --lecter-blue: #22f3d0;
+  --lecter-blue-hover: #69ffe7;
+  --lecter-keep: #7cff8b;
+  --lecter-danger: #ff5c51;
+  --lecter-warn: #ffd43d;
+  --lecter-on-accent: #061018;
+  --lecter-bg-rgb: 11 11 16;
+  --lecter-panel-rgb: 20 23 34;
+  --lecter-line-rgb: 52 61 85;
+  --lecter-accent-rgb: 255 212 61;
+  --lecter-blue-rgb: 34 243 208;
+  --lecter-keep-rgb: 124 255 139;
+  --lecter-warn-rgb: 255 212 61;
+  --lecter-danger-rgb: 255 92 81;
 }
 
 :root[data-lecter-theme="lime-azure"] {
   --lecter-theme-id: lime-azure;
-  --lecter-bg: #0d1110;
-  --lecter-panel: #141a19;
-  --lecter-panel-2: #1c2422;
-  --lecter-line: #2d3a36;
-  --lecter-text: #eaf5ef;
-  --lecter-muted: #92a69c;
-  --lecter-faint: #52645b;
-  --lecter-accent: #b8f052;
-  --lecter-accent-hover: #cbff73;
-  --lecter-blue: #33b7ff;
-  --lecter-blue-hover: #65c8ff;
-  --lecter-keep: #51de87;
-  --lecter-danger: #ff6b6b;
-  --lecter-warn: #f4d35e;
-  --lecter-bg-rgb: 13 17 16;
-  --lecter-panel-rgb: 20 26 25;
-  --lecter-line-rgb: 45 58 54;
-  --lecter-accent-rgb: 184 240 82;
-  --lecter-blue-rgb: 51 183 255;
-  --lecter-keep-rgb: 81 222 135;
-  --lecter-warn-rgb: 244 211 94;
-  --lecter-danger-rgb: 255 107 107;
+  --lecter-bg: #071019;
+  --lecter-panel: #0d1724;
+  --lecter-panel-2: #122138;
+  --lecter-line: #29415b;
+  --lecter-text: #f6fbff;
+  --lecter-muted: #a7bacd;
+  --lecter-faint: #668098;
+  --lecter-accent: #a7ff18;
+  --lecter-accent-hover: #c2ff52;
+  --lecter-blue: #2fb8ff;
+  --lecter-blue-hover: #66cdff;
+  --lecter-keep: #78ff4d;
+  --lecter-danger: #ff5c75;
+  --lecter-warn: #ffe066;
+  --lecter-on-accent: #061018;
+  --lecter-bg-rgb: 7 16 25;
+  --lecter-panel-rgb: 13 23 36;
+  --lecter-line-rgb: 41 65 91;
+  --lecter-accent-rgb: 167 255 24;
+  --lecter-blue-rgb: 47 184 255;
+  --lecter-keep-rgb: 120 255 77;
+  --lecter-warn-rgb: 255 224 102;
+  --lecter-danger-rgb: 255 92 117;
 }
 
 :root {
   --lecter-pair-a: var(--lecter-accent);
   --lecter-pair-b: var(--lecter-blue);
-  --lecter-accent-soft: rgb(var(--lecter-accent-rgb) / 0.12);
-  --lecter-accent-soft-2: rgb(var(--lecter-accent-rgb) / 0.20);
-  --lecter-blue-soft: rgb(var(--lecter-blue-rgb) / 0.12);
-  --lecter-blue-soft-2: rgb(var(--lecter-blue-rgb) / 0.20);
-  --lecter-keep-soft: rgb(var(--lecter-keep-rgb) / 0.12);
+  --lecter-accent-soft: rgb(var(--lecter-accent-rgb) / 0.18);
+  --lecter-accent-soft-2: rgb(var(--lecter-accent-rgb) / 0.30);
+  --lecter-blue-soft: rgb(var(--lecter-blue-rgb) / 0.16);
+  --lecter-blue-soft-2: rgb(var(--lecter-blue-rgb) / 0.28);
+  --lecter-keep-soft: rgb(var(--lecter-keep-rgb) / 0.16);
   --lecter-danger-soft: rgb(var(--lecter-danger-rgb) / 0.12);
   --lecter-warn-soft: rgb(var(--lecter-warn-rgb) / 0.12);
 
@@ -173,6 +178,8 @@
   --muted: var(--lecter-muted);
   --accent: var(--lecter-accent);
   --accent-hover: var(--lecter-accent-hover);
+  --accent-ink: var(--lecter-on-accent);
+  --on-accent: var(--lecter-on-accent);
   --keep: var(--lecter-keep);
   --drop: var(--lecter-danger);
   --trunc: var(--lecter-warn);
