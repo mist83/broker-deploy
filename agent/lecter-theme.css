@@ -1,6 +1,6 @@
 /* VENDORED COPY of lecter/public/lecter-theme.css — DO NOT EDIT HERE.
    Source of truth is the canon; re-sync with: bash lecter/sync-theme.sh
-   canon-sha256: 20386fa088b43eaf7800f37d12381f2669d1a1f36e81b770d05266b34b020762 */
+   canon-sha256: 70869ec63bc1094f782286e4c93500cf5957c23e749cf62a08037f030b28a64d */
 /* ============================================================================
    LECTER THEME — CANONICAL SOURCE OF TRUTH for every Lecter surface.
 
@@ -21,8 +21,10 @@
    Keep vendored copies honest:   bash lecter/sync-theme.sh
    (copies this file out + stamps a checksum so drift is detectable).
    ============================================================================ */
-:root {
+:root,
+:root[data-lecter-theme="ember-blue"] {
   color-scheme: dark;
+  --lecter-theme-id: ember-blue;
   --lecter-bg: #0f1115;
   --lecter-panel: #161922;
   --lecter-panel-2: #1d212c;
@@ -33,15 +35,135 @@
   --lecter-accent: #ff6e3c;
   --lecter-accent-hover: #ff855e;
   --lecter-blue: #6cb7ff;
+  --lecter-blue-hover: #8cc8ff;
   --lecter-keep: #4cd07d;
   --lecter-danger: #ff5d5d;
   --lecter-warn: #ffb454;
+  --lecter-bg-rgb: 15 17 21;
+  --lecter-panel-rgb: 22 25 34;
+  --lecter-line-rgb: 38 43 56;
+  --lecter-accent-rgb: 255 110 60;
+  --lecter-blue-rgb: 108 183 255;
+  --lecter-keep-rgb: 76 208 125;
+  --lecter-warn-rgb: 255 180 84;
+  --lecter-danger-rgb: 255 93 93;
   --lecter-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  /* Translucent accent tints — derived from --lecter-accent (#ff6e3c) so
-     hover/selected states stay on-brand. Added 2026-05 for the lecter-files
-     extension; reusable by any surface. */
-  --lecter-accent-soft: rgba(255, 110, 60, 0.12);
-  --lecter-accent-soft-2: rgba(255, 110, 60, 0.20);
+}
+
+:root[data-lecter-theme="violet-green"] {
+  --lecter-theme-id: violet-green;
+  --lecter-bg: #0d1016;
+  --lecter-panel: #151a22;
+  --lecter-panel-2: #1b2230;
+  --lecter-line: #2a3240;
+  --lecter-text: #f0f3fb;
+  --lecter-muted: #94a0b4;
+  --lecter-faint: #566275;
+  --lecter-accent: #6f72ff;
+  --lecter-accent-hover: #8a8cff;
+  --lecter-blue: #36df6f;
+  --lecter-blue-hover: #65ef90;
+  --lecter-keep: #36df6f;
+  --lecter-danger: #ff5d7f;
+  --lecter-warn: #f8c85e;
+  --lecter-bg-rgb: 13 16 22;
+  --lecter-panel-rgb: 21 26 34;
+  --lecter-line-rgb: 42 50 64;
+  --lecter-accent-rgb: 111 114 255;
+  --lecter-blue-rgb: 54 223 111;
+  --lecter-keep-rgb: 54 223 111;
+  --lecter-warn-rgb: 248 200 94;
+  --lecter-danger-rgb: 255 93 127;
+}
+
+:root[data-lecter-theme="rose-cyan"] {
+  --lecter-theme-id: rose-cyan;
+  --lecter-bg: #100d14;
+  --lecter-panel: #191520;
+  --lecter-panel-2: #231d2d;
+  --lecter-line: #382d45;
+  --lecter-text: #f7f0ff;
+  --lecter-muted: #a59bb5;
+  --lecter-faint: #62586f;
+  --lecter-accent: #ff4f9a;
+  --lecter-accent-hover: #ff73ae;
+  --lecter-blue: #38d8ff;
+  --lecter-blue-hover: #6ee3ff;
+  --lecter-keep: #5fe398;
+  --lecter-danger: #ff6060;
+  --lecter-warn: #ffd05a;
+  --lecter-bg-rgb: 16 13 20;
+  --lecter-panel-rgb: 25 21 32;
+  --lecter-line-rgb: 56 45 69;
+  --lecter-accent-rgb: 255 79 154;
+  --lecter-blue-rgb: 56 216 255;
+  --lecter-keep-rgb: 95 227 152;
+  --lecter-warn-rgb: 255 208 90;
+  --lecter-danger-rgb: 255 96 96;
+}
+
+:root[data-lecter-theme="gold-teal"] {
+  --lecter-theme-id: gold-teal;
+  --lecter-bg: #10100e;
+  --lecter-panel: #181a17;
+  --lecter-panel-2: #20251f;
+  --lecter-line: #34382f;
+  --lecter-text: #f1f0e8;
+  --lecter-muted: #a29f92;
+  --lecter-faint: #606258;
+  --lecter-accent: #f6c945;
+  --lecter-accent-hover: #ffda70;
+  --lecter-blue: #2bd6bd;
+  --lecter-blue-hover: #62e3d0;
+  --lecter-keep: #62d98c;
+  --lecter-danger: #ff6b5a;
+  --lecter-warn: #f6c945;
+  --lecter-bg-rgb: 16 16 14;
+  --lecter-panel-rgb: 24 26 23;
+  --lecter-line-rgb: 52 56 47;
+  --lecter-accent-rgb: 246 201 69;
+  --lecter-blue-rgb: 43 214 189;
+  --lecter-keep-rgb: 98 217 140;
+  --lecter-warn-rgb: 246 201 69;
+  --lecter-danger-rgb: 255 107 90;
+}
+
+:root[data-lecter-theme="lime-azure"] {
+  --lecter-theme-id: lime-azure;
+  --lecter-bg: #0d1110;
+  --lecter-panel: #141a19;
+  --lecter-panel-2: #1c2422;
+  --lecter-line: #2d3a36;
+  --lecter-text: #eaf5ef;
+  --lecter-muted: #92a69c;
+  --lecter-faint: #52645b;
+  --lecter-accent: #b8f052;
+  --lecter-accent-hover: #cbff73;
+  --lecter-blue: #33b7ff;
+  --lecter-blue-hover: #65c8ff;
+  --lecter-keep: #51de87;
+  --lecter-danger: #ff6b6b;
+  --lecter-warn: #f4d35e;
+  --lecter-bg-rgb: 13 17 16;
+  --lecter-panel-rgb: 20 26 25;
+  --lecter-line-rgb: 45 58 54;
+  --lecter-accent-rgb: 184 240 82;
+  --lecter-blue-rgb: 51 183 255;
+  --lecter-keep-rgb: 81 222 135;
+  --lecter-warn-rgb: 244 211 94;
+  --lecter-danger-rgb: 255 107 107;
+}
+
+:root {
+  --lecter-pair-a: var(--lecter-accent);
+  --lecter-pair-b: var(--lecter-blue);
+  --lecter-accent-soft: rgb(var(--lecter-accent-rgb) / 0.12);
+  --lecter-accent-soft-2: rgb(var(--lecter-accent-rgb) / 0.20);
+  --lecter-blue-soft: rgb(var(--lecter-blue-rgb) / 0.12);
+  --lecter-blue-soft-2: rgb(var(--lecter-blue-rgb) / 0.20);
+  --lecter-keep-soft: rgb(var(--lecter-keep-rgb) / 0.12);
+  --lecter-danger-soft: rgb(var(--lecter-danger-rgb) / 0.12);
+  --lecter-warn-soft: rgb(var(--lecter-warn-rgb) / 0.12);
 
   --bg: var(--lecter-bg);
   --panel: var(--lecter-panel);
@@ -56,4 +178,8 @@
   --trunc: var(--lecter-warn);
   --link: var(--lecter-blue);
   --shadow: var(--lecter-shadow);
+  --fg: var(--lecter-text);
+  --fg-faint: var(--lecter-muted);
+  --bg-card: var(--lecter-panel);
+  --bg-edge: var(--lecter-line);
 }
