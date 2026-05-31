@@ -2,7 +2,7 @@
   "schemaVersion": "agents-codex-instruction-pack-v1",
   "flavor": "codex",
   "operator": "mist83",
-  "renderedAt": "2026-05-31T10:12:12.295Z",
+  "renderedAt": "2026-05-31T10:13:18.381Z",
   "manifestUrl": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
   "preambleInstruction": "At the start of every chat, prefer a verified local doctrine cache, otherwise fetch bootstrap-v1.json, materialize this pack only as generated projections, and stop visibly if neither cache nor fetch verifies. Do not invent fallback policy.",
   "totalItems": 13,
