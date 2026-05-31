@@ -8,6 +8,154 @@
   "convention": "Drop any new proof video for this repo at s3://mullmania.com/videos/proof/agent/<name>.mp4 (optional poster-<name>.png alongside). Then cd ~/Code/videos.mullmania.com && node scripts/sync-manifest.mjs --publish.",
   "deposits": [
     {
+      "video_id": "agent-cache-first-20260531",
+      "proof_type": "screenshots",
+      "site_src": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531.provenance.json",
+      "evidence_src": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531.provenance.json",
+      "vault_src": "https://videos.mullmania.com/?tag=agent#feed",
+      "source_commit": "6db1f233829855d7dfbabcab84e26dfd3db53ced",
+      "related_commits": [
+        "fcb2c39",
+        "6db1f23"
+      ],
+      "created_by_chat": {
+        "runtime": "codex-desktop",
+        "url": null,
+        "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+        "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+        "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+        "workspace": "/Users/mist83/Code/agent",
+        "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+        "captured_at": "2026-05-31T10:11:38.166Z"
+      },
+      "assets": [
+        {
+          "kind": "screenshot",
+          "label": "Live Codex AGENTS pointer uses local doctrine cache first",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-01-agents-pointer.png",
+          "source_url": "https://agent.mullmania.com/doctrine/codex-pack/instructions/global/AGENTS.md",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        },
+        {
+          "kind": "screenshot",
+          "label": "Live bootstrap JSON exposes localCache contract",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-02-bootstrap-local-cache.png",
+          "source_url": "https://agent.mullmania.com/doctrine/bootstrap-v1.json",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        },
+        {
+          "kind": "screenshot",
+          "label": "Live Codex bootstrap prompt documents cache-first startup",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-03-codex-bootstrap-prompt.png",
+          "source_url": "https://agent.mullmania.com/CODEX-BOOTSTRAP-PROMPT.md",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        },
+        {
+          "kind": "screenshot",
+          "label": "Live bootstrap guide documents cache verification and fallback",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-04-bootstrap-guide.png",
+          "source_url": "https://agent.mullmania.com/DOCTRINE-BOOTSTRAP-GUIDE.md",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        },
+        {
+          "kind": "screenshot",
+          "label": "Live Codex instruction pack points at verified local cache behavior",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-05-instruction-pack.png",
+          "source_url": "https://agent.mullmania.com/doctrine/codex-instruction-pack-v1.json",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        },
+        {
+          "kind": "screenshot",
+          "label": "Live agent front door after deploy",
+          "url": "https://videos.mullmania.com/proof/agent/agent-cache-first-20260531-06-frontdoor.png",
+          "source_url": "https://agent.mullmania.com/",
+          "created_by_chat": {
+            "runtime": "codex-desktop",
+            "url": null,
+            "thread_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_id": "019e7d5a-372c-7be3-8935-43e0da0957c0",
+            "session_jsonl": "/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl",
+            "workspace": "/Users/mist83/Code/agent",
+            "locator": "CODEX_THREAD_ID=019e7d5a-372c-7be3-8935-43e0da0957c0; session_jsonl=/Users/mist83/.codex/sessions/2026/05/31/rollout-2026-05-31T03-25-24-019e7d5a-372c-7be3-8935-43e0da0957c0.jsonl; workspace=/Users/mist83/Code/agent; task=cache-first doctrine bootstrap; commits=fcb2c39,6db1f23; live=https://agent.mullmania.com/",
+            "captured_at": "2026-05-31T10:11:38.166Z"
+          },
+          "timeline_at": "2026-05-31T10:11:38.166Z",
+          "timeline_source": "live-browser-proof",
+          "timeline_precision": "timestamp"
+        }
+      ],
+      "verification": [
+        "agent npm test passed: Doctrine smoke passed 61 assertions",
+        "shipit deployed root deploy.sh to https://agent.mullmania.com/",
+        "live bootstrap-v1.json includes localCache",
+        "live Codex AGENTS pointer checks ~/.codex/cache/doctrine/current first",
+        "local doctrine cache verified 121 artifacts from commit 6db1f23",
+        "six live Playwright screenshots captured from deployed pages"
+      ],
+      "qa": "Six live deployed pages were captured with Playwright and each page text was checked for the expected cache-first marker before screenshot capture.",
+      "deposited_at": "2026-05-31T10:11:38.166Z"
+    },
+    {
       "video_id": "agent-codex-instruction-pack-2026-05-26",
       "site_src": "https://videos.mullmania.com/proof/agent/agent-codex-instruction-pack-2026-05-26.mp4",
       "poster_src": "https://videos.mullmania.com/proof/agent/poster-agent-codex-instruction-pack-2026-05-26.png",

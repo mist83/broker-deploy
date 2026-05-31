@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sS -X POST https://chvp6lkrl7avzjkwwzv5botfza0qmais.lambda-url.us-west-2.on.aws/api/doctrine/compose -H 'content-type: application/json' -d '{\"runtime\":\"claude\",\"event\":\"task_execution\",\"taskIntent\":\"Repoint dead development-canon references in doctrine to katai+ineed, rebuild and deploy doctrine, run AGENT_SYNC\",\"profileIds\":[\"shared-operator-core\",\"shared-ui-stack\",\"shared-live-ship\",\"shared-multi-agent\",\"shared-retirement\",\"shared-platform-systems\"]}')"
+    ]
+  }
+}
