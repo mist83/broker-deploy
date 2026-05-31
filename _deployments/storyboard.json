@@ -3,14 +3,24 @@
   "latest": {
     "siteId": "storyboard",
     "status": "success",
-    "deployedAt": "2026-05-31T00:06:19.245Z",
+    "deployedAt": "2026-05-31T00:08:16.400Z",
     "trigger": "github-webhook",
-    "brokerRunId": "26698495726",
-    "brokerRunNumber": "256",
-    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26698495726",
+    "brokerRunId": "26698534569",
+    "brokerRunNumber": "257",
+    "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26698534569",
     "brokerSha": "4f112cbb78e9"
   },
   "history": [
+    {
+      "siteId": "storyboard",
+      "status": "success",
+      "deployedAt": "2026-05-31T00:08:16.400Z",
+      "trigger": "github-webhook",
+      "brokerRunId": "26698534569",
+      "brokerRunNumber": "257",
+      "brokerRunUrl": "https://github.com/mist83/broker-deploy/actions/runs/26698534569",
+      "brokerSha": "4f112cbb78e9"
+    },
     {
       "siteId": "storyboard",
       "status": "success",

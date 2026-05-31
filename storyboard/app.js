@@ -2,9 +2,9 @@
 // No framework, no build step. Edit index.html + styles.css + this file and
 // re-deploy.
 
-// The Lambda Function URL. Filled in by deploy.sh so the frontend doesn't
-// ship with a hardcoded URL. The server also CORS-allows the origin so
-// cross-fetch works from storyboard.mullmania.com.
+// The Lambda Function URL. deploy.sh writes public/api-url.json so the
+// frontend doesn't rely on an injected script tag. The server also
+// CORS-allows the origin so cross-fetch works from storyboard.mullmania.com.
 let API_URL = window.STORYBOARD_API_URL || localStorage.getItem('storyboard.api') || '';
 
 const $ = (id) => document.getElementById(id);
