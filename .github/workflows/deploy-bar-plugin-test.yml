@@ -1,0 +1,128 @@
+name: One-off Deploy Bar Plugin Test
+
+on:
+  push:
+    paths:
+      - .github/workflows/deploy-bar-plugin-test.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: broker-deploy-bar-plugin-test
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout broker tooling
+        uses: actions/checkout@v6
+        with:
+          path: broker-tooling
+
+      - name: Download managed site source
+        env:
+          PRIVATE_REPO_TOKEN: ${{ secrets.MULLMANIA_PRIVATE_REPO_TOKEN }}
+        shell: python
+        run: |
+          import io
+          import os
+          import shutil
+          import tarfile
+          import urllib.request
+          from pathlib import Path
+
+          token = os.environ["PRIVATE_REPO_TOKEN"].strip()
+          if not token:
+              raise SystemExit("MULLMANIA_PRIVATE_REPO_TOKEN is not configured.")
+
+          request = urllib.request.Request(
+              "https://api.github.com/repos/mist83/mullmania-managed-sites/tarball/main",
+              headers={
+                  "Accept": "application/vnd.github+json",
+                  "Authorization": f"Bearer {token}",
+                  "User-Agent": "mullmania-broker-deploy",
+                  "X-GitHub-Api-Version": "2022-11-28",
+              },
+          )
+          with urllib.request.urlopen(request, timeout=30) as response:
+              archive = response.read()
+
+          target_dir = Path("target-site")
+          shutil.rmtree(target_dir, ignore_errors=True)
+          target_dir.mkdir()
+          with tarfile.open(fileobj=io.BytesIO(archive), mode="r:gz") as tar:
+              members = []
+              for member in tar.getmembers():
+                  parts = Path(member.name).parts
+                  if len(parts) < 2:
+                      continue
+                  member.name = str(Path(*parts[1:]))
+                  members.append(member)
+              tar.extractall(target_dir, members=members)
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.1.1
+        with:
+          role-to-assume: arn:aws:iam::166404899495:role/github-actions-role
+          aws-region: us-west-2
+
+      - name: Deploy target site
+        working-directory: target-site
+        shell: bash
+        run: aws s3 cp s3://mullmania.com-data/_tools/deploy.sh - --region us-west-2 | bash -s -- apply --config sites/bar/mullmania.site.json
+
+      - name: Mirror public artifact to GitHub Pages branch
+        env:
+          SITE_ID: bar
+          GITHUB_TOKEN: ${{ github.token }}
+          REDEPLOY_SOURCE: plugin-test
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf pages-source
+          if ! git clone --depth 1 --branch gh-pages "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pages-source; then
+            git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pages-source
+            cd pages-source
+            git switch --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            cd ..
+          fi
+
+          rm -rf "pages-source/${SITE_ID}"
+          mkdir -p "pages-source/${SITE_ID}"
+          aws s3 sync "s3://mullmania.com/${SITE_ID}/" "pages-source/${SITE_ID}/" --delete --only-show-errors
+          touch pages-source/.nojekyll
+
+          page_base_url="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          node broker-tooling/scripts/render-transparency-index.mjs \
+            --pages-dir pages-source \
+            --site-id "${SITE_ID}" \
+            --run-id "${GITHUB_RUN_ID}" \
+            --run-number "${GITHUB_RUN_NUMBER}" \
+            --run-url "${run_url}" \
+            --broker-sha "${GITHUB_SHA}" \
+            --trigger-source "${REDEPLOY_SOURCE}" \
+            --page-base-url "${page_base_url}"
+
+          cd pages-source
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "GitHub Pages mirror is already current."
+          else
+            git commit -m "Mirror ${SITE_ID} artifact"
+            git push origin gh-pages
+          fi
