@@ -1,7 +1,7 @@
 {
   "siteId": "bar",
   "host": "bar.mullmania.com",
-  "semver": "1.0.0",
-  "previousSemver": null,
-  "publishedAt": "2026-05-31T03:13:36.296Z"
+  "semver": "1.0.1",
+  "previousSemver": "1.0.0",
+  "publishedAt": "2026-05-31T03:52:58.555Z"
 }
